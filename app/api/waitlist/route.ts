@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { WaitlistConfirmationTemplate } from "@/emails/waitlist-confirmation-template";
 import { WaitlistNotificationTemplate } from "@/emails/waitlist-notification-template";
+import { prisma } from "@/lib/prisma";
 import * as React from "react";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -26,6 +27,26 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Check if email already exists in database
+    const existingContact = await prisma.waitlistContact.findUnique({
+      where: { email },
+    });
+
+    if (existingContact) {
+      return NextResponse.json(
+        { error: "Cet email est déjà inscrit à la liste d'attente" },
+        { status: 409 }
+      );
+    }
+
+    // Save to database
+    const contact = await prisma.waitlistContact.create({
+      data: {
+        email,
+        source: "website",
+      },
+    });
 
     // Send confirmation email to user
     const confirmationEmail = await resend.emails.send({

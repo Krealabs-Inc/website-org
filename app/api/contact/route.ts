@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { ContactEmailTemplate } from "@/emails/contact-template";
+import { prisma } from "@/lib/prisma";
 import * as React from "react";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -37,6 +38,20 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    // Save to database
+    const contactForm = await prisma.contactForm.create({
+      data: {
+        requestType: requestType || "contact",
+        name,
+        email,
+        phone: phone || null,
+        company: company || null,
+        pricingOption: pricingOption || null,
+        message,
+        filesCount: files.length,
+      },
+    });
 
     // Process attachments
     const attachments = await Promise.all(
