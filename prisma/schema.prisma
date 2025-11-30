@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model WaitlistContact {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String   @default("website") // website, blog, other
+  createdAt DateTime @default(now())
+
+  @@map("waitlist_contacts")
+}
+
+model ContactForm {
+  id            String   @id @default(cuid())
+  requestType   String   // devis, contact, partenariat
+  name          String
+  email         String
+  phone         String?
+  company       String?
+  pricingOption String?
+  message       String
+  filesCount    Int      @default(0)
+  createdAt     DateTime @default(now())
+
+  @@map("contact_forms")
+}
