@@ -1096,10 +1096,10 @@ export const siteConfig = {
     {
       title: "Entreprise",
       links: [
-        { id: 1, title: "À propos", url: "#" },
-        { id: 2, title: "Contact", url: "#contact" },
-        { id: 3, title: "Blog", url: "#" },
-        { id: 4, title: "Notre histoire", url: "#" },
+        { id: 1, title: "À propos", url: "/notre-histoire" },
+        { id: 2, title: "Contact", url: "/contact" },
+        { id: 3, title: "Blog", url: "/blog" },
+        { id: 4, title: "Notre histoire", url: "/notre-histoire" },
       ],
     },
     {
