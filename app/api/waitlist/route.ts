@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { WaitlistConfirmationTemplate } from "@/emails/waitlist-confirmation-template";
 import { WaitlistNotificationTemplate } from "@/emails/waitlist-notification-template";
+import * as React from "react";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -31,7 +32,7 @@ export async function POST(request: NextRequest) {
       from: "Krealabs <noreply@krealabs.fr>",
       to: [email],
       subject: "Bienvenue sur la liste d'attente Krealabs",
-      react: WaitlistConfirmationTemplate({ email }),
+      react: WaitlistConfirmationTemplate({ email }) as React.ReactElement,
     });
 
     if (confirmationEmail.error) {
@@ -47,7 +48,7 @@ export async function POST(request: NextRequest) {
       from: "Krealabs Waitlist <noreply@krealabs.fr>",
       to: ["contact@krealabs.fr"],
       subject: "Nouvelle inscription à la liste d'attente",
-      react: WaitlistNotificationTemplate({ email }),
+      react: WaitlistNotificationTemplate({ email }) as React.ReactElement,
     });
 
     if (notificationEmail.error) {

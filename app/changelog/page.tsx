@@ -211,13 +211,13 @@ const changelog = [
   },
 ];
 
-const typeColors = {
+const typeColors: Record<string, string> = {
   major: "bg-red-500/10 text-red-600 dark:text-red-400 border-red-500/20",
   feature: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20",
   fix: "bg-green-500/10 text-green-600 dark:text-green-400 border-green-500/20",
 };
 
-const typeLabels = {
+const typeLabels: Record<string, string> = {
   major: "Version majeure",
   feature: "Nouvelle fonctionnalite",
   fix: "Correction",
