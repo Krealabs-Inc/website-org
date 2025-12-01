@@ -62,7 +62,7 @@ export default function NotreHistoirePage() {
                       <h3 className="text-xl font-bold text-gray-900 dark:text-white">Le Début</h3>
                     </div>
                     <p className="text-gray-600 dark:text-white/70">
-                      Fondation de Kréalabs avec une vision claire : créer des solutions web et mobile de qualité pour les entreprises innovantes. Premiers projets avec des startups locales à Clermont-Ferrand.
+                      Fondation de Kréalabs avec une vision claire : créer des solutions web et mobile de qualité pour les entreprises innovantes. Premiers projets avec des startups locales à Rouen.
                     </p>
                   </div>
                 </div>
