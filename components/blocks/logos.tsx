@@ -15,14 +15,14 @@ const logos: LogoItem[] = [
         src: "/assets/logos/Tailwind-CSS.svg",
         href: "https://tailwindcss.com",
         alt: "Tailwind CSS",
-        className: "h-[48px] sm:h-[56px] w-auto",
+        className: "h-[56px] sm:h-[64px] w-auto",
     },
     {
         id: "nextjs",
         src: "https://www.svgrepo.com/show/354113/nextjs-icon.svg",
         href: "https://nextjs.org",
         alt: "Next.js",
-        className: "h-[40px] sm:h-[48px] fill-gray-900 dark:fill-white",
+        className: "h-[40px] sm:h-[48px] dark:invert",
     },
     {
         id: "figma",
@@ -36,7 +36,7 @@ const logos: LogoItem[] = [
         src: "/assets/logos/AWS.svg",
         href: "https://aws.amazon.com",
         alt: "AWS",
-        className: "h-[56px] sm:h-[64px]",
+        className: "h-[56px] sm:h-[64px] dark:invert dark:brightness-0 dark:contrast-200",
     },
 ]
 
