@@ -31,8 +31,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Kréalabs - Agence Web & Mobile à Clermont-Ferrand",
-  description: "Création de sites web, applications mobiles et solutions digitales sur-mesure. Experts React, Next.js et React Native à Clermont-Ferrand.",
+  title: "Kréalabs - Agence Web & Mobile à Rouen",
+  description: "Création de sites web, applications mobiles et solutions digitales sur-mesure. Experts React, Next.js et React Native à Rouen.",
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
