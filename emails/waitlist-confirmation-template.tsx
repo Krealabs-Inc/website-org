@@ -1,5 +1,4 @@
 import * as React from "react";
-import Image from "next/image";
 
 interface WaitlistConfirmationTemplateProps {
   email: string;
@@ -241,11 +240,11 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
         <div className="container">
           <div className="header">
             <div className="logo">
-              <Image src="https://krealabs.fr/logo.png" alt="Kréalabs Logo" className="w-full h-auto object-contain" width={256} height={256} />
+              <span className="logo-text">K</span>
             </div>
             <div className="badge">✨ Bienvenue</div>
             <h1>Vous êtes sur la liste !</h1>
-            <p>Merci de rejoindre l'aventure Kréalabs</p>
+            <p>Merci de rejoindre l&apos;aventure Kréalabs</p>
           </div>
 
           <div className="content">
@@ -257,7 +256,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
             </p>
 
             <p className="text">
-              Votre inscription a bien été prise en compte avec l'adresse : <span className="email-highlight">{email}</span>
+              Votre inscription a bien été prise en compte avec l&apos;adresse : <span className="email-highlight">{email}</span>
             </p>
 
             <div className="feature-box">
@@ -266,12 +265,12 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
                 <li>🚀 Accès prioritaire à nos nouvelles fonctionnalités</li>
                 <li>📚 Tutoriels et ressources exclusifs sur le développement web et mobile</li>
                 <li>🎁 Offres spéciales réservées aux membres de la waitlist</li>
-                <li>💡 Conseils d'experts et meilleures pratiques</li>
+                <li>💡 Conseils d&apos;experts et meilleures pratiques</li>
               </ul>
             </div>
 
             <p className="text">
-              En attendant, n'hésitez pas à explorer notre site et découvrir nos services :
+              En attendant, n&apos;hésitez pas à explorer notre site et découvrir nos services :
             </p>
 
             <center>
@@ -302,7 +301,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
               <a href="https://krealabs.fr/services">Services</a>
             </div>
             <p style={{ marginTop: '24px', fontSize: '12px', color: 'rgba(255, 255, 255, 0.3)' }}>
-              Vous recevez cet email car vous vous êtes inscrit à notre liste d'attente.
+              Vous recevez cet email car vous vous êtes inscrit à notre liste d&apos;attente.
             </p>
           </div>
         </div>
