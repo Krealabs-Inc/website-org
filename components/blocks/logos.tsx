@@ -15,7 +15,7 @@ const logos: LogoItem[] = [
         src: "/assets/logos/Tailwind-CSS.svg",
         href: "https://tailwindcss.com",
         alt: "Tailwind CSS",
-        className: "h-[56px] sm:h-[64px] w-auto",
+        className: "h-[80px] sm:h-[96px] w-auto",
     },
     {
         id: "nextjs",
