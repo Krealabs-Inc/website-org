@@ -55,16 +55,16 @@ export default function WaitlistBanner() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="flex items-center justify-between gap-8 max-w-7xl mx-auto"
+                    className="flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8 max-w-7xl mx-auto"
                 >
-                    <div className="flex-1 flex items-center gap-6">
+                    <div className="flex-1 flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 w-full lg:w-auto text-center sm:text-left">
                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#A543F1]/10 dark:bg-white/10 backdrop-blur-sm border border-[#A543F1]/20 dark:border-white/20">
                             <Sparkles className="w-4 h-4 text-[#A543F1]" />
                             <span className="text-sm text-gray-900 dark:text-white font-medium">Rejoignez-nous</span>
                         </div>
 
-                        <div>
-                            <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
+                        <div className="flex-1">
+                            <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">
                                 Pret a transformer votre idee en realite ?
                             </h2>
                             <p className="text-sm text-gray-600 dark:text-white/70 mt-1">
@@ -73,8 +73,8 @@ export default function WaitlistBanner() {
                         </div>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="flex-shrink-0">
-                        <div className="flex items-center gap-3">
+                    <form onSubmit={handleSubmit} className="w-full lg:w-auto">
+                        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full lg:w-auto">
                             <input
                                 type="email"
                                 value={email}
@@ -82,14 +82,14 @@ export default function WaitlistBanner() {
                                 placeholder="votre@email.com"
                                 required
                                 disabled={status === 'loading' || status === 'success'}
-                                className="w-64 px-5 py-3 rounded-full bg-gray-100 dark:bg-white/10 backdrop-blur-sm border border-gray-200 dark:border-white/20 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#A543F1] focus:border-transparent disabled:opacity-70 disabled:cursor-not-allowed transition-all"
+                                className="w-full sm:w-64 px-5 py-3 rounded-full bg-gray-100 dark:bg-white/10 backdrop-blur-sm border border-gray-200 dark:border-white/20 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-[#A543F1] focus:border-transparent disabled:opacity-70 disabled:cursor-not-allowed transition-all"
                             />
                             <motion.button
                                 type="submit"
                                 disabled={status === 'loading' || status === 'success'}
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="px-8 py-3 rounded-full bg-[#A543F1] text-white font-semibold hover:bg-[#A543F1]/90 focus:outline-none focus:ring-2 focus:ring-[#A543F1] focus:ring-offset-2 focus:ring-offset-black disabled:opacity-70 disabled:cursor-not-allowed transition-all shadow-lg whitespace-nowrap"
+                                className="w-full sm:w-auto px-8 py-3 rounded-full bg-[#A543F1] text-white font-semibold hover:bg-[#A543F1]/90 focus:outline-none focus:ring-2 focus:ring-[#A543F1] focus:ring-offset-2 focus:ring-offset-black disabled:opacity-70 disabled:cursor-not-allowed transition-all shadow-lg whitespace-nowrap"
                             >
                                 {status === 'loading' ? (
                                     <span className="flex items-center gap-2">

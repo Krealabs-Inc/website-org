@@ -102,7 +102,7 @@ export function PricingSection() {
                         </p>
                     </div>
 
-                    <div className="overflow-hidden rounded-lg border border-gray-200 dark:border-white/[0.08]">
+                    <div className="hidden md:block overflow-hidden rounded-lg border border-gray-200 dark:border-white/[0.08]">
                         <PricingTable className="table-fixed">
                             <colgroup>
                                 <col className="w-[40%]" />
@@ -176,6 +176,59 @@ export function PricingSection() {
                                 ))}
                             </PricingTableBody>
                         </PricingTable>
+                    </div>
+
+                    {/* Mobile View - Cards */}
+                    <div className="md:hidden space-y-6">
+                        {plans.map((plan, planIndex) => {
+                            const Icon = plan.icon;
+                            return (
+                                <div
+                                    key={plan.name}
+                                    className={`rounded-xl border p-6 ${
+                                        planIndex === 1
+                                            ? "border-[#A543F1] bg-gradient-to-br from-[#A543F1]/5 to-transparent shadow-lg"
+                                            : "border-gray-200 dark:border-white/[0.08] bg-white dark:bg-[#0a0a0a]"
+                                    }`}
+                                >
+                                    <div className="flex items-start justify-between mb-4">
+                                        <div>
+                                            <div className="flex items-center gap-2 mb-2">
+                                                <Icon className={`w-5 h-5 ${planIndex === 1 ? "text-[#A543F1]" : "text-gray-600 dark:text-white/70"}`} />
+                                                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{plan.name}</h3>
+                                            </div>
+                                            <span className="inline-block px-2 py-1 text-xs rounded-full bg-gray-100 dark:bg-white/10 text-gray-600 dark:text-white/70">
+                                                {plan.badge}
+                                            </span>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-2xl font-bold text-[#A543F1]">{plan.price}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-3 mb-6">
+                                        {features.map((feature, index) => {
+                                            const value = feature.values[planIndex];
+                                            return (
+                                                <div key={index} className="flex justify-between items-center text-sm">
+                                                    <span className="text-gray-600 dark:text-white/70">{feature.label}</span>
+                                                    <span className="font-medium text-gray-900 dark:text-white">
+                                                        {typeof value === 'boolean' ? (value ? '✓' : '✗') : value}
+                                                    </span>
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+
+                                    <Button
+                                        className={`w-full ${planIndex === 1 ? "bg-[#A543F1] hover:bg-[#A543F1]/90" : ""}`}
+                                        variant={planIndex === 1 ? "default" : "outline"}
+                                    >
+                                        {plan.price === "Sur devis" ? "Nous contacter" : "Démarrer"}
+                                    </Button>
+                                </div>
+                            );
+                        })}
                     </div>
 
                     <div className="mt-8 text-center">
