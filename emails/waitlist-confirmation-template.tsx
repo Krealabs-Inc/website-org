@@ -240,7 +240,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
         <div className="container">
           <div className="header">
             <div className="logo">
-              <span className="logo-text">K</span>
+              <img src="https://krealabs.fr/logo.png" alt="Kréalabs Logo" style={{ width: '48px', height: '48px', objectFit: 'contain' }} />
             </div>
             <div className="badge">✨ Bienvenue</div>
             <h1>Vous êtes sur la liste !</h1>
