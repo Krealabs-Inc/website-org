@@ -430,7 +430,7 @@ export default function ContactPage() {
                       Adresse
                     </h4>
                     <p className="text-sm text-gray-600 dark:text-white/60">
-                      Clermont-Ferrand, Auvergne
+                      Rouen, Normandie
                       <br />
                       France
                     </p>
