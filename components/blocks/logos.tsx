@@ -15,7 +15,7 @@ const logos: LogoItem[] = [
         src: "/assets/logos/Tailwind-CSS.svg",
         href: "https://tailwindcss.com",
         alt: "Tailwind CSS",
-        className: "h-20 w-auto dark:invert",
+        className: "h-20 w-auto",
     },
     {
         id: "nextjs",
@@ -58,6 +58,34 @@ const logos: LogoItem[] = [
         href: "https://wordpress.org",
         alt: "WordPress",
         className: "h-20 w-auto",
+    },
+    {
+        id: "docker",
+        src: "/assets/logos/Docker.svg",
+        href: "https://www.docker.com",
+        alt: "Docker",
+        className: "h-20 w-auto",
+    },
+    {
+        id: "graphql",
+        src: "/assets/logos/GraphQL.svg",
+        href: "https://graphql.org",
+        alt: "GraphQL",
+        className: "h-20 w-auto",
+    },
+    {
+        id: "vercel",
+        src: "/assets/logos/Vercel.svg",
+        href: "https://vercel.com",
+        alt: "Vercel",
+        className: "h-20 w-auto dark:invert",
+    },
+    {
+        id: "cloudflare",
+        src: "/assets/logos/Cloudflare.svg",
+        href: "https://www.cloudflare.com",
+        alt: "Cloudflare",
+        className: "h-20 w-auto",
     }
 ]
 
@@ -70,7 +98,7 @@ export function MarqueeDemo() {
                     href={logo.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative mx-20 flex h-24 min-w-[120px] items-center justify-center transition-opacity hover:opacity-80"
+                    className="relative mx-10 flex h-24 min-w-[120px] items-center justify-center transition-opacity hover:opacity-80"
                 >
                     <Image
                         src={logo.src}
