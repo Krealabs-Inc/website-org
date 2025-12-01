@@ -1,36 +1,154 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Kréalabs - Agence Web & Mobile
 
-## Getting Started
+Site officiel de Kréalabs, agence de développement web et mobile basée à Rouen, spécialisée en React, Next.js et React Native.
 
-First, run the development server:
+## 🚀 Technologies
+
+- **Framework**: Next.js 16 avec App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **Animations**: Framer Motion
+- **Database**: PostgreSQL (Supabase)
+- **ORM**: Prisma
+- **Email**: Resend
+- **Deployment**: Vercel
+
+## 📦 Installation
 
 ```bash
+# Cloner le repository
+git clone https://github.com/Krealabs-Inc/website-org.git
+cd website-org
+
+# Installer les dépendances
+npm install
+
+# Configurer les variables d'environnement
+cp .env.example .env.local
+# Éditer .env.local avec vos valeurs
+
+# Générer le client Prisma
+npx prisma generate
+
+# Créer les tables dans la base de données
+npx prisma db push
+
+# Lancer le serveur de développement
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🔧 Configuration
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Variables d'environnement requises
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Voir `.env.example` pour la liste complète. Les principales variables :
 
-## Learn More
+- `RESEND_API_KEY`: Clé API pour l'envoi d'emails
+- `DATABASE_URL`: URL de connexion PostgreSQL
+- `NEXT_PUBLIC_SUPABASE_URL`: URL publique Supabase
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Clé anonyme Supabase
+- `ADMIN_TOKEN`: Token d'authentification admin
 
-To learn more about Next.js, take a look at the following resources:
+### Base de données
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Le projet utilise Prisma avec PostgreSQL. Deux tables principales :
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `waitlist_contacts`: Inscriptions à la liste d'attente
+- `contact_forms`: Soumissions de formulaires de contact
 
-## Deploy on Vercel
+Pour plus de détails, voir `DATABASE_SETUP.md`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📂 Structure du projet
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+krealabs/
+├── app/                      # App Router Next.js
+│   ├── admin/               # Dashboard administrateur
+│   ├── api/                 # API Routes
+│   ├── blog/                # Pages blog
+│   ├── contact/             # Page contact
+│   ├── notre-histoire/      # Page à propos
+│   ├── pricing/             # Page tarifs
+│   └── technologies/        # Pages technos
+├── components/              # Composants réutilisables
+│   ├── admin/              # Composants admin
+│   ├── navigation/         # Navigation
+│   └── ui/                 # UI components
+├── emails/                  # Templates d'emails
+├── lib/                     # Utilitaires
+├── prisma/                  # Schéma Prisma
+└── public/                  # Assets statiques
+```
+
+## 🎨 Features
+
+### Site Public
+- ✅ Page d'accueil avec animations
+- ✅ Page tarifs avec 3 formules
+- ✅ Pages technologies (React, Next.js, React Native)
+- ✅ Page Notre Histoire
+- ✅ Formulaire de contact avec upload de fichiers
+- ✅ Liste d'attente (waitlist)
+- ✅ Blog
+- ✅ Mode sombre
+- ✅ Responsive design
+
+### Dashboard Admin
+- ✅ Authentification par token
+- ✅ Vue d'ensemble des contacts
+- ✅ Export CSV des contacts
+- ✅ Envoi de newsletters
+- ✅ Filtres et recherche
+- ✅ Statistiques en temps réel
+
+## 🛠️ Scripts disponibles
+
+```bash
+npm run dev          # Serveur de développement
+npm run build        # Build de production
+npm run start        # Serveur de production
+npm run lint         # Linter ESLint
+npx prisma studio    # Interface graphique BDD
+npx prisma generate  # Générer le client Prisma
+npx prisma db push   # Pousser le schéma vers la BDD
+```
+
+## 🔐 Admin
+
+Accéder au dashboard admin : `/admin`
+
+Authentification avec le token défini dans `ADMIN_TOKEN`.
+
+Voir `ADMIN_GUIDE.md` pour la documentation complète.
+
+## 📧 Emails
+
+Le projet utilise Resend pour l'envoi d'emails avec des templates React personnalisés :
+
+- Email de confirmation d'inscription waitlist
+- Notification admin pour nouvelle inscription
+- Notification admin pour nouveau formulaire de contact
+
+Tous les emails utilisent le design système de l'agence (violet #A543F1, dark theme).
+
+## 🚀 Déploiement
+
+Le site est déployé automatiquement sur Vercel lors des push sur la branche `main`.
+
+### Variables d'environnement Vercel
+
+Ne pas oublier de configurer toutes les variables d'environnement dans les settings Vercel.
+
+## 📝 Licence
+
+Propriété de Kréalabs. Tous droits réservés.
+
+## 👥 Contact
+
+- **Email**: contact@krealabs.fr
+- **Site**: https://krealabs.fr
+- **Localisation**: Rouen, France
+
+---
+
+Développé avec ❤️ par Kréalabs
