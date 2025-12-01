@@ -5,7 +5,6 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Navbar } from "@/components/navigation/navbar";
 import { Component as Footer } from "@/components/ui/flickering-footer";
 import { Toaster } from "sonner";
-import { PageTransition } from "@/components/ui/page-transition";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -63,9 +62,7 @@ export default function RootLayout({
           enableSystem={false}
         >
           <Navbar />
-          <PageTransition>
-            {children}
-          </PageTransition>
+          {children}
           <Footer />
           <Toaster position="top-right" richColors />
         </ThemeProvider>
