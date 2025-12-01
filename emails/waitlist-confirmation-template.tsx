@@ -1,4 +1,5 @@
 import * as React from "react";
+import Image from "next/image";
 
 interface WaitlistConfirmationTemplateProps {
   email: string;
@@ -240,7 +241,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
         <div className="container">
           <div className="header">
             <div className="logo">
-              <span className="logo-text">K</span>
+              <Image src="/logo.png" alt="Kréalabs Logo" className="w-full h-auto object-contain" width={256} height={256} />
             </div>
             <div className="badge">✨ Bienvenue</div>
             <h1>Vous êtes sur la liste !</h1>
