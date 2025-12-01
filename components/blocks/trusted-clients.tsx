@@ -20,6 +20,11 @@ const allLogos = [
     name: "Meli Mélo",
     logo: "/assets/clients/logo-meli-melo.svg",
     siteUrl: "https://meli-melo.vercel.app/"
+  },
+  {
+    name: "So'Crochette",
+    logo: "/assets/clients/logo-so-crochette.jpg",
+    siteUrl: "https://www.socrochette.fr/"
   }
 ];
 
@@ -44,18 +49,16 @@ export function TrustedClients() {
                 href={company.siteUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative mx-20 flex h-24 min-w-[160px] items-center justify-center transition-all duration-300 group"
+                className="relative mx-12 flex h-24 min-w-40 items-center justify-center transition-opacity hover:opacity-100 duration-300"
               >
-                <div className="relative flex h-full w-full items-center justify-center rounded-xl bg-white dark:bg-white/5 p-6 border border-gray-200 dark:border-white/10 group-hover:border-[#A543F1]/50 group-hover:bg-gray-50 dark:group-hover:bg-white/10 transition-all">
-                  <Image
-                    src={company.logo}
-                    alt={`${company.name} logo`}
-                    width={300}
-                    height={96}
-                    className="h-20 w-auto object-contain grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
-                    style={{ objectFit: 'contain', maxWidth: '200px' }}
-                  />
-                </div>
+                <Image
+                  src={company.logo}
+                  alt={`${company.name} logo`}
+                  width={300}
+                  height={96}
+                  className="h-20 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+                  style={{ objectFit: 'contain', maxWidth: '200px' }}
+                />
               </a>
             ))}
           </Marquee>
