@@ -276,7 +276,7 @@ export const WaitlistHero = () => {
           </h1>
 
           <p className="text-lg font-medium" style={{ color: colors.textSecondary }}>
-            Agence web & mobile à Clermont-Ferrand
+            Agence web & mobile à Rouen
           </p>
 
           {/* Form / Success Container */}
