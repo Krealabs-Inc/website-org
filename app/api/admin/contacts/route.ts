@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { isAdminAuthenticated, getAdminAuthError } from '@/lib/admin-auth';
+import type { WaitlistContact, ContactForm } from '@prisma/client';
 
 export async function GET(request: NextRequest) {
   // Check authentication
@@ -13,8 +14,8 @@ export async function GET(request: NextRequest) {
     const type = searchParams.get('type') || 'all';
     const format = searchParams.get('format') || 'json';
 
-    let waitlistContacts = [];
-    let contactForms = [];
+    let waitlistContacts: WaitlistContact[] = [];
+    let contactForms: ContactForm[] = [];
 
     if (type === 'all' || type === 'waitlist') {
       waitlistContacts = await prisma.waitlistContact.findMany({
