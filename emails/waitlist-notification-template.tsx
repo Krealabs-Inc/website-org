@@ -215,7 +215,7 @@ export const WaitlistNotificationTemplate: React.FC<WaitlistNotificationTemplate
         <div className="container">
           <div className="header">
             <div className="logo">
-              <span className="logo-text">K</span>
+              <img src="https://krealabs.fr/logo.png" alt="Kréalabs Logo" style={{ width: '48px', height: '48px', objectFit: 'contain' }} />
             </div>
             <div className="badge">🔔 Notification</div>
             <h1>Nouvelle inscription</h1>
