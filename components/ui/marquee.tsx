@@ -17,17 +17,17 @@ export function Marquee({
   ...props
 }: MarqueeProps) {
   return (
-    <div 
+    <div
       className={cn(
-        "w-full overflow-hidden sm:mt-24 mt-10 z-10",
+        "w-full overflow-hidden",
         className
-      )} 
+      )}
       {...props}
     >
-      <div className="relative flex max-w-[90vw] overflow-hidden py-5">
-        <div 
+      <div className="relative flex overflow-hidden">
+        <div
           className={cn(
-            "flex w-max animate-marquee",
+            "flex w-max animate-marquee gap-0",
             pauseOnHover && "hover:[animation-play-state:paused]",
             direction === "right" && "animate-marquee-reverse"
           )}

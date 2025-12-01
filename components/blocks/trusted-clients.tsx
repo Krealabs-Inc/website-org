@@ -2,33 +2,25 @@
 
 import React from "react";
 import { Marquee } from "@/components/ui/marquee";
+import Image from "next/image";
 
 // Logos d'entreprises avec leurs URLs
 const allLogos = [
   {
-    name: "Vercel",
-    logo: "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png"
+    name: "Unilasalle",
+    logo: "/assets/clients/LOGO_UNILASALLE.png",
+    siteUrl: "https://www.unilasalle.fr/"
   },
   {
-    name: "GitHub",
-    logo: "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+    name: "Main Verte",
+    logo: "/assets/clients/logo-main-vert.png",
+    siteUrl: "https://www.main-verte28.fr/"
   },
   {
-    name: "Stripe",
-    logo: "https://images.ctfassets.net/fzn2n1nzq965/HTTOloNPhisV9P4hlMPNA/cacf1bb88b9fc492dfad34378d844280/Stripe_icon_-_square.svg?q=80&w=1082"
-  },
-  {
-    name: "Notion",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png"
-  },
-  {
-    name: "Figma",
-    logo: "https://cdn.sanity.io/images/599r6htc/localized/46a76c802176eb17b04e12108de7e7e0f3736dc6-1024x1024.png"
-  },
-  {
-    name: "Slack",
-    logo: "https://a.slack-edge.com/80588/marketing/img/meta/slack_hash_256.png"
-  },
+    name: "Meli Mélo",
+    logo: "/assets/clients/logo-meli-melo.png",
+    siteUrl: "https://www.melimelo-boutique.fr/"
+  }
 ];
 
 export function TrustedClients() {
@@ -47,18 +39,23 @@ export function TrustedClients() {
         <div className="relative flex w-full flex-col items-center justify-center overflow-hidden">
           <Marquee pauseOnHover className="[--duration:40s]">
             {allLogos.map((company) => (
-              <div
+              <a
                 key={company.name}
+                href={company.siteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-center px-8 py-4"
               >
                 <div className="relative h-12 w-32 flex items-center justify-center">
-                  <img
+                  <Image
                     src={company.logo}
                     alt={`${company.name} logo`}
+                    width={200}
+                    height={48}
                     className="max-h-12 w-auto object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
                   />
                 </div>
-              </div>
+              </a>
             ))}
           </Marquee>
         </div>
