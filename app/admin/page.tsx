@@ -17,6 +17,8 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { AdminNavbar } from '@/components/admin/admin-navbar';
+import { AdminFooter } from '@/components/admin/admin-footer';
 
 interface WaitlistContact {
   id: string;
@@ -162,45 +164,50 @@ export default function AdminPage() {
 
   if (!isAuthenticated) {
     return (
-      <main className="min-h-screen bg-white dark:bg-[#030303] flex items-center justify-center p-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-md w-full"
-        >
-          <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-white/10 rounded-lg p-8">
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-[family-name:var(--font-heading)]">
-              Admin Dashboard
-            </h1>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-white/70 mb-2">
-                  Token d'authentification
-                </label>
-                <Input
-                  type="password"
-                  value={token}
-                  onChange={(e) => setToken(e.target.value)}
-                  placeholder="Entrez votre token admin"
-                  onKeyPress={(e) => e.key === 'Enter' && fetchContacts()}
-                />
+      <div className="min-h-screen bg-white dark:bg-[#030303] flex flex-col">
+        <main className="flex-1 flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-md w-full"
+          >
+            <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-white/10 rounded-lg p-8">
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-6 font-[family-name:var(--font-heading)]">
+                Admin Dashboard
+              </h1>
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-white/70 mb-2">
+                    Token d'authentification
+                  </label>
+                  <Input
+                    type="password"
+                    value={token}
+                    onChange={(e) => setToken(e.target.value)}
+                    placeholder="Entrez votre token admin"
+                    onKeyPress={(e) => e.key === 'Enter' && fetchContacts()}
+                  />
+                </div>
+                <Button
+                  onClick={fetchContacts}
+                  disabled={loading || !token}
+                  className="w-full"
+                >
+                  {loading ? 'Connexion...' : 'Se connecter'}
+                </Button>
               </div>
-              <Button
-                onClick={fetchContacts}
-                disabled={loading || !token}
-                className="w-full"
-              >
-                {loading ? 'Connexion...' : 'Se connecter'}
-              </Button>
             </div>
-          </div>
-        </motion.div>
-      </main>
+          </motion.div>
+        </main>
+        <AdminFooter />
+      </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030303] pt-20 pb-12">
+    <div className="min-h-screen bg-white dark:bg-[#030303] flex flex-col">
+      <AdminNavbar />
+      <main className="flex-1 pt-20 pb-12">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -524,5 +531,7 @@ export default function AdminPage() {
         </motion.div>
       </div>
     </main>
+      <AdminFooter />
+    </div>
   );
 }
