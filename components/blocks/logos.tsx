@@ -12,51 +12,73 @@ type LogoItem = {
 const logos: LogoItem[] = [
     {
         id: "tailwindcss",
-        src: "/assets/logos/Tailwind-CSS.svg",
+        src: "/assets/logos/tailwind.svg",
         href: "https://tailwindcss.com",
         alt: "Tailwind CSS",
-        className: "h-[80px] sm:h-[96px] w-auto",
+        className: "h-16 w-auto dark:invert",
     },
     {
         id: "nextjs",
         src: "https://www.svgrepo.com/show/354113/nextjs-icon.svg",
         href: "https://nextjs.org",
         alt: "Next.js",
-        className: "h-[40px] sm:h-[48px] dark:invert",
+        className: "h-16 w-auto dark:invert",
     },
     {
         id: "figma",
         src: "/assets/logos/Figma.svg",
         href: "https://www.figma.com/",
         alt: "Figma",
-        className: "h-[48px] sm:h-[56px]",
+        className: "h-16 w-auto",
     },
     {
         id: "aws",
         src: "/assets/logos/AWS.svg",
         href: "https://aws.amazon.com",
         alt: "AWS",
-        className: "h-[56px] sm:h-[64px] dark:invert dark:brightness-0 dark:contrast-200",
+        className: "h-16 w-auto dark:invert dark:brightness-0 dark:contrast-200",
     },
+    {
+        id: "react",
+        src: "/assets/logos/React.svg",
+        href: "https://reactjs.org",
+        alt: "React",
+        className: "h-16 w-auto",
+    },
+    {
+        id: "typescript",
+        src: "/assets/logos/TypeScript.svg",
+        href: "https://www.typescriptlang.org",
+        alt: "TypeScript",
+        className: "h-16 w-auto",
+    },
+    {
+        id: "wordpress",
+        src: "/assets/logos/WordPress.svg",
+        href: "https://wordpress.org",
+        alt: "WordPress",
+        className: "h-16 w-auto",
+    }
 ]
 
 export function MarqueeDemo() {
     return (
-        <Marquee>
+        <Marquee className="py-8">
             {logos.map((logo) => (
                 <a
                     key={logo.id}
                     href={logo.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative h-full w-fit mx-16 flex items-center justify-start transition-opacity hover:opacity-80"
+                    className="relative mx-16 flex h-20 items-center justify-center transition-opacity hover:opacity-80"
                 >
                     <Image
                         src={logo.src}
                         alt={logo.alt ?? logo.id}
-                        className={logo.className ?? "h-[48px] sm:h-[56px]"}
-                        width={500}
-                        height={500}
+                        className={logo.className ?? "h-16 w-auto"}
+                        width={200}
+                        height={64}
+                        style={{ objectFit: 'contain' }}
                     />
                 </a>
             ))}
