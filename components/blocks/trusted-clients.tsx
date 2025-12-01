@@ -9,7 +9,8 @@ const allLogos = [
   {
     name: "Unilasalle",
     logo: "/assets/clients/LOGO_UNILASALLE.png",
-    siteUrl: "https://www.unilasalle.fr/"
+    siteUrl: "https://www.unilasalle.fr/",
+    className: "dark:invert"
   },
   {
     name: "Main Verte",
@@ -56,7 +57,7 @@ export function TrustedClients() {
                   alt={`${company.name} logo`}
                   width={300}
                   height={96}
-                  className="h-20 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300"
+                  className={"h-20 w-auto object-contain opacity-60 hover:opacity-100 transition-opacity duration-300 " + (company.className ?? "")}
                   style={{ objectFit: 'contain', maxWidth: '200px' }}
                 />
               </a>

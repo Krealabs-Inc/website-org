@@ -64,7 +64,9 @@ export default function Home() {
         <main className="min-h-screen bg-white dark:bg-[#030303] transition-colors">
             <WaitlistHero />
 
+            {/* Composant affichant les logos des clients de confiance
             <TrustedClients />
+            */}
 
             <section id="technologies" className="relative py-24 bg-white dark:bg-[#030303] transition-colors">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#A543F1]/[0.02] to-transparent" />
