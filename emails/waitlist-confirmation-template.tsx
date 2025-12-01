@@ -289,7 +289,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
           <div className="footer">
             <div className="footer-logo">Kréalabs</div>
             <p>Agence de développement web et mobile</p>
-            <p>Clermont-Ferrand, France</p>
+            <p>Rouen, France</p>
             <p style={{ marginTop: '16px' }}>
               <a href="mailto:contact@krealabs.fr">contact@krealabs.fr</a>
             </p>
