@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function NewsletterSignup() {
@@ -50,15 +49,12 @@ export default function NewsletterSignup() {
   };
 
   return (
-    <div className="relative overflow-hidden bg-gradient-to-r from-[#A543F1] to-[#c5cbf9] p-8 md:p-12 rounded-2xl text-white">
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djItSDI0di0yaDEyek0zNiAyOHYySDI0di0yaDEyek0zNiAyMnYySDI0di0yaDEyeiIvPjwvZz48L2c+PC9zdmc+')] opacity-10" />
-
-      <div className="relative text-center max-w-2xl mx-auto">
-        <Sparkles className="w-12 h-12 mx-auto mb-4 opacity-80" />
-        <h3 className="text-3xl md:text-4xl font-bold mb-4 font-[family-name:var(--font-heading)]">
+    <div className="bg-gradient-to-r from-[#A543F1]/10 to-[#c5cbf9]/10 p-8 rounded-2xl border border-[#A543F1]/20">
+      <div className="text-center max-w-2xl mx-auto">
+        <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
           Restez informé des dernières tendances
         </h3>
-        <p className="text-white/90 mb-8 text-lg font-[family-name:var(--font-sans)]">
+        <p className="text-gray-600 dark:text-white/60 mb-6 font-[family-name:var(--font-sans)]">
           Recevez nos meilleurs articles directement dans votre boîte mail. Pas de spam, promis.
         </p>
 
@@ -70,12 +66,12 @@ export default function NewsletterSignup() {
             placeholder="votre@email.com"
             required
             disabled={status === 'loading' || status === 'success'}
-            className="flex-1 px-5 py-3.5 rounded-lg text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-white/50 font-[family-name:var(--font-sans)] disabled:opacity-70 disabled:cursor-not-allowed"
+            className="flex-1 px-5 py-3 rounded-lg bg-white dark:bg-white/5 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 border border-gray-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-[#A543F1]/50 focus:border-[#A543F1] font-[family-name:var(--font-sans)] disabled:opacity-70 disabled:cursor-not-allowed transition-all"
           />
           <button
             type="submit"
             disabled={status === 'loading' || status === 'success'}
-            className="px-6 py-3.5 bg-white text-[#A543F1] rounded-lg font-semibold hover:bg-white/90 transition-colors shadow-lg hover:shadow-xl font-[family-name:var(--font-heading)] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="px-6 py-3 bg-[#A543F1] text-white rounded-lg font-medium hover:bg-[#A543F1]/90 transition-colors font-[family-name:var(--font-heading)] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 whitespace-nowrap"
           >
             {status === 'loading' ? (
               <>
