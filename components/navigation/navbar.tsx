@@ -77,7 +77,7 @@ export function Navbar() {
                     <div className="hidden md:flex items-center space-x-4">
                         <ThemeToggle/>
                         <Link
-                            href="#contact"
+                            href="/contact"
                             className={cn(
                                 "px-4 py-2 rounded-lg font-medium text-sm",
                                 "bg-[#A543F1]",
@@ -128,7 +128,7 @@ export function Navbar() {
                             </Link>
                         ))}
                         <Link
-                            href="#contact"
+                            href="/contact"
                             onClick={() => setIsMobileMenuOpen(false)}
                             className={cn(
                                 "block text-center px-4 py-2 rounded-lg font-medium text-sm",

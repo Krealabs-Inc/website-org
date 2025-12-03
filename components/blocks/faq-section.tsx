@@ -80,11 +80,11 @@ export default function FAQSection() {
                     </Accordion>
 
                     <p className="text-gray-600 dark:text-white/40 mt-6 px-8 text-center">
-                        Vous ne trouvez pas la reponse ? Contactez notre{' '}
+                        Vous ne trouvez pas la réponse ? Contactez notre{' '}
                         <Link
-                            href="#contact"
+                            href="/contact"
                             className="text-[#A543F1] font-medium hover:underline">
-                            equipe
+                            équipe
                         </Link>
                     </p>
                 </div>
