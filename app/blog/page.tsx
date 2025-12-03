@@ -7,6 +7,7 @@ import Link from "next/link";
 import { blogPosts } from "@/lib/blog-data";
 import { useState } from "react";
 import NewsletterSignup from "@/components/blocks/newsletter-signup";
+import { BlogHero } from "@/components/blocks/blog-hero";
 
 const categories = ["Tous", "Developpement", "Design", "Performance", "Mobile", "IA"];
 
@@ -23,53 +24,23 @@ export default function BlogPage() {
   return (
     <main className="min-h-screen bg-white dark:bg-[#030303] transition-colors pt-20">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#A543F1]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10 border-b border-gray-200 dark:border-white/[0.08]">
-        <div className="container mx-auto px-4 py-16 md:py-24 max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-center"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A543F1]/10 border border-[#A543F1]/20 mb-6">
-              <Sparkles className="w-4 h-4 text-[#A543F1]" />
-              <span className="text-sm font-medium text-[#A543F1] font-[family-name:var(--font-heading)]">
-                Blog
-              </span>
-            </div>
+      <BlogHero />
 
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 font-[family-name:var(--font-heading)]">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] to-[#c5cbf9]">
-                Actualités & Tutoriels
-              </span>
-              <br />
-              <span className="text-gray-900 dark:text-white">
-                Tech & Digital
-              </span>
-            </h1>
-
-            <p className="text-xl text-gray-600 dark:text-white/60 max-w-3xl mx-auto font-[family-name:var(--font-sans)]">
-              Découvrez nos articles sur le développement web, mobile, le design et les dernières technologies
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      <div className="container mx-auto px-4 py-16 md:py-24 max-w-7xl">
+      <div className="container mx-auto px-4 py-12 md:py-16 max-w-7xl">
         {/* Categories Filter */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-12"
+          className="mb-8"
         >
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-4">
             <TrendingUp className="w-5 h-5 text-[#A543F1]" />
             <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-white/40 font-[family-name:var(--font-heading)]">
               Catégories
             </h2>
           </div>
-          <div className="flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2">
             {categories.map((category) => (
               <button
                 key={category}
@@ -92,9 +63,9 @@ export default function BlogPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-16"
+            className="mb-12"
           >
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3 mb-4">
               <Sparkles className="w-5 h-5 text-[#A543F1]" />
               <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-white/40 font-[family-name:var(--font-heading)]">
                 Article en vedette
@@ -106,14 +77,14 @@ export default function BlogPage() {
                 <div className="absolute inset-0 bg-gradient-to-r from-[#A543F1]/5 to-[#c5cbf9]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
 
                 <div className="grid md:grid-cols-2 gap-0">
-                  <div className="relative h-72 md:h-full overflow-hidden">
+                  <div className="relative h-64 md:h-full overflow-hidden">
                     <img
                       src={featuredPost.image}
                       alt={featuredPost.title}
                       className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
-                    <div className="absolute top-6 left-6">
+                    <div className="absolute top-4 left-4">
                       <Badge className="bg-[#A543F1] text-white border-0 shadow-lg font-[family-name:var(--font-heading)]">
                         <Sparkles className="w-3 h-3 mr-1" />
                         En vedette
@@ -121,18 +92,18 @@ export default function BlogPage() {
                     </div>
                   </div>
 
-                  <div className="relative p-8 md:p-12 flex flex-col justify-center">
-                    <Badge className="w-fit mb-4 bg-[#A543F1]/10 text-[#A543F1] border border-[#A543F1]/20 font-[family-name:var(--font-heading)]">
+                  <div className="relative p-6 md:p-8 flex flex-col justify-center">
+                    <Badge className="w-fit mb-3 bg-[#A543F1]/10 text-[#A543F1] border border-[#A543F1]/20 font-[family-name:var(--font-heading)]">
                       {featuredPost.category}
                     </Badge>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white group-hover:text-[#A543F1] transition-colors font-[family-name:var(--font-heading)]">
+                    <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-[#A543F1] transition-colors font-[family-name:var(--font-heading)]">
                       {featuredPost.title}
                     </h2>
-                    <p className="text-gray-600 dark:text-white/60 mb-6 leading-relaxed font-[family-name:var(--font-sans)]">
+                    <p className="text-gray-600 dark:text-white/60 mb-4 leading-relaxed font-[family-name:var(--font-sans)]">
                       {featuredPost.excerpt}
                     </p>
 
-                    <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-white/40 mb-6">
+                    <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-white/40 mb-4">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         <span className="font-[family-name:var(--font-sans)]">{featuredPost.date}</span>
@@ -155,15 +126,15 @@ export default function BlogPage() {
         )}
 
         {/* Blog Posts Grid */}
-        <div className="mb-12">
-          <div className="flex items-center gap-3 mb-6">
+        <div className="mb-8">
+          <div className="flex items-center gap-3 mb-4">
             <TrendingUp className="w-5 h-5 text-[#A543F1]" />
             <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-white/40 font-[family-name:var(--font-heading)]">
               {selectedCategory === "Tous" ? "Derniers articles" : `Articles ${selectedCategory}`}
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPosts.map((post, index) => (
               <motion.div
                 key={post.slug}
@@ -173,7 +144,7 @@ export default function BlogPage() {
               >
                 <Link href={`/blog/${post.slug}`}>
                   <article className="group h-full flex flex-col bg-gray-50 dark:bg-white/[0.02] rounded-2xl border border-gray-200 dark:border-white/[0.08] overflow-hidden hover:border-[#A543F1]/50 transition-all hover:shadow-lg hover:shadow-[#A543F1]/10">
-                    <div className="relative h-56 overflow-hidden">
+                    <div className="relative h-48 overflow-hidden">
                       <img
                         src={post.image}
                         alt={post.title}
@@ -182,20 +153,20 @@ export default function BlogPage() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0" />
                     </div>
 
-                    <div className="p-6 flex flex-col flex-1">
-                      <Badge className="w-fit mb-3 bg-[#A543F1]/10 text-[#A543F1] border border-[#A543F1]/20 text-xs font-[family-name:var(--font-heading)]">
+                    <div className="p-5 flex flex-col flex-1">
+                      <Badge className="w-fit mb-2 bg-[#A543F1]/10 text-[#A543F1] border border-[#A543F1]/20 text-xs font-[family-name:var(--font-heading)]">
                         {post.category}
                       </Badge>
 
-                      <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-[#A543F1] transition-colors line-clamp-2 font-[family-name:var(--font-heading)]">
+                      <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white group-hover:text-[#A543F1] transition-colors line-clamp-2 font-[family-name:var(--font-heading)]">
                         {post.title}
                       </h3>
 
-                      <p className="text-gray-600 dark:text-white/60 mb-4 line-clamp-3 flex-1 font-[family-name:var(--font-sans)]">
+                      <p className="text-sm text-gray-600 dark:text-white/60 mb-3 line-clamp-3 flex-1 font-[family-name:var(--font-sans)]">
                         {post.excerpt}
                       </p>
 
-                      <div className="flex items-center justify-between pt-4 border-t border-gray-200 dark:border-white/[0.08]">
+                      <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-white/[0.08]">
                         <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-white/40">
                           <div className="flex items-center gap-1.5">
                             <Calendar className="w-3.5 h-3.5" />
@@ -230,7 +201,7 @@ export default function BlogPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-16"
+          className="mt-12"
         >
           <NewsletterSignup />
         </motion.div>
