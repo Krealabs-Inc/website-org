@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Sparkles, Heart, Rocket, Users, Target, Award } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { CTASection } from "@/components/blocks/cta-section";
 
 export default function NotreHistoirePage() {
   return (
@@ -241,36 +240,18 @@ export default function NotreHistoirePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6 font-[family-name:var(--font-heading)]">
-              Prêt à écrire votre histoire avec nous ?
-            </h2>
-            <p className="text-xl text-gray-600 dark:text-white/70 mb-8 font-[family-name:var(--font-sans)]">
-              Discutons de votre projet et découvrons comment nous pouvons vous aider à atteindre vos objectifs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-[#A543F1] hover:bg-[#A543F1]/90">
-                <Link href="/contact">
-                  Démarrer un projet
-                </Link>
-              </Button>
-              <Button asChild size="lg" variant="outline">
-                <Link href="/services">
-                  Découvrir nos services
-                </Link>
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CTASection
+        title="Prêt à écrire votre histoire avec nous ?"
+        description="Discutons de votre projet et découvrons comment nous pouvons vous aider à atteindre vos objectifs."
+        primaryCTA={{
+          text: "Démarrer un projet",
+          href: "/contact"
+        }}
+        secondaryCTA={{
+          text: "Découvrir nos services",
+          href: "/services"
+        }}
+      />
     </main>
   );
 }
