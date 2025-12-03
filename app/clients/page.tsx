@@ -1,10 +1,10 @@
 "use client";
 
 import React from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { motion } from 'framer-motion';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { ExternalLink, Globe, Users, TrendingUp, Award } from 'lucide-react';
+import { Sparkles, TrendingUp, Award, Zap, Users2 } from 'lucide-react';
+import { CTASection } from '@/components/blocks/cta-section';
 
 interface Client {
     id: number;
@@ -32,11 +32,11 @@ const defaultClients: Client[] = [
         name: 'TechCorp Solutions',
         logo: 'TC',
         website: 'https://techcorp.example.com',
-        industry: 'Technology',
-        description: 'Leading enterprise software solutions provider with global reach and innovative products.',
+        industry: 'Technologie',
+        description: 'Plateforme de solutions logicielles d\'entreprise avec portée mondiale et produits innovants.',
         stats: [
-            { label: 'Growth', value: '+245%' },
-            { label: 'Users', value: '2M+' },
+            { label: 'Croissance', value: '+245%' },
+            { label: 'Utilisateurs', value: '2M+' },
         ],
         featured: true,
     },
@@ -129,112 +129,140 @@ const defaultClients: Client[] = [
 
 const ClientsPage: React.FC<ClientsPageProps> = ({
                                                      clients = defaultClients,
-                                                     title = 'Trusted by Industry Leaders',
-                                                     subtitle = 'We partner with innovative companies across various industries to deliver exceptional digital experiences and drive measurable results.',
+                                                     title = 'Ils nous font confiance',
+                                                     subtitle = 'Nous collaborons avec des entreprises innovantes pour créer des expériences digitales exceptionnelles qui génèrent des résultats concrets.',
                                                  }) => {
-    const handleVisitWebsite = (website: string) => {
-        window.open(website, '_blank', 'noopener,noreferrer');
-    };
-
     return (
-        <div className="min-h-screen bg-background">
+        <main className="min-h-screen bg-white dark:bg-[#030303] transition-colors pt-20">
             {/* Hero Section */}
-            <div className="border-b border-border bg-gradient-to-b from-muted/50 to-background">
-                <div className="container mx-auto px-4 py-16 md:py-24">
-                    <div className="max-w-3xl mx-auto text-center space-y-4">
-                        <Badge variant="secondary" className="mb-2">
-                            <Users className="w-3 h-3 mr-1" />
-                            Our Clients
-                        </Badge>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
-                            {title}
+            <section className="relative bg-gradient-to-br from-[#A543F1]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10 border-b border-gray-200 dark:border-white/[0.08]">
+                <div className="container mx-auto px-4 py-16 md:py-24 max-w-7xl">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        className="text-center"
+                    >
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A543F1]/10 border border-[#A543F1]/20 mb-6">
+                            <Users2 className="w-4 h-4 text-[#A543F1]" />
+                            <span className="text-sm font-medium text-[#A543F1] font-[family-name:var(--font-heading)]">
+                                Nos Clients
+                            </span>
+                        </div>
+
+                        <h1 className="text-4xl md:text-6xl font-bold mb-6 font-[family-name:var(--font-heading)]">
+                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] to-[#c5cbf9]">
+                                {title}
+                            </span>
                         </h1>
-                        <p className="text-lg md:text-xl text-muted-foreground">
+
+                        <p className="text-xl text-gray-600 dark:text-white/60 max-w-3xl mx-auto font-[family-name:var(--font-sans)]">
                             {subtitle}
                         </p>
-                    </div>
+                    </motion.div>
 
-                    {/* Stats Bar */}
-                    <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-                        <div className="text-center space-y-1">
-                            <div className="text-3xl md:text-4xl font-bold text-foreground">
-                                {clients.length}+
-                            </div>
-                            <div className="text-sm text-muted-foreground">Happy Clients</div>
-                        </div>
-                        <div className="text-center space-y-1">
-                            <div className="text-3xl md:text-4xl font-bold text-foreground">
-                                98%
-                            </div>
-                            <div className="text-sm text-muted-foreground">Satisfaction Rate</div>
-                        </div>
-                        <div className="text-center space-y-1">
-                            <div className="text-3xl md:text-4xl font-bold text-foreground">
-                                150+
-                            </div>
-                            <div className="text-sm text-muted-foreground">Projects Delivered</div>
-                        </div>
-                        <div className="text-center space-y-1">
-                            <div className="text-3xl md:text-4xl font-bold text-foreground">
-                                12
-                            </div>
-                            <div className="text-sm text-muted-foreground">Industries Served</div>
-                        </div>
+                    {/* Stats Bar with animations */}
+                    <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                        {[
+                            { icon: Users2, value: clients.length + '+', label: 'Clients satisfaits' },
+                            { icon: Award, value: '98%', label: 'Taux de satisfaction' },
+                            { icon: Zap, value: '150+', label: 'Projets livrés' },
+                            { icon: TrendingUp, value: '12', label: 'Industries servies' }
+                        ].map((stat, index) => {
+                            const Icon = stat.icon;
+                            return (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    className="text-center p-6 bg-white dark:bg-white/[0.02] rounded-2xl border border-gray-200 dark:border-white/[0.08] hover:border-[#A543F1]/30 transition-all group"
+                                >
+                                    <Icon className="w-8 h-8 mx-auto mb-3 text-[#A543F1] group-hover:scale-110 transition-transform" />
+                                    <div className="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] to-[#c5cbf9] mb-2 font-[family-name:var(--font-heading)]">
+                                        {stat.value}
+                                    </div>
+                                    <div className="text-sm text-gray-600 dark:text-white/60 font-[family-name:var(--font-sans)]">
+                                        {stat.label}
+                                    </div>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
-            </div>
+            </section>
 
             {/* Featured Clients */}
             {clients.some((client) => client.featured) && (
-                <div className="container mx-auto px-4 py-16">
-                    <div className="mb-8">
-                        <div className="flex items-center gap-2 mb-2">
-                            <Award className="w-5 h-5 text-primary" />
-                            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-                                Featured Success Stories
-                            </h2>
+                <section className="container mx-auto px-4 py-16 md:py-20">
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                        className="text-center mb-12"
+                    >
+                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A543F1]/10 border border-[#A543F1]/20 mb-4">
+                            <Sparkles className="w-4 h-4 text-[#A543F1]" />
+                            <span className="text-sm font-medium text-[#A543F1] font-[family-name:var(--font-heading)]">
+                                Success Stories
+                            </span>
                         </div>
-                        <p className="text-muted-foreground">
-                            Highlighting our most impactful partnerships
+                        <h2 className="text-3xl md:text-4xl font-bold mb-4 font-[family-name:var(--font-heading)]">
+                            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] to-[#c5cbf9]">
+                                Nos partenariats les plus marquants
+                            </span>
+                        </h2>
+                        <p className="text-gray-600 dark:text-white/60 max-w-2xl mx-auto font-[family-name:var(--font-sans)]">
+                            Découvrez comment nous avons aidé ces entreprises à atteindre leurs objectifs
                         </p>
-                    </div>
+                    </motion.div>
 
-                    <div className="grid md:grid-cols-2 gap-6 mb-16">
+                    <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
                         {clients
                             .filter((client) => client.featured)
-                            .map((client) => (
-                                <Card
+                            .map((client, index) => (
+                                <motion.div
                                     key={client.id}
-                                    className="group hover:shadow-lg transition-all duration-300 border-2 hover:border-primary/50"
+                                    initial={{ opacity: 0, y: 30 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.5, delay: index * 0.2 }}
+                                    className="group relative"
                                 >
-                                    <CardContent className="p-6">
-                                        <div className="flex items-start gap-4 mb-4">
-                                            <div className="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary font-bold text-xl flex-shrink-0">
+                                    <div className="h-full p-8 bg-white dark:bg-white/[0.02] rounded-3xl border border-gray-200 dark:border-white/[0.08] hover:border-[#A543F1]/50 transition-all duration-300 hover:shadow-2xl hover:shadow-[#A543F1]/10">
+                                        {/* Logo and Header */}
+                                        <div className="flex items-start gap-4 mb-6">
+                                            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#A543F1]/20 to-[#c5cbf9]/10 flex items-center justify-center font-bold text-2xl text-[#A543F1] group-hover:scale-110 transition-transform flex-shrink-0">
                                                 {client.logo}
                                             </div>
                                             <div className="flex-1 min-w-0">
-                                                <h3 className="text-xl font-bold text-foreground mb-1">
+                                                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2 font-[family-name:var(--font-heading)]">
                                                     {client.name}
                                                 </h3>
-                                                <Badge variant="outline" className="text-xs">
+                                                <Badge className="bg-[#A543F1]/10 text-[#A543F1] border-[#A543F1]/20 hover:bg-[#A543F1]/20">
                                                     {client.industry}
                                                 </Badge>
                                             </div>
                                         </div>
 
-                                        <p className="text-muted-foreground mb-4 line-clamp-2">
+                                        {/* Description */}
+                                        <p className="text-gray-600 dark:text-white/60 mb-6 leading-relaxed font-[family-name:var(--font-sans)]">
                                             {client.description}
                                         </p>
 
-                                        <div className="flex gap-4 mb-4">
-                                            {client.stats.map((stat, index) => (
-                                                <div key={index} className="flex items-center gap-2">
-                                                    <TrendingUp className="w-4 h-4 text-primary" />
+                                        {/* Stats */}
+                                        <div className="flex gap-6 mb-6 pb-6 border-b border-gray-200 dark:border-white/[0.08]">
+                                            {client.stats.map((stat, statIndex) => (
+                                                <div key={statIndex} className="flex items-start gap-3">
+                                                    <div className="p-2 rounded-lg bg-[#A543F1]/10">
+                                                        <TrendingUp className="w-4 h-4 text-[#A543F1]" />
+                                                    </div>
                                                     <div>
-                                                        <div className="text-lg font-bold text-foreground">
+                                                        <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] to-[#c5cbf9] font-[family-name:var(--font-heading)]">
                                                             {stat.value}
                                                         </div>
-                                                        <div className="text-xs text-muted-foreground">
+                                                        <div className="text-xs text-gray-600 dark:text-white/60 font-[family-name:var(--font-sans)]">
                                                             {stat.label}
                                                         </div>
                                                     </div>
@@ -242,112 +270,102 @@ const ClientsPage: React.FC<ClientsPageProps> = ({
                                             ))}
                                         </div>
 
-                                        <Button
-                                            variant="outline"
-                                            className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
-                                            onClick={() => handleVisitWebsite(client.website)}
-                                        >
-                                            <Globe className="w-4 h-4 mr-2" />
-                                            Visit Website
-                                            <ExternalLink className="w-4 h-4 ml-2" />
-                                        </Button>
-                                    </CardContent>
-                                </Card>
+                                        {/* CTA - Remove for showcase */}
+                                        <div className="text-center text-sm text-gray-500 dark:text-white/40 font-[family-name:var(--font-sans)]">
+                                            En savoir plus sur ce projet
+                                        </div>
+                                    </div>
+                                </motion.div>
                             ))}
                     </div>
-                </div>
+                </section>
             )}
 
             {/* All Clients Grid */}
-            <div className="container mx-auto px-4 pb-16">
-                <div className="mb-8">
-                    <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-                        All Our Clients
+            <section className="container mx-auto px-4 pb-20">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                    className="text-center mb-12"
+                >
+                    <h2 className="text-3xl md:text-4xl font-bold mb-4 font-[family-name:var(--font-heading)]">
+                        <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] to-[#c5cbf9]">
+                            Tous nos clients
+                        </span>
                     </h2>
-                    <p className="text-muted-foreground">
-                        Explore the diverse range of companies we've helped succeed
+                    <p className="text-gray-600 dark:text-white/60 max-w-2xl mx-auto font-[family-name:var(--font-sans)]">
+                        Découvrez la diversité des entreprises que nous accompagnons vers le succès
                     </p>
-                </div>
+                </motion.div>
 
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {clients.map((client) => (
-                        <Card
+                <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                    {clients.map((client, index) => (
+                        <motion.div
                             key={client.id}
-                            className="group hover:shadow-md transition-all duration-300 hover:border-primary/30"
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: index * 0.05 }}
+                            className="group relative"
                         >
-                            <CardContent className="p-6">
+                            <div className="h-full p-6 bg-white dark:bg-white/[0.02] rounded-2xl border border-gray-200 dark:border-white/[0.08] hover:border-[#A543F1]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[#A543F1]/5">
                                 <div className="flex flex-col items-center text-center space-y-4">
-                                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center text-primary font-bold text-2xl group-hover:scale-110 transition-transform">
+                                    {/* Logo */}
+                                    <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-[#A543F1]/20 to-[#c5cbf9]/10 flex items-center justify-center font-bold text-2xl text-[#A543F1] group-hover:scale-110 transition-transform">
                                         {client.logo}
                                     </div>
 
+                                    {/* Name and Industry */}
                                     <div className="space-y-2 w-full">
-                                        <h3 className="text-lg font-bold text-foreground">
+                                        <h3 className="text-lg font-bold text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
                                             {client.name}
                                         </h3>
-                                        <Badge variant="secondary" className="text-xs">
+                                        <Badge className="bg-[#A543F1]/10 text-[#A543F1] border-[#A543F1]/20 text-xs">
                                             {client.industry}
                                         </Badge>
                                     </div>
 
-                                    <p className="text-sm text-muted-foreground line-clamp-3">
+                                    {/* Description */}
+                                    <p className="text-sm text-gray-600 dark:text-white/60 line-clamp-3 font-[family-name:var(--font-sans)]">
                                         {client.description}
                                     </p>
 
-                                    <div className="grid grid-cols-2 gap-2 w-full pt-2 border-t border-border">
-                                        {client.stats.map((stat, index) => (
-                                            <div key={index} className="text-center">
-                                                <div className="text-sm font-bold text-foreground">
+                                    {/* Stats */}
+                                    <div className="grid grid-cols-2 gap-3 w-full pt-3 border-t border-gray-200 dark:border-white/[0.08]">
+                                        {client.stats.map((stat, statIndex) => (
+                                            <div key={statIndex} className="text-center">
+                                                <div className="text-sm font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] to-[#c5cbf9] font-[family-name:var(--font-heading)]">
                                                     {stat.value}
                                                 </div>
-                                                <div className="text-xs text-muted-foreground">
+                                                <div className="text-xs text-gray-600 dark:text-white/60 font-[family-name:var(--font-sans)]">
                                                     {stat.label}
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
-
-                                    <Button
-                                        variant="ghost"
-                                        size="sm"
-                                        className="w-full group-hover:bg-primary/10"
-                                        onClick={() => handleVisitWebsite(client.website)}
-                                    >
-                                        <Globe className="w-4 h-4 mr-2" />
-                                        Visit Site
-                                        <ExternalLink className="w-3 h-3 ml-2" />
-                                    </Button>
                                 </div>
-                            </CardContent>
-                        </Card>
+                            </div>
+                        </motion.div>
                     ))}
                 </div>
-            </div>
+            </section>
 
             {/* CTA Section */}
-            <div className="border-t border-border bg-muted/30">
-                <div className="container mx-auto px-4 py-16">
-                    <div className="max-w-2xl mx-auto text-center space-y-6">
-                        <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                            Ready to Join Our Success Stories?
-                        </h2>
-                        <p className="text-lg text-muted-foreground">
-                            Let's collaborate to create exceptional digital experiences that drive
-                            real business results.
-                        </p>
-                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                            <Button size="lg" className="text-base">
-                                Start Your Project
-                                <ExternalLink className="w-4 h-4 ml-2" />
-                            </Button>
-                            <Button size="lg" variant="outline" className="text-base">
-                                View Case Studies
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <CTASection
+                title="Prêt à rejoindre nos success stories ?"
+                description="Collaborons ensemble pour créer des expériences digitales exceptionnelles qui génèrent des résultats concrets pour votre entreprise."
+                primaryCTA={{
+                    text: "Démarrer un projet",
+                    href: "/contact"
+                }}
+                secondaryCTA={{
+                    text: "Voir nos tarifs",
+                    href: "/pricing"
+                }}
+            />
+        </main>
     );
 };
 
