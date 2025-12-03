@@ -138,9 +138,9 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="h-screen overflow-hidden bg-white dark:bg-[#030303] transition-colors pt-20 flex flex-col">
+    <main className="min-h-screen bg-white dark:bg-[#030303] transition-colors pt-20">
       {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-[#A543F1]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10 border-b border-gray-200 dark:border-white/[0.08] flex-shrink-0">
+      <div className="relative bg-gradient-to-br from-[#A543F1]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10 border-b border-gray-200 dark:border-white/[0.08]">
         <div className="container mx-auto px-4 py-4 max-w-7xl text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -151,16 +151,16 @@ export default function ContactPage() {
               Contactez-nous
             </h1>
             <p className="text-sm text-gray-600 dark:text-white/60 max-w-2xl mx-auto">
-              Vous avez un projet en tete ? Parlons-en ! Notre equipe vous repondra sous 24h.
+              Vous avez un projet en tête ? Parlons-en ! Notre équipe vous répondra sous 24h.
             </p>
           </motion.div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-4 max-w-7xl flex-1 overflow-hidden">
-        <div className="grid lg:grid-cols-3 gap-4 h-full">
+      <div className="container mx-auto px-4 py-4 max-w-7xl">
+        <div className="grid lg:grid-cols-3 gap-4">
           {/* Contact Form - Takes 2 columns */}
-          <div className="lg:col-span-2 overflow-auto">
+          <div className="lg:col-span-2">
             <div className="bg-gray-50 dark:bg-white/[0.02] p-4 rounded-2xl border border-gray-200 dark:border-white/[0.08]">
               <h2 className="text-lg font-bold mb-3 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
                 Envoyez-nous un message
@@ -414,7 +414,7 @@ export default function ContactPage() {
           </div>
 
           {/* Contact Info Sidebar */}
-          <div className="space-y-3 overflow-auto">
+          <div className="space-y-3">
             {/* Contact Cards */}
             <div className="bg-gray-50 dark:bg-white/[0.02] p-3 rounded-2xl border border-gray-200 dark:border-white/[0.08]">
               <h3 className="text-sm font-bold mb-2 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
@@ -491,16 +491,16 @@ export default function ContactPage() {
             </div>
 
             {/* CTA Card */}
-            <div className="bg-gradient-to-br from-[#A543F1] to-[#c5cbf9] p-3 rounded-2xl text-white">
-              <h3 className="text-sm font-bold mb-1 font-[family-name:var(--font-heading)]">
-                Reponse rapide garantie
+            <div className="bg-gradient-to-r from-[#A543F1]/10 to-[#c5cbf9]/10 p-4 rounded-2xl border border-[#A543F1]/20">
+              <h3 className="text-base font-bold mb-2 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
+                Réponse rapide garantie
               </h3>
-              <p className="text-xs text-white/90 mb-3">
-                Nous nous engageons a repondre a toutes les demandes sous 24h.
+              <p className="text-sm text-gray-600 dark:text-white/60 mb-3">
+                Nous nous engageons à répondre à toutes les demandes sous 24h.
               </p>
-              <div className="flex items-center gap-2 text-xs">
+              <div className="flex items-center gap-2 text-sm text-[#A543F1] font-medium">
                 <Check className="w-4 h-4" />
-                <span>Reponse sous 24h</span>
+                <span>Réponse sous 24h</span>
               </div>
             </div>
           </div>
