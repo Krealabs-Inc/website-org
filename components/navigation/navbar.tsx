@@ -1,147 +1,163 @@
 "use client";
 
-import {useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import {motion} from "framer-motion";
-import {ThemeToggle} from "@/components/ui/theme-toggle";
-import {Menu, X} from "lucide-react";
-import {cn} from "@/lib/utils";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Menu, X, ArrowUpRight } from "lucide-react";
+
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { cn } from "@/lib/utils";
 
 const navItems = [
-    {name: "Accueil", href: "/"},
-    {name: "Services", href: "/services"},
-    {name: "Clients", href: "/clients"},
-    {name: "Pricing", href: "/pricing"},
-    {name: "Blog", href: "/blog"},
-    {name: "Changelog", href: "/changelog"},
-    {name: "Contact", href: "/contact"},
+  { name: "Services", href: "/services" },
+  { name: "Expertise", href: "/expertise" },
+  { name: "Équipe", href: "/equipe" },
+  { name: "Blog", href: "/blog" },
+  { name: "FAQ", href: "/faq" },
 ];
 
 export function Navbar() {
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
-        };
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 16);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+  // Close mobile menu on route change
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [pathname]);
 
-    return (
-        <motion.nav
-            initial={{y: -100}}
-            animate={{y: 0}}
-            transition={{duration: 0.5}}
-            className={cn(
-                "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-                isScrolled
-                    ? "bg-white/80 dark:bg-[#030303]/80 backdrop-blur-xl border-b border-gray-200/50 dark:border-white/[0.08]"
-                    : "bg-transparent"
-            )}
-        >
-            <div className="container mx-auto px-4 md:px-6">
-                <div className="flex items-center justify-between h-16 md:h-20">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center group">
-                        <Image
-                            src="/logo.png"
-                            alt="Kréalabs Logo"
-                            width={150}
-                            height={40}
-                            className="h-8 w-auto transition-opacity group-hover:opacity-80 invert dark:invert-0"
-                            priority
-                        />
-                    </Link>
+  return (
+    <>
+      <header
+        className={cn(
+          "fixed top-0 inset-x-0 z-50 transition-all duration-300",
+          isScrolled
+            ? "bg-[var(--background)]/80 backdrop-blur-xl border-b border-[var(--border)]"
+            : "bg-transparent border-b border-transparent",
+        )}
+      >
+        <Container>
+          <div className="flex items-center justify-between h-16">
+            {/* Logo */}
+            <Link
+              href="/"
+              className="group flex items-center -ml-1 px-1 py-1 rounded-[var(--radius)] hover:bg-[var(--surface)] transition-colors"
+              aria-label="Krealabs — Accueil"
+            >
+              <Image
+                src="/logo.png"
+                alt="Krealabs"
+                width={139}
+                height={87}
+                priority
+                className="h-7 md:h-8 w-auto dark:invert-0 invert transition-opacity group-hover:opacity-80"
+              />
+            </Link>
 
-                    {/* Desktop Navigation - Centered */}
-                    <div
-                        className="hidden md:flex items-center justify-center space-x-8 absolute left-1/2 -translate-x-1/2">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.name}
-                                href={item.href}
-                                className="text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-white/60 dark:hover:text-white transition-colors relative group font-[family-name:var(--font-heading)]"
-                            >
-                                {item.name}
-                                <span
-                                    className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#A543F1] group-hover:w-full transition-all duration-300"/>
-                            </Link>
-                        ))}
-                    </div>
+            {/* Desktop nav */}
+            <nav className="hidden md:flex items-center gap-1">
+              {navItems.map((item) => {
+                const active =
+                  pathname === item.href ||
+                  (item.href !== "/" && pathname.startsWith(item.href));
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={cn(
+                      "px-3 py-1.5 text-[0.9rem] font-medium rounded-[var(--radius)] transition-colors",
+                      active
+                        ? "text-[var(--foreground)] bg-[var(--surface)]"
+                        : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]",
+                    )}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </nav>
 
-                    {/* Right side: Theme toggle + CTA */}
-                    <div className="hidden md:flex items-center space-x-4">
-                        <ThemeToggle/>
-                        <Link
-                            href="/contact"
-                            className={cn(
-                                "px-4 py-2 rounded-lg font-medium text-sm",
-                                "bg-[#A543F1]",
-                                "text-white hover:shadow-lg hover:shadow-[#A543F1]/25",
-                                "transition-all duration-200",
-                                "font-[family-name:var(--font-heading)]"
-                            )}
-                        >
-                            Démarrer un projet
-                        </Link>
-                    </div>
-
-                    {/* Mobile menu button */}
-                    <div className="flex md:hidden items-center space-x-2">
-                        <ThemeToggle/>
-                        <button
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="p-2 rounded-lg bg-white/[0.05] hover:bg-white/[0.1] border border-white/[0.1] dark:bg-white/[0.05] dark:border-white/[0.1] transition-colors"
-                            aria-label="Toggle menu"
-                        >
-                            {isMobileMenuOpen ? (
-                                <X className="w-5 h-5 text-gray-900 dark:text-white"/>
-                            ) : (
-                                <Menu className="w-5 h-5 text-gray-900 dark:text-white"/>
-                            )}
-                        </button>
-                    </div>
-                </div>
+            {/* Right cluster */}
+            <div className="hidden md:flex items-center gap-2">
+              <ThemeToggle />
+              <Button size="md" asChild>
+                <Link href="/contact">
+                  Nous contacter
+                  <ArrowUpRight />
+                </Link>
+              </Button>
             </div>
 
-            {/* Mobile Menu */}
-            {isMobileMenuOpen && (
-                <motion.div
-                    initial={{opacity: 0, height: 0}}
-                    animate={{opacity: 1, height: "auto"}}
-                    exit={{opacity: 0, height: 0}}
-                    className="md:hidden border-t border-gray-200/50 dark:border-white/[0.08] bg-white/95 dark:bg-[#030303]/95 backdrop-blur-xl"
-                >
-                    <div className="container mx-auto px-4 py-4 space-y-3">
-                        {navItems.map((item) => (
-                            <Link
-                                key={item.name}
-                                href={item.href}
-                                onClick={() => setIsMobileMenuOpen(false)}
-                                className="block py-2 text-sm font-medium text-gray-600 hover:text-gray-900 dark:text-white/60 dark:hover:text-white transition-colors font-[family-name:var(--font-heading)]"
-                            >
-                                {item.name}
-                            </Link>
-                        ))}
-                        <Link
-                            href="/contact"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                            className={cn(
-                                "block text-center px-4 py-2 rounded-lg font-medium text-sm",
-                                "bg-[#A543F1]",
-                                "text-white",
-                                "transition-all duration-200"
-                            )}
-                        >
-                            Démarrer un projet
-                        </Link>
-                    </div>
-                </motion.div>
+            {/* Mobile cluster */}
+            <div className="flex md:hidden items-center gap-2">
+              <ThemeToggle />
+              <button
+                onClick={() => setIsMobileMenuOpen((v) => !v)}
+                className="size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] flex items-center justify-center transition-colors"
+                aria-label={isMobileMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+                aria-expanded={isMobileMenuOpen}
+              >
+                {isMobileMenuOpen ? (
+                  <X className="size-4 text-[var(--foreground)]" />
+                ) : (
+                  <Menu className="size-4 text-[var(--foreground)]" />
+                )}
+              </button>
+            </div>
+          </div>
+        </Container>
+      </header>
+
+      {/* Mobile sheet — CSS-only transitions (pas de framer-motion) */}
+      <div
+        id="mobile-menu"
+        aria-hidden={!isMobileMenuOpen}
+        className={cn(
+          "fixed inset-0 z-40 md:hidden bg-[var(--background)]/95 backdrop-blur-xl pt-20",
+          "transition-opacity duration-200 ease-out",
+          isMobileMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none",
+        )}
+      >
+        <Container>
+          <nav
+            className={cn(
+              "flex flex-col gap-1 transition-transform duration-300 ease-out",
+              isMobileMenuOpen ? "translate-y-0" : "-translate-y-2",
             )}
-        </motion.nav>
-    );
+          >
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="flex items-center justify-between py-4 border-b border-[var(--border)] text-h3 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+              >
+                {item.name}
+                <ArrowUpRight className="size-5 text-[var(--subtle-foreground)]" />
+              </Link>
+            ))}
+            <div className="pt-6">
+              <Button size="lg" className="w-full" asChild>
+                <Link href="/contact">
+                  Nous contacter
+                  <ArrowUpRight />
+                </Link>
+              </Button>
+            </div>
+          </nav>
+        </Container>
+      </div>
+    </>
+  );
 }

@@ -1,18 +1,7 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
+/**
+ * Template global — fade-in léger à chaque navigation.
+ * Implémenté en CSS pour éviter de charger framer-motion sur toutes les pages.
+ */
 export default function Template({ children }: { children: React.ReactNode }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{
-        duration: 0.3,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className="animate-page-enter">{children}</div>;
 }
