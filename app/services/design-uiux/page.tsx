@@ -1,424 +1,173 @@
-"use client";
+import { Metadata } from "next";
+import {
+  Eye,
+  PenTool,
+  Figma,
+  Layers,
+  Accessibility,
+  TestTube2,
+} from "lucide-react";
 
-import { motion } from "framer-motion";
-import { Palette, Check, ArrowRight, Sparkles, Users, Eye, Accessibility, Layers, Figma } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+export const metadata: Metadata = {
+  title: "Design UI/UX à Rouen — Interfaces & design system",
+  description:
+    "Design UI/UX à Rouen : wireframes, maquettes Figma, design system, prototypage. Interfaces accessibles, mémorables, pensées pour convertir. Agence digitale Normandie.",
+  keywords: [
+    "design ui ux rouen",
+    "designer figma rouen",
+    "design system normandie",
+    "maquette site web rouen",
+    "ux designer rouen",
+  ],
+  alternates: { canonical: "https://krealabs.fr/services/design-uiux" },
+};
 
-const features = [
-  {
-    icon: Sparkles,
-    title: "Design System complet",
-    description: "Création de design systems évolutifs avec composants réutilisables et documentation"
-  },
-  {
-    icon: Users,
-    title: "Recherche utilisateur",
-    description: "Analyse des besoins, personas, parcours utilisateur et tests d'utilisabilité"
-  },
-  {
-    icon: Eye,
-    title: "Prototypage interactif",
-    description: "Prototypes haute-fidélité avec animations et interactions pour valider le concept"
-  },
-  {
-    icon: Accessibility,
-    title: "Accessibilité WCAG 2.1",
-    description: "Interfaces conformes aux normes d'accessibilité pour tous les utilisateurs"
-  },
-  {
-    icon: Layers,
-    title: "Design responsive",
-    description: "Adaptation parfaite sur mobile, tablette et desktop avec breakpoints optimisés"
-  },
-  {
-    icon: Figma,
-    title: "Collaboration temps réel",
-    description: "Travail collaboratif sur Figma avec versioning et commentaires intégrés"
-  }
-];
+import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { ServiceHero } from "@/components/services/service-hero";
+import { ServiceFeatures } from "@/components/services/service-features";
+import { ServiceCta } from "@/components/services/service-cta";
 
-const tools = [
-  { name: "Figma", description: "Design et prototypage collaboratif en temps réel" },
-  { name: "Adobe XD", description: "Design d'expérience et wireframing avancé" },
-  { name: "Sketch", description: "Design d'interfaces pour écosystème Apple" },
-  { name: "Framer", description: "Prototypage interactif avec code React" },
-  { name: "Principle", description: "Animations et micro-interactions natives" },
-  { name: "Zeplin", description: "Handoff développeur avec spécifications CSS" },
-];
-
-const processSteps = [
-  {
-    number: "01",
-    title: "Audit et recherche",
-    description: "Audit de l'existant, analyse concurrentielle, définition des personas et parcours utilisateurs types.",
-    duration: "1-2 semaines"
-  },
-  {
-    number: "02",
-    title: "Wireframes et architecture",
-    description: "Création de wireframes low-fi, architecture de l'information et flux utilisateurs.",
-    duration: "1-2 semaines"
-  },
-  {
-    number: "03",
-    title: "Design visuel",
-    description: "Charte graphique, maquettes haute-fidélité, iconographie et identité visuelle.",
-    duration: "3-4 semaines"
-  },
-  {
-    number: "04",
-    title: "Prototypage et tests",
-    description: "Création de prototypes interactifs, tests utilisateurs et itérations basées sur les retours.",
-    duration: "2-3 semaines"
-  },
-  {
-    number: "05",
-    title: "Design system",
-    description: "Documentation complète, bibliothèque de composants, guidelines et variables design tokens.",
-    duration: "2-3 semaines"
-  },
-  {
-    number: "06",
-    title: "Handoff développement",
-    description: "Spécifications techniques, assets exportés, accompagnement des développeurs.",
-    duration: "1 semaine"
-  }
-];
-
-const projects = [
-  {
-    title: "App bancaire",
-    description: "Refonte complète de l'expérience mobile avec dashboard intuitif et onboarding simplifié",
-    results: ["NPS +45 points", "Adoption 89%", "Temps de tâche -60%"]
-  },
-  {
-    title: "Plateforme e-learning",
-    description: "Interface d'apprentissage moderne avec gamification et suivi de progression",
-    results: ["Engagement +120%", "Taux de complétion 78%", "Satisfaction 4.7/5"]
-  },
-  {
-    title: "Dashboard analytics",
-    description: "Visualisation de données complexes avec graphiques interactifs et filtres avancés",
-    results: ["Prise de décision -40%", "Erreurs -75%", "Productivité +50%"]
-  }
-];
-
-const principles = [
-  {
-    title: "User-centric",
-    description: "L'utilisateur au centre de chaque décision de design"
-  },
-  {
-    title: "Simplicité",
-    description: "Des interfaces épurées et intuitives qui vont à l'essentiel"
-  },
-  {
-    title: "Cohérence",
-    description: "Design system unifié pour une expérience homogène"
-  },
-  {
-    title: "Accessibilité",
-    description: "Interfaces utilisables par tous, sans discrimination"
-  }
-];
-
-export default function DesignUIUXPage() {
+export default function DesignUiUxPage() {
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030303] transition-colors pt-20">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#A543F1]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10 border-b border-gray-200 dark:border-white/[0.08]">
-        <div className="container mx-auto px-4 py-16 md:py-24 max-w-7xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A543F1]/10 border border-[#A543F1]/20 mb-6">
-                <Palette className="w-4 h-4 text-[#A543F1] dark:text-[#A543F1]" />
-                <span className="text-sm font-medium text-[#A543F1] dark:text-[#A543F1] font-[family-name:var(--font-heading)]">
-                  Design UI/UX
-                </span>
-              </div>
+    <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <ServiceHero
+        number="03"
+        eyebrow="Service · Design"
+        title={
+          <>
+            Des <em>interfaces</em> qui se distinguent.
+          </>
+        }
+        description="Wireframes, maquettes haute fidélité, design system, prototypage interactif. Nous concevons des interfaces accessibles, mémorables et pensées pour convertir."
+      />
 
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 font-[family-name:var(--font-heading)]">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] to-[#c5cbf9] dark:from-[#A543F1] dark:to-[#c5cbf9]">
-                  Des interfaces
-                </span>
-                <br />
-                <span className="text-gray-900 dark:text-white">
-                  qui convertissent
-                </span>
-              </h1>
+      <ServiceFeatures
+        number="01"
+        eyebrow="Ce que nous livrons"
+        title={
+          <>
+            Du <em>brief</em> au design system.
+          </>
+        }
+        intro="Un design rigoureux, documenté, réutilisable — pas une simple maquette qu'il faudra interpréter."
+        features={FEATURES}
+      />
 
-              <p className="text-xl text-gray-600 dark:text-white/60 mb-8 leading-relaxed font-[family-name:var(--font-sans)]">
-                Nous créons des expériences utilisateur mémorables qui allient esthétique et performance.
-                Notre approche design-first garantit des interfaces intuitives et accessibles.
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-5">
+              <Eyebrow number="02" className="mb-6">Méthode</Eyebrow>
+              <h2 className="text-h1 mb-6">
+                Un <em>parcours</em> en quatre temps.
+              </h2>
+              <p className="text-body text-[var(--muted-foreground)]">
+                Du discovery au design system. Chaque étape est validée
+                explicitement avant de passer à la suivante.
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
-                  <Button className="bg-gradient-to-r from-[#A543F1] to-[#c5cbf9] hover:from-[#9333ea] hover:to-[#a78bfa] text-white px-8 py-6 text-base font-[family-name:var(--font-heading)]">
-                    Démarrer un projet
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Button>
-                </Link>
-                <Link href="#processus">
-                  <Button variant="outline" className="border-gray-300 dark:border-white/[0.08] px-8 py-6 text-base font-[family-name:var(--font-heading)]">
-                    Notre processus
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative bg-gradient-to-br from-[#A543F1]/20 to-[#c5cbf9]/20 rounded-2xl p-8 border border-[#A543F1]/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#A543F1] to-[#c5cbf9] opacity-5 rounded-2xl" />
-                <Palette className="w-full h-auto text-[#A543F1] dark:text-[#A543F1] opacity-20" strokeWidth={1} />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Principles Section */}
-      <section className="py-16 md:py-24 bg-gray-50 dark:bg-white/[0.02]">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
-              Nos principes de design
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-white/60 max-w-3xl mx-auto font-[family-name:var(--font-sans)]">
-              Les valeurs qui guident chacune de nos créations
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {principles.map((principle, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="text-center p-6 bg-white dark:bg-white/[0.02] rounded-2xl border border-gray-200 dark:border-white/[0.08]"
-              >
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 font-[family-name:var(--font-heading)]">
-                  {principle.title}
-                </h3>
-                <p className="text-gray-600 dark:text-white/60 font-[family-name:var(--font-sans)]">
-                  {principle.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
-              Notre expertise design
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-white/60 max-w-3xl mx-auto font-[family-name:var(--font-sans)]">
-              De la recherche utilisateur au design system, nous couvrons tous les aspects du design UX/UI
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group p-6 bg-gray-50 dark:bg-white/[0.02] rounded-2xl border border-gray-200 dark:border-white/[0.08] hover:border-[#A543F1]/50 transition-all"
-                >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#A543F1]/10 mb-4 group-hover:bg-[#A543F1]/20 transition-colors">
-                    <Icon className="w-6 h-6 text-[#A543F1] dark:text-[#A543F1]" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 font-[family-name:var(--font-heading)]">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-white/60 font-[family-name:var(--font-sans)]">
-                    {feature.description}
-                  </p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Tools Section */}
-      <section className="py-16 md:py-24 bg-gray-50 dark:bg-white/[0.02]">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
-              Nos outils de design
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-white/60 max-w-3xl mx-auto font-[family-name:var(--font-sans)]">
-              Les meilleurs logiciels pour créer des interfaces exceptionnelles
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {tools.map((tool, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 bg-white dark:bg-white/[0.02] rounded-xl border border-gray-200 dark:border-white/[0.08]"
-              >
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 font-[family-name:var(--font-heading)]">
-                  {tool.name}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-white/60 font-[family-name:var(--font-sans)]">
-                  {tool.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process Section */}
-      <section id="processus" className="py-16 md:py-24">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
-              De l'idée au design final
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-white/60 max-w-3xl mx-auto font-[family-name:var(--font-sans)]">
-              Notre méthodologie éprouvée pour créer des interfaces qui enchantent vos utilisateurs
-            </p>
-          </div>
-
-          <div className="grid gap-8">
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative"
-              >
-                <div className="flex flex-col md:flex-row gap-6 p-8 bg-gray-50 dark:bg-white/[0.02] rounded-2xl border border-gray-200 dark:border-white/[0.08] hover:border-[#A543F1]/50 transition-all">
-                  <div className="flex-shrink-0">
-                    <div className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-br from-[#A543F1] to-[#c5cbf9] dark:from-[#A543F1] dark:to-[#c5cbf9] font-[family-name:var(--font-heading)]">
-                      {step.number}
-                    </div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-2xl font-bold text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
-                        {step.title}
-                      </h3>
-                      <span className="text-sm font-medium text-[#A543F1] dark:text-[#A543F1] bg-[#A543F1]/10 px-3 py-1 rounded-full font-[family-name:var(--font-mono)]">
-                        {step.duration}
-                      </span>
-                    </div>
-                    <p className="text-gray-600 dark:text-white/60 leading-relaxed font-[family-name:var(--font-sans)]">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section className="py-16 md:py-24 bg-gray-50 dark:bg-white/[0.02]">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
-              Designs qui performent
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-white/60 max-w-3xl mx-auto font-[family-name:var(--font-sans)]">
-              Des interfaces qui ont transformé l'expérience de milliers d'utilisateurs
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-8 bg-white dark:bg-white/[0.02] rounded-2xl border border-gray-200 dark:border-white/[0.08]"
-              >
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 font-[family-name:var(--font-heading)]">
-                  {project.title}
-                </h3>
-                <p className="text-gray-600 dark:text-white/60 mb-6 font-[family-name:var(--font-sans)]">
-                  {project.description}
-                </p>
-                <div className="space-y-2">
-                  {project.results.map((result, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-[#A543F1] dark:text-[#A543F1]" />
-                      <span className="text-sm text-gray-700 dark:text-white/70 font-[family-name:var(--font-sans)]">
-                        {result}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-gradient-to-r from-[#A543F1] to-[#c5cbf9] p-8 md:p-12 rounded-2xl text-white text-center"
-          >
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 font-[family-name:var(--font-heading)]">
-              Créons une interface exceptionnelle
-            </h2>
-            <p className="text-white/90 mb-8 text-lg max-w-2xl mx-auto font-[family-name:var(--font-sans)]">
-              Transformez votre vision en expérience utilisateur mémorable avec notre expertise design.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button className="bg-white text-[#A543F1] hover:bg-white/90 px-8 py-6 text-base font-[family-name:var(--font-heading)]">
-                  Obtenir un devis gratuit
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-              </Link>
-              <Link href="/blog">
-                <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-6 text-base font-[family-name:var(--font-heading)]">
-                  Voir nos articles
-                </Button>
-              </Link>
             </div>
-          </motion.div>
-        </div>
+            <ol className="lg:col-span-7 space-y-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+              {STEPS.map((step, i) => (
+                <li key={step.title} className="bg-[var(--background)] p-8 grid grid-cols-[auto_1fr] gap-8 items-start">
+                  <span className="text-eyebrow text-[var(--accent)] pt-1.5">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 className="text-h3 mb-2">{step.title}</h3>
+                    <p className="text-body-sm text-[var(--muted-foreground)]">{step.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Container>
       </section>
+
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="max-w-3xl mb-16">
+            <Eyebrow number="03" className="mb-6">Outils</Eyebrow>
+            <h2 className="text-h1">
+              Notre <em>boîte à outils</em>.
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {TOOLS.map((t) => (
+              <div key={t.name} className="p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]">
+                <p className="text-caption mb-3">{t.kind}</p>
+                <p className="text-h4 mb-2">{t.name}</p>
+                <p className="text-body-sm text-[var(--muted-foreground)]">{t.tagline}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <ServiceCta
+        title={
+          <>
+            Un projet à <em>maquetter</em> ?
+          </>
+        }
+      />
     </main>
   );
 }
+
+const FEATURES = [
+  {
+    icon: Eye,
+    title: "Audit UX",
+    description: "Analyse de votre site/app existant : parcours, friction, heatmaps, recommandations chiffrées.",
+  },
+  {
+    icon: PenTool,
+    title: "Wireframes",
+    description: "Squelettes basse fidélité de chaque écran. On valide la structure avant la déco.",
+  },
+  {
+    icon: Figma,
+    title: "Maquettes haute fidélité",
+    description: "Designs finalisés sur Figma : typographie, couleurs, espacements, états, mobile et desktop.",
+  },
+  {
+    icon: Layers,
+    title: "Design system",
+    description: "Bibliothèque de composants documentée, variantes, tokens. Réutilisable pour les évolutions futures.",
+  },
+  {
+    icon: TestTube2,
+    title: "Prototypage interactif",
+    description: "Prototype navigable Figma pour tester les flows avant le développement. Économie de temps massive.",
+  },
+  {
+    icon: Accessibility,
+    title: "Accessibilité WCAG",
+    description: "Contrastes, navigation clavier, lecteurs d'écran. Conformité AA dès la phase design.",
+  },
+];
+
+const STEPS = [
+  {
+    title: "Discovery",
+    description: "Atelier de cadrage : utilisateurs cibles, objectifs business, contraintes techniques. Brief design écrit.",
+  },
+  {
+    title: "Wireframes",
+    description: "Structure des écrans en basse fidélité. Validation des parcours utilisateur clés.",
+  },
+  {
+    title: "Maquettes finales",
+    description: "Design haute fidélité Figma, états, animations, version responsive. Validation écran par écran.",
+  },
+  {
+    title: "Design system",
+    description: "Documentation Figma + tokens, prêts à transformer en code. Handoff propre vers les développeurs.",
+  },
+];
+
+const TOOLS = [
+  { kind: "Design", name: "Figma", tagline: "Outil principal, collaboration temps réel" },
+  { kind: "Prototyping", name: "Figma Prototype", tagline: "Navigation, animations, interactions" },
+  { kind: "Recherche", name: "Maze / Lookback", tagline: "Tests utilisateurs distants, validés" },
+  { kind: "Inspiration", name: "Mobbin / Refero", tagline: "Veille UI/UX continue" },
+];

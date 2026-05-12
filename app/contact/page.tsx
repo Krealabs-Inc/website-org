@@ -1,53 +1,51 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
+import { toast } from "sonner";
 import {
   Mail,
   MapPin,
-  Phone,
-  Upload,
-  X,
+  Clock,
+  ArrowRight,
   Check,
-  MessageSquare,
   FileText,
-  Briefcase
+  MessageSquare,
+  Briefcase,
+  Globe,
+  Smartphone,
+  Cpu,
+  Search,
+  Paperclip,
+  X,
 } from "lucide-react";
-import { motion } from "framer-motion";
-import { toast } from "sonner";
 
-const requestTypes = [
-  {
-    id: "devis",
-    label: "Demande de devis",
-    icon: FileText,
-    description: "Obtenez une estimation pour votre projet",
-  },
-  {
-    id: "contact",
-    label: "Contact simple",
-    icon: MessageSquare,
-    description: "Posez-nous vos questions",
-  },
-  {
-    id: "partenariat",
-    label: "Partenariat",
-    icon: Briefcase,
-    description: "Collaborons ensemble",
-  },
-];
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { cn } from "@/lib/utils";
 
-const pricingOptions = [
-  { id: "starter", label: "Starter - 2 990 EUR", value: "starter" },
-  { id: "pro", label: "Pro - 5 990 EUR", value: "pro" },
-  { id: "enterprise", label: "Enterprise - Sur mesure", value: "enterprise" },
-  { id: "custom", label: "Projet personnalise", value: "custom" },
-];
+const REQUEST_TYPES = [
+  { id: "devis", label: "Demande de devis", icon: FileText },
+  { id: "contact", label: "Question / Renseignement", icon: MessageSquare },
+  { id: "partenariat", label: "Partenariat", icon: Briefcase },
+] as const;
 
-export default function ContactPage() {
+const PROJECT_TYPES = [
+  { id: "site-web", label: "Site web", icon: Globe },
+  { id: "app-mobile", label: "Application mobile", icon: Smartphone },
+  { id: "logiciel", label: "Logiciel sur mesure", icon: Cpu },
+  { id: "refonte-seo", label: "Refonte / SEO", icon: Search },
+] as const;
+
+function ContactPageInner() {
+  const searchParams = useSearchParams();
+  const initialType = searchParams.get("type") === "partenariat" ? "partenariat" : "devis";
+
   const [formData, setFormData] = useState({
-    requestType: "devis",
+    requestType: initialType,
     name: "",
     email: "",
     phone: "",
@@ -55,38 +53,33 @@ export default function ContactPage() {
     pricingOption: "",
     message: "",
   });
-
   const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    const t = searchParams.get("type");
+    if (t === "partenariat" || t === "contact" || t === "devis") {
+      setFormData((d) => ({ ...d, requestType: t }));
+    }
+  }, [searchParams]);
+
+  const update = <K extends keyof typeof formData>(key: K, value: (typeof formData)[K]) =>
+    setFormData((d) => ({ ...d, [key]: value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("loading");
-    setErrorMessage("");
 
     try {
-      const formDataToSend = new FormData();
+      const fd = new FormData();
+      Object.entries(formData).forEach(([k, v]) => fd.append(k, v));
+      files.forEach((f) => fd.append("files", f));
 
-      // Append form fields
-      Object.entries(formData).forEach(([key, value]) => {
-        formDataToSend.append(key, value);
-      });
-
-      // Append files
-      files.forEach((file) => {
-        formDataToSend.append("files", file);
-      });
-
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        body: formDataToSend,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        toast.error("Erreur d'envoi", {
-          description: errorData.error || "Une erreur est survenue lors de l'envoi du formulaire."
+      const res = await fetch("/api/contact", { method: "POST", body: fd });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        toast.error("Envoi échoué", {
+          description: err.error || "Une erreur est survenue. Réessayez ou écrivez-nous à contact@krealabs.fr.",
         });
         setStatus("error");
         setTimeout(() => setStatus("idle"), 3000);
@@ -94,10 +87,9 @@ export default function ContactPage() {
       }
 
       setStatus("success");
-      toast.success("Message envoyé !", {
-        description: "Nous avons bien reçu votre message et vous répondrons dans les plus brefs délais."
+      toast.success("Message envoyé", {
+        description: "Nous revenons vers vous sous 24h ouvrées.",
       });
-
       setFormData({
         requestType: "devis",
         name: "",
@@ -108,404 +100,355 @@ export default function ContactPage() {
         message: "",
       });
       setFiles([]);
-
-      setTimeout(() => setStatus("idle"), 3000);
-    } catch (error) {
-      console.error("Error submitting contact form:", error);
+    } catch {
       setStatus("error");
-      toast.error("Erreur de connexion", {
-        description: "Impossible de se connecter au serveur. Veuillez réessayer."
+      toast.error("Connexion impossible", {
+        description: "Vérifiez votre connexion et réessayez.",
       });
       setTimeout(() => setStatus("idle"), 3000);
     }
   };
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const newFiles = Array.from(e.target.files);
-      setFiles((prev) => [...prev, ...newFiles]);
-    }
-  };
-
-  const removeFile = (index: number) => {
-    setFiles((prev) => prev.filter((_, i) => i !== index));
+  const handleFiles = (incoming: FileList | null) => {
+    if (!incoming) return;
+    const next = Array.from(incoming).filter((f) => f.size <= 10 * 1024 * 1024);
+    setFiles((curr) => [...curr, ...next].slice(0, 5));
   };
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030303] transition-colors pt-20">
-      {/* Hero Section */}
-      <div className="relative bg-gradient-to-br from-[#A543F1]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10 border-b border-gray-200 dark:border-white/[0.08]">
-        <div className="container mx-auto px-4 py-4 max-w-7xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className="text-2xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-white/80 mb-2 font-[family-name:var(--font-heading)]">
-              Contactez-nous
-            </h1>
-            <p className="text-sm text-gray-600 dark:text-white/60 max-w-2xl mx-auto">
-              Vous avez un projet en tête ? Parlons-en ! Notre équipe vous répondra sous 24h.
-            </p>
-          </motion.div>
-        </div>
-      </div>
+    <main className="bg-[var(--background)] text-[var(--foreground)] pt-32 pb-32">
+      <Container>
+        {/* Header */}
+        <header className="mb-16 max-w-4xl">
+          <Eyebrow dot className="mb-6">Parlons de votre projet</Eyebrow>
+          <h1 className="text-display">
+            <em>Décrivez-nous</em> votre besoin.
+          </h1>
+          <p className="text-body-lg text-[var(--muted-foreground)] mt-6 max-w-2xl">
+            Site vitrine, application mobile, logiciel métier ou refonte SEO :
+            partagez-nous votre contexte. Nous revenons vers vous sous 24h
+            ouvrées avec un premier retour concret.
+          </p>
+        </header>
 
-      <div className="container mx-auto px-4 py-4 max-w-7xl">
-        <div className="grid lg:grid-cols-3 gap-4">
-          {/* Contact Form - Takes 2 columns */}
-          <div className="lg:col-span-2">
-            <div className="bg-gray-50 dark:bg-white/[0.02] p-4 rounded-2xl border border-gray-200 dark:border-white/[0.08]">
-              <h2 className="text-lg font-bold mb-3 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
-                Envoyez-nous un message
-              </h2>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          {/* ============== LEFT : Info ============== */}
+          <aside className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start space-y-6">
+            <InfoCard
+              icon={Mail}
+              eyebrow="Email"
+              value="contact@krealabs.fr"
+              href="mailto:contact@krealabs.fr"
+            />
+            <InfoCard
+              icon={MapPin}
+              eyebrow="Localisation"
+              value="Rouen, Normandie"
+              detail="Intervention France entière"
+            />
+            <InfoCard
+              icon={Clock}
+              eyebrow="Délai de réponse"
+              value="Sous 24h ouvrées"
+              detail="Du lundi au vendredi"
+            />
 
-              <form onSubmit={handleSubmit} className="space-y-3">
-                {/* Request Type Selection */}
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-white/70">
-                    Type de demande
-                  </label>
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                    {requestTypes.map((type) => {
-                      const Icon = type.icon;
-                      return (
-                        <button
-                          key={type.id}
-                          type="button"
-                          onClick={() => setFormData({ ...formData, requestType: type.id })}
-                          className={`p-3 rounded-lg border-2 transition-all text-left ${
-                            formData.requestType === type.id
-                              ? "border-[#A543F1] bg-[#A543F1]/10"
-                              : "border-gray-200 dark:border-white/[0.08] hover:border-[#A543F1]/50"
-                          }`}
-                        >
-                          <Icon className={`w-4 h-4 mb-1 ${
-                            formData.requestType === type.id
-                              ? "text-[#A543F1]"
-                              : "text-gray-400"
-                          }`} />
-                          <div className="font-medium text-xs text-gray-900 dark:text-white">
-                            {type.label}
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                {/* Personal Information */}
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700 dark:text-white/70">
-                      Nom complet <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      placeholder="Jean Dupont"
-                      className="w-full"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium mb-2 text-gray-700 dark:text-white/70">
-                      Email <span className="text-red-500">*</span>
-                    </label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder="jean@entreprise.com"
-                      className="w-full"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium mb-2 text-gray-700 dark:text-white/70">
-                      Telephone
-                    </label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      placeholder="+33 6 12 34 56 78"
-                      className="w-full"
-                    />
-                  </div>
-
-                  <div>
-                    <label htmlFor="company" className="block text-sm font-medium mb-2 text-gray-700 dark:text-white/70">
-                      Entreprise
-                    </label>
-                    <Input
-                      id="company"
-                      name="company"
-                      type="text"
-                      value={formData.company}
-                      onChange={handleChange}
-                      placeholder="Votre entreprise"
-                      className="w-full"
-                    />
-                  </div>
-                </div>
-
-                {/* Pricing Option - Only shown for devis */}
-                {formData.requestType === "devis" && (
-                  <div>
-                    <label htmlFor="pricingOption" className="block text-sm font-medium mb-2 text-gray-700 dark:text-white/70">
-                      Formule souhaitee
-                    </label>
-                    <select
-                      id="pricingOption"
-                      name="pricingOption"
-                      value={formData.pricingOption}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-white/[0.08] bg-white dark:bg-white/[0.02] text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-[#A543F1] transition-colors"
-                    >
-                      <option value="">Selectionnez une formule</option>
-                      {pricingOptions.map((option) => (
-                        <option key={option.id} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
-                {/* Message */}
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2 text-gray-700 dark:text-white/70">
-                    Message <span className="text-red-500">*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    required
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={4}
-                    placeholder={
-                      formData.requestType === "devis"
-                        ? "Decrivez votre projet en detail..."
-                        : "Votre message..."
-                    }
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-white/[0.08] bg-white dark:bg-white/[0.02] text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[#A543F1] transition-colors"
-                  />
-                </div>
-
-                {/* File Upload */}
-                <div>
-                  <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-white/70">
-                    Documents (optionnel)
-                  </label>
-                  <div className="space-y-2">
-                    <label className="flex items-center justify-center w-full p-4 border-2 border-dashed border-gray-300 dark:border-white/[0.08] rounded-lg cursor-pointer hover:border-[#A543F1] hover:bg-[#A543F1]/5 transition-all">
-                      <div className="text-center">
-                        <Upload className="w-6 h-6 mx-auto mb-1 text-gray-400" />
-                        <span className="text-xs text-gray-600 dark:text-white/60">
-                          Cliquez pour ajouter des fichiers
-                        </span>
-                        <span className="text-xs text-gray-400 dark:text-white/40 block mt-0.5">
-                          PDF, DOC, PNG, JPG (Max 10MB)
-                        </span>
-                      </div>
-                      <input
-                        type="file"
-                        multiple
-                        onChange={handleFileChange}
-                        accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
-                        className="hidden"
-                      />
-                    </label>
-
-                    {/* File List */}
-                    {files.length > 0 && (
-                      <div className="space-y-2">
-                        {files.map((file, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center justify-between p-3 bg-white dark:bg-white/[0.02] rounded-lg border border-gray-200 dark:border-white/[0.08]"
-                          >
-                            <div className="flex items-center gap-3 flex-1 min-w-0">
-                              <FileText className="w-4 h-4 text-[#A543F1] flex-shrink-0" />
-                              <span className="text-sm text-gray-700 dark:text-white/70 truncate">
-                                {file.name}
-                              </span>
-                              <span className="text-xs text-gray-400 flex-shrink-0">
-                                {(file.size / 1024 / 1024).toFixed(2)} MB
-                              </span>
-                            </div>
-                            <button
-                              type="button"
-                              onClick={() => removeFile(index)}
-                              className="ml-2 p-1 hover:bg-red-100 dark:hover:bg-red-500/20 rounded transition-colors"
-                            >
-                              <X className="w-4 h-4 text-red-500" />
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-                <Button
-                  type="submit"
-                  disabled={status === "loading"}
-                  className="w-full bg-[#A543F1] hover:bg-[#A543F1]/90 text-white py-3 text-sm font-medium"
-                >
-                  {status === "loading" && (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2" />
-                      Envoi en cours...
-                    </>
-                  )}
-                  {status === "success" && (
-                    <>
-                      <Check className="w-5 h-5 mr-2" />
-                      Message envoye !
-                    </>
-                  )}
-                  {status === "error" && (
-                    <>
-                      <X className="w-5 h-5 mr-2" />
-                      Erreur - Reessayer
-                    </>
-                  )}
-                  {status === "idle" && "Envoyer le message"}
-                </Button>
-
-                {errorMessage && (
-                  <div className="p-4 bg-red-50 dark:bg-red-500/10 border border-red-200 dark:border-red-500/20 rounded-lg">
-                    <p className="text-sm text-red-600 dark:text-red-400">
-                      {errorMessage}
-                    </p>
-                  </div>
-                )}
-
-                {status === "success" && (
-                  <div className="p-4 bg-green-50 dark:bg-green-500/10 border border-green-200 dark:border-green-500/20 rounded-lg">
-                    <p className="text-sm text-green-600 dark:text-green-400">
-                      Votre message a ete envoye avec succes ! Nous vous repondrons dans les plus brefs delais.
-                    </p>
-                  </div>
-                )}
-              </form>
-            </div>
-          </div>
-
-          {/* Contact Info Sidebar */}
-          <div className="space-y-3">
-            {/* Contact Cards */}
-            <div className="bg-gray-50 dark:bg-white/[0.02] p-3 rounded-2xl border border-gray-200 dark:border-white/[0.08]">
-              <h3 className="text-sm font-bold mb-2 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
-                Informations
-              </h3>
-              <div className="space-y-3">
-                <div className="flex items-start gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#A543F1]/10 text-[#A543F1] flex-shrink-0">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-sm text-gray-900 dark:text-white mb-1">
-                      Adresse
-                    </h4>
-                    <p className="text-sm text-gray-600 dark:text-white/60">
-                      Rouen, Normandie
-                      <br />
-                      France
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#A543F1]/10 text-[#A543F1] flex-shrink-0">
-                    <Mail className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-sm text-gray-900 dark:text-white mb-1">
-                      Email
-                    </h4>
-                    <a
-                      href="mailto:contact@krealabs.fr"
-                      className="text-sm text-gray-600 dark:text-white/60 hover:text-[#A543F1] transition-colors"
-                    >
-                      contact@krealabs.fr
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-[#A543F1]/10 text-[#A543F1] flex-shrink-0">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-sm text-gray-900 dark:text-white mb-1">
-                      Telephone
-                    </h4>
-                    <a
-                      href="tel:+33123456789"
-                      className="text-sm text-gray-600 dark:text-white/60 hover:text-[#A543F1] transition-colors"
-                    >
-                      +33 1 23 45 67 89
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Business Hours */}
-            <div className="bg-gray-50 dark:bg-white/[0.02] p-3 rounded-2xl border border-gray-200 dark:border-white/[0.08]">
-              <h3 className="text-sm font-bold mb-2 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
-                Horaires
-              </h3>
-              <div className="space-y-2 text-sm text-gray-600 dark:text-white/60">
-                <div className="flex justify-between">
-                  <span>Lundi - Vendredi</span>
-                  <span className="font-medium text-gray-900 dark:text-white">9h - 18h</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Samedi - Dimanche</span>
-                  <span className="font-medium text-gray-900 dark:text-white">Ferme</span>
-                </div>
-              </div>
-            </div>
-
-            {/* CTA Card */}
-            <div className="bg-gradient-to-r from-[#A543F1]/10 to-[#c5cbf9]/10 p-4 rounded-2xl border border-[#A543F1]/20">
-              <h3 className="text-base font-bold mb-2 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
-                Réponse rapide garantie
-              </h3>
-              <p className="text-sm text-gray-600 dark:text-white/60 mb-3">
-                Nous nous engageons à répondre à toutes les demandes sous 24h.
+            <div className="p-6 rounded-[var(--radius)] border border-[var(--accent-subtle)] bg-[var(--accent-subtle)]/40">
+              <p className="text-eyebrow text-[var(--accent)] mb-3">Bon à savoir</p>
+              <p className="text-body-sm text-[var(--foreground)]">
+                Le premier échange est <strong className="font-medium">gratuit et sans engagement</strong>.
+                Nous prenons le temps de comprendre votre projet avant tout devis.
               </p>
-              <div className="flex items-center gap-2 text-sm text-[#A543F1] font-medium">
-                <Check className="w-4 h-4" />
-                <span>Réponse sous 24h</span>
-              </div>
             </div>
-          </div>
+          </aside>
+
+          {/* ============== RIGHT : Form ============== */}
+          <form
+            onSubmit={handleSubmit}
+            className="lg:col-span-8 space-y-12 p-8 md:p-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]"
+          >
+            {/* Section: Type de demande */}
+            <Section number="01" title="Type de demande">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
+                {REQUEST_TYPES.map((t) => {
+                  const active = formData.requestType === t.id;
+                  const Icon = t.icon;
+                  return (
+                    <button
+                      key={t.id}
+                      type="button"
+                      onClick={() => update("requestType", t.id)}
+                      className={cn(
+                        "flex flex-col gap-2 items-start p-4 rounded-[var(--radius)] border text-left transition-colors",
+                        active
+                          ? "border-[var(--accent)] bg-[var(--accent-subtle)]"
+                          : "border-[var(--border)] bg-[var(--background)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)]",
+                      )}
+                    >
+                      <Icon
+                        className={cn(
+                          "size-4",
+                          active ? "text-[var(--accent)]" : "text-[var(--muted-foreground)]",
+                        )}
+                      />
+                      <span className="text-body-sm font-medium">{t.label}</span>
+                    </button>
+                  );
+                })}
+              </div>
+            </Section>
+
+            {/* Section: Identité */}
+            <Section number="02" title="Vos coordonnées">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <Field label="Nom complet" required>
+                  <Input
+                    required
+                    value={formData.name}
+                    onChange={(e) => update("name", e.target.value)}
+                    placeholder="Jean Dupont"
+                  />
+                </Field>
+                <Field label="Email" required>
+                  <Input
+                    required
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => update("email", e.target.value)}
+                    placeholder="jean@entreprise.fr"
+                  />
+                </Field>
+                <Field label="Téléphone (optionnel)">
+                  <Input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => update("phone", e.target.value)}
+                    placeholder="06 12 34 56 78"
+                  />
+                </Field>
+                <Field label="Entreprise (optionnel)">
+                  <Input
+                    value={formData.company}
+                    onChange={(e) => update("company", e.target.value)}
+                    placeholder="Acme SAS"
+                  />
+                </Field>
+              </div>
+            </Section>
+
+            {/* Section: Type de projet (only if devis) */}
+            {formData.requestType === "devis" && (
+              <Section number="03" title="Type de projet">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                  {PROJECT_TYPES.map((p) => {
+                    const active = formData.pricingOption === p.id;
+                    const Icon = p.icon;
+                    return (
+                      <button
+                        key={p.id}
+                        type="button"
+                        onClick={() =>
+                          update("pricingOption", active ? "" : p.id)
+                        }
+                        className={cn(
+                          "flex flex-col gap-2 items-start p-4 rounded-[var(--radius)] border text-left transition-colors",
+                          active
+                            ? "border-[var(--accent)] bg-[var(--accent-subtle)]"
+                            : "border-[var(--border)] bg-[var(--background)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)]",
+                        )}
+                      >
+                        <Icon
+                          className={cn(
+                            "size-4",
+                            active ? "text-[var(--accent)]" : "text-[var(--muted-foreground)]",
+                          )}
+                        />
+                        <span className="text-body-sm font-medium">{p.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </Section>
+            )}
+
+            {/* Section: Message */}
+            <Section
+              number={formData.requestType === "devis" ? "04" : "03"}
+              title="Votre message"
+            >
+              <Field label="Décrivez votre projet" required>
+                <Textarea
+                  required
+                  rows={6}
+                  minLength={20}
+                  value={formData.message}
+                  onChange={(e) => update("message", e.target.value)}
+                  placeholder="Contexte, objectifs, contraintes, délai souhaité, budget envisagé..."
+                />
+              </Field>
+
+              {/* File drop zone */}
+              <div className="space-y-2">
+                <label className="text-eyebrow">Pièces jointes (optionnel)</label>
+                <label
+                  htmlFor="files-input"
+                  className="flex items-center justify-center gap-2 px-4 py-6 rounded-[var(--radius)] border border-dashed border-[var(--border-strong)] bg-[var(--background)] cursor-pointer hover:bg-[var(--surface-hover)] transition-colors"
+                >
+                  <Paperclip className="size-4 text-[var(--muted-foreground)]" />
+                  <span className="text-body-sm text-[var(--muted-foreground)]">
+                    Glissez-déposez ou cliquez · 5 fichiers max · 10 Mo chacun
+                  </span>
+                </label>
+                <input
+                  id="files-input"
+                  type="file"
+                  multiple
+                  className="sr-only"
+                  onChange={(e) => handleFiles(e.target.files)}
+                />
+                {files.length > 0 && (
+                  <ul className="space-y-1 mt-2">
+                    {files.map((f, i) => (
+                      <li
+                        key={i}
+                        className="flex items-center justify-between gap-2 px-3 py-2 text-body-sm rounded-[var(--radius)] border border-[var(--border)] bg-[var(--background)]"
+                      >
+                        <span className="truncate">{f.name}</span>
+                        <button
+                          type="button"
+                          onClick={() => setFiles((curr) => curr.filter((_, idx) => idx !== i))}
+                          aria-label={`Retirer ${f.name}`}
+                          className="text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+                        >
+                          <X className="size-4" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </Section>
+
+            {/* Submit */}
+            <div className="pt-6 border-t border-[var(--border)] flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
+              <p className="text-caption">
+                En envoyant ce formulaire, vous acceptez d'être contacté par
+                Krealabs.
+              </p>
+              <Button
+                type="submit"
+                size="lg"
+                disabled={status === "loading" || status === "success"}
+              >
+                {status === "loading" && "Envoi en cours…"}
+                {status === "idle" && (
+                  <>
+                    Envoyer la demande
+                    <ArrowRight />
+                  </>
+                )}
+                {status === "success" && (
+                  <>
+                    <Check className="size-4" />
+                    Message envoyé
+                  </>
+                )}
+                {status === "error" && "Réessayer"}
+              </Button>
+            </div>
+          </form>
+        </div>
+      </Container>
+    </main>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="pt-32"><Container><p className="text-body text-[var(--muted-foreground)]">Chargement…</p></Container></div>}>
+      <ContactPageInner />
+    </Suspense>
+  );
+}
+
+// ============================================================
+// LOCAL HELPERS
+// ============================================================
+
+function Section({
+  number,
+  title,
+  children,
+}: {
+  number: string;
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <section>
+      <div className="mb-5">
+        <Eyebrow number={number}>{title}</Eyebrow>
+      </div>
+      {children}
+    </section>
+  );
+}
+
+function Field({
+  label,
+  required,
+  children,
+}: {
+  label: string;
+  required?: boolean;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="space-y-2">
+      <label className="text-eyebrow">
+        {label}
+        {required && <span className="text-[var(--accent)] ml-1">*</span>}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+function InfoCard({
+  icon: Icon,
+  eyebrow,
+  value,
+  detail,
+  href,
+}: {
+  icon: typeof Mail;
+  eyebrow: string;
+  value: string;
+  detail?: string;
+  href?: string;
+}) {
+  const Wrapper = href ? "a" : "div";
+  const wrapperProps = href ? { href } : {};
+  return (
+    <Wrapper
+      {...(wrapperProps as object)}
+      className={cn(
+        "block p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]",
+        href && "hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] transition-colors",
+      )}
+    >
+      <div className="flex items-start gap-4">
+        <div className="size-10 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--background)] flex items-center justify-center">
+          <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
+        </div>
+        <div className="space-y-1 min-w-0">
+          <p className="text-eyebrow">{eyebrow}</p>
+          <p className="text-body font-medium truncate">{value}</p>
+          {detail && (
+            <p className="text-body-sm text-[var(--muted-foreground)]">{detail}</p>
+          )}
         </div>
       </div>
-    </main>
+    </Wrapper>
   );
 }
