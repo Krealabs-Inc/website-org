@@ -28,8 +28,40 @@ export interface BlogPost {
 const author = {
   name: "Maxime Dubois",
   role: "Co-fondateur · Krealabs",
-  avatar: "https://avatars.githubusercontent.com/u/makcimerrr",
+  avatar: "https://avatars.githubusercontent.com/u/36298487?v=4",
 };
+
+// ============================================================
+// HELPER : date française → ISO 8601 pour Schema.org Article
+// ============================================================
+
+const FR_MONTHS: Record<string, string> = {
+  janvier: "01",
+  février: "02",
+  fevrier: "02",
+  mars: "03",
+  avril: "04",
+  mai: "05",
+  juin: "06",
+  juillet: "07",
+  août: "08",
+  aout: "08",
+  septembre: "09",
+  octobre: "10",
+  novembre: "11",
+  décembre: "12",
+  decembre: "12",
+};
+
+/** Convertit "5 mai 2026" en "2026-05-05" pour les balises ISO 8601 */
+export function frenchDateToISO(frenchDate: string): string {
+  const normalized = frenchDate.toLowerCase().replace(/[^\w\sàâéèêîôûç]/g, "");
+  const match = normalized.match(/(\d{1,2})\s+([a-zàâéèêîôûç]+)\s+(\d{4})/i);
+  if (!match) return new Date().toISOString().split("T")[0];
+  const [, day, month, year] = match;
+  const monthNum = FR_MONTHS[month] ?? "01";
+  return `${year}-${monthNum}-${day.padStart(2, "0")}`;
+}
 
 // =============================================================================
 // CLUSTERS THÉMATIQUES
@@ -42,6 +74,455 @@ const author = {
 
 export const blogPosts: BlogPost[] = [
   // ===========================================================================
+  // CLUSTER WORDPRESS (5 articles) — Spécialité agence
+  // ===========================================================================
+  {
+    slug: "pourquoi-wordpress-reste-le-bon-choix-2026",
+    title: "Pourquoi WordPress reste le bon choix en 2026",
+    excerpt:
+      "Beaucoup de blogs tech ont enterré WordPress. Pourtant, 43% du web tourne encore dessus en 2026. Tour d'horizon honnête de ses forces, ses limites, et pourquoi c'est notre spécialité d'agence.",
+    category: "WordPress",
+    date: "11 mai 2026",
+    readTime: "14 min",
+    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=1200&q=80",
+    featured: true,
+    author,
+    tags: ["WordPress", "CMS", "Stratégie", "Choix techno", "PME"],
+    content: {
+      introduction:
+        "Si vous suivez la presse tech, vous avez peut-être lu que WordPress était dépassé, lent, ou que tout le monde passait à Next.js. La réalité est différente : en 2026, WordPress propulse toujours 43% des sites web mondiaux, et la majorité de nos clients chez Krealabs sont sur cette stack. Pas par défaut, par choix. Voici, sans langue de bois, pourquoi WordPress reste pertinent pour la plupart des PME, où il échoue, et comment éviter les pièges classiques. Cet article est notre position d'agence après plus de 10 ans à livrer des projets WordPress de qualité.",
+      sections: [
+        {
+          title: "WordPress en chiffres en 2026",
+          content:
+            "Commençons par les faits. Selon W3Techs (mars 2026), WordPress alimente 43,2% de l'ensemble des sites web sur Internet, soit 65% des sites construits avec un CMS. Aucun autre outil n'approche ces parts. Shopify suit avec ~5%, Wix ~4%, Squarespace ~3%. La croissance se stabilise mais la base installée est immense, et l'écosystème compte plus de 60 000 plugins gratuits, 11 000 thèmes, des dizaines de milliers d'agences spécialisées partout dans le monde. Cela signifie une chose pour vous : trouver un partenaire WordPress en cas de besoin reste facile, les coûts de migration ou de maintenance sont prévisibles, et les compétences sont disponibles sur le marché.",
+        },
+        {
+          title: "Quand WordPress reste imbattable",
+          content:
+            "Site vitrine institutionnel pour PME, blog éditorial avec rédaction régulière, e-commerce TPE/PME via WooCommerce, site multilingue (WPML/Polylang), plateformes média ou magazines — sur ces cas d'usage, WordPress n'a pratiquement aucun concurrent au même rapport qualité/coût/délai. Une équipe non-technique peut gérer les contenus quotidiennement sans solliciter le développeur. Les rédacteurs aiment l'éditeur Gutenberg, qui a énormément progressé depuis 2024 avec le Full Site Editing. Les marketeurs apprécient les intégrations natives avec les outils SEO (Yoast, RankMath), email (Mailchimp, Brevo), analytics (GA4, Plausible) et CRM (HubSpot, Salesforce). Bref : WordPress reste l'outil le plus universel pour les sites où le contenu est central.",
+        },
+        {
+          title: "Le mythe de WordPress lent",
+          content:
+            "« WordPress c'est lent. » C'est l'argument numéro un des détracteurs. Il est faux dans l'absolu, vrai dans la pratique pour beaucoup de sites. La différence ? La qualité de la construction. Un WordPress bien fait — thème custom léger, hébergement spécialisé (o2switch, Kinsta, WP Engine), cache (WP Rocket), CDN (Cloudflare), images optimisées (WebP/AVIF) — peut tenir des Core Web Vitals au top, comparable à un site Next.js bien construit. Un WordPress mal fait — thème Divi/Elementor avec 200 plugins, hébergement mutualisé bas de gamme, 0 optimisation — sera effectivement lent. Le problème n'est pas WordPress, c'est l'exécution.",
+          code: `// Optimisations critiques sur un projet WP performant
+// 1. Thème custom sans page builder
+// 2. WP Rocket : cache pages, minify CSS/JS, lazyload
+// 3. WebP Express : conversion JPG/PNG en WebP à la volée
+// 4. Cloudflare CDN : cache global + image resize
+// 5. Hébergement spécialisé : PHP 8.3+, OPcache, MySQL 8`,
+        },
+        {
+          title: "Les vrais inconvénients à connaître",
+          content:
+            "Soyons honnêtes, WordPress a aussi ses limites. L'admin est lourde sur les gros catalogues (WooCommerce 50k+ produits commence à souffrir). La sécurité demande une attention continue : mises à jour, monitoring, durcissement — ce n'est pas plug-and-forget. Les plugins varient en qualité : certains sont des bombes à retardement (abandon, conflits, vulnérabilités). L'écosystème est verrouillé sur PHP, ce qui peut paraître démodé face à TypeScript/Rust/Go. Pour des apps web complexes type SaaS multi-tenants ou outils temps réel (chat, collaboration live), WordPress n'est pas adapté — c'est là que les frameworks modernes comme Next.js entrent en jeu.",
+        },
+        {
+          title: "WordPress vs Wix, Squarespace, Webflow",
+          content:
+            "Comparons avec les concurrents directs en 2026. Wix et Squarespace offrent une UX d'édition très simple mais vous êtes prisonnier : impossible d'exporter votre site, contraintes de design lourdes, scaling limité au-delà de 50 pages, SEO bridé. Webflow est plus puissant et permet du custom code, mais reste un SaaS propriétaire — abonnement à vie obligatoire, et la migration est complexe si vous voulez sortir. WordPress, lui, vous donne propriété complète du code, des données, et du contenu. Vous pouvez changer d'hébergeur en 30 minutes, changer d'agence sans perdre un seul fichier. C'est la différence open-source vs SaaS — et pour un projet long-terme, ça compte énormément.",
+        },
+        {
+          title: "Le futur : Headless WordPress + Block Editor",
+          content:
+            "WordPress n'est pas immobile. Le Block Editor (Gutenberg) avec Full Site Editing transforme l'expérience d'édition vers quelque chose de plus moderne et flexible. Mais le vrai virage stratégique, c'est le headless : utiliser WordPress comme back-office CMS (où vos rédacteurs continuent leur travail dans l'interface qu'ils connaissent) et un frontend en Next.js qui consomme WP via REST API ou WPGraphQL. On obtient les performances natives de Next.js, l'ergonomie d'édition WordPress, et la flexibilité maximum. Chez Krealabs, on déploie de plus en plus de projets sur cette architecture pour les clients qui veulent le meilleur des deux mondes.",
+          code: `// Exemple : récupérer les articles WP dans Next.js via WPGraphQL
+const QUERY = gql\`
+  query GetPosts {
+    posts(first: 10) {
+      nodes {
+        title
+        excerpt
+        slug
+        featuredImage { node { sourceUrl } }
+      }
+    }
+  }
+\`;`,
+        },
+        {
+          title: "Comment bien choisir un partenaire WordPress",
+          content:
+            "Le choix de l'agence pèse plus que le choix du CMS. Quelques signaux à regarder : utilise-t-elle un thème custom (pas un Divi/Elementor recyclé) ? Code-t-elle ses plugins métier ou n'achète-t-elle que des plugins premium ? Propose-t-elle un forfait maintenance/sécurité crédible ? Vous donne-t-elle accès au dépôt Git du thème ? Documente-t-elle ses choix dans un README ? Si la réponse est non sur la moitié des points, fuyez : vous tombez sur un assembleur de page builder qui vous laissera face à un site impossible à faire évoluer dans 2 ans. Les bons partenaires WP sont rares mais existent — ils traitent WordPress comme un projet de développement sérieux, pas comme du clic-glisse.",
+        },
+      ],
+      conclusion:
+        "WordPress n'est pas mort, mais il n'est pas non plus la solution universelle. C'est l'outil le plus pragmatique pour 80% des PME et associations, à condition d'être bien fait. Mal fait, c'est l'enfer. La différence se joue sur l'agence qui le pose. Si vous avez un projet WordPress — création, refonte, migration — et que vous voulez un partenaire qui assume cette stack et la fait bien, parlons-en. Et si votre projet sort du périmètre WP, on a aussi la stack moderne pour ça : Next.js, React Native, Python. Mais pour la plupart des entreprises rouennaises et normandes, WordPress reste la réponse la plus économique et la plus durable.",
+    },
+  },
+  {
+    slug: "refonte-wordpress-sans-perdre-seo",
+    title: "Refonte WordPress : ne perdez pas votre SEO",
+    excerpt:
+      "Une refonte mal pilotée peut faire perdre 30 à 80% du trafic organique. Méthode complète pour refondre un site WordPress en préservant votre positionnement Google — checklist agence.",
+    category: "WordPress",
+    date: "9 mai 2026",
+    readTime: "16 min",
+    image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["WordPress", "Refonte", "SEO", "Redirections 301", "Migration"],
+    content: {
+      introduction:
+        "Vous avez un site WordPress qui fonctionne, qui a accumulé du trafic organique au fil des années, et vous voulez le refondre — design daté, performance médiocre, structure devenue ingérable. Le risque #1 d'une refonte : tout casser côté SEO et voir vos positions Google s'effondrer pendant des mois. Nous avons piloté des dizaines de refontes WordPress chez Krealabs, certaines avec gain de trafic immédiat (+30% en 2 mois), d'autres où le client avait fait n'importe quoi avant et où on a dû réparer (perte de 50% pour rattraper sur 6 mois). Voici la méthode que nous appliquons systématiquement pour éviter le second scénario.",
+      sections: [
+        {
+          title: "Avant tout : audit SEO complet de l'existant",
+          content:
+            "On ne peut pas préserver ce qu'on ne mesure pas. Première étape : un audit SEO exhaustif de votre site actuel. Exporter toutes les données de Google Search Console (URLs indexées, requêtes, positions moyennes, CTR), faire tourner Screaming Frog SEO Spider pour cartographier l'ensemble du site (status codes, profondeur, redirections internes, balises meta), récupérer les analytics (GA4 ou autre) pour identifier les pages à fort trafic. À la fin de cette étape, on a une photo précise de ce qui marche, ce qui draine du trafic, et ce qu'il faut absolument préserver. C'est notre référence de comparaison après la refonte.",
+        },
+        {
+          title: "Cartographier les URLs existantes",
+          content:
+            "Exporter la liste complète des URLs du site actuel, avec leur trafic Search Console des 12 derniers mois et leurs backlinks principaux (via Ahrefs ou Semrush). Identifier le top 50 des pages à fort trafic — ce sont elles qu'il faut protéger absolument. Pour chacune, noter : URL actuelle, titre, meta description, contenu principal, redirections sortantes éventuelles, backlinks pointant vers elle. Cette liste devient votre Bible de migration. À chaque URL doit correspondre une URL équivalente dans le nouveau site, soit identique (idéal), soit redirigée 301 vers la nouvelle URL pertinente.",
+          code: `# Export Screaming Frog : Internal URLs (CSV)
+# Colonnes critiques :
+- Address (URL actuelle)
+- Status Code (200, 301, 404, etc.)
+- Title 1
+- Meta Description 1
+- H1-1
+- Word Count
+- Crawl Depth
+- Indexability`,
+        },
+        {
+          title: "Définir le plan de redirections 301",
+          content:
+            "Pour chaque URL qui change, il faut une redirection 301 (permanente) vers la nouvelle URL. Pas de 302, pas de chaînes de redirections (301 → 301 → 301 c'est catastrophique pour le SEO). Le plan de redirections doit être documenté dans un fichier (CSV ou tableur partagé) avec source → destination. Implémentation : via plugin (Redirection, Rank Math Redirections), via le .htaccess directement, ou via les règles serveur si Nginx. Tester chaque redirection après mise en ligne avec un outil comme HTTPstatus.io ou simplement curl en CLI.",
+          code: `# .htaccess WordPress — exemples de redirections 301
+Redirect 301 /ancien-blog/article-1 https://exemple.fr/blog/nouveau-titre-article
+Redirect 301 /services-anciens/web-design https://exemple.fr/services/design-uiux
+
+# Pattern matching pour migrations massives
+RedirectMatch 301 ^/blog/category/([a-z-]+)$ https://exemple.fr/blog/?categorie=$1`,
+        },
+        {
+          title: "Préserver la structure des URLs (slug history)",
+          content:
+            "Idéalement, gardez la même structure de permaliens (`/blog/%postname%/` par exemple). Si vous devez la changer, faites-le UNE fois, jamais en cours de route. Pour WordPress, le plugin « Permalink Manager Pro » permet de gérer les URLs custom et leurs historiques de redirections, particulièrement utile pour les boutiques WooCommerce avec catégories produits. Erreur classique à éviter : changer de `?p=ID` vers `/postname/` sans plan de redirection — perte massive de SEO sur l'ancien format.",
+        },
+        {
+          title: "Migration des contenus, taxonomies et métadonnées",
+          content:
+            "Si vous changez de thème mais gardez WordPress, c'est simple : tous les contenus restent. Si vous migrez depuis un autre CMS (Wix, Squarespace, Joomla, Drupal), c'est plus complexe. Outils utiles : WP All Import Pro pour les imports massifs depuis CSV/XML, Migrate DB Pro pour copier une DB entre environnements, FG Joomla to WordPress pour les migrations Joomla. Critique : récupérer les métadonnées SEO existantes (Title, meta description, balise canonical, schema markup) et les transférer dans Yoast/RankMath sur le nouveau site. Sans ça, Google voit un site complètement neuf et redémarre l'indexation à zéro.",
+        },
+        {
+          title: "Préserver les balises Title, meta et schema",
+          content:
+            "Les balises Title et meta description sont vos cartes de visite dans Google. Sur chaque page principale (home, services, catégories, top articles), gardez les Titles existants — ils ont été indexés et fonctionnent. Vous pouvez les optimiser, mais ne les remplacez pas radicalement sans raison. Pour le schema.org (balisages JSON-LD : Article, Product, FAQPage, BreadcrumbList, LocalBusiness), refaites-les sur le nouveau site avec les mêmes informations. RankMath et Yoast génèrent du schema automatiquement, mais customisez-le pour vos cas spécifiques.",
+        },
+        {
+          title: "Performance + Core Web Vitals : où la refonte aide",
+          content:
+            "C'est l'opportunité numéro un d'une refonte : passer d'un Lighthouse score de 40 à 90+. Sur un site WordPress refondu, viser obligatoirement : LCP < 2,5s, INP < 200ms, CLS < 0.1. Comment ? Thème custom (vs Divi/Elementor), WP Rocket configuré agressivement (cache + critical CSS + delay JS), Cloudflare en frontal, conversion automatique images en WebP, hébergement spécialisé. Mesurer avant/après via Google PageSpeed Insights et la Search Console (rapport Web Vitals). Une amélioration significative de la vitesse peut faire monter vos positions de plusieurs places sur les requêtes concurrentielles.",
+        },
+        {
+          title: "Tests pré-production : staging et contrôles",
+          content:
+            "Avant la mise en ligne, le nouveau site doit tourner en staging (sous-domaine genre `staging.exemple.fr`) avec un `robots.txt: Disallow: /` pour bloquer l'indexation. Réaliser : audit Screaming Frog complet du staging, vérification de chaque template (home, page service, single article, catégorie, contact, 404), tests des formulaires, vérification des redirections 301 (curl chaque URL ancien format), Lighthouse sur les pages principales, tests utilisateurs courts. Critique : le staging doit être identique à la prod, mêmes plugins, même version PHP, mêmes images.",
+        },
+        {
+          title: "Mise en ligne et monitoring post-lancement",
+          content:
+            "Bascule prod : pendant les 48h critiques après, surveiller toutes les heures via Search Console (rapport Couverture, erreurs d'exploration). Lancer un crawl Screaming Frog sur la prod pour vérifier que tout est OK. Soumettre le nouveau sitemap.xml dans Search Console. Forcer l'indexation des pages les plus importantes via URL Inspection. Surveiller : positions sur top 20 requêtes, trafic Google Analytics, vitesse Core Web Vitals (CrUX data). Si une régression apparaît, on a 7 jours pour rétablir avant que Google ne re-fixe ses positions à la baisse — d'où l'importance du suivi rapproché.",
+        },
+        {
+          title: "Pièges classiques à éviter absolument",
+          content:
+            "Trois erreurs que nous voyons trop souvent : 1) Mettre en ligne sans plan de redirections — résultat 50% de 404 et chute SEO immédiate. 2) Changer la structure des permaliens sans réfléchir — les ID changent, les anciennes URLs deviennent inaccessibles. 3) Désindexer le staging trop tard ou pas du tout — Google indexe les deux versions, contenu dupliqué, sanction. Une refonte mal préparée coûte plus cher que la refonte elle-même en perte de trafic. Prenez le temps de l'audit en amont.",
+        },
+      ],
+      conclusion:
+        "Une refonte WordPress n'est jamais juste un redesign : c'est un chantier SEO autant que graphique. Méthode rigoureuse + outils corrects + monitoring serré = positions préservées voire améliorées. Si vous avez un projet de refonte WordPress et que vous voulez sécuriser le SEO, c'est exactement notre métier — on intervient sur des refontes de PME normandes, mais aussi à distance partout en France. Un premier audit SEO de votre site actuel est offert pour cadrer le périmètre.",
+    },
+  },
+  {
+    slug: "woocommerce-vs-shopify-pme",
+    title: "WooCommerce vs Shopify : que choisir pour une PME ?",
+    excerpt:
+      "Le choix entre WooCommerce et Shopify divise. Pour qui choisir quoi ? Comparatif équilibré sur les coûts réels, la personnalisation, le SEO, le scaling, après 10 ans de projets e-commerce.",
+    category: "WordPress",
+    date: "7 mai 2026",
+    readTime: "15 min",
+    image: "https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["WooCommerce", "Shopify", "E-commerce", "Comparatif", "WordPress"],
+    content: {
+      introduction:
+        "Vous lancez ou refondez une boutique en ligne. Entre WooCommerce (WordPress) et Shopify, le débat fait rage sur Reddit, dans les groupes Facebook e-commerce, et sur les blogs spécialisés. La vérité ? Aucune des deux solutions n'est universellement supérieure. Chacune a son terrain de jeu. Voici notre lecture détaillée après 10 ans à voir les deux en production chez nos clients normands et au-delà. L'objectif de cet article : vous aider à choisir sereinement selon votre contexte spécifique, sans dogmatisme.",
+      sections: [
+        {
+          title: "Le verdict rapide selon votre profil",
+          content:
+            "Si vous avez besoin de lancer rapidement une boutique simple, sans devs internes, avec moins de 500 produits et un budget total limité : Shopify. Si vous voulez la maîtrise totale, des intégrations métier sur mesure, un budget mensuel récurrent maîtrisé, ou un site contenu+e-commerce mixte : WooCommerce. Pour les boutiques de niche très techniques (configurateurs produits complexes, B2B avec catalogues spécifiques, multilingue lourd) : WooCommerce gagne presque toujours. Pour le dropshipping ou les marques DTC à fort volume marketing : Shopify a l'avantage de son écosystème app store. Ces grandes lignes étant posées, regardons en détail.",
+        },
+        {
+          title: "Coûts réels : la grosse surprise",
+          content:
+            "Shopify affiche 29$/mois pour le plan Basic, 79$ pour le Shopify, 299$ pour l'Advanced. Mais les vrais coûts dérapent vite : commission paiement (2,9% + 0,30$ avec Shopify Payments, plus si Stripe externe), apps premium (compter 50-200$/mois cumulé), thème premium (200-350$), domaine. Total réel pour une PME : 200-500$/mois minimum. WooCommerce : hébergement spécialisé (15-50€/mois), domaine (10€/an), extensions premium type Stripe Pro/WP Rocket/Yoast Pro (200-400€/an au total). Pas de commission sur vos ventes (sauf frais Stripe/PayPal standards). Total : 30-100€/mois en moyenne, beaucoup plus prévisible.",
+        },
+        {
+          title: "Personnalisation : niveau de liberté",
+          content:
+            "Shopify utilise Liquid comme moteur de templates et a ouvert son frontend depuis Hydrogen (Next.js + React). Vous pouvez personnaliser la plupart des choses, mais certaines parties restent fermées (logique panier, fonctionnement checkout sur les plans inférieurs). WooCommerce, c'est du WordPress et du PHP — donc une personnalisation à 100%. Modifier le tunnel d'achat, créer des types de produits custom, intégrer un PIM externe, automatiser des règles métier complexes : tout est possible sans contrainte. La contrepartie : ça demande un développeur compétent. Avec Shopify, vous pouvez aller plus loin avec moins de code.",
+          code: `// WooCommerce : hook pour modifier le prix selon une logique custom
+add_filter('woocommerce_get_price_html', function($price, $product) {
+    if (is_user_logged_in() && get_user_role() === 'wholesale') {
+        $wholesale_price = $product->get_meta('_wholesale_price');
+        return wc_price($wholesale_price);
+    }
+    return $price;
+}, 10, 2);`,
+        },
+        {
+          title: "Performance et vitesse",
+          content:
+            "Shopify est hébergé sur leur infrastructure mondiale et gère automatiquement le scaling, CDN, cache, etc. Vous n'avez rien à faire — site relativement rapide par défaut. WooCommerce dépend de votre hébergement : sur un hébergement mutualisé à 5€/mois, c'est lent. Sur un Kinsta ou WP Engine spécialisé, c'est aussi rapide que Shopify. Sur un VPS bien configuré avec Cloudflare en frontal, on peut faire mieux que Shopify (latence édge optimisée). Bref : WooCommerce demande plus d'effort de setup performance, mais permet d'aller plus loin si on s'en occupe.",
+        },
+        {
+          title: "SEO : avantage WooCommerce",
+          content:
+            "Sur le SEO, WooCommerce a un avantage clair grâce à WordPress et ses plugins SEO matures (Yoast, RankMath). Contrôle total des URLs, des balises canonical, des breadcrumbs, du schema Product avec données complexes (variants, reviews, availability). Shopify gère le SEO basique correctement mais a des limites : URLs forcées en /products/, /collections/, schema généré automatiquement mais peu customisable, contrôle limité sur les meta dynamiques. Pour des boutiques où le SEO est central (niche, longue traîne, contenu+commerce), WooCommerce est préférable. Pour des boutiques où le trafic vient surtout des ads et du marketing, Shopify suffit largement.",
+        },
+        {
+          title: "Stock & catalogue : limites des deux solutions",
+          content:
+            "Shopify limite à 100 variantes par produit, 100 collections automatiques par boutique, et a des limites de performance au-delà de 5000-10000 produits sur les plans inférieurs (besoin de Shopify Plus à partir de 2300$/mois pour scaler vraiment). WooCommerce monte plus haut nativement : on peut tenir 50k+ produits sur un hébergement solide, avec des optimisations DB (indexs MySQL, requêtes optimisées, cache produits). Pour les grandes boutiques (15k+ SKUs), WooCommerce + hébergement managé spécialisé devient le choix le plus économique. Shopify Plus reste pertinent pour les marques internationales avec gros volume de transactions, mais c'est une autre catégorie de prix.",
+        },
+        {
+          title: "Extensions tierces : deux philosophies",
+          content:
+            "Shopify a un App Store très bien rangé avec ~10 000 apps, principalement payantes (abonnements mensuels qui s'accumulent). Qualité globale élevée, support souvent réactif, intégration native fluide. WooCommerce a 6000+ extensions, mix de gratuit et payant. Qualité variable, certaines abandonnées, parfois conflits entre plugins. La différence philosophique : Shopify pousse l'écosystème vers le payant récurrent (revenue model SaaS), WooCommerce permet beaucoup gratuitement mais demande un développeur pour intégrer proprement. Pour une PME sans dev interne, l'app store Shopify est plus accessible. Pour un budget contraint, WooCommerce reste imbattable.",
+        },
+        {
+          title: "Paiements et frais",
+          content:
+            "Shopify Payments (powered by Stripe) impose 2,9% + 0,30$ par transaction sur le plan Basic, dégressif sur les plans supérieurs. Si vous utilisez un autre processeur (Stripe direct, PayPal, Mollie), Shopify ajoute une commission supplémentaire (0,5 à 2%) pour vous pénaliser. WooCommerce ne prend AUCUNE commission sur vos ventes — vous payez uniquement les frais standard de votre processeur (Stripe : 1,4-2,9% selon le marché européen). Pour une boutique qui fait 100k€/an de CA, la différence cumulée représente facilement 500 à 2000€ par an.",
+        },
+        {
+          title: "B2B et fonctionnalités métier complexes",
+          content:
+            "Pour le B2B (catalogues par client, tarifs négociés, devis avant achat, comptes pro multi-utilisateurs, demandes de quote), WooCommerce a un écosystème mature : B2B for WooCommerce, WooCommerce Memberships, WooCommerce Subscriptions, Gravity Forms pour les devis personnalisés. Shopify a B2B intégré depuis 2024, mais c'est encore moins flexible que WooCommerce. Pour un wholesale, distributeur, marché de niche industriel — WooCommerce est presque toujours le choix. Pour B2C standard, Shopify peut suffire.",
+        },
+        {
+          title: "Notre recommandation finale",
+          content:
+            "Pour les PME normandes que nous accompagnons (artisans, retailers locaux, producteurs, marques DTC, B2B technique), nous recommandons WooCommerce dans 80% des cas. Pour les raisons suivantes : coûts long-terme plus bas, pas de commission sur les ventes, intégration avec un site WordPress existant (contenu + e-commerce), maîtrise totale sur les évolutions, écosystème français mature (transporteurs Colissimo/Chronopost, comptables, etc.). Pour les 20% restants — démarrage très rapide, équipe non-technique, focus sur ads et pas SEO — Shopify reste un choix pertinent. La pire option, c'est de choisir au hasard ou pour mauvaises raisons.",
+        },
+      ],
+      conclusion:
+        "Il n'y a pas de mauvais outil entre WooCommerce et Shopify — il y a juste des bons et des mauvais alignements avec votre projet. Si vous hésitez encore, écrivez-nous : on fait un état des lieux gratuit de votre contexte (catalogue, budget, équipe, objectifs SEO) et on vous oriente vers la bonne solution même si ce n'est pas la nôtre. Chez Krealabs, on développe et maintient des boutiques WooCommerce depuis 2014, et on a aussi piloté des migrations Shopify → WooCommerce et inversement. L'expertise se mesure à savoir dire « non, ce n'est pas pour vous » quand c'est le cas.",
+    },
+  },
+  {
+    slug: "audit-seo-wordpress-12-points",
+    title: "Audit SEO WordPress : 12 points techniques à vérifier",
+    excerpt:
+      "Votre WordPress est-il vraiment optimisé pour Google ? La méthode d'audit que nous appliquons en agence avant chaque projet SEO — 12 points concrets, mesurables, actionnables.",
+    category: "WordPress",
+    date: "6 mai 2026",
+    readTime: "18 min",
+    image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["SEO WordPress", "Audit", "Core Web Vitals", "RankMath", "Yoast"],
+    content: {
+      introduction:
+        "Vous avez un site WordPress, mais le trafic organique stagne ou baisse. Avant de vous lancer dans une stratégie de contenu coûteuse, vérifiez d'abord que les fondations techniques sont saines. Un site WordPress mal configuré peut neutraliser tous les efforts de contenu et de netlinking. Voici la checklist d'audit SEO WordPress que nous appliquons chez Krealabs avant chaque mission. 12 points concrets, chacun mesurable, chacun actionnable, en moins de 4h d'analyse pour un site de taille moyenne.",
+      sections: [
+        {
+          title: "1. Indexabilité : robots.txt, noindex, sitemap.xml",
+          content:
+            "Premier réflexe : vérifier que votre site EST indexable. Le robots.txt ne bloque pas les pages critiques, les meta robots sur les pages importantes ne contiennent pas `noindex`, le sitemap.xml est généré et soumis dans Search Console. Sur WordPress, RankMath et Yoast génèrent automatiquement le sitemap (`/sitemap_index.xml`). Vérifier dans Search Console le rapport Couverture : combien d'URLs indexées vs soumises ? Idéalement >90%. Si <70%, il y a un problème : pages dupliquées, faible qualité (thin content), erreurs de crawl, ou meta noindex non voulu.",
+        },
+        {
+          title: "2. Vitesse & Core Web Vitals",
+          content:
+            "Depuis 2021, les Core Web Vitals influencent directement le classement Google. Mesurer : LCP (Largest Contentful Paint, viser < 2,5s), INP (Interaction to Next Paint, viser < 200ms — a remplacé FID en mars 2024), CLS (Cumulative Layout Shift, viser < 0,1). Outils : PageSpeed Insights (Google), Lighthouse en local, et surtout le rapport Core Web Vitals de Search Console (données réelles utilisateurs via CrUX). Sur WordPress, les leviers principaux : caching (WP Rocket), images WebP, suppression de plugins inutiles, hébergement performant, CDN Cloudflare.",
+          code: `// Mesurer le LCP via la Web Vitals JS API
+import { onLCP } from 'web-vitals';
+
+onLCP((metric) => {
+  console.log('LCP:', metric.value);
+  // Envoyer à Google Analytics si nécessaire
+});`,
+        },
+        {
+          title: "3. Structure d'URLs et permaliens",
+          content:
+            "Les permaliens WordPress doivent suivre le format `/%postname%/` (Settings > Permalinks). Évitez les structures avec `?p=ID`, dates dans l'URL inutiles, ou hiérarchies profondes. Pour les catégories, désactiver le prefixe `/category/` si inutile (via plugin ou code). URL idéale : `exemple.fr/agence-web-rouen` plutôt que `exemple.fr/blog/2024/03/agence-web-rouen`. Le poids SEO d'un mot-clé dans l'URL n'est plus déterminant en 2026, mais une URL claire reste un facteur de CTR dans les SERPs.",
+        },
+        {
+          title: "4. Balises Title et meta description",
+          content:
+            "Chaque page importante doit avoir : un Title unique de 50-60 caractères incluant le mot-clé principal, une meta description de 140-160 caractères avec CTA, des balises Open Graph et Twitter Card. Sur WordPress, RankMath ou Yoast permet de cadrer ces meta page par page. Audit : Screaming Frog peut crawler le site et lister tous les Titles/meta — identifier les pages avec Title manquant, dupliqué, ou trop long/court. Critique pour le CTR organique dans Google.",
+        },
+        {
+          title: "5. Schema.org : Article, Product, FAQ, LocalBusiness",
+          content:
+            "Le balisage schema.org permet d'afficher des rich snippets dans Google (étoiles produits, FAQ déroulantes, breadcrumbs, dates articles, prix). RankMath et Yoast gèrent les schemas standard (Article, BreadcrumbList) automatiquement. Pour les sites e-commerce, ajouter Product schema sur les fiches WooCommerce (note moyenne, prix, disponibilité). Pour les sites locaux, LocalBusiness schema sur la home et page contact. Pour les FAQ : FAQPage schema. Tester avec l'outil Rich Results Test de Google pour valider.",
+          code: `// Exemple : Schema FAQPage à ajouter via Yoast/RankMath
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Combien coûte un site WordPress ?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "..."
+    }
+  }]
+}`,
+        },
+        {
+          title: "6. Mobile-friendliness et responsive",
+          content:
+            "Depuis 2021, Google utilise l'indexation mobile-first : c'est la version mobile de votre site qui est crawlée et indexée. Vérifier : que toutes les pages s'affichent correctement sur mobile (Chrome DevTools, simulation iPhone/Android), que le mobile menu est accessible, que les boutons sont assez grands (44x44px minimum), que la lisibilité reste bonne (16px minimum sur texte courant). Tester avec l'outil Mobile-Friendly Test de Google. WordPress en thème custom géré correctement = mobile-first natif. Page builders type Divi peuvent générer du mobile cassé sans qu'on s'en rende compte.",
+        },
+        {
+          title: "7. SSL/HTTPS et redirections",
+          content:
+            "Le HTTPS est obligatoire depuis 2018 (Google le considère comme facteur de classement, et les navigateurs marquent les sites HTTP comme « non sécurisé »). Vérifier : certificat SSL valide (Let's Encrypt ou autre), redirection 301 systématique de HTTP vers HTTPS, mixed content corrigé (toutes les ressources internes en HTTPS). Sur WordPress : `home_url` et `site_url` en HTTPS, plugin Really Simple SSL pour gérer les cas tordus, ou règle .htaccess pour la redirection.",
+        },
+        {
+          title: "8. Maillage interne : catégories, tags, related",
+          content:
+            "Le maillage interne (liens internes entre les pages de votre site) est sous-estimé. Il distribue le « jus SEO » aux pages importantes et aide Google à comprendre la structure. Sur WordPress : utiliser correctement les catégories et tags, ajouter manuellement des liens dans le contenu vers vos pages piliers, mettre en place des « related posts » sur les articles de blog. Outil utile : Screaming Frog peut mesurer le nombre de liens internes vers chaque URL — vos pages cibles SEO devraient avoir >10 liens internes pointant vers elles.",
+        },
+        {
+          title: "9. Optimisation des images",
+          content:
+            "Les images représentent souvent 60-80% du poids d'une page WordPress. Trois leviers : 1) Compression — utiliser ShortPixel ou Imagify pour compresser automatiquement à l'upload. 2) Format WebP/AVIF — convertir tous les JPG/PNG en WebP via WebP Express ou un plugin similaire. 3) Lazy loading — natif depuis WordPress 5.5 (`loading=\"lazy\"` sur les images hors viewport). Bonus : alt text systématique sur chaque image (accessibilité + SEO).",
+        },
+        {
+          title: "10. Contenu dupliqué et balises canonical",
+          content:
+            "Google pénalise (légèrement) le contenu dupliqué. Sur WordPress, ça arrive avec : catégories vs tags affichant les mêmes articles, pages d'archives auteur/date, paramètres URL multiples (filtres WooCommerce). Solution : balises canonical pointant vers l'URL principale. Yoast et RankMath le gèrent automatiquement, mais vérifier les cas particuliers. Pour les paramètres URL, configurer dans Search Console les paramètres à ignorer (panneau Paramètres > Paramètres URL).",
+        },
+        {
+          title: "11. Backlinks et autorité du domaine",
+          content:
+            "Hors-page mais critique : combien de sites externes pointent vers votre WordPress ? Avec quelle qualité ? Outils : Ahrefs, Semrush ou Moz pour mesurer le Domain Rating / Authority. Sur WordPress, vérifier qu'aucun backlink n'est cassé (lien externe pointant vers une URL 404 sur votre site = perte). Plugin Broken Link Checker peut identifier ces cas. Stratégie de netlinking long terme : digital PR, articles invités, citations locales (pour SEO local). Cela ne s'audite pas, ça se construit dans la durée.",
+        },
+        {
+          title: "12. Outils essentiels à mettre en place",
+          content:
+            "Sans monitoring, vous naviguez à l'aveugle. Outils gratuits indispensables : Google Search Console (positions, requêtes, erreurs d'exploration, Core Web Vitals), Google Analytics 4 ou Plausible (trafic, comportement, conversions), Bing Webmaster Tools (5% du marché mais moins concurrentiel). Outils payants utiles : Ahrefs ou Semrush (suivi positions, analyse concurrence, backlinks — 99$/mois), Screaming Frog SEO Spider (audit on-page, 200€/an). Sur WordPress même : RankMath Pro ou Yoast Premium pour les fonctions SEO avancées.",
+        },
+      ],
+      conclusion:
+        "Cette checklist couvre 90% des audits techniques que Google attend. Un site qui passe ces 12 points est solide. Si vous ne savez pas par où commencer, RankMath fait un score SEO interne (>80/100 visé) qui vous oriente vers les principales lacunes. Mais l'œil d'un audit humain reste différent — un consultant SEO trouve souvent des problèmes que les plugins ratent. Si vous voulez un audit complet de votre site WordPress, on en réalise régulièrement pour nos clients normands à un tarif raisonnable, avec rapport écrit et plan d'action chiffré.",
+    },
+  },
+  {
+    slug: "securite-wordpress-checklist-2026",
+    title: "Sécurité WordPress : la checklist agence en 12 points",
+    excerpt:
+      "WordPress propulse 43% du web : c'est aussi la cible #1 des bots et hackers. 12 actions concrètes pour sécuriser un site WordPress en 2026, sans tomber dans la paranoïa.",
+    category: "WordPress",
+    date: "4 mai 2026",
+    readTime: "16 min",
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["Sécurité WordPress", "Wordfence", "Maintenance", "WAF", "Hardening"],
+    content: {
+      introduction:
+        "WordPress est attaqué en permanence — pas parce qu'il est mal sécurisé, mais parce qu'il propulse 43% du web : la surface d'attaque est immense. Les bots scannent en continu des millions de sites à la recherche de versions obsolètes, mots de passe faibles, plugins vulnérables. La majorité des compromissions WordPress n'a rien à voir avec des hackers ciblés : ce sont des attaques automatisées qui frappent au hasard. La bonne nouvelle : 90% des risques se neutralisent avec une bonne hygiène. Voici notre checklist complète, appliquée sur tous nos forfaits de maintenance Krealabs.",
+      sections: [
+        {
+          title: "1. Mises à jour : noyau, plugins, thèmes",
+          content:
+            "Le vecteur d'attaque #1 sur WordPress, c'est un plugin obsolète avec faille connue. La majorité des compromissions exploite des vulnérabilités publiées depuis plus de 6 mois — donc patchées, mais sur des sites qui n'ont pas mis à jour. Stratégie : activer les mises à jour automatiques pour les versions mineures (WP, plugins, thèmes), valider manuellement les versions majeures (qui peuvent casser des choses). Outils de monitoring : ManageWP ou MainWP centralisent les MAJ sur plusieurs sites. Plugin recommandé : Easy Updates Manager pour le contrôle fin par type.",
+          code: `// wp-config.php — activer auto-update du core
+define('WP_AUTO_UPDATE_CORE', true);
+
+// Pour les plugins (avec précaution)
+add_filter('auto_update_plugin', '__return_true');
+
+// Mais idéalement : centraliser avec ManageWP
+// et tester avant les majeures`,
+        },
+        {
+          title: "2. Authentification : 2FA et mots de passe forts",
+          content:
+            "Tous les comptes administrateurs doivent : avoir un mot de passe complexe (16+ caractères, gestionnaire type 1Password/Bitwarden), avoir la 2FA activée (TOTP via Google Authenticator/Authy), ne PAS s'appeler `admin` (changer le username défaut). Plugin recommandé : Two Factor Authentication (Plugin Vault) ou WP 2FA. Pour les rôles : limiter les comptes admin au strict nécessaire. Un rédacteur n'a pas besoin du rôle Administrator, juste Editor ou Author. Auditer régulièrement la liste des utilisateurs et supprimer les comptes inactifs.",
+        },
+        {
+          title: "3. Limiter les tentatives de login",
+          content:
+            "Les attaques par brute-force sur `/wp-login.php` représentent l'essentiel du trafic malveillant sur un WordPress non protégé. Plugins recommandés : Limit Login Attempts Reloaded (gratuit) ou Wordfence (qui inclut cette fonction). Configuration typique : 4 tentatives échouées = blocage IP 20 minutes, 10 échecs = blocage 24h. Variante : whitelister les IPs admin si vous travaillez depuis IPs fixes. Pour aller plus loin : ajouter un reCAPTCHA v3 sur le formulaire de login.",
+        },
+        {
+          title: "4. Cacher /wp-admin et /wp-login.php",
+          content:
+            "Tous les bots ciblent `/wp-admin/` et `/wp-login.php`. Changer ces URLs est une protection par obscurité — pas une vraie sécurité, mais ça élimine 95% des attaques automatisées. Plugin recommandé : WPS Hide Login (renomme en `/secret-login-url`). Important : ne pas perdre l'URL custom (la stocker dans le gestionnaire de mots de passe), et garder une redirection ou une page d'erreur 404 sur l'ancienne URL. Combiné avec la 2FA, ça réduit drastiquement la surface d'attaque.",
+        },
+        {
+          title: "5. Permissions fichiers et durcissement wp-config",
+          content:
+            "Les permissions Unix doivent être correctes : 644 pour les fichiers, 755 pour les dossiers, 600 ou 640 pour `wp-config.php` (le plus sensible). Désactiver l'édition de fichiers depuis l'admin WP (impossible pour un attaquant qui obtient un accès admin de modifier du code via l'interface) :",
+          code: `// wp-config.php — durcissement standard
+
+// Empêcher l'édition de fichiers depuis l'admin
+define('DISALLOW_FILE_EDIT', true);
+
+// Empêcher l'installation/màj de plugins via l'admin
+// (à activer seulement si CI/CD ou déploiement Git)
+define('DISALLOW_FILE_MODS', false);
+
+// Changer les clés et sels d'authentification
+// Générer via https://api.wordpress.org/secret-key/1.1/salt/
+define('AUTH_KEY', '...');
+define('SECURE_AUTH_KEY', '...');
+// ... et les 6 autres clés`,
+        },
+        {
+          title: "6. Désactivation XML-RPC et REST API publique",
+          content:
+            "XML-RPC est une vieille API WordPress utilisée pour les pingbacks, l'application mobile WordPress, etc. Si vous ne l'utilisez pas (cas le plus courant), désactivez-la : c'est un vecteur d'attaque récurrent (amplification DDoS, brute-force via xmlrpc.php). Plugin Disable XML-RPC ou règle .htaccess. La REST API WordPress (`/wp-json/`) est utile mais expose par défaut la liste des utilisateurs (`/wp-json/wp/v2/users`) — utile pour un attaquant pour trouver les usernames. Restreindre via plugin Disable REST API ou code custom pour ne laisser passer que les endpoints nécessaires.",
+        },
+        {
+          title: "7. WAF : Cloudflare, Sucuri, Wordfence",
+          content:
+            "Un Web Application Firewall filtre les requêtes malveillantes AVANT qu'elles n'atteignent WordPress. Trois options crédibles : Cloudflare (gratuit en version basic, WAF avancé en payant ~20$/mois), Sucuri (~200$/an, spécialisé WP), Wordfence (gratuit + payant ~99$/an pour le WAF avancé). Cloudflare en frontal est notre recommandation #1 — il offre CDN + DDoS protection + WAF + analytics. Configurer les règles : bloquer les bots malveillants connus, geo-blocking si vous ne servez qu'un marché (FR/EU), rate limiting agressif sur `/wp-login.php`.",
+        },
+        {
+          title: "8. Sauvegardes : fréquence, lieu, restauration testée",
+          content:
+            "Sauvegarde = la dernière ligne de défense. Critères : fréquence adaptée (quotidienne pour un site actif, hebdomadaire pour un site vitrine), stockage offsite (Amazon S3, Backblaze, Google Drive — PAS sur le même serveur), rétention 30+ jours, restauration TESTÉE régulièrement (un backup non testé n'est pas un backup). Plugins recommandés : UpdraftPlus (gratuit + Premium 70$/an), BackWPup (open-source), BlogVault (payant mais excellent). Tester la restauration au moins une fois par trimestre sur un staging.",
+        },
+        {
+          title: "9. Monitoring et alerting",
+          content:
+            "Détecter une compromission rapidement = limiter les dégâts. Outils : Wordfence (alerte si fichiers core modifiés, nouveaux plugins suspects, comptes admin créés), Sucuri SiteCheck (scan quotidien), ManageWP (monitoring uptime + sécurité). Configurer alertes par email/Slack sur événements critiques : nouveau compte admin créé, fichier core modifié, plugin ajouté, downtime > 5 min. Plus tôt vous détectez, plus tôt vous réagissez — souvent la différence entre 1h de réparation et 48h de catastrophe.",
+        },
+        {
+          title: "10. SSL/TLS bien configuré",
+          content:
+            "HTTPS oui, mais bien fait. Vérifier : version TLS 1.2 minimum (idéalement 1.3 only), certificat valide pas seulement présent, HSTS activé (Strict-Transport-Security header), pas de mixed content (toutes ressources internes en HTTPS), redirect 301 systématique HTTP→HTTPS. Outil de test : SSL Labs (ssllabs.com/ssltest) — viser score A ou A+. Sur WordPress : plugin Really Simple SSL pour automatiser, ou configurer manuellement dans Nginx/Apache.",
+        },
+        {
+          title: "11. Choisir un hébergement WordPress-friendly",
+          content:
+            "Un hébergement mutualisé bas de gamme (OVH Perso, 1&1 IONOS basic) = WordPress vulnérable par construction. Caractéristiques d'un bon hébergement WP : PHP 8.2+ avec OPcache, MySQL 8 ou MariaDB 10.6+, isolation entre comptes (pas de neighbor risk), monitoring sécurité par l'hébergeur, sauvegardes automatiques quotidiennes, support réactif. Recommandations : o2switch (français, RGPD, ~7€/mois — excellent pour PME), Kinsta (premium WordPress géré, 35$/mois), WP Engine (US premium, 30$/mois), AWS Lightsail (technique, 5$/mois). Éviter : les revendeurs cPanel à 2€/mois.",
+        },
+        {
+          title: "12. Plan d'incident : que faire en cas de compromission",
+          content:
+            "Si malgré tout vous êtes compromis : 1) Couper l'accès au site (page maintenance), 2) Faire un backup complet de l'état compromis (pour forensics), 3) Restaurer depuis backup sain antérieur à la compromission, 4) Changer TOUS les mots de passe (admin WP, FTP, DB, hébergeur), 5) Régénérer les clés/sels wp-config, 6) Scanner avec Wordfence + Sucuri, 7) Identifier le point d'entrée (plugin vulnérable ?) et patcher, 8) Re-monter, 9) Soumettre Google Search Console si Google a flaggé le site, 10) Surveillance renforcée 30 jours. Un incident bien géré = downtime 4-8h. Mal géré = client perdu, SEO détruit, semaines de récupération.",
+        },
+      ],
+      conclusion:
+        "La sécurité WordPress n'est pas une option, c'est une discipline continue. Tous nos forfaits de maintenance Krealabs incluent cette checklist appliquée et monitorée. Si vous gérez votre site vous-même, cette liste vous donne le minimum à mettre en place. Si vous voulez déléguer — pour vous concentrer sur votre métier plutôt que sur les patchs sécurité du dimanche soir — nos forfaits maintenance commencent à un tarif raisonnable et couvrent l'ensemble. Parlons-en si vous voulez dormir tranquille.",
+    },
+  },
+
+  // ===========================================================================
   // CLUSTER WEB (5 articles)
   // ===========================================================================
   {
@@ -53,7 +534,7 @@ export const blogPosts: BlogPost[] = [
     date: "5 mai 2026",
     readTime: "8 min",
     image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&q=80",
-    featured: true,
+    featured: false,
     author,
     tags: ["Next.js", "React", "App Router", "Turbopack", "Web", "Performance"],
     content: {

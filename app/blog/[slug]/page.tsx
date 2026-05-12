@@ -1,213 +1,406 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, ArrowLeft, Tag, Share2 } from "lucide-react";
-import { blogPosts } from "@/lib/blog-data";
 import Image from "next/image";
+import { ArrowLeft, Calendar, Clock, Tag, ArrowUpRight } from "lucide-react";
+
+import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { ShareButton } from "@/components/blog/share-button";
+import { blogPosts, frenchDateToISO } from "@/lib/blog-data";
+
+const SITE_URL = "https://krealabs.fr";
+
+// ============================================================
+// STATIC PARAMS — un fichier par article au build
+// ============================================================
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
+  return blogPosts.map((post) => ({ slug: post.slug }));
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+// ============================================================
+// METADATA — OpenGraph, Twitter, canonical par article
+// ============================================================
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const post = blogPosts.find((p) => p.slug === slug);
+  if (!post) return {};
+
+  const url = `${SITE_URL}/blog/${post.slug}`;
+  const isoDate = frenchDateToISO(post.date);
+  const image = post.image
+    ? [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ]
+    : undefined;
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    keywords: post.tags,
+    authors: [{ name: post.author.name, url: `${SITE_URL}/equipe` }],
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.excerpt,
+      url,
+      siteName: "Krealabs",
+      locale: "fr_FR",
+      publishedTime: isoDate,
+      modifiedTime: isoDate,
+      authors: [post.author.name],
+      tags: post.tags,
+      section: post.category,
+      images: image,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      creator: "@krealabs",
+      images: post.image ? [post.image] : undefined,
+    },
+  };
+}
+
+// ============================================================
+// PAGE
+// ============================================================
+
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
 
-  if (!post) {
-    notFound();
-  }
+  if (!post) notFound();
 
-  // Get related posts
+  const url = `${SITE_URL}/blog/${post.slug}`;
+  const isoDate = frenchDateToISO(post.date);
+  const wordCount =
+    post.content.introduction.split(/\s+/).length +
+    post.content.sections.reduce(
+      (sum, s) => sum + s.content.split(/\s+/).length + (s.code?.split(/\s+/).length ?? 0),
+      0,
+    ) +
+    post.content.conclusion.split(/\s+/).length;
+
   const relatedPosts = blogPosts
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 3);
 
+  // Si pas assez de related par catégorie, compléter avec d'autres
+  const fillRelated =
+    relatedPosts.length < 3
+      ? blogPosts.filter((p) => p.slug !== post.slug && !relatedPosts.includes(p)).slice(0, 3 - relatedPosts.length)
+      : [];
+  const allRelated = [...relatedPosts, ...fillRelated];
+
+  // ===== Schema.org Article =====
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.excerpt,
+    image: post.image ? [post.image] : undefined,
+    datePublished: isoDate,
+    dateModified: isoDate,
+    author: {
+      "@type": "Person",
+      name: post.author.name,
+      url: `${SITE_URL}/equipe`,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Krealabs",
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/logo.png`,
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": url,
+    },
+    keywords: post.tags.join(", "),
+    articleSection: post.category,
+    wordCount,
+    inLanguage: "fr-FR",
+  };
+
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030303] transition-colors pt-20">
-      {/* Hero Section */}
-      <div className="relative h-[400px] md:h-[500px] overflow-hidden">
-        <img
-          src={post.image}
-          alt={post.title}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+    <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <BreadcrumbSchema
+        items={[
+          { name: "Accueil", url: SITE_URL },
+          { name: "Blog", url: `${SITE_URL}/blog` },
+          { name: post.title, url },
+        ]}
+      />
 
-        {/* Breadcrumb */}
-        <div className="absolute top-8 left-0 right-0">
-          <div className="container mx-auto px-4 max-w-4xl">
-            <Link
-              href="/blog"
-              className="inline-flex items-center text-white/80 hover:text-white transition-colors"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Retour au blog
-            </Link>
-          </div>
-        </div>
-
-        {/* Title Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
-          <div className="container mx-auto max-w-4xl">
-            <Badge className="mb-4 bg-[#A543F1] text-white border-0">
-              {post.category}
-            </Badge>
-            <h1 className="text-3xl md:text-5xl font-bold text-white mb-4 font-[family-name:var(--font-heading)]">
-              {post.title}
-            </h1>
-            <div className="flex items-center gap-6 text-white/80 text-sm">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4" />
-                {post.date}
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4" />
-                {post.readTime}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-16 max-w-4xl">
-        {/* Author Info */}
-        <div className="flex items-center justify-between mb-12 pb-8 border-b border-gray-200 dark:border-white/[0.08]">
-          <div className="flex items-center gap-4">
-            <img
-              src={post.author.avatar}
-              alt={post.author.name}
-              className="w-12 h-12 rounded-full object-cover"
+      {/* ========== HERO IMAGE + TITLE ========== */}
+      <header className="relative pt-24 pb-12 md:pt-32 md:pb-16 overflow-hidden">
+        {/* Background image with overlay */}
+        {post.image && (
+          <div className="absolute inset-0 -z-10">
+            <Image
+              src={post.image}
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover opacity-25 dark:opacity-20"
             />
-            <div>
-              <div className="font-semibold text-gray-900 dark:text-white">
-                {post.author.name}
-              </div>
-              <div className="text-sm text-gray-600 dark:text-white/60">
-                {post.author.role}
-              </div>
+            <div className="absolute inset-0 bg-gradient-to-b from-[var(--background)]/40 via-[var(--background)]/80 to-[var(--background)]" />
+          </div>
+        )}
+
+        <Container size="narrow">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-body-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors mb-8"
+          >
+            <ArrowLeft className="size-3.5" />
+            Retour au blog
+          </Link>
+
+          <div className="space-y-6">
+            <div className="flex flex-wrap items-center gap-3">
+              <Badge>{post.category}</Badge>
+              {post.featured && <Badge variant="default">À la une</Badge>}
+            </div>
+
+            <h1 className="text-display !leading-[1.05]">{post.title}</h1>
+
+            <p className="text-body-lg text-[var(--muted-foreground)] max-w-3xl">
+              {post.excerpt}
+            </p>
+
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 pt-4 text-body-sm text-[var(--muted-foreground)]">
+              <time dateTime={isoDate} className="inline-flex items-center gap-1.5">
+                <Calendar className="size-3.5" />
+                {post.date}
+              </time>
+              <span className="inline-flex items-center gap-1.5">
+                <Clock className="size-3.5" />
+                {post.readTime}
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <span className="size-1.5 rounded-full bg-[var(--accent)]" />
+                {wordCount.toLocaleString("fr-FR")} mots
+              </span>
             </div>
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-200 dark:border-white/[0.08] hover:border-[#A543F1] hover:bg-[#A543F1]/10 transition-colors text-sm font-medium text-gray-700 dark:text-white/70">
-            <Share2 className="w-4 h-4" />
-            Partager
-          </button>
-        </div>
+        </Container>
+      </header>
 
-        {/* Article Content */}
-        <article className="prose prose-lg dark:prose-invert max-w-none">
+      {/* ========== AUTHOR + SHARE ========== */}
+      <section className="border-y border-[var(--border)] bg-[var(--surface)]/40">
+        <Container size="narrow">
+          <div className="py-5 flex flex-wrap items-center justify-between gap-4">
+            <Link
+              href="/equipe"
+              className="group flex items-center gap-3 hover:opacity-80 transition-opacity"
+            >
+              <div className="relative size-10 rounded-full overflow-hidden border border-[var(--border)] bg-[var(--surface)]">
+                <Image
+                  src={post.author.avatar}
+                  alt={post.author.name}
+                  fill
+                  sizes="40px"
+                  className="object-cover"
+                />
+              </div>
+              <div>
+                <p className="text-body-sm font-semibold text-[var(--foreground)]">
+                  {post.author.name}
+                </p>
+                <p className="text-caption">{post.author.role}</p>
+              </div>
+            </Link>
+
+            <ShareButton url={url} title={post.title} description={post.excerpt} />
+          </div>
+        </Container>
+      </section>
+
+      {/* ========== ARTICLE CONTENT ========== */}
+      <article className="section-y">
+        <Container size="narrow">
           {/* Introduction */}
-          <p className="text-xl text-gray-700 dark:text-white/70 leading-relaxed mb-8 font-[family-name:var(--font-sans)]">
+          <p className="text-body-lg text-[var(--foreground)]/90 leading-relaxed mb-12">
             {post.content.introduction}
           </p>
 
           {/* Sections */}
           {post.content.sections.map((section, index) => (
-            <div key={index} className="mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 font-[family-name:var(--font-heading)]">
+            <section key={index} className="mb-12 last:mb-0">
+              <h2 className="text-h2 mb-6">
+                <span className="text-[var(--accent)] mr-3 text-eyebrow align-middle">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 {section.title}
               </h2>
-              <p className="text-gray-700 dark:text-white/70 leading-relaxed mb-6 font-[family-name:var(--font-sans)]">
+              <p className="text-body-lg text-[var(--muted-foreground)] leading-relaxed">
                 {section.content}
               </p>
               {section.code && (
-                <div className="relative rounded-xl overflow-hidden bg-gray-900 dark:bg-black border border-gray-700 dark:border-white/[0.08] p-6 mb-6">
-                  <pre className="overflow-x-auto">
-                    <code className="text-sm text-gray-100 font-[family-name:var(--font-mono)]">
-                      {section.code}
-                    </code>
-                  </pre>
-                </div>
+                <pre className="mt-6 overflow-x-auto rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] p-5">
+                  <code className="text-body-sm font-mono text-[var(--foreground)]/90 whitespace-pre">
+                    {section.code}
+                  </code>
+                </pre>
               )}
-            </div>
+            </section>
           ))}
 
           {/* Conclusion */}
-          <div className="mt-12 p-6 bg-[#A543F1]/10 border-l-4 border-[#A543F1] rounded-r-xl">
-            <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 font-[family-name:var(--font-heading)]">
-              Conclusion
-            </h3>
-            <p className="text-gray-700 dark:text-white/70 leading-relaxed font-[family-name:var(--font-sans)]">
+          <div className="mt-16 p-8 rounded-[var(--radius)] border-l-4 border-[var(--accent)] bg-[var(--accent-subtle)]/30">
+            <Eyebrow className="mb-4">En résumé</Eyebrow>
+            <p className="text-body-lg text-[var(--foreground)]/90 leading-relaxed">
               {post.content.conclusion}
             </p>
           </div>
-        </article>
 
-        {/* Tags */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-white/[0.08]">
-          <div className="flex items-center gap-3 flex-wrap">
-            <Tag className="w-5 h-5 text-gray-400" />
+          {/* Tags */}
+          <div className="mt-12 pt-8 border-t border-[var(--border)] flex flex-wrap items-center gap-3">
+            <Tag className="size-4 text-[var(--muted-foreground)]" />
             {post.tags.map((tag) => (
-              <Badge
-                key={tag}
-                className="bg-gray-100 dark:bg-white/[0.05] text-gray-700 dark:text-white/70 border-0 hover:bg-[#A543F1]/20 hover:text-[#A543F1] transition-colors cursor-pointer"
-              >
+              <Badge key={tag} variant="secondary">
                 {tag}
               </Badge>
             ))}
           </div>
-        </div>
 
-        {/* Related Posts */}
-        {relatedPosts.length > 0 && (
-          <div className="mt-16 pt-12 border-t border-gray-200 dark:border-white/[0.08]">
-            <h3 className="text-2xl font-bold mb-8 text-gray-900 dark:text-white">
-              Articles similaires
-            </h3>
-            <div className="grid md:grid-cols-3 gap-6">
-              {relatedPosts.map((relatedPost) => (
+          {/* Author card */}
+          <Link
+            href="/equipe"
+            className="mt-16 group flex items-start gap-5 p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] transition-colors"
+          >
+            <div className="relative size-16 rounded-full overflow-hidden border border-[var(--border)] bg-[var(--background)] shrink-0">
+              <Image
+                src={post.author.avatar}
+                alt={post.author.name}
+                fill
+                sizes="64px"
+                className="object-cover"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-caption mb-1">Écrit par</p>
+              <p className="text-h4 mb-1">{post.author.name}</p>
+              <p className="text-body-sm text-[var(--muted-foreground)] mb-3">
+                {post.author.role}
+              </p>
+              <span className="inline-flex items-center gap-1.5 text-body-sm font-medium text-[var(--accent)]">
+                Découvrir l'équipe
+                <ArrowUpRight className="size-3.5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+              </span>
+            </div>
+          </Link>
+        </Container>
+      </article>
+
+      {/* ========== RELATED POSTS ========== */}
+      {allRelated.length > 0 && (
+        <section className="section-y border-t border-[var(--border)]">
+          <Container>
+            <Eyebrow className="mb-6">Articles similaires</Eyebrow>
+            <h2 className="text-h1 mb-12">
+              <em>À lire aussi</em>.
+            </h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {allRelated.map((related) => (
                 <Link
-                  key={relatedPost.slug}
-                  href={`/blog/${relatedPost.slug}`}
-                  className="group"
+                  key={related.slug}
+                  href={`/blog/${related.slug}`}
+                  className="group flex flex-col rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] overflow-hidden hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] transition-colors"
                 >
-                  <article className="h-full bg-gray-50 dark:bg-white/[0.02] rounded-xl border border-gray-200 dark:border-white/[0.08] overflow-hidden hover:border-[#A543F1]/50 transition-all">
-                    <div className="relative h-40 overflow-hidden">
-                      <img
-                        src={relatedPost.image}
-                        alt={relatedPost.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  {related.image && (
+                    <div className="relative aspect-[16/10] overflow-hidden bg-[var(--background)]">
+                      <Image
+                        src={related.image}
+                        alt={related.title}
+                        fill
+                        loading="lazy"
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                       />
                     </div>
-                    <div className="p-4">
-                      <Badge className="mb-2 bg-gray-200 dark:bg-white/[0.08] text-gray-700 dark:text-white/70 border-0 text-xs">
-                        {relatedPost.category}
-                      </Badge>
-                      <h4 className="text-sm font-bold text-gray-900 dark:text-white group-hover:text-[#A543F1] transition-colors line-clamp-2">
-                        {relatedPost.title}
-                      </h4>
-                      <div className="flex items-center gap-3 mt-3 text-xs text-gray-500 dark:text-white/40">
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {relatedPost.readTime}
-                        </div>
-                      </div>
+                  )}
+                  <div className="p-6 flex flex-col flex-1">
+                    <Badge variant="secondary" className="w-fit mb-3">
+                      {related.category}
+                    </Badge>
+                    <h3 className="text-h4 mb-2 group-hover:text-[var(--accent)] transition-colors line-clamp-2">
+                      {related.title}
+                    </h3>
+                    <p className="text-body-sm text-[var(--muted-foreground)] line-clamp-2 mb-4 flex-1">
+                      {related.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between pt-3 border-t border-[var(--border)]">
+                      <span className="text-caption inline-flex items-center gap-1.5">
+                        <Clock className="size-3" />
+                        {related.readTime}
+                      </span>
+                      <ArrowUpRight className="size-4 text-[var(--subtle-foreground)] group-hover:text-[var(--accent)] transition-colors" />
                     </div>
-                  </article>
+                  </div>
                 </Link>
               ))}
             </div>
-          </div>
-        )}
+          </Container>
+        </section>
+      )}
 
-        {/* CTA */}
-        <div className="mt-16 bg-gradient-to-r from-[#A543F1] to-[#c5cbf9] p-8 md:p-12 rounded-2xl text-white text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            Besoin d'aide pour votre projet ?
-          </h3>
-          <p className="text-white/90 mb-6 max-w-2xl mx-auto">
-            Notre equipe d'experts est la pour transformer vos idees en realite.
-            Contactez-nous pour discuter de votre projet.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center px-6 py-3 bg-white text-[#A543F1] rounded-lg font-medium hover:bg-white/90 transition-colors"
-          >
-            Nous contacter
-          </Link>
-        </div>
-      </div>
+      {/* ========== CTA ========== */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container size="narrow">
+          <div className="relative overflow-hidden p-8 md:p-12 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] text-center">
+            <div className="absolute inset-0 bg-grid bg-grid-fade opacity-30" aria-hidden />
+            <div className="relative">
+              <Eyebrow className="mb-6 justify-center">Parlons projet</Eyebrow>
+              <h2 className="text-h1 mb-4">
+                Un sujet à <em>creuser</em> ensemble ?
+              </h2>
+              <p className="text-body-lg text-[var(--muted-foreground)] mb-8 max-w-xl mx-auto">
+                Si cet article t'a parlé et que tu as un projet en cours (ou
+                naissant), écris-nous — premier échange offert.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Button size="lg" asChild>
+                  <Link href="/contact">Discuter d'un projet</Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/services">Voir nos services</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
     </main>
   );
 }

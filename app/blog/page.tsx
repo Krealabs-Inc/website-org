@@ -12,7 +12,7 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { blogPosts } from "@/lib/blog-data";
 import { cn } from "@/lib/utils";
 
-const CATEGORIES = ["Tous", "Web", "Mobile", "SEO", "Outils"];
+const CATEGORIES = ["Tous", "WordPress", "Web", "Mobile", "SEO", "Outils"];
 
 export default function BlogPage() {
   const [active, setActive] = useState("Tous");
