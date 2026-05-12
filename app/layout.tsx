@@ -7,6 +7,8 @@ import { Navbar } from "@/components/navigation/navbar";
 import { Footer } from "@/components/navigation/footer";
 import { Toaster } from "sonner";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
+import { LenisProvider } from "@/components/animations/lenis-provider";
+import { Analytics } from "@vercel/analytics/react";
 
 // Switzer — sans-serif principale (auto-hébergée, Fontshare)
 const switzer = localFont({
@@ -56,16 +58,33 @@ export const metadata: Metadata = {
   description: 'Agence web à Rouen en Normandie. Création de sites internet, applications mobiles et logiciels sur mesure. Experts React, Next.js, React Native, TypeScript. Devis gratuit sous 24h.',
 
   keywords: [
+    // SEO local agence
     'agence web rouen',
     'agence digitale rouen',
+    'agence web normandie',
     'création site internet rouen',
     'développement web rouen',
-    'agence web normandie',
-    'logiciel sur mesure rouen',
-    'application mobile rouen',
-    'développeur react rouen',
+    'développeur rouen',
+    // Spécialité WordPress
+    'agence wordpress rouen',
+    'agence wordpress normandie',
+    'création site wordpress rouen',
+    'refonte wordpress',
+    'développeur wordpress rouen',
+    'maintenance wordpress',
+    'sécurité wordpress',
+    'seo wordpress rouen',
+    'woocommerce rouen',
+    'e-commerce wordpress rouen',
+    'headless wordpress',
+    // Stack moderne
     'next.js normandie',
     'react native rouen',
+    'typescript rouen',
+    'python rouen',
+    // Services divers
+    'logiciel sur mesure rouen',
+    'application mobile rouen',
     'agence seo rouen',
     'création site internet normandie',
     'développement logiciel rouen',
@@ -82,8 +101,8 @@ export const metadata: Metadata = {
   },
 
   icons: {
+    // app/favicon.ico est auto-détecté par Next.js — pas besoin de le redéclarer
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
     ],
@@ -164,11 +183,14 @@ export default function RootLayout({
           defaultTheme="dark"
           enableSystem={false}
         >
-          <OrganizationSchema />
-          <Navbar />
-          {children}
-          <Footer />
-          <Toaster position="top-right" richColors />
+          <LenisProvider>
+            <OrganizationSchema />
+            <Navbar />
+            {children}
+            <Footer />
+            <Toaster position="top-right" richColors />
+          </LenisProvider>
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>

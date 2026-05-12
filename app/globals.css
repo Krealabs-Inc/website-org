@@ -50,6 +50,23 @@
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
   --animate-page-enter: page-enter 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-border-beam: border-beam linear infinite;
+  --animate-particle-float: particle-float ease-in-out infinite;
+
+  @keyframes border-beam {
+    to {
+      offset-distance: 100%;
+    }
+  }
+
+  @keyframes particle-float {
+    0%, 100% {
+      transform: translateY(0) translateX(0);
+    }
+    50% {
+      transform: translateY(-12px) translateX(4px);
+    }
+  }
 
   @keyframes page-enter {
     from {
@@ -162,6 +179,19 @@
 html,
 body {
   overscroll-behavior: none;
+}
+
+/* Respect global de prefers-reduced-motion :
+   coupe les animations CSS, transitions et scroll-behavior smooth. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @layer base {

@@ -6,19 +6,29 @@ import {
   Sparkles,
   Gauge,
   ArrowRight,
+  Wrench,
+  ShoppingBag,
+  ShieldCheck,
+  CheckCircle2,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
+import { MotionReveal } from "@/components/animations/motion-reveal";
+import { NumberTicker } from "@/components/animations/number-ticker";
+import { TextHighlighter } from "@/components/animations/text-highlighter";
+import { WordRotator } from "@/components/animations/word-rotator";
+import { BorderBeam } from "@/components/animations/border-beam";
+import { Marquee } from "@/components/animations/marquee";
+import { ParticlesBg } from "@/components/animations/particles-bg";
 
 export default function HomePage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       {/* ========== HERO ========== */}
       <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
-        {/* Background grid + radial fade */}
         <div className="absolute inset-0 bg-grid bg-grid-fade opacity-60" aria-hidden />
         <div
           aria-hidden
@@ -27,22 +37,36 @@ export default function HomePage() {
         />
 
         <Container className="relative">
-          <div className="max-w-4xl">
+          <MotionReveal className="max-w-4xl" direction="up">
             <Eyebrow dot className="mb-8">
               Agence digitale · Rouen, Normandie
             </Eyebrow>
 
             <h1 className="text-display">
-              Sites web et logiciels{" "}
-              <em>sur mesure</em>,
+              Sites web et logiciels <em>sur mesure</em>,
               <br />
-              conçus à <em>Rouen</em>.
+              conçus à{" "}
+              <TextHighlighter>
+                <em>Rouen</em>
+              </TextHighlighter>
+              .
             </h1>
 
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
               Krealabs est une agence web spécialisée dans la création de sites
               performants, d'applications mobile et de logiciels métier pour les
               entreprises normandes exigeantes.
+            </p>
+
+            {/* Ligne rotative des expertises */}
+            <p className="mt-6 inline-flex items-center gap-2 text-body text-[var(--muted-foreground)]">
+              <span className="size-1.5 rounded-full bg-[var(--accent)]" />
+              Spécialisés en{" "}
+              <span className="font-semibold text-[var(--foreground)]">
+                <WordRotator
+                  words={["WordPress", "WooCommerce", "Next.js", "React Native", "TypeScript", "Python", "SEO local"]}
+                />
+              </span>
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-3">
@@ -61,52 +85,139 @@ export default function HomePage() {
               Réponse sous 24h · Devis gratuit · Basés à Rouen, intervention en
               France
             </p>
-          </div>
+          </MotionReveal>
 
           {/* Stat strip */}
-          <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
-            {[
-              { value: "50+", label: "Projets livrés" },
-              { value: "12", label: "Mois d'autonomie" },
-              { value: "< 2s", label: "Temps de chargement" },
-              { value: "100%", label: "Code maison" },
-            ].map((s) => (
-              <div
-                key={s.label}
-                className="bg-[var(--background)] px-6 py-8 flex flex-col gap-1"
-              >
-                <p className="text-h2 font-medium tracking-[-0.03em]">
-                  {s.value}
-                </p>
-                <p className="text-caption">{s.label}</p>
-              </div>
-            ))}
-          </div>
+          <MotionReveal delay={0.2} direction="up" className="mt-24">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+              {STATS.map((s) => (
+                <div
+                  key={s.label}
+                  className="bg-[var(--background)] px-6 py-8 flex flex-col gap-1"
+                >
+                  <p className="text-h2 font-medium tracking-[-0.03em]">
+                    {s.numeric != null ? (
+                      <NumberTicker
+                        value={s.numeric}
+                        prefix={s.prefix}
+                        suffix={s.suffix}
+                      />
+                    ) : (
+                      s.staticValue
+                    )}
+                  </p>
+                  <p className="text-caption">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </MotionReveal>
         </Container>
       </section>
 
-      {/* ========== SERVICES ========== */}
+      {/* ========== WORDPRESS — SPÉCIALITÉ HÉROS ========== */}
+      <section className="section-y border-t border-[var(--border)] relative overflow-hidden">
+        <Container>
+          <MotionReveal>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+              <div className="lg:col-span-7">
+                <Eyebrow number="01" dot className="mb-6">Spécialité · WordPress</Eyebrow>
+                <h2 className="text-h1 mb-6">
+                  <em>WordPress</em> à Rouen,
+                  <br />
+                  c'est notre métier.
+                </h2>
+                <p className="text-body-lg text-[var(--muted-foreground)] mb-8 max-w-xl">
+                  Depuis plus de 10 ans, nous développons des sites WordPress
+                  sur mesure : thèmes custom, WooCommerce, refontes, SEO,
+                  maintenance, sécurité. La plupart de nos clients sont sur
+                  WordPress — et ça nous va parfaitement.
+                </p>
+                <ul className="space-y-3 mb-10">
+                  {WP_HIGHLIGHTS.map((h) => (
+                    <li key={h} className="flex items-start gap-3 text-body">
+                      <CheckCircle2 className="size-5 text-[var(--accent)] mt-0.5 shrink-0" />
+                      <span>{h}</span>
+                    </li>
+                  ))}
+                </ul>
+                <div className="flex flex-wrap gap-3">
+                  <Button size="lg" asChild>
+                    <Link href="/services/wordpress">
+                      Découvrir l'offre WordPress
+                      <ArrowRight />
+                    </Link>
+                  </Button>
+                  <Button size="lg" variant="outline" asChild>
+                    <Link href="/contact?type=devis">Demander un devis WP</Link>
+                  </Button>
+                </div>
+              </div>
+
+              <div className="lg:col-span-5">
+                <div className="relative p-8 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] overflow-hidden">
+                  <BorderBeam duration={10} size={80} />
+                  <div className="space-y-6 relative z-10">
+                    <div className="flex items-center justify-between">
+                      <p className="text-eyebrow">Offre WordPress</p>
+                      <Badge>Spécialité</Badge>
+                    </div>
+                    <div className="space-y-4">
+                      {WP_OFFERS.map((o) => {
+                        const Icon = o.icon;
+                        return (
+                          <Link
+                            key={o.title}
+                            href={o.href}
+                            className="group flex items-start gap-4 p-3 rounded-[var(--radius)] hover:bg-[var(--background)] transition-colors"
+                          >
+                            <div className="size-10 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--background)] flex items-center justify-center">
+                              <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
+                            </div>
+                            <div className="min-w-0 flex-1">
+                              <p className="text-body font-semibold">{o.title}</p>
+                              <p className="text-body-sm text-[var(--muted-foreground)]">
+                                {o.description}
+                              </p>
+                            </div>
+                            <ArrowUpRight className="size-4 text-[var(--subtle-foreground)] group-hover:text-[var(--accent)] mt-3 shrink-0" />
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </MotionReveal>
+        </Container>
+      </section>
+
+      {/* ========== SERVICES — AUTRES ========== */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-            <div className="max-w-2xl">
-              <Eyebrow number="01" className="mb-6">Services</Eyebrow>
-              <h2 className="text-h1">
-                Ce que nous <em>construisons</em>.
-              </h2>
+          <MotionReveal>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+              <div className="max-w-2xl">
+                <Eyebrow number="02" className="mb-6">Au-delà de WordPress</Eyebrow>
+                <h2 className="text-h1">
+                  Polyvalents par <em>choix</em>.
+                </h2>
+              </div>
+              <p className="text-body text-[var(--muted-foreground)] max-w-md">
+                On ne se limite pas à WordPress. Quand votre projet l'exige,
+                nous concevons des applications sur mesure dans la stack la
+                plus adaptée — Next.js, React Native, Python, peu importe.
+              </p>
             </div>
-            <p className="text-body text-[var(--muted-foreground)] max-w-md">
-              Du site vitrine à l'application métier, nous concevons et
-              développons des outils digitaux qui servent vraiment votre
-              activité.
-            </p>
-          </div>
+          </MotionReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
-            {SERVICES.map((s) => (
-              <ServiceCard key={s.title} {...s} />
-            ))}
-          </div>
+          <MotionReveal delay={0.15}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+              {SERVICES.map((s) => (
+                <ServiceCard key={s.title} {...s} />
+              ))}
+            </div>
+          </MotionReveal>
         </Container>
       </section>
 
@@ -114,8 +225,8 @@ export default function HomePage() {
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-5">
-              <Eyebrow number="02" className="mb-6">Méthode</Eyebrow>
+            <MotionReveal className="lg:col-span-5">
+              <Eyebrow number="03" className="mb-6">Méthode</Eyebrow>
               <h2 className="text-h1 mb-6">
                 Une approche <em>artisanale</em>, des résultats mesurables.
               </h2>
@@ -124,24 +235,28 @@ export default function HomePage() {
                 anonyme. Vous parlez directement aux personnes qui codent votre
                 projet.
               </p>
-            </div>
+            </MotionReveal>
 
             <ol className="lg:col-span-7 space-y-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
               {STEPS.map((step, i) => (
-                <li
+                <MotionReveal
                   key={step.title}
-                  className="bg-[var(--background)] p-8 grid grid-cols-[auto_1fr] gap-8 items-start"
+                  delay={i * 0.08}
+                  direction="left"
+                  distance={20}
                 >
-                  <span className="text-eyebrow text-[var(--accent)] pt-1.5">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h3 className="text-h3 mb-2">{step.title}</h3>
-                    <p className="text-body-sm text-[var(--muted-foreground)]">
-                      {step.description}
-                    </p>
-                  </div>
-                </li>
+                  <li className="bg-[var(--background)] p-8 grid grid-cols-[auto_1fr] gap-8 items-start">
+                    <span className="text-eyebrow text-[var(--accent)] pt-1.5">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <h3 className="text-h3 mb-2">{step.title}</h3>
+                      <p className="text-body-sm text-[var(--muted-foreground)]">
+                        {step.description}
+                      </p>
+                    </div>
+                  </li>
+                </MotionReveal>
               ))}
             </ol>
           </div>
@@ -150,50 +265,79 @@ export default function HomePage() {
 
       {/* ========== STACK ========== */}
       <section className="section-y border-t border-[var(--border)]">
-        <Container>
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <Eyebrow number="03" className="mb-6 justify-center">
-              Stack technique
-            </Eyebrow>
-            <h2 className="text-h1">
-              Les technologies que nous <em>maîtrisons</em>.
-            </h2>
-            <p className="text-body text-[var(--muted-foreground)] mt-6">
-              Nous travaillons exclusivement avec un écosystème moderne, typé,
-              testé. Pas de WordPress legacy, pas de page builders.
-            </p>
-          </div>
+        <MotionReveal>
+          <Container>
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <Eyebrow number="04" className="mb-6 justify-center">
+                Stack technique
+              </Eyebrow>
+              <h2 className="text-h1">
+                Les technologies que nous <em>maîtrisons</em>.
+              </h2>
+              <p className="text-body text-[var(--muted-foreground)] mt-6">
+                WordPress et son écosystème, complétés par les outils
+                modernes du web et du mobile. On choisit la stack adaptée à
+                votre projet, pas l'inverse.
+              </p>
+            </div>
+          </Container>
+        </MotionReveal>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {STACK.map((tech) => (
-              <Link
-                key={tech.name}
-                href={tech.href}
-                className="group p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] transition-colors"
+        {/* Marquee infinie de la stack */}
+        <div className="relative">
+          <Marquee duration={40} className="py-6 border-y border-[var(--border)] bg-[var(--surface)]/50">
+            {STACK_TAGS.map((tag) => (
+              <span
+                key={tag}
+                className="text-h3 text-[var(--muted-foreground)] hover:text-[var(--accent)] transition-colors whitespace-nowrap inline-flex items-center gap-3"
               >
-                <div className="flex items-start justify-between mb-4">
-                  <span className="text-caption">{tech.kind}</span>
-                  <ArrowUpRight className="size-4 text-[var(--subtle-foreground)] group-hover:text-[var(--foreground)] transition-colors" />
-                </div>
-                <p className="text-h4 font-medium">{tech.name}</p>
-                <p className="text-body-sm text-[var(--muted-foreground)] mt-1">
-                  {tech.tagline}
-                </p>
-              </Link>
+                {tag}
+                <span aria-hidden className="text-[var(--accent)] text-2xl">·</span>
+              </span>
             ))}
-          </div>
+          </Marquee>
+        </div>
+
+        {/* Cards principales */}
+        <Container className="mt-16">
+          <MotionReveal>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {STACK_CARDS.map((tech) => (
+                <Link
+                  key={tech.name}
+                  href={tech.href}
+                  className="group p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] transition-colors"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <span className="text-caption">{tech.kind}</span>
+                    <ArrowUpRight className="size-4 text-[var(--subtle-foreground)] group-hover:text-[var(--foreground)] transition-colors" />
+                  </div>
+                  <p className="text-h4 font-medium">{tech.name}</p>
+                  <p className="text-body-sm text-[var(--muted-foreground)] mt-1">
+                    {tech.tagline}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </MotionReveal>
         </Container>
       </section>
 
       {/* ========== ROUEN — SEO LOCAL ========== */}
       <section className="section-y border-t border-[var(--border)] relative overflow-hidden">
         <div className="absolute inset-0 bg-dot opacity-50" aria-hidden />
+        <ParticlesBg count={30} />
+
         <Container className="relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div className="lg:col-span-7">
-              <Eyebrow number="04" dot className="mb-6">Ancrage local</Eyebrow>
+            <MotionReveal className="lg:col-span-7" direction="right">
+              <Eyebrow number="05" dot className="mb-6">Ancrage local</Eyebrow>
               <h2 className="text-h1 mb-6">
-                Une agence digitale à <em>Rouen</em>, au service de la Normandie.
+                Une agence digitale à{" "}
+                <TextHighlighter>
+                  <em>Rouen</em>
+                </TextHighlighter>
+                , au service de la Normandie.
               </h2>
               <p className="text-body-lg text-[var(--muted-foreground)] mb-8 max-w-xl">
                 Nous accompagnons les PME, startups et grandes entreprises de
@@ -211,14 +355,14 @@ export default function HomePage() {
                   <p className="text-h4">France entière</p>
                 </div>
               </div>
-            </div>
+            </MotionReveal>
 
-            <div className="lg:col-span-5">
+            <MotionReveal className="lg:col-span-5" direction="left" delay={0.1}>
               <div className="p-8 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] space-y-6">
                 <div className="flex items-center justify-between">
                   <p className="text-eyebrow">Nous trouver</p>
                   <Badge>
-                    <span className="size-1.5 rounded-full bg-[var(--success)]" />
+                    <span className="size-1.5 rounded-full bg-[var(--success)] motion-safe:animate-pulse" />
                     Disponible
                   </Badge>
                 </div>
@@ -240,7 +384,7 @@ export default function HomePage() {
                   </Link>
                 </Button>
               </div>
-            </div>
+            </MotionReveal>
           </div>
         </Container>
       </section>
@@ -248,27 +392,29 @@ export default function HomePage() {
       {/* ========== FINAL CTA ========== */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="text-center max-w-3xl mx-auto">
-            <Eyebrow className="mb-8 justify-center">Parlons projet</Eyebrow>
-            <h2 className="text-display">
-              Prêt à <em>donner vie</em> à votre idée ?
-            </h2>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 mb-10">
-              Décrivez-nous votre projet en quelques lignes. Nous revenons vers
-              vous sous 24h ouvrées avec un premier retour concret.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <Button size="lg" asChild>
-                <Link href="/contact">
-                  Demander un devis
-                  <ArrowRight />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/services">Découvrir nos services</Link>
-              </Button>
+          <MotionReveal>
+            <div className="text-center max-w-3xl mx-auto">
+              <Eyebrow className="mb-8 justify-center">Parlons projet</Eyebrow>
+              <h2 className="text-display">
+                Prêt à <em>donner vie</em> à votre idée ?
+              </h2>
+              <p className="text-body-lg text-[var(--muted-foreground)] mt-8 mb-10">
+                Décrivez-nous votre projet en quelques lignes. Nous revenons vers
+                vous sous 24h ouvrées avec un premier retour concret.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Button size="lg" asChild>
+                  <Link href="/contact">
+                    Demander un devis
+                    <ArrowRight />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/services">Découvrir nos services</Link>
+                </Button>
+              </div>
             </div>
-          </div>
+          </MotionReveal>
         </Container>
       </section>
     </main>
@@ -279,13 +425,55 @@ export default function HomePage() {
 // DATA
 // ============================================================
 
+const STATS = [
+  { numeric: 50, suffix: "+", label: "Projets livrés" },
+  { numeric: 12, suffix: "", label: "Mois d'autonomie" },
+  { numeric: null, staticValue: "< 2s", label: "Temps de chargement" },
+  { numeric: 100, suffix: "%", label: "Code maison" },
+] as Array<{
+  numeric: number | null;
+  suffix?: string;
+  prefix?: string;
+  staticValue?: string;
+  label: string;
+}>;
+
+const WP_HIGHLIGHTS = [
+  "Thèmes custom (pas d'Elementor ni Divi)",
+  "WooCommerce sur mesure pour PME",
+  "Refonte sans perdre votre SEO",
+  "Maintenance, sécurité, performance",
+  "Headless WordPress (WP + Next.js) si pertinent",
+];
+
+const WP_OFFERS = [
+  {
+    icon: Wrench,
+    title: "Création sur mesure",
+    description: "Thème custom, ACF Pro, pas de bloat",
+    href: "/services/wordpress",
+  },
+  {
+    icon: ShoppingBag,
+    title: "WooCommerce",
+    description: "Boutique en ligne complète",
+    href: "/services/wordpress",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Maintenance & sécurité",
+    description: "Forfaits mensuels, monitoring",
+    href: "/services/wordpress",
+  },
+];
+
 const SERVICES = [
   {
     icon: Code2,
-    eyebrow: "Site & application web",
-    title: "Développement web",
+    eyebrow: "Sur mesure · Polyvalent",
+    title: "Développement web custom",
     description:
-      "Sites vitrines, plateformes SaaS, applications métier. Architecture moderne, typage strict, performance native.",
+      "Quand WordPress ne suffit pas : Next.js, React, Python, Node.js. Plateformes SaaS, apps métier, API. La techno suit le projet.",
     href: "/services/developpement-web",
   },
   {
@@ -320,23 +508,27 @@ interface ServiceCardProps {
   title: string;
   description: string;
   href: string;
+  featured?: boolean;
 }
 
-function ServiceCard({ icon: Icon, eyebrow, title, description, href }: ServiceCardProps) {
+function ServiceCard({ icon: Icon, eyebrow, title, description, href, featured }: ServiceCardProps) {
   return (
     <Link
       href={href}
-      className="group relative bg-[var(--background)] hover:bg-[var(--surface)] p-8 md:p-10 transition-colors duration-200"
+      className="group relative bg-[var(--background)] hover:bg-[var(--surface)] p-8 md:p-10 transition-colors duration-200 overflow-hidden"
     >
-      <div className="flex items-start justify-between mb-12">
-        <div className="size-12 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center">
+      {/* Border beam uniquement sur la card featured */}
+      {featured && <BorderBeam duration={10} size={80} />}
+
+      <div className="flex items-start justify-between mb-12 relative z-10">
+        <div className="size-12 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center group-hover:border-[var(--accent)] transition-colors">
           <Icon className="size-5 text-[var(--accent)]" strokeWidth={1.75} />
         </div>
         <ArrowUpRight className="size-5 text-[var(--subtle-foreground)] group-hover:text-[var(--accent)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
       </div>
-      <p className="text-eyebrow mb-3">{eyebrow}</p>
-      <h3 className="text-h2 mb-3">{title}</h3>
-      <p className="text-body text-[var(--muted-foreground)] max-w-md">
+      <p className="text-eyebrow mb-3 relative z-10">{eyebrow}</p>
+      <h3 className="text-h2 mb-3 relative z-10">{title}</h3>
+      <p className="text-body text-[var(--muted-foreground)] max-w-md relative z-10">
         {description}
       </p>
     </Link>
@@ -366,7 +558,38 @@ const STEPS = [
   },
 ];
 
-const STACK = [
+const STACK_TAGS = [
+  "WordPress",
+  "WooCommerce",
+  "ACF Pro",
+  "PHP",
+  "MySQL",
+  "Next.js",
+  "React",
+  "React Native",
+  "TypeScript",
+  "Python",
+  "Node.js",
+  "Tailwind CSS",
+  "Prisma",
+  "PostgreSQL",
+  "GraphQL",
+  "Vercel",
+  "Figma",
+  "Sentry",
+  "Cloudflare",
+  "WP Rocket",
+  "Stripe",
+  "Resend",
+];
+
+const STACK_CARDS = [
+  {
+    name: "WordPress",
+    tagline: "Notre spécialité historique",
+    kind: "CMS",
+    href: "/services/wordpress",
+  },
   {
     name: "Next.js",
     tagline: "Framework React production",
@@ -384,11 +607,5 @@ const STACK = [
     tagline: "Typage strict, code fiable",
     kind: "Langage",
     href: "/technologies/typescript",
-  },
-  {
-    name: "React",
-    tagline: "Interfaces réactives",
-    kind: "Bibliothèque",
-    href: "/technologies/react",
   },
 ];
