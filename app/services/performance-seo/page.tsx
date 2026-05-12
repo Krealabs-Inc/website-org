@@ -28,10 +28,25 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceSchema } from "@/components/seo/service-schema";
 
 export default function PerformanceSeoPage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <ServiceSchema
+        name="Audit SEO et optimisation performance"
+        description="Audit SEO technique, optimisation Core Web Vitals, référencement local Rouen et Normandie. Schema.org, sitemap, contenus, Lighthouse 95+."
+        url="https://krealabs.fr/services/performance-seo"
+        serviceType="Audit SEO et optimisation performance web"
+        priceRange="€€"
+        offers={[
+          { name: "Audit Core Web Vitals" },
+          { name: "SEO technique" },
+          { name: "SEO local Rouen" },
+          { name: "Optimisation contenus" },
+          { name: "Suivi mensuel" },
+        ]}
+      />
       <ServiceHero
         number="04"
         eyebrow="Service · Performance & SEO"

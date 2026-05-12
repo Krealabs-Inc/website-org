@@ -27,10 +27,25 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceSchema } from "@/components/seo/service-schema";
 
 export default function DesignUiUxPage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <ServiceSchema
+        name="Design UI/UX et design system"
+        description="Design d'interfaces web et mobile à Rouen. Wireframes, maquettes Figma, design system, prototypage. Interfaces accessibles WCAG, mémorables, pensées pour convertir."
+        url="https://krealabs.fr/services/design-uiux"
+        serviceType="Design UI/UX"
+        priceRange="€€"
+        offers={[
+          { name: "Audit UX" },
+          { name: "Maquettes haute fidélité Figma" },
+          { name: "Design system" },
+          { name: "Prototypage interactif" },
+          { name: "Accessibilité WCAG" },
+        ]}
+      />
       <ServiceHero
         number="03"
         eyebrow="Service · Design"

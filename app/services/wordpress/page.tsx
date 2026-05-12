@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceSchema } from "@/components/seo/service-schema";
 
 export const metadata: Metadata = {
   title: "Agence WordPress à Rouen — Création, refonte, WooCommerce, SEO",
@@ -52,6 +53,22 @@ export const metadata: Metadata = {
 export default function WordpressPage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <ServiceSchema
+        name="Création de site WordPress sur mesure"
+        description="Agence WordPress à Rouen : création, refonte, WooCommerce, SEO, maintenance, sécurité. Thèmes custom (pas de page builders), plugins développés à la main, headless WordPress quand pertinent."
+        url="https://krealabs.fr/services/wordpress"
+        serviceType="Création de site WordPress"
+        priceRange="€€"
+        offers={[
+          { name: "Création WordPress sur mesure", description: "Thème custom, ACF Pro, pas de page builders" },
+          { name: "Refonte & migration", description: "Migration Wix/Squarespace/Webflow vers WordPress propre" },
+          { name: "WooCommerce e-commerce", description: "Boutiques en ligne complètes" },
+          { name: "SEO WordPress", description: "Audit, optimisation Yoast/RankMath, Core Web Vitals" },
+          { name: "Maintenance & sécurité", description: "Forfaits mensuels, monitoring, durcissement" },
+          { name: "Plugins & thèmes custom", description: "Développement WP sur mesure" },
+          { name: "Headless WordPress", description: "WP back + Next.js front" },
+        ]}
+      />
       <ServiceHero
         number="01"
         eyebrow="Spécialité · WordPress"

@@ -148,7 +148,7 @@ const QUERY = gql\`
         },
       ],
       conclusion:
-        "WordPress n'est pas mort, mais il n'est pas non plus la solution universelle. C'est l'outil le plus pragmatique pour 80% des PME et associations, à condition d'être bien fait. Mal fait, c'est l'enfer. La différence se joue sur l'agence qui le pose. Si vous avez un projet WordPress — création, refonte, migration — et que vous voulez un partenaire qui assume cette stack et la fait bien, parlons-en. Et si votre projet sort du périmètre WP, on a aussi la stack moderne pour ça : Next.js, React Native, Python. Mais pour la plupart des entreprises rouennaises et normandes, WordPress reste la réponse la plus économique et la plus durable.",
+        "WordPress n'est pas mort, mais il n'est pas non plus la solution universelle. C'est l'outil le plus pragmatique pour 80% des PME et associations, à condition d'être bien fait. Mal fait, c'est l'enfer. La différence se joue sur l'agence qui le pose. Si vous avez un projet WordPress — création, refonte, migration — découvrez notre offre dédiée [WordPress](/services/wordpress) et nos guides sur la [refonte sans perdre le SEO](/blog/refonte-wordpress-sans-perdre-seo) et [WooCommerce vs Shopify pour PME](/blog/woocommerce-vs-shopify-pme). Pour les projets qui sortent du périmètre WP, on couvre aussi la stack moderne ([Next.js, Python, React Native](/services/developpement-web)). Mais pour la plupart des entreprises rouennaises et normandes, WordPress reste la réponse la plus économique et la plus durable.",
     },
   },
   {
@@ -415,7 +415,7 @@ onLCP((metric) => {
         },
       ],
       conclusion:
-        "Cette checklist couvre 90% des audits techniques que Google attend. Un site qui passe ces 12 points est solide. Si vous ne savez pas par où commencer, RankMath fait un score SEO interne (>80/100 visé) qui vous oriente vers les principales lacunes. Mais l'œil d'un audit humain reste différent — un consultant SEO trouve souvent des problèmes que les plugins ratent. Si vous voulez un audit complet de votre site WordPress, on en réalise régulièrement pour nos clients normands à un tarif raisonnable, avec rapport écrit et plan d'action chiffré.",
+        "Cette checklist couvre 90% des audits techniques que Google attend. Un site qui passe ces 12 points est solide. Si vous ne savez pas par où commencer, RankMath fait un score SEO interne (>80/100 visé) qui vous oriente vers les principales lacunes. Mais l'œil d'un audit humain reste différent — un consultant SEO trouve souvent des problèmes que les plugins ratent. Allez plus loin avec notre [guide SEO local Rouen](/blog/seo-local-rouen-guide-pme), notre [méthode d'audit Lighthouse](/blog/audit-lighthouse-methode-agence), et notre [checklist sécurité WordPress](/blog/securite-wordpress-checklist-2026). Pour un audit complet de votre site WordPress par nos soins, c'est notre [service WordPress](/services/wordpress) ou [Performance & SEO](/services/performance-seo) qui s'en occupent. Premier diagnostic offert.",
     },
   },
   {
@@ -1445,7 +1445,7 @@ function processInChunks(items, chunkSize = 50) {
         },
       ],
       conclusion:
-        "Le SEO local est un marathon : 3 à 6 mois pour voir des effets significatifs, 12 mois pour stabiliser. Mais pour une PME qui dépend de sa clientèle locale (Rouen et Normandie), c'est l'investissement marketing le plus rentable — ROI typique 5x à 10x sur un an quand c'est bien fait. Chez Krealabs, on accompagne les entreprises rouennaises et normandes sur ces sujets régulièrement, soit en mission ponctuelle d'audit + plan d'action, soit en accompagnement continu sur 6-12 mois. Premier audit SEO local de votre fiche GMB + site offert.",
+        "Le SEO local est un marathon : 3 à 6 mois pour voir des effets significatifs, 12 mois pour stabiliser. Mais pour une PME qui dépend de sa clientèle locale (Rouen et Normandie), c'est l'investissement marketing le plus rentable — ROI typique 5x à 10x sur un an quand c'est bien fait. Découvrez notre [page dédiée agence web Rouen](/agence-web-rouen) et notre offre [Performance & SEO](/services/performance-seo). Si votre site est sur WordPress, lisez aussi notre [guide d'audit SEO WordPress en 12 points](/blog/audit-seo-wordpress-12-points). Chez Krealabs, on accompagne les entreprises rouennaises et normandes sur ces sujets régulièrement. Premier audit SEO local de votre fiche GMB + site offert.",
     },
   },
   {

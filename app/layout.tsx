@@ -120,22 +120,14 @@ export const metadata: Metadata = {
     title: 'Krealabs — Agence web à Rouen',
     description: 'Sites internet, applications mobiles et logiciels sur mesure. Agence basée à Rouen, intervention France entière.',
     siteName: 'Krealabs',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Krealabs · Agence web à Rouen',
-      },
-    ],
   },
 
   twitter: {
     card: 'summary_large_image',
     title: 'Krealabs — Agence web à Rouen',
     description: 'Sites internet, applications mobiles et logiciels sur mesure en Normandie.',
-    creator: '@krealabs',
-    images: ['/og-image.jpg'],
+    creator: '@krealabs_',
+    site: '@krealabs_',
   },
 
   robots: {
@@ -161,6 +153,10 @@ export const metadata: Metadata = {
 
   alternates: {
     canonical: 'https://krealabs.fr',
+    languages: {
+      'fr-FR': 'https://krealabs.fr',
+      'x-default': 'https://krealabs.fr',
+    },
   },
 
   category: 'technology',

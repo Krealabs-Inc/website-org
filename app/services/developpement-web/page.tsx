@@ -31,10 +31,25 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceSchema } from "@/components/seo/service-schema";
 
 export default function DeveloppementWebPage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <ServiceSchema
+        name="Développement web sur mesure"
+        description="Création de sites web et applications sur mesure à Rouen. Next.js, React, TypeScript, Python, Node.js. Sites vitrines, SaaS, plateformes B2B, API."
+        url="https://krealabs.fr/services/developpement-web"
+        serviceType="Création de site internet sur mesure"
+        priceRange="€€€"
+        offers={[
+          { name: "Site vitrine moderne" },
+          { name: "Application web métier" },
+          { name: "E-commerce sur mesure" },
+          { name: "API & backend" },
+          { name: "Refonte & migration" },
+        ]}
+      />
       <ServiceHero
         number="01"
         eyebrow="Service · Développement"

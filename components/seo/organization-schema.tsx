@@ -131,7 +131,7 @@ export function OrganizationSchema() {
     ],
 
     sameAs: [
-      "https://twitter.com/krealabs",
+      "https://twitter.com/krealabs_",
       "https://linkedin.com/company/krealabs",
       "https://github.com/krealabs",
     ],

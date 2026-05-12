@@ -9,6 +9,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 import { MotionReveal } from "@/components/animations/motion-reveal";
+import { PersonSchema } from "@/components/seo/person-schema";
 
 export const metadata: Metadata = {
   title: "L'équipe — 2 co-fondateurs à Rouen",
@@ -54,7 +55,7 @@ const TEAM: TeamMember[] = [
     location: "Rouen, Normandie",
     yearsExperience: "10+",
     loves: "Concevoir des interfaces où chaque détail compte.",
-    photo: "/team/maxime.jpg",
+    photo: "/team/maxime.webp",
     github: "https://github.com/makcimerrr",
     linkedin: "https://www.linkedin.com/in/maxime-dubois-0265a4292/",
     specialties: ["Full-stack", "Architecture", "Suivi client"],
@@ -81,8 +82,22 @@ const TEAM: TeamMember[] = [
 // =============================================================================
 
 export default function EquipePage() {
+  const baseUrl = "https://krealabs.fr";
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <PersonSchema
+        persons={TEAM.map((m) => ({
+          name: m.name,
+          jobTitle: m.role,
+          image: m.photo?.startsWith("http") ? m.photo : m.photo ? `${baseUrl}${m.photo}` : undefined,
+          url: `${baseUrl}/equipe`,
+          bio: m.bio,
+          sameAs: [m.github, m.linkedin, m.twitter].filter(
+            (v): v is string => typeof v === "string",
+          ),
+          knowsAbout: [...m.specialties, ...m.stack],
+        }))}
+      />
       {/* HERO */}
       <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />

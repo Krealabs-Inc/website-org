@@ -139,11 +139,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   // Articles de blog individuels — chargés depuis blog-data.ts
+  // Inclut images pour Google Images (post.image + OG dynamique)
   const blogArticles: MetadataRoute.Sitemap = blogPosts.map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: now,
     changeFrequency: "monthly",
     priority: post.featured ? 0.75 : 0.65,
+    images: [
+      ...(post.image ? [post.image] : []),
+      `${baseUrl}/blog/${post.slug}/opengraph-image`,
+    ],
   }));
 
   return [...staticPages, ...servicePages, ...techPages, ...blogIndex, ...blogArticles];

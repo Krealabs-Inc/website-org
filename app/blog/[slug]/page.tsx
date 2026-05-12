@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { ShareButton } from "@/components/blog/share-button";
+import { MarkdownText } from "@/components/blog/markdown-text";
 import { blogPosts, frenchDateToISO } from "@/lib/blog-data";
 
 const SITE_URL = "https://krealabs.fr";
@@ -72,7 +73,8 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: post.title,
       description: post.excerpt,
-      creator: "@krealabs",
+      creator: "@krealabs_",
+      site: "@krealabs_",
       images: post.image ? [post.image] : undefined,
     },
   };
@@ -275,11 +277,11 @@ export default async function BlogPostPage({
             </section>
           ))}
 
-          {/* Conclusion */}
+          {/* Conclusion — supporte les liens markdown [texte](/url) */}
           <div className="mt-16 p-8 rounded-[var(--radius)] border-l-4 border-[var(--accent)] bg-[var(--accent-subtle)]/30">
             <Eyebrow className="mb-4">En résumé</Eyebrow>
             <p className="text-body-lg text-[var(--foreground)]/90 leading-relaxed">
-              {post.content.conclusion}
+              <MarkdownText>{post.content.conclusion}</MarkdownText>
             </p>
           </div>
 

@@ -27,10 +27,25 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceSchema } from "@/components/seo/service-schema";
 
 export default function ApplicationsMobilePage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <ServiceSchema
+        name="Développement d'application mobile"
+        description="Applications iOS et Android en React Native, développées à Rouen. Une base de code, deux App Stores. Notifications push, mode offline, publication Apple/Google."
+        url="https://krealabs.fr/services/applications-mobile"
+        serviceType="Développement application mobile"
+        priceRange="€€€"
+        offers={[
+          { name: "App native iOS & Android" },
+          { name: "Notifications push" },
+          { name: "Mode offline" },
+          { name: "Publication App Store" },
+          { name: "Mises à jour OTA" },
+        ]}
+      />
       <ServiceHero
         number="02"
         eyebrow="Service · Mobile"
