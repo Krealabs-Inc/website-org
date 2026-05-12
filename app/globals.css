@@ -3,63 +3,70 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ===================================================================
+   THEME — tokens exposés à Tailwind 4 via @theme inline
+   =================================================================== */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-space-grotesk);
-  --font-mono: var(--font-jetbrains-mono);
-  --font-serif: var(--font-playfair);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
   --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-input: var(--border);
+  --color-ring: var(--accent);
+
+  --color-primary: var(--accent);
+  --color-primary-foreground: var(--accent-foreground);
+  --color-secondary: var(--surface);
+  --color-secondary-foreground: var(--foreground);
+  --color-destructive: var(--danger);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--foreground);
+  --color-popover: var(--surface);
+  --color-popover-foreground: var(--foreground);
+
+  --font-sans: var(--font-switzer);
+  --font-serif: var(--font-instrument-serif);
+  --font-mono: var(--font-geist-mono);
+  --font-geist: var(--font-switzer); /* alias rétrocompat pour utility classes */
+
+  --radius: 0.625rem;
+  --radius-sm: 0.625rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.625rem;
+  --radius-full: 9999px;
+
   --animate-marquee: marquee var(--duration, 30s) linear infinite;
-  --color-sky-500: var(----sky-500);
-  --color-sky-400: var(----sky-400);
-  --muted-foreground: var(----muted-foreground);
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+  --animate-page-enter: page-enter 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes page-enter {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   @keyframes marquee {
     to {
       transform: translateX(-50%);
     }
   }
-  @keyframes marquee {
-  to {
-    transform: translateX(-50%);
-    }
-  }
-  --animate-accordion-down: accordion-down 0.2s ease-out;
-  --animate-accordion-up: accordion-up 0.2s ease-out;
 
   @keyframes accordion-down {
     from {
@@ -78,119 +85,287 @@
       height: 0;
     }
   }
-  @keyframes accordion-down {
-  from {
-    height: 0;
-    }
-  to {
-    height: var(--radix-accordion-content-height);
-    }
-  }
-  @keyframes accordion-up {
-  from {
-    height: var(--radix-accordion-content-height);
-    }
-  to {
-    height: 0;
-    }
-  }
 }
 
-html, body{
-  overscroll-behavior: none;
-}
+/* ===================================================================
+   ROOT VARS — dark by default, light via .light class
+   =================================================================== */
 
 :root {
-  --radius: 0.625rem;
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --card: #ffffff;
-  --card-foreground: #0a0a0a;
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
-  --primary: #A543F1;
-  --primary-foreground: #ffffff;
-  --secondary: #f3f4f6;
-  --secondary-foreground: #0a0a0a;
-  --muted: #f9fafb;
-  --muted-foreground: #6b7280;
-  --accent: #f3f4f6;
-  --accent-foreground: #0a0a0a;
-  --destructive: #ef4444;
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: #A543F1;
-  --chart-1: #A543F1;
+  /* Default = dark theme */
+  --background: #0a0a0a;
+  --surface: #141414;
+  --surface-hover: #1c1c1c;
+  --foreground: #fafafa;
+  --muted: #141414;
+  --muted-foreground: rgba(250, 250, 250, 0.6);
+  --subtle-foreground: rgba(250, 250, 250, 0.4);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  --accent: #b06cff;
+  --accent-hover: #9f58f0;
+  --accent-subtle: rgba(176, 108, 255, 0.12);
+  --accent-foreground: #ffffff;
+
+  --danger: #ef4444;
+  --success: #10b981;
+  --warning: #f59e0b;
+
+  /* Charts (kept for any existing data viz) */
+  --chart-1: #b06cff;
   --chart-2: #f43f5e;
   --chart-3: #8b5cf6;
   --chart-4: #ec4899;
   --chart-5: #f59e0b;
-  --sidebar: #ffffff;
-  --sidebar-foreground: #0a0a0a;
-  --sidebar-primary: #A543F1;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #f3f4f6;
-  --sidebar-accent-foreground: #0a0a0a;
-  --sidebar-border: #e5e7eb;
-  --sidebar-ring: #A543F1;
 }
 
-.dark {
-  --background: #030303;
-  --foreground: #ffffff;
-  --card: #0a0a0a;
-  --card-foreground: #ffffff;
-  --popover: #0a0a0a;
-  --popover-foreground: #ffffff;
-  --primary: #A543F1;
-  --primary-foreground: #ffffff;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #ffffff;
-  --muted: #1a1a1a;
-  --muted-foreground: #9ca3af;
-  --accent: #1a1a1a;
+.light {
+  --background: #fafafa;
+  --surface: #ffffff;
+  --surface-hover: #f4f4f5;
+  --foreground: #0a0a0a;
+  --muted: #f4f4f5;
+  --muted-foreground: rgba(10, 10, 10, 0.6);
+  --subtle-foreground: rgba(10, 10, 10, 0.4);
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
+
+  --accent: #8b3cf0;
+  --accent-hover: #7a2ce0;
+  --accent-subtle: rgba(139, 60, 240, 0.1);
   --accent-foreground: #ffffff;
-  --destructive: #ef4444;
-  --border: rgba(255, 255, 255, 0.1);
-  --input: rgba(255, 255, 255, 0.1);
-  --ring: #A543F1;
-  --chart-1: #A543F1;
-  --chart-2: #f43f5e;
-  --chart-3: #8b5cf6;
-  --chart-4: #ec4899;
-  --chart-5: #f59e0b;
-  --sidebar: #0a0a0a;
-  --sidebar-foreground: #ffffff;
-  --sidebar-primary: #A543F1;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1a1a1a;
-  --sidebar-accent-foreground: #ffffff;
-  --sidebar-border: rgba(255, 255, 255, 0.1);
-  --sidebar-ring: #A543F1;
+}
+
+/* Backwards compat: keep .dark class working alongside :root dark default */
+.dark {
+  --background: #0a0a0a;
+  --surface: #141414;
+  --surface-hover: #1c1c1c;
+  --foreground: #fafafa;
+  --muted: #141414;
+  --muted-foreground: rgba(250, 250, 250, 0.6);
+  --subtle-foreground: rgba(250, 250, 250, 0.4);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+
+  --accent: #b06cff;
+  --accent-hover: #9f58f0;
+  --accent-subtle: rgba(176, 108, 255, 0.12);
+  --accent-foreground: #ffffff;
+}
+
+/* ===================================================================
+   BASE
+   =================================================================== */
+
+html,
+body {
+  overscroll-behavior: none;
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    border-color: var(--border);
+  }
+  html {
+    font-family: var(--font-switzer), ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   body {
-    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11";
+    font-weight: 400;
+  }
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection {
+    background: var(--accent-subtle);
+    color: var(--foreground);
+  }
+}
+
+/* ===================================================================
+   TYPOGRAPHY UTILITIES
+   =================================================================== */
+
+@layer utilities {
+  /* Display — hero only */
+  .text-display {
+    font-family: var(--font-switzer);
+    font-size: clamp(2.75rem, 7vw, 5.5rem);
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: -0.04em;
   }
 
-  /* Theme transition overlay */
-  .theme-transition-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    pointer-events: none;
-    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%),
-      var(--overlay-color) 0%,
-      var(--overlay-color) var(--size, 0%),
-      transparent var(--size, 0%));
-    transition: --size 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Display with serif italic accent — wrap accented words in <em> */
+  .text-display em,
+  .display-serif {
+    font-family: var(--font-instrument-serif);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
   }
 
-  .theme-transition-overlay.active {
-    --size: 150%;
+  .text-h1 {
+    font-family: var(--font-switzer);
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.03em;
   }
+
+  .text-h2 {
+    font-family: var(--font-switzer);
+    font-size: clamp(1.625rem, 3vw, 2.5rem);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.025em;
+  }
+
+  .text-h3 {
+    font-family: var(--font-switzer);
+    font-size: clamp(1.25rem, 2vw, 1.625rem);
+    line-height: 1.25;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .text-h4 {
+    font-family: var(--font-switzer);
+    font-size: 1.125rem;
+    line-height: 1.4;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .text-body-lg {
+    font-family: var(--font-switzer);
+    font-size: 1.125rem;
+    line-height: 1.6;
+    font-weight: 400;
+    letter-spacing: -0.005em;
+  }
+
+  .text-body {
+    font-family: var(--font-switzer);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .text-body-sm {
+    font-family: var(--font-switzer);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* Eyebrow — mono uppercase tag used over h2 */
+  .text-eyebrow {
+    font-family: var(--font-geist-mono);
+    font-size: 0.75rem;
+    line-height: 1;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted-foreground);
+  }
+
+  .text-caption {
+    font-family: var(--font-geist-mono);
+    font-size: 0.6875rem;
+    line-height: 1.2;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--subtle-foreground);
+  }
+
+  /* ===================================================================
+     LAYOUT UTILITIES
+     =================================================================== */
+
+  .container-x {
+    padding-inline: clamp(1rem, 4vw, 2rem);
+    margin-inline: auto;
+    width: 100%;
+    max-width: 80rem;
+  }
+
+  .section-y {
+    padding-block: clamp(4rem, 10vw, 8rem);
+  }
+
+  .section-y-sm {
+    padding-block: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  /* ===================================================================
+     DECORATIVE PATTERNS — grid + noise
+     =================================================================== */
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--border) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .bg-grid-fade {
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  .bg-dot {
+    background-image: radial-gradient(circle, var(--border) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .bg-noise {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  .glow-accent {
+    box-shadow:
+      0 0 0 1px var(--accent-subtle),
+      0 8px 48px -8px var(--accent-subtle);
+  }
+
+  /* ===================================================================
+     FOCUS RING
+     =================================================================== */
+
+  .focus-ring {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  .focus-ring:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+/* Theme transition overlay (preserved from existing system) */
+.theme-transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--x, 50%) var(--y, 50%),
+    var(--overlay-color) 0%,
+    var(--overlay-color) var(--size, 0%),
+    transparent var(--size, 0%)
+  );
+  transition: --size 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.theme-transition-overlay.active {
+  --size: 150%;
 }
