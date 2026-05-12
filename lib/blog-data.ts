@@ -1278,206 +1278,372 @@ async function requestPermission() {
   // ===========================================================================
   {
     slug: "core-web-vitals-2026-inp",
-    title: "Core Web Vitals 2026 : INP a remplacé FID, voici ce que ça change",
+    title: "Core Web Vitals 2026 : INP a remplacé FID, ce que ça change vraiment",
     excerpt:
-      "Depuis mars 2024, INP (Interaction to Next Paint) remplace FID dans les Core Web Vitals. Plus exigeant, plus représentatif de l'expérience réelle. Méthode d'optimisation.",
+      "Depuis mars 2024, INP (Interaction to Next Paint) remplace FID dans les Core Web Vitals. Plus exigeant, plus représentatif de l'expérience réelle. Méthode complète d'optimisation, outils de mesure, et seuils Google pour le SEO.",
     category: "SEO",
     date: "25 avril 2026",
-    readTime: "9 min",
+    readTime: "13 min",
     image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80",
     featured: false,
     author,
-    tags: ["Core Web Vitals", "INP", "Performance", "SEO", "Lighthouse"],
+    tags: ["Core Web Vitals", "INP", "Performance", "SEO", "Lighthouse", "LCP", "CLS"],
     content: {
       introduction:
-        "Google a remplacé FID (First Input Delay) par INP (Interaction to Next Paint) dans les Core Web Vitals. Sur le papier, c'est juste un nouveau nom. En pratique, beaucoup de sites qui étaient verts en FID se retrouvent rouges en INP. On t'explique pourquoi et comment corriger.",
+        "Google a remplacé FID (First Input Delay) par INP (Interaction to Next Paint) dans les Core Web Vitals en mars 2024. Sur le papier, c'est juste un nouveau nom. En pratique, beaucoup de sites qui étaient au vert en FID se retrouvent au rouge en INP, et perdent des places dans Google. Voici notre guide complet : ce que mesure vraiment l'INP, comment l'optimiser sur les stacks que nous utilisons chez Krealabs (WordPress, Next.js, React Native Web), et comment monitorer en réel via les bons outils.",
       sections: [
         {
           title: "FID vs INP : la vraie différence",
           content:
-            "FID ne mesurait que le délai avant la première interaction. INP mesure le pire délai entre toute interaction et la prochaine peinture pendant toute la session. Beaucoup plus représentatif du ressenti réel — et beaucoup plus dur à passer.",
+            "FID ne mesurait que le délai avant la PREMIÈRE interaction utilisateur sur la page. C'était une métrique très indulgente : une fois la page chargée et la première interaction OK, FID restait bon même si toutes les interactions suivantes étaient catastrophiques. INP, lui, mesure le PIRE délai entre toute interaction et la prochaine peinture pendant TOUTE la session de l'utilisateur. C'est donc beaucoup plus représentatif du ressenti réel — et beaucoup plus dur à passer. Sur nos audits, on voit régulièrement des sites avec FID < 100ms (excellent) mais INP > 500ms (mauvais) à cause de gros handlers React mal optimisés.",
         },
         {
-          title: "Seuils Google",
+          title: "Les seuils Google et leur impact SEO",
           content:
-            "Bon : < 200ms. À améliorer : 200-500ms. Mauvais : > 500ms. Pour info, LCP < 2.5s, CLS < 0.1, et INP < 200ms sont les seuils officiels. Si un seul est rouge, votre page perd des points dans le classement Google.",
+            "Bon : INP < 200ms. À améliorer : 200-500ms. Mauvais : > 500ms. Pour info complète, LCP < 2.5s, CLS < 0.1, INP < 200ms sont les trois seuils officiels Google. Si un seul est dans le rouge, votre page perd des points dans le classement Google. L'impact n'est pas binaire (votre site ne disparaît pas), mais sur des requêtes concurrentielles, ces signaux peuvent faire la différence entre la 4ème et la 9ème position — donc entre du trafic et pas de trafic.",
         },
         {
-          title: "Optimiser l'INP",
+          title: "Pourquoi l'INP est si dur à passer",
           content:
-            "Trois leviers principaux. Premièrement : réduire le JS au maximum (Server Components, code splitting, lazy loading). Deuxièmement : éviter les long tasks (découper avec scheduler.yield ou requestIdleCallback). Troisièmement : optimiser les event handlers (debounce, throttle, web workers pour les calculs lourds).",
-          code: `// Découper une tâche longue avec scheduler.yield
+            "L'INP punit principalement les apps lourdes en JavaScript. Quand un utilisateur clique, le browser doit : traiter l'event handler JS, mettre à jour l'état React/Vue, rendre le DOM, peindre l'écran. Si une de ces étapes prend plus de 50ms, on cumule rapidement vers 200ms+. Les pièges classiques : handlers onClick qui font des calculs lourds, useState qui déclenche des re-renders en cascade, scripts tiers (analytics, A/B testing, chat) qui bloquent le main thread, scroll handlers non-throttled qui réagissent à chaque pixel.",
+        },
+        {
+          title: "Optimiser l'INP : 3 leviers principaux",
+          content:
+            "Premièrement : RÉDUIRE LE JS. Sur Next.js, utiliser massivement les Server Components (le JS n'est pas envoyé au client). Code splitting agressif (dynamic imports), lazy loading des modales/onglets. Sur WordPress, supprimer les plugins inutiles (chaque plugin = JS chargé). Deuxièmement : ÉVITER LES LONG TASKS. Toute tâche > 50ms bloque l'INP. Découper avec scheduler.yield() (nouvelle API native) ou requestIdleCallback. Troisièmement : OPTIMISER LES HANDLERS. Debounce/throttle sur les inputs, événements scroll passifs, web workers pour les calculs lourds (recherche full-text, parsing JSON 100k+, etc.).",
+          code: `// Découper une tâche longue avec scheduler.yield (Chromium 129+)
 async function processLargeList(items) {
   for (const item of items) {
     processItem(item)
+    // Laisse le browser respirer entre chaque
     if (navigator.scheduling?.isInputPending()) {
       await scheduler.yield()
     }
   }
+}
+
+// Alternative classique : découper en chunks
+function processInChunks(items, chunkSize = 50) {
+  let i = 0
+  function next() {
+    const chunk = items.slice(i, i + chunkSize)
+    chunk.forEach(processItem)
+    i += chunkSize
+    if (i < items.length) requestIdleCallback(next)
+  }
+  next()
 }`,
         },
         {
-          title: "Mesurer en réel",
+          title: "Cas concrets : où on gagne sur WordPress",
           content:
-            "Lighthouse mesure en lab — c'est utile mais incomplet. Google Search Console et Vercel Analytics donnent l'INP réel de vos utilisateurs (CrUX). C'est cette mesure-là qui compte pour le SEO.",
+            "Sur WordPress, les principaux coupables INP sont : Elementor ou Divi (les page builders sont des desastres INP, on en voit régulièrement à 800-1500ms), plugins de chat live (Intercom, Tawk, Crisp injectent un gros JS), plugins de popup (Optinmonster, Sumo), trackers tiers (Hotjar, FullStory). Solutions concrètes : passer à un thème custom (gain typique 300-500ms d'INP), différer le chargement des chats avec setTimeout 3-5s après load, utiliser le delay JS de WP Rocket sur les scripts non critiques. Sur nos audits Krealabs, on fait régulièrement passer un site WordPress de INP 600ms à INP 150ms uniquement en virant les bloatants.",
+        },
+        {
+          title: "Cas concrets : où on gagne sur Next.js / React",
+          content:
+            "Sur React/Next.js, les coupables typiques : composants client énormes (Tableaux 1000+ lignes, dashboards avec 50 graphiques), useEffect qui se déclenchent en cascade, libraries lourdes chargées eagerly (Moment.js, Lodash entier, Charts.js complet). Solutions : passer un maximum en Server Components, virtualiser les listes longues (react-virtuoso), code splitter les libs lourdes (charts.js → import dynamique), remplacer Moment par date-fns ou dayjs (10x plus léger), tree-shaker Lodash (importer juste lodash/debounce, pas tout lodash). React 19 + Server Components a divisé par 2 nos INP moyens sur des dashboards lourds.",
+        },
+        {
+          title: "Mesurer en réel : Lab vs Field data",
+          content:
+            "Lighthouse mesure en LAB (conditions contrôlées Chromium headless) — c'est utile mais incomplet. Les vraies données INP qui comptent pour le SEO viennent du FIELD : Chrome User Experience Report (CrUX). Pour y accéder : Google Search Console > Web Vitals (vue agrégée 28 jours), Vercel Analytics (si vous êtes sur Vercel), Speed Insights, ou Real User Monitoring (Sentry Performance, Datadog RUM). Sur les sites à fort trafic, on configure systématiquement Vercel Speed Insights pour avoir le détail par page et identifier les pires offenders.",
+        },
+        {
+          title: "L'avenir : nouvelles métriques en préparation",
+          content:
+            "Google travaille déjà sur les prochaines métriques Core Web Vitals : possiblement TTFB (Time To First Byte) plus visible, ou une métrique de \"smoothness\" sur les animations de scroll. Notre conseil : ne pas optimiser pour des métriques hypothétiques. Optimiser pour l'expérience utilisateur réelle. Un site qui charge vite, réagit instantanément aux clics, et ne saute pas pendant le chargement — c'est ça qu'on vise. Les métriques Google sont une bonne proxy mais pas le but en soi.",
         },
       ],
       conclusion:
-        "L'INP est plus exigeant que le FID, mais c'est tant mieux : il pousse à livrer des sites vraiment fluides. Un site rapide, c'est un meilleur SEO, un meilleur taux de conversion, et un meilleur ressenti utilisateur. Tout est lié.",
+        "L'INP est plus exigeant que le FID, mais c'est tant mieux : il pousse à livrer des sites vraiment fluides. Un site rapide, c'est un meilleur SEO, un meilleur taux de conversion, et un meilleur ressenti utilisateur. Tout est lié. Si votre site galère sur l'INP (>200ms en moyenne), c'est typiquement le genre d'audit qu'on fait chez Krealabs en 1-2 jours : identification des coupables + plan d'action chiffré. Premier diagnostic offert.",
     },
   },
   {
     slug: "seo-local-rouen-guide-pme",
     title: "Guide SEO local pour les PME de Rouen et Normandie",
     excerpt:
-      "Comment ressortir dans les recherches \"agence X à Rouen\" ? Schema LocalBusiness, fiche Google Business Profile, citations locales. Méthode complète et applicable.",
+      "Comment ressortir dans les recherches \"agence X à Rouen\" et dans le pack local Google ? Schema LocalBusiness, fiche Google Business Profile, citations locales, avis, contenu géolocalisé. Méthode complète et applicable, avec exemples concrets pour PME normandes.",
     category: "SEO",
     date: "10 mai 2026",
-    readTime: "12 min",
+    readTime: "17 min",
     image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&q=80",
-    featured: true,
+    featured: false,
     author,
-    tags: ["SEO local", "Rouen", "Normandie", "Google Business", "Schema.org"],
+    tags: ["SEO local", "Rouen", "Normandie", "Google Business Profile", "Schema.org", "Avis Google", "Pack local"],
     content: {
       introduction:
-        "Vous tenez un commerce, un cabinet ou une PME à Rouen. Vos clients potentiels tapent \"votre métier + Rouen\" sur Google. Comment faire pour ressortir dans les premiers résultats — voire dans le pack local (les 3 résultats avec carte) ? Voici la méthode que nous appliquons chez Krealabs pour nos clients normands.",
+        "Vous tenez un commerce, un cabinet, un atelier ou une PME à Rouen, au Havre, à Caen ou ailleurs en Normandie. Vos clients potentiels tapent \"votre métier + Rouen\" ou simplement \"votre métier près de moi\" sur Google et leur smartphone. Comment faire pour ressortir dans les premiers résultats — voire mieux, dans le pack local (les 3 résultats avec carte qui apparaissent souvent en haut de la SERP) ? Voici la méthode complète que nous appliquons chez Krealabs pour nos clients normands. Article basé sur 5 ans de pratique SEO local, avec des résultats vérifiables sur les fiches Google de nos clients.",
       sections: [
         {
-          title: "Fiche Google Business Profile",
+          title: "Fiche Google Business Profile : la fondation",
           content:
-            "C'est la fondation. Sans fiche Google Business optimisée, oubliez le pack local. Catégorie précise, adresse correcte, horaires complets, photos régulières, réponses aux avis. Mettre à jour au moins une fois par mois avec un post.",
+            "C'est LA fondation. Sans fiche Google Business optimisée, oubliez le pack local — peu importe la qualité de votre site web. Trois leviers principaux : 1) Catégorie principale précise (ex: \"Restaurant italien\" plutôt que \"Restaurant\"), avec si pertinent 5-10 catégories secondaires. 2) Informations complètes et exactes : adresse, téléphone, horaires (incluant jours fériés), site web. 3) Photos régulières (mensuelles minimum) — Google détecte les fiches \"vivantes\". 4) Posts Google Business hebdomadaires (event, offre, mise à jour). 5) Réponses systématiques aux avis (positifs comme négatifs, dans les 48h). Une fiche optimisée gagne typiquement 2-4 places dans le pack local en 3 mois.",
         },
         {
-          title: "Schema.org LocalBusiness",
+          title: "Schema.org LocalBusiness sur votre site",
           content:
-            "Sur votre site, ajoutez un balisage JSON-LD de type LocalBusiness (ou plus spécifique : Restaurant, Dentist, ProfessionalService). Google comprend mieux qui vous êtes, où vous êtes, ce que vous proposez.",
+            "Sur votre site, ajoutez un balisage JSON-LD de type LocalBusiness (ou plus spécifique : Restaurant, Dentist, ProfessionalService, AutoRepair, etc. — la liste est sur schema.org). Google comprend mieux qui vous êtes, où vous êtes, ce que vous proposez. Inclure obligatoirement : address (avec postalCode et addressRegion), geo (coordinates), telephone, openingHoursSpecification, priceRange, knowsAbout (compétences), areaServed (zones desservies). Pour les multi-établissements, un schéma par établissement avec @id unique.",
           code: `{
+  "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "Krealabs",
+  "@id": "https://votre-site.fr/#org",
+  "name": "Votre Entreprise",
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "12 rue Jeanne d'Arc",
     "addressLocality": "Rouen",
     "postalCode": "76000",
-    "addressRegion": "Normandie"
+    "addressRegion": "Normandie",
+    "addressCountry": "FR"
   },
-  "geo": { "@type": "GeoCoordinates", "latitude": 49.4431, "longitude": 1.0993 }
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 49.4431,
+    "longitude": 1.0993
+  },
+  "telephone": "+33 2 35 XX XX XX",
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "09:00",
+    "closes": "18:00"
+  }],
+  "priceRange": "€€",
+  "areaServed": ["Rouen", "Le Havre", "Normandie"]
 }`,
         },
         {
-          title: "Citations locales",
+          title: "Citations locales : la cohérence NAP",
           content:
-            "Plus votre entreprise est mentionnée sur des sites locaux pertinents (annuaires, chambres de commerce, presse locale), plus Google confirme votre légitimité géographique. Visez la cohérence : NAP (Name, Address, Phone) identique partout.",
+            "Plus votre entreprise est mentionnée sur des sites locaux pertinents (annuaires, chambres de commerce, presse locale), plus Google confirme votre légitimité géographique. Le critère clé : la cohérence NAP (Name, Address, Phone) — strictement identique partout. Pas \"SARL Krealabs\" ici et \"Krealabs\" là, pas \"12 r. Jeanne d'Arc\" et \"12 rue Jeanne d'Arc\". Les annuaires à viser pour Rouen et Normandie : Pages Jaunes, Mappy, Bing Places, Apple Maps Connect, Normandinamik, CCI Rouen, annuaires sectoriels (Truspilot pour les services, Doctolib pour les médicaux, TripAdvisor pour les commerces). Compter 10-20 annuaires de qualité, pas 100 annuaires bidons.",
         },
         {
-          title: "Contenu géolocalisé",
+          title: "Contenu géolocalisé : pages locales et longue traîne",
           content:
-            "Créez du contenu qui parle de votre ville et région. Page dédiée \"Métier à Rouen\", articles de blog sur des sujets locaux, témoignages clients de la région. Les requêtes longue traîne géolocalisées sont moins concurrentielles.",
+            "Créez du contenu qui parle explicitement de votre ville et région. Page dédiée \"Métier à Rouen\" (notre exemple : /agence-web-rouen), articles de blog sur des sujets locaux (\"5 entreprises rouennaises qui...\", \"Le marché du XX à Rouen en 2026\"), témoignages clients de la région avec lieu mentionné, FAQ qui mentionnent Rouen/Normandie. Les requêtes longue traîne géolocalisées (\"comment trouver un X à Rouen\", \"prix moyen de X en Normandie\") sont MOINS concurrentielles que les requêtes courtes — c'est là que vous pouvez gagner facilement. Cibler 10-20 mots-clés longue traîne par page, plutôt qu'un mot-clé court trop concurrentiel.",
         },
         {
-          title: "Avis Google",
+          title: "Avis Google : le levier sous-estimé",
           content:
-            "Le nombre d'avis et leur note moyenne pèsent fortement dans le pack local. Demandez systématiquement à vos clients satisfaits de laisser un avis (lien direct dans un email de fin de mission). Répondez à tous les avis, positifs comme négatifs.",
+            "Le nombre d'avis et leur note moyenne pèsent FORTEMENT dans le classement du pack local. Demandez systématiquement à vos clients satisfaits de laisser un avis — pas \"si vous avez 2 minutes\" mais via un lien direct dans un email de fin de mission ou un QR code en boutique. Cible : 30-50 avis minimum, note 4.5+, fréquence régulière (Google détecte les avis groupés suspects). Répondez à TOUS les avis, positifs comme négatifs (les réponses montrent le sérieux). Pour les avis négatifs, restez factuel et propose une suite hors-Google (\"appelez-nous au... pour qu'on règle ça\"). Les avis sont aussi un signal pour les utilisateurs : 78% lisent les avis avant de contacter.",
+        },
+        {
+          title: "Backlinks locaux : la stratégie",
+          content:
+            "Au-delà des annuaires, les vrais backlinks locaux pèsent. Sources : presse régionale (Paris-Normandie, Tendance Ouest), blogs locaux thématiques, partenariats avec d'autres entreprises locales (lien réciproque ou mentions), sponsoring d'événements locaux (course Rouen, festivals), CCI/CMA qui listent leurs adhérents avec lien. Un seul backlink de Paris-Normandie vaut souvent 20 backlinks de petits sites. Stratégie de digital PR : trouver l'angle local qui intéresse les journalistes (étude, chiffre régional, événement, prix), et les contacter.",
+        },
+        {
+          title: "Search Console : monitoring du SEO local",
+          content:
+            "Google Search Console est gratuit et indispensable. Configurer : 1) Rapport Performance, filtrer par requêtes contenant \"Rouen\" ou \"Normandie\" pour voir vos positions locales. 2) Rapport Couverture pour vérifier que vos pages locales sont indexées. 3) Rapport Web Vitals pour la performance (les sites lents tombent dans le pack local aussi). 4) Demander indexation des pages locales prioritaires. À regarder chaque semaine pour identifier les requêtes en hausse et les opportunités. Pour ceux qui veulent aller plus loin, BrightLocal ou Whitespark donnent des outils de monitoring spécifiquement SEO local.",
+        },
+        {
+          title: "Erreurs classiques à éviter",
+          content:
+            "Sur les audits SEO local qu'on fait, on retrouve toujours les mêmes erreurs. 1) NAP incohérent sur 3-4 annuaires (Google se méfie). 2) Catégorie GMB trop générique. 3) 0 photos sur la fiche GMB depuis 6 mois. 4) Pas de réponse aux avis. 5) Site lent (LCP > 4s) qui pénalise le pack local. 6) Page \"Contact\" sans schema LocalBusiness. 7) Numéro de téléphone non-cliquable sur mobile. 8) Page \"horaires\" séparée de la page contact (pour Google c'est mieux que tout soit sur la même page). Corriger ces 8 points = +30-50% de trafic local typique en 3 mois.",
         },
       ],
       conclusion:
-        "Le SEO local est un marathon : 3 à 6 mois pour voir des effets significatifs. Mais pour une PME qui dépend de sa clientèle locale, c'est l'investissement marketing le plus rentable. Chez Krealabs, nous accompagnons les entreprises rouennaises sur ces sujets — n'hésitez pas à nous contacter pour un audit.",
+        "Le SEO local est un marathon : 3 à 6 mois pour voir des effets significatifs, 12 mois pour stabiliser. Mais pour une PME qui dépend de sa clientèle locale (Rouen et Normandie), c'est l'investissement marketing le plus rentable — ROI typique 5x à 10x sur un an quand c'est bien fait. Chez Krealabs, on accompagne les entreprises rouennaises et normandes sur ces sujets régulièrement, soit en mission ponctuelle d'audit + plan d'action, soit en accompagnement continu sur 6-12 mois. Premier audit SEO local de votre fiche GMB + site offert.",
     },
   },
   {
     slug: "schema-org-agences-web",
-    title: "Schema.org pour les agences web : balisage complet",
+    title: "Schema.org pour agences web : guide balisage complet",
     excerpt:
-      "Sitelinks, breadcrumbs, FAQ, services, équipe : tous les balisages JSON-LD utiles pour une agence web ou digitale, avec exemples concrets.",
+      "Sitelinks, breadcrumbs, FAQ, services, équipe, reviews : tous les balisages JSON-LD utiles pour une agence web ou digitale. Exemples concrets, validation Rich Results Test, retours d'impact CTR.",
     category: "SEO",
     date: "8 mai 2026",
-    readTime: "8 min",
+    readTime: "13 min",
     image: "https://images.unsplash.com/photo-1432888622747-4eb9a8efeb07?w=1200&q=80",
     featured: false,
     author,
-    tags: ["Schema.org", "JSON-LD", "Rich Snippets", "SEO", "Agence web"],
+    tags: ["Schema.org", "JSON-LD", "Rich Snippets", "SEO", "Agence web", "Structured Data"],
     content: {
       introduction:
-        "Schema.org est le vocabulaire commun que Google, Bing et Yandex utilisent pour comprendre votre site. Pour une agence web, c'est l'occasion d'afficher des rich snippets (étoiles, FAQ, fil d'Ariane) qui font la différence dans les résultats de recherche.",
+        "Schema.org est le vocabulaire commun que Google, Bing, Yandex et tous les moteurs de recherche utilisent pour comprendre votre site. Pour une agence web ou digitale, c'est l'occasion d'afficher des rich snippets (étoiles, FAQ, fil d'Ariane, événements) qui font la différence dans les résultats de recherche — gain CTR mesurable de 10 à 30%. Voici notre guide complet sur les balisages Schema.org qu'on déploie systématiquement chez Krealabs, avec exemples concrets et retours sur ce qui marche vraiment.",
       sections: [
         {
-          title: "ProfessionalService — la fondation",
+          title: "ProfessionalService — la fondation pour agences",
           content:
-            "Le type ProfessionalService (sous-classe de LocalBusiness) est idéal pour une agence. Il accepte tous les champs utiles : adresse, géolocalisation, services, prix, horaires, contact. À placer sur la home dans un script JSON-LD.",
+            "Le type ProfessionalService (sous-classe de LocalBusiness) est idéal pour une agence digitale. Il accepte tous les champs utiles : adresse postale, géolocalisation, services proposés, prix range, horaires, contact, zones desservies. À placer sur la home dans un script JSON-LD <type=\"application/ld+json\">. Pour les variantes spécifiques métier, voir les sous-types : Restaurant, Dentist, AutoRepair, etc. Pour une agence web/digitale, ProfessionalService convient parfaitement. Inclure absolument knowsAbout (vos expertises) et areaServed (zones géographiques desservies).",
         },
         {
-          title: "BreadcrumbList — le fil d'Ariane",
+          title: "BreadcrumbList — fil d'Ariane visible dans Google",
           content:
-            "Sur chaque page intérieure, ajoutez un BreadcrumbList pour afficher le chemin de navigation sous le titre dans Google. Petit effort, vrai impact UX dans les SERP.",
+            "Sur chaque page intérieure, ajoutez un BreadcrumbList pour afficher le chemin de navigation sous le titre dans la SERP Google. Petit effort, vrai impact UX dans les SERP — l'utilisateur voit la hiérarchie de votre site, le contexte de la page. Sur un article de blog, les breadcrumbs montrent \"Accueil > Blog > Catégorie > Titre article\" avec liens cliquables. Mesuré sur nos sites : +5-8% de CTR après mise en place du BreadcrumbList.",
           code: `{
+  "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
     { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://krealabs.fr" },
-    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://krealabs.fr/services" }
+    { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://krealabs.fr/services" },
+    { "@type": "ListItem", "position": 3, "name": "Développement web", "item": "https://krealabs.fr/services/developpement-web" }
   ]
 }`,
         },
         {
-          title: "FAQPage — pour les pages FAQ",
+          title: "FAQPage — réponses dans la SERP",
           content:
-            "Sur votre page FAQ, ajoutez un balisage FAQPage. Google peut afficher directement les questions/réponses dans la SERP, ce qui augmente considérablement le taux de clic.",
+            "Sur votre page FAQ ou les pages avec questions fréquentes, ajoutez un balisage FAQPage. Google peut afficher directement les questions/réponses sous votre résultat dans la SERP, ce qui augmente considérablement la visibilité et le CTR. Attention en 2026 : Google a restreint le FAQPage rich snippet aux sites \"officiels\" (gouvernement, santé) sur les requêtes très concurrentielles. Mais pour les requêtes long-tail métier (\"comment fonctionne un X\", \"combien coûte un Y\"), ça marche encore très bien. Mesurer dans Search Console : rapport Performance > comparer CTR avant/après.",
+          code: `{
+  "@type": "FAQPage",
+  "mainEntity": [{
+    "@type": "Question",
+    "name": "Combien coûte un site WordPress sur mesure ?",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Cela dépend du projet : vitrine simple 4-6k€, WooCommerce 10-20k€..."
+    }
+  }]
+}`,
         },
         {
-          title: "Article — pour les articles de blog",
+          title: "Article — pour articles de blog",
           content:
-            "Chaque article doit avoir un balisage Article avec author, datePublished, image. Cela permet à Google de proposer votre contenu dans Discover, Top Stories, etc.",
+            "Chaque article de blog doit avoir un balisage Article (ou ses sous-types : BlogPosting, NewsArticle, TechArticle). Champs obligatoires : headline, image, author (Person ou Organization), publisher (Organization avec logo), datePublished (ISO 8601), dateModified, mainEntityOfPage. Bonus : wordCount, articleSection, keywords, inLanguage. Cela permet à Google de proposer votre contenu dans Discover, Top Stories, et améliore le snippet (date, auteur affichés). On l'a implémenté sur tous les articles du blog Krealabs.",
+        },
+        {
+          title: "Service — pour vos pages de services",
+          content:
+            "Sur chaque page service (ex: /services/wordpress, /services/developpement-web), un Service avec serviceType, provider (votre Organization), areaServed, hasOfferCatalog. Aide Google à comprendre que vous proposez ces services concrets dans ces zones. Combiné avec ProfessionalService sur la home, ça structure clairement votre catalogue d'offres pour Google.",
+          code: `{
+  "@type": "Service",
+  "serviceType": "Création de site WordPress",
+  "provider": { "@type": "ProfessionalService", "name": "Krealabs" },
+  "areaServed": ["Rouen", "Normandie", "France"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "itemListElement": [
+      { "@type": "Offer", "name": "Site vitrine WordPress" },
+      { "@type": "Offer", "name": "WooCommerce" }
+    ]
+  }
+}`,
+        },
+        {
+          title: "Person — pour pages équipe et auteurs",
+          content:
+            "Sur votre page équipe (/equipe chez nous), un Person par membre avec name, jobTitle, image, sameAs (liens LinkedIn/GitHub/Twitter), knowsAbout. Sur les articles de blog, l'author dans l'Article schema peut renvoyer vers cette Person. Cela aide Google à construire la \"Knowledge Graph\" autour de votre équipe — les co-fondateurs et experts deviennent plus visibles dans les recherches nominatives.",
+        },
+        {
+          title: "Review et AggregateRating — étoiles dans la SERP",
+          content:
+            "Pour les agences avec témoignages clients, vous pouvez baliser les avis avec Review et un AggregateRating global (note moyenne, nombre d'avis). En 2026, Google est strict sur l'authenticité : pas de balisage de notes inventées, l'AggregateRating doit pointer sur une page qui affiche réellement les avis. Si fait correctement, les étoiles apparaissent dans la SERP — gain CTR souvent +15-25%. Important : vous ne pouvez baliser les avis QUE s'ils sont sur votre propre site, pas si vous compilez des avis Google externes.",
+        },
+        {
+          title: "Outils de validation et debugging",
+          content:
+            "Toujours valider vos balisages avant déploiement. Outils essentiels : 1) Google Rich Results Test (search.google.com/test/rich-results) — teste si Google va générer un rich snippet pour votre URL. 2) Schema.org Validator (validator.schema.org) — vérifie la conformité technique au standard. 3) Google Search Console > Améliorations — détecte les erreurs sur l'ensemble du site indexé. 4) Nodejs schema-dts pour TypeScript : typage strict des objets Schema, plus jamais de balisage cassé silencieusement.",
+          code: `// schema-dts pour typage strict en TypeScript
+import { Person, Article, WithContext } from 'schema-dts'
+
+const articleSchema: WithContext<Article> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: 'Mon article',
+  datePublished: '2026-01-15',
+  author: { '@type': 'Person', name: 'Maxime Dubois' }
+}`,
+        },
+        {
+          title: "Implémentation Next.js : pattern recommandé",
+          content:
+            "Sur Next.js, le pattern qu'on utilise chez Krealabs : un dossier components/seo/ avec un composant par type de schema (OrganizationSchema, BreadcrumbSchema, ArticleSchema, FAQSchema). Chaque composant rend un <script type=\"application/ld+json\"> avec les données passées en props. Insérés dans le layout ou la page concernée. Pour les types récurrents (BreadcrumbList sur toutes les pages internes), ça devient automatique. Sur WordPress, Yoast et RankMath gèrent la plupart des schemas mais on customise souvent avec du code pour des cas spécifiques (Service, Person).",
         },
       ],
       conclusion:
-        "Le balisage Schema.org ne demande pas de gros efforts mais offre un retour clair en visibilité. Si vous gérez le site vous-même, des plugins existent (Rank Math, Yoast). Si vous êtes sur du custom (Next.js, par exemple), c'est quelques scripts à ajouter — voir notre implémentation open source sur GitHub.",
+        "Le balisage Schema.org ne demande pas de gros efforts mais offre un retour clair en visibilité Google. Si vous gérez le site vous-même, des plugins existent (Rank Math, Yoast pour WordPress, le helper officiel pour Next.js). Si vous êtes sur du custom, c'est quelques scripts à ajouter. Sur nos sites clients après mise en place complète : +10 à +30% de CTR organique en moyenne, des positions stables, des rich snippets visibles. Si vous voulez un audit du balisage Schema actuel de votre site et un plan d'enrichissement, on le fait régulièrement chez Krealabs.",
     },
   },
   {
     slug: "audit-lighthouse-methode-agence",
-    title: "Audit Lighthouse : la méthode qu'on applique en agence",
+    title: "Audit Lighthouse : la méthode complète qu'on applique en agence",
     excerpt:
-      "Un Lighthouse à 50 ne donne pas la même priorité d'actions qu'un à 85. Méthode complète d'audit selon le score, avec quick wins et chantiers de fond.",
+      "Un Lighthouse à 50 ne donne pas la même priorité d'actions qu'un à 85. Méthode complète d'audit selon le score, quick wins, chantiers de fond, outils d'investigation, et mise en CI/CD pour ne plus régresser.",
     category: "SEO",
     date: "1 mai 2026",
-    readTime: "10 min",
+    readTime: "14 min",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
     featured: false,
     author,
-    tags: ["Lighthouse", "Audit", "Performance", "Core Web Vitals", "SEO"],
+    tags: ["Lighthouse", "Audit", "Performance", "Core Web Vitals", "SEO", "Bundle analysis"],
     content: {
       introduction:
-        "Lighthouse donne 4 scores : Performance, Accessibility, Best Practices, SEO. Mais un site à 50 et un site à 85 ne se traitent pas du tout pareil. Voici la méthode que nous appliquons chez Krealabs pour cadrer un audit, prioriser les actions, et mesurer les progrès.",
+        "Lighthouse donne 4 scores : Performance, Accessibility, Best Practices, SEO. Mais un site à 50 et un site à 85 ne se traitent pas du tout pareil — les actions prioritaires changent radicalement. Voici la méthode complète que nous appliquons chez Krealabs pour cadrer un audit Lighthouse, prioriser les actions selon le score initial, et mesurer les progrès. Article basé sur 50+ audits réalisés ces 3 dernières années, sur des sites WordPress, Next.js, et autres.",
       sections: [
+        {
+          title: "Le score Lighthouse n'est qu'une vue partielle",
+          content:
+            "Avant d'attaquer, un point clé : Lighthouse mesure en conditions LAB (Chromium headless, throttling simulé, machine de référence). Les vraies données qui comptent pour Google SEO viennent du FIELD : Chrome User Experience Report (CrUX), accessible via Search Console > Web Vitals ou PageSpeed Insights. Lighthouse est un excellent outil de diagnostic, mais un score Lighthouse à 100 sur un site lent en réalité ne sert à rien — et un score lab à 70 mais avec CrUX au vert suffit largement. Toujours valider lab + field.",
+        },
         {
           title: "Site à 30-50 : urgence performance",
           content:
-            "Le plus probable : images non optimisées, JS énorme, render-blocking CSS. Trois quick wins : convertir les images en WebP/AVIF avec next/image, code splitting, minification + brotli sur le CDN. Ces 3 actions remontent souvent le score à 70+ en quelques jours.",
+            "Le plus probable sur ce score : images non optimisées (JPG/PNG énormes, pas de WebP), JavaScript énorme (souvent 1-3 MB de scripts tiers), render-blocking CSS, hébergement lent. Trois quick wins qui remontent souvent le score à 70+ en quelques jours : 1) Convertir TOUTES les images en WebP/AVIF avec next/image ou ShortPixel sur WordPress. 2) Code splitting agressif (dynamic imports sur les composants lourds, lazy loading des images below-fold). 3) Minification + Brotli + cache long sur le CDN. Bonus : virer les scripts tiers non critiques (analytics auxiliaires, A/B tests dormants, anciens widgets). Sur les sites WordPress, c'est souvent virer 5-10 plugins inutiles qui apporte le plus.",
         },
         {
           title: "Site à 50-75 : nettoyage des dépendances",
           content:
-            "On entre dans le détail. Auditer le bundle JavaScript (webpack-bundle-analyzer), identifier les dépendances surdimensionnées (Moment.js, Lodash entier), traiter les CLS (réserver l'espace pour les images, les fonts, les ads).",
+            "On entre dans le détail. Auditer le bundle JavaScript avec @next/bundle-analyzer pour Next.js ou webpack-bundle-analyzer ailleurs : identifier les dépendances surdimensionnées (Moment.js → date-fns ou dayjs, Lodash entier → import par fonction, Charts.js complet → import dynamique), libs anciennes qui pourraient être natives (Polyfills inutiles en 2026). Traiter le CLS (Cumulative Layout Shift) : réserver l'espace pour les images (width/height obligatoires sur next/image), pour les fonts (font-display: swap + preload), pour les bannières publicitaires (taille fixe en CSS). À ce stade, on optimise aussi les requêtes réseau : préchargement des ressources critiques (rel=preload sur fonts, images LCP, scripts critiques).",
           code: `// Analyse du bundle Next.js
+// next.config.ts
 import bundleAnalyzer from '@next/bundle-analyzer'
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === 'true',
 })
 
-export default withBundleAnalyzer({})`,
+export default withBundleAnalyzer({
+  // votre config Next existante
+})
+
+// Usage : ANALYZE=true npm run build
+// Ouvre 2 onglets : client + server bundles
+// Cliquez sur les gros blocs pour identifier les "fat" dépendances`,
         },
         {
           title: "Site à 75-90 : optimisation fine",
           content:
-            "Préload des polices critiques, priorité des images above-the-fold, lazy loading agressif, font-display: swap, optimisation des Core Web Vitals (LCP, INP, CLS) au cas par cas. C'est là qu'on gagne 5-10 points sans renoncer aux features.",
+            "Préload des polices critiques avec rel=preload + crossorigin, priorité des images above-the-fold (priority sur next/image, fetchpriority=\"high\" sur les LCP candidates), lazy loading agressif sur le below-fold, font-display: swap obligatoire, optimisation des Core Web Vitals (LCP, INP, CLS) au cas par cas. À ce stade, on monitorse aussi les scripts tiers : Google Analytics 4 charge mieux que Universal Analytics, mais reste lourd. Plausible Analytics est plus léger (~3 KB vs ~50 KB pour GA4). Pour les chat widgets (Crisp, Intercom), différer le chargement avec setTimeout 3-5s post-load. C'est là qu'on gagne 5-10 points sans renoncer aux features.",
         },
         {
-          title: "Site à 90+ : maintenance",
+          title: "Site à 90+ : maintenance et CI",
           content:
-            "Le score est bon. L'enjeu devient de ne pas régresser. CI Lighthouse en pull request, alerting si un score baisse, audit trimestriel. C'est de la gestion de patrimoine technique.",
+            "Le score est bon. L'enjeu devient de ne pas régresser à la prochaine feature développée. Mettre en place : 1) Lighthouse CI en GitHub Actions, qui s'exécute sur chaque pull request et bloque le merge si un score baisse. 2) Vercel Speed Insights ou Sentry Performance pour le monitoring continu (vraies données utilisateurs, pas lab). 3) Audit trimestriel manuel pour vérifier que les chiffres CrUX restent au vert dans Search Console. 4) Process de revue avant chaque déploiement majeur : passer en revue les nouvelles dépendances ajoutées (npm ls --depth=0 + bundle analyzer). C'est de la gestion de patrimoine technique.",
+          code: `# .github/workflows/lighthouse.yml
+name: Lighthouse CI
+on: pull_request
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm }
+      - run: npm ci && npm run build && npm start &
+      - run: npx lhci autorun
+        env: { LHCI_GITHUB_APP_TOKEN: \${{ secrets.LHCI_GITHUB_TOKEN }} }`,
+        },
+        {
+          title: "Au-delà du Performance score : Accessibility, Best Practices, SEO",
+          content:
+            "Le score Performance est le plus surveillé, mais les 3 autres scores Lighthouse comptent aussi. Accessibility : viser 95+ — contrast ratio AA, alt sur toutes les images, labels sur tous les inputs, hierarchy hX correcte. Best Practices : 90+ — HTTPS obligatoire, pas d'erreurs console en prod, images en bonnes dimensions natives. SEO : 95-100 facile à atteindre — meta description présente, robots.txt OK, structured data valide, mobile-friendly. Sur les nouveaux sites Krealabs, on vise systématiquement 95+ sur les 4 scores en condition lab, et CrUX au vert sur 90+% des pages.",
+        },
+        {
+          title: "Outils complémentaires pour aller plus loin",
+          content:
+            "Lighthouse n'est pas le seul outil de mesure. WebPageTest (webpagetest.org) donne un waterfall ultra-détaillé : on voit chaque requête réseau, son timing, sa priorité. Idéal pour identifier les ressources bloquantes critiques. Chrome DevTools > Performance : profiling JS détaillé pour identifier les long tasks (>50ms) qui plombent l'INP. Chrome DevTools > Coverage : montre le % de CSS/JS non utilisés (à supprimer). Vercel Speed Insights : vraies données utilisateurs sur les sites déployés sur Vercel. Sentry Performance : RUM (Real User Monitoring) cross-stack. Pour les audits sérieux chez Krealabs, on combine ces 4-5 outils, pas seulement Lighthouse.",
+        },
+        {
+          title: "Pièges classiques d'audit Lighthouse",
+          content:
+            "1) Auditer en mobile sur sa machine de dev pleine puissance : utiliser le throttling mobile + slow 4G en simulation, sinon scores trompeurs. 2) Auditer la home seulement : auditer aussi les pages internes (catégorie, fiche produit, blog), souvent moins optimisées. 3) Optimiser pour le score lab sans valider en field : on a vu des sites passer de 60 à 95 en lab mais sans amélioration réelle pour les utilisateurs (faux gains). 4) Ne pas re-tester après chaque optimisation : tester APRÈS chaque changement, mesurer l'impact, ne pas tout faire en aveugle. 5) Ignorer les warnings non-bloquants Lighthouse : ils signalent souvent des problèmes futurs.",
         },
       ],
       conclusion:
-        "Un Lighthouse à 100 n'est pas un objectif en soi. Un site stable à 85-95 avec un INP < 200ms et un LCP < 2s, c'est largement suffisant pour ressortir dans Google. Concentrez-vous sur l'expérience réelle (CrUX) plutôt que sur le score lab.",
+        "Un Lighthouse à 100 n'est pas un objectif en soi. Un site stable à 85-95 avec un INP < 200ms et un LCP < 2s en field data, c'est largement suffisant pour ressortir dans Google. Concentrez-vous sur l'expérience réelle (CrUX) plutôt que sur le score lab. Si vous voulez un audit complet de votre site (Lighthouse + WebPageTest + bundle analysis + plan d'action priorisé), on le réalise régulièrement chez Krealabs sur 1-3 jours selon la taille du site, livré avec un rapport écrit et un échange de débrief.",
     },
   },
 
@@ -1486,75 +1652,109 @@ export default withBundleAnalyzer({})`,
   // ===========================================================================
   {
     slug: "ai-coding-claude-cursor-agence",
-    title: "Coder avec l'IA en agence : ce qui marche en 2026",
+    title: "Coder avec l'IA en agence : ce qui marche vraiment en 2026",
     excerpt:
-      "Cursor, Claude Code, Copilot. Comment on intègre l'IA dans le quotidien d'une agence sans sacrifier la qualité. Retour d'expérience après 2 ans.",
+      "Cursor, Claude Code, GitHub Copilot. Comment on intègre l'IA dans le quotidien d'une agence sans sacrifier la qualité. Retour d'expérience honnête après 2 ans : ce qui marche, ce qui rate, et notre workflow concret.",
     category: "Outils",
     date: "29 avril 2026",
-    readTime: "9 min",
+    readTime: "13 min",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
     featured: false,
     author,
-    tags: ["IA", "Claude", "Cursor", "Copilot", "Productivité"],
+    tags: ["IA", "Claude", "Cursor", "GitHub Copilot", "Productivité", "AI Coding"],
     content: {
       introduction:
-        "Deux ans après l'arrivée de Cursor et Claude Code dans le quotidien des développeurs, où en sommes-nous ? Quelle place ces outils prennent-ils dans une agence comme Krealabs ? Retour d'expérience honnête, avec ce qui marche, ce qui ne marche pas, et ce qui marche trop bien.",
+        "Deux ans après l'arrivée de Cursor et Claude Code dans le quotidien des développeurs, où en sommes-nous vraiment ? Quelle place ces outils prennent-ils dans une agence comme Krealabs ? Cet article est notre retour d'expérience honnête, sans le marketing AI ni le doomerism anti-IA. Avec ce qui marche, ce qui ne marche pas, et ce qui marche trop bien (au point de poser des problèmes). On y partage aussi notre workflow concret, les pièges à éviter, et l'impact sur la formation et le recrutement.",
       sections: [
         {
-          title: "Ce que l'IA fait bien",
+          title: "Ce que l'IA fait bien aujourd'hui",
           content:
-            "Boilerplate, conversions de format (JSON → TypeScript), génération de tests unitaires basés sur le code existant, refactoring mécanique (renommage, extraction de fonction), explication d'un code legacy obscur. Sur ces tâches, gain de productivité réel : 30 à 50%.",
+            "Sur certaines tâches, le gain de productivité est massif et indéniable. Boilerplate (composants React, API routes, schémas Prisma) : 30-50% plus rapide. Conversions de format (JSON → TypeScript types, OpenAPI → client TS, screenshots Figma → JSX initial) : presque instantané. Génération de tests unitaires basés sur le code existant : excellent point de départ, à raffiner manuellement ensuite. Refactoring mécanique (renommage de variable transversal, extraction de fonction, conversion class → function component) : impeccable. Explication d'un code legacy obscur (\"qu'est-ce que fait cette fonction de 200 lignes ?\") : très utile. Migration de syntaxe (jQuery → Vanilla JS, JS → TS) : 80% du travail fait par l'IA.",
         },
         {
-          title: "Ce que l'IA fait mal (ou plutôt, où il faut rester vigilant)",
+          title: "Ce que l'IA fait mal (ou plutôt : où il faut rester vigilant)",
           content:
-            "Décisions d'architecture, équilibrage de la dette technique, compréhension fine du contexte métier client. L'IA propose souvent du code qui marche mais qui n'est pas idiomatique pour votre stack. Et sur les API récentes (Next.js 16, React 19), ses connaissances peuvent être en retard.",
+            "Décisions d'architecture : l'IA propose souvent des solutions \"évidentes\" qui marchent mais qui ne sont pas idiomatiques pour votre stack ou qui créent de la dette technique. Équilibrage de la dette technique : l'IA ajoute volontiers du code, rarement elle propose de simplifier ou supprimer. Compréhension fine du contexte métier client : impossible sans long briefing. Sur les API très récentes (Next.js 16, React 19, dernières versions de libs niche), ses connaissances peuvent être en retard de 6-12 mois. Et le pire : l'IA peut HALLUCINER avec confiance — inventer une API qui n'existe pas, citer une doc obsolète, ou produire du code qui compile mais ne fait pas ce qu'on demande. Vigilance obligatoire.",
+        },
+        {
+          title: "Comparaison rapide des outils principaux",
+          content:
+            "Cursor : excellent éditeur de code basé sur VS Code, intégration agent IA très poussée (peut éditer plusieurs fichiers en autonomie), modèle Anthropic Claude par défaut. ~20-40$/mois pro. Notre outil principal chez Krealabs. Claude Code (CLI) : interface ligne de commande pour interagir avec Claude depuis un terminal, parfait pour les tâches longues ou les automatisations CI. ~20$/mois. GitHub Copilot : autocomplétion in-editor, plus léger, moins agent. Bon complément de Cursor. ~10$/mois. ChatGPT/Claude.ai en interface web : pour les questions ad-hoc, brainstorming, debugging cassé. Free tier + payant. Notre stack quotidienne : Cursor en principal, Claude Code pour les batches lourds (refactoring, génération de tests massive), Copilot en backup sur les machines moins puissantes.",
         },
         {
           title: "Notre workflow Krealabs",
           content:
-            "Pair programming avec Cursor / Claude Code pour les tâches concrètes, jamais pour la planification architecturale. Reviews humaines systématiques (tout code AI passe en review). Tests automatisés non négociables — si l'IA a produit le code, le test garantit qu'il fait ce qu'il prétend.",
+            "Pair programming avec Cursor / Claude Code pour les tâches concrètes, JAMAIS pour la planification architecturale (cette décision reste humaine, après discussion entre les deux co-fondateurs). Reviews humaines systématiques : tout code généré par IA passe en review avant merge, comme du code humain. Tests automatisés non négociables — si l'IA a produit le code, le test garantit qu'il fait ce qu'il prétend faire. Documentation des prompts : on garde une bibliothèque de prompts efficaces (ex: \"refactor this React class to function component using TypeScript strict, preserving all props and lifecycle behavior\") pour cohérence dans l'équipe.",
+          code: `# Notre .cursorrules type (instructions persistantes pour Cursor)
+- Stack: Next.js 16, React 19, TypeScript strict, Tailwind 4, Prisma 6
+- Always use Server Components by default, 'use client' only when needed
+- Use Switzer font via Tailwind --font-sans
+- Radius unique : rounded-[var(--radius)] partout
+- Pas de page builders sur les sites WordPress, thèmes custom uniquement
+- Tests : Vitest unit, Playwright e2e
+- Tone : direct, pas de marketing fluff, retour terrain assumé`,
         },
         {
-          title: "Impact sur la formation",
+          title: "Impact sur la formation et le recrutement",
           content:
-            "Pour un junior, l'IA peut être un piège : générer du code qu'on ne comprend pas. Pour un senior, c'est un accélérateur. La discipline d'agence : on ne mergeune pull request que si on saurait l'écrire soi-même.",
+            "Pour un junior, l'IA peut être un piège : générer du code qu'on ne comprend pas, mais qui marche — donc qu'on merge sans apprendre. Risque : devenir un opérateur d'IA plutôt qu'un développeur. Pour un senior, c'est un accélérateur qui amplifie l'expertise existante. La discipline qu'on impose chez Krealabs : on ne merge une pull request que si on saurait l'écrire soi-même — autrement dit, l'IA peut nous faire gagner du temps mais elle ne peut pas remplacer la compréhension. Sur le recrutement : on s'attend à ce que les candidats sachent utiliser l'IA (c'est devenu une compétence essentielle), MAIS on les teste sur leur capacité à juger ce qu'elle produit (qualité code, sécurité, perf).",
+        },
+        {
+          title: "Pièges à éviter absolument",
+          content:
+            "1) Faire confiance aveuglément à l'IA pour le code de production critique (auth, paiement, données médicales). Toujours review en équipe. 2) Coller du code IA sans comprendre — bombes à retardement futures. 3) Demander à l'IA de générer ce qu'on ne saurait pas vérifier (algorithmique avancée, crypto). 4) Utiliser l'IA pour analyser du code propriétaire client sans accord (RGPD, NDA). 5) Faire générer des tests qui valident le code généré par la même IA — c'est circulaire et n'apporte rien. 6) Croire l'IA quand elle invente du code qui ne compile pas mais a l'air convainquant — toujours essayer en local.",
+        },
+        {
+          title: "L'avenir : agents IA autonomes",
+          content:
+            "En 2026, on voit émerger des agents plus autonomes : Devin, OpenHands, Claude Agent SDK qui peuvent prendre une tâche complète et l'exécuter de bout en bout (générer code + lancer tests + corriger erreurs + ouvrir PR). C'est puissant pour les tâches répétitives bien cadrées (migrations massives, refactorings cross-codebase, génération de doc). Mais ça nécessite un cadrage humain serré sinon ça dévie. Chez Krealabs, on commence à utiliser ces agents pour des tâches précises comme \"audit cette base de code et lister tous les TODO\" ou \"générer la documentation API\" — mais on reste loin de la full autonomie sur du code de production.",
+        },
+        {
+          title: "Économie : ce que ça coûte vraiment",
+          content:
+            "Budget AI tools mensuel par développeur chez Krealabs en 2026 : Cursor pro 20$, Claude Code 20$, Copilot 10$, API credits Anthropic pour les batches (~30-50$/mois selon usage). Total : ~80-100$/mois/dev. Comparé au gain de productivité (estimé 30-40% sur les tâches éligibles), c'est rentable instantanément. À noter : l'IA augmente aussi la charge cognitive (revoir code généré, vérifier, débugger) — on n'a pas vraiment 30% de bande passante en plus pour faire plus de projets, mais on délivre des projets de meilleure qualité dans le même temps.",
         },
       ],
       conclusion:
-        "L'IA accélère les bons développeurs et masque les faiblesses des mauvais. Chez Krealabs, on l'utilise quotidiennement — et on rend toujours du code qu'on comprend, qu'on a testé et qu'on assume.",
+        "L'IA accélère les bons développeurs et masque les faiblesses des mauvais. Chez Krealabs, on l'utilise quotidiennement — et on rend toujours du code qu'on comprend, qu'on a testé et qu'on assume. Si vous démarrez un projet en 2026 sans utiliser l'IA, vous perdez du temps. Si vous l'utilisez sans discipline, vous accumulez de la dette technique invisible. L'équilibre se trouve dans le métier : savoir quand utiliser l'outil et quand ne pas s'en servir. Notre conviction : l'IA est un super junior qui ne dort pas. Comme tout junior, à manager.",
     },
   },
   {
     slug: "github-actions-pme-cicd-zero",
-    title: "GitHub Actions pour PME : CI/CD à partir de zéro",
+    title: "GitHub Actions pour PME : CI/CD complet en partant de zéro",
     excerpt:
-      "Comment mettre en place une CI/CD propre sur un projet web ou mobile sans usine à gaz. Workflow minimal à copier-coller, avec extensions selon vos besoins.",
+      "Comment mettre en place une CI/CD propre sur un projet web ou mobile sans usine à gaz. Workflows complets à copier-coller, déploiement Vercel/Netlify, sécurité, performance, et patterns avancés selon vos besoins.",
     category: "Outils",
     date: "18 avril 2026",
-    readTime: "8 min",
+    readTime: "12 min",
     image: "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=1200&q=80",
     featured: false,
     author,
-    tags: ["GitHub Actions", "CI/CD", "DevOps", "Outils", "Automatisation"],
+    tags: ["GitHub Actions", "CI/CD", "DevOps", "Outils", "Automatisation", "Vercel"],
     content: {
       introduction:
-        "Le CI/CD (intégration et déploiement continus) est un investissement à fort ROI pour une PME. GitHub Actions étant intégré à GitHub, pas besoin d'infrastructure externe. Voici un workflow minimal qui couvre 90% des besoins d'un projet web ou mobile.",
+        "Le CI/CD (intégration et déploiement continus) est un investissement à fort ROI pour une PME ou une startup. GitHub Actions étant intégré à GitHub, pas besoin d'infrastructure externe ni de Jenkins, CircleCI ou GitLab CI à provisionner. Voici un guide complet pour mettre en place une CI/CD professionnelle à partir de zéro, avec les workflows que nous utilisons chez Krealabs sur nos projets clients. Article concret avec du YAML à copier-coller, et évolutions possibles selon votre besoin.",
       sections: [
         {
-          title: "Le minimum vital : lint + test",
+          title: "Le minimum vital : lint + type-check + tests",
           content:
-            "Un job qui tourne à chaque pull request : npm ci, lint, type-check, tests. Si un de ces 4 étapes échoue, la PR est bloquée. Cela coûte 0 effort à mettre en place et évite 90% des régressions.",
+            "Un job qui tourne à chaque pull request : install des deps, lint ESLint, type-check TypeScript, tests unitaires (Vitest ou Jest). Si une de ces 4 étapes échoue, la PR est bloquée (status check obligatoire dans GitHub branch protection). Cela coûte 0 effort à mettre en place et évite 90% des régressions évidentes. Variables critiques : caching de npm (gain ~30s par run), version Node.js explicite (jamais 'latest', toujours pinné).",
           code: `# .github/workflows/ci.yml
 name: CI
-on: pull_request
+on:
+  pull_request:
+  push:
+    branches: [main]
+
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22, cache: npm }
+        with:
+          node-version: 22
+          cache: 'npm'
       - run: npm ci
       - run: npm run lint
       - run: npx tsc --noEmit
@@ -1563,62 +1763,128 @@ jobs:
         {
           title: "Build & deploy par environnement",
           content:
-            "Sur push vers main, déploiement en production (Vercel, Netlify, AWS). Sur push vers develop, déploiement en staging. Sur chaque PR, preview deployment automatique (Vercel le fait nativement, sinon GitHub Actions + Cloudflare Pages).",
+            "Sur push vers main → déploiement en production. Sur push vers develop → déploiement en staging. Sur chaque PR → preview deployment automatique. Si vous êtes sur Vercel, la plateforme gère TOUT cela nativement (preview deployments par PR, prod sur main, alias staging configurable) — pas besoin d'écrire de workflow GitHub Actions pour le déploiement, juste connecter le repo dans le dashboard Vercel. Pour Netlify : pareil. Pour AWS/OVH/serveur custom : il faut écrire le workflow GitHub Actions de déploiement (rsync + ssh, ou Docker push, etc.).",
         },
         {
-          title: "Cache et performance",
+          title: "Cache et performance des workflows",
           content:
-            "Cacher node_modules, le cache Next.js, et les artefacts Playwright peut diviser le temps de CI par 3. Sur un workflow de 10 minutes, cela compte vite.",
+            "Cacher node_modules, le cache Next.js (.next/cache), les artefacts Playwright/Cypress peut diviser le temps de CI par 3. Sur un workflow de 10 minutes, cela compte vite (et économise du quota GitHub Actions sur les plans payants). Stratégies : cache npm via setup-node action (built-in), cache custom pour .next/cache avec actions/cache@v4 keyé sur package-lock + sources. Pour les tests e2e Playwright, utiliser l'action officielle qui cache les browsers téléchargés (~80 MB économisés par run).",
+          code: `# Cache Next.js build
+- uses: actions/cache@v4
+  with:
+    path: |
+      .next/cache
+      ~/.npm
+    key: \${{ runner.os }}-nextjs-\${{ hashFiles('package-lock.json') }}-\${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+    restore-keys: |
+      \${{ runner.os }}-nextjs-\${{ hashFiles('package-lock.json') }}-`,
         },
         {
-          title: "Au-delà : les extras qui valent le coup",
+          title: "Sécurité : Dependabot et scans automatiques",
           content:
-            "Vérification de coverage minimum, scan de sécurité (Dependabot, Snyk), validation des migrations DB en preview, tests e2e Playwright sur les PR critiques. Mais pas la peine de tout activer dès le jour 1 — commencez petit.",
+            "Activer Dependabot dans GitHub repo settings → security & analysis. Il crée automatiquement des PRs pour mettre à jour les dépendances avec failles de sécurité connues. Configurer dependabot.yml pour grouper les updates par catégorie (eviter 50 PRs séparées). Compléter avec : npm audit en CI (mais attention aux faux positifs), Snyk gratuit pour le scan de vulnérabilités, CodeQL natif GitHub pour l'analyse statique du code. Sur les projets clients, on configure tout ça dès le jour 1 — coût zéro, gain de sécurité massif.",
+          code: `# .github/dependabot.yml
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule: { interval: weekly }
+    groups:
+      next:
+        patterns: ["next", "@next/*", "react", "react-dom"]
+      dev:
+        dependency-type: development
+    open-pull-requests-limit: 5`,
+        },
+        {
+          title: "Migrations DB en preview deployments",
+          content:
+            "Sur les projets avec Prisma + Neon (notre stack DB par défaut), on configure les preview deployments Vercel avec branche DB Neon dédiée par PR. Workflow : 1) PR ouverte → Vercel crée preview + branche DB Neon copiée de prod. 2) GitHub Action lance prisma migrate deploy sur la branche DB. 3) Tests e2e en preview. 4) PR mergée → Vercel deploy prod + GitHub Action lance migrate deploy sur DB prod. Avantage : chaque PR a une vraie DB à elle, on peut tester les migrations en isolation. Aucun risque de polluer la prod.",
+        },
+        {
+          title: "Tests e2e Playwright dans la CI",
+          content:
+            "Pour les tests end-to-end (Playwright), on les lance UNIQUEMENT sur les PRs vers main (pas sur chaque commit) car ils sont lents. Setup : action officielle microsoft/playwright-github-action qui gère le download des browsers. Variables d'env : BASE_URL pointant vers le preview deployment Vercel. Strategy : lancer e2e sur 3 navigateurs (Chromium, Firefox, WebKit) en parallèle via matrix. Upload des artefacts (screenshots, vidéos) en cas d'échec pour debugger ensuite. Compter 3-8 minutes de test e2e selon le scope.",
+        },
+        {
+          title: "Notifications et reporting",
+          content:
+            "Intégrer Slack ou Discord pour recevoir les notifications de build : action 8398a7/action-slack ou native Slack pour GitHub. Sur les fails, notification immédiate dans un channel #dev. Sur les déploiements prod réussis, notification dans #releases avec le diff. Reporting des PRs : utiliser GitHub Actions pour poster un commentaire automatique sur chaque PR avec le link preview Vercel + lighthouse score + couverture tests. Pratique pour l'équipe et le client qui suit l'avancement.",
+        },
+        {
+          title: "Patterns avancés : monorepo, matrix, environments",
+          content:
+            "Pour les monorepos (Turborepo, Nx), configurer le `paths` filter pour ne lancer les checks que sur les packages affectés (gain massif de temps CI). Pour les matrix builds (tester sur plusieurs versions Node 20/22 ou OS Ubuntu/macOS) : la syntaxe matrix de GitHub Actions est élégante. Pour les déploiements multi-environnements (prod, staging, preview, demo), utiliser les GitHub Environments avec secrets séparés et required reviewers pour la prod (sécurité). Sur les projets sérieux, on protège la prod avec required reviewers : 2 personnes doivent approuver la PR avant deploy.",
         },
       ],
       conclusion:
-        "Un CI/CD minimal mis en place en 30 minutes vaut mieux qu'un CI/CD parfait jamais déployé. Démarrez petit, étendez au fur et à mesure. Chez Krealabs, tous nos projets ont CI dès le premier commit.",
+        "Un CI/CD minimal mis en place en 30 minutes vaut mieux qu'un CI/CD parfait jamais déployé. Démarrez petit (lint + tests + auto-deploy), étendez au fur et à mesure de vos besoins (security scan, e2e, monitoring). Chez Krealabs, tous nos projets ont CI dès le premier commit. Si vous voulez accompagnement pour mettre en place une CI/CD propre sur un projet existant, c'est une mission qu'on adore — usuellement 1-2 jours pour un setup complet et formé.",
     },
   },
   {
     slug: "vercel-vs-ovh-hebergement-2026",
-    title: "Vercel ou OVH : où héberger en 2026 ?",
+    title: "Vercel, OVH, Scaleway, AWS : où héberger son site en 2026",
     excerpt:
-      "Le débat de l'hébergement revient à chaque projet. Vercel pour la DX, OVH pour le coût et la souveraineté. Comment choisir selon votre contexte.",
+      "Le débat de l'hébergement revient à chaque projet. Vercel pour la DX, OVH/o2switch pour WordPress, Scaleway pour la souveraineté française, AWS pour le scale. Comparatif détaillé et grille de décision par profil de projet.",
     category: "Outils",
     date: "8 avril 2026",
-    readTime: "7 min",
+    readTime: "12 min",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80",
     featured: false,
     author,
-    tags: ["Hébergement", "Vercel", "OVH", "Cloud", "Souveraineté"],
+    tags: ["Hébergement", "Vercel", "OVH", "Scaleway", "AWS", "Cloud", "Souveraineté", "o2switch"],
     content: {
       introduction:
-        "À chaque démarrage de projet, la même question revient : Vercel, AWS, ou un hébergeur français comme OVH ou Scaleway ? La réponse dépend du contexte. Notre grille de décision chez Krealabs.",
+        "À chaque démarrage de projet, la même question revient chez le client : où héberger le site ? Vercel, AWS, un hébergeur français comme OVH ou Scaleway, o2switch pour les WordPress ? La réponse dépend du contexte : type d'app (WordPress vs Next.js), exigences de souveraineté, budget, volume de trafic, équipe DevOps disponible. Voici notre grille de décision chez Krealabs, basée sur les centaines de projets qu'on a vu en production ces dernières années, avec retours d'expérience concrets sur les principaux acteurs.",
       sections: [
         {
-          title: "Vercel — la DX maximale",
+          title: "Vercel — la DX maximale pour Next.js",
           content:
-            "Pour un projet Next.js, Vercel est imbattable côté expérience développeur. Deploy en un push Git, preview branches automatiques, edge functions, analytics intégrées. Coût raisonnable pour des projets PME (Pro à 20$/mois/dev). En revanche : données hébergées hors UE par défaut, prix qui grimpe vite si le trafic explose.",
+            "Pour un projet Next.js (ou React/Vue/Astro), Vercel est imbattable côté expérience développeur. Deploy en un push Git, preview branches automatiques par PR, edge functions, analytics intégrées (Vercel Analytics + Speed Insights), CDN global. Coût raisonnable pour des projets PME : Pro à 20$/mois/dev avec quotas généreux. En revanche : données hébergées principalement aux US (problème RGPD pour certains clients), prix qui grimpe vite si le trafic explose (overage charges sur la bandwidth), et écosystème un peu fermé. Notre choix par défaut pour les projets Next.js sans contrainte de souveraineté.",
         },
         {
-          title: "OVH / Scaleway — souveraineté française",
+          title: "o2switch — le meilleur hébergeur WordPress français",
           content:
-            "Pour un client sensible à la souveraineté des données (administration, santé, finance), un hébergeur français est presque obligatoire. Coût stable, prévisible, mais DX plus rugueuse. Demande de la compétence DevOps pour bien faire.",
+            "Pour les sites WordPress (notre spécialité), o2switch est notre recommandation #1 en France. Avantages : performance excellente pour WordPress (PHP optimisé, cache LiteSpeed, OPcache, MySQL bien configuré), support technique réactif et compétent (français), hébergement en France (Auvergne) donc RGPD-friendly, prix très raisonnable (~7€/mois pour un site, illimité en sites). Idéal pour PME et associations qui veulent un hébergement sérieux sans casser la tirelire. Kinsta est l'alternative premium (~35$/mois) pour les sites WordPress qui exigent le top niveau (apps WP critiques, gros trafic).",
         },
         {
-          title: "AWS — la flexibilité maximale",
+          title: "Scaleway et OVH — souveraineté française",
           content:
-            "Pour des besoins complexes (multi-régions, services managés AWS spécifiques, gros volumes), AWS reste la référence. Coût difficilement prévisible, courbe d'apprentissage importante. Pertinent pour des projets à fort potentiel de scale.",
+            "Pour un client sensible à la souveraineté des données (administration, santé, finance, défense), un hébergeur français est presque obligatoire en 2026. Scaleway (Iliad/Free) : très bonne offre cloud (Object Storage, Kubernetes, Postgres managé, Functions), datacenters en France, support correct, prix compétitifs. OVHcloud : leader européen, infrastructure massive, plus complexe à utiliser (UI vieillissante mais robuste). Pour héberger une app Next.js sur ces clouds, il faut maîtriser Docker + Kubernetes ou utiliser leurs offres PaaS naissantes. Coût stable, prévisible, mais DX plus rugueuse. Demande de la compétence DevOps pour bien faire.",
         },
         {
-          title: "Notre recommandation",
+          title: "AWS — la flexibilité maximale pour le scale",
           content:
-            "Pour 80% des projets PME que nous accompagnons : Vercel pour le front Next.js + Neon (Postgres serverless) pour la base. Pour les projets exigeants en souveraineté : Scaleway + Postgres managé Scaleway. Pour les projets à fort scale : AWS, mais on prévoit du temps DevOps dédié.",
+            "Pour des besoins complexes (multi-régions, services managés AWS spécifiques, gros volumes 100k+ utilisateurs/jour, intégrations IA via Bedrock), AWS reste la référence. Plus de 200 services managés disponibles, écosystème immense, scalabilité quasi-infinie. Coût difficilement prévisible (toujours des services cachés qui s'accumulent), courbe d'apprentissage importante, vendor lock-in si vous utilisez les services proprios. Pertinent pour des projets à fort potentiel de scale (SaaS B2B avec millions d'événements, e-commerce gros volume, plateformes média). Sur ces projets, on dédie du temps DevOps spécifique.",
+        },
+        {
+          title: "Cloudflare — l'option émergente puissante",
+          content:
+            "Cloudflare s'impose comme une option crédible en 2026 : Workers (compute edge ultra-rapide), Pages (hébergement static + SSR), R2 (S3 compatible sans frais de bande passante), D1 (SQLite serverless), KV / Queues / Durable Objects. Avantages : performance globale, prix imbattables (R2 sans bandwidth fees révolutionne le stockage), édité par une entreprise solide. Inconvénients : Workers ont des contraintes (50ms CPU max, taille bundle 1MB), compatibilité Next.js encore en évolution (mieux qu'avant mais pas aussi mature que Vercel). Notre conseil : à considérer pour les apps statiques + API edge, à laisser pour les apps full-stack lourdes.",
+        },
+        {
+          title: "Le piège : choisir l'hébergement avant l'architecture",
+          content:
+            "Erreur classique : choisir l'hébergement AVANT d'avoir cadré l'architecture. La bonne séquence : 1) Comprendre le besoin métier (catégorie de site, volumes, contraintes). 2) Choisir la stack technique (WordPress, Next.js, Astro, etc.). 3) Définir les contraintes de l'hébergement (souveraineté, budget mensuel, scaling attendu). 4) Choisir l'hébergeur qui matche. Pas l'inverse. Si vous choisissez l'hébergement d'abord, vous pouvez vous retrouver à compromettre la stack pour s'adapter à l'infra (mauvaise idée).",
+        },
+        {
+          title: "Notre grille de décision finale",
+          content:
+            "Pour 80% des projets PME que nous accompagnons : SITE WORDPRESS → o2switch (FR, performant, abordable) ou Kinsta (premium). SITE NEXT.JS / REACT → Vercel + Neon (Postgres serverless EU). APP MOBILE BACK-END → Supabase ou Firebase selon préférence. PROJET SOUVERAINETÉ FORTE → Scaleway + Postgres managé Scaleway. PROJET FORT VOLUME / MULTI-RÉGIONS → AWS avec architecture dédiée. PROJET API EDGE GLOBAL → Cloudflare Workers. Cette grille couvre 95% des cas. Les 5% restants sont des hybrides ou des cas exotiques qui demandent une étude spécifique.",
+        },
+        {
+          title: "Coûts comparés sur 3 ans (estimation)",
+          content:
+            "Pour un site WordPress vitrine PME (~30k visiteurs/mois) : o2switch ~250€/3ans. Kinsta ~1200€/3ans. Pour un site Next.js startup early stage (~100k visiteurs/mois) : Vercel ~720€/3ans (Pro 20$/dev). Scaleway ~600€/3ans (VPS + Postgres managé). AWS variable, souvent 1500-3000€/3ans selon services utilisés. Pour un SaaS B2B (~1M de visiteurs/mois, dashboards, API) : Vercel Enterprise 2000-5000€/an. AWS 3000-8000€/an. Auto-hosted Kubernetes Scaleway/OVH ~1500€/an + temps DevOps. Le coût d'hébergement est rarement la variable décisive en dessous de 10k€/an — c'est le coût total d'opération qui compte.",
+        },
+        {
+          title: "Et la migration entre hébergeurs ?",
+          content:
+            "Bonne nouvelle : la plupart des stacks modernes (WordPress, Next.js, Docker) sont relativement portables. Mauvaise nouvelle : la migration prend du temps et casse souvent des choses (DNS, certs SSL, jobs cron, variables d'env). Notre conseil : choisir un hébergement avec lequel vous vous voyez rester 3-5 ans minimum. Pour les projets en lock-in fort (Lambda, Cloudflare Workers avec D1 et KV très intégrés), bien évaluer le coût de sortie avant de s'engager. Pour les stacks portables (WordPress sur n'importe quel mutualisé/VPS, Next.js Dockerisé), la migration est moins risquée.",
         },
       ],
       conclusion:
-        "Il n'y a pas de mauvais choix, juste un choix adapté à votre contexte. Le coût d'hébergement est rarement la variable la plus importante — c'est plutôt le coût d'opération sur 3 ans qu'il faut regarder. Et la possibilité d'évoluer sans tout réécrire.",
+        "Il n'y a pas de mauvais choix entre Vercel, o2switch, Scaleway, AWS — juste un choix adapté à votre contexte. Le coût d'hébergement est rarement la variable la plus importante (en dessous de 10k€/an) — c'est plutôt le coût d'opération sur 3 ans qu'il faut regarder, la portabilité, et la possibilité d'évoluer sans tout réécrire. Si vous hésitez pour votre projet entre 2-3 options, on peut vous aider à cadrer le bon choix selon votre stack et vos contraintes — premier échange offert chez Krealabs.",
     },
   },
 ];
