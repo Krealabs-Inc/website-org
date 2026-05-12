@@ -25,20 +25,23 @@ export function ParticlesBg({
   color = "var(--accent)",
 }: ParticlesBgProps) {
   const particles = useMemo(() => {
-    // Pseudo-random stable basé sur index (pas de Math.random pour SSR)
+    // Pseudo-random stable basé sur index (pas de Math.random pour SSR).
+    // On arrondit à 2 décimales pour éviter les mismatchs d'hydratation
+    // entre la sérialisation float côté serveur vs client.
+    const round2 = (n: number) => Math.round(n * 100) / 100;
+    const hash = (n: number) => {
+      const x = Math.sin(n) * 10000;
+      return x - Math.floor(x);
+    };
     return Array.from({ length: count }, (_, i) => {
-      const hash = (n: number) => {
-        const x = Math.sin(n) * 10000;
-        return x - Math.floor(x);
-      };
       const seed = i + 1;
       return {
-        left: hash(seed) * 100,
-        top: hash(seed * 2.3) * 100,
-        size: minSize + hash(seed * 3.7) * (maxSize - minSize),
-        delay: hash(seed * 4.1) * 6,
-        duration: 8 + hash(seed * 5.3) * 8,
-        opacity: 0.15 + hash(seed * 6.7) * 0.35,
+        left: round2(hash(seed) * 100),
+        top: round2(hash(seed * 2.3) * 100),
+        size: round2(minSize + hash(seed * 3.7) * (maxSize - minSize)),
+        delay: round2(hash(seed * 4.1) * 6),
+        duration: round2(8 + hash(seed * 5.3) * 8),
+        opacity: round2(0.15 + hash(seed * 6.7) * 0.35),
       };
     });
   }, [count, minSize, maxSize]);
