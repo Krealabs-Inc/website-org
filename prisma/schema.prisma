@@ -13,26 +13,195 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ===================================
+// CONTACTS & CRM
+// ===================================
+
 model WaitlistContact {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  source    String   @default("website") // website, blog, other
-  createdAt DateTime @default(now())
+  id        String        @id @default(cuid())
+  email     String        @unique
+  source    String        @default("website") // website, blog, other
+  status    ContactStatus @default(NEW)
+  priority  Int           @default(0) // 0=normal, 1=high, 2=urgent
+  tags      String[]      @default([])
+  assignedTo String?      // AdminUser id
+  notes     Note[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @default(now()) @updatedAt
 
   @@map("waitlist_contacts")
+  @@index([status])
+  @@index([priority])
+  @@index([assignedTo])
 }
 
 model ContactForm {
-  id            String   @id @default(cuid())
-  requestType   String   // devis, contact, partenariat
+  id            String        @id @default(cuid())
+  requestType   String        // devis, contact, partenariat
   name          String
   email         String
   phone         String?
   company       String?
   pricingOption String?
   message       String
-  filesCount    Int      @default(0)
-  createdAt     DateTime @default(now())
+  filesCount    Int           @default(0)
+  status        ContactStatus @default(NEW)
+  priority      Int           @default(0) // 0=normal, 1=high, 2=urgent
+  tags          String[]      @default([])
+  assignedTo    String?       // AdminUser id
+  notes         Note[]
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @default(now()) @updatedAt
 
   @@map("contact_forms")
+  @@index([status])
+  @@index([email])
+  @@index([priority])
+  @@index([assignedTo])
+}
+
+enum ContactStatus {
+  NEW           // Nouveau contact
+  CONTACTED     // Premier contact effectué
+  QUALIFIED     // Lead qualifié
+  PROPOSAL_SENT // Devis envoyé
+  NEGOTIATION   // En négociation
+  WON           // Gagné - converti en client
+  LOST          // Perdu
+  UNRESPONSIVE  // Sans réponse
+}
+
+model Note {
+  id            String           @id @default(cuid())
+  content       String           @db.Text
+  authorId      String           // AdminUser id
+  waitlistId    String?
+  contactFormId String?
+  waitlist      WaitlistContact? @relation(fields: [waitlistId], references: [id], onDelete: Cascade)
+  contactForm   ContactForm?     @relation(fields: [contactFormId], references: [id], onDelete: Cascade)
+  createdAt     DateTime         @default(now())
+
+  @@map("notes")
+  @@index([waitlistId])
+  @@index([contactFormId])
+  @@index([authorId])
+}
+
+// ===================================
+// ADMIN & AUTHENTICATION
+// ===================================
+
+model AdminUser {
+  id           String      @id @default(cuid())
+  email        String      @unique
+  name         String
+  role         AdminRole   @default(VIEWER)
+  passwordHash String
+  sessions     Session[]
+  auditLogs    AuditLog[]
+  lastLoginAt  DateTime?
+  isActive     Boolean     @default(true)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+
+  @@map("admin_users")
+  @@index([email])
+  @@index([role])
+  @@index([isActive])
+}
+
+enum AdminRole {
+  SUPER_ADMIN // Accès complet + gestion admins
+  ADMIN       // Accès complet sauf gestion admins
+  EDITOR      // Lecture + écriture (pas de suppression)
+  VIEWER      // Lecture seule
+}
+
+model Session {
+  id        String    @id @default(cuid())
+  adminId   String
+  admin     AdminUser @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  token     String    @unique
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+
+  @@map("sessions")
+  @@index([adminId])
+  @@index([token])
+  @@index([expiresAt])
+}
+
+model AuditLog {
+  id         String    @id @default(cuid())
+  adminId    String
+  admin      AdminUser @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  action     String    // CREATE_CONTACT, DELETE_PRODUCT, UPDATE_ORDER, etc.
+  resource   String    // Contact, Product, Order, Campaign, etc.
+  resourceId String?
+  metadata   Json?     // Détails de l'action
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime  @default(now())
+
+  @@map("audit_logs")
+  @@index([adminId])
+  @@index([action])
+  @@index([resource])
+  @@index([createdAt])
+}
+
+// ===================================
+// EMAIL CAMPAIGNS
+// ===================================
+
+model Campaign {
+  id          String         @id @default(cuid())
+  name        String
+  subject     String
+  htmlContent String         @db.Text
+  target      CampaignTarget @default(ALL)
+  status      CampaignStatus @default(DRAFT)
+  scheduledAt DateTime?
+  sentAt      DateTime?
+  stats       Json?          // { sent: 0, delivered: 0, opened: 0, clicked: 0, bounced: 0, unsubscribed: 0 }
+  createdBy   String         // AdminUser id
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@map("campaigns")
+  @@index([status])
+  @@index([createdBy])
+  @@index([scheduledAt])
+}
+
+enum CampaignTarget {
+  ALL       // Tous les contacts
+  WAITLIST  // Uniquement waitlist
+  FORMS     // Uniquement formulaires
+  CUSTOMERS // Uniquement clients ayant acheté
+  CUSTOM    // Segmentation custom (via tags/filters)
+}
+
+enum CampaignStatus {
+  DRAFT     // Brouillon
+  SCHEDULED // Planifiée
+  SENDING   // En cours d'envoi
+  SENT      // Envoyée
+  FAILED    // Échec
+}
+
+// ===================================
+// ANALYTICS
+// ===================================
+
+model DailyMetric {
+  id          String   @id @default(cuid())
+  date        DateTime @unique
+  newContacts Int      @default(0)
+  newDevisRequests Int @default(0) // Demandes de devis
+  newLeads    Int      @default(0) // Leads qualifiés
+  createdAt   DateTime @default(now())
+
+  @@map("daily_metrics")
+  @@index([date])
 }
