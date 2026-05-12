@@ -73,7 +73,7 @@ const VALUES = [
     label: "Artisanat",
     title: "Pas de copy-paste",
     description:
-      "Chaque projet est conçu pour son contexte. Pas de template recyclé, pas de WordPress générique.",
+      "Chaque projet est conçu pour son contexte. Thèmes WordPress custom, applications Next.js sur mesure — pas de template recyclé, pas de page builder bloated.",
   },
   {
     label: "Pérennité",

@@ -16,10 +16,18 @@ import { ServiceCta } from "@/components/services/service-cta";
 
 const TECHNOLOGIES = [
   {
+    name: "WordPress",
+    kind: "CMS · Spécialité",
+    description:
+      "Notre spécialité historique. Sites sur mesure (thèmes custom, ACF Pro, pas de page builders), WooCommerce, refonte, SEO, maintenance. La majorité de nos clients sont sur WordPress.",
+    points: ["Thème custom + ACF", "WooCommerce e-commerce", "Maintenance & sécurité"],
+    href: "/services/wordpress",
+  },
+  {
     name: "Next.js",
     kind: "Framework React",
     description:
-      "Le framework React de production. Server Components, App Router, optimisations automatiques. Notre arme principale pour les sites web modernes.",
+      "Le framework React de production. Server Components, App Router, optimisations automatiques. Notre stack moderne pour les projets qui demandent plus que WordPress.",
     points: ["Rendu serveur", "SEO natif", "Performance optimale"],
     href: "/technologies/nextjs",
   },
@@ -63,9 +71,10 @@ export default function TechnologiesPage() {
               nous misons.
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Nous travaillons exclusivement avec un écosystème moderne, typé,
-              testé. Pas de WordPress legacy, pas de page builders : du code
-              propre, conçu pour durer.
+              WordPress reste notre spécialité (et la majorité des projets que
+              nous livrons), mais on s'adapte : Next.js, React Native,
+              TypeScript, Python, Node.js — on choisit la techno selon le
+              projet, pas selon une chapelle.
             </p>
             <div className="mt-10">
               <Button size="lg" asChild>

@@ -51,16 +51,29 @@ export function OrganizationSchema() {
     },
 
     knowsAbout: [
+      "WordPress",
+      "WooCommerce",
+      "Création de site WordPress",
+      "Refonte WordPress",
+      "Maintenance WordPress",
+      "Sécurité WordPress",
+      "Headless WordPress",
       "Développement web",
       "Création de site internet",
       "Application mobile",
       "Logiciel sur mesure",
+      "PHP",
+      "MySQL",
+      "JavaScript",
+      "TypeScript",
+      "Python",
       "React",
       "Next.js",
       "React Native",
-      "TypeScript",
       "SEO",
+      "SEO local Rouen",
       "Performance web",
+      "Core Web Vitals",
       "Design UI/UX",
     ],
 
@@ -70,7 +83,12 @@ export function OrganizationSchema() {
       itemListElement: [
         {
           "@type": "OfferCatalog",
-          name: "Développement web",
+          name: "WordPress sur mesure",
+          url: "https://krealabs.fr/services/wordpress",
+        },
+        {
+          "@type": "OfferCatalog",
+          name: "Développement web custom",
           url: "https://krealabs.fr/services/developpement-web",
         },
         {

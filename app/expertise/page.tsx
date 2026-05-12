@@ -272,7 +272,20 @@ const COMPETENCES = [
 
 const STACK_CATEGORIES = [
   {
-    title: "Frontend",
+    title: "WordPress (notre spécialité)",
+    items: [
+      { kind: "CMS", name: "WordPress", tagline: "Thèmes custom, pas de page builders" },
+      { kind: "E-commerce", name: "WooCommerce", tagline: "Boutiques en ligne sur mesure" },
+      { kind: "Champs", name: "ACF Pro", tagline: "Champs personnalisés robustes" },
+      { kind: "SEO", name: "RankMath / Yoast", tagline: "SEO WordPress avancé" },
+      { kind: "Performance", name: "WP Rocket", tagline: "Cache + minify" },
+      { kind: "Sécurité", name: "Wordfence", tagline: "Pare-feu + scan malwares" },
+      { kind: "Headless", name: "WPGraphQL", tagline: "API GraphQL pour Next.js" },
+      { kind: "Langages", name: "PHP · MySQL", tagline: "Fondations WordPress" },
+    ],
+  },
+  {
+    title: "Frontend (stack moderne)",
     items: [
       { kind: "Framework", name: "Next.js 16", tagline: "App Router, RSC" },
       { kind: "Bibliothèque", name: "React 19", tagline: "Server Components" },
@@ -296,14 +309,14 @@ const STACK_CATEGORIES = [
   {
     title: "Backend & base de données",
     items: [
+      { kind: "PHP", name: "Laravel / Symfony", tagline: "Pour les API & apps PHP" },
+      { kind: "Python", name: "FastAPI / Django", tagline: "Quand Python est requis" },
       { kind: "Runtime", name: "Node.js / Edge", tagline: "Vercel Functions" },
       { kind: "ORM", name: "Prisma", tagline: "Typage strict DB" },
-      { kind: "Base", name: "PostgreSQL", tagline: "Neon / Supabase" },
+      { kind: "Base SQL", name: "PostgreSQL / MySQL", tagline: "Neon, Supabase, RDS" },
       { kind: "Auth", name: "NextAuth / Lucia", tagline: "Sessions, OAuth" },
-      { kind: "Fichiers", name: "UploadThing / S3", tagline: "Stockage fichiers" },
       { kind: "Emails", name: "Resend", tagline: "Transactional emails" },
-      { kind: "Paiement", name: "Stripe", tagline: "Si nécessaire" },
-      { kind: "Real-time", name: "Pusher / Liveblocks", tagline: "WebSockets" },
+      { kind: "Paiement", name: "Stripe / WooCommerce", tagline: "Selon stack" },
     ],
   },
   {

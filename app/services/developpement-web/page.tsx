@@ -151,7 +151,7 @@ const FEATURES = [
   {
     icon: RefreshCw,
     title: "Refonte de site",
-    description: "Migration d'un site WordPress, Wix ou ancien CMS vers une stack moderne sans perdre votre SEO.",
+    description: "Migration d'un site Wix, Squarespace, Webflow ou ancien CMS vers la stack adaptée à votre projet — WordPress moderne ou stack JavaScript selon le besoin. SEO préservé.",
   },
 ];
 

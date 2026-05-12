@@ -7,6 +7,7 @@ import {
   Sparkles,
   Gauge,
   ArrowRight,
+  Wrench,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -111,15 +112,28 @@ export default function ServicesIndexPage() {
 
 const SERVICES = [
   {
-    icon: Code2,
-    eyebrow: "Sites & applications web",
-    title: "Développement web",
+    icon: Wrench,
+    eyebrow: "Spécialité · WordPress",
+    title: "Sites WordPress sur mesure",
     description:
-      "Sites vitrines performants, plateformes SaaS, applications métier sur mesure. Stack moderne, code typé, architecture scalable.",
+      "Notre métier historique : création WordPress sur mesure, WooCommerce, refonte, SEO, maintenance, sécurité. Thèmes custom (pas de page builders), plugins développés à la main.",
     points: [
-      "Next.js · React · TypeScript",
+      "Thème custom + ACF Pro",
+      "WooCommerce e-commerce",
+      "Maintenance & sécurité",
+    ],
+    href: "/services/wordpress",
+  },
+  {
+    icon: Code2,
+    eyebrow: "Sur mesure · Polyvalent",
+    title: "Développement web custom",
+    description:
+      "Quand WordPress ne suffit pas : Next.js, React, Python, Node.js. Plateformes SaaS, apps métier, API. La techno s'adapte au projet.",
+    points: [
+      "Next.js · TypeScript · Python",
       "Architectures scalables",
-      "SEO & performance",
+      "API & intégrations",
     ],
     href: "/services/developpement-web",
   },

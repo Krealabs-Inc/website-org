@@ -281,10 +281,17 @@ const REASONS = [
 
 const LOCAL_SERVICES = [
   {
-    icon: Code2,
-    title: "Création de site internet à Rouen",
+    icon: Building2,
+    title: "Sites WordPress sur mesure à Rouen",
     description:
-      "Sites vitrines, sites e-commerce, plateformes SaaS. Optimisés SEO local pour ressortir sur les requêtes Rouen et Normandie.",
+      "Notre spécialité : sites WordPress, WooCommerce, thèmes custom, refonte. La majorité de nos clients normands sont sur WordPress.",
+    href: "/services/wordpress",
+  },
+  {
+    icon: Code2,
+    title: "Création de site internet custom",
+    description:
+      "Quand WordPress ne suffit pas : Next.js, React, Python, Node.js. Plateformes SaaS, outils métier sur mesure.",
     href: "/services/developpement-web",
   },
   {
@@ -295,17 +302,10 @@ const LOCAL_SERVICES = [
     href: "/services/applications-mobile",
   },
   {
-    icon: Building2,
-    title: "Logiciel sur mesure pour PME",
-    description:
-      "Outils internes, plateformes B2B, applications métier. Nous concevons des logiciels qui simplifient votre quotidien.",
-    href: "/services/developpement-web",
-  },
-  {
     icon: Search,
     title: "SEO local & référencement Rouen",
     description:
-      "Audit, optimisation Core Web Vitals, fiche Google Business, citations locales. Pour ressortir devant la concurrence rouennaise.",
+      "Audit, optimisation Core Web Vitals, fiche Google Business, SEO WordPress / général. Pour ressortir devant la concurrence rouennaise.",
     href: "/services/performance-seo",
   },
 ];
