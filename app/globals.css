@@ -244,6 +244,24 @@ body {
   }
 }
 
+/* Optimisation mobile : couper les animations continues (infinite loops)
+   qui consomment CPU/GPU/batterie. Les animations one-shot (fade-up,
+   highlighter, hover transitions) restent actives. */
+@media (max-width: 767px) {
+  .animate-marquee,
+  .animate-border-beam,
+  .animate-particle-float,
+  .animate-shimmer,
+  .animate-mesh-1,
+  .animate-mesh-2,
+  .animate-mesh-3,
+  .animate-glitch-cyan,
+  .animate-glitch-red,
+  .animate-glitch-flicker {
+    animation: none !important;
+  }
+}
+
 @layer base {
   * {
     border-color: var(--border);

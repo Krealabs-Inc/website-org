@@ -13,9 +13,11 @@ interface MeshGradientProps {
  */
 export function MeshGradient({ className, intensity = 0.4 }: MeshGradientProps) {
   return (
+    // Hidden sur mobile : les 3 blobs blurred consomment trop de GPU
+    // sur petit écran et n'apportent rien hors viewport desktop.
     <div
       aria-hidden
-      className={cn("absolute inset-0 overflow-hidden pointer-events-none", className)}
+      className={cn("hidden md:block absolute inset-0 overflow-hidden pointer-events-none", className)}
       style={{ opacity: intensity }}
     >
       <div

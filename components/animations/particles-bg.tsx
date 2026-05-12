@@ -47,7 +47,9 @@ export function ParticlesBg({
   }, [count, minSize, maxSize]);
 
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+    // Hidden sur mobile : les 30 particules consomment trop de DOM/CPU
+    // sans apporter de valeur visuelle sur petit écran.
+    <div aria-hidden className="hidden md:block pointer-events-none absolute inset-0 overflow-hidden">
       {particles.map((p, i) => (
         <span
           key={i}

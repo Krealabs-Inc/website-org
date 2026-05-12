@@ -25,10 +25,12 @@ export function BorderBeam({
   className,
 }: BorderBeamProps) {
   return (
+    // Hidden sur mobile : animation infinie offset-path coûteuse,
+    // pas de valeur visuelle nette sur petit écran.
     <div
       aria-hidden
       className={cn(
-        "pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden",
+        "hidden md:block pointer-events-none absolute inset-0 rounded-[inherit] overflow-hidden",
         "[mask-image:linear-gradient(white,white)]",
         className,
       )}

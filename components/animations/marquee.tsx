@@ -27,9 +27,11 @@ export function Marquee({
   className,
 }: MarqueeProps) {
   return (
+    // Hidden sur mobile : animation infinie qui consomme CPU même paused.
+    // La stack reste visible via les cards en dessous sur la home.
     <div
       className={cn(
-        "group/marquee flex overflow-hidden",
+        "group/marquee hidden md:flex overflow-hidden",
         fade &&
           "[mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]",
         className,
