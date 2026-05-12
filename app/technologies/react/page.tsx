@@ -1,284 +1,103 @@
-"use client";
+import { Metadata } from "next";
+import {
+  Component,
+  Workflow,
+  Boxes,
+  Recycle,
+  TestTube2,
+  Sparkles,
+  Building2,
+  LayoutDashboard,
+  AppWindow,
+} from "lucide-react";
 
-import { motion } from "framer-motion";
-import { Code, Check, ArrowRight, Zap, Users, Shield, Layers, Rocket, RefreshCw } from "lucide-react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+export const metadata: Metadata = {
+  title: "React à Rouen — Bibliothèque UI moderne",
+  description:
+    "Développement React à Rouen. Composants réutilisables, écosystème mature, standard de l'industrie. Base de nos applications web et mobiles.",
+  alternates: { canonical: "https://krealabs.fr/technologies/react" },
+};
 
-const features = [
-  {
-    icon: Zap,
-    title: "Performance optimale",
-    description: "Virtual DOM et optimisations avancées pour des interfaces ultra-rapides et réactives"
-  },
-  {
-    icon: Layers,
-    title: "Composants réutilisables",
-    description: "Architecture modulaire pour construire des applications scalables et maintenables"
-  },
-  {
-    icon: Shield,
-    title: "Écosystème riche",
-    description: "Milliers de bibliothèques et outils pour accélérer votre développement"
-  },
-  {
-    icon: Users,
-    title: "Communauté active",
-    description: "Support mondial et ressources illimitées pour résoudre tous vos défis"
-  },
-  {
-    icon: Rocket,
-    title: "Production-ready",
-    description: "Utilisé par Meta, Netflix, Airbnb et des milliers d'entreprises leaders"
-  },
-  {
-    icon: RefreshCw,
-    title: "Développement rapide",
-    description: "Hot reload et outils de dev pour un cycle de développement ultra-rapide"
-  }
+import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { ServiceHero } from "@/components/services/service-hero";
+import { ServiceFeatures } from "@/components/services/service-features";
+import { ServiceCta } from "@/components/services/service-cta";
+
+const FEATURES = [
+  { icon: Component, title: "Composants réutilisables", description: "Une logique d'UI claire, modulaire, testable." },
+  { icon: Workflow, title: "Écosystème immense", description: "Des milliers de bibliothèques matures pour tout faire." },
+  { icon: Boxes, title: "Standard de l'industrie", description: "Adopté par Meta, Netflix, Airbnb, Shopify. Compétences disponibles." },
+  { icon: Recycle, title: "Web + mobile", description: "Même paradigme pour React et React Native. Une seule philosophie." },
+  { icon: TestTube2, title: "Testable nativement", description: "Outils de test matures : Vitest, Playwright, React Testing Library." },
+  { icon: Sparkles, title: "Hooks modernes", description: "useState, useEffect, hooks customisés. Logique partageable, code clair." },
 ];
 
-const useCases = [
-  {
-    title: "Applications SaaS",
-    description: "Plateformes web complexes avec dashboards temps réel et interfaces utilisateur riches",
-    results: ["Interfaces réactives", "État complexe géré", "Performance garantie"]
-  },
-  {
-    title: "E-commerce",
-    description: "Boutiques en ligne performantes avec expérience utilisateur optimale et conversions maximisées",
-    results: ["UX exceptionnelle", "Temps de chargement < 1s", "Mobile-first"]
-  },
-  {
-    title: "Progressive Web Apps",
-    description: "Applications web modernes avec fonctionnalités offline et notifications push",
-    results: ["Offline-first", "Installation native", "Engagement utilisateur"]
-  }
-];
-
-const techStack = [
-  { name: "React 19", description: "Dernière version avec Server Components et optimisations majeures" },
-  { name: "React Hooks", description: "État et effets de bord avec une API élégante et puissante" },
-  { name: "Context API", description: "Gestion d'état globale sans bibliothèque externe" },
-  { name: "React Router", description: "Navigation client-side fluide et optimisée" },
-  { name: "React Query", description: "Gestion du cache et synchronisation serveur simplifiée" },
-  { name: "Testing Library", description: "Tests robustes centrés sur l'expérience utilisateur" },
+const USE_CASES = [
+  { icon: AppWindow, title: "Single Page Applications", description: "Apps web complexes avec navigation côté client fluide." },
+  { icon: LayoutDashboard, title: "Tableaux de bord", description: "Interfaces riches en données avec graphiques temps réel." },
+  { icon: Building2, title: "Outils internes", description: "Back-offices, CRM, ERP custom, outils métier sur mesure." },
 ];
 
 export default function ReactPage() {
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030303] transition-colors pt-20">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#A543F1]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10 border-b border-gray-200 dark:border-white/[0.08]">
-        <div className="container mx-auto px-4 py-16 md:py-24 max-w-7xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A543F1]/10 border border-[#A543F1]/20 mb-6">
-                <Code className="w-4 h-4 text-[#A543F1]" />
-                <span className="text-sm font-medium text-[#A543F1] font-[family-name:var(--font-heading)]">
-                  React
-                </span>
-              </div>
+    <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <ServiceHero
+        number="02"
+        eyebrow="Technologie · UI"
+        title={
+          <>
+            <em>React</em> : la bibliothèque
+            <br />
+            qui a tout changé.
+          </>
+        }
+        description="L'écosystème UI le plus mature de l'industrie. Composants réutilisables, philosophie déclarative, communauté immense. La base de toutes nos applications web et mobiles."
+      />
 
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 font-[family-name:var(--font-heading)]">
-                <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] to-[#c5cbf9]">
-                  React
-                </span>
-                <br />
-                <span className="text-gray-900 dark:text-white">
-                  interfaces modernes et performantes
-                </span>
-              </h1>
+      <ServiceFeatures
+        number="01"
+        eyebrow="Pourquoi React"
+        title={
+          <>
+            Six fondations <em>solides</em>.
+          </>
+        }
+        features={FEATURES}
+      />
 
-              <p className="text-xl text-gray-600 dark:text-white/60 mb-8 leading-relaxed font-[family-name:var(--font-sans)]">
-                Créez des applications web interactives et rapides avec React, la bibliothèque
-                de référence pour construire des interfaces utilisateur exceptionnelles.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/contact">
-                  <Button className="bg-gradient-to-r from-[#A543F1] to-[#c5cbf9] hover:from-[#9333ea] hover:to-[#a78bfa] text-white px-8 py-6 text-base font-[family-name:var(--font-heading)]">
-                    Démarrer un projet
-                    <ArrowRight className="w-5 h-5 ml-2" />
-                  </Button>
-                </Link>
-                <Link href="#avantages">
-                  <Button variant="outline" className="border-gray-300 dark:border-white/[0.08] px-8 py-6 text-base font-[family-name:var(--font-heading)]">
-                    Découvrir React
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="relative"
-            >
-              <div className="relative bg-gradient-to-br from-[#A543F1]/20 to-[#c5cbf9]/20 rounded-2xl p-8 border border-[#A543F1]/20">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#A543F1] to-[#c5cbf9] opacity-5 rounded-2xl" />
-                <Code className="w-full h-auto text-[#A543F1] opacity-20" />
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section id="avantages" className="py-16 md:py-24">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-white/80 font-[family-name:var(--font-heading)]">
-              Pourquoi choisir React ?
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="max-w-3xl mb-16">
+            <Eyebrow number="02" className="mb-6">Cas d'usage</Eyebrow>
+            <h2 className="text-h1">
+              Là où React <em>excelle</em>.
             </h2>
-            <p className="text-lg text-gray-600 dark:text-white/60 max-w-3xl mx-auto font-[family-name:var(--font-sans)]">
-              La bibliothèque JavaScript qui révolutionne le développement d'interfaces
-            </p>
           </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {features.map((feature, index) => {
-              const Icon = feature.icon;
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            {USE_CASES.map((u) => {
+              const Icon = u.icon;
               return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="group p-6 bg-gray-50 dark:bg-white/[0.02] rounded-2xl border border-gray-200 dark:border-white/[0.08] hover:border-[#A543F1]/50 transition-all"
-                >
-                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#A543F1]/10 mb-4 group-hover:bg-[#A543F1]/20 transition-colors">
-                    <Icon className="w-6 h-6 text-[#A543F1]" />
+                <div key={u.title} className="bg-[var(--background)] p-8">
+                  <div className="size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mb-6">
+                    <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 font-[family-name:var(--font-heading)]">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-white/60 font-[family-name:var(--font-sans)]">
-                    {feature.description}
-                  </p>
-                </motion.div>
+                  <h3 className="text-h4 mb-2">{u.title}</h3>
+                  <p className="text-body-sm text-[var(--muted-foreground)]">{u.description}</p>
+                </div>
               );
             })}
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* Tech Stack Section */}
-      <section className="py-16 md:py-24 bg-gray-50 dark:bg-white/[0.02]">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-white/80 font-[family-name:var(--font-heading)]">
-              Notre expertise React
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-white/60 max-w-3xl mx-auto font-[family-name:var(--font-sans)]">
-              Maîtrise complète de l'écosystème React pour des applications optimales
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {techStack.map((tech, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-6 bg-white dark:bg-white/[0.02] rounded-xl border border-gray-200 dark:border-white/[0.08]"
-              >
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2 font-[family-name:var(--font-heading)]">
-                  {tech.name}
-                </h3>
-                <p className="text-sm text-gray-600 dark:text-white/60 font-[family-name:var(--font-sans)]">
-                  {tech.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Use Cases Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-white/80 font-[family-name:var(--font-heading)]">
-              Projets React réalisés
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-white/60 max-w-3xl mx-auto font-[family-name:var(--font-sans)]">
-              Des applications React qui transforment les activités de nos clients
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {useCases.map((useCase, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="p-8 bg-gray-50 dark:bg-white/[0.02] rounded-2xl border border-gray-200 dark:border-white/[0.08]"
-              >
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3 font-[family-name:var(--font-heading)]">
-                  {useCase.title}
-                </h3>
-                <p className="text-gray-600 dark:text-white/60 mb-6 font-[family-name:var(--font-sans)]">
-                  {useCase.description}
-                </p>
-                <div className="space-y-2">
-                  {useCase.results.map((result, i) => (
-                    <div key={i} className="flex items-center gap-2">
-                      <Check className="w-4 h-4 text-[#A543F1]" />
-                      <span className="text-sm text-gray-700 dark:text-white/70 font-[family-name:var(--font-sans)]">
-                        {result}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gray-50 dark:bg-white/[0.02]">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="bg-gradient-to-r from-[#A543F1] to-[#c5cbf9] p-8 md:p-12 rounded-2xl text-white text-center"
-          >
-            <h2 className="text-3xl md:text-5xl font-bold mb-6 font-[family-name:var(--font-heading)]">
-              Prêt à démarrer avec React ?
-            </h2>
-            <p className="text-white/90 mb-8 text-lg max-w-2xl mx-auto font-[family-name:var(--font-sans)]">
-              Créons ensemble une application React performante qui ravira vos utilisateurs.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/contact">
-                <Button className="bg-white text-[#A543F1] hover:bg-white/90 px-8 py-6 text-base font-[family-name:var(--font-heading)]">
-                  Obtenir un devis gratuit
-                  <ArrowRight className="w-5 h-5 ml-2" />
-                </Button>
-              </Link>
-              <Link href="/services">
-                <Button variant="outline" className="border-white text-white hover:bg-white/10 px-8 py-6 text-base font-[family-name:var(--font-heading)]">
-                  Voir nos services
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <ServiceCta
+        title={
+          <>
+            Une app <em>React</em> à construire ?
+          </>
+        }
+      />
     </main>
   );
 }

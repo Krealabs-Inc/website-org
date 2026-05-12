@@ -1,256 +1,243 @@
-'use client';
+import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowRight, Rocket, Layers, TrendingUp, MapPin } from "lucide-react";
 
-import { motion } from "framer-motion";
-import { Sparkles, Heart, Rocket, Users, Target, Award } from "lucide-react";
-import { CTASection } from "@/components/blocks/cta-section";
+export const metadata: Metadata = {
+  title: "Notre histoire — Agence web à Rouen depuis 2020",
+  description:
+    "Découvrez Krealabs, agence digitale fondée à Rouen en 2020. Notre parcours, nos valeurs, notre méthode artisanale au service des entreprises de Normandie.",
+  alternates: { canonical: "https://krealabs.fr/notre-histoire" },
+};
+
+import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { ServiceCta } from "@/components/services/service-cta";
+
+const TIMELINE = [
+  {
+    year: "2020",
+    icon: Rocket,
+    title: "Création de Krealabs",
+    description:
+      "Lancement de l'agence à Rouen avec une idée simple : faire du web qui dure, sans intermédiaires.",
+  },
+  {
+    year: "2021",
+    icon: Layers,
+    title: "Premières applications mobiles",
+    description:
+      "Spécialisation React Native, premières apps publiées sur l'App Store et le Play Store.",
+  },
+  {
+    year: "2022",
+    icon: TrendingUp,
+    title: "Croissance & équipe",
+    description:
+      "Structuration de l'agence, premiers projets SaaS d'envergure, équipe étendue.",
+  },
+  {
+    year: "2024",
+    icon: MapPin,
+    title: "Ancrage régional",
+    description:
+      "Spécialisation SEO local Normandie, accompagnement long terme des PME rouennaises.",
+  },
+];
+
+const TEAM_PREVIEW = [
+  {
+    name: "Maxime Dubois",
+    initials: "MD",
+    role: "Co-fondateur · Développeur",
+    shortBio:
+      "10 ans d'expérience web. Pilote l'architecture technique et la relation client sur les projets Krealabs.",
+  },
+  {
+    name: "Romain Clatot",
+    initials: "RC",
+    role: "Co-fondateur · Développeur",
+    shortBio:
+      "Profil back-end et intégrations. Pilote les choix d'architecture serveur, les API et les bases de données sur nos projets.",
+  },
+];
+
+const VALUES = [
+  {
+    label: "Transparence",
+    title: "Code source partagé",
+    description:
+      "Vous avez accès au dépôt Git dès le jour 1. Pas de dépendance technique, pas de rétention.",
+  },
+  {
+    label: "Artisanat",
+    title: "Pas de copy-paste",
+    description:
+      "Chaque projet est conçu pour son contexte. Pas de template recyclé, pas de WordPress générique.",
+  },
+  {
+    label: "Pérennité",
+    title: "Penser long terme",
+    description:
+      "Code maintenable, documentation à jour, formation incluse. On construit pour 5 ans, pas 6 mois.",
+  },
+  {
+    label: "Proximité",
+    title: "Une équipe accessible",
+    description:
+      "Basés à Rouen, joignables directement. Vous parlez à ceux qui codent — pas à des chefs de projet.",
+  },
+];
 
 export default function NotreHistoirePage() {
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030303] transition-colors pt-20">
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#A543F1]/5 via-transparent to-[#c5cbf9]/5" />
-
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-4xl mx-auto text-center"
-          >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A543F1]/10 border border-[#A543F1]/20 mb-6">
-              <Sparkles className="w-4 h-4 text-[#A543F1]" />
-              <span className="text-sm font-medium text-[#A543F1]">Notre Histoire</span>
-            </div>
-
-            <h1 className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white mb-6 font-[family-name:var(--font-heading)]">
-              Créer des expériences digitales exceptionnelles
+    <main className="bg-[var(--background)] text-[var(--foreground)]">
+      {/* HERO */}
+      <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
+        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
+        <Container className="relative">
+          <div className="max-w-4xl">
+            <Eyebrow dot className="mb-8">Notre histoire</Eyebrow>
+            <h1 className="text-display">
+              Une agence <em>artisanale</em>,
+              <br />
+              ancrée en Normandie.
             </h1>
-
-            <p className="text-xl text-gray-600 dark:text-white/70 mb-8 font-[family-name:var(--font-sans)]">
-              Depuis 2020, nous transformons les idées en solutions digitales innovantes et performantes.
+            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
+              Depuis 2020, nous construisons des sites web, applications mobiles
+              et logiciels sur mesure pour les entreprises de Rouen et de toute
+              la Normandie. Pas de promesses creuses, juste du travail propre.
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Timeline Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-12 text-center font-[family-name:var(--font-heading)]">
-              Notre Parcours
-            </h2>
-
-            <div className="space-y-12">
-              {/* 2020 */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="flex gap-8"
-              >
-                <div className="flex-shrink-0 w-32">
-                  <div className="text-3xl font-bold text-[#A543F1]">2020</div>
-                </div>
-                <div className="flex-1">
-                  <div className="bg-gray-50 dark:bg-white/[0.02] p-6 rounded-xl border border-gray-200 dark:border-white/[0.08]">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Rocket className="w-6 h-6 text-[#A543F1]" />
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">Le Début</h3>
-                    </div>
-                    <p className="text-gray-600 dark:text-white/70">
-                      Fondation de Kréalabs avec une vision claire : créer des solutions web et mobile de qualité pour les entreprises innovantes. Premiers projets avec des startups locales à Rouen.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* 2021 */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="flex gap-8"
-              >
-                <div className="flex-shrink-0 w-32">
-                  <div className="text-3xl font-bold text-[#A543F1]">2021</div>
-                </div>
-                <div className="flex-1">
-                  <div className="bg-gray-50 dark:bg-white/[0.02] p-6 rounded-xl border border-gray-200 dark:border-white/[0.08]">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Users className="w-6 h-6 text-[#A543F1]" />
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">Croissance</h3>
-                    </div>
-                    <p className="text-gray-600 dark:text-white/70">
-                      Agrandissement de l'équipe et diversification des services. Spécialisation dans React, Next.js et React Native. Collaboration avec des entreprises régionales et nationales.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* 2022 */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="flex gap-8"
-              >
-                <div className="flex-shrink-0 w-32">
-                  <div className="text-3xl font-bold text-[#A543F1]">2022</div>
-                </div>
-                <div className="flex-1">
-                  <div className="bg-gray-50 dark:bg-white/[0.02] p-6 rounded-xl border border-gray-200 dark:border-white/[0.08]">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Target className="w-6 h-6 text-[#A543F1]" />
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">Excellence</h3>
-                    </div>
-                    <p className="text-gray-600 dark:text-white/70">
-                      Focus sur l'excellence technique et l'expérience utilisateur. Mise en place de processus qualité rigoureux et adoption des dernières technologies. Plus de 50 projets livrés avec succès.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* 2023 */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className="flex gap-8"
-              >
-                <div className="flex-shrink-0 w-32">
-                  <div className="text-3xl font-bold text-[#A543F1]">2023</div>
-                </div>
-                <div className="flex-1">
-                  <div className="bg-gray-50 dark:bg-white/[0.02] p-6 rounded-xl border border-gray-200 dark:border-white/[0.08]">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Award className="w-6 h-6 text-[#A543F1]" />
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">Innovation</h3>
-                    </div>
-                    <p className="text-gray-600 dark:text-white/70">
-                      Intégration de l'IA dans nos processus de développement. Partenariats stratégiques avec des leaders technologiques. Reconnaissance comme agence de référence en Auvergne-Rhône-Alpes.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* 2024 */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex gap-8"
-              >
-                <div className="flex-shrink-0 w-32">
-                  <div className="text-3xl font-bold text-[#A543F1]">2024</div>
-                </div>
-                <div className="flex-1">
-                  <div className="bg-gradient-to-br from-[#A543F1]/10 to-[#c5cbf9]/10 p-6 rounded-xl border border-[#A543F1]/20">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Sparkles className="w-6 h-6 text-[#A543F1]" />
-                      <h3 className="text-xl font-bold text-gray-900 dark:text-white">Aujourd'hui</h3>
-                    </div>
-                    <p className="text-gray-600 dark:text-white/70">
-                      Consolidation de notre expertise et expansion de nos services. Accompagnement de projets d'envergure avec des technologies de pointe. L'aventure continue avec toujours la même passion !
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+            <div className="mt-10">
+              <Button size="lg" asChild>
+                <Link href="/contact">
+                  Démarrer une collaboration
+                  <ArrowRight />
+                </Link>
+              </Button>
             </div>
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* Values Section */}
-      <section className="py-16 md:py-24 bg-gray-50 dark:bg-white/[0.02]">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4 font-[family-name:var(--font-heading)]">
-                Nos Valeurs
+      {/* TIMELINE */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div className="lg:col-span-4">
+              <Eyebrow number="01" className="mb-6">Parcours</Eyebrow>
+              <h2 className="text-h1 mb-6">
+                Quatre années de <em>construction</em>.
               </h2>
-              <p className="text-xl text-gray-600 dark:text-white/70 font-[family-name:var(--font-sans)]">
-                Les principes qui guident chacune de nos actions
+              <p className="text-body text-[var(--muted-foreground)]">
+                Une trajectoire mesurée, des choix techniques assumés, une
+                clientèle fidèle qui reste avec nous sur la durée.
               </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="text-center"
-              >
-                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-[#A543F1]/10 flex items-center justify-center">
-                  <Heart className="w-8 h-8 text-[#A543F1]" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Passion</h3>
-                <p className="text-gray-600 dark:text-white/70">
-                  Nous aimons ce que nous faisons et ça se voit dans chaque projet que nous livrons.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-center"
-              >
-                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-[#A543F1]/10 flex items-center justify-center">
-                  <Target className="w-8 h-8 text-[#A543F1]" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Excellence</h3>
-                <p className="text-gray-600 dark:text-white/70">
-                  La qualité n'est pas négociable. Nous visons l'excellence dans chaque ligne de code.
-                </p>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-center"
-              >
-                <div className="w-16 h-16 mx-auto mb-4 rounded-2xl bg-[#A543F1]/10 flex items-center justify-center">
-                  <Users className="w-8 h-8 text-[#A543F1]" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">Collaboration</h3>
-                <p className="text-gray-600 dark:text-white/70">
-                  Votre succès est notre succès. Nous travaillons main dans la main avec nos clients.
-                </p>
-              </motion.div>
             </div>
+
+            <ol className="lg:col-span-8 relative">
+              <div className="absolute left-[1.125rem] top-2 bottom-2 w-px bg-[var(--border)]" aria-hidden />
+              {TIMELINE.map((step) => {
+                const Icon = step.icon;
+                return (
+                  <li key={step.year} className="relative pl-14 pb-12 last:pb-0">
+                    <span className="absolute left-0 top-0 size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center">
+                      <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
+                    </span>
+                    <p className="text-eyebrow text-[var(--accent)] mb-2">{step.year}</p>
+                    <h3 className="text-h3 mb-2">{step.title}</h3>
+                    <p className="text-body text-[var(--muted-foreground)] max-w-2xl">
+                      {step.description}
+                    </p>
+                  </li>
+                );
+              })}
+            </ol>
           </div>
-        </div>
+        </Container>
       </section>
 
-      {/* CTA Section */}
-      <CTASection
-        title="Prêt à écrire votre histoire avec nous ?"
-        description="Discutons de votre projet et découvrons comment nous pouvons vous aider à atteindre vos objectifs."
-        primaryCTA={{
-          text: "Démarrer un projet",
-          href: "/contact"
-        }}
-        secondaryCTA={{
-          text: "Découvrir nos services",
-          href: "/services"
-        }}
+      {/* EQUIPE — aperçu */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+            <div className="max-w-2xl">
+              <Eyebrow number="02" className="mb-6">L'équipe</Eyebrow>
+              <h2 className="text-h1">
+                Deux <em>co-fondateurs</em>, une seule équipe.
+              </h2>
+            </div>
+            <p className="text-body text-[var(--muted-foreground)] max-w-md">
+              Pas de chef de projet, pas de sous-traitance. Les deux personnes
+              que vous rencontrez sont celles qui codent votre projet.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            {TEAM_PREVIEW.map((m) => (
+              <div key={m.name} className="bg-[var(--background)] p-8 md:p-10">
+                <div className="flex items-start gap-5 mb-5">
+                  <div className="size-14 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--accent-subtle)] flex items-center justify-center">
+                    <span className="text-h4 font-semibold text-[var(--accent)]">{m.initials}</span>
+                  </div>
+                  <div>
+                    <h3 className="text-h3 mb-1">{m.name}</h3>
+                    <p className="text-body-sm text-[var(--accent)] font-medium">{m.role}</p>
+                  </div>
+                </div>
+                <p className="text-body text-[var(--muted-foreground)]">{m.shortBio}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/equipe"
+              className="inline-flex items-center gap-2 text-body font-medium text-[var(--accent)] hover:opacity-80 transition-opacity"
+            >
+              Découvrir l'équipe en détail
+              <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </Container>
+      </section>
+
+      {/* VALUES */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+            <div className="max-w-2xl">
+              <Eyebrow number="03" className="mb-6">Valeurs</Eyebrow>
+              <h2 className="text-h1">
+                Ce qui nous <em>guide</em>.
+              </h2>
+            </div>
+            <p className="text-body text-[var(--muted-foreground)] max-w-md">
+              Quatre engagements concrets qui structurent notre façon de
+              travailler avec chaque client.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            {VALUES.map((v) => (
+              <div key={v.title} className="bg-[var(--background)] p-8 md:p-10">
+                <p className="text-eyebrow text-[var(--accent)] mb-4">{v.label}</p>
+                <h3 className="text-h3 mb-3">{v.title}</h3>
+                <p className="text-body text-[var(--muted-foreground)] max-w-md">
+                  {v.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <ServiceCta
+        title={
+          <>
+            On <em>construit</em> ensemble ?
+          </>
+        }
       />
     </main>
   );

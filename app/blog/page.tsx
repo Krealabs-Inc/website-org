@@ -1,211 +1,194 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
-import { Calendar, Clock, ArrowRight, TrendingUp, Sparkles } from "lucide-react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
-import { blogPosts } from "@/lib/blog-data";
-import { useState } from "react";
-import NewsletterSignup from "@/components/blocks/newsletter-signup";
-import { BlogHero } from "@/components/blocks/blog-hero";
+import Image from "next/image";
+import { ArrowUpRight, Clock, Calendar } from "lucide-react";
 
-const categories = ["Tous", "Developpement", "Design", "Performance", "Mobile", "IA"];
+import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { Badge } from "@/components/ui/badge";
+import { ServiceCta } from "@/components/services/service-cta";
+import { blogPosts } from "@/lib/blog-data";
+import { cn } from "@/lib/utils";
+
+const CATEGORIES = ["Tous", "Web", "Mobile", "SEO", "Outils"];
 
 export default function BlogPage() {
-  const [selectedCategory, setSelectedCategory] = useState("Tous");
+  const [active, setActive] = useState("Tous");
 
-  const featuredPost = blogPosts.find(post => post.featured);
-  const otherPosts = blogPosts.filter(post => !post.featured || post !== featuredPost);
-
-  const filteredPosts = selectedCategory === "Tous"
-    ? otherPosts
-    : otherPosts.filter(post => post.category === selectedCategory);
+  const featured = useMemo(
+    () => blogPosts.find((p) => p.featured),
+    [],
+  );
+  const list = useMemo(() => {
+    const others = blogPosts.filter((p) => p !== featured);
+    return active === "Tous" ? others : others.filter((p) => p.category === active);
+  }, [active, featured]);
 
   return (
-    <main className="min-h-screen bg-white dark:bg-[#030303] transition-colors pt-20">
-      {/* Hero Section */}
-      <BlogHero />
-
-      <div className="container mx-auto px-4 py-12 md:py-16 max-w-7xl">
-        {/* Categories Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-8"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <TrendingUp className="w-5 h-5 text-[#A543F1]" />
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-white/40 font-[family-name:var(--font-heading)]">
-              Catégories
-            </h2>
+    <main className="bg-[var(--background)] text-[var(--foreground)]">
+      {/* HERO */}
+      <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
+        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-40" aria-hidden />
+        <Container className="relative">
+          <div className="max-w-4xl">
+            <Eyebrow dot className="mb-8">Journal · Krealabs</Eyebrow>
+            <h1 className="text-display">
+              Notes & <em>réflexions</em>
+              <br />
+              sur le web moderne.
+            </h1>
+            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
+              Articles techniques, retours d'expérience, veille sur les
+              technologies que nous utilisons au quotidien chez Krealabs.
+            </p>
           </div>
-          <div className="flex flex-wrap gap-2">
-            {categories.map((category) => (
+        </Container>
+      </section>
+
+      {/* CATEGORIES */}
+      <section className="border-t border-[var(--border)]">
+        <Container>
+          <div className="py-8 flex flex-wrap items-center gap-2">
+            <Eyebrow className="mr-2 hidden md:inline-flex">Filtrer</Eyebrow>
+            {CATEGORIES.map((cat) => (
               <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-5 py-2.5 rounded-full border transition-all font-medium text-sm font-[family-name:var(--font-heading)] ${
-                  selectedCategory === category
-                    ? "bg-[#A543F1] border-[#A543F1] text-white shadow-lg shadow-[#A543F1]/25"
-                    : "border-gray-200 dark:border-white/[0.08] hover:border-[#A543F1] hover:bg-[#A543F1]/10 text-gray-700 dark:text-white/70 hover:text-[#A543F1]"
-                }`}
+                key={cat}
+                onClick={() => setActive(cat)}
+                className={cn(
+                  "px-4 py-2 rounded-full text-body-sm transition-colors",
+                  active === cat
+                    ? "bg-[var(--accent-subtle)] text-[var(--accent)] border border-[var(--accent-subtle)]"
+                    : "bg-[var(--surface)] text-[var(--muted-foreground)] border border-[var(--border)] hover:bg-[var(--surface-hover)] hover:text-[var(--foreground)]",
+                )}
               >
-                {category}
+                {cat}
               </button>
             ))}
           </div>
-        </motion.div>
+        </Container>
+      </section>
 
-        {/* Featured Post */}
-        {featuredPost && selectedCategory === "Tous" && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="mb-12"
-          >
-            <div className="flex items-center gap-3 mb-4">
-              <Sparkles className="w-5 h-5 text-[#A543F1]" />
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-white/40 font-[family-name:var(--font-heading)]">
-                Article en vedette
-              </h2>
-            </div>
-
-            <Link href={`/blog/${featuredPost.slug}`}>
-              <div className="group relative overflow-hidden rounded-2xl bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/[0.08] hover:border-[#A543F1]/50 transition-all hover:shadow-xl hover:shadow-[#A543F1]/10">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#A543F1]/5 to-[#c5cbf9]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
-
+      {/* FEATURED */}
+      {featured && active === "Tous" && (
+        <section className="border-t border-[var(--border)]">
+          <Container>
+            <div className="py-10">
+              <Eyebrow number="01" className="mb-6">Article à la une</Eyebrow>
+              <Link
+                href={`/blog/${featured.slug}`}
+                className="group block rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] overflow-hidden hover:bg-[var(--surface-hover)] transition-colors"
+              >
                 <div className="grid md:grid-cols-2 gap-0">
-                  <div className="relative h-64 md:h-full overflow-hidden">
-                    <img
-                      src={featuredPost.image}
-                      alt={featuredPost.title}
-                      className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0" />
-                    <div className="absolute top-4 left-4">
-                      <Badge className="bg-[#A543F1] text-white border-0 shadow-lg font-[family-name:var(--font-heading)]">
-                        <Sparkles className="w-3 h-3 mr-1" />
-                        En vedette
-                      </Badge>
-                    </div>
+                  <div className="relative aspect-[4/3] md:aspect-auto overflow-hidden bg-[var(--background)]">
+                    {featured.image && (
+                      <Image
+                        src={featured.image}
+                        alt={featured.title}
+                        fill
+                        priority
+                        fetchPriority="high"
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+                      />
+                    )}
                   </div>
-
-                  <div className="relative p-6 md:p-8 flex flex-col justify-center">
-                    <Badge className="w-fit mb-3 bg-[#A543F1]/10 text-[#A543F1] border border-[#A543F1]/20 font-[family-name:var(--font-heading)]">
-                      {featuredPost.category}
+                  <div className="p-8 md:p-12 flex flex-col justify-center">
+                    <Badge variant="secondary" className="w-fit mb-4">
+                      {featured.category}
                     </Badge>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-[#A543F1] transition-colors font-[family-name:var(--font-heading)]">
-                      {featuredPost.title}
+                    <h2 className="text-h2 mb-4 group-hover:text-[var(--accent)] transition-colors">
+                      {featured.title}
                     </h2>
-                    <p className="text-gray-600 dark:text-white/60 mb-4 leading-relaxed font-[family-name:var(--font-sans)]">
-                      {featuredPost.excerpt}
+                    <p className="text-body text-[var(--muted-foreground)] mb-6 line-clamp-3">
+                      {featured.excerpt}
                     </p>
-
-                    <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-white/40 mb-4">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        <span className="font-[family-name:var(--font-sans)]">{featuredPost.date}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4" />
-                        <span className="font-[family-name:var(--font-sans)]">{featuredPost.readTime}</span>
-                      </div>
+                    <div className="flex items-center gap-5 text-caption mb-8">
+                      <span className="inline-flex items-center gap-1.5">
+                        <Calendar className="size-3.5" />
+                        {featured.date}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5">
+                        <Clock className="size-3.5" />
+                        {featured.readTime}
+                      </span>
                     </div>
-
-                    <div className="flex items-center gap-2 text-[#A543F1] font-medium group-hover:gap-3 transition-all font-[family-name:var(--font-heading)]">
+                    <span className="inline-flex items-center gap-2 text-body-sm font-medium text-[var(--accent)]">
                       Lire l'article
-                      <ArrowRight className="w-5 h-5" />
-                    </div>
+                      <ArrowUpRight className="size-4 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
+                    </span>
                   </div>
                 </div>
-              </div>
-            </Link>
-          </motion.div>
-        )}
+              </Link>
+            </div>
+          </Container>
+        </section>
+      )}
 
-        {/* Blog Posts Grid */}
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-4">
-            <TrendingUp className="w-5 h-5 text-[#A543F1]" />
-            <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-white/40 font-[family-name:var(--font-heading)]">
-              {selectedCategory === "Tous" ? "Derniers articles" : `Articles ${selectedCategory}`}
-            </h2>
-          </div>
+      {/* GRID */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <Eyebrow number="02" className="mb-8">
+            {active === "Tous" ? "Tous les articles" : `Articles · ${active}`}
+          </Eyebrow>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredPosts.map((post, index) => (
-              <motion.div
-                key={post.slug}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Link href={`/blog/${post.slug}`}>
-                  <article className="group h-full flex flex-col bg-gray-50 dark:bg-white/[0.02] rounded-2xl border border-gray-200 dark:border-white/[0.08] overflow-hidden hover:border-[#A543F1]/50 transition-all hover:shadow-lg hover:shadow-[#A543F1]/10">
-                    <div className="relative h-48 overflow-hidden">
-                      <img
+          {list.length === 0 ? (
+            <p className="text-body text-[var(--muted-foreground)] py-20 text-center">
+              Aucun article dans cette catégorie pour l'instant.
+            </p>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {list.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group flex flex-col rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] overflow-hidden hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] transition-colors"
+                >
+                  {post.image && (
+                    <div className="relative aspect-[16/10] overflow-hidden bg-[var(--background)]">
+                      <Image
                         src={post.image}
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        fill
+                        loading="lazy"
+                        sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                        className="object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0" />
                     </div>
-
-                    <div className="p-5 flex flex-col flex-1">
-                      <Badge className="w-fit mb-2 bg-[#A543F1]/10 text-[#A543F1] border border-[#A543F1]/20 text-xs font-[family-name:var(--font-heading)]">
-                        {post.category}
-                      </Badge>
-
-                      <h3 className="text-lg font-bold mb-2 text-gray-900 dark:text-white group-hover:text-[#A543F1] transition-colors line-clamp-2 font-[family-name:var(--font-heading)]">
-                        {post.title}
-                      </h3>
-
-                      <p className="text-sm text-gray-600 dark:text-white/60 mb-3 line-clamp-3 flex-1 font-[family-name:var(--font-sans)]">
-                        {post.excerpt}
-                      </p>
-
-                      <div className="flex items-center justify-between pt-3 border-t border-gray-200 dark:border-white/[0.08]">
-                        <div className="flex items-center gap-4 text-xs text-gray-500 dark:text-white/40">
-                          <div className="flex items-center gap-1.5">
-                            <Calendar className="w-3.5 h-3.5" />
-                            <span className="font-[family-name:var(--font-sans)]">{post.date}</span>
-                          </div>
-                          <div className="flex items-center gap-1.5">
-                            <Clock className="w-3.5 h-3.5" />
-                            <span className="font-[family-name:var(--font-sans)]">{post.readTime}</span>
-                          </div>
-                        </div>
-
-                        <ArrowRight className="w-5 h-5 text-[#A543F1] opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      </div>
+                  )}
+                  <div className="p-6 flex flex-col flex-1">
+                    <Badge variant="secondary" className="w-fit mb-4">{post.category}</Badge>
+                    <h3 className="text-h4 mb-2 group-hover:text-[var(--accent)] transition-colors line-clamp-2">
+                      {post.title}
+                    </h3>
+                    <p className="text-body-sm text-[var(--muted-foreground)] line-clamp-3 mb-6 flex-1">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between pt-4 border-t border-[var(--border)]">
+                      <span className="text-caption inline-flex items-center gap-1.5">
+                        <Clock className="size-3" />
+                        {post.readTime}
+                      </span>
+                      <ArrowUpRight className="size-4 text-[var(--subtle-foreground)] group-hover:text-[var(--accent)] group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-all" />
                     </div>
-                  </article>
+                  </div>
                 </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          {filteredPosts.length === 0 && (
-            <div className="text-center py-12">
-              <p className="text-gray-500 dark:text-white/40 font-[family-name:var(--font-sans)]">
-                Aucun article trouvé dans cette catégorie.
-              </p>
+              ))}
             </div>
           )}
-        </div>
+        </Container>
+      </section>
 
-        {/* Newsletter CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-12"
-        >
-          <NewsletterSignup />
-        </motion.div>
-      </div>
+      <ServiceCta
+        title={
+          <>
+            Une question <em>technique</em> ?
+          </>
+        }
+        description="Au-delà des articles, nous sommes disponibles pour répondre à vos questions sur vos projets web et mobile."
+        primaryLabel="Nous contacter"
+      />
     </main>
   );
 }
