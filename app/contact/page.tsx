@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
+import confetti from "canvas-confetti";
 import {
   Mail,
   MapPin,
@@ -90,6 +91,34 @@ function ContactPageInner() {
       toast.success("Message envoyé", {
         description: "Nous revenons vers vous sous 24h ouvrées.",
       });
+      // Petit confetti aux couleurs Krealabs pour célébrer
+      if (typeof window !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        const colors = ["#B06CFF", "#9F58F0", "#FAFAFA"];
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.7 },
+          colors,
+          ticks: 200,
+          scalar: 0.9,
+        });
+        setTimeout(() => {
+          confetti({
+            particleCount: 40,
+            spread: 100,
+            angle: 60,
+            origin: { x: 0, y: 0.7 },
+            colors,
+          });
+          confetti({
+            particleCount: 40,
+            spread: 100,
+            angle: 120,
+            origin: { x: 1, y: 0.7 },
+            colors,
+          });
+        }, 200);
+      }
       setFormData({
         requestType: "devis",
         name: "",

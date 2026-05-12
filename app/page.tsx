@@ -23,6 +23,7 @@ import { WordRotator } from "@/components/animations/word-rotator";
 import { BorderBeam } from "@/components/animations/border-beam";
 import { Marquee } from "@/components/animations/marquee";
 import { ParticlesBg } from "@/components/animations/particles-bg";
+import { ShimmerButton } from "@/components/animations/shimmer-button";
 
 export default function HomePage() {
   return (
@@ -403,12 +404,12 @@ export default function HomePage() {
                 vous sous 24h ouvrées avec un premier retour concret.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
-                <Button size="lg" asChild>
+                <ShimmerButton size="lg" asChild>
                   <Link href="/contact">
                     Demander un devis
                     <ArrowRight />
                   </Link>
-                </Button>
+                </ShimmerButton>
                 <Button size="lg" variant="outline" asChild>
                   <Link href="/services">Découvrir nos services</Link>
                 </Button>

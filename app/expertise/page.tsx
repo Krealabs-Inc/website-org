@@ -23,6 +23,8 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
+import { MotionReveal } from "@/components/animations/motion-reveal";
+import { MeshGradient } from "@/components/animations/mesh-gradient";
 
 export const metadata: Metadata = {
   title: "Expertise — Savoir-faire & technologies",
@@ -43,15 +45,11 @@ export default function ExpertisePage() {
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       {/* HERO */}
       <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
-        <div
-          aria-hidden
-          className="absolute -top-32 right-1/4 size-[640px] rounded-full blur-[120px] opacity-15"
-          style={{ background: "radial-gradient(circle, var(--accent), transparent 70%)" }}
-        />
+        <MeshGradient intensity={0.25} />
+        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-30" aria-hidden />
 
         <Container className="relative">
-          <div className="max-w-4xl">
+          <MotionReveal className="max-w-4xl">
             <Eyebrow dot className="mb-8">Notre expertise</Eyebrow>
             <h1 className="text-display">
               Savoir-faire <em>technique</em>,
@@ -74,7 +72,7 @@ export default function ExpertisePage() {
                 <Link href="/equipe">Découvrir l'équipe</Link>
               </Button>
             </div>
-          </div>
+          </MotionReveal>
         </Container>
       </section>
 

@@ -4,6 +4,7 @@ import { Home, ArrowRight, MessagesSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { GlitchText } from "@/components/animations/glitch-text";
 
 const SUGGESTIONS = [
   { label: "Services", href: "/services" },
@@ -28,9 +29,9 @@ export default function NotFound() {
 
           <h1
             aria-hidden
-            className="text-[clamp(6rem,18vw,14rem)] leading-[0.85] font-medium tracking-[-0.05em] text-[var(--foreground)]/[0.08] mb-2 select-none"
+            className="text-[clamp(6rem,18vw,14rem)] leading-[0.85] font-medium tracking-[-0.05em] text-[var(--foreground)]/[0.12] mb-2 select-none"
           >
-            404
+            <GlitchText text="404" interval={4000} />
           </h1>
 
           <h2 className="text-h1 -mt-12 relative">

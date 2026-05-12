@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
+import { MotionReveal } from "@/components/animations/motion-reveal";
 
 export const metadata: Metadata = {
   title: "L'équipe — 2 co-fondateurs à Rouen",
@@ -87,7 +88,7 @@ export default function EquipePage() {
         <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
 
         <Container className="relative">
-          <div className="max-w-4xl">
+          <MotionReveal className="max-w-4xl">
             <Eyebrow dot className="mb-8">L'équipe Krealabs</Eyebrow>
             <h1 className="text-display">
               Deux <em>développeurs</em>,
@@ -100,7 +101,7 @@ export default function EquipePage() {
               pas de sous-traitance. Vous parlez directement à ceux qui
               construisent.
             </p>
-          </div>
+          </MotionReveal>
         </Container>
       </section>
 
@@ -109,11 +110,11 @@ export default function EquipePage() {
         <Container>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border-x border-b border-[var(--border)]">
             {TEAM.map((member, i) => (
-              <article
-                key={member.name}
-                className="bg-[var(--background)] p-8 md:p-12 flex flex-col gap-8"
-              >
-                <header className="flex items-start gap-6">
+              <MotionReveal key={member.name} delay={i * 0.1}>
+                <article
+                  className="group/team relative bg-[var(--background)] p-8 md:p-12 flex flex-col gap-8 hover:bg-[var(--surface)]/40 transition-colors duration-300 overflow-hidden h-full"
+                >
+                <header className="flex items-start gap-6 relative z-10">
                   <Avatar member={member} />
                   <div className="flex-1 min-w-0">
                     <p className="text-caption mb-2">
@@ -180,7 +181,7 @@ export default function EquipePage() {
 
                 {/* Socials */}
                 {(member.github || member.linkedin || member.twitter) && (
-                  <div className="pt-6 border-t border-[var(--border)] flex items-center gap-2">
+                  <div className="pt-6 border-t border-[var(--border)] flex items-center gap-2 relative z-10">
                     {member.github && (
                       <SocialLink href={member.github} label="GitHub" icon={Github} />
                     )}
@@ -189,7 +190,8 @@ export default function EquipePage() {
                     )}
                   </div>
                 )}
-              </article>
+                </article>
+              </MotionReveal>
             ))}
           </div>
         </Container>
@@ -244,21 +246,21 @@ export default function EquipePage() {
 function Avatar({ member }: { member: TeamMember }) {
   if (member.photo) {
     return (
-      <div className="relative size-20 md:size-24 shrink-0 rounded-[var(--radius)] overflow-hidden border border-[var(--border)] bg-[var(--surface)]">
+      <div className="relative size-20 md:size-24 shrink-0 rounded-[var(--radius)] overflow-hidden border border-[var(--border)] bg-[var(--surface)] group-hover/team:border-[var(--accent)] group-hover/team:shadow-[0_0_0_4px_var(--accent-subtle),0_0_24px_var(--accent-subtle)] transition-all duration-300">
         <Image
           src={member.photo}
           alt={member.name}
           fill
           sizes="96px"
           priority
-          className="object-cover"
+          className="object-cover group-hover/team:scale-105 transition-transform duration-500"
         />
       </div>
     );
   }
 
   return (
-    <div className="size-20 md:size-24 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--accent-subtle)] flex items-center justify-center">
+    <div className="size-20 md:size-24 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--accent-subtle)] flex items-center justify-center group-hover/team:border-[var(--accent)] group-hover/team:shadow-[0_0_0_4px_var(--accent-subtle),0_0_24px_var(--accent-subtle)] transition-all duration-300">
       <span className="text-h2 font-semibold text-[var(--accent)]">
         {member.initials}
       </span>
