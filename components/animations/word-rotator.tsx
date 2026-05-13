@@ -35,11 +35,25 @@ export function WordRotator({ words, interval = 2500, className }: WordRotatorPr
   }
 
   return (
-    <span className={cn("relative inline-flex overflow-hidden align-middle", className)}>
-      {/* Mot fantôme pour réserver la largeur du plus long */}
-      <span className="invisible whitespace-nowrap" aria-hidden>
-        {words.reduce((longest, w) => (w.length > longest.length ? w : longest), "")}
-      </span>
+    <span
+      className={cn(
+        "relative inline-grid overflow-hidden align-middle",
+        className,
+      )}
+    >
+      {/* Ghosts : tous les mots empilés invisibles dans la même cellule
+          grid. La cellule prend la largeur du plus large en pixels (pas
+          la longueur en caractères) → "WooCommerce" et "React Native"
+          tiennent tous les deux. */}
+      {words.map((w) => (
+        <span
+          key={`ghost-${w}`}
+          aria-hidden
+          className="col-start-1 row-start-1 invisible whitespace-nowrap"
+        >
+          {w}
+        </span>
+      ))}
       <AnimatePresence mode="wait" initial={false}>
         <motion.span
           key={words[index]}
@@ -47,7 +61,7 @@ export function WordRotator({ words, interval = 2500, className }: WordRotatorPr
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: "-100%", opacity: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute inset-0 whitespace-nowrap"
+          className="col-start-1 row-start-1 whitespace-nowrap"
         >
           {words[index]}
         </motion.span>
