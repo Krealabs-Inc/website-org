@@ -1,150 +1,150 @@
-# Configuration emails — Brevo SMTP (outbound) + ProtonMail (inbound)
+# Configuration emails — Formsubmit (zéro setup) + ProtonMail
 
 ## Architecture choisie
 
 ```
-Visiteur envoie formulaire
+Visiteur soumet formulaire
          │
          ▼
  Vercel /api/contact (Next.js)
+         │ Save form to Prisma DB
          │
-         ▼
- Brevo SMTP (smtp-relay.brevo.com:587)
+         ▼ POST JSON
+ Formsubmit (https://formsubmit.co/ajax/contact@krealabs.fr)
          │
-         ▼  Email envoyé depuis noreply@krealabs.fr
-         │  (DKIM/SPF valides via Brevo)
-         ▼
- Inbox contact@krealabs.fr  ← ProtonMail (MX records OVH pointent vers Proton)
+         ├──→ Email à contact@krealabs.fr (= ProtonMail via MX OVH)
+         │       Reply-To = email du visiteur
+         │       Tu réponds depuis ProtonMail comme d'habitude
+         │
+         └──→ Auto-reply au visiteur (champ _autoresponse)
+                 "Bonjour {Name}, votre demande est bien reçue..."
+                 Le visiteur sait qu'on a bien capté son message
 ```
 
-**Pourquoi cette archi** : ProtonMail n'expose pas de SMTP cloud
-(seulement Bridge desktop). Brevo gère l'outbound (envoi depuis le code),
-ProtonMail garde l'inbound (réception). Tu réponds depuis ProtonMail
-comme d'habitude.
+**Pourquoi Formsubmit** : aucune autre solution n'offre l'auto-reply
+visiteur sans configuration DNS. Resend free tier impose la
+vérification du domaine pour envoyer à autre chose que l'email du
+propriétaire du compte. Brevo demande SPF/DKIM. Formsubmit gère tout
+côté serveur, on n'a qu'à POST des données.
 
 ---
 
-## Setup Brevo (5 min)
+## Setup en 2 minutes
 
-### 1. Créer un compte Brevo
+### 1. Variables d'env
 
-https://www.brevo.com → "Sign up free"
-Pas de carte bancaire. Free tier : 300 emails/jour à vie.
-
-### 2. Vérifier le domaine `krealabs.fr`
-
-Dans Brevo : `Senders & IP > Domains > Add a domain`.
-
-Brevo te donne 3 enregistrements DNS à ajouter dans **OVH Zone DNS** :
-
-| Type | Nom | Valeur (exemple) |
-|---|---|---|
-| TXT | `mail._domainkey.krealabs.fr` | `k=rsa; p=MIGfMA0...` (DKIM Brevo) |
-| TXT | `krealabs.fr` | `brevo-code:XXXXX` (verification token) |
-| TXT | `_dmarc.krealabs.fr` | `v=DMARC1; p=none; rua=mailto:...` (DMARC) |
-
-**Dans OVH** :
-1. Manager OVH → Web Cloud → Domaines → `krealabs.fr`
-2. Onglet "Zone DNS" → "Ajouter une entrée" → TXT
-3. Ajouter les 3 records ci-dessus
-4. Attendre 5-15 min la propagation
-5. Retour Brevo → "Authenticate this domain" → ✓ Vert sur les 3
-
-⚠️ Si ton SPF existant (pour ProtonMail) doit cohabiter avec celui de
-Brevo, **mergeles** au lieu d'avoir 2 records SPF (Google rejette).
-Format SPF combiné typique :
-```
-v=spf1 include:_spf.protonmail.ch include:spf.brevo.com ~all
-```
-
-### 3. Générer la clé SMTP
-
-Dans Brevo : `SMTP & API > SMTP > Generate a new SMTP key`.
-
-Copie :
-- **SMTP Login** (en haut de la page) — souvent ton email Brevo
-- **SMTP Key** générée — c'est le mot de passe
-
-### 4. Variables d'env Vercel
-
-Dans **Vercel Dashboard > Project > Settings > Environment Variables** :
+Dans Vercel Dashboard > Project Settings > Environment Variables
+(Production + Preview + Development) :
 
 ```bash
-SMTP_HOST=smtp-relay.brevo.com
-SMTP_PORT=587
-SMTP_USER=<ton login SMTP Brevo>
-SMTP_PASS=<la clé SMTP générée>
-SMTP_FROM=Krealabs <noreply@krealabs.fr>
 CONTACT_EMAIL=contact@krealabs.fr
 ```
 
-Variables à appliquer sur **Production, Preview, Development**.
+C'est tout. Aucune API key requise.
 
-Tu peux supprimer `RESEND_API_KEY` qui ne sert plus.
+### 2. Activation Formsubmit (première fois uniquement)
 
-### 5. (Optionnel) Variables d'env local
+Au premier formulaire soumis depuis le site (en prod ou en dev),
+Formsubmit envoie un email d'activation à `contact@krealabs.fr`.
 
-Pour tester en `npm run dev`, créer `.env.local` (gitignored) avec
-les mêmes valeurs.
+1. Soumettre une fois le formulaire `/contact` (avec un email réel)
+2. Ouvrir ta boîte ProtonMail (contact@krealabs.fr)
+3. Tu reçois un email Formsubmit avec un bouton "Activate"
+4. Cliquer → c'est activé pour toujours
 
-### 6. Tester
-
-```bash
-curl -X POST https://krealabs.fr/api/contact \
-  -F "name=Test" \
-  -F "email=ton-email-perso@example.com" \
-  -F "message=Test SMTP Brevo"
-```
-
-→ Devrait retourner `{success: true}`.
-→ Email arrive sur `contact@krealabs.fr` (= ProtonMail) dans la minute.
-→ Tu peux répondre directement, le `Reply-To: ton-email-perso@example.com`
-   est déjà set, ta réponse part vers la bonne adresse.
+Tous les envois suivants arrivent directement, sans nouvelle étape.
 
 ---
 
-## Templates email
+## Que reçoit le visiteur
 
-Les templates restent en React (`emails/*.tsx`) et sont rendus en HTML
-via `@react-email/render` (déjà installé). Compatible Gmail, Outlook,
-Apple Mail, ProtonMail.
+Auto-reply texte plain envoyé immédiatement depuis Formsubmit :
 
-Fichiers :
-- `emails/contact-template.tsx`
-- `emails/waitlist-confirmation-template.tsx`
-- `emails/waitlist-notification-template.tsx`
+```
+Bonjour {Nom},
+
+Nous avons bien reçu votre demande de devis et nous l'étudions
+dès maintenant.
+
+Vous recevrez une réponse personnalisée sous 24 heures ouvrées
+à l'adresse {son email}.
+
+En attendant, n'hésitez pas à explorer notre travail :
+  • Offre WordPress : https://krealabs.fr/services/wordpress
+  • Tous nos services : https://krealabs.fr/services
+  • L'équipe : https://krealabs.fr/equipe
+
+Une question urgente ? Écrivez-nous directement à contact@krealabs.fr.
+
+À très vite,
+L'équipe Krealabs
+https://krealabs.fr
+```
+
+L'email apparaît dans la boîte du visiteur avec un sender Formsubmit
+(`noreply@formsubmit.co`) mais avec Reply-To pointant sur
+`contact@krealabs.fr`.
+
+## Que tu reçois sur ProtonMail
+
+Email structuré (template `table`) avec toutes les infos du formulaire :
+
+```
+Sujet : Demande de devis — Jean Dupont
+
+| Champ        | Valeur                                     |
+|--------------|--------------------------------------------|
+| name         | Jean Dupont                                |
+| email        | jean@entreprise.fr                         |
+| telephone    | 06 12 34 56 78                             |
+| entreprise   | Acme SAS                                   |
+| type_demande | Demande de devis                           |
+| type_projet  | Site web                                   |
+| message      | Bonjour, nous cherchons une agence pour... |
+```
+
+**Reply-To = jean@entreprise.fr** → quand tu réponds dans ProtonMail,
+ta réponse part directement vers le visiteur.
+
+---
+
+## Limitations
+
+- **Pas de pièces jointes** sur le free tier Formsubmit. Si le visiteur
+  veut envoyer un brief / maquettes, il le fait par mail après ta première
+  réponse (mentionné dans le placeholder du formulaire).
+- **1000-2000 submissions / mois** sur free (largement suffisant pour
+  une agence).
+- Footer "Powered by Formsubmit" en bas de l'email visiteur.
+- Sender visible = `noreply@formsubmit.co` (Reply-To corrigé sur ton domaine).
 
 ---
 
 ## Code utilisateur
 
-Tout passe par `lib/mailer.ts` :
+Tout passe par `lib/mailer.ts > sendForm()` :
 
 ```ts
-import { sendMail } from "@/lib/mailer";
+import { sendForm } from "@/lib/mailer";
 
-await sendMail({
-  to: "destinataire@example.com",
-  subject: "Hello",
-  react: <MonTemplate {...props} />,
-  replyTo: "user@example.com",
-  attachments: [{ filename: "doc.pdf", content: bufferBuffer }],
+await sendForm({
+  fields: {
+    subject: "Nouveau message",
+    name: "Jean Dupont",
+    email: "jean@example.com",
+    message: "...",
+    // tout autre champ custom sera ajouté à l'email
+  },
+  autoresponse: "Bonjour Jean, ...",  // optionnel
 });
 ```
 
 Routes qui l'utilisent :
-- `app/api/contact/route.ts` — formulaire de contact
-- `app/api/waitlist/route.ts` — inscription waitlist
-- `app/api/admin/newsletter/route.ts` — newsletter admin
+- `app/api/contact/route.ts` — formulaire de contact + auto-reply
+- `app/api/waitlist/route.ts` — inscription waitlist + auto-reply
 
----
-
-## Migration depuis Resend (effectuée mai 2026)
-
-- `RESEND_API_KEY` supprimable de Vercel
-- Templates `emails/*.tsx` inchangés
-- Aucun changement front
-- `package.json` : `resend` retiré, `nodemailer` ajouté
+`app/api/admin/newsletter/route.ts` est désactivé (501) car Formsubmit
+ne gère pas le bulk vers des destinataires arbitraires.
 
 ---
 
@@ -152,10 +152,26 @@ Routes qui l'utilisent :
 
 Si emails n'arrivent pas en prod :
 
-1. **Vercel logs** : Vercel Dashboard > Deployments > Latest > Functions > /api/contact
-   → cherche "SMTP send error" ou "SMTP verify failed"
-2. **Brevo dashboard** : Logs > Transactional > voir si l'email est listé
-3. **Spam** : check spam ProtonMail (DKIM/SPF mal config = spam)
-4. **DNS propagation** : `dig TXT krealabs.fr` doit montrer les TXT Brevo
-5. **Limites free tier** : 300/jour. Dépassé = emails bloqués jusqu'à
-   minuit UTC.
+1. **Vérifier l'activation** : as-tu cliqué le bouton "Activate" dans
+   le premier email Formsubmit ? Si pas, tous les envois sont en attente.
+2. **Vercel logs** : Dashboard > Deployments > Latest > Functions >
+   `/api/contact` → cherche `Formsubmit error`.
+3. **Spam ProtonMail** : check le dossier spam (improbable mais bon).
+4. **Quota** : Formsubmit limite à ~1000-2000/mois. Au-delà, les envois
+   sont bloqués jusqu'au mois suivant. Pour augmenter, upgrade payant
+   ou switcher vers Resend + domaine vérifié.
+
+---
+
+## Si tu veux changer de service plus tard
+
+L'abstraction `sendForm()` dans `lib/mailer.ts` peut être remplacée
+sans toucher au reste du code. Options pour upgrade futur :
+
+- **Resend** + domaine vérifié → emails depuis `noreply@krealabs.fr`,
+  meilleure deliverability, statistiques. Nécessite 3 DNS records.
+- **Brevo** + domaine vérifié → idem, free tier 300/jour.
+- **AWS SES** + domaine vérifié → haute volumétrie, ~0.10$ / 1000.
+
+Tous compatibles avec l'API actuelle, juste remplacer le corps de
+`sendForm()`.

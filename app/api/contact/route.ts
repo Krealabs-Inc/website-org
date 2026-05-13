@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ContactEmailTemplate } from "@/emails/contact-template";
 import { prisma } from "@/lib/prisma";
-import { sendMail } from "@/lib/mailer";
-import * as React from "react";
+import { sendForm } from "@/lib/mailer";
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,7 +21,6 @@ export async function POST(request: NextRequest) {
     const company = formData.get("company") as string;
     const pricingOption = formData.get("pricingOption") as string;
     const message = formData.get("message") as string;
-    const files = formData.getAll("files") as File[];
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -40,7 +37,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Sauvegarde DB
+    // Sauvegarde DB (toujours, même si l'envoi email échoue)
     await prisma.contactForm.create({
       data: {
         requestType: requestType || "contact",
@@ -50,45 +47,59 @@ export async function POST(request: NextRequest) {
         company: company || null,
         pricingOption: pricingOption || null,
         message,
-        filesCount: files.length,
+        filesCount: 0,
       },
     });
 
-    // Pièces jointes : conversion File → Buffer pour nodemailer
-    const attachments = await Promise.all(
-      files.map(async (file) => ({
-        filename: file.name,
-        content: Buffer.from(await file.arrayBuffer()),
-      })),
-    );
-
-    // Sujet contextuel
-    const subjectByType: Record<string, string> = {
-      devis: "Nouvelle demande de devis",
-      partenariat: "Nouvelle demande de partenariat",
-      contact: "Nouveau message de contact",
+    // Labels lisibles
+    const typeLabel: Record<string, string> = {
+      devis: "Demande de devis",
+      contact: "Question / Renseignement",
+      partenariat: "Partenariat",
     };
-    const subject = `${subjectByType[requestType] || "Nouveau message"} — ${name}`;
+    const projectLabel: Record<string, string> = {
+      "site-web": "Site web",
+      "app-mobile": "Application mobile",
+      logiciel: "Logiciel sur mesure",
+      "refonte-seo": "Refonte / SEO",
+    };
 
-    // Envoi SMTP
+    // Envoi via Formsubmit
     try {
-      await sendMail({
-        subject,
-        replyTo: email,
-        react: ContactEmailTemplate({
-          requestType,
+      await sendForm({
+        fields: {
+          subject: `${typeLabel[requestType] || "Nouveau message"} — ${name}`,
           name,
           email,
-          phone,
-          company,
-          pricingOption,
+          telephone: phone || "Non renseigné",
+          entreprise: company || "Non renseignée",
+          type_demande: typeLabel[requestType] || requestType || "contact",
+          type_projet: pricingOption
+            ? projectLabel[pricingOption] || pricingOption
+            : "Non précisé",
           message,
-          filesCount: files.length,
-        }) as React.ReactElement,
-        attachments: attachments.length > 0 ? attachments : undefined,
+        },
+        autoresponse: [
+          `Bonjour ${name},`,
+          ``,
+          `Nous avons bien reçu votre ${typeLabel[requestType]?.toLowerCase() || "demande"} et nous l'étudions dès maintenant.`,
+          ``,
+          `Vous recevrez une réponse personnalisée sous 24 heures ouvrées à l'adresse ${email}.`,
+          ``,
+          `En attendant, n'hésitez pas à explorer notre travail :`,
+          `  • Offre WordPress : https://krealabs.fr/services/wordpress`,
+          `  • Tous nos services : https://krealabs.fr/services`,
+          `  • L'équipe : https://krealabs.fr/equipe`,
+          ``,
+          `Une question urgente ? Écrivez-nous directement à contact@krealabs.fr.`,
+          ``,
+          `À très vite,`,
+          `L'équipe Krealabs`,
+          `https://krealabs.fr`,
+        ].join("\n"),
       });
-    } catch (smtpError) {
-      console.error("SMTP send error:", smtpError);
+    } catch (err) {
+      console.error("Formsubmit error:", err);
       return NextResponse.json(
         { error: "Erreur lors de l'envoi de l'email" },
         { status: 500 },

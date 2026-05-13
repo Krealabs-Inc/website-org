@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { WaitlistConfirmationTemplate } from "@/emails/waitlist-confirmation-template";
-import { WaitlistNotificationTemplate } from "@/emails/waitlist-notification-template";
 import { prisma } from "@/lib/prisma";
-import { sendMail } from "@/lib/mailer";
-import * as React from "react";
+import { sendForm } from "@/lib/mailer";
 
 export async function POST(request: NextRequest) {
   try {
@@ -45,29 +42,29 @@ export async function POST(request: NextRequest) {
       data: { email, source: "website" },
     });
 
-    // Email de confirmation à l'utilisateur (critique — bloque si échec)
+    // Envoi via Formsubmit : notif admin + auto-reply visiteur
     try {
-      await sendMail({
-        to: email,
-        subject: "Bienvenue sur la liste d'attente Krealabs",
-        react: WaitlistConfirmationTemplate({ email }) as React.ReactElement,
+      await sendForm({
+        fields: {
+          subject: `Nouvelle inscription waitlist — ${email}`,
+          name: "Inscription waitlist",
+          email,
+          source: "Site web",
+        },
+        autoresponse: [
+          `Merci pour votre inscription à la liste d'attente Krealabs !`,
+          ``,
+          `Vous serez parmi les premiers informés de nos prochaines disponibilités,`,
+          `nouveaux services et opportunités de collaboration.`,
+          ``,
+          `À très vite,`,
+          `L'équipe Krealabs`,
+          `https://krealabs.fr`,
+        ].join("\n"),
       });
-    } catch (smtpError) {
-      console.error("SMTP confirmation error:", smtpError);
-      return NextResponse.json(
-        { error: "Erreur lors de l'envoi de l'email de confirmation" },
-        { status: 500 },
-      );
-    }
-
-    // Notification admin (best-effort — n'échoue pas si KO)
-    try {
-      await sendMail({
-        subject: "Nouvelle inscription à la liste d'attente",
-        react: WaitlistNotificationTemplate({ email }) as React.ReactElement,
-      });
-    } catch (smtpError) {
-      console.error("SMTP notification error:", smtpError);
+    } catch (err) {
+      console.error("Formsubmit waitlist error:", err);
+      // On laisse passer : l'inscription DB est sauvegardée
     }
 
     return NextResponse.json(

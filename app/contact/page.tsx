@@ -17,8 +17,6 @@ import {
   Smartphone,
   Cpu,
   Search,
-  Paperclip,
-  X,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -54,7 +52,6 @@ function ContactPageInner() {
     pricingOption: "",
     message: "",
   });
-  const [files, setFiles] = useState<File[]>([]);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   useEffect(() => {
@@ -74,7 +71,6 @@ function ContactPageInner() {
     try {
       const fd = new FormData();
       Object.entries(formData).forEach(([k, v]) => fd.append(k, v));
-      files.forEach((f) => fd.append("files", f));
 
       const res = await fetch("/api/contact", { method: "POST", body: fd });
       if (!res.ok) {
@@ -128,7 +124,6 @@ function ContactPageInner() {
         pricingOption: "",
         message: "",
       });
-      setFiles([]);
     } catch {
       setStatus("error");
       toast.error("Connexion impossible", {
@@ -136,12 +131,6 @@ function ContactPageInner() {
       });
       setTimeout(() => setStatus("idle"), 3000);
     }
-  };
-
-  const handleFiles = (incoming: FileList | null) => {
-    if (!incoming) return;
-    const next = Array.from(incoming).filter((f) => f.size <= 10 * 1024 * 1024);
-    setFiles((curr) => [...curr, ...next].slice(0, 5));
   };
 
   return (
@@ -312,50 +301,9 @@ function ContactPageInner() {
                   minLength={20}
                   value={formData.message}
                   onChange={(e) => update("message", e.target.value)}
-                  placeholder="Contexte, objectifs, contraintes, délai souhaité, budget envisagé..."
+                  placeholder="Contexte, objectifs, contraintes, délai souhaité, budget envisagé... Si vous avez un brief ou des maquettes, vous pourrez nous les transmettre par retour de mail."
                 />
               </Field>
-
-              {/* File drop zone */}
-              <div className="space-y-2">
-                <label className="text-eyebrow">Pièces jointes (optionnel)</label>
-                <label
-                  htmlFor="files-input"
-                  className="flex items-center justify-center gap-2 px-4 py-6 rounded-[var(--radius)] border border-dashed border-[var(--border-strong)] bg-[var(--background)] cursor-pointer hover:bg-[var(--surface-hover)] transition-colors"
-                >
-                  <Paperclip className="size-4 text-[var(--muted-foreground)]" />
-                  <span className="text-body-sm text-[var(--muted-foreground)]">
-                    Glissez-déposez ou cliquez · 5 fichiers max · 10 Mo chacun
-                  </span>
-                </label>
-                <input
-                  id="files-input"
-                  type="file"
-                  multiple
-                  className="sr-only"
-                  onChange={(e) => handleFiles(e.target.files)}
-                />
-                {files.length > 0 && (
-                  <ul className="space-y-1 mt-2">
-                    {files.map((f, i) => (
-                      <li
-                        key={i}
-                        className="flex items-center justify-between gap-2 px-3 py-2 text-body-sm rounded-[var(--radius)] border border-[var(--border)] bg-[var(--background)]"
-                      >
-                        <span className="truncate">{f.name}</span>
-                        <button
-                          type="button"
-                          onClick={() => setFiles((curr) => curr.filter((_, idx) => idx !== i))}
-                          aria-label={`Retirer ${f.name}`}
-                          className="text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
-                        >
-                          <X className="size-4" />
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </div>
             </Section>
 
             {/* Submit */}
