@@ -4,6 +4,15 @@ import { blogPosts } from "@/lib/blog-data";
 const baseUrl = "https://krealabs.fr";
 const now = new Date();
 
+/**
+ * Échappe les `&` non-entités pour qu'une URL avec query string
+ * (ex: Unsplash `?w=1200&q=80`) reste un XML valide dans <image:loc>.
+ * Next.js n'échappe pas automatiquement le contenu de ce champ.
+ */
+function escapeXmlUrl(url: string): string {
+  return url.replace(/&(?!(amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)/g, "&amp;");
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
@@ -164,7 +173,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly",
     priority: post.featured ? 0.75 : 0.65,
     images: [
-      ...(post.image ? [post.image] : []),
+      ...(post.image ? [escapeXmlUrl(post.image)] : []),
       `${baseUrl}/blog/${post.slug}/opengraph-image`,
     ],
   }));
