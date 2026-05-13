@@ -6,6 +6,7 @@ import { TEAM_SLUGS } from "@/lib/team";
 import { CATEGORY_SLUGS } from "@/app/blog/category/[slug]/page";
 import { INDEXABLE_TAG_SLUGS } from "@/app/blog/tag/[slug]/page";
 import { COMPARATOR_SLUGS } from "@/lib/comparators";
+import { GLOSSARY_SLUGS } from "@/lib/glossary";
 
 const baseUrl = "https://krealabs.fr";
 const now = new Date();
@@ -242,12 +243,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
+  // Lexique (definitions courtes pour AI search + long-tail SEO)
+  const lexiquePages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/lexique`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    },
+    ...GLOSSARY_SLUGS.map((slug) => ({
+      url: `${baseUrl}/lexique/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    })),
+  ];
+
   return [
     ...staticPages,
     ...authorPages,
     ...cityPages,
     ...sectorPages,
     ...comparatorPages,
+    ...lexiquePages,
     ...servicePages,
     ...techPages,
     ...blogIndex,
