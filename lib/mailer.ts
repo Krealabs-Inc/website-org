@@ -67,11 +67,21 @@ export async function sendForm(opts: SendFormOptions): Promise<void> {
     payload[key] = value as string | number | boolean;
   }
 
+  // Formsubmit vérifie Origin/Referer pour bloquer les soumissions
+  // depuis des fichiers locaux file://. On fournit notre domaine prod.
+  const origin =
+    process.env.NEXT_PUBLIC_URL ||
+    process.env.VERCEL_URL ||
+    "https://krealabs.fr";
+  const originUrl = origin.startsWith("http") ? origin : `https://${origin}`;
+
   const response = await fetch(ENDPOINT, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
+      Origin: originUrl,
+      Referer: originUrl,
     },
     body: JSON.stringify(payload),
   });
@@ -89,7 +99,20 @@ export async function sendForm(opts: SendFormOptions): Promise<void> {
   } | null;
 
   if (data && data.success !== "true" && data.message) {
-    // Formsubmit renvoie 200 même si erreur métier — on check le body
+    // Cas spécial : "needs Activation" → premier envoi, Formsubmit a
+    // envoyé un email d'activation à CONTACT_EMAIL. Le user doit
+    // cliquer dessus. On log un warning mais on ne fait pas échouer
+    // la requête (la DB save a réussi, prochain envoi marchera).
+    if (/activation/i.test(data.message)) {
+      console.warn(
+        "[mailer] Formsubmit needs activation. Check inbox at " +
+          CONTACT_EMAIL +
+          " and click 'Activate Form'. Message:",
+        data.message,
+      );
+      return;
+    }
+    // Autres erreurs métier → on throw
     throw new Error(`Formsubmit business error: ${data.message}`);
   }
 }
