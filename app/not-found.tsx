@@ -9,6 +9,9 @@ import { GlitchText } from "@/components/animations/glitch-text";
 const SUGGESTIONS = [
   { label: "Services", href: "/services" },
   { label: "Blog", href: "/blog" },
+  { label: "Lexique du web", href: "/lexique" },
+  { label: "Comparateurs", href: "/comparateur" },
+  { label: "Calculateur de devis", href: "/calculateur" },
   { label: "FAQ", href: "/faq" },
   { label: "Contact", href: "/contact" },
 ];
@@ -73,6 +76,14 @@ export default function NotFound() {
               ))}
             </ul>
           </div>
+
+          <p className="mt-12 text-caption hidden md:block">
+            Astuce : appuyez sur{" "}
+            <kbd className="px-1.5 py-0.5 rounded border border-[var(--border)] bg-[var(--surface)] font-mono">
+              ⌘K
+            </kbd>{" "}
+            pour ouvrir la recherche globale.
+          </p>
         </div>
       </Container>
     </main>

@@ -9,6 +9,9 @@ import { Toaster } from "sonner";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { LenisProvider } from "@/components/animations/lenis-provider";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { CookieConsent } from "@/components/legal/cookie-consent";
+import { SearchModal } from "@/components/search/search-modal";
 
 // Switzer — sans-serif principale (auto-hébergée, Fontshare)
 const switzer = localFont({
@@ -174,6 +177,13 @@ export default function RootLayout({
       className={`${switzer.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
     >
       <body className="antialiased font-sans">
+        {/* Skip-to-content : accessibilité clavier (WCAG 2.4.1) */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-[var(--radius)] focus:bg-[var(--accent)] focus:text-[#0a0a0a] focus:font-medium focus:shadow-lg"
+        >
+          Aller au contenu principal
+        </a>
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
@@ -182,11 +192,14 @@ export default function RootLayout({
           <LenisProvider>
             <OrganizationSchema />
             <Navbar />
-            {children}
+            <div id="main-content">{children}</div>
             <Footer />
             <Toaster position="top-right" richColors />
+            <CookieConsent />
+            <SearchModal />
           </LenisProvider>
           <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
