@@ -27,6 +27,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
 
 export default function DesignUiUxPage() {
@@ -117,6 +118,15 @@ export default function DesignUiUxPage() {
         </Container>
       </section>
 
+      <ServiceFAQ
+        title={
+          <>
+            Vos questions sur <em>design UI/UX</em>.
+          </>
+        }
+        items={FAQ}
+      />
+
       <ServiceCta
         title={
           <>
@@ -127,6 +137,39 @@ export default function DesignUiUxPage() {
     </main>
   );
 }
+
+const FAQ = [
+  {
+    question: "Travaillez-vous avec un designer dédié ou un dev qui fait du design ?",
+    answer:
+      "Les deux. Pour les projets exigeants en identité graphique, nous collaborons avec un designer UI/UX indépendant à Rouen avec qui nous travaillons depuis plusieurs années. Pour les projets où l'UX prime sur l'esthétique pure (SaaS B2B, outils métier), nous gérons en interne avec une approche utility-first (Tailwind, design systems). Vous nous dites ce dont vous avez besoin, on calibre la bonne équipe.",
+  },
+  {
+    question: "Combien de maquettes au total ?",
+    answer:
+      "Site vitrine 6-10 pages : 8-15 écrans Figma (desktop + mobile + variantes principales). App mobile MVP : 15-25 écrans. SaaS / plateforme : 25-50 écrans. Toujours en haute fidélité (HF) — on saute les wireframes basse fidélité pour les projets de petite/moyenne envergure, car on perd plus de temps à les valider qu'on n'en gagne sur les HF.",
+  },
+  {
+    question: "Quels délais sur la phase design ?",
+    answer:
+      "Site vitrine : 2-3 semaines de design avant le démarrage du dev. App mobile MVP : 3-4 semaines. SaaS / plateforme : 4-6 semaines. Ces durées incluent 2-3 cycles de validation avec vous. On bloque le démarrage du dev tant que les maquettes ne sont pas validées — éviter le \"on corrige en cours de dev\" qui explose les budgets.",
+  },
+  {
+    question: "Travaillez-vous avec mes maquettes existantes (Figma, XD, Sketch) ?",
+    answer:
+      "Oui, sans souci. Si vous avez déjà des maquettes solides (Figma idéalement), on les intègre directement en dev. Si elles ont des problèmes (incohérences, manques, design impossible techniquement), on vous le dit honnêtement et on propose les corrections nécessaires avant de coder.",
+  },
+  {
+    question: "Que se passe-t-il après validation des maquettes ?",
+    answer:
+      "On démarre l'intégration. Toutes nos integrations sont pixel-perfect par défaut — si votre maquette Figma indique 24px de marge, le site aura 24px. On utilise Tailwind avec design tokens (couleurs, spacings, typo extraits de Figma) pour garantir la cohérence. Vérification finale ensemble avant mise en ligne.",
+  },
+  {
+    question: "Concevez-vous des design systems complets ?",
+    answer:
+      "Oui, pour les clients avec plusieurs produits ou équipes : design system Figma (tokens, composants, variants, documentation) + implémentation côté code (shadcn/ui adapté à votre identité). Compter 6-10 jours de design + 8-15 jours d'implémentation selon la profondeur souhaitée.",
+  },
+];
 
 const FEATURES = [
   {

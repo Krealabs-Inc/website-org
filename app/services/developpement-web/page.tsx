@@ -31,6 +31,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
 
 export default function DeveloppementWebPage() {
@@ -126,6 +127,15 @@ export default function DeveloppementWebPage() {
         </Container>
       </section>
 
+      <ServiceFAQ
+        title={
+          <>
+            Vos questions sur le <em>développement web</em>.
+          </>
+        }
+        items={FAQ}
+      />
+
       <ServiceCta
         title={
           <>
@@ -136,6 +146,39 @@ export default function DeveloppementWebPage() {
     </main>
   );
 }
+
+const FAQ = [
+  {
+    question: "Quand choisir Next.js plutôt que WordPress ?",
+    answer:
+      "WordPress excelle pour les sites de contenu (vitrines, blogs, e-commerce simple) où les rédacteurs doivent éditer en autonomie. Next.js est le bon choix dès qu'on parle de SaaS, dashboards, applications métier, sites à très fort trafic, ou expériences UX sur mesure. Notre règle : si l'admin doit publier du contenu plusieurs fois par semaine sans nous solliciter → WordPress. Si l'app est l'outil métier → Next.js.",
+  },
+  {
+    question: "Combien coûte un développement web sur mesure à Rouen ?",
+    answer:
+      "Pour un site Next.js / React custom : 8 000-25 000 € pour un site institutionnel premium, 25 000-60 000 € pour un MVP SaaS, 60 000-150 000 € pour une plateforme complète. Nos TJM se situent autour de 600-700 €/jour à Rouen (vs 800-1 200 € en agence parisienne équivalente). Premier devis détaillé après cadrage gratuit.",
+  },
+  {
+    question: "Quels sont vos délais sur une plateforme custom ?",
+    answer:
+      "Un MVP SaaS solide (login, dashboard, 2-3 features) : 6-10 semaines. Une plateforme complète (multi-utilisateurs, paiement, intégrations tierces, mobile responsive) : 12-20 semaines. Les délais varient surtout selon votre vitesse de validation des maquettes et de retour sur les démos hebdomadaires.",
+  },
+  {
+    question: "Que se passe-t-il quand le projet évolue après livraison ?",
+    answer:
+      "Trois options : (1) Forfait évolutif mensuel pour ~5-15h de dev/mois selon vos besoins. (2) Régie ponctuelle pour les évolutions plus lourdes (refonte section, ajout feature majeure). (3) Vous reprenez la main avec votre équipe interne — le code est propre, documenté, vous appartient. Pas de lock-in.",
+  },
+  {
+    question: "Comment garantissez-vous la qualité du code ?",
+    answer:
+      "TypeScript strict, tests unitaires sur la logique critique, code review systématique entre nous deux, CI/CD automatisé (lint + tests + déploiement), monitoring production (Sentry, Vercel Analytics). Vous avez accès au dépôt Git dès le jour 1 — tout est transparent.",
+  },
+  {
+    question: "Travaillez-vous avec ma stack actuelle si je veux étendre l'existant ?",
+    answer:
+      "Oui, fréquemment. On audite votre code, on s'aligne sur vos conventions, et on intègre nos développements dans votre repo. Nous sommes à l'aise avec React, Next.js, Vue, Nuxt, Node.js, Python (Django, FastAPI), PHP (Laravel, Symfony). Si la stack est trop ancienne et bloque la productivité, on vous le dit — et on propose un plan de modernisation incrémental.",
+  },
+];
 
 const FEATURES = [
   {

@@ -13,6 +13,7 @@ import { HowToSchema } from "@/components/seo/howto-schema";
 import { ShareButton } from "@/components/blog/share-button";
 import { MarkdownText } from "@/components/blog/markdown-text";
 import { blogPosts, frenchDateToISO } from "@/lib/blog-data";
+import { TEAM } from "@/lib/team";
 
 const SITE_URL = "https://krealabs.fr";
 
@@ -128,7 +129,10 @@ export default async function BlogPostPage({
     author: {
       "@type": "Person",
       name: post.author.name,
-      url: `${SITE_URL}/equipe`,
+      url: (() => {
+        const member = TEAM.find((m) => m.name === post.author.name);
+        return member ? `${SITE_URL}/equipe/${member.slug}` : `${SITE_URL}/equipe`;
+      })(),
     },
     publisher: {
       "@type": "Organization",

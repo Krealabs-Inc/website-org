@@ -2,6 +2,7 @@ import { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog-data";
 import { CITIES } from "@/lib/cities";
 import { SECTOR_SLUGS } from "@/lib/sectors";
+import { TEAM_SLUGS } from "@/lib/team";
 
 const baseUrl = "https://krealabs.fr";
 const now = new Date();
@@ -198,8 +199,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
+  // Pages auteur individuelles (E-E-A-T)
+  const authorPages: MetadataRoute.Sitemap = TEAM_SLUGS.map((slug) => ({
+    url: `${baseUrl}/equipe/${slug}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.75,
+  }));
+
   return [
     ...staticPages,
+    ...authorPages,
     ...cityPages,
     ...sectorPages,
     ...servicePages,

@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
 
 export const metadata: Metadata = {
@@ -216,38 +217,15 @@ export default function WordpressPage() {
         </Container>
       </section>
 
-      {/* FAQ WORDPRESS */}
-      <section className="section-y border-t border-[var(--border)]">
-        <Container size="narrow">
-          <div className="mb-12 text-center">
-            <Eyebrow className="mb-6 justify-center">Questions fréquentes</Eyebrow>
-            <h2 className="text-h1">
-              Tout savoir sur nos projets <em>WordPress</em>.
-            </h2>
-          </div>
-          <div className="space-y-4">
-            {FAQ.map((item) => (
-              <details
-                key={item.q}
-                className="group rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] open:border-[var(--border-strong)] transition-colors"
-              >
-                <summary className="cursor-pointer list-none px-6 py-5 flex items-center justify-between gap-4">
-                  <span className="text-h4">{item.q}</span>
-                  <span
-                    aria-hidden
-                    className="text-h3 text-[var(--accent)] group-open:rotate-45 transition-transform"
-                  >
-                    +
-                  </span>
-                </summary>
-                <p className="px-6 pb-6 text-body text-[var(--muted-foreground)]">
-                  {item.a}
-                </p>
-              </details>
-            ))}
-          </div>
-        </Container>
-      </section>
+      {/* FAQ WORDPRESS — avec FAQPage schema */}
+      <ServiceFAQ
+        title={
+          <>
+            Tout savoir sur nos projets <em>WordPress</em>.
+          </>
+        }
+        items={FAQ.map((item) => ({ question: item.q, answer: item.a }))}
+      />
 
       <ServiceCta
         title={

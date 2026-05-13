@@ -10,6 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 import { MotionReveal } from "@/components/animations/motion-reveal";
 import { PersonSchema } from "@/components/seo/person-schema";
+import { TEAM, type TeamMember } from "@/lib/team";
 
 export const metadata: Metadata = {
   title: "L'équipe — 2 co-fondateurs à Rouen",
@@ -24,58 +25,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://krealabs.fr/equipe" },
 };
 
-// =============================================================================
-// TEAM DATA — édite ici pour mettre à jour les profils
-// =============================================================================
-
-interface TeamMember {
-  name: string;
-  role: string;
-  initials: string;
-  bio: string;
-  location: string;
-  /** Années d'expérience (string pour permettre "10+", "5+", etc.) */
-  yearsExperience: string;
-  /** Ce que la personne aime faire — rendu en italique serif (phrase courte) */
-  loves: string;
-  photo?: string;
-  github?: string;
-  linkedin?: string;
-  twitter?: string;
-  specialties: string[];
-  stack: string[];
-}
-
-const TEAM: TeamMember[] = [
-  {
-    name: "Maxime Dubois",
-    role: "Co-fondateur · Développeur",
-    initials: "MD",
-    bio: "Co-fondateur de Krealabs. Passionné de développement web depuis 10+ ans, j'aime concevoir des produits digitaux à la fois performants, accessibles et beaux. Mon rôle : architecture technique, suivi des projets et relation client.",
-    location: "Rouen, Normandie",
-    yearsExperience: "10+",
-    loves: "Concevoir des interfaces où chaque détail compte.",
-    photo: "/team/maxime.webp",
-    github: "https://github.com/makcimerrr",
-    linkedin: "https://www.linkedin.com/in/maxime-dubois-0265a4292/",
-    specialties: ["Full-stack", "Architecture", "Suivi client"],
-    stack: ["Next.js", "React", "TypeScript", "Prisma", "PostgreSQL", "Tailwind"],
-  },
-  {
-    name: "Romain Clatot",
-    role: "Co-fondateur · Développeur",
-    initials: "RC",
-    bio: "Co-fondateur de Krealabs, basé à Rouen. Profil polyvalent avec une appétence forte pour le back-end, les API et l'intégration de systèmes. Romain pilote les choix d'architecture serveur, les modèles de données et les intégrations tierces (paiement, auth, services externes) sur les projets Krealabs.",
-    location: "Rouen, Normandie",
-    yearsExperience: "5+",
-    loves: "Bâtir des API claires et des modèles de données qui tiennent.",
-    photo: "https://avatars.githubusercontent.com/u/123472397?v=4",
-    github: "https://github.com/CLTRomain",
-    linkedin: "https://www.linkedin.com/in/romain-clatot/",
-    specialties: ["Back-end & API", "Intégrations", "Bases de données"],
-    stack: ["TypeScript", "Node.js", "GraphQL", "PHP", "PostgreSQL", "Docker"],
-  },
-];
+// TEAM data déplacée dans lib/team.ts (réutilisée par /equipe/[slug]
+// et par le markup Article auteur des blog posts).
 
 // =============================================================================
 // PAGE
@@ -90,12 +41,12 @@ export default function EquipePage() {
           name: m.name,
           jobTitle: m.role,
           image: m.photo?.startsWith("http") ? m.photo : m.photo ? `${baseUrl}${m.photo}` : undefined,
-          url: `${baseUrl}/equipe`,
+          url: `${baseUrl}/equipe/${m.slug}`,
           bio: m.bio,
           sameAs: [m.github, m.linkedin, m.twitter].filter(
             (v): v is string => typeof v === "string",
           ),
-          knowsAbout: [...m.specialties, ...m.stack],
+          knowsAbout: m.knowsAbout,
         }))}
       />
       {/* HERO */}
@@ -194,9 +145,9 @@ export default function EquipePage() {
                   </div>
                 </div>
 
-                {/* Socials */}
-                {(member.github || member.linkedin || member.twitter) && (
-                  <div className="pt-6 border-t border-[var(--border)] flex items-center gap-2 relative z-10">
+                {/* Socials + lien profil détaillé */}
+                <div className="pt-6 border-t border-[var(--border)] flex items-center justify-between gap-4 relative z-10">
+                  <div className="flex items-center gap-2">
                     {member.github && (
                       <SocialLink href={member.github} label="GitHub" icon={Github} />
                     )}
@@ -204,7 +155,14 @@ export default function EquipePage() {
                       <SocialLink href={member.linkedin} label="LinkedIn" icon={Linkedin} />
                     )}
                   </div>
-                )}
+                  <Link
+                    href={`/equipe/${member.slug}`}
+                    className="inline-flex items-center gap-2 text-body-sm font-medium text-[var(--accent)] hover:gap-3 transition-all"
+                  >
+                    Voir le profil
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </div>
                 </article>
               </MotionReveal>
             ))}

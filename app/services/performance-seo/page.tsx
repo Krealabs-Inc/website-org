@@ -28,6 +28,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
 
 export default function PerformanceSeoPage() {
@@ -121,16 +122,58 @@ export default function PerformanceSeoPage() {
         </Container>
       </section>
 
+      <ServiceFAQ
+        title={
+          <>
+            Vos questions sur <em>SEO &amp; performance</em>.
+          </>
+        }
+        items={FAQ}
+      />
+
       <ServiceCta
         title={
           <>
-            Besoin d'un <em>audit SEO</em> ?
+            Besoin d&apos;un <em>audit SEO</em> ?
           </>
         }
       />
     </main>
   );
 }
+
+const FAQ = [
+  {
+    question: "Comment mesurez-vous la performance d'un site ?",
+    answer:
+      "Audit complet en 3 axes : (1) Core Web Vitals via Lighthouse + PageSpeed Insights (LCP, INP, CLS — objectif 90+ sur les 3). (2) Audit SEO technique : crawl du site (Screaming Frog), schema.org, balises, vitesse, mobile-friendliness. (3) Audit sémantique : positions actuelles sur les mots-clés cibles, concurrence locale Rouen / Normandie, opportunités content. Rapport écrit avec recommandations priorisées par impact / effort.",
+  },
+  {
+    question: "Combien coûte un audit SEO + perf complet à Rouen ?",
+    answer:
+      "Audit standard (jusqu'à 50 pages, 3-5 jours de travail) : 1 500-3 000 €. Audit approfondi avec recommandations et plan d'action (jusqu'à 500 pages, 7-12 jours) : 4 000-8 000 €. Inclus : rapport PDF, debrief en visio ou présentiel, priorisation des actions, accompagnement pendant 2 semaines pour les corrections urgentes.",
+  },
+  {
+    question: "Quels sont les délais visibles sur les positions Google après corrections ?",
+    answer:
+      "Cas typiques observés : améliorations Core Web Vitals → +5-15% de trafic en 4-8 semaines. Corrections schema.org + technique → +10-30% en 8-16 semaines. Contenu nouveau ciblé local Rouen → +50-200% sur les longues traînes en 6-12 mois. Le SEO est un investissement long terme — pas de gain instantané sauf bugs techniques majeurs.",
+  },
+  {
+    question: "Garantissez-vous la première position sur \"agence web Rouen\" ?",
+    answer:
+      "Non — et toute agence qui vous garantit la 1ère position ment. Google a 200+ critères de ranking dont seuls une trentaine sont contrôlables côté technique/contenu. Les autres dépendent de l'autorité du domaine (âge, backlinks), de la concurrence locale, du contexte utilisateur. Ce qu'on garantit : application des best practices, mesure transparente, progression continue.",
+  },
+  {
+    question: "Travaillez-vous avec mon agence SEO existante ?",
+    answer:
+      "Oui régulièrement. Beaucoup d'entreprises ont déjà une agence SEO pour le contenu/netlinking et nous engagent pour le SEO technique (perf, structure, schema). Cette répartition fonctionne bien : on s'occupe du code, ils s'occupent du content + outreach. On synchronise via des points trimestriels.",
+  },
+  {
+    question: "Quels outils utilisez-vous ?",
+    answer:
+      "Audit technique : Lighthouse, PageSpeed Insights, Screaming Frog, Sitebulb. Monitoring : Search Console (gratuit), Vercel Analytics, Plausible. Sémantique : Ahrefs ou Semrush selon le projet. AI : Claude / GPT pour la rédaction assistée. Nous ne sommes pas équipés d'outils SEO marketing lourds (Ahrefs Premium 500$/mois) — pour ça, on collabore avec votre agence de référencement.",
+  },
+];
 
 const FEATURES = [
   {

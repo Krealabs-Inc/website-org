@@ -27,6 +27,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
 
 export default function ApplicationsMobilePage() {
@@ -119,6 +120,15 @@ export default function ApplicationsMobilePage() {
         </Container>
       </section>
 
+      <ServiceFAQ
+        title={
+          <>
+            Vos questions sur le <em>développement mobile</em>.
+          </>
+        }
+        items={FAQ}
+      />
+
       <ServiceCta
         title={
           <>
@@ -129,6 +139,39 @@ export default function ApplicationsMobilePage() {
     </main>
   );
 }
+
+const FAQ = [
+  {
+    question: "Faut-il développer iOS et Android, ou une seule plateforme ?",
+    answer:
+      "En 2026, il est rare de ne livrer qu'une seule plateforme. Avec React Native, le coût marginal pour ajouter Android quand vous avez iOS (ou inversement) est de l'ordre de +20-30%, pas +100%. Notre conseil : sortir les 2 dès le MVP. Exception : audience cible 100% iOS (haut de gamme, B2B France) où Android peut être différé.",
+  },
+  {
+    question: "React Native ou natif (Swift / Kotlin) ?",
+    answer:
+      "React Native pour 90% des apps : performance proche du natif, 1 base de code, time-to-market réduit de 30-40%. Natif (Swift/Kotlin) si vous avez besoin de fonctionnalités très spécifiques (AR, ML embarqué, traitement vidéo lourd, intégrations OS profondes). À Krealabs nous codons en React Native + Expo pour la majorité de nos clients normands.",
+  },
+  {
+    question: "Combien coûte une application mobile à Rouen ?",
+    answer:
+      "MVP simple (5-8 écrans, login, 1-2 features) : 30-50 k€. App fonctionnelle (15-25 écrans, paiements, notifications push, géolocalisation) : 50-80 k€. App complexe (offline-first, sync, intégrations tierces multiples) : 80-150 k€. Ces fourchettes incluent iOS + Android grâce à React Native.",
+  },
+  {
+    question: "Quels délais entre signature et publication App Store / Play Store ?",
+    answer:
+      "MVP : 12-16 semaines (dev 8-10 + tests TestFlight 2-3 + validation Apple 1-2 semaines, Google quelques jours). App complète : 20-26 semaines. Le goulot d'étranglement est souvent la validation Apple (App Review) — nous préparons la fiche App Store en amont pour minimiser les rejets.",
+  },
+  {
+    question: "Comment se passent les mises à jour après publication ?",
+    answer:
+      "Mises à jour OTA via Expo EAS Update pour les changements JS/UX (instantanées, sans passer par les stores). Pour les changements natifs (nouvelle permission, version SDK), nouvelle release via App Store Connect + Google Play Console (validation Apple 24-72h en moyenne). Forfaits maintenance mobile à partir de 250 €/mois.",
+  },
+  {
+    question: "Avez-vous déjà publié des apps sur les stores ?",
+    answer:
+      "Oui, plusieurs apps Krealabs sont actuellement en production sur l'App Store et Google Play. Nous gérons tout le pipeline : compte développeur, fastlane, signing iOS, app icon multi-tailles, screenshots App Store, fiches descriptives ASO. Vous restez propriétaire des comptes développeurs, on les configure ensemble.",
+  },
+];
 
 const FEATURES = [
   {
