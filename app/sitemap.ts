@@ -3,6 +3,8 @@ import { blogPosts } from "@/lib/blog-data";
 import { CITIES } from "@/lib/cities";
 import { SECTOR_SLUGS } from "@/lib/sectors";
 import { TEAM_SLUGS } from "@/lib/team";
+import { CATEGORY_SLUGS } from "@/app/blog/category/[slug]/page";
+import { INDEXABLE_TAG_SLUGS } from "@/app/blog/tag/[slug]/page";
 
 const baseUrl = "https://krealabs.fr";
 const now = new Date();
@@ -207,6 +209,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.75,
   }));
 
+  // Pages catégorie blog (5 catégories)
+  const blogCategoryPages: MetadataRoute.Sitemap = CATEGORY_SLUGS.map((slug) => ({
+    url: `${baseUrl}/blog/category/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.65,
+  }));
+
+  // Pages tag blog (uniquement tags avec ≥3 articles)
+  const blogTagPages: MetadataRoute.Sitemap = INDEXABLE_TAG_SLUGS.map((slug) => ({
+    url: `${baseUrl}/blog/tag/${slug}`,
+    lastModified: now,
+    changeFrequency: "weekly" as const,
+    priority: 0.55,
+  }));
+
   return [
     ...staticPages,
     ...authorPages,
@@ -215,6 +233,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...servicePages,
     ...techPages,
     ...blogIndex,
+    ...blogCategoryPages,
+    ...blogTagPages,
     ...blogArticles,
   ];
 }

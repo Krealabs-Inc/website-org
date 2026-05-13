@@ -111,7 +111,7 @@ export default function FaqPage() {
 
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
-      <FAQSchema items={allItems} />
+      <FAQSchema items={allItems} speakable />
 
       {/* HERO */}
       <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
