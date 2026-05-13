@@ -40,23 +40,24 @@ export default function HomePage() {
         <Container className="relative">
           <MotionReveal className="max-w-4xl" direction="up">
             <Eyebrow dot className="mb-8">
-              Agence digitale · Rouen, Normandie
+              Agence digitale · Studio de développement
             </Eyebrow>
 
             <h1 className="text-display">
-              Sites web et logiciels <em>sur mesure</em>,
+              Vos idées méritent
               <br />
-              conçus à{" "}
+              du code{" "}
               <TextHighlighter>
-                <em>Rouen</em>
+                <em>à leur hauteur</em>
               </TextHighlighter>
               .
             </h1>
 
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Krealabs est une agence web spécialisée dans la création de sites
-              performants, d'applications mobile et de logiciels métier pour les
-              entreprises normandes exigeantes.
+              Krealabs construit des sites web, des applications mobile et des
+              logiciels sur mesure. Du WordPress soigné au Next.js taillé sur
+              mesure — on choisit la stack en fonction de votre projet, pas
+              l'inverse.
             </p>
 
             {/* Ligne rotative des expertises */}
