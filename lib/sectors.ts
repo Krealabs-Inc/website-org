@@ -724,6 +724,622 @@ export const SECTORS: Record<string, SectorData> = {
     ],
   },
 
+  association: {
+    slug: "association",
+    name: "association",
+    namePlural: "associations",
+    nameLabeled: "les associations",
+    title: "Agence web pour association à Rouen — Sites loi 1901",
+    description:
+      "Création de sites internet pour associations à Rouen et en Normandie : présentation, adhésions en ligne, dons, agenda événements. WordPress et Next.js sur mesure.",
+    intro:
+      "Vous gérez une association loi 1901 à Rouen ou en Normandie ? Votre site web est l'épine dorsale de votre visibilité et de votre vie associative : recruter de nouveaux adhérents, collecter des dons, annoncer les événements, rassurer les financeurs. Krealabs intervient pour des associations de toutes tailles — du petit collectif de quartier à la fédération régionale — avec des solutions adaptées aux budgets limités.",
+    challenges: [
+      {
+        title: "Budget contraint, exigence professionnelle",
+        description:
+          "Les associations doivent paraître pros sans avoir le budget d'une PME. Solution : WordPress + thème custom léger, pas de prestations superflues, focus sur l'essentiel.",
+      },
+      {
+        title: "Adhésions et dons en ligne",
+        description:
+          "Le paiement en ligne pour adhésions, cotisations et dons est devenu standard. Intégration HelloAsso (gratuit, commission 1.5%) ou solution Stripe directe.",
+      },
+      {
+        title: "Agenda événements vivant",
+        description:
+          "Réunions, ateliers, AG, événements publics : un calendrier d'événements maintenu à jour est crucial. Solution simple à éditer par les bénévoles.",
+      },
+      {
+        title: "Conformité RGPD",
+        description:
+          "Les associations sont soumises au RGPD comme les entreprises. Mentions légales conformes, registre de traitement des données adhérents, consentement explicite pour la newsletter.",
+      },
+    ],
+    features: [
+      {
+        title: "HelloAsso intégré : adhésions + dons + billetterie",
+        description:
+          "HelloAsso est l'outil de référence pour les assos (commission 0% en option). Widget intégré sur votre site pour adhérer, donner ou réserver un événement.",
+      },
+      {
+        title: "Agenda et page événements",
+        description:
+          "Calendrier visuel, fiche par événement (lieu, horaire, prix, inscription), filtres par catégorie. Intégration Google Calendar pour les bénévoles.",
+      },
+      {
+        title: "Espace presse / médias",
+        description:
+          "Page dédiée aux journalistes : photos HD, communiqués, contacts. Vital pour les assos qui veulent paraître dans la presse normande.",
+      },
+      {
+        title: "Formation de l'équipe bénévole",
+        description:
+          "Nous formons 2-3 bénévoles à mettre à jour le site eux-mêmes (articles, agenda, adhérents). Documentation écrite fournie.",
+      },
+    ],
+    recommendedStack:
+      "WordPress + thème léger custom + HelloAsso intégré + plugin événements (The Events Calendar gratuit ou Modern Events Calendar). Setup simple à maintenir par les bénévoles.",
+    faq: [
+      {
+        question: "Combien coûte un site internet pour une association à Rouen ?",
+        answer:
+          "Pour une association rouennaise, un site WordPress vitrine + intégration HelloAsso : 1 800-3 500 €. Avec agenda événements et espace adhérents : 3 500-6 000 €. Maintenance allégée : 30-80 €/mois. Demandez aussi si vous êtes éligible à un mécénat de compétence d'une agence locale (~30-40% du coût offert).",
+      },
+      {
+        question: "Les associations sont-elles soumises au RGPD ?",
+        answer:
+          "Oui, totalement. Toute structure qui collecte des données personnelles (adhérents, donateurs, contacts) est concernée. Obligation : mentions légales conformes, politique de confidentialité, consentement explicite (case à cocher) pour la newsletter, registre des traitements.",
+      },
+    ],
+    keywords: [
+      "agence web association rouen",
+      "site internet association loi 1901 rouen",
+      "création site web association normandie",
+      "site associatif",
+      "site internet asso rouen",
+    ],
+  },
+
+  ehpad: {
+    slug: "ehpad",
+    name: "EHPAD / maison de retraite",
+    namePlural: "EHPAD et maisons de retraite",
+    nameLabeled: "les EHPAD",
+    title: "Agence web pour EHPAD à Rouen — Sites & familles",
+    description:
+      "Création de sites internet pour EHPAD et maisons de retraite à Rouen et en Normandie : informations familles, agenda visites, photos résidence. WordPress sur mesure.",
+    intro:
+      "Vous dirigez un EHPAD ou une maison de retraite à Rouen ou en Normandie ? Le secteur médico-social a des contraintes web spécifiques : rassurer les familles qui choisissent un établissement pour leur proche, transmettre une image de qualité de vie, simplifier la communication avec les familles. Krealabs accompagne plusieurs EHPAD normands sur la modernisation de leur présence digitale.",
+    challenges: [
+      {
+        title: "Rassurer les familles avant la visite",
+        description:
+          "Les familles choisissent un EHPAD avec une charge émotionnelle forte. Le site doit projeter sécurité, qualité, humanité. Photos qualité, témoignages, équipe valorisée.",
+      },
+      {
+        title: "Transparence sur les tarifs et financements",
+        description:
+          "Le secteur est scruté. Affichage clair du forfait journalier, des aides possibles (APA, ASH, APL), prestations incluses. Simulateur de coût en option.",
+      },
+      {
+        title: "Communication aux familles (résidents existants)",
+        description:
+          "Newsletter mensuelle, photos d'animations, agenda événements (Noël, kermesse, ateliers), espace privé pour les familles avec photos et infos santé encadrées.",
+      },
+      {
+        title: "Recrutement (personnel soignant)",
+        description:
+          "Le secteur peine à recruter. Page \"Nous rejoindre\" attractive avec témoignages de salariés, parcours, avantages, formulaire de candidature spontanée.",
+      },
+    ],
+    features: [
+      {
+        title: "Visite virtuelle 360° de la résidence",
+        description:
+          "Pour les familles éloignées géographiquement : visite virtuelle de la résidence, des chambres-types, des espaces communs. Réduit les visites physiques inutiles.",
+      },
+      {
+        title: "Pages prestations détaillées",
+        description:
+          "Hébergement permanent, court séjour, accueil de jour, unité Alzheimer protégée. Une page par typologie, avec tarifs, prestations incluses, FAQ.",
+      },
+      {
+        title: "Espace famille sécurisé",
+        description:
+          "Login familles pour accéder à : photos récentes du résident, planning visites, paiement de la facture mensuelle, prise de RDV avec la direction.",
+      },
+      {
+        title: "Page \"Nous rejoindre\" recrutement",
+        description:
+          "Témoignages d'aides-soignants, IDE, animateur. Vidéos courtes. Formulaire candidature spontanée. Souvent le levier #1 pour faire venir des CV.",
+      },
+    ],
+    recommendedStack:
+      "WordPress + thème custom (esthétique chaleureuse, photos en grand format) + plugin recrutement (WP Job Manager) + zone privée famille avec authentification.",
+    faq: [
+      {
+        question: "Combien coûte un site pour un EHPAD à Rouen ?",
+        answer:
+          "Pour un EHPAD à Rouen, un site WordPress moderne avec galerie + pages prestations + page recrutement : 5 000-8 500 €. Avec espace famille sécurisé et visite virtuelle : 10 000-18 000 €. Maintenance et MAJ des actus : 200-500 €/mois.",
+      },
+      {
+        question: "Comment se conformer aux exigences RGPD avec un espace famille ?",
+        answer:
+          "L'espace famille traite des données sensibles (photos, infos santé). Obligations : hébergement HDS (Hébergeur de Données de Santé), connexion HTTPS, authentification forte, chiffrement des photos, registre RGPD, droit d'accès et à l'effacement. Coût additionnel : ~50-150 €/mois pour l'hébergement HDS.",
+      },
+    ],
+    keywords: [
+      "agence web ehpad rouen",
+      "site internet maison de retraite rouen",
+      "création site ehpad normandie",
+      "site internet ehpad",
+      "agence web médico-social rouen",
+    ],
+  },
+
+  kine: {
+    slug: "kine",
+    name: "cabinet de kinésithérapie",
+    namePlural: "cabinets de kinésithérapie",
+    nameLabeled: "les cabinets de kinésithérapie",
+    title: "Agence web pour kinésithérapeute & ostéopathe à Rouen",
+    description:
+      "Sites internet pour kinés et ostéopathes à Rouen : prise de RDV Doctolib, présentation cabinet, spécialités, conformité ordre. WordPress / Next.js.",
+    intro:
+      "Vous êtes kinésithérapeute, ostéopathe ou exercez en cabinet pluridisciplinaire à Rouen ou en Normandie ? Vos patients vous trouvent à 80% via Google et Doctolib. Un site internet professionnel vous différencie de la concurrence locale, vous permet de capter des patients sans dépendre uniquement de Doctolib (49 €/mois minimum), et vous positionne comme expert sur vos spécialités.",
+    challenges: [
+      {
+        title: "Conformité Code de déontologie (kinés) ou Ordre (ostéos)",
+        description:
+          "Pour les kinés : article R.4321-67 CSP (pas de publicité). Pour les ostéopathes : Charte du Registre des Ostéopathes de France. Information factuelle uniquement, pas de comparaison.",
+      },
+      {
+        title: "Doctolib vs prise de RDV directe",
+        description:
+          "Doctolib : 49-129 €/mois mais énorme visibilité. Module RDV direct (Cal.com 0-30 €/mois) : économies mais demande effort marketing pour amener les patients.",
+      },
+      {
+        title: "SEO local par spécialité",
+        description:
+          "\"Kiné Rouen\" : ultra-compétitif. Stratégies : pages dédiées par spécialité (sport, périnée, respiratoire, drainage), par quartier (Saint-Sever, Mont-Saint-Aignan). Chacune cible une niche.",
+      },
+      {
+        title: "Patient autonome : tarifs et préparation séance",
+        description:
+          "Les patients veulent connaître les tarifs (secteur 1/2, dépassements), apporter les bons documents (ordonnance, bilan), préparer leur première séance. Page FAQ patient indispensable.",
+      },
+    ],
+    features: [
+      {
+        title: "Page par spécialité (rééducation sport, périnée, etc.)",
+        description:
+          "Une page dédiée par spécialité ou par pathologie traitée. Texte SEO + FAQ + témoignages patients (anonymisés). Cible la longue traîne (\"kiné rééducation épaule Rouen\").",
+      },
+      {
+        title: "RDV intégré (Doctolib ou Cal.com)",
+        description:
+          "Widget Doctolib intégré, OU module Cal.com custom relié à votre agenda Google. Patient autonome 24/7.",
+      },
+      {
+        title: "Présentation cabinet et équipe",
+        description:
+          "Photos professionnelles du cabinet, équipement, équipe (avec diplômes pour chacun). Rassure avant le premier RDV.",
+      },
+      {
+        title: "Blog conseils patients",
+        description:
+          "Articles conseil (exercices à domicile, prévention TMS, douleur dos). Excellent SEO + service rendu au patient.",
+      },
+    ],
+    recommendedStack:
+      "WordPress + thème léger custom + widget Doctolib + plugin SEO Yoast/RankMath + hébergement français.",
+    faq: [
+      {
+        question: "Faut-il Doctolib ou un module de RDV direct ?",
+        answer:
+          "Doctolib à 49-129 €/mois apporte une visibilité massive (les patients tapent \"kiné rouen\" sur Doctolib). Un module direct est moins cher mais demande un effort marketing pour amener les patients à votre site. La plupart des kinés utilisent les deux en parallèle.",
+      },
+      {
+        question: "Combien coûte un site pour un cabinet de kinésithérapie ?",
+        answer:
+          "Site vitrine WordPress avec pages spécialités + blog conseils + RDV Doctolib : 2 500-4 500 €. Site personnalisé avec module RDV intégré + témoignages patients : 4 500-7 500 €.",
+      },
+    ],
+    keywords: [
+      "agence web kiné rouen",
+      "site internet kinésithérapeute rouen",
+      "création site ostéopathe rouen",
+      "site web cabinet kiné normandie",
+      "agence web santé rouen",
+    ],
+  },
+
+  plombier: {
+    slug: "plombier",
+    name: "plombier",
+    namePlural: "plombiers",
+    nameLabeled: "les plombiers",
+    title: "Agence web pour plombier à Rouen — Sites & devis en ligne",
+    description:
+      "Création de sites internet pour plombiers à Rouen : devis express, urgence 24/7, SEO local par quartier. Spécialiste WordPress et SEO local.",
+    intro:
+      "Vous êtes plombier ou entreprise de plomberie à Rouen, dans le Petit-Quevilly, Bois-Guillaume, Mont-Saint-Aignan ou ailleurs en Normandie ? Vos clients vous trouvent en urgence : fuite d'eau, chauffe-eau en panne, WC bouchés. Votre site web doit être pensé conversion immédiate : numéro de téléphone affiché en gros, formulaire de devis express, capacité d'intervention 24/7 affichée clairement.",
+    challenges: [
+      {
+        title: "Conversion en urgence",
+        description:
+          "Quand un client a une fuite, il ne lit pas le site. Il appelle. Le numéro de téléphone doit être en méga-bouton flottant, le formulaire de devis ultra-court (3 champs max).",
+      },
+      {
+        title: "SEO local hyperprécis",
+        description:
+          "\"Plombier Rouen\", \"plombier urgent Bois-Guillaume\", \"chauffe-eau Mont-Saint-Aignan\". Une page par quartier + par prestation = 30+ pages SEO ciblées.",
+      },
+      {
+        title: "Confiance et avis",
+        description:
+          "Le secteur est connu pour les arnaques. Avis Google massivement affichés, photos d'interventions, certifications (Qualibat, RGE), assurance décennale visible.",
+      },
+      {
+        title: "Tarification transparente",
+        description:
+          "Affichage clair : déplacement, taux horaire, prestations forfaitaires (débouchage WC, remplacement chauffe-eau). Évite les mauvaises surprises.",
+      },
+    ],
+    features: [
+      {
+        title: "Numéro flottant + formulaire express",
+        description:
+          "Bouton d'appel direct visible en permanence (sticky mobile). Formulaire de devis avec 3 champs : nom, téléphone, urgence (oui/non). Pas plus.",
+      },
+      {
+        title: "Pages par quartier de Rouen",
+        description:
+          "Pages dédiées par quartier (\"plombier Saint-Sever\", \"plombier Mont-Saint-Aignan\") avec horaires d'intervention, délais, témoignages locaux.",
+      },
+      {
+        title: "Galerie interventions",
+        description:
+          "Photos avant/après de vos interventions (sans visage évidemment). Rassure et démontre la qualité du travail.",
+      },
+      {
+        title: "Certifications & assurances visibles",
+        description:
+          "Logos Qualibat, RGE, assurance décennale, garantie décennale en évidence. Rassure les particuliers exigeants.",
+      },
+    ],
+    recommendedStack:
+      "WordPress + thème simple optimisé conversion + plugin SEO local + intégration Google Business Profile + click-to-call mobile.",
+    faq: [
+      {
+        question: "Combien coûte un site pour un plombier à Rouen ?",
+        answer:
+          "Site WordPress vitrine optimisé conversion : 1 800-3 500 €. Avec 10-15 pages SEO par quartier/prestation : 4 000-6 500 €. ROI rapide : un plombier qui gagne 2 interventions/mois via le site rentabilise en 6-12 mois.",
+      },
+      {
+        question: "Vaut-il mieux investir dans Google Ads ou dans le SEO pour un plombier ?",
+        answer:
+          "Court terme (0-3 mois) : Google Ads (200-500 €/mois) pour avoir des leads tout de suite. Long terme : SEO local + Google Business Profile pour des leads gratuits sur la durée. La majorité des plombiers actifs combinent les deux.",
+      },
+    ],
+    keywords: [
+      "agence web plombier rouen",
+      "site internet plomberie rouen",
+      "création site plombier normandie",
+      "site plombier urgent rouen",
+      "site web artisan rouen",
+    ],
+  },
+
+  electricien: {
+    slug: "electricien",
+    name: "électricien",
+    namePlural: "électriciens",
+    nameLabeled: "les électriciens",
+    title: "Agence web pour électricien à Rouen — Sites & devis",
+    description:
+      "Création de sites internet pour électriciens à Rouen et en Normandie : devis en ligne, prestations détaillées, certifications RGE. Spécialiste SEO local.",
+    intro:
+      "Vous êtes électricien ou entreprise d'électricité générale à Rouen, en Métropole Rouen Normandie ou ailleurs ? Vos clients cherchent un professionnel fiable et certifié, capable d'intervenir rapidement sur des dépannages comme sur des installations neuves. Votre site web doit refléter votre expertise, afficher vos certifications (Qualifelec, RGE), et faciliter la prise de contact.",
+    challenges: [
+      {
+        title: "Diversité des prestations",
+        description:
+          "Mise aux normes, IRVE (bornes de recharge), domotique, photovoltaïque, dépannage : 10+ prestations possibles. Chacune cible une intention SEO différente.",
+      },
+      {
+        title: "Certifications IRVE / RGE de plus en plus stratégiques",
+        description:
+          "Avec la transition énergétique : bornes de recharge VE, panneaux solaires, pompes à chaleur. Page dédiée par certification, avec aides financières (MaPrimeRénov', CEE).",
+      },
+      {
+        title: "Devis détaillés pour rassurer",
+        description:
+          "Les électriciens sont souvent mis en concurrence avec 3 devis. Le vôtre doit être clair, détaillé, professionnel. Outil de pré-devis en ligne en option.",
+      },
+      {
+        title: "B2B vs B2C : 2 cibles distinctes",
+        description:
+          "Particuliers (dépannage, rénovation) vs Pros (entreprises, tertiaire, BTP). Pages dédiées pour chaque cible, communications différenciées.",
+      },
+    ],
+    features: [
+      {
+        title: "Pages par prestation et certification",
+        description:
+          "Mise aux normes électriques, IRVE bornes, domotique, photovoltaïque, dépannage urgence. Chaque page cible une longue traîne SEO précise.",
+      },
+      {
+        title: "Pré-devis en ligne",
+        description:
+          "Formulaire de pré-devis : type de prestation, surface, urgence, contact. Réponse automatisée + RDV téléphonique pour devis chiffré.",
+      },
+      {
+        title: "Page rénovation énergétique",
+        description:
+          "Aides MaPrimeRénov', CEE, déductions fiscales clairement expliquées. Cible les propriétaires qui veulent réduire leur facture énergétique.",
+      },
+      {
+        title: "Section pros / B2B",
+        description:
+          "Page dédiée pour les pros (architectes, agences immobilières, syndic) avec présentation de chantiers réalisés, références B2B.",
+      },
+    ],
+    recommendedStack:
+      "WordPress + thème custom + plugin SEO Yoast + plugin formulaires (Gravity Forms ou WPForms). Google Maps intégrée pour zone d'intervention.",
+    faq: [
+      {
+        question: "Combien coûte un site internet pour un électricien à Rouen ?",
+        answer:
+          "Site WordPress vitrine avec pages prestations + devis : 2 200-4 000 €. Avec pages dédiées par certification (IRVE, RGE, photovoltaïque) + simulateur d'aides : 4 500-7 500 €.",
+      },
+      {
+        question: "Faut-il afficher les tarifs sur le site d'un électricien ?",
+        answer:
+          "Pour les prestations standardisées (mise à la terre, remplacement disjoncteur, dépannage forfaitaire), oui — c'est un avantage concurrentiel. Pour les prestations sur mesure (rénovation totale, photovoltaïque), non — on renvoie vers un devis personnalisé. Le mix des deux est idéal.",
+      },
+    ],
+    keywords: [
+      "agence web électricien rouen",
+      "site internet électricien rouen",
+      "création site électricien normandie",
+      "site web électricien irve rouen",
+      "site web artisan électricité",
+    ],
+  },
+
+  "agence-communication": {
+    slug: "agence-communication",
+    name: "agence de communication",
+    namePlural: "agences de communication",
+    nameLabeled: "les agences de communication",
+    title: "Site web pour agence de communication à Rouen",
+    description:
+      "Création de sites internet pour agences de communication à Rouen : portfolio dynamique, études de cas, blog expertise. WordPress et Next.js sur mesure.",
+    intro:
+      "Vous dirigez une agence de communication, de design ou de publicité à Rouen ou en Normandie ? Votre site web EST votre principal commercial : il doit projeter votre niveau de créativité, vos réalisations, votre identité visuelle. C'est un exercice particulièrement délicat — votre site doit être plus beau que ceux que vous concevez pour vos clients. Krealabs accompagne plusieurs agences de communication normandes sur cette tension.",
+    challenges: [
+      {
+        title: "Le site = vitrine de votre créativité",
+        description:
+          "Si vous vendez du design ou de la communication, votre site doit l'illustrer. Direction artistique forte, typographie soignée, animations subtiles, performance technique impeccable.",
+      },
+      {
+        title: "Portfolio de cas clients hiérarchisé",
+        description:
+          "Des dizaines de projets dans le portfolio, mais seulement quelques-uns en featured. Capacité de filtrage par secteur, par expertise, par année.",
+      },
+      {
+        title: "Études de cas détaillées",
+        description:
+          "Pour les projets phares : étude de cas longue forme (brief, processus, résultats chiffrés). Le contenu fait la différence vs un simple visuel.",
+      },
+      {
+        title: "Différentiation vs Paris",
+        description:
+          "Une agence rouennaise se bat contre des agences parisiennes mieux référencées. Le site doit assumer la position locale comme un atout (réactivité, proximité, prix).",
+      },
+    ],
+    features: [
+      {
+        title: "Portfolio premium avec étude de cas",
+        description:
+          "Grille de projets avec hover effect, filtres par discipline (branding, web, print, motion). Études de cas longues pour les projets phares (problématique, processus, résultats).",
+      },
+      {
+        title: "Page expertise et méthode",
+        description:
+          "Présentation détaillée de votre méthode de travail (cadrage, recherche, conception, production). Rassure les prospects sur le processus.",
+      },
+      {
+        title: "Blog éditorial",
+        description:
+          "Pas un blog SEO bourrin, mais un vrai blog éditorial : tendances design, réflexions sur la communication, analyses de campagnes. Position d'expert.",
+      },
+      {
+        title: "Page équipe créative",
+        description:
+          "Une équipe créative se vend à travers ses personnalités. Photos pro, bios, parcours, références. Très important pour les agences de communication.",
+      },
+    ],
+    recommendedStack:
+      "Next.js + Framer Motion (animations subtiles) + Sanity CMS ou Contentful pour les contenus. Performance maximale, animations sur mesure, design system custom. WordPress reste viable pour les structures plus petites.",
+    faq: [
+      {
+        question: "Pourquoi une agence de communication ne fait-elle pas son site elle-même ?",
+        answer:
+          "Beaucoup d'agences excellentes en com font appel à un partenaire technique pour leur propre site. Raison : leurs ressources doivent être facturables aux clients ; faire leur propre site, c'est de l'investissement à faible ROI immédiat. D'où le partenariat agence créative + agence dev.",
+      },
+      {
+        question: "Combien coûte un site pour une agence de communication à Rouen ?",
+        answer:
+          "Pour une agence créative qui veut un site à la hauteur de son métier : 8 000-25 000 €. La fourchette dépend de la profondeur des animations, du custom CMS, et du nombre d'études de cas à mettre en forme.",
+      },
+    ],
+    keywords: [
+      "agence web pour agence de communication rouen",
+      "site internet agence créative rouen",
+      "création site agence de pub normandie",
+      "portfolio agence communication",
+      "site web agence design rouen",
+    ],
+  },
+
+  pharmacie: {
+    slug: "pharmacie",
+    name: "pharmacie",
+    namePlural: "pharmacies",
+    nameLabeled: "les pharmacies",
+    title: "Agence web pour pharmacie à Rouen — Sites & click & collect",
+    description:
+      "Sites internet pour pharmacies à Rouen et en Normandie : click & collect ordonnances, parapharmacie en ligne, conformité ARS. WordPress et Next.js.",
+    intro:
+      "Vous tenez une pharmacie d'officine à Rouen ou en Normandie ? Le secteur évolue : click & collect d'ordonnances, télé-services (vaccinations, tests, conseil pharmaceutique), parapharmacie en ligne. Votre site web est un canal commercial complémentaire de l'officine physique — à condition de respecter les règles strictes du Code de déontologie pharmaceutique et de l'Ordre.",
+    challenges: [
+      {
+        title: "Conformité Ordre des Pharmaciens (article R.4235-22 CSP)",
+        description:
+          "Pas de publicité grand public sur les médicaments. Restrictions sur le e-commerce de médicaments (autorisation ARS obligatoire). Nous appliquons les règles dès la conception.",
+      },
+      {
+        title: "Click & collect ordonnances",
+        description:
+          "Permettre aux clients de scanner leur ordonnance, choisir un créneau de retrait, et venir en officine sans attendre. Solution sécurisée RGPD.",
+      },
+      {
+        title: "Parapharmacie en ligne (si vous en vendez)",
+        description:
+          "Vente en ligne de produits de parapharmacie (cosmétiques, compléments, hygiène). E-commerce simple à gérer, sans tomber dans le médicament (réglementé).",
+      },
+      {
+        title: "Télé-services et nouvelles missions",
+        description:
+          "Vaccinations, tests Covid, entretiens pharmaceutiques, dispensation conditionnelle. Page d'information avec prise de RDV en ligne.",
+      },
+    ],
+    features: [
+      {
+        title: "Click & collect ordonnances",
+        description:
+          "Upload sécurisé de l'ordonnance, choix d'un créneau de retrait, validation. Système sécurisé RGPD (chiffrement), pas de stockage à long terme.",
+      },
+      {
+        title: "Boutique parapharmacie",
+        description:
+          "Catalogue produits parapharmacie (uniquement), paiement Stripe, retrait en officine ou livraison. WooCommerce configuré pour ne pas vendre de médicaments.",
+      },
+      {
+        title: "Prise de RDV télé-services",
+        description:
+          "Calendrier intégré pour vaccinations, tests, entretiens pharmaceutiques. Patient autonome 24/7.",
+      },
+      {
+        title: "Page équipe et conseils santé",
+        description:
+          "Présentation pharmacien titulaire + équipe + spécialités. Blog conseil santé (vaccinations, prévention saisonnière) pour SEO et fidélisation.",
+      },
+    ],
+    recommendedStack:
+      "WordPress + WooCommerce (configuré strict, pas de médicaments) + module RDV custom + hébergement HDS pour les ordonnances.",
+    faq: [
+      {
+        question: "Peut-on vendre des médicaments en ligne en France ?",
+        answer:
+          "Oui, mais uniquement avec autorisation expresse de l'ARS et seulement pour les médicaments NON soumis à prescription. Le processus prend 6-12 mois et coûte 1 000-3 000 € de formalités. Notre conseil : commencer par le click & collect (légal, simple), puis évaluer si l'e-commerce médicaments vaut l'effort.",
+      },
+      {
+        question: "Combien coûte un site pour une pharmacie à Rouen ?",
+        answer:
+          "Site WordPress vitrine avec click & collect ordonnances + RDV : 5 000-9 000 €. Avec boutique parapharmacie (WooCommerce, 200-500 produits) : 9 000-16 000 €. Maintenance : 150-400 €/mois.",
+      },
+    ],
+    keywords: [
+      "agence web pharmacie rouen",
+      "site internet pharmacie rouen",
+      "création site pharmacie normandie",
+      "click collect pharmacie rouen",
+      "site web officine rouen",
+    ],
+  },
+
+  "transport-logistique": {
+    slug: "transport-logistique",
+    name: "société de transport et logistique",
+    namePlural: "sociétés de transport et logistique",
+    nameLabeled: "les sociétés de transport et logistique",
+    title: "Agence web pour transport & logistique à Rouen — Sites B2B",
+    description:
+      "Sites internet pour entreprises de transport et logistique à Rouen : suivi de commandes, devis transport, intégrations ERP. WordPress et Next.js sur mesure.",
+    intro:
+      "Vous dirigez une entreprise de transport, de logistique ou de messagerie à Rouen, sur le port autonome ou sur la zone Vatine ? La Normandie concentre une activité logistique massive (port du Havre, axe Seine, A28). Votre site web n'est plus une simple vitrine : c'est un outil B2B pour générer des devis, gérer les comptes clients, suivre les commandes.",
+    challenges: [
+      {
+        title: "B2B : devis et tarification complexe",
+        description:
+          "Le transport facture selon poids, volume, distance, urgence, type de marchandise. Outil de pré-devis en ligne pour qualifier rapidement les demandes.",
+      },
+      {
+        title: "Suivi de commandes / tracking",
+        description:
+          "Les clients veulent voir où est leur livraison en temps réel. Intégration TMS (Transport Management System) : Akanea, Astre, Rio, ou solutions custom.",
+      },
+      {
+        title: "SEO sectoriel et géographique",
+        description:
+          "\"Transporteur Rouen\", \"messagerie Le Havre\", \"logistique axe Seine\". Pages dédiées par typologie (palette, express, vrac, marchandises dangereuses) et par zone.",
+      },
+      {
+        title: "Référencement B2B (annuaires pros)",
+        description:
+          "Inscription Europages, Kompass, Indexa, Pages Jaunes Pro. Backlinks B2B très puissants pour le SEO.",
+      },
+    ],
+    features: [
+      {
+        title: "Outil de pré-devis transport",
+        description:
+          "Formulaire intelligent : type de marchandise, poids, volume, départ/arrivée, urgence. Pré-devis automatique ou redirection vers commercial selon complexité.",
+      },
+      {
+        title: "Pages spécialités",
+        description:
+          "Transport routier, messagerie express, logistique entreposage, transport frigorifique, ADR (matières dangereuses). Chaque spécialité = page SEO dédiée.",
+      },
+      {
+        title: "Espace client (factures + commandes)",
+        description:
+          "Login pour les clients : historique des transports, factures dématérialisées, suivi en temps réel, demande de devis depuis le portail.",
+      },
+      {
+        title: "Recrutement chauffeurs",
+        description:
+          "Le secteur peine à recruter. Page \"Devenir chauffeur\" avec témoignages, formation, équipements, avantages, formulaire de candidature.",
+      },
+    ],
+    recommendedStack:
+      "Next.js + intégration TMS (Akanea, Astre, Stream, etc.) + Stripe pour les paiements + portail client custom. WordPress reste possible pour les structures plus petites avec moins d'intégrations.",
+    faq: [
+      {
+        question: "Combien coûte un site pour une société de transport à Rouen ?",
+        answer:
+          "Site vitrine WordPress avec formulaire de devis avancé : 4 000-7 500 €. Site Next.js avec portail client + intégration TMS : 15 000-40 000 € selon la profondeur des intégrations.",
+      },
+      {
+        question: "Faut-il intégrer le TMS (logiciel transport) au site ?",
+        answer:
+          "Pour une PME 10-50 salariés : pas obligatoire au début. Le formulaire de devis web peut être traité manuellement. Au-delà de 50 commandes/jour générées via le web, l'intégration TMS devient critique pour éviter la double saisie.",
+      },
+    ],
+    keywords: [
+      "agence web transport rouen",
+      "site internet logistique normandie",
+      "création site transporteur rouen",
+      "site web messagerie rouen",
+      "agence web transport b2b",
+    ],
+  },
+
   "e-commerce": {
     slug: "e-commerce",
     name: "e-commerce",
