@@ -8,7 +8,15 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.formData();
+    let formData: FormData;
+    try {
+      formData = await request.formData();
+    } catch {
+      return NextResponse.json(
+        { error: "Format de requête invalide (multipart/form-data attendu)" },
+        { status: 400 },
+      );
+    }
 
     // Extract form fields
     const requestType = formData.get("requestType") as string;
