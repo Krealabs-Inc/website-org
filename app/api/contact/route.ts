@@ -1,10 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
 import { ContactEmailTemplate } from "@/emails/contact-template";
 import { prisma } from "@/lib/prisma";
+import { sendMail } from "@/lib/mailer";
 import * as React from "react";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -18,7 +16,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Extract form fields
     const requestType = formData.get("requestType") as string;
     const name = formData.get("name") as string;
     const email = formData.get("email") as string;
@@ -26,29 +23,25 @@ export async function POST(request: NextRequest) {
     const company = formData.get("company") as string;
     const pricingOption = formData.get("pricingOption") as string;
     const message = formData.get("message") as string;
-
-    // Extract files
     const files = formData.getAll("files") as File[];
 
-    // Validate required fields
     if (!name || !email || !message) {
       return NextResponse.json(
         { error: "Champs obligatoires manquants" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    // Validate email format
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: "Format d'email invalide" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    // Save to database
-    const contactForm = await prisma.contactForm.create({
+    // Sauvegarde DB
+    await prisma.contactForm.create({
       data: {
         requestType: requestType || "contact",
         name,
@@ -61,63 +54,50 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Process attachments
+    // Pièces jointes : conversion File → Buffer pour nodemailer
     const attachments = await Promise.all(
-      files.map(async (file) => {
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-
-        return {
-          filename: file.name,
-          content: buffer,
-        };
-      })
+      files.map(async (file) => ({
+        filename: file.name,
+        content: Buffer.from(await file.arrayBuffer()),
+      })),
     );
 
-    // Determine subject based on request type
-    let subject = "Nouveau message de contact";
-    if (requestType === "devis") {
-      subject = "Nouvelle demande de devis";
-    } else if (requestType === "partenariat") {
-      subject = "Nouvelle demande de partenariat";
-    }
+    // Sujet contextuel
+    const subjectByType: Record<string, string> = {
+      devis: "Nouvelle demande de devis",
+      partenariat: "Nouvelle demande de partenariat",
+      contact: "Nouveau message de contact",
+    };
+    const subject = `${subjectByType[requestType] || "Nouveau message"} — ${name}`;
 
-    // Send email using Resend
-    const { data, error } = await resend.emails.send({
-      from: "Krealabs Contact <noreply@krealabs.fr>",
-      to: ["contact@krealabs.fr"],
-      replyTo: email,
-      subject: `${subject} - ${name}`,
-      react: ContactEmailTemplate({
-        requestType,
-        name,
-        email,
-        phone,
-        company,
-        pricingOption,
-        message,
-        filesCount: files.length,
-      }) as React.ReactElement,
-      attachments: attachments.length > 0 ? attachments : undefined,
-    });
-
-    if (error) {
-      console.error("Resend error:", error);
+    // Envoi SMTP
+    try {
+      await sendMail({
+        subject,
+        replyTo: email,
+        react: ContactEmailTemplate({
+          requestType,
+          name,
+          email,
+          phone,
+          company,
+          pricingOption,
+          message,
+          filesCount: files.length,
+        }) as React.ReactElement,
+        attachments: attachments.length > 0 ? attachments : undefined,
+      });
+    } catch (smtpError) {
+      console.error("SMTP send error:", smtpError);
       return NextResponse.json(
         { error: "Erreur lors de l'envoi de l'email" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
-    return NextResponse.json(
-      { success: true, messageId: data?.id },
-      { status: 200 }
-    );
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch (error) {
     console.error("Error processing contact form:", error);
-    return NextResponse.json(
-      { error: "Erreur serveur" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }

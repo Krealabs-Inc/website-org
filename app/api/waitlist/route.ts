@@ -1,34 +1,35 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
 import { WaitlistConfirmationTemplate } from "@/emails/waitlist-confirmation-template";
 import { WaitlistNotificationTemplate } from "@/emails/waitlist-notification-template";
 import { prisma } from "@/lib/prisma";
+import { sendMail } from "@/lib/mailer";
 import * as React from "react";
-
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
-    const { email } = await request.json();
-
-    // Validate email
-    if (!email) {
+    let body: { email?: string };
+    try {
+      body = await request.json();
+    } catch {
       return NextResponse.json(
-        { error: "Email requis" },
-        { status: 400 }
+        { error: "Format de requête invalide (JSON attendu)" },
+        { status: 400 },
       );
     }
+    const { email } = body;
 
-    // Validate email format
+    if (!email) {
+      return NextResponse.json({ error: "Email requis" }, { status: 400 });
+    }
+
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       return NextResponse.json(
         { error: "Format d'email invalide" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
-    // Check if email already exists in database
     const existingContact = await prisma.waitlistContact.findUnique({
       where: { email },
     });
@@ -36,60 +37,45 @@ export async function POST(request: NextRequest) {
     if (existingContact) {
       return NextResponse.json(
         { error: "Cet email est déjà inscrit à la liste d'attente" },
-        { status: 409 }
+        { status: 409 },
       );
     }
 
-    // Save to database
-    const contact = await prisma.waitlistContact.create({
-      data: {
-        email,
-        source: "website",
-      },
+    await prisma.waitlistContact.create({
+      data: { email, source: "website" },
     });
 
-    // Send confirmation email to user
-    const confirmationEmail = await resend.emails.send({
-      from: "Krealabs <noreply@krealabs.fr>",
-      to: [email],
-      subject: "Bienvenue sur la liste d'attente Krealabs",
-      react: WaitlistConfirmationTemplate({ email }) as React.ReactElement,
-    });
-
-    if (confirmationEmail.error) {
-      console.error("Resend confirmation error:", confirmationEmail.error);
+    // Email de confirmation à l'utilisateur (critique — bloque si échec)
+    try {
+      await sendMail({
+        to: email,
+        subject: "Bienvenue sur la liste d'attente Krealabs",
+        react: WaitlistConfirmationTemplate({ email }) as React.ReactElement,
+      });
+    } catch (smtpError) {
+      console.error("SMTP confirmation error:", smtpError);
       return NextResponse.json(
         { error: "Erreur lors de l'envoi de l'email de confirmation" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
-    // Send notification email to admin
-    const notificationEmail = await resend.emails.send({
-      from: "Krealabs Waitlist <noreply@krealabs.fr>",
-      to: ["contact@krealabs.fr"],
-      subject: "Nouvelle inscription à la liste d'attente",
-      react: WaitlistNotificationTemplate({ email }) as React.ReactElement,
-    });
-
-    if (notificationEmail.error) {
-      console.error("Resend notification error:", notificationEmail.error);
-      // Don't fail if notification fails - user confirmation is more important
+    // Notification admin (best-effort — n'échoue pas si KO)
+    try {
+      await sendMail({
+        subject: "Nouvelle inscription à la liste d'attente",
+        react: WaitlistNotificationTemplate({ email }) as React.ReactElement,
+      });
+    } catch (smtpError) {
+      console.error("SMTP notification error:", smtpError);
     }
 
     return NextResponse.json(
-      {
-        success: true,
-        message: "Inscription réussie",
-        confirmationId: confirmationEmail.data?.id
-      },
-      { status: 200 }
+      { success: true, message: "Inscription réussie" },
+      { status: 200 },
     );
   } catch (error) {
     console.error("Error processing waitlist signup:", error);
-    return NextResponse.json(
-      { error: "Erreur serveur" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Erreur serveur" }, { status: 500 });
   }
 }
