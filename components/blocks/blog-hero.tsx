@@ -23,13 +23,13 @@ export function BlogHero() {
   }, [titleNumber, titles]);
 
   return (
-    <div className="w-full relative bg-gradient-to-br from-[#A543F1]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10 border-b border-gray-200 dark:border-white/[0.08]">
+    <div className="w-full relative bg-gradient-to-br from-[#8F99ED]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10 border-b border-gray-200 dark:border-white/[0.08]">
       <div className="container mx-auto px-4">
         <div className="flex gap-4 py-12 md:py-16 items-center justify-center flex-col">
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#A543F1]/10 border border-[#A543F1]/20">
-              <Sparkles className="w-4 h-4 text-[#A543F1]" />
-              <span className="text-sm font-medium text-[#A543F1] font-[family-name:var(--font-heading)]">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8F99ED]/10 border border-[#8F99ED]/20">
+              <Sparkles className="w-4 h-4 text-[#8F99ED]" />
+              <span className="text-sm font-medium text-[#8F99ED] font-[family-name:var(--font-heading)]">
                 Blog
               </span>
             </div>
@@ -43,7 +43,7 @@ export function BlogHero() {
                 {titles.map((title, index) => (
                   <motion.span
                     key={index}
-                    className="absolute font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] to-[#c5cbf9]"
+                    className="absolute font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#8F99ED] to-[#c5cbf9]"
                     initial={{ opacity: 0, y: "-100" }}
                     transition={{ type: "spring", stiffness: 50 }}
                     animate={

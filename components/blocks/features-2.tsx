@@ -18,7 +18,7 @@ export function Features() {
                     <Card className="group border-0 bg-gray-50 dark:bg-[#0a0a0a] shadow-none">
                         <CardHeader className="pb-3">
                             <CardDecorator>
-                                <Zap className="size-6 text-[#A543F1]" aria-hidden />
+                                <Zap className="size-6 text-[#8F99ED]" aria-hidden />
                             </CardDecorator>
 
                             <h3 className="mt-6 font-medium text-gray-900 dark:text-white">Performance optimale</h3>
@@ -34,7 +34,7 @@ export function Features() {
                     <Card className="group border-0 bg-gray-50 dark:bg-[#0a0a0a] shadow-none">
                         <CardHeader className="pb-3">
                             <CardDecorator>
-                                <Settings2 className="size-6 text-[#A543F1]" aria-hidden />
+                                <Settings2 className="size-6 text-[#8F99ED]" aria-hidden />
                             </CardDecorator>
 
                             <h3 className="mt-6 font-medium text-gray-900 dark:text-white">Code source inclus</h3>
@@ -50,7 +50,7 @@ export function Features() {
                     <Card className="group border-0 bg-gray-50 dark:bg-[#0a0a0a] shadow-none">
                         <CardHeader className="pb-3">
                             <CardDecorator>
-                                <Sparkles className="size-6 text-[#A543F1]" aria-hidden />
+                                <Sparkles className="size-6 text-[#8F99ED]" aria-hidden />
                             </CardDecorator>
 
                             <h3 className="mt-6 font-medium text-gray-900 dark:text-white">Technologies modernes</h3>

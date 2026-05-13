@@ -96,7 +96,7 @@ function HeroGeometric({
 
     return (
         <div className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-white dark:bg-[#030303] transition-colors pt-20">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#A543F1]/[0.08] via-transparent to-[#A543F1]/[0.05] dark:from-[#A543F1]/[0.05] dark:to-[#A543F1]/[0.03] blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#8F99ED]/[0.08] via-transparent to-[#8F99ED]/[0.05] dark:from-[#8F99ED]/[0.05] dark:to-[#8F99ED]/[0.03] blur-3xl" />
 
             <div className="absolute inset-0 overflow-hidden">
                 <ElegantShape
@@ -104,7 +104,7 @@ function HeroGeometric({
                     width={600}
                     height={140}
                     rotate={12}
-                    gradient="from-[#A543F1]/[0.15]"
+                    gradient="from-[#8F99ED]/[0.15]"
                     className="left-[-10%] md:left-[-5%] top-[15%] md:top-[20%]"
                 />
 
@@ -122,7 +122,7 @@ function HeroGeometric({
                     width={300}
                     height={80}
                     rotate={-8}
-                    gradient="from-[#A543F1]/[0.12]"
+                    gradient="from-[#8F99ED]/[0.12]"
                     className="left-[5%] md:left-[10%] bottom-[5%] md:bottom-[10%]"
                 />
 
@@ -173,7 +173,7 @@ function HeroGeometric({
                             <br />
                             <span
                                 className={cn(
-                                    "bg-clip-text text-transparent bg-gradient-to-r from-[#A543F1] via-[#a8b0f3] to-[#c5cbf9] dark:from-[#A543F1] dark:via-white/90 dark:to-[#b5bdfa]"
+                                    "bg-clip-text text-transparent bg-gradient-to-r from-[#8F99ED] via-[#a8b0f3] to-[#c5cbf9] dark:from-[#8F99ED] dark:via-white/90 dark:to-[#b5bdfa]"
                                 )}
                             >
                                 {title2}

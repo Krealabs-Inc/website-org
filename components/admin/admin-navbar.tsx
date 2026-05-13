@@ -29,7 +29,7 @@ export function AdminNavbar() {
             href="/admin"
             className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white font-[family-name:var(--font-heading)]"
           >
-            <div className="w-8 h-8 bg-gradient-to-br from-[#A543F1] to-[#8b35d1] rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-gradient-to-br from-[#8F99ED] to-[#8b35d1] rounded-lg flex items-center justify-center">
               <Shield className="w-5 h-5 text-white" />
             </div>
             <span className="hidden sm:inline">Admin Dashboard</span>

@@ -172,13 +172,13 @@ const TestimonialSlider: React.FC = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 sm:mb-12 md:mb-16"
         >
-          <span className="inline-block py-1 px-3 rounded-full bg-[#A543F1]/10 dark:bg-[#A543F1]/20 text-[#A543F1] font-medium text-xs sm:text-sm uppercase tracking-wider">
+          <span className="inline-block py-1 px-3 rounded-full bg-[#8F99ED]/10 dark:bg-[#8F99ED]/20 text-[#8F99ED] font-medium text-xs sm:text-sm uppercase tracking-wider">
             Temoignages
           </span>
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-white/80 bg-clip-text text-transparent mt-3 sm:mt-4 px-4">
             Nos clients temoignent
           </h3>
-          <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-[#A543F1] to-[#A543F1]/70 mx-auto mt-4 sm:mt-6"></div>
+          <div className="w-16 sm:w-24 h-1 bg-gradient-to-r from-[#8F99ED] to-[#8F99ED]/70 mx-auto mt-4 sm:mt-6"></div>
         </motion.div>
 
         <div className="relative" ref={containerRef}>
@@ -190,7 +190,7 @@ const TestimonialSlider: React.FC = () => {
               disabled={!canGoPrev}
               className={`p-2 rounded-full ${
                 canGoPrev
-                  ? 'bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 text-[#A543F1]'
+                  ? 'bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 text-[#8F99ED]'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
               } transition-all duration-300`}
               aria-label="Temoignage precedent"
@@ -204,7 +204,7 @@ const TestimonialSlider: React.FC = () => {
               disabled={!canGoNext}
               className={`p-2 rounded-full ${
                 canGoNext
-                  ? 'bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 text-[#A543F1]'
+                  ? 'bg-white dark:bg-gray-800 shadow-md hover:bg-gray-50 dark:hover:bg-gray-700 text-[#8F99ED]'
                   : 'bg-gray-100 dark:bg-gray-800 text-gray-400 cursor-not-allowed'
               } transition-all duration-300`}
               aria-label="Temoignage suivant"
@@ -242,13 +242,13 @@ const TestimonialSlider: React.FC = () => {
                   style={{ cursor: 'grab' }}
                 >
                   <motion.div
-                    className="relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-6 h-full bg-white dark:bg-[#0a0a0a] border border-gray-100 dark:border-white/[0.08] shadow-lg shadow-[#A543F1]/5"
+                    className="relative overflow-hidden rounded-xl sm:rounded-2xl p-4 sm:p-6 h-full bg-white dark:bg-[#0a0a0a] border border-gray-100 dark:border-white/[0.08] shadow-lg shadow-[#8F99ED]/5"
                     whileHover={{
                       boxShadow: "0 10px 15px -3px rgba(165, 67, 241, 0.1), 0 4px 6px -2px rgba(165, 67, 241, 0.05)"
                     }}
                   >
                     <div className="absolute -top-4 -left-4 opacity-10 dark:opacity-20">
-                      <Quote size={windowWidth < 640 ? 40 : 60} className="text-[#A543F1]" />
+                      <Quote size={windowWidth < 640 ? 40 : 60} className="text-[#8F99ED]" />
                     </div>
 
                     <div className="relative z-10 h-full flex flex-col">
@@ -267,7 +267,7 @@ const TestimonialSlider: React.FC = () => {
                               className="w-8 h-8 sm:w-10 sm:h-10 rounded-full object-cover border-2 border-white dark:border-gray-900 shadow-sm"
                             />
                             <motion.div
-                              className="absolute inset-0 rounded-full bg-[#A543F1]/20"
+                              className="absolute inset-0 rounded-full bg-[#8F99ED]/20"
                               animate={{
                                 scale: [1, 1.2, 1],
                                 opacity: [0, 0.3, 0]
@@ -305,7 +305,7 @@ const TestimonialSlider: React.FC = () => {
                 <motion.div
                   className={`w-2 h-2 rounded-full ${
                     index === currentIndex
-                      ? 'bg-[#A543F1]'
+                      ? 'bg-[#8F99ED]'
                       : 'bg-gray-300 dark:bg-gray-600'
                   }`}
                   animate={{
@@ -319,7 +319,7 @@ const TestimonialSlider: React.FC = () => {
                 />
                 {index === currentIndex && (
                   <motion.div
-                    className="absolute inset-0 rounded-full bg-[#A543F1]/30"
+                    className="absolute inset-0 rounded-full bg-[#8F99ED]/30"
                     animate={{
                       scale: [1, 1.8],
                       opacity: [1, 0]

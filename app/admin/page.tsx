@@ -228,8 +228,8 @@ export default function AdminPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-white/10 rounded-lg p-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-[#A543F1]/10 rounded-lg">
-                  <Users className="w-6 h-6 text-[#A543F1]" />
+                <div className="p-3 bg-[#8F99ED]/10 rounded-lg">
+                  <Users className="w-6 h-6 text-[#8F99ED]" />
                 </div>
                 <div>
                   <p className="text-sm text-gray-600 dark:text-white/70">Total Contacts</p>
@@ -242,8 +242,8 @@ export default function AdminPage() {
 
             <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-white/10 rounded-lg p-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-[#A543F1]/10 rounded-lg">
-                  <Mail className="w-6 h-6 text-[#A543F1]" />
+                <div className="p-3 bg-[#8F99ED]/10 rounded-lg">
+                  <Mail className="w-6 h-6 text-[#8F99ED]" />
                 </div>
                 <div>
                   <p className="text-sm text-gray-600 dark:text-white/70">Waitlist</p>
@@ -256,8 +256,8 @@ export default function AdminPage() {
 
             <div className="bg-white dark:bg-[#0a0a0a] border border-gray-200 dark:border-white/10 rounded-lg p-6">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-[#A543F1]/10 rounded-lg">
-                  <FileText className="w-6 h-6 text-[#A543F1]" />
+                <div className="p-3 bg-[#8F99ED]/10 rounded-lg">
+                  <FileText className="w-6 h-6 text-[#8F99ED]" />
                 </div>
                 <div>
                   <p className="text-sm text-gray-600 dark:text-white/70">Formulaires</p>
@@ -472,7 +472,7 @@ export default function AdminPage() {
                   >
                     <div className="flex flex-wrap gap-4 mb-4">
                       <div className="flex items-center gap-2">
-                        <span className="px-3 py-1 bg-[#A543F1]/10 text-[#A543F1] rounded-full text-sm font-medium">
+                        <span className="px-3 py-1 bg-[#8F99ED]/10 text-[#8F99ED] rounded-full text-sm font-medium">
                           {form.requestType}
                         </span>
                         <span className="text-sm text-gray-600 dark:text-white/70">

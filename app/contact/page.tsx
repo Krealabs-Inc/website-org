@@ -93,7 +93,7 @@ function ContactPageInner() {
       });
       // Petit confetti aux couleurs Krealabs pour célébrer
       if (typeof window !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        const colors = ["#B06CFF", "#9F58F0", "#FAFAFA"];
+        const colors = ["#8F99ED", "#7782E1", "#FAFAFA"];
         confetti({
           particleCount: 80,
           spread: 70,

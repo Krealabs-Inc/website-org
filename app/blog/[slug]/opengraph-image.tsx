@@ -26,7 +26,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     readFile(join(process.cwd(), "public/fonts/switzer/switzer-700.ttf")),
   ]);
 
-  const accent = "#B06CFF";
+  const accent = "#8F99ED";
 
   return new ImageResponse(
     (

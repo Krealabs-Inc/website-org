@@ -28,7 +28,7 @@ export function WorldMapDemo() {
         </p>
       </div>
       <WorldMap
-        lineColor="#A543F1"
+        lineColor="#8F99ED"
         dots={[
           {
             start: {

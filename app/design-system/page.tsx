@@ -86,7 +86,7 @@ export default function DesignSystemPage() {
             <Swatch label="Foreground" value="#FAFAFA" var="--foreground" />
             <Swatch label="Muted FG" value="60%" var="--muted-foreground" />
             <Swatch label="Subtle FG" value="40%" var="--subtle-foreground" />
-            <Swatch label="Accent" value="#B06CFF" var="--accent" />
+            <Swatch label="Accent" value="#8F99ED" var="--accent" />
           </div>
         </section>
 

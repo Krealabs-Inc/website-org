@@ -860,7 +860,7 @@ const user = UserSchema.parse(req.body) // Throw si invalide
 
 @theme {
   /* Couleurs */
-  --color-accent: #b06cff;
+  --color-accent: #8f99ed;
   --color-background: #0a0a0a;
   --color-foreground: #fafafa;
 

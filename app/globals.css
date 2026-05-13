@@ -170,9 +170,9 @@
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
 
-  --accent: #b06cff;
-  --accent-hover: #9f58f0;
-  --accent-subtle: rgba(176, 108, 255, 0.12);
+  --accent: #8f99ed;
+  --accent-hover: #7782e1;
+  --accent-subtle: rgba(143, 153, 237, 0.12);
   --accent-foreground: #ffffff;
 
   --danger: #ef4444;
@@ -180,7 +180,7 @@
   --warning: #f59e0b;
 
   /* Charts (kept for any existing data viz) */
-  --chart-1: #b06cff;
+  --chart-1: #8f99ed;
   --chart-2: #f43f5e;
   --chart-3: #8b5cf6;
   --chart-4: #ec4899;
@@ -198,9 +198,9 @@
   --border: rgba(0, 0, 0, 0.08);
   --border-strong: rgba(0, 0, 0, 0.16);
 
-  --accent: #8b3cf0;
-  --accent-hover: #7a2ce0;
-  --accent-subtle: rgba(139, 60, 240, 0.1);
+  --accent: #6571d4;
+  --accent-hover: #525fc8;
+  --accent-subtle: rgba(101, 113, 212, 0.12);
   --accent-foreground: #ffffff;
 }
 
@@ -216,9 +216,9 @@
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
 
-  --accent: #b06cff;
-  --accent-hover: #9f58f0;
-  --accent-subtle: rgba(176, 108, 255, 0.12);
+  --accent: #8f99ed;
+  --accent-hover: #7782e1;
+  --accent-subtle: rgba(143, 153, 237, 0.12);
   --accent-foreground: #ffffff;
 }
 

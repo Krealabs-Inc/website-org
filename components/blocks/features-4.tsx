@@ -12,42 +12,42 @@ export function Features() {
                 <div className="relative mx-auto grid max-w-2xl lg:max-w-4xl divide-x divide-y border *:p-12 sm:grid-cols-2 lg:grid-cols-3">
                     <div className="space-y-3">
                         <div className="flex items-center gap-2">
-                            <Zap className="size-4 text-[#A543F1]" />
+                            <Zap className="size-4 text-[#8F99ED]" />
                             <h3 className="text-sm font-medium">Ultra-rapide</h3>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-white/60">Des applications optimisees avec des temps de reponse inferieurs a 100ms et scores Lighthouse parfaits.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                            <Cpu className="size-4 text-[#A543F1]" />
+                            <Cpu className="size-4 text-[#8F99ED]" />
                             <h3 className="text-sm font-medium">Architecture robuste</h3>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-white/60">Infrastructure scalable pensee pour supporter votre croissance et evoluer avec vos besoins.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                            <Fingerprint className="size-4 text-[#A543F1]" />
+                            <Fingerprint className="size-4 text-[#8F99ED]" />
                             <h3 className="text-sm font-medium">Securite renforcee</h3>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-white/60">Protection des donnees et conformite RGPD integrees des la conception de votre projet.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                            <Pencil className="size-4 text-[#A543F1]" />
+                            <Pencil className="size-4 text-[#8F99ED]" />
                             <h3 className="text-sm font-medium">Sur mesure</h3>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-white/60">Solutions entierement personnalisees adaptees a vos processus metier et identite de marque.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                            <Settings2 className="size-4 text-[#A543F1]" />
+                            <Settings2 className="size-4 text-[#8F99ED]" />
                             <h3 className="text-sm font-medium">Controle total</h3>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-white/60">Code source livre, documentation complete et formation pour une autonomie maximale.</p>
                     </div>
                     <div className="space-y-2">
                         <div className="flex items-center gap-2">
-                            <Sparkles className="size-4 text-[#A543F1]" />
+                            <Sparkles className="size-4 text-[#8F99ED]" />
                             <h3 className="text-sm font-medium">Innovation IA</h3>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-white/60">Integration d'intelligence artificielle pour automatiser et optimiser vos processus.</p>

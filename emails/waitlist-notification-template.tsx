@@ -34,7 +34,7 @@ export const WaitlistNotificationTemplate: React.FC<WaitlistNotificationTemplate
         }
 
         .header {
-          background: linear-gradient(135deg, #A543F1 0%, #8b35d1 100%);
+          background: linear-gradient(135deg, #8F99ED 0%, #8b35d1 100%);
           padding: 40px;
           text-align: center;
           position: relative;
@@ -152,7 +152,7 @@ export const WaitlistNotificationTemplate: React.FC<WaitlistNotificationTemplate
         }
 
         .email-value {
-          color: #A543F1;
+          color: #8F99ED;
           font-weight: 600;
           text-decoration: none;
         }
@@ -172,7 +172,7 @@ export const WaitlistNotificationTemplate: React.FC<WaitlistNotificationTemplate
         .cta-button {
           display: inline-block;
           padding: 12px 28px;
-          background: #A543F1;
+          background: #8F99ED;
           color: #ffffff;
           text-decoration: none;
           border-radius: 8px;

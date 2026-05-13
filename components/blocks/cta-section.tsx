@@ -25,7 +25,7 @@ export function CTASection({
   secondaryCTA
 }: CTASectionProps) {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-br from-[#A543F1]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10">
+    <section className="py-16 md:py-24 bg-gradient-to-br from-[#8F99ED]/10 via-white dark:via-[#030303] to-[#c5cbf9]/10">
       <div className="container mx-auto px-4 max-w-4xl text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -41,7 +41,7 @@ export function CTASection({
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href={primaryCTA.href}>
-              <Button className="bg-[#A543F1] hover:bg-[#A543F1]/90 text-white px-8 py-6 text-base shadow-lg shadow-[#A543F1]/25 hover:shadow-xl hover:shadow-[#A543F1]/30 transition-all font-[family-name:var(--font-heading)]">
+              <Button className="bg-[#8F99ED] hover:bg-[#8F99ED]/90 text-white px-8 py-6 text-base shadow-lg shadow-[#8F99ED]/25 hover:shadow-xl hover:shadow-[#8F99ED]/30 transition-all font-[family-name:var(--font-heading)]">
                 {primaryCTA.text}
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Button>

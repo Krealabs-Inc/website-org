@@ -12,19 +12,19 @@ export function Features() {
                         </div>
                         <ul className="mt-8 divide-y border-y *:flex *:items-center *:gap-3 *:py-3">
                             <li className="text-gray-700 dark:text-white/70">
-                                <Mail className="size-5 text-[#A543F1]" />
+                                <Mail className="size-5 text-[#8F99ED]" />
                                 Support email et visio
                             </li>
                             <li className="text-gray-700 dark:text-white/70">
-                                <Zap className="size-5 text-[#A543F1]" />
+                                <Zap className="size-5 text-[#8F99ED]" />
                                 Reponse sous 24h garantie
                             </li>
                             <li className="text-gray-700 dark:text-white/70">
-                                <Activity className="size-5 text-[#A543F1]" />
+                                <Activity className="size-5 text-[#8F99ED]" />
                                 Monitoring et analytics
                             </li>
                             <li className="text-gray-700 dark:text-white/70">
-                                <DraftingCompass className="size-5 text-[#A543F1]" />
+                                <DraftingCompass className="size-5 text-[#8F99ED]" />
                                 Revue d'architecture
                             </li>
                         </ul>

@@ -49,7 +49,7 @@ export default function NewsletterSignup() {
   };
 
   return (
-    <div className="bg-gradient-to-r from-[#A543F1]/10 to-[#c5cbf9]/10 p-8 rounded-2xl border border-[#A543F1]/20">
+    <div className="bg-gradient-to-r from-[#8F99ED]/10 to-[#c5cbf9]/10 p-8 rounded-2xl border border-[#8F99ED]/20">
       <div className="text-center max-w-2xl mx-auto">
         <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
           Restez informé des dernières tendances
@@ -66,12 +66,12 @@ export default function NewsletterSignup() {
             placeholder="votre@email.com"
             required
             disabled={status === 'loading' || status === 'success'}
-            className="flex-1 px-5 py-3 rounded-lg bg-white dark:bg-white/5 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 border border-gray-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-[#A543F1]/50 focus:border-[#A543F1] font-[family-name:var(--font-sans)] disabled:opacity-70 disabled:cursor-not-allowed transition-all"
+            className="flex-1 px-5 py-3 rounded-lg bg-white dark:bg-white/5 text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-white/40 border border-gray-200 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-[#8F99ED]/50 focus:border-[#8F99ED] font-[family-name:var(--font-sans)] disabled:opacity-70 disabled:cursor-not-allowed transition-all"
           />
           <button
             type="submit"
             disabled={status === 'loading' || status === 'success'}
-            className="px-6 py-3 bg-[#A543F1] text-white rounded-lg font-medium hover:bg-[#A543F1]/90 transition-colors font-[family-name:var(--font-heading)] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 whitespace-nowrap"
+            className="px-6 py-3 bg-[#8F99ED] text-white rounded-lg font-medium hover:bg-[#8F99ED]/90 transition-colors font-[family-name:var(--font-heading)] disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 whitespace-nowrap"
           >
             {status === 'loading' ? (
               <>

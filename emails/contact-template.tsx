@@ -60,7 +60,7 @@ export const ContactEmailTemplate: React.FC<ContactEmailTemplateProps> = ({
         }
 
         .header {
-          background: linear-gradient(135deg, #A543F1 0%, #8b35d1 100%);
+          background: linear-gradient(135deg, #8F99ED 0%, #8b35d1 100%);
           padding: 40px;
           text-align: center;
           position: relative;
@@ -180,7 +180,7 @@ export const ContactEmailTemplate: React.FC<ContactEmailTemplateProps> = ({
         }
 
         .email-value {
-          color: #A543F1;
+          color: #8F99ED;
         }
 
         .message-box {
@@ -212,7 +212,7 @@ export const ContactEmailTemplate: React.FC<ContactEmailTemplateProps> = ({
           background: rgba(165, 67, 241, 0.15);
           border: 1px solid rgba(165, 67, 241, 0.3);
           border-radius: 100px;
-          color: #A543F1;
+          color: #8F99ED;
           font-size: 13px;
           font-weight: 600;
           margin-top: 16px;
@@ -221,7 +221,7 @@ export const ContactEmailTemplate: React.FC<ContactEmailTemplateProps> = ({
         .cta-button {
           display: inline-block;
           padding: 12px 28px;
-          background: #A543F1;
+          background: #8F99ED;
           color: #ffffff;
           text-decoration: none;
           border-radius: 8px;

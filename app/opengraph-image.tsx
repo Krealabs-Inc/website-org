@@ -56,7 +56,7 @@ export default async function Image() {
             height: 600,
             borderRadius: 9999,
             background:
-              "radial-gradient(circle, rgba(176,108,255,0.4), transparent 70%)",
+              "radial-gradient(circle, rgba(143, 153, 237,0.4), transparent 70%)",
             filter: "blur(80px)",
             display: "flex",
           }}
@@ -77,8 +77,8 @@ export default async function Image() {
               width: 16,
               height: 16,
               borderRadius: 9999,
-              background: "#B06CFF",
-              boxShadow: "0 0 32px rgba(176,108,255,0.6)",
+              background: "#8F99ED",
+              boxShadow: "0 0 32px rgba(143, 153, 237,0.6)",
               display: "flex",
             }}
           />
@@ -108,7 +108,7 @@ export default async function Image() {
             }}
           >
             <span>Agence web à</span>
-            <span style={{ color: "#B06CFF" }}>Rouen.</span>
+            <span style={{ color: "#8F99ED" }}>Rouen.</span>
           </div>
           <div
             style={{
@@ -140,7 +140,7 @@ export default async function Image() {
           <span style={{ color: "rgba(250,250,250,0.7)" }}>krealabs.fr</span>
           <span
             style={{
-              color: "#B06CFF",
+              color: "#8F99ED",
               letterSpacing: "0.05em",
               textTransform: "uppercase",
               fontSize: 20,

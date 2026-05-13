@@ -54,7 +54,7 @@ export const WaitlistHero = () => {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
     const particles: any[] = []
-    const colors = ["#A543F1", "#c5cbf9", "#a8b0f3", "#f472b6", "#fff"]
+    const colors = ["#8F99ED", "#c5cbf9", "#a8b0f3", "#f472b6", "#fff"]
 
     // Resize canvas to cover the button area mostly
     canvas.width = canvas.offsetWidth
@@ -114,7 +114,7 @@ export const WaitlistHero = () => {
   const colors = {
     textMain: "#ffffff",
     textSecondary: "#94a3b8",
-    bluePrimary: "#A543F1",
+    bluePrimary: "#8F99ED",
     success: "#10b981", // emerald-500
     inputBg: "#27272a",
     baseBg: "#09090b",

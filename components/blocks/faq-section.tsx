@@ -83,7 +83,7 @@ export default function FAQSection() {
                         Vous ne trouvez pas la réponse ? Contactez notre{' '}
                         <Link
                             href="/contact"
-                            className="text-[#A543F1] font-medium hover:underline">
+                            className="text-[#8F99ED] font-medium hover:underline">
                             équipe
                         </Link>
                     </p>

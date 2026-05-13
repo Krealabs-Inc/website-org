@@ -27,7 +27,7 @@ export function CallToAction() {
         <Button variant="outline" asChild>
           <Link href="/services">Nos services</Link>
         </Button>
-        <Button className="bg-[#A543F1] hover:bg-[#A543F1]/90" asChild>
+        <Button className="bg-[#8F99ED] hover:bg-[#8F99ED]/90" asChild>
           <Link href="/contact">
             Démarrer un projet <ArrowRightIcon className="size-4 ml-1" />
           </Link>

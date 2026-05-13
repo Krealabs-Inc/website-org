@@ -34,7 +34,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
         }
 
         .header {
-          background: linear-gradient(135deg, #A543F1 0%, #8b35d1 100%);
+          background: linear-gradient(135deg, #8F99ED 0%, #8b35d1 100%);
           padding: 48px 40px;
           text-align: center;
           position: relative;
@@ -127,7 +127,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
         }
 
         .email-highlight {
-          color: #A543F1;
+          color: #8F99ED;
           font-weight: 600;
         }
 
@@ -161,7 +161,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
         .cta-button {
           display: inline-block;
           padding: 14px 32px;
-          background: #A543F1;
+          background: #8F99ED;
           color: #ffffff;
           text-decoration: none;
           border-radius: 8px;
@@ -205,7 +205,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
         }
 
         .footer a {
-          color: #A543F1;
+          color: #8F99ED;
           text-decoration: none;
           font-weight: 500;
         }
@@ -226,7 +226,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
         }
 
         .footer-links a:hover {
-          color: #A543F1;
+          color: #8F99ED;
         }
 
         .separator {

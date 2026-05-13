@@ -14,10 +14,10 @@
 
 export const tokens = {
   color: {
-    accent: '#B06CFF',
-    accentHover: '#9F58F0',
-    accentSubtle: 'rgba(176, 108, 255, 0.12)',
-    accentRing: 'rgba(176, 108, 255, 0.4)',
+    accent: '#8F99ED',
+    accentHover: '#7782E1',
+    accentSubtle: 'rgba(143, 153, 237, 0.12)',
+    accentRing: 'rgba(143, 153, 237, 0.4)',
 
     dark: {
       bg: '#0A0A0A',

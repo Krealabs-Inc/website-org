@@ -11,7 +11,7 @@ export function AdminFooter() {
           {/* Branding */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-br from-[#A543F1] to-[#8b35d1] rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#8F99ED] to-[#8b35d1] rounded-lg flex items-center justify-center">
                 <Shield className="w-5 h-5 text-white" />
               </div>
               <span className="text-lg font-bold text-gray-900 dark:text-white font-[family-name:var(--font-heading)]">
@@ -31,13 +31,13 @@ export function AdminFooter() {
             <div className="flex flex-col gap-2">
               <Link
                 href="/admin"
-                className="text-sm text-gray-600 dark:text-white/70 hover:text-[#A543F1] dark:hover:text-[#A543F1] transition-colors"
+                className="text-sm text-gray-600 dark:text-white/70 hover:text-[#8F99ED] dark:hover:text-[#8F99ED] transition-colors"
               >
                 Dashboard
               </Link>
               <Link
                 href="/"
-                className="text-sm text-gray-600 dark:text-white/70 hover:text-[#A543F1] dark:hover:text-[#A543F1] transition-colors"
+                className="text-sm text-gray-600 dark:text-white/70 hover:text-[#8F99ED] dark:hover:text-[#8F99ED] transition-colors"
               >
                 Retour au site
               </Link>
@@ -54,7 +54,7 @@ export function AdminFooter() {
                 href="/ADMIN_GUIDE.md"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-gray-600 dark:text-white/70 hover:text-[#A543F1] dark:hover:text-[#A543F1] transition-colors flex items-center gap-2"
+                className="text-sm text-gray-600 dark:text-white/70 hover:text-[#8F99ED] dark:hover:text-[#8F99ED] transition-colors flex items-center gap-2"
               >
                 <BookOpen className="w-4 h-4" />
                 Guide Admin
@@ -63,7 +63,7 @@ export function AdminFooter() {
                 href="/DATABASE_SETUP.md"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-gray-600 dark:text-white/70 hover:text-[#A543F1] dark:hover:text-[#A543F1] transition-colors flex items-center gap-2"
+                className="text-sm text-gray-600 dark:text-white/70 hover:text-[#8F99ED] dark:hover:text-[#8F99ED] transition-colors flex items-center gap-2"
               >
                 <FileText className="w-4 h-4" />
                 Base de données
