@@ -1,98 +1,161 @@
-# Configuration de l'envoi d'emails (SMTP via nodemailer)
+# Configuration emails — Brevo SMTP (outbound) + ProtonMail (inbound)
 
-Ce projet utilise **nodemailer** pour l'envoi d'emails directement
-en SMTP — pas de service tiers HTTP (type Resend). Compatible avec
-n'importe quel provider SMTP : OVH, Gmail, Brevo, AWS SES, Hostinger, etc.
+## Architecture choisie
 
-## Variables d'environnement requises
-
-Dans `.env.local` (dev) ou Vercel Environment Variables (prod) :
-
-```bash
-SMTP_HOST=ssl0.ovh.net           # Hôte SMTP du provider
-SMTP_PORT=465                    # 465 (SSL) ou 587 (STARTTLS)
-SMTP_USER=noreply@krealabs.fr    # Utilisateur SMTP (souvent l'email)
-SMTP_PASS=votre_mot_de_passe     # Mot de passe ou App Password
-SMTP_FROM="Krealabs <noreply@krealabs.fr>"  # Adresse expéditrice
-CONTACT_EMAIL=contact@krealabs.fr           # Destinataire des formulaires
+```
+Visiteur envoie formulaire
+         │
+         ▼
+ Vercel /api/contact (Next.js)
+         │
+         ▼
+ Brevo SMTP (smtp-relay.brevo.com:587)
+         │
+         ▼  Email envoyé depuis noreply@krealabs.fr
+         │  (DKIM/SPF valides via Brevo)
+         ▼
+ Inbox contact@krealabs.fr  ← ProtonMail (MX records OVH pointent vers Proton)
 ```
 
-## Providers SMTP recommandés
+**Pourquoi cette archi** : ProtonMail n'expose pas de SMTP cloud
+(seulement Bridge desktop). Brevo gère l'outbound (envoi depuis le code),
+ProtonMail garde l'inbound (réception). Tu réponds depuis ProtonMail
+comme d'habitude.
 
-### OVH Mail Pro (par défaut dans ce projet)
+---
 
-```bash
-SMTP_HOST=ssl0.ovh.net
-SMTP_PORT=465
-SMTP_USER=noreply@krealabs.fr
-SMTP_PASS=<mot de passe défini dans le manager OVH>
+## Setup Brevo (5 min)
+
+### 1. Créer un compte Brevo
+
+https://www.brevo.com → "Sign up free"
+Pas de carte bancaire. Free tier : 300 emails/jour à vie.
+
+### 2. Vérifier le domaine `krealabs.fr`
+
+Dans Brevo : `Senders & IP > Domains > Add a domain`.
+
+Brevo te donne 3 enregistrements DNS à ajouter dans **OVH Zone DNS** :
+
+| Type | Nom | Valeur (exemple) |
+|---|---|---|
+| TXT | `mail._domainkey.krealabs.fr` | `k=rsa; p=MIGfMA0...` (DKIM Brevo) |
+| TXT | `krealabs.fr` | `brevo-code:XXXXX` (verification token) |
+| TXT | `_dmarc.krealabs.fr` | `v=DMARC1; p=none; rua=mailto:...` (DMARC) |
+
+**Dans OVH** :
+1. Manager OVH → Web Cloud → Domaines → `krealabs.fr`
+2. Onglet "Zone DNS" → "Ajouter une entrée" → TXT
+3. Ajouter les 3 records ci-dessus
+4. Attendre 5-15 min la propagation
+5. Retour Brevo → "Authenticate this domain" → ✓ Vert sur les 3
+
+⚠️ Si ton SPF existant (pour ProtonMail) doit cohabiter avec celui de
+Brevo, **mergeles** au lieu d'avoir 2 records SPF (Google rejette).
+Format SPF combiné typique :
+```
+v=spf1 include:_spf.protonmail.ch include:spf.brevo.com ~all
 ```
 
-Doc OVH : https://docs.ovh.com/fr/emails/parametres-generiques-pour-configurer-mes-emails/
+### 3. Générer la clé SMTP
 
-### Gmail (avec App Password)
+Dans Brevo : `SMTP & API > SMTP > Generate a new SMTP key`.
 
-```bash
-SMTP_HOST=smtp.gmail.com
-SMTP_PORT=587
-SMTP_USER=vous@gmail.com
-SMTP_PASS=<App Password généré dans Google Account Security>
-```
+Copie :
+- **SMTP Login** (en haut de la page) — souvent ton email Brevo
+- **SMTP Key** générée — c'est le mot de passe
 
-Pas le mot de passe Gmail normal — il faut un App Password (2FA requise) :
-https://myaccount.google.com/apppasswords
+### 4. Variables d'env Vercel
 
-### Brevo (ex-Sendinblue) — gratuit jusqu'à 300/jour
+Dans **Vercel Dashboard > Project > Settings > Environment Variables** :
 
 ```bash
 SMTP_HOST=smtp-relay.brevo.com
 SMTP_PORT=587
-SMTP_USER=<votre login Brevo>
-SMTP_PASS=<clé SMTP générée dans Brevo > SMTP & API>
+SMTP_USER=<ton login SMTP Brevo>
+SMTP_PASS=<la clé SMTP générée>
+SMTP_FROM=Krealabs <noreply@krealabs.fr>
+CONTACT_EMAIL=contact@krealabs.fr
 ```
 
-### AWS SES (haute volumétrie, pas cher)
+Variables à appliquer sur **Production, Preview, Development**.
+
+Tu peux supprimer `RESEND_API_KEY` qui ne sert plus.
+
+### 5. (Optionnel) Variables d'env local
+
+Pour tester en `npm run dev`, créer `.env.local` (gitignored) avec
+les mêmes valeurs.
+
+### 6. Tester
 
 ```bash
-SMTP_HOST=email-smtp.eu-west-1.amazonaws.com
-SMTP_PORT=587
-SMTP_USER=<Access Key SMTP générée dans IAM>
-SMTP_PASS=<Secret Key SMTP correspondant>
+curl -X POST https://krealabs.fr/api/contact \
+  -F "name=Test" \
+  -F "email=ton-email-perso@example.com" \
+  -F "message=Test SMTP Brevo"
 ```
 
-## Fichiers concernés
+→ Devrait retourner `{success: true}`.
+→ Email arrive sur `contact@krealabs.fr` (= ProtonMail) dans la minute.
+→ Tu peux répondre directement, le `Reply-To: ton-email-perso@example.com`
+   est déjà set, ta réponse part vers la bonne adresse.
 
-- `lib/mailer.ts` : utilitaire partagé (transporter nodemailer + helper `sendMail`)
-- `app/api/contact/route.ts` : envoi des formulaires de contact
-- `app/api/waitlist/route.ts` : confirmation + notification waitlist
-- `app/api/admin/newsletter/route.ts` : newsletter admin (bulk avec pause)
+---
 
-## Templates
+## Templates email
 
 Les templates restent en React (`emails/*.tsx`) et sont rendus en HTML
-via `@react-email/render` (déjà installé). Bonus : compatibles avec
-n'importe quel client email (Gmail, Outlook, Apple Mail).
+via `@react-email/render` (déjà installé). Compatible Gmail, Outlook,
+Apple Mail, ProtonMail.
 
-## Tester en dev
+Fichiers :
+- `emails/contact-template.tsx`
+- `emails/waitlist-confirmation-template.tsx`
+- `emails/waitlist-notification-template.tsx`
 
-```bash
-# 1. Configurer SMTP dans .env.local
-# 2. Lancer le dev server : npm run dev
-# 3. Tester l'API contact :
+---
 
-curl -X POST http://localhost:3000/api/contact \
-  -F "name=Test" \
-  -F "email=test@example.com" \
-  -F "message=Test message"
+## Code utilisateur
 
-# Réponse 200 si OK + email arrive sur CONTACT_EMAIL
+Tout passe par `lib/mailer.ts` :
+
+```ts
+import { sendMail } from "@/lib/mailer";
+
+await sendMail({
+  to: "destinataire@example.com",
+  subject: "Hello",
+  react: <MonTemplate {...props} />,
+  replyTo: "user@example.com",
+  attachments: [{ filename: "doc.pdf", content: bufferBuffer }],
+});
 ```
+
+Routes qui l'utilisent :
+- `app/api/contact/route.ts` — formulaire de contact
+- `app/api/waitlist/route.ts` — inscription waitlist
+- `app/api/admin/newsletter/route.ts` — newsletter admin
+
+---
 
 ## Migration depuis Resend (effectuée mai 2026)
 
-- Variable `RESEND_API_KEY` peut être supprimée
-- Templates `emails/*.tsx` restent valides
-- Aucun changement sur les composants front
-- Bulk newsletter : Resend supportait 100 destinataires par appel,
-  nodemailer envoie en boucle avec pause 50ms pour respecter limites
-  SMTP standard
+- `RESEND_API_KEY` supprimable de Vercel
+- Templates `emails/*.tsx` inchangés
+- Aucun changement front
+- `package.json` : `resend` retiré, `nodemailer` ajouté
+
+---
+
+## Debugging
+
+Si emails n'arrivent pas en prod :
+
+1. **Vercel logs** : Vercel Dashboard > Deployments > Latest > Functions > /api/contact
+   → cherche "SMTP send error" ou "SMTP verify failed"
+2. **Brevo dashboard** : Logs > Transactional > voir si l'email est listé
+3. **Spam** : check spam ProtonMail (DKIM/SPF mal config = spam)
+4. **DNS propagation** : `dig TXT krealabs.fr` doit montrer les TXT Brevo
+5. **Limites free tier** : 300/jour. Dépassé = emails bloqués jusqu'à
+   minuit UTC.
