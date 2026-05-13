@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { sendForm } from "@/lib/mailer";
+import { sendContactEmails } from "@/lib/mailer";
 
 export async function POST(request: NextRequest) {
   try {
@@ -51,55 +51,19 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // Labels lisibles
-    const typeLabel: Record<string, string> = {
-      devis: "Demande de devis",
-      contact: "Question / Renseignement",
-      partenariat: "Partenariat",
-    };
-    const projectLabel: Record<string, string> = {
-      "site-web": "Site web",
-      "app-mobile": "Application mobile",
-      logiciel: "Logiciel sur mesure",
-      "refonte-seo": "Refonte / SEO",
-    };
-
-    // Envoi via Formsubmit
     try {
-      await sendForm({
-        fields: {
-          subject: `${typeLabel[requestType] || "Nouveau message"} — ${name}`,
-          name,
-          email,
-          telephone: phone || "Non renseigné",
-          entreprise: company || "Non renseignée",
-          type_demande: typeLabel[requestType] || requestType || "contact",
-          type_projet: pricingOption
-            ? projectLabel[pricingOption] || pricingOption
-            : "Non précisé",
-          message,
-        },
-        autoresponse: [
-          `Bonjour ${name},`,
-          ``,
-          `Nous avons bien reçu votre ${typeLabel[requestType]?.toLowerCase() || "demande"} et nous l'étudions dès maintenant.`,
-          ``,
-          `Vous recevrez une réponse personnalisée sous 24 heures ouvrées à l'adresse ${email}.`,
-          ``,
-          `En attendant, n'hésitez pas à explorer notre travail :`,
-          `  • Offre WordPress : https://krealabs.fr/services/wordpress`,
-          `  • Tous nos services : https://krealabs.fr/services`,
-          `  • L'équipe : https://krealabs.fr/equipe`,
-          ``,
-          `Une question urgente ? Écrivez-nous directement à contact@krealabs.fr.`,
-          ``,
-          `À très vite,`,
-          `L'équipe Krealabs`,
-          `https://krealabs.fr`,
-        ].join("\n"),
+      await sendContactEmails({
+        requestType: requestType || "contact",
+        name,
+        email,
+        phone: phone || undefined,
+        company: company || undefined,
+        pricingOption: pricingOption || undefined,
+        message,
+        filesCount: 0,
       });
     } catch (err) {
-      console.error("Formsubmit error:", err);
+      console.error("Resend error:", err);
       return NextResponse.json(
         { error: "Erreur lors de l'envoi de l'email" },
         { status: 500 },

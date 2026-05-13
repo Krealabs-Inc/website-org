@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { sendForm } from "@/lib/mailer";
+import { sendWaitlistEmails } from "@/lib/mailer";
 
 export async function POST(request: NextRequest) {
   try {
@@ -42,29 +42,11 @@ export async function POST(request: NextRequest) {
       data: { email, source: "website" },
     });
 
-    // Envoi via Formsubmit : notif admin + auto-reply visiteur
     try {
-      await sendForm({
-        fields: {
-          subject: `Nouvelle inscription waitlist — ${email}`,
-          name: "Inscription waitlist",
-          email,
-          source: "Site web",
-        },
-        autoresponse: [
-          `Merci pour votre inscription à la liste d'attente Krealabs !`,
-          ``,
-          `Vous serez parmi les premiers informés de nos prochaines disponibilités,`,
-          `nouveaux services et opportunités de collaboration.`,
-          ``,
-          `À très vite,`,
-          `L'équipe Krealabs`,
-          `https://krealabs.fr`,
-        ].join("\n"),
-      });
+      await sendWaitlistEmails(email);
     } catch (err) {
-      console.error("Formsubmit waitlist error:", err);
-      // On laisse passer : l'inscription DB est sauvegardée
+      console.error("Resend waitlist error:", err);
+      // best-effort : l'inscription DB est OK, on ne fait pas échouer
     }
 
     return NextResponse.json(

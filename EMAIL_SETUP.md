@@ -1,4 +1,4 @@
-# Configuration emails — Formsubmit (zéro setup) + ProtonMail
+# Configuration emails — Resend (envoi) + ProtonMail (réception)
 
 ## Architecture choisie
 
@@ -9,142 +9,126 @@ Visiteur soumet formulaire
  Vercel /api/contact (Next.js)
          │ Save form to Prisma DB
          │
-         ▼ POST JSON
- Formsubmit (https://formsubmit.co/ajax/contact@krealabs.fr)
+         ▼ Resend SDK (HTTPS)
+ Resend (send.krealabs.fr — SPF + DKIM vérifiés)
          │
-         ├──→ Email à contact@krealabs.fr (= ProtonMail via MX OVH)
-         │       Reply-To = email du visiteur
-         │       Tu réponds depuis ProtonMail comme d'habitude
+         ├──→ Email admin → contact@krealabs.fr
+         │       From: Krealabs <noreply@send.krealabs.fr>
+         │       Reply-To: email du visiteur
+         │       Reçu sur ProtonMail (MX OVH du domaine racine)
+         │       → Tu réponds depuis ProtonMail, ça part vers le visiteur
          │
-         └──→ Auto-reply au visiteur (champ _autoresponse)
-                 "Bonjour {Name}, votre demande est bien reçue..."
-                 Le visiteur sait qu'on a bien capté son message
+         └──→ Auto-reply visiteur → email du visiteur
+                 From: Krealabs <noreply@send.krealabs.fr>
+                 Reply-To: contact@krealabs.fr
+                 Template React brandé Krealabs
 ```
 
-**Pourquoi Formsubmit** : aucune autre solution n'offre l'auto-reply
-visiteur sans configuration DNS. Resend free tier impose la
-vérification du domaine pour envoyer à autre chose que l'email du
-propriétaire du compte. Brevo demande SPF/DKIM. Formsubmit gère tout
-côté serveur, on n'a qu'à POST des données.
+**Pourquoi Resend** : emails 100% brandés Krealabs (logo, violet #8F99ED,
+typo, layout), sender pro `@send.krealabs.fr`, deliverability solide,
+templates React maintenus côté codebase.
+
+**Pourquoi `send.krealabs.fr`** : sous-domaine d'envoi isolé qui ne
+touche pas aux MX records ProtonMail sur le domaine racine. Les SPF
+et DKIM Resend vivent sur le sous-domaine, ProtonMail garde son SPF
+sur la racine. Zéro merge, zéro conflit.
 
 ---
 
-## Setup en 2 minutes
+## Setup une fois pour toutes
 
-### 1. Variables d'env
+### 1. Compte Resend + domaine
 
-Dans Vercel Dashboard > Project Settings > Environment Variables
-(Production + Preview + Development) :
+1. Créer un compte sur https://resend.com
+2. Domains > Add Domain → `send.krealabs.fr` → **Enable Sending uniquement**
+3. Copier les 3 records DNS (SPF TXT + DKIM TXT + bounces MX) dans la
+   zone OVH du sous-domaine `send.krealabs.fr`
+4. Attendre le statut **Verified** (10-60 min)
+
+### 2. API Key
+
+Resend Dashboard > API Keys > Create API Key → `krealabs-prod`
+
+Garder la clé en sécurité (visible une seule fois, format `re_...`).
+
+### 3. Variables d'env
+
+**Local (.env.local)** :
 
 ```bash
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxx
+EMAIL_FROM=Krealabs <noreply@send.krealabs.fr>
 CONTACT_EMAIL=contact@krealabs.fr
 ```
 
-C'est tout. Aucune API key requise.
+**Vercel** (Project Settings > Environment Variables, Production + Preview + Development) :
 
-### 2. Activation Formsubmit (première fois uniquement)
-
-Au premier formulaire soumis depuis le site (en prod ou en dev),
-Formsubmit envoie un email d'activation à `contact@krealabs.fr`.
-
-1. Soumettre une fois le formulaire `/contact` (avec un email réel)
-2. Ouvrir ta boîte ProtonMail (contact@krealabs.fr)
-3. Tu reçois un email Formsubmit avec un bouton "Activate"
-4. Cliquer → c'est activé pour toujours
-
-Tous les envois suivants arrivent directement, sans nouvelle étape.
+```
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxx
+EMAIL_FROM=Krealabs <noreply@send.krealabs.fr>
+CONTACT_EMAIL=contact@krealabs.fr
+```
 
 ---
 
-## Que reçoit le visiteur
+## Templates React
 
-Auto-reply texte plain envoyé immédiatement depuis Formsubmit :
+4 templates dans `emails/`, tous brandés Krealabs (#8F99ED, dark theme,
+fonts Inter + Space Grotesk) :
 
-```
-Bonjour {Nom},
+| Template                              | Usage                                    |
+|---------------------------------------|------------------------------------------|
+| `contact-template.tsx`                | Notif admin : nouveau contact            |
+| `contact-autoreply-template.tsx`      | Auto-reply visiteur : demande reçue      |
+| `waitlist-notification-template.tsx`  | Notif admin : nouvelle inscription       |
+| `waitlist-confirmation-template.tsx`  | Bienvenue visiteur : sur la waitlist     |
 
-Nous avons bien reçu votre demande de devis et nous l'étudions
-dès maintenant.
-
-Vous recevrez une réponse personnalisée sous 24 heures ouvrées
-à l'adresse {son email}.
-
-En attendant, n'hésitez pas à explorer notre travail :
-  • Offre WordPress : https://krealabs.fr/services/wordpress
-  • Tous nos services : https://krealabs.fr/services
-  • L'équipe : https://krealabs.fr/equipe
-
-Une question urgente ? Écrivez-nous directement à contact@krealabs.fr.
-
-À très vite,
-L'équipe Krealabs
-https://krealabs.fr
-```
-
-L'email apparaît dans la boîte du visiteur avec un sender Formsubmit
-(`noreply@formsubmit.co`) mais avec Reply-To pointant sur
-`contact@krealabs.fr`.
-
-## Que tu reçois sur ProtonMail
-
-Email structuré (template `table`) avec toutes les infos du formulaire :
-
-```
-Sujet : Demande de devis — Jean Dupont
-
-| Champ        | Valeur                                     |
-|--------------|--------------------------------------------|
-| name         | Jean Dupont                                |
-| email        | jean@entreprise.fr                         |
-| telephone    | 06 12 34 56 78                             |
-| entreprise   | Acme SAS                                   |
-| type_demande | Demande de devis                           |
-| type_projet  | Site web                                   |
-| message      | Bonjour, nous cherchons une agence pour... |
-```
-
-**Reply-To = jean@entreprise.fr** → quand tu réponds dans ProtonMail,
-ta réponse part directement vers le visiteur.
-
----
-
-## Limitations
-
-- **Pas de pièces jointes** sur le free tier Formsubmit. Si le visiteur
-  veut envoyer un brief / maquettes, il le fait par mail après ta première
-  réponse (mentionné dans le placeholder du formulaire).
-- **1000-2000 submissions / mois** sur free (largement suffisant pour
-  une agence).
-- Footer "Powered by Formsubmit" en bas de l'email visiteur.
-- Sender visible = `noreply@formsubmit.co` (Reply-To corrigé sur ton domaine).
+Les templates sont des composants React standard — modifiables comme
+n'importe quel composant du site. Resend les rend en HTML côté serveur
+au moment de l'envoi.
 
 ---
 
 ## Code utilisateur
 
-Tout passe par `lib/mailer.ts > sendForm()` :
+Tout passe par `lib/mailer.tsx` :
 
 ```ts
-import { sendForm } from "@/lib/mailer";
+import { sendContactEmails, sendWaitlistEmails } from "@/lib/mailer";
 
-await sendForm({
-  fields: {
-    subject: "Nouveau message",
-    name: "Jean Dupont",
-    email: "jean@example.com",
-    message: "...",
-    // tout autre champ custom sera ajouté à l'email
-  },
-  autoresponse: "Bonjour Jean, ...",  // optionnel
+// Formulaire de contact
+await sendContactEmails({
+  requestType: "devis",
+  name: "Jean Dupont",
+  email: "jean@example.com",
+  phone: "0612345678",
+  company: "Acme SAS",
+  pricingOption: "site-web",
+  message: "...",
+  filesCount: 0,
 });
+
+// Inscription waitlist
+await sendWaitlistEmails("jean@example.com");
 ```
 
-Routes qui l'utilisent :
-- `app/api/contact/route.ts` — formulaire de contact + auto-reply
-- `app/api/waitlist/route.ts` — inscription waitlist + auto-reply
+Comportement :
+- **Notif admin** est critique → throw si Resend échoue → 500 côté API
+- **Auto-reply visiteur** est best-effort → log mais ne fait pas échouer
 
-`app/api/admin/newsletter/route.ts` est désactivé (501) car Formsubmit
-ne gère pas le bulk vers des destinataires arbitraires.
+Routes :
+- `app/api/contact/route.ts` — formulaire de contact
+- `app/api/waitlist/route.ts` — inscription waitlist
+
+---
+
+## Limitations Resend free tier
+
+- **3000 emails / mois** — largement suffisant pour le contact form
+- **100 emails / jour** — idem
+- **1 domaine vérifié** — `send.krealabs.fr` (suffit)
+- Pour des newsletters bulk plus tard → passer en plan payant ou
+  brancher Resend Audiences/Broadcast
 
 ---
 
@@ -152,26 +136,26 @@ ne gère pas le bulk vers des destinataires arbitraires.
 
 Si emails n'arrivent pas en prod :
 
-1. **Vérifier l'activation** : as-tu cliqué le bouton "Activate" dans
-   le premier email Formsubmit ? Si pas, tous les envois sont en attente.
-2. **Vercel logs** : Dashboard > Deployments > Latest > Functions >
-   `/api/contact` → cherche `Formsubmit error`.
-3. **Spam ProtonMail** : check le dossier spam (improbable mais bon).
-4. **Quota** : Formsubmit limite à ~1000-2000/mois. Au-delà, les envois
-   sont bloqués jusqu'au mois suivant. Pour augmenter, upgrade payant
-   ou switcher vers Resend + domaine vérifié.
+1. **Vercel logs** : Dashboard > Deployments > Latest > Functions >
+   `/api/contact` → cherche `Resend admin email failed` ou `Resend admin error`.
+2. **Resend Dashboard > Logs** : toutes les requêtes API y sont
+   tracées (Delivered, Bounced, Complained).
+3. **DNS** : Resend > Domains > send.krealabs.fr → vérifier "Verified".
+   Si "Pending", les records DNS OVH ne sont pas encore propagés.
+4. **API Key** : vérifier que `RESEND_API_KEY` est bien set sur
+   Production dans Vercel (pas seulement Preview).
+5. **Spam ProtonMail** : check le dossier spam.
 
 ---
 
-## Si tu veux changer de service plus tard
+## Changer le sender
 
-L'abstraction `sendForm()` dans `lib/mailer.ts` peut être remplacée
-sans toucher au reste du code. Options pour upgrade futur :
+Pour passer de `noreply@send.krealabs.fr` à autre chose :
 
-- **Resend** + domaine vérifié → emails depuis `noreply@krealabs.fr`,
-  meilleure deliverability, statistiques. Nécessite 3 DNS records.
-- **Brevo** + domaine vérifié → idem, free tier 300/jour.
-- **AWS SES** + domaine vérifié → haute volumétrie, ~0.10$ / 1000.
+```bash
+# Vercel env
+EMAIL_FROM=Romain de Krealabs <romain@send.krealabs.fr>
+```
 
-Tous compatibles avec l'API actuelle, juste remplacer le corps de
-`sendForm()`.
+Tout email avant le `@` est accepté (pas besoin de créer une boîte —
+Resend envoie depuis n'importe quel local-part du domaine vérifié).
