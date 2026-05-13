@@ -171,17 +171,96 @@ export function Footer() {
         </div>
       </Container>
 
-      {/* Decorative oversized wordmark */}
-      <div
-        aria-hidden
-        className="pointer-events-none overflow-hidden"
-      >
-        <Container>
-          <p className="text-[clamp(4rem,18vw,16rem)] font-medium leading-[0.85] tracking-[-0.05em] text-[var(--foreground)]/[0.04] pb-4 -mb-6 select-none">
-            krealabs<em className="font-[var(--font-instrument-serif)] italic text-[var(--foreground)]/[0.06]">.fr</em>
-          </p>
-        </Container>
-      </div>
+      {/* Decorative oversized wordmark — stacked layers + twinkle sparkles */}
+      <FooterWordmark />
     </footer>
+  );
+}
+
+/**
+ * Wordmark XXL avec effet d'empilement (4 calques fantômes + 1 calque principal)
+ * et scintillement (sparkles ponctuels animés). Les sparkles sont desktop-only
+ * pour économiser la batterie sur mobile (cf. règle anim mobile du projet).
+ */
+function FooterWordmark() {
+  const stack = [
+    { translate: "-translate-y-[18%]", blur: "blur-[3px]", opacity: "0.012" },
+    { translate: "-translate-y-[12%]", blur: "blur-[2px]", opacity: "0.018" },
+    { translate: "-translate-y-[7%]", blur: "blur-[1px]", opacity: "0.028" },
+    { translate: "-translate-y-[3%]", blur: "", opacity: "0.042" },
+  ];
+
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none overflow-hidden relative"
+    >
+      <Container>
+        <div className="relative pb-4 -mb-6">
+          {stack.map((layer, i) => (
+            <span
+              key={i}
+              className={`absolute inset-x-0 bottom-0 text-[clamp(4rem,18vw,16rem)] font-medium leading-[0.85] tracking-[-0.05em] select-none ${layer.translate} ${layer.blur}`}
+              style={{ color: `color-mix(in srgb, var(--foreground) ${parseFloat(layer.opacity) * 100}%, transparent)` }}
+            >
+              krealabs
+              <em className="font-[var(--font-instrument-serif)] italic">
+                .fr
+              </em>
+            </span>
+          ))}
+
+          <p className="relative text-[clamp(4rem,18vw,16rem)] font-medium leading-[0.85] tracking-[-0.05em] text-[var(--foreground)]/[0.06] select-none">
+            krealabs
+            <em className="font-[var(--font-instrument-serif)] italic text-[var(--foreground)]/[0.085]">
+              .fr
+            </em>
+          </p>
+
+          <FooterSparkles />
+        </div>
+      </Container>
+    </div>
+  );
+}
+
+/**
+ * Sparkles décoratifs animés (scintillement) — hidden < md pour respecter
+ * la contrainte "pas d'animations sur mobile" du projet.
+ */
+const SPARKLES = [
+  { left: "8%", top: "30%", size: 3, delay: "0s", dur: "3.2s" },
+  { left: "18%", top: "65%", size: 2, delay: "1.4s", dur: "2.6s" },
+  { left: "26%", top: "20%", size: 4, delay: "0.6s", dur: "3.8s" },
+  { left: "34%", top: "78%", size: 2, delay: "2.1s", dur: "2.9s" },
+  { left: "42%", top: "42%", size: 3, delay: "0.2s", dur: "3.4s" },
+  { left: "51%", top: "12%", size: 2, delay: "1.8s", dur: "2.4s" },
+  { left: "58%", top: "70%", size: 3, delay: "0.9s", dur: "3.1s" },
+  { left: "67%", top: "32%", size: 4, delay: "2.6s", dur: "3.6s" },
+  { left: "74%", top: "58%", size: 2, delay: "0.4s", dur: "2.7s" },
+  { left: "82%", top: "22%", size: 3, delay: "1.2s", dur: "3.3s" },
+  { left: "89%", top: "68%", size: 2, delay: "2.3s", dur: "2.5s" },
+  { left: "95%", top: "40%", size: 3, delay: "1.6s", dur: "3.5s" },
+];
+
+function FooterSparkles() {
+  return (
+    <div className="hidden md:block motion-reduce:hidden absolute inset-0 pointer-events-none">
+      {SPARKLES.map((s, i) => (
+        <span
+          key={i}
+          className="absolute rounded-full bg-[var(--accent)] animate-twinkle"
+          style={{
+            left: s.left,
+            top: s.top,
+            width: `${s.size}px`,
+            height: `${s.size}px`,
+            animationDelay: s.delay,
+            animationDuration: s.dur,
+            boxShadow: `0 0 ${s.size * 3}px color-mix(in srgb, var(--accent) 60%, transparent)`,
+          }}
+        />
+      ))}
+    </div>
   );
 }

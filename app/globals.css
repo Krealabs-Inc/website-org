@@ -59,6 +59,7 @@
   --animate-mesh-1: mesh-float-1 22s ease-in-out infinite;
   --animate-mesh-2: mesh-float-2 28s ease-in-out infinite;
   --animate-mesh-3: mesh-float-3 25s ease-in-out infinite;
+  --animate-twinkle: twinkle var(--twinkle-duration, 3s) ease-in-out infinite;
 
   @keyframes shimmer {
     0% { background-position: 200% 0, 0 0; }
@@ -116,6 +117,11 @@
     50% {
       transform: translateY(-12px) translateX(4px);
     }
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.4); }
+    50% { opacity: 1; transform: scale(1); }
   }
 
   @keyframes page-enter {
