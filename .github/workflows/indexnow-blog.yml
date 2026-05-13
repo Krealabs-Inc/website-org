@@ -1,0 +1,120 @@
+name: Ping IndexNow on new blog posts
+
+# Déclenché à chaque push sur main qui modifie lib/blog-data.ts.
+# Extrait les nouveaux slugs ajoutés (lignes "+slug:") via git diff,
+# attend que Vercel ait déployé, puis ping /api/indexnow.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "lib/blog-data.ts"
+
+# Empêche 2 runs simultanés si plusieurs push rapides (utile sur la branche
+# principale pour éviter des pings dupliqués).
+concurrency:
+  group: indexnow-blog
+  cancel-in-progress: false
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          # On a besoin du parent commit pour faire le diff
+          fetch-depth: 2
+
+      - name: Extract new slugs added in this commit
+        id: slugs
+        run: |
+          # Récupère uniquement les lignes ajoutées (+) qui matchent slug:
+          # Compare HEAD au commit précédent du push
+          if [ "$(git rev-list --count HEAD)" -lt "2" ]; then
+            echo "Premier commit du repo, rien à diff"
+            echo "count=0" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          git diff HEAD~1 HEAD -- lib/blog-data.ts \
+            | grep -E '^\+\s+slug: "' \
+            | sed -E 's/^\+\s+slug: "([^"]+)".*/\1/' \
+            > new-slugs.txt || true
+
+          count=$(wc -l < new-slugs.txt | tr -d ' ')
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          echo "Slugs détectés ($count) :"
+          cat new-slugs.txt || true
+
+      - name: No new slugs — skip
+        if: steps.slugs.outputs.count == '0'
+        run: echo "Aucun nouveau slug détecté dans ce push, rien à faire."
+
+      - name: Wait for Vercel deploy (HTTP 200 sur chaque URL)
+        if: steps.slugs.outputs.count != '0'
+        run: |
+          set -e
+          # Boucle jusqu'à 10 minutes : on attend que TOUS les nouveaux
+          # slugs répondent HTTP 200 sur prod.
+          for attempt in $(seq 1 60); do
+            all_ok=true
+            while IFS= read -r slug; do
+              [ -z "$slug" ] && continue
+              status=$(curl -s -o /dev/null -w "%{http_code}" \
+                "https://krealabs.fr/blog/$slug")
+              if [ "$status" != "200" ]; then
+                echo "  [attempt $attempt] /blog/$slug → HTTP $status (waiting...)"
+                all_ok=false
+                break
+              fi
+            done < new-slugs.txt
+            if [ "$all_ok" = "true" ]; then
+              echo "✅ Toutes les nouvelles URLs sont en ligne"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "❌ Timeout : Vercel n'a pas déployé sous 10 min"
+          exit 1
+
+      - name: Build URL list JSON
+        if: steps.slugs.outputs.count != '0'
+        id: payload
+        run: |
+          # Transforme les slugs en payload JSON pour IndexNow
+          urls=$(sed -E 's|^|"https://krealabs.fr/blog/|; s|$|"|' new-slugs.txt \
+            | paste -sd, -)
+          echo "{\"urls\":[${urls}]}" > payload.json
+          echo "Payload :"
+          cat payload.json
+
+      - name: Ping IndexNow
+        if: steps.slugs.outputs.count != '0'
+        env:
+          ADMIN_TOKEN: ${{ secrets.ADMIN_TOKEN }}
+        run: |
+          if [ -z "$ADMIN_TOKEN" ]; then
+            echo "❌ ADMIN_TOKEN secret manquant. Ajoute-le dans Settings > Secrets and variables > Actions."
+            exit 1
+          fi
+
+          response=$(curl -s -w "\n%{http_code}" \
+            -X POST https://krealabs.fr/api/indexnow \
+            -H "Authorization: Bearer $ADMIN_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d @payload.json)
+
+          body=$(echo "$response" | sed '$d')
+          status=$(echo "$response" | tail -n1)
+
+          echo "Réponse IndexNow ($status) : $body"
+
+          if [ "$status" != "200" ]; then
+            echo "❌ IndexNow a renvoyé HTTP $status"
+            exit 1
+          fi
+
+          echo "✅ Ping IndexNow OK"
