@@ -9,6 +9,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
+import { HowToSchema } from "@/components/seo/howto-schema";
 import { ShareButton } from "@/components/blog/share-button";
 import { MarkdownText } from "@/components/blog/markdown-text";
 import { blogPosts, frenchDateToISO } from "@/lib/blog-data";
@@ -160,6 +161,7 @@ export default async function BlogPostPage({
           { name: post.title, url },
         ]}
       />
+      <HowToSchema post={post} pageUrl={url} />
 
       {/* ========== HERO IMAGE + TITLE ========== */}
       <header className="relative pt-24 pb-12 md:pt-32 md:pb-16 overflow-hidden">

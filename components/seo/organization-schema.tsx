@@ -137,6 +137,24 @@ export function OrganizationSchema() {
     ],
   };
 
+  // AggregateRating env-driven : injecté SEULEMENT si les vars d'env existent.
+  // À setter une fois qu'on a la note Google Business réelle (jamais inventer
+  // une note — Google pénalise sévèrement les ratings fake).
+  // Côté Vercel :
+  //   NEXT_PUBLIC_RATING_VALUE=4.9
+  //   NEXT_PUBLIC_RATING_COUNT=23
+  const ratingValue = process.env.NEXT_PUBLIC_RATING_VALUE;
+  const ratingCount = process.env.NEXT_PUBLIC_RATING_COUNT;
+  if (ratingValue && ratingCount) {
+    (schema as Record<string, unknown>).aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: parseFloat(ratingValue),
+      reviewCount: parseInt(ratingCount, 10),
+      bestRating: 5,
+      worstRating: 1,
+    };
+  }
+
   return (
     <script
       type="application/ld+json"
