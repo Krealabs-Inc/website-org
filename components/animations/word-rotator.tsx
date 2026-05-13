@@ -14,32 +14,23 @@ interface WordRotatorProps {
 
 /**
  * Cycle entre plusieurs mots avec une transition slide+fade.
- * Respecte prefers-reduced-motion. Sur mobile (< md), affichage
- * statique du premier mot pour économiser CPU/batterie.
+ * Respecte prefers-reduced-motion uniquement (animation très légère :
+ * 1 setInterval + 1 fade Framer toutes les 2.5s, négligeable côté perf
+ * même sur mobile bas de gamme).
  */
 export function WordRotator({ words, interval = 2500, className }: WordRotatorProps) {
   const reduced = useReducedMotion();
-  const [isMobile, setIsMobile] = useState(false);
   const [index, setIndex] = useState(0);
 
-  // Détection mobile côté client uniquement (évite mismatch hydratation)
   useEffect(() => {
-    const check = () => setIsMobile(window.matchMedia("(max-width: 767px)").matches);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  useEffect(() => {
-    if (reduced || isMobile || words.length <= 1) return;
+    if (reduced || words.length <= 1) return;
     const id = setInterval(() => {
       setIndex((i) => (i + 1) % words.length);
     }, interval);
     return () => clearInterval(id);
-  }, [words.length, interval, reduced, isMobile]);
+  }, [words.length, interval, reduced]);
 
-  // Mobile ou reduced motion → statique
-  if (reduced || isMobile) {
+  if (reduced) {
     return <span className={className}>{words[0]}</span>;
   }
 
