@@ -41,8 +41,10 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  // Skip pour les assets statiques, API routes et fichiers spéciaux
+  // Skip pour les assets statiques, API routes et fichiers spéciaux.
+  // Note Next.js : seul l'outer group est autorisé comme capturing group ;
+  // les groupes internes doivent être non-capturing (?:...).
   matcher: [
-    "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|llms.txt|.*\\.(png|jpg|jpeg|svg|webp|avif|ico|woff2?)).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|llms.txt|.*\\.(?:png|jpg|jpeg|svg|webp|avif|ico|woff2?)).*)",
   ],
 };
