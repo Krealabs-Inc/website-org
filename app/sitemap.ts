@@ -5,6 +5,7 @@ import { SECTOR_SLUGS } from "@/lib/sectors";
 import { TEAM_SLUGS } from "@/lib/team";
 import { CATEGORY_SLUGS } from "@/app/blog/category/[slug]/page";
 import { INDEXABLE_TAG_SLUGS } from "@/app/blog/tag/[slug]/page";
+import { COMPARATOR_SLUGS } from "@/lib/comparators";
 
 const baseUrl = "https://krealabs.fr";
 const now = new Date();
@@ -225,11 +226,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.55,
   }));
 
+  // Comparator pages (commercial intent élevé)
+  const comparatorPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/comparateur`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+    },
+    ...COMPARATOR_SLUGS.map((slug) => ({
+      url: `${baseUrl}/comparateur/${slug}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })),
+  ];
+
   return [
     ...staticPages,
     ...authorPages,
     ...cityPages,
     ...sectorPages,
+    ...comparatorPages,
     ...servicePages,
     ...techPages,
     ...blogIndex,
