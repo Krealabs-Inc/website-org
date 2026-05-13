@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { X } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ShieldCheck, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -67,62 +68,93 @@ export function CookieConsent() {
     setVisible(false);
   }
 
-  if (!visible) return null;
-
   return (
-    <div
-      role="dialog"
-      aria-labelledby="cookie-consent-title"
-      aria-describedby="cookie-consent-description"
-      className="fixed bottom-4 left-4 right-4 md:left-auto md:bottom-6 md:right-6 md:max-w-md z-[80] rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] backdrop-blur-md shadow-2xl"
-    >
-      <div className="p-5 md:p-6">
-        <div className="flex items-start justify-between gap-4 mb-3">
-          <h2 id="cookie-consent-title" className="text-h4">
-            Cookies &amp; vie privée
-          </h2>
-          <button
-            onClick={() => decide("rejected")}
-            aria-label="Refuser et fermer"
-            className="size-7 rounded-full hover:bg-[var(--surface-hover)] flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-          >
-            <X className="size-4" />
-          </button>
-        </div>
-        <p
-          id="cookie-consent-description"
-          className="text-body-sm text-[var(--muted-foreground)] mb-5 leading-relaxed"
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          role="dialog"
+          aria-labelledby="cookie-consent-title"
+          aria-describedby="cookie-consent-description"
+          initial={{ y: 60, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 60, opacity: 0 }}
+          transition={{ type: "spring", stiffness: 260, damping: 28 }}
+          className={[
+            // Mobile : full-width pinned bottom, safe-area iOS, pas de marges
+            "fixed inset-x-0 bottom-0 z-[80]",
+            "pb-[max(env(safe-area-inset-bottom),0px)]",
+            // Desktop : card flottante en bas-droite
+            "md:inset-x-auto md:bottom-6 md:right-6 md:max-w-md md:pb-0",
+          ].join(" ")}
         >
-          Krealabs utilise une mesure d&apos;audience anonyme (Vercel Analytics,
-          sans cookie) qui ne nécessite pas votre consentement. Aucun traceur
-          marketing n&apos;est actuellement actif. Détails dans notre{" "}
-          <Link
-            href="/legal/politique-confidentialite"
-            className="underline underline-offset-2 hover:text-[var(--foreground)]"
+          <div
+            className={[
+              "relative border bg-[var(--surface)]/95 backdrop-blur-lg shadow-2xl",
+              // Mobile : coins arrondis seulement en haut, full width
+              "border-t border-[var(--border)] rounded-t-2xl",
+              // Desktop : carré classique
+              "md:border md:rounded-[var(--radius-lg)]",
+            ].join(" ")}
           >
-            politique de confidentialité
-          </Link>
-          .
-        </p>
-        <div className="flex flex-col sm:flex-row gap-2">
-          <Button
-            onClick={() => decide("accepted")}
-            size="sm"
-            className="flex-1"
-          >
-            J&apos;ai compris
-          </Button>
-          <Button
-            onClick={() => decide("rejected")}
-            size="sm"
-            variant="outline"
-            className="flex-1"
-          >
-            Préférences strictes
-          </Button>
-        </div>
-      </div>
-    </div>
+            {/* Close X — desktop uniquement (sur mobile, les boutons font le job) */}
+            <button
+              onClick={() => decide("rejected")}
+              aria-label="Fermer"
+              className="absolute top-3 right-3 size-8 rounded-full hover:bg-[var(--surface-hover)] flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors hidden md:flex"
+            >
+              <X className="size-4" />
+            </button>
+
+            <div className="px-5 pt-5 pb-4 md:p-6">
+              {/* Icône + titre */}
+              <div className="flex items-center gap-3 mb-3">
+                <div className="inline-flex size-9 items-center justify-center rounded-full bg-[var(--accent-subtle)] text-[var(--accent)] shrink-0">
+                  <ShieldCheck className="size-4" strokeWidth={2} />
+                </div>
+                <h2 id="cookie-consent-title" className="text-h4">
+                  Cookies &amp; vie privée
+                </h2>
+              </div>
+
+              <p
+                id="cookie-consent-description"
+                className="text-body-sm text-[var(--muted-foreground)] mb-5 leading-relaxed"
+              >
+                Mesure d&apos;audience anonyme (Vercel Analytics,{" "}
+                <strong className="text-[var(--foreground)] font-medium">
+                  sans cookie
+                </strong>
+                ). Pas de traceur marketing.{" "}
+                <Link
+                  href="/legal/politique-confidentialite"
+                  className="underline underline-offset-2 hover:text-[var(--foreground)] whitespace-nowrap"
+                >
+                  En savoir plus
+                </Link>
+                .
+              </p>
+
+              {/* Boutons : full-width mobile (chacun min-h 44px), row desktop */}
+              <div className="flex flex-col-reverse sm:flex-row gap-2">
+                <Button
+                  onClick={() => decide("rejected")}
+                  variant="outline"
+                  className="flex-1 !h-11"
+                >
+                  Préférences strictes
+                </Button>
+                <Button
+                  onClick={() => decide("accepted")}
+                  className="flex-1 !h-11"
+                >
+                  J&apos;ai compris
+                </Button>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 }
 
