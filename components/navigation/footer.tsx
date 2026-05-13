@@ -8,6 +8,7 @@ import { Github, Linkedin, Mail, MapPin } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 
 const nav = {
   services: [
@@ -127,6 +128,30 @@ export function Footer() {
 
         {/* Sparkles overlay (desktop + motion-safe) */}
         <FooterSparkles />
+
+        {/* Newsletter signup ribbon */}
+        <Container className="relative z-10 pt-16 lg:pt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-16 border-b border-[var(--border)]">
+            <div className="lg:col-span-5">
+              <Eyebrow dot className="mb-4">Newsletter</Eyebrow>
+              <h3 className="text-h2">
+                1 mail par mois,{" "}
+                <em>zéro spam</em>.
+              </h3>
+              <p className="text-body text-[var(--muted-foreground)] mt-4 max-w-md">
+                Articles, retours d&apos;expérience, études de cas chiffrées
+                sur les projets Krealabs. Désinscription en un clic.
+              </p>
+            </div>
+            <div className="lg:col-span-7">
+              <NewsletterSignup source="footer" variant="compact" />
+              <p className="text-caption mt-3">
+                En vous inscrivant, vous acceptez de recevoir notre newsletter
+                mensuelle. Données conformes RGPD.
+              </p>
+            </div>
+          </div>
+        </Container>
 
         {/* Main content — brand + link columns */}
         <Container className="relative z-10 flex flex-1 flex-col justify-end">

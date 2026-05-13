@@ -23,6 +23,10 @@ import { ContactEmailTemplate } from "@/emails/contact-template";
 import { ContactAutoreplyTemplate } from "@/emails/contact-autoreply-template";
 import { WaitlistNotificationTemplate } from "@/emails/waitlist-notification-template";
 import { WaitlistConfirmationTemplate } from "@/emails/waitlist-confirmation-template";
+import { NewsletterWelcomeTemplate } from "@/emails/newsletter-welcome-template";
+
+const SITE_URL =
+  process.env.NEXT_PUBLIC_URL || "https://krealabs.fr";
 
 const FROM = process.env.EMAIL_FROM || "Krealabs <noreply@krealabs.fr>";
 const ADMIN_TO = process.env.CONTACT_EMAIL || "contact@krealabs.fr";
@@ -169,5 +173,38 @@ export async function sendWaitlistEmails(email: string): Promise<void> {
       "[mailer] Resend visitor waitlist confirmation error:",
       visitorResult.value.error,
     );
+  }
+}
+
+/**
+ * Envoie le welcome email à un nouveau souscripteur newsletter.
+ * Inclut le lien d'unsubscribe one-click (RGPD).
+ */
+export async function sendNewsletterWelcome(opts: {
+  email: string;
+  unsubscribeToken: string;
+}): Promise<void> {
+  const resend = getResend();
+  const unsubscribeUrl = `${SITE_URL}/api/newsletter/unsubscribe?token=${opts.unsubscribeToken}`;
+
+  const result = await resend.emails.send({
+    from: FROM,
+    to: [opts.email],
+    replyTo: ADMIN_TO,
+    subject: "Bienvenue dans la newsletter Krealabs",
+    headers: {
+      // RFC 8058 : permet à Gmail/Apple Mail d'afficher un bouton
+      // "Unsubscribe" natif dans la barre d'en-tête de l'email.
+      "List-Unsubscribe": `<${unsubscribeUrl}>`,
+      "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+    },
+    react: React.createElement(NewsletterWelcomeTemplate, {
+      email: opts.email,
+      unsubscribeUrl,
+    }),
+  });
+
+  if (result.error) {
+    throw new Error(`Resend newsletter welcome error: ${result.error.message}`);
   }
 }

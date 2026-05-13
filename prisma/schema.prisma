@@ -35,6 +35,27 @@ model WaitlistContact {
   @@index([assignedTo])
 }
 
+// Newsletter mensuelle Krealabs (distinct du waitlist : un waitlist contact
+// est un prospect, un newsletter subscriber est un lecteur du blog/contenu).
+model NewsletterSubscriber {
+  id               String   @id @default(cuid())
+  email            String   @unique
+  source           String   @default("website") // website, footer, blog, lead-magnet
+  /// Token unique pour le lien "one-click unsubscribe" en pied d'email
+  unsubscribeToken String   @unique @default(cuid())
+  /// Faux quand l'utilisateur s'est désabonné (on garde l'historique)
+  subscribed       Boolean  @default(true)
+  /// ID du contact dans la Resend Audience (pour sync remove/update)
+  resendContactId  String?
+  unsubscribedAt   DateTime?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now()) @updatedAt
+
+  @@map("newsletter_subscribers")
+  @@index([subscribed])
+  @@index([source])
+}
+
 model ContactForm {
   id            String        @id @default(cuid())
   requestType   String        // devis, contact, partenariat
