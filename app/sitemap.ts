@@ -259,6 +259,15 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
+  const conversionPages: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/calculateur`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+    },
+  ];
+
   return [
     ...staticPages,
     ...authorPages,
@@ -266,6 +275,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...sectorPages,
     ...comparatorPages,
     ...lexiquePages,
+    ...conversionPages,
     ...servicePages,
     ...techPages,
     ...blogIndex,
