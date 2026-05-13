@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { CityLanding } from "@/components/local/city-landing";
 import { CITIES } from "@/lib/cities";
 
-const city = CITIES.rouen;
+const city = CITIES["le-havre"];
 
 export const metadata: Metadata = {
   title: city.title,
@@ -18,6 +18,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default function AgenceWebRouenPage() {
+export default function AgenceWebLeHavrePage() {
   return <CityLanding city={city} />;
 }

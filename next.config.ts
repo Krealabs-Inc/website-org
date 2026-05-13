@@ -1,7 +1,25 @@
 import type { NextConfig } from "next";
 
+// CSP report-only : observe les violations sans rien casser. À durcir
+// progressivement après quelques semaines d'observation des reports.
+// Permet : Vercel Analytics, Resend API, polices Google, Unsplash images.
+const csp = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://vercel.live",
+  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+  "font-src 'self' https://fonts.gstatic.com data:",
+  "img-src 'self' data: blob: https:",
+  "connect-src 'self' https://api.resend.com https://va.vercel-scripts.com https://vitals.vercel-insights.com https://vercel.live wss:",
+  "frame-src 'self' https://vercel.live",
+  "frame-ancestors 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "upgrade-insecure-requests",
+].join("; ");
+
 const securityHeaders = [
   // Force HTTPS pour 2 ans, includeSubDomains, preload
+  // Pour la liste preload : soumettre sur https://hstspreload.org après mise en prod
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
   // Empêche MIME-sniffing
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -11,6 +29,12 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   // Désactive APIs sensibles non utilisées
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
+  // CSP en mode report-only : aucun blocage, juste signal Google + visibilité
+  // sur les violations. À promouvoir en Content-Security-Policy quand stable.
+  { key: "Content-Security-Policy-Report-Only", value: csp },
+  // Cross-Origin Opener Policy : isole les BrowsingContext (anti-spectre)
+  // same-origin-allow-popups conserve les popups d'auth tiers (Stripe, Google).
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
 ];
 
 const nextConfig: NextConfig = {

@@ -1,0 +1,82 @@
+# Krealabs
+
+> Agence digitale à Rouen (Normandie) — conception et développement de sites internet, applications mobiles et logiciels sur mesure. Spécialiste WordPress, Next.js, React Native, TypeScript. Co-fondée par Maxime Dubois et Romain Clatot.
+
+Krealabs accompagne les PME, startups et grandes entreprises rouennaises et normandes dans leur transformation digitale : refonte de sites, lancement de plateformes SaaS, applications mobiles cross-platform, audit SEO, performance et maintenance.
+
+## À propos
+
+- [À propos de Krealabs](https://krealabs.fr/notre-histoire): Histoire, valeurs, méthode artisanale.
+- [L'équipe](https://krealabs.fr/equipe): Maxime Dubois et Romain Clatot, co-fondateurs développeurs.
+- [Expertise et savoir-faire](https://krealabs.fr/expertise): Domaines techniques et secteurs accompagnés.
+- [Travaux clients (anonymisés)](https://krealabs.fr/clients): Études de cas SaaS, e-commerce, mobile.
+- [FAQ](https://krealabs.fr/faq): Délais, méthode, tarifs, technologies.
+- [Contact](https://krealabs.fr/contact): Formulaire de demande et coordonnées.
+
+## Services
+
+- [Tous les services](https://krealabs.fr/services): Vue d'ensemble.
+- [WordPress sur mesure](https://krealabs.fr/services/wordpress): Spécialité — thèmes custom, ACF, WooCommerce, maintenance.
+- [Développement web custom](https://krealabs.fr/services/developpement-web): Next.js, React, Python, Node.js. Plateformes SaaS et logiciels métier.
+- [Applications mobiles](https://krealabs.fr/services/applications-mobile): React Native iOS + Android.
+- [Design UI/UX](https://krealabs.fr/services/design-uiux): Maquettes Figma, design systems.
+- [Performance & SEO](https://krealabs.fr/services/performance-seo): Audit Core Web Vitals, optimisation, SEO local.
+
+## Pages locales (SEO Normandie)
+
+- [Agence web à Rouen](https://krealabs.fr/agence-web-rouen): Landing principale (siège Krealabs).
+- [Agence web au Havre](https://krealabs.fr/agence-web-le-havre): Le Havre 76600.
+- [Agence web à Caen](https://krealabs.fr/agence-web-caen): Caen 14000.
+- [Agence web à Évreux](https://krealabs.fr/agence-web-evreux): Évreux 27000.
+
+## Technologies
+
+- [Stack technique](https://krealabs.fr/technologies): Vue d'ensemble.
+- [Next.js](https://krealabs.fr/technologies/nextjs)
+- [React](https://krealabs.fr/technologies/react)
+- [React Native](https://krealabs.fr/technologies/react-native)
+- [TypeScript](https://krealabs.fr/technologies/typescript)
+
+## Blog (24 articles)
+
+Cluster WordPress :
+- [Pourquoi WordPress reste le bon choix en 2026](https://krealabs.fr/blog/pourquoi-wordpress-reste-le-bon-choix-2026)
+- [Refonte WordPress sans perdre son SEO](https://krealabs.fr/blog/refonte-wordpress-sans-perdre-seo)
+- [WooCommerce vs Shopify pour PME](https://krealabs.fr/blog/woocommerce-vs-shopify-pme)
+- [Audit SEO WordPress en 12 points](https://krealabs.fr/blog/audit-seo-wordpress-12-points)
+- [Sécurité WordPress : checklist 2026](https://krealabs.fr/blog/securite-wordpress-checklist-2026)
+
+Cluster Web moderne :
+- [Next.js 16 et App Router](https://krealabs.fr/blog/nextjs-16-app-router-2026)
+- [React 19 Server Components](https://krealabs.fr/blog/react-19-server-components-pratique)
+- [TypeScript 5 strict mode](https://krealabs.fr/blog/typescript-5-strict-mode)
+- [Tailwind 4 migration](https://krealabs.fr/blog/tailwind-4-migration-2026)
+- [Prisma 6 + Postgres](https://krealabs.fr/blog/prisma-6-postgres-orm)
+
+Cluster Mobile :
+- [État de React Native 2026](https://krealabs.fr/blog/react-native-2026-etat-des-lieux)
+- [Expo Router file-based](https://krealabs.fr/blog/expo-router-file-based-mobile)
+- [Notifications push Expo + Firebase](https://krealabs.fr/blog/notifications-push-expo-firebase)
+
+Cluster SEO :
+- [Core Web Vitals & INP 2026](https://krealabs.fr/blog/core-web-vitals-2026-inp)
+- [SEO local Rouen pour PME](https://krealabs.fr/blog/seo-local-rouen-guide-pme)
+- [Schema.org pour agences web](https://krealabs.fr/blog/schema-org-agences-web)
+- [Méthode d'audit Lighthouse](https://krealabs.fr/blog/audit-lighthouse-methode-agence)
+
+Cluster Outils :
+- [AI coding (Claude, Cursor) en agence](https://krealabs.fr/blog/ai-coding-claude-cursor-agence)
+- [GitHub Actions pour PME](https://krealabs.fr/blog/github-actions-pme-cicd-zero)
+- [Vercel vs OVH hébergement 2026](https://krealabs.fr/blog/vercel-vs-ovh-hebergement-2026)
+
+Cluster Local Rouen :
+- [Comment choisir son agence web à Rouen en 2026](https://krealabs.fr/blog/choisir-agence-web-rouen-2026)
+- [Combien coûte un site internet à Rouen ?](https://krealabs.fr/blog/prix-site-internet-rouen-2026)
+- [Agence web Rouen ou Paris ?](https://krealabs.fr/blog/agence-digitale-rouen-vs-paris)
+- [PME normandes : 10 leviers de digitalisation 2026](https://krealabs.fr/blog/pme-normandie-digitalisation-2026)
+
+## Mentions légales
+
+- [Mentions légales](https://krealabs.fr/legal/mentions-legales)
+- [Politique de confidentialité](https://krealabs.fr/legal/politique-confidentialite)
+- [Conditions générales de vente (CGV)](https://krealabs.fr/legal/cgv)

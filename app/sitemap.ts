@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 import { blogPosts } from "@/lib/blog-data";
+import { CITIES } from "@/lib/cities";
+import { SECTOR_SLUGS } from "@/lib/sectors";
 
 const baseUrl = "https://krealabs.fr";
 const now = new Date();
@@ -178,5 +180,31 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ],
   }));
 
-  return [...staticPages, ...servicePages, ...techPages, ...blogIndex, ...blogArticles];
+  // Pages locales par ville (Rouen, Le Havre, Caen, Évreux)
+  const cityPages: MetadataRoute.Sitemap = Object.values(CITIES)
+    .filter((c) => c.slug !== "rouen") // Rouen est déjà dans staticPages
+    .map((c) => ({
+      url: `${baseUrl}${c.path}`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+    }));
+
+  // Pages programmatic SEO /agence-web-rouen/[secteur]
+  const sectorPages: MetadataRoute.Sitemap = SECTOR_SLUGS.map((secteur) => ({
+    url: `${baseUrl}/agence-web-rouen/${secteur}`,
+    lastModified: now,
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [
+    ...staticPages,
+    ...cityPages,
+    ...sectorPages,
+    ...servicePages,
+    ...techPages,
+    ...blogIndex,
+    ...blogArticles,
+  ];
 }
