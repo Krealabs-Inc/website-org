@@ -75,21 +75,21 @@ export function Footer() {
   return (
     <div
       ref={wrapperRef}
-      className="relative h-screen min-h-[760px] w-full"
+      className="relative w-full md:h-screen md:min-h-[760px]"
       style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
     >
-      <footer className="fixed bottom-0 left-0 right-0 flex h-screen min-h-[760px] w-full flex-col overflow-hidden border-t border-[var(--border)] bg-[var(--background)]">
-        {/* Aurora breathing glow */}
+      <footer className="relative md:fixed md:bottom-0 md:left-0 md:right-0 flex w-full flex-col overflow-hidden border-t border-[var(--border)] bg-[var(--background)] md:h-screen md:min-h-[760px]">
+        {/* Aurora breathing glow — desktop only (perf mobile) */}
         <div
           aria-hidden
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[60vh] w-[80vw] rounded-full blur-[100px] animate-footer-breathe"
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[60vh] w-[80vw] rounded-full blur-[100px] hidden md:block animate-footer-breathe"
           style={{
             background:
               "radial-gradient(circle at 50% 50%, color-mix(in oklch, var(--accent) 18%, transparent) 0%, color-mix(in oklch, var(--accent) 6%, transparent) 40%, transparent 70%)",
           }}
         />
 
-        {/* Grid mask */}
+        {/* Grid mask — visible mobile mais plus discret */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 z-0"
@@ -104,10 +104,12 @@ export function Footer() {
           }}
         />
 
-        {/* Giant wordmark — parallax + stroke + gradient clip */}
+        {/* Giant wordmark — desktop only (parallax + stroke + gradient clip).
+            Caché sur mobile : pas de curtain reveal donc l'effet n'a pas
+            de sens, et le 26vw écrasait/masquait le contenu lisible. */}
         <motion.div
           aria-hidden
-          className="pointer-events-none absolute -bottom-[6vh] left-1/2 z-0 -translate-x-1/2 select-none whitespace-nowrap font-black tracking-[-0.05em]"
+          className="pointer-events-none absolute -bottom-[6vh] left-1/2 z-0 -translate-x-1/2 select-none whitespace-nowrap font-black tracking-[-0.05em] hidden md:block"
           style={{
             y: wordmarkY,
             scale: wordmarkScale,
@@ -130,15 +132,15 @@ export function Footer() {
         <FooterSparkles />
 
         {/* Newsletter signup ribbon */}
-        <Container className="relative z-10 pt-16 lg:pt-24">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-16 border-b border-[var(--border)]">
+        <Container className="relative z-10 pt-10 md:pt-16 lg:pt-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center pb-10 md:pb-16 border-b border-[var(--border)]">
             <div className="lg:col-span-5">
               <Eyebrow dot className="mb-4">Newsletter</Eyebrow>
-              <h3 className="text-h2">
+              <h3 className="text-h3 md:text-h2">
                 1 mail par mois,{" "}
                 <em>zéro spam</em>.
               </h3>
-              <p className="text-body text-[var(--muted-foreground)] mt-4 max-w-md">
+              <p className="text-body-sm md:text-body text-[var(--muted-foreground)] mt-4 max-w-md">
                 Articles, retours d&apos;expérience, études de cas chiffrées
                 sur les projets Krealabs. Désinscription en un clic.
               </p>
@@ -155,7 +157,7 @@ export function Footer() {
 
         {/* Main content — brand + link columns */}
         <Container className="relative z-10 flex flex-1 flex-col justify-end">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 py-16 lg:py-20">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-12 lg:gap-8 py-10 md:py-16 lg:py-20">
             {/* Brand block */}
             <div className="lg:col-span-5 space-y-8">
               <Link
@@ -220,7 +222,7 @@ export function Footer() {
             </div>
 
             {/* Link columns */}
-            <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-10">
+            <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-10">
               <div className="space-y-4">
                 <Eyebrow>Services</Eyebrow>
                 <ul className="space-y-2.5">
@@ -275,11 +277,11 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="relative z-10 border-t border-[var(--border)]">
           <Container>
-            <div className="py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div className="py-5 md:py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-4">
               <p className="text-caption">
                 © {year} Krealabs · Tous droits réservés · Rouen, France
               </p>
-              <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
+              <ul className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2">
                 {nav.legal.map((l) => (
                   <li key={l.name}>
                     <Link
