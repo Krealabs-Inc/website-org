@@ -1,4 +1,13 @@
 import type { NextConfig } from "next";
+import bundleAnalyzer from "@next/bundle-analyzer";
+
+// Bundle analyzer : activé via `ANALYZE=true npm run build`.
+// Génère .next/analyze/client.html + .next/analyze/server.html
+// pour visualiser le poids des dépendances et identifier les
+// candidats à du code-splitting / lazy-load.
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === "true",
+});
 
 // CSP report-only : observe les violations sans rien casser. À durcir
 // progressivement après quelques semaines d'observation des reports.
@@ -115,4 +124,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBundleAnalyzer(nextConfig);
