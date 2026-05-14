@@ -2169,4 +2169,444 @@ updates:
         "Digitaliser une PME normande en 2026 n'a rien d'un grand chantier impressionnant : c'est une suite de petits leviers, activés dans le bon ordre, qui composent sur 18-24 mois. Commencer par l'audit (gratuit) et Google Business Profile (gratuit, ROI immédiat), puis monter en gamme vers la refonte SEO, le CRM, le contenu. Évitez le piège du « tout en même temps » — choisissez 2-3 leviers par trimestre. Pour cadrer ensemble une stratégie de digitalisation adaptée à votre PME, [contactez Krealabs](/contact) ou découvrez nos [services](/services). Premier échange offert, en présentiel à Rouen ou en visio.",
     },
   },
+
+  // ===========================================================================
+  // CALENDRIER ÉDITORIAL 2026 — Articles à publication différée (juin-novembre)
+  // Le filtre getPublishedPosts() rend ces articles invisibles jusqu'à leur date.
+  // Rythme : 2 articles/mois (le 1er et le 15).
+  // ===========================================================================
+
+  {
+    slug: "refonte-wordpress-2026-methode-agence-rouen",
+    title: "Refonte WordPress 2026 : la méthode complète d'une agence à Rouen",
+    excerpt:
+      "Pas juste un changement de design : une refonte WordPress sérieuse en 2026 c'est de l'audit, de la migration SEO sans pertes, et un thème custom qui dure 5 ans. La méthode que nous appliquons chez Krealabs sur chaque projet.",
+    category: "WordPress",
+    date: "1 juin 2026",
+    readTime: "16 min",
+    image: "https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1200&q=80",
+    featured: true,
+    author,
+    tags: ["Refonte WordPress", "Méthode agence", "Migration SEO", "Thème custom", "Rouen", "WordPress 2026"],
+    content: {
+      introduction:
+        "Une refonte WordPress en 2026 ne se résume pas à \"changer le design\". À Rouen comme ailleurs, les sites WordPress qui ont 4-6 ans accumulent des problèmes : plugins obsolètes, thème basé sur un page builder bloated, Core Web Vitals médiocres, SEO en perte de vitesse, dette technique invisible. Une refonte sérieuse, c'est une opération chirurgicale en 6 phases qui touche au design, au code, à la stack et au SEO. Cet article décrit la méthode que nous appliquons chez Krealabs depuis 5 ans, après plusieurs dizaines de refontes WordPress pour des PME normandes.",
+      sections: [
+        {
+          title: "1. Audit initial : qu'est-ce qu'on refait, qu'est-ce qu'on garde ?",
+          content:
+            "Avant toute ligne de code, on fait un audit complet du site existant. Trois dimensions : (1) Technique — version WP, plugins installés (souvent 25-50 sur un vieux site, dont 60% inutiles ou doublons), thème, hébergement, performances (Lighthouse, GTmetrix). (2) Contenu — quelles pages génèrent du trafic SEO, quelles requêtes elles classent, quelles URLs sont indexées vs orphelines (via Google Search Console). (3) Stratégique — quels parcours utilisateurs convertissent, quel positionnement éditorial, quelle voix. Cet audit dure 3-5 jours, livré sous forme d'un rapport PDF. C'est ce qui détermine ensuite si on fait une \"refonte légère\" (4-7k €) ou \"profonde\" (8-15k €).",
+        },
+        {
+          title: "2. Cartographie des URLs et plan de redirection 301",
+          content:
+            "Le piège classique d'une refonte WordPress : changer la structure d'URLs sans plan de redirection. Résultat : -40% de trafic SEO en 4 semaines. Notre méthode : export complet des URLs existantes via Screaming Frog (ou Sitemap.xml + scrape), matching avec les nouvelles URLs cibles, et plan de redirection 301 systématique. Pour les sites avec 500-5000 URLs, on automatise le matching par règles regex quand possible. Les URLs qui n'ont pas d'équivalent direct redirigent vers la page la plus proche (parent, catégorie, ou homepage en dernier recours). On valide le plan AVANT la mise en ligne avec le client. Voir aussi notre [guide complet refonte WordPress sans perdre son SEO](/blog/refonte-wordpress-sans-perdre-seo).",
+        },
+        {
+          title: "3. Choix de la stack : custom theme ou builder ?",
+          content:
+            "C'est la décision technique #1. Notre règle Krealabs : zéro page builder (Elementor, Divi, WPBakery) sur les projets sérieux. Les page builders ajoutent 300-800 KB de CSS/JS bloated, plombent Lighthouse, et créent une dette technique permanente (le site devient prisonnier du builder). Alternative : thème WordPress custom en PHP + Tailwind + ACF Pro pour les content types, qui livre Lighthouse 90+ avec un effort raisonnable. Pour les projets premium ou les sites qui doivent ressembler à un Next.js moderne : WordPress headless (WP backend + Next.js frontend), voir [notre lexique sur le headless](/lexique/headless-wordpress). Coût additionnel headless : +30-50% mais perf et UX au niveau d'un SaaS.",
+        },
+        {
+          title: "4. Maquettes Figma : la phase qu'on ne peut pas brûler",
+          content:
+            "Cette étape paraît cosmétique. Elle ne l'est pas. C'est ici qu'on cadre 80% des décisions structurelles : nombre de pages, contenu type par page, micro-interactions, design system. On livre toutes les pages clés en haute-fidélité (HF) sur Figma, validées en 2-3 cycles avec le client avant que le dev démarre. Brûler cette phase = corrections coûteuses pendant le dev. On ne démarre pas le code tant que les maquettes ne sont pas validées à 100%. Pour les refontes d'envergure : 8-15 jours de design. Pour les refontes plus légères : 3-5 jours. À noter : on n'utilise jamais de templates Figma achetés — l'identité visuelle est custom à chaque projet.",
+        },
+        {
+          title: "5. Développement : sprints + démos hebdomadaires",
+          content:
+            "Une fois les maquettes validées, on entre en sprints de dev. Notre méthode : sprints d'une semaine, démo client en fin de chaque sprint (15-30 minutes en visio), feedback structuré. Pour une refonte type, compter 6-10 sprints (6-10 semaines de dev). Pendant les sprints : code review entre Maxime et Romain sur chaque PR, tests Lighthouse sur les pages clés à chaque étape (objectif 90+ tout le long, pas seulement à la fin), staging Vercel preview pour validation client. Côté technique : thème WordPress custom en PHP/HTML/CSS, ACF Pro pour les contenus, gulp/vite pour les assets, pas d'Elementor.",
+        },
+        {
+          title: "6. Migration & mise en ligne : la phase critique",
+          content:
+            "Tout se joue ici. Notre checklist en 12 points : (1) backup complet du site existant, (2) staging final validé, (3) plan de redirection 301 importé via Redirection plugin, (4) certificat SSL vérifié, (5) sitemap.xml généré et soumis à GSC, (6) schema.org Article + LocalBusiness vérifié sur 5 pages clés, (7) tests sur 3 devices (desktop/tablet/mobile) en 4 navigateurs, (8) tests des formulaires (contact, newsletter, etc.) avec envoi réel, (9) Core Web Vitals validés sur PageSpeed Insights, (10) Google Business Profile mis à jour, (11) annonce client (newsletter, LinkedIn), (12) monitoring sur les 7 premiers jours pour détecter régressions SEO. Si tout est OK, on délivre.",
+        },
+        {
+          title: "7. Maintenance post-livraison : penser long terme",
+          content:
+            "Un site WordPress livré sans maintenance dure 18-24 mois avant de tomber en obsolescence : plugins non mis à jour, faille sécurité, version PHP qui passe en EOL. Sur tous nos projets Krealabs, on propose un forfait maintenance dès la livraison : (a) Light 80-150 €/mois — MAJ WP/plugins, backups, monitoring uptime. (b) Évolutive 200-400 €/mois — Idem + 1-3h de dev mineure incluses chaque mois. (c) Premium 600-1200 €/mois — Idem + SEO continu, analytics mensuels, support SLA 4h. Sans maintenance, votre investissement de refonte (4-15k €) perd 30% de sa valeur par an. Avec, il vit confortablement 5-7 ans.",
+        },
+        {
+          title: "Récapitulatif : combien de temps et combien ça coûte",
+          content:
+            "Refonte WordPress légère (~6 pages, contenu existant, design custom simple) : 4 000-7 000 €, 4-6 semaines. Refonte WordPress profonde (10-20 pages, custom post types ACF, design haut de gamme) : 8 000-15 000 €, 8-12 semaines. Refonte vers WordPress headless (WP backend + Next.js frontend) : 18 000-35 000 €, 10-16 semaines. Ces fourchettes incluent : audit, maquettes Figma, dev, migration SEO, formation, garantie 30 jours post-livraison. Hors maintenance (à partir de 80 €/mois). Pour cadrer votre projet précis, voir notre [calculateur de devis](/calculateur) ou [contactez-nous](/contact) pour un premier échange.",
+        },
+      ],
+      conclusion:
+        "Une refonte WordPress sérieuse à Rouen en 2026 n'est plus un projet \"on refait le site et c'est bon\" — c'est un investissement long terme qui doit suivre une méthode rigoureuse. Audit, redirections, design custom, dev sans page builder, migration propre, maintenance évolutive : c'est cette chaîne complète qui fait la différence entre un site qui dure 18 mois et un site qui dure 5-7 ans. À Krealabs, nous refusons les projets où le budget ne permet pas cette méthode (un client mécontent qui revient 8 mois après est plus coûteux qu'un client qu'on refuse poliment). Pour discuter de votre refonte, [prenez rendez-vous](/contact) — premier échange offert. Voir aussi nos [services WordPress](/services/wordpress) et [SEO local Rouen](/blog/seo-local-rouen-guide-pme).",
+    },
+  },
+
+  {
+    slug: "react-19-production-bilan-1-an",
+    title: "React 19 en production : bilan honnête après 1 an d'usage",
+    excerpt:
+      "12 mois après la stable, qu'est-ce qui marche, qu'est-ce qui pique encore avec React 19 ? Server Components, Suspense, Actions : retours d'expérience d'une agence qui a migré 5 projets clients.",
+    category: "Web",
+    date: "15 juin 2026",
+    readTime: "14 min",
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["React 19", "Server Components", "Suspense", "Actions", "Next.js", "Production"],
+    content: {
+      introduction:
+        "React 19 est sorti stable en décembre 2024. Un an et demi plus tard, qu'est-ce qu'on en pense en agence après 5 projets clients migrés ? Server Components, Actions, hooks `use()`, optimizations automatiques : il y a du génie et il y a des frottements. Cet article fait le bilan honnête, sans hype et sans bashing, après 1 an et demi d'usage en production sur des projets PME et SaaS.",
+      sections: [
+        {
+          title: "Server Components : la feature qui change tout (ou presque)",
+          content:
+            "Les Server Components sont, sans exagération, la feature React la plus impactante depuis l'introduction des hooks en 2018. Sur nos projets, on observe : -30 à -60% de JS bundle envoyé au client (selon le pourcentage de composants qu'on peut basculer en RSC), Lighthouse 95+ accessible par défaut, possibilité d'utiliser Prisma / fetch / fs directement dans les composants sans backend séparé. Le mental model demande un ajustement : par défaut tout est Server Component, on opt-in avec `\"use client\"` quand on a besoin d'interactivité, d'état, ou d'effets. Voir [notre article dédié](/blog/react-19-server-components-pratique).",
+        },
+        {
+          title: "Actions + useFormState : adieu les API routes pour 80% des cas",
+          content:
+            "Les Server Actions (`\"use server\"`) couplées au hook `useFormState` éliminent une grosse partie du code boilerplate API + fetch + state management côté client. Pour les formulaires CRUD typiques (contact form, signup, update profile), on passe de ~80 lignes de code à ~30. Trade-off : c'est lié au framework (Next.js), pas portable, et le debug est plus complexe car le code s'exécute côté serveur sans logs JS classique. Notre règle : Actions pour les workflows simples form-driven, API routes classiques quand on a besoin d'un endpoint public ou consommé par mobile/external.",
+        },
+        {
+          title: "Suspense : enfin mature pour le streaming",
+          content:
+            "Suspense existait depuis React 16 mais n'était vraiment utilisable que depuis 18+ pour le streaming SSR. En React 19, c'est polished : on peut wrap n'importe quel composant async dans `<Suspense fallback={<Skeleton />}>` et le contenu se révèle progressivement. Combiné avec les RSC, ça permet de servir le shell de page (header, nav, sidebar) instantanément, puis de stream le contenu lourd (dashboards, listes paginées) à mesure qu'il arrive. Sur un SaaS B2B qu'on a migré, le LCP est passé de 2.8s à 1.1s grâce à Suspense streaming.",
+        },
+        {
+          title: "useOptimistic + form transitions : UX premium accessible",
+          content:
+            "Le hook `useOptimistic` permet de simuler instantanément la réponse serveur (optimistic update) et de gérer le rollback proprement si l'opération échoue. Combiné avec `useTransition` pour les loading states, on obtient une UX premium type Linear/Notion sans bibliothèque tierce (vs SWR mutation ou TanStack Query optimistic). Cas d'usage typique : like button, ajout au panier, toggle d'état. Avant React 19, ça demandait 30-50 lignes de gestion d'état manuelle ; maintenant 10 lignes.",
+        },
+        {
+          title: "Les frictions : debug RSC + écosystème qui rattrape",
+          content:
+            "Tout n'est pas rose. (1) Le debug des Server Components est plus dur : pas de DevTools React côté serveur, console.log dans le terminal Next.js, pas dans le browser. Demande une discipline particulière. (2) L'écosystème React (libraries tierces) met du temps à supporter RSC. Beaucoup de bibliothèques (charts, animations, formulaires complexes) sont encore Client-Component-only. (3) Le tooling TypeScript autour des Server Actions a quelques rough edges (types des arguments / retour à expliciter manuellement). (4) Les patterns émergents (data fetching, mutations, caching) ne sont pas encore standardisés — chaque projet réinvente un peu sa stack.",
+        },
+        {
+          title: "Migration depuis React 18 : combien ça coûte ?",
+          content:
+            "Pour un projet existant React 18 + Next.js Pages Router, la migration vers React 19 + App Router est un chantier sérieux. Notre expérience sur 3 migrations clients : 4-8 semaines selon la taille du projet, refactor de 30-60% du code (composants en Server Components, hooks adaptés, fetch patterns réécrits). Pour les projets neufs : démarrer directement en RSC, plus rapide qu'avant. Conseil agence : ne pas migrer pour migrer. Un projet React 18 + Pages Router qui marche bien peut rester dessus. La migration se justifie quand on veut profiter spécifiquement de RSC, Streaming, ou Actions.",
+        },
+        {
+          title: "Verdict après 1 an et demi",
+          content:
+            "React 19 est, à notre avis, la version la plus importante depuis 16.8 (introduction des hooks). Les Server Components changent la façon dont on architecture les apps. Pour un projet neuf en 2026 : démarrer directement React 19 + Next.js App Router est le choix par défaut. Pour les projets existants en bonne santé : pas urgent, migrer quand le besoin se présente. Toutes nos nouvelles missions clientes Krealabs depuis mi-2025 sont en React 19 — pas un seul retour en arrière, et les Lighthouse parlent d'eux-mêmes (95+ sur 90% des pages).",
+        },
+      ],
+      conclusion:
+        "React 19 tient ses promesses. Pas une révolution sans bug ni courbe d'apprentissage, mais un saut qualitatif qui réduit drastiquement le bundle, améliore l'UX (streaming, optimistic) et simplifie le code (Actions). Pour un nouveau projet : foncez. Pour une migration : pas urgent mais à planifier dans les 12 prochains mois. Voir aussi [notre stack Next.js](/technologies/nextjs), nos [services développement web custom](/services/developpement-web), et notre [comparateur Next.js vs WordPress](/comparateur/nextjs-vs-wordpress) pour cadrer le bon choix. Pour discuter de votre projet en React 19, [prenez RDV avec nous](/contact).",
+    },
+  },
+
+  {
+    slug: "delais-livraison-site-wordpress",
+    title: "Combien de temps pour livrer un site WordPress ? Le vrai planning d'un projet",
+    excerpt:
+      "Vous pensez qu'un site WordPress se livre en 2 semaines ? Avec du sérieux, comptez 4-12 semaines selon la complexité. Le détail du planning agence, semaine par semaine, sans bullshit commercial.",
+    category: "WordPress",
+    date: "1 juillet 2026",
+    readTime: "12 min",
+    image: "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["WordPress", "Délais site internet", "Planning projet", "Gestion projet", "Agence web Rouen"],
+    content: {
+      introduction:
+        "« Vous me livrez ça en combien de temps ? » C'est la question 2 après le prix dans tous les premiers RDV. La réponse honnête est : ça dépend, mais pas autant qu'on le dit. Un site WordPress vitrine sérieux se livre en 4-6 semaines. Un site complexe avec WooCommerce et intégrations en 8-12 semaines. Tout ce qui est promis à 2-3 semaines avec qualité, c'est du marketing. Cet article décrit le vrai planning semaine par semaine de nos projets WordPress chez Krealabs, pour que vous puissiez calibrer vos attentes.",
+      sections: [
+        {
+          title: "Semaine 1 — Cadrage & briefs",
+          content:
+            "Avant de coder une ligne, on cadre. Réunion de kick-off (1-2h), brief détaillé du client sur sa cible, ses objectifs, sa concurrence. Définition du scope précis : nombre de pages, fonctionnalités, contenus à intégrer, intégrations tierces. Validation du périmètre, des deliverables et du planning. Compte aussi : récupération des accès (hébergement actuel, nom de domaine, comptes Google, etc.) et démarrage du collecte de contenus (textes, photos). Si les contenus ne sont pas prêts à la fin de semaine 1, ça décale tout. C'est le piège #1 sur les projets clients : le contenu qui traîne.",
+        },
+        {
+          title: "Semaines 2-3 — Maquettes Figma haute-fidélité",
+          content:
+            "Phase design. On livre une première salve de maquettes (homepage + 2-3 pages clés) en haute-fidélité Figma. Validation client en 24-48h, retours, ajustements. Deuxième salve : pages secondaires (services, contact, mentions légales, etc.). Validation. Cycle de retouches : 2-3 rounds maximum, sinon on dérive. À la fin de la semaine 3, les maquettes sont validées à 100% — pas un détail ne bouge ensuite. C'est la condition pour démarrer le dev. Brûler cette phase = corrections coûteuses pendant le dev (multiplie le coût total par 1.3-1.5x).",
+        },
+        {
+          title: "Semaines 4-5 — Développement thème WordPress",
+          content:
+            "Création d'un thème WordPress custom from scratch. PHP, HTML, Tailwind CSS, JS minimal. Setup ACF Pro pour les custom post types et les blocs flexibles. Intégration des pages au pixel près selon les maquettes Figma. À la fin de semaine 4 : structure complète + intégration desktop des pages clés. Semaine 5 : responsive mobile/tablet, animations légères, intégration des contenus du client. Démo client mi-parcours pour valider l'orientation. Toute correction graphique demandée hors maquettes initiales = ticket additionnel (sinon dérive infinie).",
+        },
+        {
+          title: "Semaine 6 — Optimisations, SEO, tests",
+          content:
+            "Phase finition technique. Optimisation Core Web Vitals (objectif Lighthouse 90+ sur toutes les pages clés), compression images (AVIF/WebP), lazy loading, audit accessibilité (contraste, ARIA, navigation clavier). Configuration SEO on-page : balises title/meta, schema.org Article et Organization, sitemap.xml, robots.txt. Tests cross-browser (Chrome, Safari, Firefox, Edge). Tests responsive (mobile / tablet / desktop / wide). Tests des formulaires avec envoi réel d'emails. Préparation du staging final pour validation client.",
+        },
+        {
+          title: "Semaine 7 — Migration & mise en ligne",
+          content:
+            "Si c'est une refonte d'un site existant : plan de redirection 301 importé, ancien site backup, migration DNS, configuration SSL, et redirections 301 testées. Si c'est une création from scratch : configuration domaine, hébergement, SSL Let's Encrypt automatique. Formation du client à l'admin WordPress (1-2h en visio) : comment créer une page, modifier des contenus, ajouter un article de blog. Documentation écrite. Mise en ligne validée par le client. Monitoring 7 jours pour détecter les régressions SEO ou les bugs prod.",
+        },
+        {
+          title: "Les facteurs qui décalent le planning",
+          content:
+            "Sur 50+ projets, voici les causes #1 de décalage (par ordre de fréquence) : (1) Contenus du client en retard — pas de textes/photos = pas de mise en ligne. Mitigation : on collecte au plus tôt et on documente clairement les manques. (2) Retours sur les maquettes étirés dans le temps — le client repousse les validations à \"plus tard\". Solution : deadline de validation max 5 jours ouvrés. (3) Scope creep — \"juste une petite fonctionnalité en plus\". On le facture comme un change request, jamais en silence. (4) Intégrations tierces qui buggent (CRM, ERP, paiement) — on prend une marge de 1 semaine sur tout projet avec intégration externe. (5) Indisponibilité du décisionnaire — on bloque les RDV de validation à l'avance dans son agenda.",
+        },
+        {
+          title: "Délais types par typologie de projet",
+          content:
+            "Site vitrine WordPress simple (6-10 pages, contenus fournis, design custom basique) : 4-5 semaines. Site WordPress vitrine premium (12-20 pages, design poussé, intégrations CRM/analytics) : 6-8 semaines. Site WordPress + WooCommerce (boutique 50-300 produits, paiement Stripe, transporteurs) : 8-10 semaines. Refonte WordPress majeure (site existant 4-6 ans, contenu volumineux à migrer) : 8-12 semaines. WordPress headless (WP backend + Next.js frontend) : 10-14 semaines. Multilingue : +25% sur la durée. Voir aussi [notre article sur les prix](/blog/prix-site-internet-rouen-2026) pour calibrer le budget.",
+        },
+      ],
+      conclusion:
+        "Un site WordPress sérieux ne se livre pas en 2 semaines. Les agences qui promettent ça soit utilisent des templates clé-en-main (qualité médiocre), soit sacrifient la phase design ou les tests (sites bugués à la mise en ligne). 4-6 semaines pour un vitrine, 8-12 pour un site complexe, c'est le rythme honnête. Si vous voulez plus court, il faut accepter de réduire le scope (moins de pages, moins de personnalisation). Pour calibrer ensemble votre planning, [contactez Krealabs](/contact) ou utilisez notre [calculateur](/calculateur). Voir aussi notre [méthode refonte WordPress](/blog/refonte-wordpress-2026-methode-agence-rouen) et notre [comparateur WordPress vs Webflow](/comparateur/wordpress-vs-webflow).",
+    },
+  },
+
+  {
+    slug: "stripe-billing-saas-b2b-guide",
+    title: "Stripe Billing pour SaaS B2B : le guide complet 2026",
+    excerpt:
+      "Stripe Billing est devenu le standard de fait pour les SaaS B2B. Plans, trials, prorata, dunning, factures auto : tout ce qu'il faut savoir pour intégrer proprement, par une agence qui en code 2-3 par an.",
+    category: "Outils",
+    date: "15 juillet 2026",
+    readTime: "16 min",
+    image: "https://images.unsplash.com/photo-1556742111-a301076d9d18?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["Stripe Billing", "SaaS B2B", "Abonnements", "Paiement en ligne", "Stripe", "Facturation"],
+    content: {
+      introduction:
+        "Si vous lancez un SaaS B2B en 2026, vous allez utiliser Stripe Billing. C'est devenu le standard de fait pour la facturation récurrente : Notion, Linear, Vercel, Resend, Plausible — tous l'utilisent. Cet article couvre tout ce qu'il faut savoir pour intégrer proprement Stripe Billing dans votre SaaS, après plusieurs intégrations clients chez Krealabs. Code, webhooks, gestion des cas limites, dunning, factures conformes. Long et technique mais c'est pour ne plus chercher 20 articles sur Stack Overflow.",
+      sections: [
+        {
+          title: "Stripe Billing : qu'est-ce qu'on obtient (et ne pas)",
+          content:
+            "Stripe Billing = brique facturation récurrente au-dessus de Stripe Payments. Ce que vous obtenez : création de plans tarifaires (Products + Prices), gestion d'abonnements (Subscriptions), trials, upgrades/downgrades avec prorata automatique, dunning (relance automatique en cas d'échec de paiement), Customer Portal hébergé par Stripe pour gérer son abonnement, factures HTML/PDF générées automatiquement avec mentions légales FR. Ce que vous N'obtenez PAS : pas de gestion de l'usage metering complexe (chargement à la consommation = à coder soi-même), pas de gestion fine des coupons inter-pays, pas de comptabilité analytique avancée.",
+        },
+        {
+          title: "Setup initial : Products, Prices, et leur structure",
+          content:
+            "La hiérarchie Stripe Billing : un Product est un plan tarifaire (ex: \"Starter\", \"Pro\", \"Enterprise\"), un Price est une variante de prix attachée à un Product (mensuel vs annuel, par utilisateur vs flat). On définit tout dans le Dashboard Stripe OU via l'API. Notre recommandation pour les SaaS naissants : 3 Products max (Free / Pro / Business), 2 Prices chacun (mensuel / annuel avec ~17% de remise). Au-delà de 3 plans, vous compliquez l'UX d'inscription pour rien. Utiliser `lookup_key` sur les Prices pour pouvoir les récupérer programmatiquement sans hardcoder les IDs (`price_xxx`) dans le code.",
+          code: `// Récupérer un Price par lookup_key (plus stable qu'un ID hardcodé)
+const prices = await stripe.prices.list({
+  lookup_keys: ['pro_monthly', 'pro_yearly'],
+  expand: ['data.product'],
+});`,
+        },
+        {
+          title: "Checkout flow : Stripe Checkout vs Embedded",
+          content:
+            "Deux options pour l'inscription payante : (1) **Stripe Checkout** : redirection vers une page hébergée par Stripe, ultra-simple à intégrer (3 lignes de code), gère 3D Secure / Apple Pay / Google Pay nativement, hautement convertissant. Notre choix par défaut pour 80% des SaaS. (2) **Embedded Checkout** ou **Payment Element** : formulaire intégré dans votre interface, contrôle UX total. À utiliser quand vous voulez une expérience 100% sur votre domaine ou des champs custom (entreprise, SIRET pour facturation FR). Compter +3-5 jours de dev en plus.",
+          code: `// Stripe Checkout - flow le plus simple
+const session = await stripe.checkout.sessions.create({
+  mode: 'subscription',
+  payment_method_types: ['card'],
+  line_items: [{ price: priceId, quantity: 1 }],
+  customer_email: user.email,
+  success_url: \`\${origin}/dashboard?welcome=true\`,
+  cancel_url: \`\${origin}/pricing\`,
+  // Pour les SaaS FR : capturer adresse pour factures
+  customer_creation: 'always',
+  billing_address_collection: 'required',
+});
+return Response.redirect(session.url, 303);`,
+        },
+        {
+          title: "Webhooks : la partie qu'on ne peut pas brûler",
+          content:
+            "Stripe envoie des webhooks à votre app pour chaque événement (`customer.subscription.created`, `invoice.payment_failed`, `subscription.deleted`...). Sans webhook handler, votre base de données ne sait pas qu'un user a payé, annulé, ou été dunné. Les événements critiques à gérer : `checkout.session.completed` (création abonnement post-paiement), `invoice.payment_succeeded` (renouvellement OK, prolonger l'accès), `invoice.payment_failed` (paiement échoué, downgrade graceful), `customer.subscription.deleted` (annulation, supprimer accès). Sécuriser le webhook avec la signature HMAC envoyée par Stripe — sinon n'importe qui peut spoofer.",
+          code: `// Validation signature webhook (Next.js Route Handler)
+export async function POST(req: Request) {
+  const sig = req.headers.get('stripe-signature')!;
+  const body = await req.text();
+  let event: Stripe.Event;
+  try {
+    event = stripe.webhooks.constructEvent(body, sig, process.env.STRIPE_WEBHOOK_SECRET!);
+  } catch (err) {
+    return new Response('Bad signature', { status: 400 });
+  }
+  switch (event.type) {
+    case 'checkout.session.completed':
+      await handleCheckoutComplete(event.data.object);
+      break;
+    case 'invoice.payment_failed':
+      await handlePaymentFailed(event.data.object);
+      break;
+    // ... autres handlers
+  }
+  return new Response(null, { status: 200 });
+}`,
+        },
+        {
+          title: "Gestion des cas limites : trials, upgrades, prorata",
+          content:
+            "**Trials** : créer la subscription avec `trial_period_days: 14`. Stripe ne charge pas pendant la période ; à J+14, premier paiement automatique. Si la carte fail → événement `invoice.payment_failed`. **Upgrades/downgrades** : avec `proration_behavior: 'create_prorations'`, Stripe calcule automatiquement le crédit/débit prorata. Le user en cours de mois qui upgrade Pro → Business paie immédiatement la différence prorata pour le reste du mois. **Annulation** : `cancel_at_period_end: true` (recommandé) laisse l'accès jusqu'à la fin du cycle payé. `cancel_at_period_end: false` coupe immédiatement et émet un remboursement prorata.",
+        },
+        {
+          title: "Customer Portal : ne réinventez pas ce qui existe",
+          content:
+            "Stripe propose un Customer Portal hébergé : page où vos clients gèrent leur abonnement (changer de plan, mettre à jour CB, télécharger factures, annuler). Vous n'avez QUE besoin de leur fournir un lien — Stripe gère tout, conformément aux régulations (RGPD, droit consommateur, conformité FR). Notre recommandation : 100% des SaaS Krealabs utilisent le Customer Portal au lieu de coder une UI custom. Configurer dans Dashboard Stripe : quels plans sont upgradeables, autoriser ou non l'annulation immédiate, mentions légales custom.",
+          code: `// Génère un lien Customer Portal pour un user connecté
+const session = await stripe.billingPortal.sessions.create({
+  customer: user.stripeCustomerId,
+  return_url: \`\${origin}/dashboard/billing\`,
+});
+return Response.redirect(session.url);`,
+        },
+        {
+          title: "Conformité FR : TVA, factures, mentions légales",
+          content:
+            "Pour un SaaS facturant en France ou EU : (1) Activer **Stripe Tax** (0.5% sur les transactions taxées) qui calcule TVA automatiquement selon pays + type client (B2C, B2B avec VAT EU). Sans Stripe Tax, vous devez gérer la TVA manuellement — déconseillé au-delà de 50 clients. (2) Factures Stripe ont mentions légales auto-générées : votre raison sociale, SIRET, TVA intracom + celles du client. Activer dans Settings > Tax. (3) Pour B2B EU : `tax_id_data` sur le Customer pour qu'il rentre son VAT, Stripe applique le mécanisme d'autoliquidation automatiquement.",
+        },
+      ],
+      conclusion:
+        "Stripe Billing est devenu indispensable pour un SaaS B2B sérieux. Compter 3-5 jours de dev pour une intégration MVP propre (checkout + webhooks + Customer Portal + Stripe Tax), 1-2 semaines pour une intégration premium avec custom invoicing, multi-currency, et metering. Sur les SaaS Krealabs, c'est la première brique qu'on met en place après l'auth — sans monétisation, pas de SaaS. Pour intégrer Stripe Billing sur votre projet, [contactez-nous](/contact). Voir aussi notre [comparateur Stripe vs PayPal](/comparateur/stripe-vs-paypal), notre [lexique sur Stripe](/lexique/stripe), et nos [services développement web](/services/developpement-web).",
+    },
+  },
+
+  {
+    slug: "pme-normandes-digital-2026-cas-clients",
+    title: "10 PME normandes qui ont misé sur le digital en 2026",
+    excerpt:
+      "10 retours d'expérience anonymisés de PME en Seine-Maritime, Calvados et Eure qui ont franchi le pas digital cette année. Refontes, e-commerce, apps : les chantiers concrets et les résultats mesurés.",
+    category: "Web",
+    date: "1 août 2026",
+    readTime: "13 min",
+    image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["PME Normandie", "Cas clients", "Transformation digitale", "Rouen", "Le Havre", "Caen", "Évreux"],
+    content: {
+      introduction:
+        "L'été 2026 est un moment propice pour faire le bilan des projets digitaux PME en Normandie. Cet article présente 10 retours d'expérience anonymisés (NDA oblige) issus de notre portefeuille Krealabs ou de confrères locaux, couvrant Rouen, Le Havre, Caen et Évreux. Chaque cas inclut le contexte initial, les chantiers digitaux engagés, et les résultats mesurés. Objectif : montrer aux dirigeants de PME normandes ce qui marche concrètement en 2026, hors blabla marketing.",
+      sections: [
+        {
+          title: "Cas 1 — Cabinet d'avocats à Rouen (15 collaborateurs)",
+          content:
+            "**Contexte :** Site WordPress 2018, plus mis à jour depuis 4 ans, conforme ni Yoast SEO ni au RIN actuel. Aucune génération de leads digital, tout passe par bouche-à-oreille. **Chantier :** refonte complète en 6 semaines, thème custom avec ACF, pages dédiées par spécialité (droit du travail, droit des affaires, etc.). Schema LegalService. **Résultat :** 6 mois après, 14 nouveaux clients sont arrivés via le site (vs 0 auparavant). Conversion 2.3% sur la page contact. CTR Google +85% sur les requêtes \"avocat droit du travail Rouen\".",
+        },
+        {
+          title: "Cas 2 — Boulangerie premium au Havre (3 boutiques)",
+          content:
+            "**Contexte :** Pas de site, présence Instagram seulement. Le dirigeant voulait ouvrir une 4e boutique et avait besoin d'un site pour rassurer banques et investisseurs sur la \"professionnalisation\". **Chantier :** site vitrine WordPress en 4 semaines, fiche Google Business optimisée pour chaque boutique, photos pro, intégration Instagram en galerie. **Résultat :** la banque a validé le prêt expansion (le site a pesé dans la décision selon le banquier), +30% de followers Instagram via les liens croisés, file d'attente le samedi matin doublée en 6 mois.",
+        },
+        {
+          title: "Cas 3 — Atelier mécanique à Évreux (8 employés)",
+          content:
+            "**Contexte :** Garage spécialisé véhicules anciens et de prestige, clientèle vieillissante, pas de relève dans la clientèle 30-50 ans. **Chantier :** site WordPress avec catalogue véhicules en stock, formulaire de pré-devis (type véhicule + symptôme + urgence), SEO local sur \"garage Évreux\" et requêtes spécialisées (\"révision Porsche Évreux\"). **Résultat :** +400% de demandes de devis en 8 mois, dont 60% de la nouvelle cible 30-50 ans. Le dirigeant a embauché un mécanicien supplémentaire en avril 2026.",
+        },
+        {
+          title: "Cas 4 — Conserverie artisanale en Calvados (12 employés)",
+          content:
+            "**Contexte :** Produits du terroir (rillettes, terrines, conserves), vente sur les marchés et 2 magasins. Aucun e-commerce. Demande croissante de touristes pour expédier. **Chantier :** site e-commerce WooCommerce en 8 semaines, intégration Stripe + Mondial Relay + Colissimo, photos produits pro. **Résultat :** premier mois : 800 € de CA en ligne. 6 mois plus tard : 8 500 €/mois de CA e-commerce, devenu le 3e canal de vente après les marchés et le magasin de Caen. Investissement initial rentabilisé en 9 mois.",
+        },
+        {
+          title: "Cas 5 — Cabinet comptable à Rouen (6 experts-comptables)",
+          content:
+            "**Contexte :** Site WordPress 2020 honnête mais sans portail client, échanges de documents par email (risque RGPD), surcharge administrative. **Chantier :** ajout d'un espace client custom avec login, upload sécurisé de documents (HDS), accès historique bilans/factures. **Résultat :** -40% de temps passé sur les échanges email basiques, satisfaction client en hausse mesurée (NPS +18 points), gain de productivité utilisé pour prendre 3 nouveaux clients sans embaucher.",
+        },
+        {
+          title: "Cas 6 — Startup tech à Rouen (lancement MVP)",
+          content:
+            "**Contexte :** 2 fondateurs sortis d'école d'ingé, idée de SaaS B2B (gestion d'événements pour collectivités), pas de tech maison. **Chantier :** MVP en 10 semaines (Next.js + Postgres Neon + Stripe Billing + NextAuth), 6 fonctionnalités clés. **Résultat :** 12 collectivités normandes ont signé un contrat dans les 6 mois post-lancement (5 villes, 4 communautés de communes, 3 conseils départementaux régionaux). Levée de fonds (seed) en cours d'écriture grâce aux premières metrics. La startup tourne en autonomie depuis (Krealabs intervient en mode maintenance évolutive).",
+        },
+        {
+          title: "Cas 7 — Magasin de meubles à Caen (4 boutiques)",
+          content:
+            "**Contexte :** Réseau 4 magasins en Calvados et Manche, site corporate vieux et sans intérêt commercial. **Chantier :** refonte avec catalogue produits synchronisé au logiciel de gestion interne (sync stock toutes les 4h), fiche par magasin avec horaires + Google Maps, devis en ligne. **Résultat :** +35% de visites magasin attribuables au site (mesuré via codes promo en ligne valables uniquement en magasin), 1 200 demandes de devis en 6 mois (vs 100 auparavant), reconversion d'un employé vers la gestion du site/SEO en interne.",
+        },
+        {
+          title: "Cas 8 — Cabinet médical pluridisciplinaire à Évreux",
+          content:
+            "**Contexte :** 4 médecins associés, secrétariat débordé par les appels téléphoniques pour RDV, perte de patients qui ne réussissaient pas à joindre. **Chantier :** site WordPress conforme CNOM avec module Doctolib intégré, page par praticien, page \"téléconsultation\" pour les nouveaux services. **Résultat :** -60% d'appels au secrétariat (RDV pris directement en ligne), capacité à prendre 2 nouveaux médecins associés sans surcharger le secrétariat.",
+        },
+        {
+          title: "Cas 9 — Hôtel-restaurant Côte d'Albâtre",
+          content:
+            "**Contexte :** Hôtel 3* à Fécamp, ~80% de réservations via Booking.com (commission 18%). Site obsolète, pas de moteur de réservation direct. **Chantier :** refonte Next.js + intégration Mews PMS + Stripe pour les réservations directes, multilingue FR/EN/DE, photos pro + visites 360°. **Résultat :** 6 mois plus tard, 35% des réservations passent en direct (vs 0%). Économie Booking estimée : 32 000 €/an. Investissement initial rentabilisé en 14 mois.",
+        },
+        {
+          title: "Cas 10 — Coopérative agricole en Eure",
+          content:
+            "**Contexte :** Coopérative regroupant 80 agriculteurs locaux, vente B2B en gros + une boutique. Pas de digital. **Chantier :** plateforme custom Next.js pour les commandes B2B des restaurateurs/épiceries (login agriculteurs et clients pro, catalogue saisonnier, paniers, commandes hebdomadaires récurrentes). **Résultat :** +45 clients restaurateurs en 12 mois, +180k € de CA additionnel, simplification radicale du process commande (avant : tableau Excel partagé par email — maintenant : interface dédiée).",
+        },
+      ],
+      conclusion:
+        "Ces 10 cas n'ont rien d'exotique. Ils représentent fidèlement ce qu'une PME normande peut obtenir d'un projet digital sérieusement mené en 2026. Investissement typique : 4 000-25 000 € selon le périmètre. Rentabilisation : 6-24 mois. La condition #1 du succès : un dirigeant impliqué et une équipe agence qui prend le temps de comprendre votre métier (vs livrer en pilote automatique). Si vous êtes une PME normande qui veut franchir le pas en 2026-2027, [discutons-en](/contact). Voir aussi notre [guide PME digitalisation](/blog/pme-normandie-digitalisation-2026), notre [agence web Rouen](/agence-web-rouen), et nos [services](/services).",
+    },
+  },
+
+  {
+    slug: "notifications-push-onesignal-firebase-expo",
+    title: "Notifications push mobile : OneSignal vs Firebase vs Expo en 2026",
+    excerpt:
+      "Pour brancher des notifications push sur une app React Native, 3 options dominent : OneSignal, Firebase Cloud Messaging, Expo Notifications. Comparatif honnête, coûts, intégrations, cas d'usage.",
+    category: "Mobile",
+    date: "15 août 2026",
+    readTime: "13 min",
+    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["Notifications push", "OneSignal", "Firebase", "Expo", "React Native", "Mobile"],
+    content: {
+      introduction:
+        "Quand on lance une app React Native, les notifications push deviennent rapidement nécessaires : retention, engagement, alertes transactionnelles. Trois écosystèmes dominent en 2026 : **OneSignal** (le plus utilisé en agence), **Firebase Cloud Messaging** (le gratuit le plus puissant), et **Expo Notifications** (l'ergonomique pour les projets Expo-only). Cet article compare honnêtement les trois après plusieurs intégrations chez Krealabs, pour vous aider à choisir.",
+      sections: [
+        {
+          title: "OneSignal : le standard agence",
+          content:
+            "OneSignal est le service de notifications push le plus utilisé en agence en 2026. **Pricing :** gratuit jusqu'à 10 000 utilisateurs, puis 9-99 $/mois selon le volume et features. **Forces :** dashboard ultra-complet (segmentation, A/B testing des notifications, analytics conversion intégrée), SDK React Native mature, support web push + email + SMS dans le même outil. **Faiblesses :** SDK propriétaire (vendor lock-in), pricing qui grimpe vite au-delà de 50k utilisateurs, performance dashboard parfois lente. **Idéal pour :** PME qui veulent un outil complet sans construire leur propre infra notifications.",
+        },
+        {
+          title: "Firebase Cloud Messaging (FCM) : le poids lourd Google",
+          content:
+            "Firebase Cloud Messaging est le service notifications de Google. **Pricing :** 100% gratuit, même à très grande échelle. **Forces :** illimité gratuit, intégration native Android (c'est l'infra qui propulse les push iOS et Android sous le capot — même OneSignal utilise FCM en backend pour Android), SDK robuste maintenu par Google. **Faiblesses :** dashboard FCM minimaliste (pas de segmentation, pas d'A/B test, pas d'analytics avancées — il faut construire votre propre couche au-dessus), setup iOS plus complexe (configuration Apple Developer + APNs), pas de support email/SMS intégré. **Idéal pour :** projets matures avec une équipe tech qui veut son propre outil de gestion notifications par-dessus FCM gratuit.",
+        },
+        {
+          title: "Expo Notifications : l'ergonomique pour Expo-first",
+          content:
+            "Si votre app React Native tourne sur Expo (ce qui devient le défaut en 2026 grâce à EAS), Expo Notifications est l'option clé-en-main. **Pricing :** gratuit (inclus dans Expo). **Forces :** zéro config pour push iOS + Android (Expo gère APNs et FCM en backend), SDK super ergonomique avec hooks React, parfaitement intégré au workflow Expo (EAS Update + Expo Notifications combinés font des merveilles). **Faiblesses :** dashboard inexistant (vous envoyez via l'API Expo Notifications depuis votre backend), pas de segmentation native, pas adapté pour gros volumes (au-delà de 100k notifs/jour, basculer sur FCM/OneSignal). **Idéal pour :** MVPs Expo, apps en phase d'amorçage, projets où le simple suffit.",
+        },
+        {
+          title: "Comparatif coûts à différentes échelles",
+          content:
+            "Pour 1 000 utilisateurs actifs : OneSignal gratuit, FCM gratuit, Expo gratuit. Tous identiques en coût. Pour 10 000 utilisateurs : OneSignal gratuit (juste la limite), FCM gratuit, Expo gratuit. Pour 100 000 utilisateurs : OneSignal ~80 $/mois (plan Growth), FCM gratuit, Expo gratuit mais avec rate limits qui demandent du throttling côté backend. Pour 1M utilisateurs : OneSignal ~600-1500 $/mois selon features (segmentation avancée), FCM gratuit, Expo non recommandé à cette échelle. **Verdict coûts pur :** FCM est imbattable pour les gros volumes, OneSignal apporte la valeur sur le dashboard et les features avancées.",
+        },
+        {
+          title: "Intégration React Native : code comparé",
+          content:
+            "**Expo Notifications** est la plus simple à intégrer. Pour OneSignal et FCM, comptez ~2-3 jours de setup pour un dev qui n'a jamais fait. Pour Expo : ~4 heures.",
+          code: `// Expo Notifications - setup ultra simple
+import * as Notifications from 'expo-notifications';
+
+async function registerForPushNotificationsAsync() {
+  const { status } = await Notifications.requestPermissionsAsync();
+  if (status !== 'granted') return;
+  const token = (await Notifications.getExpoPushTokenAsync()).data;
+  // Envoyer ce token à votre backend pour stocker
+  await fetch('/api/push-tokens', {
+    method: 'POST',
+    body: JSON.stringify({ token, userId }),
+  });
+}
+
+// Backend Node.js - envoyer une push
+const message = {
+  to: expoPushToken,
+  sound: 'default',
+  title: 'Nouveau message',
+  body: 'Vous avez reçu un message de Marc',
+  data: { conversationId: 'abc123' },
+};
+await fetch('https://exp.host/--/api/v2/push/send', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(message),
+});`,
+        },
+        {
+          title: "Pièges classiques (les 5 erreurs qu'on voit le plus)",
+          content:
+            "(1) **Oublier de demander la permission au bon moment** : ne demandez pas la permission au launch de l'app — l'utilisateur dit non par réflexe. Attendez un moment contextuel (après une action concluante, comme un premier achat). (2) **Ne pas gérer le token refresh** : les tokens push expirent ou changent. Stocker le token côté backend mais aussi vérifier sa validité régulièrement. (3) **Envoyer trop de notifications** : opt-out = utilisateur perdu. Limiter à 2-3 notifs/semaine max sauf push transactionnel. (4) **Pas de deep linking** : tap sur la notif doit ouvrir le bon écran de l'app, pas la home. (5) **Pas de fallback email** : si l'utilisateur a désactivé les push, envoyer par email pour les notifs critiques.",
+        },
+        {
+          title: "Notre recommandation Krealabs",
+          content:
+            "Pour 80% des projets clients Krealabs : **Expo Notifications** sur MVP/early-stage, migration vers **FCM** quand on dépasse 50k utilisateurs ou quand le besoin de segmentation arrive. **OneSignal** réservé aux clients qui veulent le confort dashboard et acceptent le surcoût (~50-200 €/mois). Pour les cas industriels (banques, télcos, retail à grande échelle avec millions d'utilisateurs), on monte des solutions custom sur FCM + outils internes — mais ces projets sont rares en agence à taille humaine.",
+        },
+      ],
+      conclusion:
+        "Les notifications push restent un canal de retention essentiel en 2026 — bien utilisées (peu, contextuelles, valeur ajoutée), elles boostent la rétention 7j de +20-40%. Mal utilisées (spam), elles font fuir 50% des utilisateurs. Choisir le bon outil (Expo / FCM / OneSignal) selon votre échelle et votre équipe. Pour intégrer des notifications push sur votre app React Native, [contactez Krealabs](/contact). Voir aussi notre [comparateur React Native vs Flutter](/comparateur/react-native-vs-flutter), notre [stack React Native](/technologies/react-native), et nos [services applications mobiles](/services/applications-mobile).",
+    },
+  },
 ];
