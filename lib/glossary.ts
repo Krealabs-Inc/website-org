@@ -307,6 +307,114 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
     relatedTerms: ["schema-org", "core-web-vitals"],
   },
 
+  "tailwind-css": {
+    slug: "tailwind-css",
+    term: "Tailwind CSS",
+    shortDef:
+      "Framework CSS utility-first qui permet de construire des interfaces en composant des classes utilitaires (m-4, text-lg, bg-blue-500) directement dans le JSX. Devenu standard en 2024 dans l'écosystème React.",
+    synonyms: ["Tailwind", "TailwindCSS"],
+    category: "Web",
+    definition:
+      "**Tailwind CSS** est un framework CSS \"utility-first\" : au lieu de définir des classes sémantiques (`.button`, `.card`), on compose des utilitaires bas niveau (`flex items-center gap-4 px-6 py-3 rounded-lg`) directement dans le markup. Adopté par 80%+ des nouveaux projets React/Vue en 2026. Versions clés : 3.0 (JIT engine), 4.0 (rewrite Lightning CSS, custom properties natives, pas de config requise). Tailwind v4 utilise `@theme` pour les tokens et lit le CSS pur, sans tailwind.config.js obligatoire. Bénéfices mesurables : -40% de CSS bundle vs styled-components, pas de naming bikeshedding, design system codé en dur dans les utilities.",
+    whyItMatters:
+      "Tailwind élimine 90% du CSS custom à écrire et garantit une cohérence du design system par construction. Sur un projet React de 50k+ lignes, c'est l'écart entre un CSS qui devient ingérable (BEM, CSS Modules) et un système qui scale propre. Standard de fait pour les agences modernes.",
+    ourApproach:
+      "100% de nos projets Next.js sont en Tailwind CSS 4. Stack typique : Tailwind + shadcn/ui (composants headless) + design tokens custom via @theme. Aucun CSS-in-JS, pas de styled-components. Le design system est codé directement dans tailwind.config / globals.css.",
+    relatedTerms: ["next-js", "react-server-components"],
+  },
+
+  "vercel": {
+    slug: "vercel",
+    term: "Vercel",
+    shortDef:
+      "Plateforme d'hébergement et de déploiement spécialisée Next.js (créateurs du framework). Edge runtime mondial, déploiement à chaque git push, preview deployments par PR.",
+    synonyms: ["Vercel Platform"],
+    category: "Infrastructure",
+    definition:
+      "**Vercel** est la plateforme cloud créée par les auteurs de Next.js. Elle propose un déploiement edge mondial automatique à chaque push Git (GitHub, GitLab, Bitbucket), des preview deployments uniques par Pull Request, et un CDN edge optimisé pour Next.js. Tarifs 2026 : Hobby gratuit (sites perso), Pro 20 $/mois par utilisateur (sites pro avec analytics, password protection), Enterprise sur devis. Au-delà de Next.js, Vercel héberge aussi Astro, Remix, Nuxt, SvelteKit, et tout autre framework qui produit du HTML/JS statique.",
+    whyItMatters:
+      "Vercel est l'expérience développeur de référence : push → deploy → preview en 30 secondes. Pour une agence ou une équipe produit, cette boucle d'itération rapide est un avantage compétitif majeur. La compatibilité native avec Next.js (Server Components, ISR, edge runtime) est inégalée par les concurrents.",
+    ourApproach:
+      "100% de nos projets Next.js sont hébergés sur Vercel. Pour les projets WordPress, on reste sur des hébergeurs spécialisés (o2switch, Kinsta). On teste les preview deployments avec le client à chaque PR, validation visuelle avant merge sur main.",
+    relatedTerms: ["next-js", "core-web-vitals"],
+    relatedLinks: [
+      {
+        label: "Article : Vercel vs OVH hébergement 2026",
+        url: "/blog/vercel-vs-ovh-hebergement-2026",
+      },
+    ],
+  },
+
+  "oauth": {
+    slug: "oauth",
+    term: "OAuth (authentification déléguée)",
+    shortDef:
+      "Standard d'authentification qui permet à un utilisateur de se connecter à un service avec un compte tiers (Google, GitHub, Apple, Microsoft) sans partager son mot de passe.",
+    synonyms: ["OAuth 2.0", "Single Sign-On", "SSO", "Social login"],
+    category: "Infrastructure",
+    definition:
+      "**OAuth 2.0** est le standard d'authentification déléguée du web. Au lieu de créer un compte avec email/password sur chaque site, l'utilisateur clique \"Se connecter avec Google\" et autorise l'application à lire son identité. Bénéfices : pas de mot de passe à gérer (réduction du risque sécurité), inscription rapide (1 clic), récupération d'infos profile (avatar, nom) automatique. Les bibliothèques modernes (NextAuth/Auth.js, Clerk, Lucia, Better-Auth) gèrent OAuth en quelques lignes de configuration pour les providers populaires : Google, GitHub, Apple, Microsoft, Discord, LinkedIn, etc.",
+    whyItMatters:
+      "OAuth améliore drastiquement le taux d'inscription : passer de \"créer un compte avec email\" à \"se connecter avec Google\" augmente typiquement la conversion signup de 2-3x. Pour les SaaS B2B, c'est devenu un standard attendu.",
+    ourApproach:
+      "Sur nos projets SaaS, on intègre OAuth (au moins Google) dès le MVP. Stack : NextAuth/Auth.js + Prisma pour la persistance des sessions. Pour les apps grand public où la sécurité est critique, on combine OAuth + 2FA optionnelle.",
+    relatedTerms: ["stripe", "next-js"],
+  },
+
+  "webhook": {
+    slug: "webhook",
+    term: "Webhook",
+    shortDef:
+      "URL HTTP exposée par une application qui reçoit automatiquement des notifications POST quand un événement se produit ailleurs (paiement Stripe reçu, commande WooCommerce passée, etc.).",
+    synonyms: ["Hook HTTP", "Reverse API"],
+    category: "Infrastructure",
+    definition:
+      "Un **webhook** est l'inverse d'un appel d'API classique. Au lieu que votre app appelle un service externe pour lui demander des nouvelles, c'est le service externe qui appelle votre app en POST dès qu'un événement intéressant se produit. Exemples typiques : Stripe envoie un webhook `payment_intent.succeeded` quand un paiement aboutit, WooCommerce envoie `order.created` à chaque commande, GitHub envoie `push` à chaque commit, Resend envoie `email.delivered` quand un email est remis. Le webhook permet une intégration **temps réel et asynchrone** entre systèmes.",
+    whyItMatters:
+      "Les webhooks sont la colle qui tient les architectures modernes ensemble. Sans webhook, on devrait poller (interroger l'API toutes les N secondes), ce qui est coûteux et lent. Avec webhook, la réaction est instantanée et la charge serveur minimale. Pratiquement tous les SaaS modernes exposent des webhooks.",
+    ourApproach:
+      "Nous intégrons des webhooks systématiquement sur les projets e-commerce et SaaS : Stripe webhooks pour la facturation/abonnements, Resend webhooks pour le suivi de delivery emails, WooCommerce/Shopify webhooks pour les commandes, GitHub Actions webhooks pour la CI/CD. Sur Next.js : API routes /api/webhooks/[service] avec validation signature HMAC.",
+    relatedTerms: ["stripe", "next-js"],
+  },
+
+  "postgres": {
+    slug: "postgres",
+    term: "PostgreSQL (Postgres)",
+    shortDef:
+      "Système de gestion de base de données relationnelle open-source, leader sur le marché pro depuis 30+ ans. Robuste, scalable, supporte JSON, géolocalisation, full-text search nativement.",
+    synonyms: ["PostgreSQL", "PG"],
+    category: "Infrastructure",
+    definition:
+      "**PostgreSQL** (souvent abrégé \"Postgres\") est le SGBD relationnel open-source de référence en 2026. Plus ancien que MySQL, longtemps considéré comme \"plus dur à prendre en main\" mais désormais reconnu comme techniquement supérieur sur de nombreux aspects : JSON natif (JSONB), full-text search, géolocalisation (PostGIS), réplication, transactions ACID solides, extensibilité (extensions C/Rust). Plébiscité par Stripe, Apple, Reddit, Instagram. Hébergement serverless moderne : Neon, Supabase, Crunchy Data, Railway, RDS Aurora.",
+    whyItMatters:
+      "Pour 95% des projets web/SaaS, Postgres est le bon choix par défaut. Il monte à des dizaines de millions de lignes sans peine, supporte JSON pour les contenus semi-structurés (donc remplace souvent MongoDB), et son écosystème (Prisma, Drizzle, Kysely) est riche. Pas besoin de basculer vers NoSQL ou des bases spécialisées tant qu'on est en dessous de 100M+ lignes.",
+    ourApproach:
+      "100% de nos projets utilisent PostgreSQL via Prisma. Hébergement : Neon en standard (serverless, branching pour les preview environments), Supabase quand le projet a besoin de RLS / Realtime / Storage intégré. Schemas typés via Prisma, migrations versionnées en Git.",
+    relatedTerms: ["next-js", "stripe"],
+    relatedLinks: [
+      {
+        label: "Article : Prisma 6 + Postgres ORM",
+        url: "/blog/prisma-6-postgres-orm",
+      },
+    ],
+  },
+
+  "edge-runtime": {
+    slug: "edge-runtime",
+    term: "Edge Runtime (calcul en bordure)",
+    shortDef:
+      "Environnement d'exécution serveur qui tourne dans des datacenters proches géographiquement de l'utilisateur (Cloudflare Workers, Vercel Edge, Deno Deploy). Latence ~10-50ms vs 200-500ms en serveur classique.",
+    synonyms: ["Edge Computing", "Edge Functions"],
+    category: "Infrastructure",
+    definition:
+      "L'**edge runtime** désigne l'exécution de code serveur dans des datacenters \"en bordure\" (edge) du réseau, géographiquement proches de l'utilisateur. Au lieu d'une seule region serveur (ex: AWS Paris) qui sert toute la France, le edge runtime distribue le code dans 200-300+ datacenters mondiaux. Pour un utilisateur à Rouen, la requête est servie depuis Paris (~5ms) au lieu de l'Irlande (~30ms) ou Virginie (~100ms). Acteurs : **Vercel Edge** (basé sur V8), **Cloudflare Workers**, **Deno Deploy**, **Bun on Cloudflare**. Limite : pas d'API Node.js complète, environnement plus restreint (pas de `fs`, `child_process`, etc.).",
+    whyItMatters:
+      "Pour les sites globaux ou les apps avec utilisateurs internationaux, le edge runtime divise la latence par 3-10x. Impact direct sur les Core Web Vitals (LCP, INP) et donc le SEO. Pour les apps purement françaises avec hébergement EU, le gain est plus modeste mais réel (~30-50ms vs serveur Paris classique).",
+    ourApproach:
+      "Sur Next.js, on active edge runtime pour les routes critiques (homepage, landing pages, certaines API). Pour les routes qui ont besoin d'accès Node complet (BD Prisma, Resend, fs), on garde Node runtime classique. Vercel détecte automatiquement les besoins et configure.",
+    relatedTerms: ["next-js", "core-web-vitals", "vercel"],
+  },
+
   "stripe": {
     slug: "stripe",
     term: "Stripe (paiement en ligne)",

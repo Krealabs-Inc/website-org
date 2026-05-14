@@ -20,6 +20,7 @@ import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceFAQ } from "@/components/services/service-faq";
+import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 import { ServiceSchema } from "@/components/seo/service-schema";
 
 export const metadata: Metadata = {
@@ -226,6 +227,12 @@ export default function WordpressPage() {
         }
         items={FAQ.map((item) => ({ question: item.q, answer: item.a }))}
       />
+
+      <section className="section-y border-t border-[var(--border)]">
+        <Container size="narrow">
+          <NewsletterSignup variant="card" source="services-wordpress" />
+        </Container>
+      </section>
 
       <ServiceCta
         title={

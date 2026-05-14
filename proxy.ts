@@ -1,16 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 
 /**
- * Middleware Next.js : assigne un variant A/B au visiteur via cookie.
- * Pattern simple : 50/50 split, cookie persistant 1 an.
+ * Proxy Next.js (anciennement "middleware", renommé en Next.js 16).
+ * Assigne un variant A/B au visiteur via cookie. 50/50 split,
+ * persistance 1 an.
  *
  * Usage côté composants :
  *   import { cookies } from "next/headers";
- *   const variant = cookies().get("kl-variant")?.value;
+ *   const variant = (await cookies()).get("kl-variant")?.value;
  *   return <Hero variant={variant === "b" ? "alternate" : "default"} />
  *
- * Configurer les expériences via Vercel Edge Config quand on en aura
- * besoin de plusieurs simultanément. Pour le moment, simple A/B.
+ * Pour piloter plusieurs expériences en parallèle, brancher Vercel
+ * Edge Config quand le besoin sera là.
  */
 
 const VARIANT_COOKIE = "kl-variant";
@@ -21,7 +22,7 @@ function assignVariant(): Variant {
   return Math.random() < 0.5 ? "a" : "b";
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const response = NextResponse.next();
 
   const existing = request.cookies.get(VARIANT_COOKIE);

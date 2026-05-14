@@ -29,6 +29,7 @@ import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
+import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 
 export default function ApplicationsMobilePage() {
   return (
@@ -128,6 +129,12 @@ export default function ApplicationsMobilePage() {
         }
         items={FAQ}
       />
+
+      <section className="section-y border-t border-[var(--border)]">
+        <Container size="narrow">
+          <NewsletterSignup variant="card" source="services-mobile" />
+        </Container>
+      </section>
 
       <ServiceCta
         title={

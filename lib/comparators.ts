@@ -371,6 +371,315 @@ export const COMPARATORS: Record<string, ComparatorData> = {
     ],
   },
 
+  "stripe-vs-paypal": {
+    slug: "stripe-vs-paypal",
+    a: { name: "Stripe", tagline: "API-first · Devs · Mondial" },
+    b: { name: "PayPal", tagline: "Historique · Grand public · Confiance" },
+    title: "Stripe vs PayPal : quel processeur de paiement en 2026 ?",
+    description:
+      "Comparatif Stripe vs PayPal pour PME et e-commerce français. Commissions, DX, conformité, taux de conversion. Bilan d'une agence digitale.",
+    intro:
+      "Stripe et PayPal occupent deux philosophies du paiement en ligne. Stripe est l'outil des devs : API-first, intégrations propres, contrôle technique. PayPal est l'outil grand public : réputation historique, audience massive, paiement \"sans rentrer sa CB\". Lequel choisir pour votre e-commerce ou SaaS en 2026 ? Cette page compare honnêtement, du point de vue d'une agence qui intègre les deux selon les projets.",
+    criteria: [
+      {
+        label: "Commission standard (cartes EU)",
+        a: "1.4% + 0.25 € par transaction. Plus simple, plus prévisible.",
+        b: "2.9% + 0.35 € par transaction (paiements domestiques). Plus cher pour les ventes EU.",
+        winner: "a",
+      },
+      {
+        label: "Intégration développeur",
+        a: "API exemplaire. SDKs Node/Python/PHP/Ruby. Documentation référence mondiale. Stripe CLI pour tester webhooks.",
+        b: "API plus ancienne. Documentation moins claire. SDKs maintenus mais moins polis. Setup plus complexe.",
+        winner: "a",
+      },
+      {
+        label: "Méthodes de paiement disponibles",
+        a: "40+ méthodes : cartes, SEPA, Apple Pay, Google Pay, Klarna, Afterpay, Alipay, WeChat Pay, virements bancaires.",
+        b: "Cartes + PayPal Balance + Pay Later (BNPL) + Venmo (US). Plus restreint sur les méthodes locales internationales.",
+        winner: "a",
+      },
+      {
+        label: "Confiance perçue côté client",
+        a: "Logo Stripe peu visible côté client (white-label). Le client voit votre formulaire. Confiance liée à votre brand.",
+        b: "PayPal est ultra-connu. Beaucoup d'utilisateurs cliquent \"Payer avec PayPal\" sans réfléchir. Rassurance forte pour le grand public.",
+        winner: "b",
+      },
+      {
+        label: "Taux de conversion checkout",
+        a: "Stripe Link (one-click pour clients existants) + Apple Pay/Google Pay = excellent. Mais demande un design de checkout soigné.",
+        b: "PayPal Express Checkout = ultra-rapide pour les utilisateurs PayPal existants. Gain conversion mesurable sur D2C.",
+      },
+      {
+        label: "Gestion des litiges (chargebacks)",
+        a: "Stripe Radar (ML anti-fraude) + Stripe Disputes UI clair. Frais 15 $ par chargeback.",
+        b: "Programmes Seller Protection mais réputation pour favoriser l'acheteur. Frais 14-20 $.",
+        winner: "a",
+      },
+      {
+        label: "Abonnements / recurring billing",
+        a: "Stripe Billing : full-featured, plans, trials, dunning, prorata, factures auto. Industry standard pour SaaS.",
+        b: "Possible mais moins ergonomique que Stripe. Manque d'API SaaS-friendly.",
+        winner: "a",
+      },
+      {
+        label: "Marketplace / split payments",
+        a: "Stripe Connect : standard pour les marketplaces (split, payouts à plusieurs vendeurs, KYC vendeurs).",
+        b: "PayPal Commerce Platform existe mais moins développé.",
+        winner: "a",
+      },
+    ],
+    useCases: [
+      {
+        label: "SaaS B2B avec abonnements mensuels / annuels",
+        description: "Plans gratuits, payants, upgrades, downgrades, factures automatiques.",
+        winner: "a",
+        reasoning:
+          "Stripe Billing est le standard SaaS incontesté. Toutes les startups B2B sérieuses (Notion, Linear, Vercel, Resend) l'utilisent. PayPal n'est pas dans la course sur ce use case.",
+      },
+      {
+        label: "E-commerce D2C grand public (45+ ans, premier achat)",
+        description: "Marque jeune, audience moins tech, panier moyen 50-150 €.",
+        winner: "b",
+        reasoning:
+          "Le bouton PayPal capte les 15-25% d'acheteurs qui ne veulent pas taper leur CB. Sur de petits paniers, ce gain de conversion compense la commission plus chère. Notre conseil : proposer les deux (Stripe + PayPal).",
+      },
+      {
+        label: "Marketplace ou plateforme multi-vendeurs",
+        description: "Split de paiement entre la plateforme et plusieurs vendeurs.",
+        winner: "a",
+        reasoning:
+          "Stripe Connect gère le KYC vendeurs, les splits automatiques, les payouts, la conformité. PayPal Commerce existe mais moins puissant et moins documenté.",
+      },
+    ],
+    verdict:
+      "Notre règle : Stripe par défaut pour 95% des projets (SaaS, e-commerce moderne, marketplace, B2B). Ajouter PayPal en complément si l'audience cible est grand public 45+ ans et qu'on veut maximiser la conversion pour les acheteurs non-tech. Les deux en parallèle coûtent ~5-10 jours de dev de plus mais peuvent rentabiliser sur le volume.",
+    faq: [
+      {
+        question: "Peut-on utiliser Stripe et PayPal en parallèle ?",
+        answer:
+          "Oui, c'est même fréquent sur les e-commerces grand public. WooCommerce et Shopify supportent les deux nativement. Côté UX, on affiche Stripe (CB) comme méthode par défaut + bouton PayPal en alternative au checkout. Compter +3-5 jours de dev pour intégrer les deux proprement.",
+      },
+      {
+        question: "Stripe Tax gère-t-il la TVA française et européenne ?",
+        answer:
+          "Oui. Stripe Tax (depuis 2022) calcule automatiquement la TVA selon le pays du client, gère les exceptions (TVA intracom B2B, OSS pour l'EU), et produit les exports comptables. Coût : 0.5% sur les transactions taxées (en plus des frais standards). Très rentable vs le temps comptable manuel.",
+      },
+    ],
+    keywords: [
+      "stripe vs paypal",
+      "paypal ou stripe",
+      "processeur paiement comparatif",
+      "choisir paiement en ligne",
+      "agence stripe rouen",
+    ],
+  },
+
+  "vercel-vs-netlify": {
+    slug: "vercel-vs-netlify",
+    a: { name: "Vercel", tagline: "Créateurs de Next.js" },
+    b: { name: "Netlify", tagline: "Pionnier du Jamstack" },
+    title: "Vercel vs Netlify : quelle plateforme d'hébergement en 2026 ?",
+    description:
+      "Comparatif Vercel vs Netlify pour Next.js, Astro et apps modernes. Performance, prix, DX, fonctionnalités. Le bilan d'une agence web.",
+    intro:
+      "Vercel et Netlify dominent l'hébergement edge des frameworks modernes (Next.js, Astro, Remix, Nuxt). Vercel est éditée par les créateurs de Next.js → intégration native parfaite. Netlify a été pionnière du Jamstack avant que ce soit cool. Lequel choisir en 2026 ? Cette page compare honnêtement, après plusieurs années à utiliser les deux sur des projets clients.",
+    criteria: [
+      {
+        label: "Compatibilité Next.js",
+        a: "Native, premium. Server Components, ISR, Edge Functions, Middleware, Image Optimization → tout marche out-of-the-box.",
+        b: "Bonne mais pas native. Quelques features Next.js (ISR, Middleware Edge) ont eu du délai à supporter. S'améliore mais Vercel garde l'avance.",
+        winner: "a",
+      },
+      {
+        label: "Performance edge mondiale",
+        a: "100+ régions edge. Premier sur les benchmarks Lighthouse pour Next.js.",
+        b: "300+ POPs CDN. Bonne perf sur les sites statiques.",
+      },
+      {
+        label: "Preview deployments par PR",
+        a: "Excellent. URL unique par PR, commentaires GitHub auto, analytics par preview.",
+        b: "Excellent aussi. Feature historique de Netlify.",
+      },
+      {
+        label: "Prix (tier Pro pour PME)",
+        a: "Pro 20 $/mois/utilisateur. Bandwidth 1 TB inclus, build minutes 6000/mois.",
+        b: "Pro 19 $/mois/utilisateur. Bandwidth 1 TB inclus, build minutes 25 000/mois.",
+        winner: "b",
+      },
+      {
+        label: "DX du dashboard",
+        a: "Dashboard très soigné. Speed Insights, Analytics, Edge Config, KV, Postgres intégrés. Tout-en-un.",
+        b: "Dashboard correct. Netlify Functions, Forms (capture lead native), Identity (auth). Moins de produits intégrés.",
+        winner: "a",
+      },
+      {
+        label: "Frameworks supportés",
+        a: "Next.js + Astro + Nuxt + Remix + SvelteKit + 30+ autres. Optimisé Next.js avant tout.",
+        b: "100+ frameworks supportés. Plus généraliste. Excellent pour Hugo, Jekyll, Eleventy.",
+      },
+      {
+        label: "Ecosystème produits annexes",
+        a: "Vercel Postgres (Neon white-label), Blob, KV (Upstash), Edge Config, Speed Insights, Analytics, A/B testing.",
+        b: "Netlify Forms (gratuit !), Identity (auth), Functions, Edge Functions, mais moins de stockage/DB intégré.",
+        winner: "a",
+      },
+      {
+        label: "Free tier / hobby plan",
+        a: "Très généreux : 100 GB bandwidth, build illimités, projets illimités, Analytics inclus.",
+        b: "Comparable : 100 GB bandwidth, 300 build minutes/mois.",
+      },
+    ],
+    useCases: [
+      {
+        label: "Projet Next.js 13+ (App Router, Server Components)",
+        description: "App moderne, Server Components, ISR, Edge Functions.",
+        winner: "a",
+        reasoning:
+          "Vercel est le choix par défaut, optimisé par les créateurs du framework. Les nouvelles features Next.js arrivent sur Vercel en premier (parfois plusieurs mois avant Netlify).",
+      },
+      {
+        label: "Site statique (Astro, Hugo, Eleventy) avec formulaires",
+        description: "Site marketing pur, blog statique, peu de logique serveur.",
+        winner: "b",
+        reasoning:
+          "Netlify Forms gère la capture lead nativement sans backend : un attribut `netlify` sur le form HTML → les soumissions arrivent dans le dashboard Netlify gratuitement. Très pratique pour les sites marketing sans backend dédié.",
+      },
+      {
+        label: "Projet avec besoin Postgres + KV + edge fonctions",
+        description: "App full-stack avec BDD, cache, fonctions multi-régions.",
+        winner: "a",
+        reasoning:
+          "Vercel a tout intégré nativement (Postgres via Neon partenariat, KV via Upstash, Edge Config, Blob). Sur Netlify il faut connecter des services externes.",
+      },
+    ],
+    verdict:
+      "Notre choix par défaut chez Krealabs : Vercel pour 100% de nos projets Next.js. C'est l'optimisation maximale pour le framework qu'on utilise. Netlify reste excellent pour les sites statiques pure (Astro/Hugo) ou les projets qui dépendent fortement de Netlify Forms et Identity. À budget équivalent et stack Next.js, Vercel gagne.",
+    faq: [
+      {
+        question: "Peut-on migrer de Netlify à Vercel facilement ?",
+        answer:
+          "Pour un projet Next.js : très facile, quelques heures. Connecter le repo GitHub à Vercel, mapper les env vars, configurer le domaine. Pour un projet Astro/Hugo/etc. : aussi simple. La difficulté arrive si vous utilisiez Netlify Forms (gratuit) → faut le re-coder en /api/contact avec un backend.",
+      },
+      {
+        question: "Vercel est-il plus cher que Netlify à l'usage ?",
+        answer:
+          "À usage standard PME (1-100k visites/mois) : Hobby gratuit suffit sur les deux. Au-delà : Pro à 20 $/mois équivalent. Pour les très gros volumes (1M+ visites), Vercel peut devenir nettement plus cher que Netlify sur le bandwidth.",
+      },
+    ],
+    keywords: [
+      "vercel vs netlify",
+      "netlify ou vercel",
+      "hebergement nextjs",
+      "plateforme jamstack",
+      "agence vercel rouen",
+    ],
+  },
+
+  "astro-vs-nextjs": {
+    slug: "astro-vs-nextjs",
+    a: { name: "Astro", tagline: "Sites de contenu · Zero JS par défaut" },
+    b: { name: "Next.js", tagline: "Apps React production · Vercel" },
+    title: "Astro vs Next.js : quel framework en 2026 ?",
+    description:
+      "Comparatif Astro vs Next.js pour sites marketing, blogs et apps. Performance, DX, écosystème, cas d'usage. Bilan d'une agence web rouennaise.",
+    intro:
+      "Astro et Next.js sont les deux frameworks JS modernes les plus discutés en 2026. Astro vise les **sites de contenu** (blogs, marketing, e-commerce) avec une philosophie \"zero JS par défaut\" et un rendu HTML pur. Next.js vise les **applications web** avec React, Server Components, et toute la richesse de l'écosystème React. Cette page compare honnêtement pour vous aider à choisir le bon outil selon votre projet.",
+    criteria: [
+      {
+        label: "Philosophie",
+        a: "Server-first, HTML-first, JS optionnel (Islands Architecture). Vous opt-in pour de l'interactivité bloc par bloc.",
+        b: "React-first, JS partout par défaut. Server Components depuis 13.0 réduisent le bundle mais l'app reste React-centric.",
+      },
+      {
+        label: "Performance brute (site marketing simple)",
+        a: "Champion : 0 KB de JS par défaut sur un site statique. Lighthouse 100/100 facile à atteindre.",
+        b: "Très bonne mais bundle React minimum (~30 KB). Lighthouse 95+ accessible avec effort.",
+        winner: "a",
+      },
+      {
+        label: "Performance d'une vraie app (dashboard, SaaS)",
+        a: "Possible mais pas optimisé pour ça. Hydratation islands devient lourde au-delà de 10-20 composants interactifs.",
+        b: "Conçu pour ça. Server Components + Client Components scalent bien.",
+        winner: "b",
+      },
+      {
+        label: "Écosystème de composants UI",
+        a: "Compatible React/Vue/Svelte/Solid via islands. Mais le choix \"natif Astro\" est plus restreint.",
+        b: "L'écosystème React entier. shadcn/ui, Radix, Mantine, Chakra, Headless UI, Tremor. Choix infini.",
+        winner: "b",
+      },
+      {
+        label: "DX et apprentissage",
+        a: "Plus simple à prendre en main pour un dev HTML/CSS. Syntaxe .astro proche du HTML. Apprentissage court.",
+        b: "Plus complexe. Server Components, App Router, Suspense, streaming — courbe d'apprentissage plus longue.",
+        winner: "a",
+      },
+      {
+        label: "Content collections (Markdown, MDX)",
+        a: "Excellent. Content Collections natives, types TypeScript auto-générés. Le meilleur framework pour un blog.",
+        b: "Possible mais demande plus de setup (MDX manual, contentlayer abandonné, alternatives variées).",
+        winner: "a",
+      },
+      {
+        label: "Recrutement & taille équipe",
+        a: "Petit écosystème, moins de devs disponibles. Profil senior recherché.",
+        b: "Énorme pool de devs React. Recruter ou trouver une agence : facile partout.",
+        winner: "b",
+      },
+      {
+        label: "Maturité production",
+        a: "v5 stable depuis 2024. Adopté par Google.dev, The Guardian, Trivago. Robuste.",
+        b: "Standard de fait depuis 5+ ans. Vercel, Notion, TikTok, Hulu. Maturité totale.",
+        winner: "b",
+      },
+    ],
+    useCases: [
+      {
+        label: "Site marketing / vitrine pour PME (5-30 pages)",
+        description: "Pages de contenu statique, blog, formulaire de contact.",
+        winner: "a",
+        reasoning:
+          "Astro brille ici. Pages servies en HTML pur, JS minimal pour les blocs interactifs (form, menu mobile). Lighthouse 100/100, time-to-interactive instantané. Pas besoin de la complexité Next.js pour ce use case.",
+      },
+      {
+        label: "Blog éditorial Markdown / MDX (50-500 articles)",
+        description: "Blog avec catégories, tags, recherche, image optimization.",
+        winner: "a",
+        reasoning:
+          "Astro Content Collections + image optimization native + zero JS = expérience parfaite. Plus rapide et plus simple à maintenir qu'un blog Next.js équivalent.",
+      },
+      {
+        label: "SaaS B2B avec dashboards, authentification, paiement",
+        description: "Application interactive complète avec API, BDD, login, charts.",
+        winner: "b",
+        reasoning:
+          "Next.js est conçu pour ça : Server Components pour la perf, NextAuth pour l'auth, edge runtime, écosystème React riche pour les composants admin (Tremor, Mantine, shadcn). Astro serait à contre-emploi.",
+      },
+    ],
+    verdict:
+      "Notre règle agence : Astro pour les sites de contenu et marketing pure (Lighthouse 100/100 sans effort). Next.js pour tout ce qui ressemble à une application (SaaS, dashboards, e-commerce custom, plateformes). Le choix dépend du type de projet, pas du goût technique. À Krealabs nous utilisons les deux selon le contexte client.",
+    faq: [
+      {
+        question: "Astro peut-il faire de l'e-commerce ?",
+        answer:
+          "Oui pour les boutiques simples (10-200 produits) avec Shopify ou Snipcart en backend. Pour des e-commerces complexes (1000+ produits, configurations B2B, comptes utilisateurs), Next.js reste préférable.",
+      },
+      {
+        question: "Peut-on utiliser des composants React dans Astro ?",
+        answer:
+          "Oui. Astro Islands Architecture permet d'embarquer des composants React, Vue, Svelte ou Solid là où l'interactivité est nécessaire, en gardant le reste du site en HTML statique. C'est l'argument principal d'Astro.",
+      },
+    ],
+    keywords: [
+      "astro vs nextjs",
+      "nextjs ou astro",
+      "framework jamstack 2026",
+      "choisir astro nextjs",
+      "agence astro nextjs",
+    ],
+  },
+
   "react-native-vs-flutter": {
     slug: "react-native-vs-flutter",
     a: { name: "React Native", tagline: "Meta · JS · multi-plateforme" },
