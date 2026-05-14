@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Développement React - Agence React à Rouen',
-  description: 'Experts React à Rouen. Développement d\'applications web modernes avec React 19, hooks, Context API, Redux. Agence spécialisée React depuis 2024.',
+  description: 'Experts React à Rouen. Développement d\'applications web modernes avec React 19, hooks, Server Components, Context API. Agence spécialisée React en Normandie.',
   keywords: ['développeur react rouen', 'agence react', 'expert react', 'react hooks', 'react 19'],
   openGraph: {
     title: 'Développement React - Agence React à Rouen | Krealabs',

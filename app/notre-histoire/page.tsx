@@ -32,9 +32,9 @@ const TIMELINE = [
   {
     year: "2022",
     icon: TrendingUp,
-    title: "Croissance & équipe",
+    title: "Premiers SaaS B2B",
     description:
-      "Structuration de l'agence, premiers projets SaaS d'envergure, équipe étendue.",
+      "Structuration de l'agence, premiers projets SaaS d'envergure pour des PME normandes. Stack Next.js + Postgres adoptée pour les apps custom.",
   },
   {
     year: "2024",
@@ -42,6 +42,20 @@ const TIMELINE = [
     title: "Ancrage régional",
     description:
       "Spécialisation SEO local Normandie, accompagnement long terme des PME rouennaises.",
+  },
+  {
+    year: "2025",
+    icon: Layers,
+    title: "Migration stack moderne",
+    description:
+      "Adoption de Next.js 16 + React 19 + Server Components sur tous les nouveaux projets. Premières apps publiées sur l'App Store + Play Store en parallèle.",
+  },
+  {
+    year: "2026",
+    icon: Rocket,
+    title: "Refonte du site Krealabs",
+    description:
+      "Refonte totale de notre propre site : design system v2, blog enrichi, pages locales (Rouen, Le Havre, Caen, Évreux, Dieppe…), lexique technique, comparateurs, calculateur de devis. La vitrine reflète enfin la rigueur des projets clients.",
   },
 ];
 
