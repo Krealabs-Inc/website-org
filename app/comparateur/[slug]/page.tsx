@@ -137,7 +137,8 @@ export default async function ComparatorPage({ params }: PageProps) {
           </div>
 
           <div className="rounded-[var(--radius-lg)] border border-[var(--border)] overflow-hidden">
-            <div className="grid grid-cols-[1fr_2fr_2fr_auto] bg-[var(--surface)] text-eyebrow border-b border-[var(--border)]">
+            {/* Header — desktop only */}
+            <div className="hidden md:grid grid-cols-[1fr_2fr_2fr_auto] bg-[var(--surface)] text-eyebrow border-b border-[var(--border)]">
               <div className="px-6 py-4">Critère</div>
               <div className="px-6 py-4 border-l border-[var(--border)]">
                 {data.a.name}
@@ -152,32 +153,58 @@ export default async function ComparatorPage({ params }: PageProps) {
             {data.criteria.map((c, i) => (
               <div
                 key={c.label}
-                className={`grid grid-cols-[1fr_2fr_2fr_auto] border-b border-[var(--border)] ${
+                className={`border-b border-[var(--border)] md:grid md:grid-cols-[1fr_2fr_2fr_auto] ${
                   i === data.criteria.length - 1 ? "border-b-0" : ""
                 }`}
               >
-                <div className="px-6 py-5 text-body-sm font-semibold">
-                  {c.label}
+                {/* Label */}
+                <div className="px-5 py-4 md:px-6 md:py-5 text-body-sm font-semibold flex items-center justify-between gap-4 bg-[var(--surface)] md:bg-transparent border-b md:border-b-0 border-[var(--border)]">
+                  <span>{c.label}</span>
+                  {/* Verdict badge inline on mobile */}
+                  <span className="md:hidden shrink-0">
+                    {c.winner === "a" && (
+                      <span className="inline-flex items-center justify-center size-7 rounded-full bg-[var(--accent)] text-[#0a0a0a] text-body-sm font-bold">
+                        A
+                      </span>
+                    )}
+                    {c.winner === "b" && (
+                      <span className="inline-flex items-center justify-center size-7 rounded-full bg-[var(--accent)] text-[#0a0a0a] text-body-sm font-bold">
+                        B
+                      </span>
+                    )}
+                    {!c.winner && (
+                      <Minus className="size-4 text-[var(--muted-foreground)]" />
+                    )}
+                  </span>
                 </div>
+                {/* A */}
                 <div
-                  className={`px-6 py-5 text-body-sm text-[var(--muted-foreground)] border-l border-[var(--border)] ${
+                  className={`px-5 py-4 md:px-6 md:py-5 text-body-sm text-[var(--muted-foreground)] md:border-l border-[var(--border)] ${
                     c.winner === "a"
                       ? "bg-[var(--accent-subtle)]/30"
                       : ""
                   }`}
                 >
+                  <span className="md:hidden inline-flex items-center justify-center size-5 rounded-full bg-[var(--border)] text-[var(--foreground)] text-caption font-bold mr-2 align-middle">
+                    A
+                  </span>
                   {c.a}
                 </div>
+                {/* B */}
                 <div
-                  className={`px-6 py-5 text-body-sm text-[var(--muted-foreground)] border-l border-[var(--border)] ${
+                  className={`px-5 py-4 md:px-6 md:py-5 text-body-sm text-[var(--muted-foreground)] md:border-l border-[var(--border)] border-t md:border-t-0 ${
                     c.winner === "b"
                       ? "bg-[var(--accent-subtle)]/30"
                       : ""
                   }`}
                 >
+                  <span className="md:hidden inline-flex items-center justify-center size-5 rounded-full bg-[var(--border)] text-[var(--foreground)] text-caption font-bold mr-2 align-middle">
+                    B
+                  </span>
                   {c.b}
                 </div>
-                <div className="px-6 py-5 border-l border-[var(--border)] w-24 flex items-center justify-center">
+                {/* Verdict — desktop only (mobile badge is inside label row) */}
+                <div className="hidden md:flex px-6 py-5 border-l border-[var(--border)] w-24 items-center justify-center">
                   {c.winner === "a" && (
                     <span className="inline-flex items-center justify-center size-7 rounded-full bg-[var(--accent)] text-[#0a0a0a] text-body-sm font-bold">
                       A

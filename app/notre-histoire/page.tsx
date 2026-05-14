@@ -141,7 +141,7 @@ export default function NotreHistoirePage() {
             <div className="lg:col-span-4">
               <Eyebrow number="01" className="mb-6">Parcours</Eyebrow>
               <h2 className="text-h1 mb-6">
-                Quatre années de <em>construction</em>.
+                Six années de <em>construction</em>.
               </h2>
               <p className="text-body text-[var(--muted-foreground)]">
                 Une trajectoire mesurée, des choix techniques assumés, une
