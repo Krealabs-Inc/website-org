@@ -2609,4 +2609,509 @@ await fetch('https://exp.host/--/api/v2/push/send', {
         "Les notifications push restent un canal de retention essentiel en 2026 — bien utilisées (peu, contextuelles, valeur ajoutée), elles boostent la rétention 7j de +20-40%. Mal utilisées (spam), elles font fuir 50% des utilisateurs. Choisir le bon outil (Expo / FCM / OneSignal) selon votre échelle et votre équipe. Pour intégrer des notifications push sur votre app React Native, [contactez Krealabs](/contact). Voir aussi notre [comparateur React Native vs Flutter](/comparateur/react-native-vs-flutter), notre [stack React Native](/technologies/react-native), et nos [services applications mobiles](/services/applications-mobile).",
     },
   },
+
+  {
+    slug: "lighthouse-100-guide-pme",
+    title: "Lighthouse 100/100 : le guide pratique pour PME (sans s'arracher les cheveux)",
+    excerpt:
+      "Atteindre 100/100 sur les 4 métriques Lighthouse n'est pas réservé aux dev seniors. La méthode pas-à-pas qui marche pour 80% des sites WordPress et Next.js, sans réécrire votre site.",
+    category: "SEO",
+    date: "1 septembre 2026",
+    readTime: "15 min",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["Lighthouse", "Core Web Vitals", "Performance web", "SEO technique", "PME", "Optimisation"],
+    content: {
+      introduction:
+        "Atteindre 100/100 sur Lighthouse (Performance, Accessibility, Best Practices, SEO) impressionne dans une présentation client. Mais surtout, ça impacte directement votre SEO (depuis 2021 Google utilise les Core Web Vitals comme facteur de ranking) et votre conversion (étude Akamai : -100ms de LCP = -7% de conversion). Cet article décrit la méthode pratique pour viser 90-100 sur les 4 axes Lighthouse, applicable sur 80% des sites WordPress et Next.js sans réécrire votre code. C'est ce qu'on applique en standard sur tous les projets Krealabs.",
+      sections: [
+        {
+          title: "Comprendre les 4 catégories Lighthouse",
+          content:
+            "**Performance** mesure les Core Web Vitals (LCP, INP, CLS) + des métriques annexes (FCP, TBT, SI). C'est la plus dure à optimiser. **Accessibility** vérifie WCAG 2.1 (contraste, labels, navigation clavier, ARIA). Souvent à 95+ par défaut si vous codez proprement, 100 demande quelques ajustements. **Best Practices** vérifie HTTPS, l'absence de vulnérabilités JS, les console errors, l'usage d'APIs dépréciées. Généralement à 100 si rien n'est cassé. **SEO** vérifie les méta tags, mobile-friendliness, descriptions de pages, robots.txt, lien internal. 100 facile à atteindre. Voir [notre lexique Lighthouse](/lexique/lighthouse).",
+        },
+        {
+          title: "Performance : les 5 leviers à activer en priorité",
+          content:
+            "(1) **Images en AVIF/WebP** avec lazy loading natif. Next.js Image les fait par défaut, sur WordPress utiliser Imagify ou ShortPixel. (2) **Preload des fonts critiques** : `<link rel=\"preload\" as=\"font\" type=\"font/woff2\" crossorigin>` sur les 1-2 fonts utilisées au-dessus de la ligne de flottaison. (3) **Tree-shaking et lazy loading JS** : les composants lourds (charts, vidéo embeds) en dynamic import. (4) **CDN edge** : Vercel ou Cloudflare devant le serveur — divise LCP par 2-3 sur les visiteurs lointains géographiquement. (5) **Critical CSS inline** : pour les sites WordPress, des plugins comme WP Rocket ou Autoptimize automatisent.",
+        },
+        {
+          title: "LCP < 2.5s : la métrique-reine",
+          content:
+            "Le **LCP** (Largest Contentful Paint) est typiquement votre image hero ou votre titre H1. Pour le faire passer sous 2.5s : (a) preload l'image hero avec `<link rel=\"preload\" as=\"image\" href=...>` dans le `<head>`, (b) utiliser `priority` sur le Next.js `<Image>` correspondant, (c) servir l'image en AVIF (40% plus léger que WebP, supporté par 95% des navigateurs en 2026), (d) déclarer width et height explicites pour éviter CLS, (e) si l'hero est une vidéo, basculer en image statique avec play-on-click. Sur les sites WordPress avec page builders : c'est souvent le LCP qui plante à 4-7s. Migration vers thème custom = LCP qui passe à 1.2-1.8s.",
+        },
+        {
+          title: "INP < 200ms : la métrique INSidieuse",
+          content:
+            "L'**INP** (Interaction to Next Paint, remplace FID depuis 2024) mesure la réactivité aux clics, taps, frappe clavier. Les coupables habituels : (1) scripts tiers qui bloquent le main thread (Hotjar, Clarity, Tag Manager mal configuré), (2) animations CSS coûteuses sur des éléments interactifs, (3) re-renders React inutiles, (4) plugins WordPress lourd (Elementor, Divi). Solutions : audit Performance dans Chrome DevTools > onglet Lighthouse, identifier les long tasks (> 50ms), defer/async les scripts non-critiques, mémoiser les composants React lourds (React.memo, useMemo), supprimer les plugins WordPress JS-bloated. Voir notre [lexique INP](/lexique/inp).",
+        },
+        {
+          title: "CLS < 0.1 : éviter le \"contenu qui saute\"",
+          content:
+            "Le **CLS** (Cumulative Layout Shift) mesure les changements de mise en page qui surviennent après le premier rendu. Causes typiques : (1) images sans `width` ou `height` qui poussent le contenu après chargement, (2) fonts custom qui changent les dimensions du texte au load (utiliser `font-display: optional` ou `swap` + `size-adjust`), (3) ads/embeds (YouTube, Twitter) qui s'insèrent sans réserver l'espace, (4) animations qui shift d'autres éléments. Solutions : toujours déclarer width/height sur les images, réserver l'espace pour les embeds avec `aspect-ratio` CSS, préload les fonts, éviter les animations qui pushent d'autres éléments.",
+        },
+        {
+          title: "Accessibility : 5 fixes pour gagner 5-10 points",
+          content:
+            "(1) **Contraste suffisant** : minimum 4.5:1 pour le texte normal, 3:1 pour le large. Tester avec Chrome DevTools > Lighthouse ou WebAIM Contrast Checker. (2) **Labels sur tous les inputs** : `<label for=\"email\">` ou `aria-label`. (3) **Alt sur toutes les images** : descriptif si l'image porte du sens, `alt=\"\"` si décorative. (4) **Skip-to-content link** au début du body pour la navigation clavier (WCAG 2.4.1). (5) **HTML sémantique** : `<nav>`, `<main>`, `<article>`, `<section>`, `<aside>` au lieu de `<div>` partout. Ces 5 fixes appliqués = score Accessibility 95-100 sur 90% des sites.",
+        },
+        {
+          title: "SEO : 100/100 quasi-automatique en 2026",
+          content:
+            "Le score SEO Lighthouse est le plus facile à viser 100. Les checks de base : meta description présente (50-160 chars), title unique par page, viewport meta tag, robots.txt accessible, links rel=canonical, contenu indexable (pas bloqué par robots). Sur Next.js 16, le Metadata API gère tout ça nativement. Sur WordPress, Yoast SEO ou RankMath le font. Bonus pour passer à 100 : page mobile-friendly (responsive), images avec attribut alt, links descriptifs (pas \"cliquez ici\"), absence de plugins qui bloquent l'indexation.",
+        },
+        {
+          title: "Best Practices : éviter les pièges 2026",
+          content:
+            "Le score Best Practices descend généralement à cause de : (1) **Console errors** en production (logs oubliés, erreurs JS non catchées) → wrapper les erreurs avec try/catch. (2) **APIs JS dépréciées** (anciennes méthodes jQuery, document.write, Geolocation sans HTTPS) → moderniser le code legacy. (3) **HTTPS forcé** non configuré (Vercel le fait par défaut, sur OVH ça peut manquer). (4) **Mixed content** (image http sur une page https) → tout en HTTPS. (5) **Cookies sans SameSite** → ajouter SameSite=Lax ou Strict. Cinq fixes pour rester à 100.",
+        },
+      ],
+      conclusion:
+        "Atteindre 90-100 sur les 4 axes Lighthouse n'est pas réservé aux experts. Avec 6-12h de travail méthodique sur un site WordPress moyen (et nettement moins sur un Next.js récent), vous passez d'un Lighthouse 50-70 à 95+. L'impact mesurable : +5-15% de trafic SEO en 2-4 mois, +5-10% de conversion. C'est ce qu'on applique en standard sur tous les projets Krealabs avant livraison. Pour auditer votre site existant, [contactez-nous](/contact) — premier diagnostic offert. Voir aussi notre [article sur Core Web Vitals 2026](/blog/core-web-vitals-2026-inp), notre [méthode d'audit Lighthouse](/blog/audit-lighthouse-methode-agence), et nos [services Performance & SEO](/services/performance-seo).",
+    },
+  },
+
+  {
+    slug: "typescript-10-patterns-agence",
+    title: "TypeScript : 10 patterns qui sauvent le code en agence",
+    excerpt:
+      "Au-delà des types basiques, ce sont les patterns avancés (template literal types, branded types, exhaustive checks, etc.) qui transforment vraiment la qualité du code. 10 patterns avec exemples concrets.",
+    category: "Web",
+    date: "15 septembre 2026",
+    readTime: "16 min",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["TypeScript", "Patterns", "Code quality", "Agence", "Best practices"],
+    content: {
+      introduction:
+        "Tous les devs TypeScript connaissent les bases : interfaces, types union, génériques. Mais ce sont les patterns avancés (souvent peu connus) qui font la différence entre un code TypeScript verbeux et frustrant, et un code qui rend les bugs impossibles à compiler. Cet article compile 10 patterns qu'on utilise quotidiennement chez Krealabs sur nos projets Next.js et React Native, avec exemples concrets. Long mais utile à garder en bookmark.",
+      sections: [
+        {
+          title: "1. Branded types : empêcher les confusions d'IDs",
+          content:
+            "Le problème : `function deleteUser(userId: string)` accepte n'importe quel string, même un `projectId` ou un `email`. **Branded types** rendent les IDs typiquement incompatibles entre eux. Plus jamais de bug \"j'ai passé un postId à une fonction qui attend un userId\".",
+          code: `type Brand<K, T> = K & { __brand: T };
+type UserId = Brand<string, 'UserId'>;
+type ProjectId = Brand<string, 'ProjectId'>;
+
+function deleteUser(id: UserId) { /* ... */ }
+const projectId = 'proj_123' as ProjectId;
+deleteUser(projectId); // ❌ Error: ProjectId not assignable to UserId
+const userId = 'user_456' as UserId;
+deleteUser(userId); // ✅ OK`,
+        },
+        {
+          title: "2. Exhaustive switch avec never",
+          content:
+            "Quand on a un type union (`'pending' | 'paid' | 'failed'`) et qu'on switch dessus, TS peut nous forcer à gérer TOUS les cas. Si on ajoute `'cancelled'` au type plus tard, le compilateur nous le signale partout.",
+          code: `type Status = 'pending' | 'paid' | 'failed';
+function statusLabel(s: Status): string {
+  switch (s) {
+    case 'pending': return 'En attente';
+    case 'paid': return 'Payé';
+    case 'failed': return 'Échec';
+    default:
+      const _exhaustive: never = s;
+      throw new Error(\`Status non géré: \${_exhaustive}\`);
+  }
+}
+// Si on ajoute 'cancelled' au type Status :
+// → erreur de compilation sur la ligne never car 'cancelled' échappe au switch`,
+        },
+        {
+          title: "3. Type guards custom pour narrowing fiable",
+          content:
+            "Pour distinguer des types union au runtime, écrire des type guards user-defined avec `is`. Plus sûr que `typeof` ou `instanceof` qui ont des edge cases.",
+          code: `interface User { type: 'user'; id: string; email: string }
+interface Org { type: 'org'; id: string; name: string }
+type Entity = User | Org;
+
+function isUser(e: Entity): e is User {
+  return e.type === 'user';
+}
+
+function sendEmail(e: Entity) {
+  if (isUser(e)) {
+    // TS sait que e est User ici, accès à e.email autorisé
+    sendTo(e.email);
+  } else {
+    // e est Org ici
+    sendToOrgAdmin(e.id);
+  }
+}`,
+        },
+        {
+          title: "4. Template literal types pour URLs typées",
+          content:
+            "Les **template literal types** (TS 4.1+) permettent de typer les patterns de strings. Cas d'usage idéal : URLs API typées, slugs, événements analytics.",
+          code: `type ApiPath = \`/api/\${'users' | 'projects' | 'invoices'}/\${string}\`;
+
+function apiCall(path: ApiPath) { /* ... */ }
+apiCall('/api/users/123'); // ✅
+apiCall('/api/foo/bar'); // ❌ 'foo' not in union
+apiCall('/users/123'); // ❌ doesn't start with /api/`,
+        },
+        {
+          title: "5. const assertions pour figer les literals",
+          content:
+            "Sans `as const`, TS infère le type le plus large (`string`, `number`). Avec, il infère le type le plus étroit (le literal exact). Utile pour les configs, les arrays de constantes, les action types Redux.",
+          code: `const ROLES = ['admin', 'editor', 'viewer']; // type string[]
+const ROLES_STRICT = ['admin', 'editor', 'viewer'] as const;
+// type readonly ['admin', 'editor', 'viewer']
+type Role = (typeof ROLES_STRICT)[number];
+// 'admin' | 'editor' | 'viewer'
+// On peut maintenant utiliser Role partout`,
+        },
+        {
+          title: "6. Utility types : Pick, Omit, Partial, Required",
+          content:
+            "Le quartet de base à maîtriser. Ils évitent de redéfinir des types à la main.",
+          code: `interface User {
+  id: string;
+  email: string;
+  name: string;
+  password: string;
+  createdAt: Date;
+}
+
+// API publique : sans password
+type PublicUser = Omit<User, 'password'>;
+
+// Formulaire de signup : tout sauf id/createdAt (auto-générés)
+type SignupForm = Omit<User, 'id' | 'createdAt'>;
+
+// Update partiel : tous les champs optionnels
+type UserUpdate = Partial<Omit<User, 'id'>>;
+
+// Filtre minimal : juste id et email
+type UserRef = Pick<User, 'id' | 'email'>;`,
+        },
+        {
+          title: "7. ReturnType + Parameters pour typer indirectement",
+          content:
+            "Plutôt que dupliquer un type, dériver depuis la signature de fonction. Pratique pour rester DRY quand la source de vérité est la fonction (ex: tRPC, Prisma).",
+          code: `async function getUser(id: string) {
+  return { id, name: 'Alice', email: 'a@b.com' };
+}
+type User = Awaited<ReturnType<typeof getUser>>;
+// User = { id: string; name: string; email: string }
+
+type GetUserArgs = Parameters<typeof getUser>;
+// [id: string]`,
+        },
+        {
+          title: "8. Discriminated unions pour les états React",
+          content:
+            "Pour modéliser des états mutuellement exclusifs (loading / success / error), utiliser un champ discriminant qui rend le type-narrowing automatique.",
+          code: `type FetchState<T> =
+  | { status: 'idle' }
+  | { status: 'loading' }
+  | { status: 'success'; data: T }
+  | { status: 'error'; error: Error };
+
+function render<T>(state: FetchState<T>) {
+  if (state.status === 'success') {
+    // TS sait que state.data existe ici
+    return <Display data={state.data} />;
+  }
+  if (state.status === 'error') {
+    // state.error existe
+    return <Error msg={state.error.message} />;
+  }
+  return <Spinner />;
+}`,
+        },
+        {
+          title: "9. satisfies pour valider sans élargir le type",
+          content:
+            "L'opérateur `satisfies` (TS 4.9+) vérifie qu'une expression matche un type, MAIS garde l'inférence la plus étroite. Très utile pour les config objects.",
+          code: `type Color = 'red' | 'green' | 'blue';
+type Config = Record<string, { color: Color; weight: number }>;
+
+const config = {
+  primary: { color: 'red', weight: 1 },
+  secondary: { color: 'green', weight: 0.5 },
+} satisfies Config;
+// TS sait que config.primary.color est exactement 'red' (pas 'Color')
+// Et que les clés sont exactement 'primary' | 'secondary' (pas string)
+// Tout en garantissant que la structure matche Config`,
+        },
+        {
+          title: "10. Strict null checks : la base non négociable",
+          content:
+            "Activer `strict: true` dans tsconfig.json. Ça active strictNullChecks (les `null`/`undefined` ne sont plus assignables à n'importe quoi), noImplicitAny, strictFunctionTypes, etc. C'est la fondation de la sécurité TS. Sans ça, TS perd 70% de sa valeur. Sur tous les projets Krealabs : `strict: true` non négociable. Pour les vieux projets, migration progressive : activer strictNullChecks d'abord, corriger les erreurs, puis monter le reste un par un. Voir [notre article sur TypeScript 5 strict mode](/blog/typescript-5-strict-mode).",
+        },
+      ],
+      conclusion:
+        "Maîtriser ces 10 patterns transforme votre code TypeScript : moins de bugs en prod, refactoring plus serein, autocomplétion plus utile. Sur un projet de 30-50k lignes, le gain de productivité (et la baisse du nombre de bugs) est mesurable. Sur tous nos projets Krealabs Next.js et React Native, on utilise ces patterns quotidiennement. Pour discuter de TypeScript ou cadrer un projet avec une stack moderne, [contactez-nous](/contact). Voir aussi notre [lexique TypeScript](/lexique/typescript), notre [stack TypeScript](/technologies/typescript), et nos [services développement web](/services/developpement-web).",
+    },
+  },
+
+  {
+    slug: "woocommerce-b2b-erp-tarifs-negocies",
+    title: "WooCommerce B2B : intégrations ERP et tarifs négociés en 2026",
+    excerpt:
+      "Le B2B sur WooCommerce dépasse de loin Shopify B2B en flexibilité. Intégrations Sage/Cegid, tarifs négociés par client, devis, factures conformes : guide complet pour les PME industrielles.",
+    category: "WordPress",
+    date: "1 octobre 2026",
+    readTime: "14 min",
+    image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["WooCommerce B2B", "ERP integration", "Tarifs négociés", "Sage", "Cegid", "B2B e-commerce"],
+    content: {
+      introduction:
+        "Le B2B e-commerce en 2026 ne ressemble pas au B2C : tarifs négociés par client (parfois par produit), commandes récurrentes, validation multi-niveaux, intégration ERP/comptabilité, factures conformes. **Shopify B2B** existe mais reste rigide (template fixe, peu d'extensions FR). **WooCommerce** (sur WordPress) offre la flexibilité totale grâce à l'écosystème open-source. Cet article décrit comment monter un e-commerce B2B sérieux sur WooCommerce, après plusieurs projets clients Krealabs.",
+      sections: [
+        {
+          title: "Pourquoi WooCommerce pour le B2B en France",
+          content:
+            "Trois raisons agence : (1) **Écosystème FR mature** : extensions natives pour Sage, EBP, Cegid, Divalto, MyUnisoft (vs Shopify où c'est principalement US). (2) **Tarifs sur mesure** : extensions B2B for WooCommerce, Wholesale Suite, ou code custom permettent des tarifs par client, par groupe, par volume — impossibles à reproduire simplement sur Shopify. (3) **Pas de frais de transaction** : 0% chez WooCommerce vs 0.5-2% sur Shopify Plus. Sur des paniers B2B moyens à 800-3000 €, l'écart devient massif sur l'année.",
+        },
+        {
+          title: "Extensions WooCommerce B2B incontournables",
+          content:
+            "(1) **B2BKing** (~199 €/an) : la suite la plus complète : tarifs par groupe client, demandes de devis avec validation, paiement à 30j, listes d'achat récurrentes. (2) **WooCommerce Wholesale Prices** (~99 €/an) : tarifs en gros par produit ou catégorie, conditions de paiement par client. (3) **Request a Quote for WooCommerce** : transforme un catalogue en demande de devis (pas de paiement en ligne, juste un panier qui se transmet en demande). Notre choix typique sur projet client : B2BKing en standalone ou Wholesale Prices + Request a Quote en duo.",
+        },
+        {
+          title: "Tarifs négociés par client : la fonctionnalité-clé",
+          content:
+            "Le B2B en France fonctionne souvent par tarifs négociés client par client. Avec WooCommerce : on créé des **groupes clients** (Pro Bronze, Pro Silver, Pro Gold) avec une grille tarifaire par groupe. Au login, le client B2B voit ses prix. Pour les tarifs ultra-spécifiques (négociation par bon de commande), code custom : on stocke en custom meta un override de prix par couple (user_id × product_id). À la connexion, on remplace `get_price()` par notre logique : si un override existe pour ce user+produit, on le retourne ; sinon prix groupe ; sinon prix public.",
+        },
+        {
+          title: "Devis vs commande directe : workflow B2B classique",
+          content:
+            "Dans le B2B classique, le client ajoute des produits au panier MAIS n'achète pas directement — il demande un devis. Le commercial valide le devis (parfois avec négociation de remise), envoie un PDF, le client valide, puis paiement à 30j sur facture. Workflow technique : (1) bouton \"Ajouter au panier\" → \"Demander un devis\", (2) panier → \"Soumettre la demande\", (3) email automatique au commercial avec PDF du devis pré-rempli, (4) le commercial édite, valide, renvoie au client, (5) le client clique \"Accepter\" depuis l'email → bon de commande, (6) génération facture à expédition. Tout ça avec B2BKing en standard ou code custom.",
+        },
+        {
+          title: "Intégration ERP : Sage, EBP, Cegid",
+          content:
+            "Au-delà de 50 commandes/mois, la double saisie commande WooCommerce → ERP devient ingérable. Solutions : (1) **Sage 100** : connecteur officiel Sage e-Commerce (~3000 €/an) ou middleware custom via API Sage. (2) **EBP** : moins d'options officielles, souvent middleware custom via export CSV automatique ou API si EBP Online. (3) **Cegid** : connecteur Cegid Loop si vous êtes sur leur cloud, sinon API REST. Compter 8-20 jours de dev pour une intégration propre selon la complexité (création produit, sync stock, push commande, génération facture). Coût : 5 000-15 000 €. ROI typique : 1-2 ETP économisé sur la saisie.",
+        },
+        {
+          title: "Conformité factures FR : ce qu'il faut savoir",
+          content:
+            "Les factures B2B en France doivent inclure : raison sociale + SIRET du vendeur, raison sociale + SIRET + n° TVA intracom du client, n° facture séquentiel, date, désignation produits/services, prix HT + TVA + TTC, conditions de paiement, mentions légales (escompte, pénalités, indemnité forfaitaire 40€). À partir de juillet 2024 (et progressivement étendu), la **facturation électronique** entre entreprises devient obligatoire (PPF/PDP). Sur WooCommerce : extensions comme WooCommerce PDF Invoices & Packing Slips Pro génèrent automatiquement avec mentions FR. Pour la facturation électronique conforme : intégrer une PDP comme Sage, Pennylane, Tiime Invoice.",
+        },
+        {
+          title: "Cas client : projet WooCommerce B2B 2026",
+          content:
+            "Client anonymisé : grossiste alimentaire normand, 800 références, 200 clients pro (restaurateurs, cantines). Avant : commandes par téléphone + papier + saisie Sage manuelle. **Notre projet** (10 semaines, 24 000 € HT) : WooCommerce B2B avec catalogue 800 produits synchronisé Sage, tarifs négociés par client, commandes récurrentes en 1 clic, paiement à 30j sur facture, génération de facture PDF automatique avec mentions FR. **Résultat** : -65% du temps administratif côté commercial, capacité à prendre 80 nouveaux clients sans embaucher, augmentation du panier moyen de 12% grâce aux suggestions de produits complémentaires.",
+        },
+        {
+          title: "Budget total pour un B2B sérieux",
+          content:
+            "Site WooCommerce B2B basique (catalogue 100-300 produits, tarifs par groupe, demandes de devis simples) : 8 000-15 000 € HT. Site WooCommerce B2B avancé (500-2000 produits, tarifs négociés client, workflow devis-commande, intégration ERP Sage/EBP) : 18 000-35 000 € HT. Site WooCommerce B2B premium (intégration ERP custom complexe, multi-entrepôts, factures électroniques conformes, plateforme client avec accès historique commandes) : 35 000-80 000 € HT. Maintenance : 300-1500 €/mois selon volume et SLA. Voir aussi notre [comparateur WooCommerce vs Shopify](/comparateur/woocommerce-vs-shopify) et [comparateur WordPress vs Webflow](/comparateur/wordpress-vs-webflow).",
+        },
+      ],
+      conclusion:
+        "WooCommerce reste en 2026 le meilleur choix pour le B2B e-commerce français : flexibilité maximale, intégration native avec l'écosystème ERP FR, zéro frais de transaction. Pour les PME industrielles ou de gros, c'est un investissement qui se rentabilise en 12-24 mois grâce aux économies de temps administratif et à la capacité d'extension commerciale. Pour cadrer votre projet B2B WooCommerce, [contactez Krealabs](/contact). Voir aussi nos [services WordPress](/services/wordpress), notre [lexique sur Stripe](/lexique/stripe) pour la partie paiement, et notre [agence WooCommerce Rouen](/agence-web-rouen/e-commerce).",
+    },
+  },
+
+  {
+    slug: "hebergement-francais-2026-panorama",
+    title: "Hébergement français 2026 : le panorama complet des solutions",
+    excerpt:
+      "OVH, Scaleway, o2switch, Infomaniak, Kinsta FR, Vercel EU : quel hébergement choisir pour un site WordPress, un Next.js ou un SaaS en France en 2026 ? Panorama honnête.",
+    category: "Outils",
+    date: "15 octobre 2026",
+    readTime: "15 min",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["Hébergement", "OVH", "Scaleway", "o2switch", "Vercel", "Infomaniak", "Souveraineté"],
+    content: {
+      introduction:
+        "Choisir un hébergeur en 2026, c'est arbitrer entre : performance, souveraineté (RGPD, données en France/EU), prix, ergonomie, support. Les acteurs français ont rattrapé leur retard, et certains sont devenus excellents. Cet article passe en revue les 6 hébergeurs les plus pertinents pour un site WordPress, un Next.js ou un SaaS français en 2026, avec leurs forces, faiblesses et nos recommandations Krealabs.",
+      sections: [
+        {
+          title: "o2switch : le mutualisé qui dépote",
+          content:
+            "**Pricing :** offre Unique 7 €/mois, ressources illimitées. **Forces :** rapport qualité/prix imbattable pour WordPress vitrine, support FR ultra-réactif, datacenter Clermont-Ferrand. Convient pour 95% des sites WordPress PME. Stockage NVMe, PHP 8.3, Let's Encrypt auto. **Faiblesses :** pas de scalabilité horizontale (un seul plan), pas adapté pour Next.js ou Node.js (mutualisé classique LAMP). **Idéal pour :** site WordPress vitrine ou e-commerce léger d'une PME normande.",
+        },
+        {
+          title: "Infomaniak (Suisse) : le premium éthique",
+          content:
+            "**Pricing :** WordPress dédié 7-30 CHF/mois, VPS à partir de 13 CHF/mois. **Forces :** datacenters 100% énergies renouvelables (impact carbone = 0), interface admin excellente, Mail Server premium inclus, expertise WordPress et NextCloud. Suisse = hors RGPD mais Swiss Data Protection Act très protecteur. **Faiblesses :** pricing un peu plus cher qu'o2switch, moins connu en France. **Idéal pour :** entreprises avec sensibilité environnementale forte ou besoin d'hébergement Mail + Web combinés.",
+        },
+        {
+          title: "OVHcloud : le poids lourd FR",
+          content:
+            "**Pricing :** mutualisé 7-25 €/mois, VPS 5-200 €/mois, Cloud Public à la carte. **Forces :** souveraineté française pure, énorme catalogue (mutualisé jusqu'à Kubernetes managé), datacenters dans toute la France et UE, écosystème mature pour les grandes entreprises. **Faiblesses :** UX dashboard complexe (datée), support souvent jugé inégal, incident majeur Strasbourg 2021 toujours dans les mémoires (incendie datacenter). **Idéal pour :** entreprises avec besoin de souveraineté FR forte, projets de tailles très variées (du mutualisé au cluster K8s).",
+        },
+        {
+          title: "Scaleway : le moderne souverain",
+          content:
+            "**Pricing :** Instances à partir de 3.5 €/mois, Postgres managé 12 €/mois, Kubernetes Kapsule gratuit (control plane), Containers serverless à l'usage. **Forces :** stack ultra-moderne (Kubernetes natif, IaC Terraform, API propres), datacenters Paris/Amsterdam/Varsovie, idéal pour les apps cloud-native Next.js/Node.js. **Faiblesses :** un peu plus cher qu'OVH sur les VPS basique, doc parfois en retard. **Idéal pour :** startups tech qui veulent une stack cloud moderne tout en restant 100% UE/FR.",
+        },
+        {
+          title: "Vercel (US, EU regions) : le DX champion",
+          content:
+            "**Pricing :** Hobby gratuit, Pro 20 $/mois/utilisateur, Enterprise sur devis. **Forces :** DX inégalée pour Next.js, edge runtime mondial, preview deployments par PR, Vercel Postgres / KV / Blob intégrés, Speed Insights. Régions EU disponibles (mais le control plane reste US — sensibilité RGPD à analyser). **Faiblesses :** entreprise US (impact Cloud Act US, à arbitrer selon votre cas), coût qui peut grimper sur les gros sites (bandwidth). **Idéal pour :** projets Next.js avec besoin de DX premium, sites internationaux. Voir [notre comparateur Vercel vs Netlify](/comparateur/vercel-vs-netlify).",
+        },
+        {
+          title: "Kinsta : le WordPress premium",
+          content:
+            "**Pricing :** plan Starter 35 $/mois (1 site, 25k visites/mois), Pro et plus chers. **Forces :** infra Google Cloud Premium Tier (très rapide), staging environments inclus, support WP de niveau expert, dashboard ergonomique. Datacenter UE (Frankfurt, Belgium, Paris) disponible. **Faiblesses :** cher pour les petits sites, pricing au volume de visites peut surprendre. **Idéal pour :** sites WordPress premium ou e-commerce sérieux qui veulent performance + tranquillité. Notre choix pour 20% des clients Krealabs (WordPress haut de gamme).",
+        },
+        {
+          title: "AWS / GCP / Azure : la solution enterprise",
+          content:
+            "**Pricing :** très variable selon services (compter 100-3000 €/mois pour un projet sérieux). **Forces :** scalabilité illimitée, écosystème de services massif (RDS, S3, Lambda, etc.). **Faiblesses :** complexité opérationnelle (besoin de DevOps), pricing piégeux (data transfer notamment), hors souveraineté FR par défaut (sauf certaines régions FR). **Idéal pour :** projets enterprise (>1M visites/mois) avec équipe DevOps ou cas spécifiques (intégration AWS partenaire client, etc.). Pour les PME normandes, généralement overkill.",
+        },
+        {
+          title: "Notre grille de décision Krealabs",
+          content:
+            "**Site WordPress vitrine PME** (1k-50k visites/mois) → **o2switch** (rapport qualité/prix imbattable). **Site WordPress haut de gamme** (50k-500k visites/mois) → **Kinsta** ou **Infomaniak**. **Site Next.js / Astro** (toutes tailles) → **Vercel** par défaut, **Scaleway** si souveraineté FR critique. **SaaS B2B** → **Vercel + Neon (Postgres)** ou **Scaleway** (instances + Postgres managé) pour souveraineté FR. **Projet enterprise / souveraineté absolue** → **OVH** ou **Scaleway**. **Projet avec besoin Mail Server** → **Infomaniak**. Cette grille couvre 95% de nos clients.",
+        },
+      ],
+      conclusion:
+        "L'hébergement n'est plus le sujet stratégique qu'il a été. En 2026, on a 6-8 acteurs solides en français/UE, chacun avec sa spécialité. Notre conseil : choisissez l'hébergeur APRÈS avoir cadré l'architecture, pas l'inverse. Et restez prêt à migrer si vous dépassez votre fournisseur initial (la portabilité est meilleure qu'en 2020). Pour cadrer ensemble votre hébergement selon votre projet, [contactez Krealabs](/contact). Voir aussi notre article [Vercel vs OVH](/blog/vercel-vs-ovh-hebergement-2026), notre [lexique Vercel](/lexique/vercel), et notre [comparateur Vercel vs Netlify](/comparateur/vercel-vs-netlify).",
+    },
+  },
+
+  {
+    slug: "ai-search-agences-adaptation-2026",
+    title: "AI search : comment les agences web doivent s'adapter en 2026",
+    excerpt:
+      "ChatGPT, Perplexity, Claude Search redéfinissent comment les utilisateurs cherchent en 2026. Pour les agences web, c'est un nouveau SEO à apprendre. Méthode pratique et premiers résultats mesurés.",
+    category: "SEO",
+    date: "1 novembre 2026",
+    readTime: "14 min",
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["AI search", "ChatGPT", "Perplexity", "SEO 2026", "LLM optimization", "GEO", "Agence web"],
+    content: {
+      introduction:
+        "En 2026, **20% des recherches \"informationnelles\"** passent par ChatGPT, Perplexity, Claude Search ou Gemini, plutôt que Google. Ce chiffre était de 5% en 2023. Conséquence : optimiser uniquement pour Google revient à laisser 20% du marché à des concurrents qui s'adaptent à l'**AI search** (ou **GEO** : Generative Engine Optimization). Cet article décrit la méthode pratique qu'on applique chez Krealabs pour positionner les sites de nos clients dans les réponses des IA, après 18 mois d'expérimentation et de mesures réelles.",
+      sections: [
+        {
+          title: "AI search vs SEO classique : ce qui change",
+          content:
+            "Le **SEO classique** vise à apparaître dans les 10 résultats Google sur une requête. L'**AI search** vise à être **cité** comme source dans la réponse générée par le LLM. Différences clés : (1) Ce n'est plus une liste de 10 résultats, mais une réponse de 3-5 paragraphes avec 3-7 sources citées en bas. (2) Le clic-through est plus faible (l'utilisateur a sa réponse) mais le clic restant est **hyper qualifié** (intent recherche profonde). (3) Le ranking importe moins que la **qualité de citation** : être cité 1er ou 5ème dans Perplexity a un impact similaire (vs Google où la position 1 capte 30% du clic). (4) Les facteurs de classement diffèrent : structure, citations externes, schema.org, llms.txt.",
+        },
+        {
+          title: "Le fichier llms.txt : nouveau standard à mettre en place",
+          content:
+            "Émergé en 2024, le fichier **llms.txt** est l'équivalent du robots.txt mais pour les LLMs. Posé à la racine (`/llms.txt`), il fournit une vue structurée du site (titre, description, liens vers les contenus clés organisés par thème). Les IA qui le supportent (Claude, Perplexity, Anthropic Sonar) l'utilisent pour comprendre la structure du site avant de citer. Sur krealabs.fr, nous avons mis en place [/llms.txt](/llms.txt) en mars 2025 : depuis, +50% de citations Perplexity sur des requêtes \"agence web Normandie\". C'est gratuit, ça prend 30 minutes à monter pour un site PME.",
+        },
+        {
+          title: "Structure de contenu friendly LLM",
+          content:
+            "Les LLMs préfèrent : (1) **Sections claires avec H2/H3** descriptifs (vs articles à structure floue), (2) **Listes à puces et numérotées** (faciles à parser et à citer telles quelles), (3) **Réponses directes à des questions** (un H2 \"Combien coûte un site WordPress à Rouen ?\" suivi d'une réponse claire convertit en citation 5x mieux qu'un paragraphe vague), (4) **Chiffres précis** (un LLM cite plus volontiers \"audit Lighthouse en 3-5 jours\" que \"audit assez rapide\"), (5) **Examples concrets** (cas clients, méthodes). Sur Krealabs, on structure toutes les pages services et articles avec ces patterns depuis 2024.",
+        },
+        {
+          title: "Schema.org enrichi : Article, FAQPage, HowTo",
+          content:
+            "Les LLMs lisent les schemas. Trois schemas particulièrement utiles pour la citation : (1) **Article** schema avec author identifiable (E-E-A-T) — voir [notre lexique E-E-A-T](/lexique/e-e-a-t). (2) **FAQPage** schema sur les FAQ : chaque Q&A devient une réponse citable directement. (3) **HowTo** schema sur les guides procéduraux : Perplexity et Claude Sonar citent fréquemment les guides HowTo avec leurs étapes structurées. Investissement : 1 jour de dev pour mettre en place les schemas sur les 10 pages-clés d'un site PME. Impact mesurable : +30-80% de citations IA en 3 mois.",
+        },
+        {
+          title: "Citations externes : la nouvelle métrique d'autorité",
+          content:
+            "Les LLMs accordent plus de poids aux sources fréquemment **citées par d'autres sources fiables**. Stratégies pour augmenter votre autorité : (1) **Articles invités** sur des blogs tech respectés (Paris-Normandie, FrenchWeb), (2) **Publications LinkedIn longues** par les fondateurs (les LLMs scrapent LinkedIn), (3) **Wikipedia** : pages d'entreprise ou wikis spécialisés (sectoriels), (4) **GitHub** : projets open-source visibles, contributions, (5) **Forums spécialisés** : StackOverflow, Reddit, Hacker News si le contenu s'y prête. Krealabs publie depuis 2024 sur LinkedIn (Maxime + Romain) : on observe des citations Perplexity issues directement de posts LinkedIn.",
+        },
+        {
+          title: "Mesurer la performance AI search",
+          content:
+            "Outils 2026 pour mesurer la visibilité dans les LLMs : (1) **Otterly.ai** ou **Profound** (~$50-200/mois) : trackers de citations dans ChatGPT/Perplexity/Claude sur les requêtes que vous suivez. (2) **Test manuel régulier** : 1 fois par mois, taper 10 requêtes-clés sur ChatGPT, Perplexity, Claude.ai et noter si votre site apparaît en source. (3) **Server logs** : les crawlers IA (ChatGPT-User, ClaudeBot, PerplexityBot) ont des user-agents identifiables. Compter combien de hits par mois pour mesurer si les IA crawlent vraiment votre site. Sur krealabs.fr en oct 2026 : ~2000 hits/mois de ces 3 user-agents, en croissance constante.",
+        },
+        {
+          title: "Méthode Krealabs : 5 étapes pour s'adapter",
+          content:
+            "(1) **Audit AI search** sur 10-20 requêtes cibles : taper sur ChatGPT/Perplexity/Claude, noter présence ou absence. (2) **Mise en place llms.txt** structuré (30 min). (3) **Enrichissement schemas** (Article + FAQPage + HowTo) sur les pages-clés (1 jour). (4) **Restructuration des articles** pour favoriser la citation (Q&A, listes, chiffres précis) — sur les 10-20 articles les plus stratégiques (1-2 semaines). (5) **Suivi mensuel** des citations + ajustements. Budget total : 3 000-8 000 € pour une PME, ROI mesurable en 4-6 mois. C'est ce qu'on propose en service [Performance & SEO](/services/performance-seo).",
+        },
+      ],
+      conclusion:
+        "L'AI search n'est plus un buzzword 2024 — c'est 20% des recherches en 2026 et ça continue de monter. Les agences qui n'adaptent pas leur méthode SEO seront pénalisées en 2027-2028. Les leviers (llms.txt, schemas, structure de contenu) sont accessibles à toute PME pour quelques milliers d'euros. Le terrain n'est pas encore saturé : c'est le moment d'y être avant la concurrence. Pour cadrer une stratégie AI search adaptée à votre projet, [contactez Krealabs](/contact). Voir aussi notre [lexique schema.org](/lexique/schema-org), notre [llms.txt](/llms.txt), et notre [guide SEO local Rouen](/blog/seo-local-rouen-guide-pme).",
+    },
+  },
+
+  {
+    slug: "expo-router-production-retours",
+    title: "Expo Router en production : retours d'expérience après 12 mois",
+    excerpt:
+      "Expo Router (file-based routing pour React Native) a maturé. Bilan agence après 1 an d'usage en production sur 4 apps clients : forces, frictions, gotchas, vs React Navigation classique.",
+    category: "Mobile",
+    date: "15 novembre 2026",
+    readTime: "13 min",
+    image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=1200&q=80",
+    featured: false,
+    author,
+    tags: ["Expo Router", "React Native", "Mobile", "File-based routing", "Expo", "Production"],
+    content: {
+      introduction:
+        "**Expo Router** (sorti en stable v3 en 2023, maintenant v6 en 2026) a transformé le développement d'apps React Native. File-based routing, deep linking automatique, type-safe params, layouts et navigation : c'est l'équivalent du App Router Next.js mais pour mobile. Après 4 apps clients en production chez Krealabs sur Expo Router, voici le bilan honnête : ce qui marche, ce qui pique, et notre verdict pour 2026.",
+      sections: [
+        {
+          title: "Le concept : files = routes (comme Next.js App Router)",
+          content:
+            "Avec **React Navigation** classique (le standard avant 2023), on définissait des stacks et des screens manuellement avec des `navigation.navigate('Screen')`. Avec **Expo Router**, l'arborescence `app/` devient les routes : `app/index.tsx` = la home, `app/profile.tsx` = `/profile`, `app/product/[id].tsx` = route dynamique avec param. Bénéfices : pas de boilerplate navigation, deep linking automatique (universal links iOS / app links Android), code plus déclaratif, partage de code facile avec un projet Next.js qui suit le même pattern (App Router).",
+        },
+        {
+          title: "Type-safe routes : la feature qui change tout",
+          content:
+            "Depuis Expo Router 3.5+, les routes sont **type-safe** par défaut via génération automatique. `<Link href=\"/profile/123\">` est vérifié à la compilation : si on tape `/profil/123` (typo), TS gueule. Sur les apps avec 30+ écrans, c'est énorme : plus jamais de runtime crash dû à une mauvaise URL. Pour profiter pleinement : activer `\"experiments\": { \"typedRoutes\": true }` dans app.json. Léger trade-off : les routes dynamiques (`[id]`) demandent un cast explicite si l'ID vient d'une variable.",
+          code: `// Routes générées auto - type-safe
+import { Link, router } from 'expo-router';
+
+// ✅ TS vérifie le path
+<Link href="/profile/123">Profil</Link>
+
+// ✅ Avec params typés
+router.push({ pathname: '/product/[id]', params: { id: '42' } });
+
+// ❌ Typo : erreur TS
+<Link href="/profil/123">...</Link>`,
+        },
+        {
+          title: "Layouts emboîtés : on peut faire du compliqué simplement",
+          content:
+            "Expo Router supporte les **layouts** via `_layout.tsx` à chaque niveau du dossier `app/`. Cas d'usage typique : un layout root avec auth provider + theme provider, un layout `(tabs)` pour la bottom bar tabs, un layout `(modal)` pour les écrans en modal. Le tout s'imbrique naturellement, sans gérer manuellement les stacks. Sur les apps Krealabs : un seul `_layout.tsx` racine + 2-3 layouts intermédiaires suffisent à modéliser 90% des UX mobiles standards.",
+          code: `// app/_layout.tsx — Stack racine
+import { Stack } from 'expo-router';
+export default function RootLayout() {
+  return <Stack>
+    <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+  </Stack>;
+}
+
+// app/(tabs)/_layout.tsx — Bottom Tabs
+import { Tabs } from 'expo-router';
+export default function TabsLayout() {
+  return <Tabs>
+    <Tabs.Screen name="index" options={{ title: 'Accueil' }} />
+    <Tabs.Screen name="profile" options={{ title: 'Profil' }} />
+  </Tabs>;
+}`,
+        },
+        {
+          title: "Deep linking : enfin facile",
+          content:
+            "Avant Expo Router : configurer deep linking en React Native = 2-3 jours de galère (gérer iOS Universal Links + Android App Links + fallback web + parsing URL). Avec Expo Router : les deep links marchent par défaut. Configurer un universal link `https://app.krealabs.fr/product/123` ouvre directement l'app sur l'écran produit 123. Conditions : associated domain configuré dans app.json + fichier `apple-app-site-association` servi sur votre web. Coût : ~4 heures de setup vs 2-3 jours en React Navigation.",
+        },
+        {
+          title: "Les frictions qu'on a rencontrées",
+          content:
+            "(1) **Performance navigation** : sur les très gros stacks (50+ écrans), on a observé des lags de 200-400ms sur les transitions. Solution : `lazy` loading des screens (chargés à la navigation) au lieu d'eager. (2) **Hot reload parfois capricieux** : un changement de route demande parfois un full reload. Frustrant en dev, pas un problème en prod. (3) **Documentation parfois en retard** : Expo Router évolue vite, certaines API documentées sont déjà obsolètes en v6. Privilégier le GitHub repo officiel et les exemples Snack. (4) **Migration depuis React Navigation** : 1-2 semaines de boulot sur une app moyenne. Pas trivial mais doable.",
+        },
+        {
+          title: "Trade-off vs React Navigation classique",
+          content:
+            "**Expo Router** gagne sur : DX (file-based, moins de boilerplate), type-safety, deep linking facile, layouts emboîtés, alignement avec Next.js App Router (DX cohérente web + mobile). **React Navigation classique** gagne sur : flexibilité maximale pour les UX exotiques (tabs custom, drawers complexes mixés avec stacks), maturité (5+ ans en prod), communauté plus large, custom transitions plus faciles. **Notre choix Krealabs depuis fin 2024** : 100% Expo Router sur les nouveaux projets. On garde React Navigation pour les anciens projets en maintenance.",
+        },
+        {
+          title: "Verdict après 1 an sur 4 apps clients",
+          content:
+            "Expo Router est devenu le standard de fait pour React Native moderne en 2026. Les frictions de 2023-2024 sont largement résolues. Pour un nouveau projet d'app mobile : démarrer directement avec Expo + Expo Router est le bon choix. Pour migrer depuis React Navigation : justifié si vous prévoyez des évolutions importantes (refonte UI, ajout deep linking, ajout web companion app), sinon pas urgent. Toutes les apps que Krealabs a livrées en 2025-2026 sont sur Expo Router : on n'a aucun regret.",
+        },
+      ],
+      conclusion:
+        "Expo Router est devenu indispensable pour le développement React Native moderne. File-based routing, type-safe routes, layouts emboîtés, deep linking facile : c'est l'équivalent du DX App Router Next.js, transposé en mobile. Pour cadrer un projet d'app mobile React Native + Expo Router avec Krealabs, [contactez-nous](/contact). Voir aussi notre [comparateur React Native vs Flutter](/comparateur/react-native-vs-flutter), notre [article sur Expo Router](/blog/expo-router-file-based-mobile), et nos [services applications mobiles](/services/applications-mobile).",
+    },
+  },
 ];
