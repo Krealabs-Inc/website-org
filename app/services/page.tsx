@@ -18,7 +18,7 @@ import { ServiceCta } from "@/components/services/service-cta";
 export const metadata: Metadata = {
   title: "Nos services",
   description:
-    "Agence web à Rouen : développement web, applications mobiles, design UI/UX, performance & SEO. Quatre expertises, une seule équipe pour vos projets digitaux en Normandie.",
+    "Agence web à Rouen : WordPress, développement web custom, applications mobiles, design UI/UX, performance & SEO. Cinq expertises, une seule équipe pour vos projets digitaux en Normandie.",
   alternates: { canonical: "https://krealabs.fr/services" },
 };
 
@@ -33,7 +33,7 @@ export default function ServicesIndexPage() {
           <div className="max-w-4xl">
             <Eyebrow dot className="mb-8">Services · Krealabs Rouen</Eyebrow>
             <h1 className="text-display">
-              Quatre <em>expertises</em>,
+              Cinq <em>expertises</em>,
               <br />
               un seul interlocuteur.
             </h1>
