@@ -9,7 +9,11 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
-import { blogPosts } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/blog-data";
+
+// ISR : revalide toutes les heures → les articles à publication différée
+// apparaissent dans la liste catégorie dès leur date prévue.
+export const revalidate = 3600;
 
 const BASE_URL = "https://krealabs.fr";
 
@@ -115,7 +119,7 @@ export default async function BlogCategoryPage({ params }: PageProps) {
   if (!meta) notFound();
 
   const categoryName = SLUG_TO_NAME[slug];
-  const posts = blogPosts.filter((p) => p.category === categoryName);
+  const posts = getPublishedPosts().filter((p) => p.category === categoryName);
   if (posts.length === 0) notFound();
 
   return (

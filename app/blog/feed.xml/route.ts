@@ -1,4 +1,4 @@
-import { blogPosts, frenchDateToISO } from "@/lib/blog-data";
+import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
 import { TEAM } from "@/lib/team";
 
 const BASE_URL = "https://krealabs.fr";
@@ -15,7 +15,7 @@ const BASE_URL = "https://krealabs.fr";
  * Cache : 1 heure côté CDN, 5 minutes côté browser.
  */
 export async function GET() {
-  const items = blogPosts
+  const items = getPublishedPosts()
     .slice()
     .sort((a, b) => frenchDateToISO(b.date).localeCompare(frenchDateToISO(a.date)))
     .slice(0, 50) // limite à 50 articles dans le flux

@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { blogPosts } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/blog-data";
 import { CITIES } from "@/lib/cities";
 import { SECTOR_SLUGS } from "@/lib/sectors";
 import { TEAM_SLUGS } from "@/lib/team";
@@ -174,7 +174,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Articles de blog individuels — chargés depuis blog-data.ts
   // Inclut images pour Google Images (post.image + OG dynamique)
-  const blogArticles: MetadataRoute.Sitemap = blogPosts.map((post) => ({
+  const blogArticles: MetadataRoute.Sitemap = getPublishedPosts().map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     lastModified: now,
     changeFrequency: "monthly",

@@ -12,7 +12,7 @@
  *  + pages statiques codées en dur
  */
 
-import { blogPosts } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/blog-data";
 import { CITIES } from "@/lib/cities";
 import { SECTORS } from "@/lib/sectors";
 import { COMPARATORS } from "@/lib/comparators";
@@ -113,7 +113,7 @@ export const SEARCH_INDEX: SearchItem[] = [
   })),
 
   // Articles blog
-  ...blogPosts.map((p) => ({
+  ...getPublishedPosts().map((p) => ({
     url: `/blog/${p.slug}`,
     title: p.title,
     excerpt: p.excerpt,

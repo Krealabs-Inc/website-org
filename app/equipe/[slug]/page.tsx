@@ -20,7 +20,7 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { PersonSchema } from "@/components/seo/person-schema";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { TEAM, TEAM_SLUGS, getMember } from "@/lib/team";
-import { blogPosts } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/blog-data";
 
 const BASE_URL = "https://krealabs.fr";
 
@@ -74,7 +74,7 @@ export default async function AuthorPage({ params }: PageProps) {
     .filter((v): v is string => Boolean(v));
 
   // Articles signés par cet auteur (E-E-A-T : preuve d'expertise)
-  const authoredPosts = blogPosts.filter((p) => p.author.name === member.name);
+  const authoredPosts = getPublishedPosts().filter((p) => p.author.name === member.name);
 
   // Autre(s) membre(s) de l'équipe pour cross-link
   const otherMembers = TEAM.filter((m) => m.slug !== slug);

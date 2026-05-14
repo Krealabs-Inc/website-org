@@ -9,7 +9,7 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
-import { blogPosts } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/blog-data";
 import { cn } from "@/lib/utils";
 
 const CATEGORIES = ["Tous", "WordPress", "Web", "Mobile", "SEO", "Outils"];
@@ -17,14 +17,17 @@ const CATEGORIES = ["Tous", "WordPress", "Web", "Mobile", "SEO", "Outils"];
 export default function BlogPage() {
   const [active, setActive] = useState("Tous");
 
+  // Filtre par date de publication (articles futurs invisibles)
+  const published = useMemo(() => getPublishedPosts(), []);
+
   const featured = useMemo(
-    () => blogPosts.find((p) => p.featured),
-    [],
+    () => published.find((p) => p.featured),
+    [published],
   );
   const list = useMemo(() => {
-    const others = blogPosts.filter((p) => p !== featured);
+    const others = published.filter((p) => p !== featured);
     return active === "Tous" ? others : others.filter((p) => p.category === active);
-  }, [active, featured]);
+  }, [active, featured, published]);
 
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">

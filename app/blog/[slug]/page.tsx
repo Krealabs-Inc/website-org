@@ -12,17 +12,26 @@ import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { HowToSchema } from "@/components/seo/howto-schema";
 import { ShareButton } from "@/components/blog/share-button";
 import { MarkdownText } from "@/components/blog/markdown-text";
-import { blogPosts, frenchDateToISO } from "@/lib/blog-data";
+import {
+  blogPosts,
+  frenchDateToISO,
+  getPublishedPosts,
+  isPostPublished,
+} from "@/lib/blog-data";
 import { TEAM } from "@/lib/team";
 
 const SITE_URL = "https://krealabs.fr";
 
+// ISR : régénère toutes les heures pour que les articles à publication
+// différée deviennent visibles à leur date prévue, même sans visiteur.
+export const revalidate = 3600;
+
 // ============================================================
-// STATIC PARAMS — un fichier par article au build
+// STATIC PARAMS — un fichier par article publié au build
 // ============================================================
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  return getPublishedPosts().map((post) => ({ slug: post.slug }));
 }
 
 // ============================================================
@@ -94,8 +103,10 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = blogPosts.find((p) => p.slug === slug);
 
-  if (!post) notFound();
+  // 404 si l'article n'existe pas OU s'il n'est pas encore publié
+  if (!post || !isPostPublished(post)) notFound();
 
+  const publishedPosts = getPublishedPosts();
   const url = `${SITE_URL}/blog/${post.slug}`;
   const isoDate = frenchDateToISO(post.date);
   const wordCount =
@@ -106,14 +117,14 @@ export default async function BlogPostPage({
     ) +
     post.content.conclusion.split(/\s+/).length;
 
-  const relatedPosts = blogPosts
+  const relatedPosts = publishedPosts
     .filter((p) => p.slug !== post.slug && p.category === post.category)
     .slice(0, 3);
 
   // Si pas assez de related par catégorie, compléter avec d'autres
   const fillRelated =
     relatedPosts.length < 3
-      ? blogPosts.filter((p) => p.slug !== post.slug && !relatedPosts.includes(p)).slice(0, 3 - relatedPosts.length)
+      ? publishedPosts.filter((p) => p.slug !== post.slug && !relatedPosts.includes(p)).slice(0, 3 - relatedPosts.length)
       : [];
   const allRelated = [...relatedPosts, ...fillRelated];
 

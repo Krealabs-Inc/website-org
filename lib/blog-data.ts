@@ -63,6 +63,30 @@ export function frenchDateToISO(frenchDate: string): string {
   return `${year}-${monthNum}-${day.padStart(2, "0")}`;
 }
 
+// ============================================================
+// PUBLICATION DIFFÉRÉE
+// ============================================================
+// Un article dont la `date` est dans le futur est INVISIBLE sur le site
+// jusqu'à ce que sa date arrive. Vercel ISR (revalidate 3600s) + cron
+// quotidien garantissent que les articles deviennent visibles à leur
+// date prévue, même sans visiteur.
+//
+// Pour rédiger un article à publier le 1er juillet 2026, il suffit de
+// le pousser dans blogPosts[] avec date: "1 juillet 2026". Il sera
+// invisible jusqu'à cette date.
+
+/** Retourne uniquement les articles dont la date de publication est passée. */
+export function getPublishedPosts(): BlogPost[] {
+  const today = new Date().toISOString().slice(0, 10); // "2026-05-14"
+  return blogPosts.filter((p) => frenchDateToISO(p.date) <= today);
+}
+
+/** Vrai si l'article est déjà publié (sa date est passée ou aujourd'hui). */
+export function isPostPublished(post: BlogPost): boolean {
+  const today = new Date().toISOString().slice(0, 10);
+  return frenchDateToISO(post.date) <= today;
+}
+
 // =============================================================================
 // CLUSTERS THÉMATIQUES
 // =============================================================================

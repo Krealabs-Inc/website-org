@@ -9,7 +9,11 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
-import { blogPosts } from "@/lib/blog-data";
+import { blogPosts, getPublishedPosts } from "@/lib/blog-data";
+
+// ISR : revalide toutes les heures → tags se mettent à jour avec les
+// nouveaux articles à leur date de publication.
+export const revalidate = 3600;
 
 const BASE_URL = "https://krealabs.fr";
 
@@ -23,9 +27,9 @@ function slugifyTag(tag: string): string {
     .replace(/^-|-$/g, "");
 }
 
-/** Map slug → tag original (premier match trouvé) */
+/** Map slug → tag original (premier match trouvé parmi posts publiés) */
 function getOriginalTagFromSlug(slug: string): string | null {
-  for (const post of blogPosts) {
+  for (const post of getPublishedPosts()) {
     for (const tag of post.tags) {
       if (slugifyTag(tag) === slug) return tag;
     }
@@ -38,6 +42,9 @@ const MIN_ARTICLES_PER_TAG = 3;
 
 function getIndexableTagSlugs(): string[] {
   const counter = new Map<string, { tag: string; count: number }>();
+  // Note : on inclut blogPosts ENTIER ici pour pré-générer les routes statiques
+  // de tous les tags qui finiront indexables. Le filtre par date se fait dans
+  // le rendu de chaque page (BlogTagPage).
   for (const post of blogPosts) {
     for (const tag of post.tags) {
       const slug = slugifyTag(tag);
@@ -69,7 +76,7 @@ export async function generateMetadata({
   const tag = getOriginalTagFromSlug(slug);
   if (!tag) return {};
 
-  const posts = blogPosts.filter((p) =>
+  const posts = getPublishedPosts().filter((p) =>
     p.tags.some((t) => slugifyTag(t) === slug),
   );
 
@@ -90,7 +97,7 @@ export default async function BlogTagPage({ params }: PageProps) {
   const tag = getOriginalTagFromSlug(slug);
   if (!tag) notFound();
 
-  const posts = blogPosts.filter((p) =>
+  const posts = getPublishedPosts().filter((p) =>
     p.tags.some((t) => slugifyTag(t) === slug),
   );
   if (posts.length === 0) notFound();
