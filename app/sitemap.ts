@@ -20,6 +20,15 @@ function escapeXmlUrl(url: string): string {
   return url.replace(/&(?!(amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)/g, "&amp;");
 }
 
+/**
+ * Préfixe une URL relative par le baseUrl pour que sitemap/JSON-LD/OG
+ * exposent toujours des URLs absolues (requis par Google).
+ */
+function absolutize(path: string, baseUrl: string): string {
+  if (/^https?:\/\//i.test(path)) return path;
+  return `${baseUrl}${path.startsWith("/") ? "" : "/"}${path}`;
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
@@ -183,7 +192,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     changeFrequency: "monthly",
     priority: post.featured ? 0.75 : 0.65,
     images: [
-      ...(post.image ? [escapeXmlUrl(post.image)] : []),
+      ...(post.image
+        ? [escapeXmlUrl(absolutize(post.image, baseUrl))]
+        : []),
       `${baseUrl}/blog/${post.slug}/opengraph-image`,
     ],
   }));

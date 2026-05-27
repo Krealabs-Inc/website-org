@@ -39,7 +39,7 @@ export async function GET() {
       <author>${authorEmail} (${escapeXml(post.author.name)})</author>
       <dc:creator><![CDATA[${post.author.name}]]></dc:creator>
 ${categories}
-      ${post.image ? `<enclosure url="${escapeXmlAttr(post.image)}" type="image/jpeg" />` : ""}
+      ${post.image ? `<enclosure url="${escapeXmlAttr(absolutize(post.image))}" type="image/jpeg" />` : ""}
       ${member ? `<atom:link rel="author" href="${BASE_URL}/equipe/${member.slug}" />` : ""}
     </item>`;
     })
@@ -80,6 +80,11 @@ ${items}
         "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400",
     },
   });
+}
+
+function absolutize(path: string): string {
+  if (/^https?:\/\//i.test(path)) return path;
+  return `${BASE_URL}${path.startsWith("/") ? "" : "/"}${path}`;
 }
 
 function escapeXml(s: string): string {

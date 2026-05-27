@@ -21,6 +21,12 @@ import { TEAM } from "@/lib/team";
 
 const SITE_URL = "https://krealabs.fr";
 
+/** Préfixe une URL relative par SITE_URL — les schémas et OG exigent l'absolu. */
+function absolutize(path: string): string {
+  if (/^https?:\/\//i.test(path)) return path;
+  return `${SITE_URL}${path.startsWith("/") ? "" : "/"}${path}`;
+}
+
 // ISR : régénère toutes les heures pour que les articles à publication
 // différée deviennent visibles à leur date prévue, même sans visiteur.
 export const revalidate = 3600;
@@ -51,10 +57,11 @@ export async function generateMetadata({
   const isoModified = post.updatedAt
     ? frenchDateToISO(post.updatedAt)
     : isoDate;
-  const image = post.image
+  const absoluteImage = post.image ? absolutize(post.image) : undefined;
+  const image = absoluteImage
     ? [
         {
-          url: post.image,
+          url: absoluteImage,
           width: 1200,
           height: 630,
           alt: post.title,
@@ -87,7 +94,7 @@ export async function generateMetadata({
       description: post.excerpt,
       creator: "@krealabs_",
       site: "@krealabs_",
-      images: post.image ? [post.image] : undefined,
+      images: absoluteImage ? [absoluteImage] : undefined,
     },
   };
 }
@@ -139,7 +146,7 @@ export default async function BlogPostPage({
     "@type": "Article",
     headline: post.title,
     description: post.excerpt,
-    image: post.image ? [post.image] : undefined,
+    image: post.image ? [absolutize(post.image)] : undefined,
     datePublished: isoDate,
     dateModified: isoModifiedDate,
     author: {
