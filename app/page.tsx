@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import {
   ArrowUpRight,
@@ -17,14 +18,26 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
 import { MotionReveal } from "@/components/animations/motion-reveal";
-import { NumberTicker } from "@/components/animations/number-ticker";
 import { TextHighlighter } from "@/components/animations/text-highlighter";
 import { WordRotator } from "@/components/animations/word-rotator";
-import { BorderBeam } from "@/components/animations/border-beam";
 import { Marquee } from "@/components/animations/marquee";
-import { ParticlesBg } from "@/components/animations/particles-bg";
 import { ShimmerButton } from "@/components/animations/shimmer-button";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
+
+// Décorations différées — code-splitted, n'entrent pas dans le JS critique.
+// Réservent leur emplacement DOM côté SSR; l'animation arrive après hydration.
+const ParticlesBg = dynamic(
+  () => import("@/components/animations/particles-bg").then((m) => m.ParticlesBg),
+  { ssr: false },
+);
+const NumberTicker = dynamic(
+  () => import("@/components/animations/number-ticker").then((m) => m.NumberTicker),
+  { ssr: false, loading: () => <span>0</span> },
+);
+const BorderBeam = dynamic(
+  () => import("@/components/animations/border-beam").then((m) => m.BorderBeam),
+  { ssr: false },
+);
 
 export default function HomePage() {
   return (

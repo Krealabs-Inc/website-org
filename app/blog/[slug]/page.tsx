@@ -63,7 +63,7 @@ export async function generateMetadata({
         {
           url: absoluteImage,
           width: 1200,
-          height: 630,
+          height: 675,
           alt: post.title,
         },
       ]
