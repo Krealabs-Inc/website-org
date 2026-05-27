@@ -355,6 +355,53 @@ export default async function BlogPostPage({
         </Container>
       </article>
 
+      {/* ========== MÉTHODOLOGIE & MISE À JOUR ========== */}
+      <section className="border-t border-[var(--border)] py-10 md:py-12">
+        <Container size="narrow">
+          <div className="rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] p-6 md:p-8">
+            <p className="text-eyebrow mb-3">À propos de cet article</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-3 text-body-sm">
+              <div>
+                <p className="text-caption mb-1">Rédigé par</p>
+                <p className="text-[var(--foreground)] font-medium">
+                  {post.author.name}
+                </p>
+                <p className="text-[var(--muted-foreground)]">
+                  {post.author.role}
+                </p>
+              </div>
+              <div>
+                <p className="text-caption mb-1">Méthodologie</p>
+                <p className="text-[var(--muted-foreground)] leading-relaxed">
+                  Rédigé à partir de notre travail d&apos;agence et de la
+                  documentation officielle des outils cités. Pas d&apos;IA
+                  générative pour le fond éditorial.
+                </p>
+              </div>
+              <div className="md:col-span-2 pt-3 border-t border-[var(--border)] flex flex-wrap items-baseline gap-x-6 gap-y-1">
+                <span className="text-caption text-[var(--muted-foreground)]">
+                  Publié le{" "}
+                  <time dateTime={isoDate} className="text-[var(--foreground)]">
+                    {post.date}
+                  </time>
+                </span>
+                {wasUpdated && (
+                  <span className="text-caption text-[var(--muted-foreground)]">
+                    Dernière revue le{" "}
+                    <time
+                      dateTime={isoModifiedDate}
+                      className="text-[var(--accent)]"
+                    >
+                      {post.updatedAt}
+                    </time>
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* ========== RELATED POSTS ========== */}
       {allRelated.length > 0 && (
         <section className="section-y border-t border-[var(--border)]">

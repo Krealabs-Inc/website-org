@@ -1,0 +1,7 @@
+# Krealabs — Security disclosure policy
+# Format: RFC 9116
+
+Contact: mailto:contact@krealabs.fr
+Expires: 2027-05-27T00:00:00.000Z
+Preferred-Languages: fr, en
+Canonical: https://krealabs.fr/.well-known/security.txt

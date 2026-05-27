@@ -126,7 +126,7 @@ export function OrganizationSchema() {
         contactType: "Customer Service",
         email: "contact@krealabs.fr",
         areaServed: "FR",
-        availableLanguage: ["French", "English"],
+        availableLanguage: ["French"],
       },
     ],
 

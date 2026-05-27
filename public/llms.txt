@@ -4,6 +4,8 @@
 
 Krealabs accompagne les PME, startups et grandes entreprises rouennaises et normandes dans leur transformation digitale : refonte de sites, lancement de plateformes SaaS, applications mobiles cross-platform, audit SEO, performance et maintenance.
 
+Pour le full-text des articles : https://krealabs.fr/llms-full.txt
+
 ## À propos
 
 - [À propos de Krealabs](https://krealabs.fr/notre-histoire): Histoire, valeurs, méthode artisanale.
