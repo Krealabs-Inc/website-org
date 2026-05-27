@@ -150,14 +150,8 @@ export default async function BlogPostPage({
         return member ? `${SITE_URL}/equipe/${member.slug}` : `${SITE_URL}/equipe`;
       })(),
     },
-    publisher: {
-      "@type": "Organization",
-      name: "Krealabs",
-      logo: {
-        "@type": "ImageObject",
-        url: `${SITE_URL}/logo.png`,
-      },
-    },
+    // Référence à l'org émise sur / et /notre-histoire. Pas de duplication.
+    publisher: { "@id": `${SITE_URL}/#organization` },
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": url,

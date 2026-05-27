@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/providers/theme-provider";
 import { Navbar } from "@/components/navigation/navbar";
 import { Footer } from "@/components/navigation/footer";
 import { Toaster } from "sonner";
-import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { WebSiteSchema } from "@/components/seo/website-schema";
 import { LenisProvider } from "@/components/animations/lenis-provider";
 import { Analytics } from "@vercel/analytics/react";
@@ -159,7 +158,6 @@ export default function RootLayout({
           enableSystem={false}
         >
           <LenisProvider>
-            <OrganizationSchema />
             <WebSiteSchema />
             <Navbar />
             <div id="main-content">{children}</div>

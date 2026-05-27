@@ -24,10 +24,12 @@ import { BorderBeam } from "@/components/animations/border-beam";
 import { Marquee } from "@/components/animations/marquee";
 import { ParticlesBg } from "@/components/animations/particles-bg";
 import { ShimmerButton } from "@/components/animations/shimmer-button";
+import { OrganizationSchema } from "@/components/seo/organization-schema";
 
 export default function HomePage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <OrganizationSchema />
       {/* ========== HERO ========== */}
       <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="absolute inset-0 bg-grid bg-grid-fade opacity-60" aria-hidden />

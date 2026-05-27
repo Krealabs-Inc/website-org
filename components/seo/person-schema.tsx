@@ -30,12 +30,8 @@ export function PersonSchema({ persons }: PersonSchemaProps) {
     description: p.bio,
     sameAs: p.sameAs?.filter(Boolean),
     knowsAbout: p.knowsAbout,
-    worksFor: {
-      "@type": "ProfessionalService",
-      "@id": `${baseUrl}/#organization`,
-      name: "Krealabs",
-      url: baseUrl,
-    },
+    // Référence à l'org émise sur / et /notre-histoire. Pas de duplication.
+    worksFor: { "@id": `${baseUrl}/#organization` },
     nationality: { "@type": "Country", name: "France" },
     workLocation: {
       "@type": "Place",

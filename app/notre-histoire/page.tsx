@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
+import { OrganizationSchema } from "@/components/seo/organization-schema";
 
 const TIMELINE = [
   {
@@ -106,6 +107,7 @@ const VALUES = [
 export default function NotreHistoirePage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
+      <OrganizationSchema />
       {/* HERO */}
       <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />

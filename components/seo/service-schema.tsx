@@ -35,20 +35,8 @@ export function ServiceSchema({
     url,
     ...(serviceType && { serviceType }),
     ...(serviceOutput && { serviceOutput }),
-    provider: {
-      "@type": "ProfessionalService",
-      "@id": `${baseUrl}/#organization`,
-      name: "Krealabs",
-      url: baseUrl,
-      logo: `${baseUrl}/logo.png`,
-      address: {
-        "@type": "PostalAddress",
-        addressLocality: "Rouen",
-        postalCode: "76000",
-        addressRegion: "Normandie",
-        addressCountry: "FR",
-      },
-    },
+    // Référence à l'org émise sur / et /notre-histoire. Pas de duplication.
+    provider: { "@id": `${baseUrl}/#organization` },
     areaServed: [
       { "@type": "City", name: "Rouen" },
       { "@type": "City", name: "Le Havre" },
