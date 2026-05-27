@@ -8,6 +8,7 @@ export function OrganizationSchema() {
     "@type": "ProfessionalService",
     "@id": "https://krealabs.fr/#organization",
     name: "Krealabs",
+    alternateName: "Kréalabs",
     legalName: "Krealabs",
     url: "https://krealabs.fr",
     logo: "https://krealabs.fr/logo.png",
@@ -134,6 +135,8 @@ export function OrganizationSchema() {
       "https://twitter.com/krealabs_",
       "https://linkedin.com/company/krealabs",
       "https://github.com/krealabs",
+      // Google Business Profile (Knowledge Graph id /g/11vxv18qcr)
+      "https://www.google.com/search?kgmid=/g/11vxv18qcr",
     ],
   };
 

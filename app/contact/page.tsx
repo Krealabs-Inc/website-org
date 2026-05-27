@@ -325,20 +325,28 @@ function ContactPageInner() {
               detail="Intervention France entière"
             />
 
-            {/* Map embed — signal local visuel, iframe lazy-loaded pour ne
-                pas peser sur le LCP. Pas d'API key requise (URL embed publique).
-                CSP: maps.google.com whitelisté dans frame-src de next.config.ts. */}
+            {/* Map embed pointant sur le GBP Krealabs (Knowledge Graph
+                /g/11vxv18qcr). Iframe lazy-loaded, pas d'API key requise.
+                CSP: maps.google.com whitelisté dans frame-src. */}
             <div className="rounded-[var(--radius)] border border-[var(--border)] overflow-hidden bg-[var(--surface)]">
               <iframe
-                title="Krealabs — Rouen, Normandie"
-                src="https://maps.google.com/maps?q=Rouen+76000+France&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                title="Krealabs sur Google Maps"
+                src="https://maps.google.com/maps?q=Kr%C3%A9alabs+Rouen&t=&z=14&ie=UTF8&iwloc=&output=embed"
                 width="100%"
                 height="220"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 style={{ border: 0, display: "block" }}
-                aria-label="Localisation Krealabs sur Google Maps — Rouen, France"
+                aria-label="Localisation Krealabs sur Google Maps"
               />
+              <a
+                href="https://www.google.com/search?kgmid=/g/11vxv18qcr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block px-4 py-2.5 text-caption text-[var(--accent)] hover:bg-[var(--surface-hover)] border-t border-[var(--border)] transition-colors"
+              >
+                Voir notre fiche Google Business →
+              </a>
             </div>
 
             <InfoCard
