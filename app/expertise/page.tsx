@@ -30,13 +30,6 @@ export const metadata: Metadata = {
   title: "Expertise — Savoir-faire & technologies",
   description:
     "Méthodes, savoir-faire et stack technique de l'agence Krealabs à Rouen. Architecture, sécurité, performance, CI/CD, accessibilité — l'ensemble de nos compétences pour réussir vos projets web et mobile.",
-  keywords: [
-    "expertise développement web rouen",
-    "savoir-faire agence digitale",
-    "compétences techniques rouen",
-    "stack technique normandie",
-    "agence next.js expertise",
-  ],
   alternates: { canonical: "https://krealabs.fr/expertise" },
 };
 

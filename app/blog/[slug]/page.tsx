@@ -9,7 +9,6 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
-import { HowToSchema } from "@/components/seo/howto-schema";
 import { ShareButton } from "@/components/blog/share-button";
 import { MarkdownText } from "@/components/blog/markdown-text";
 import {
@@ -49,6 +48,9 @@ export async function generateMetadata({
 
   const url = `${SITE_URL}/blog/${post.slug}`;
   const isoDate = frenchDateToISO(post.date);
+  const isoModified = post.updatedAt
+    ? frenchDateToISO(post.updatedAt)
+    : isoDate;
   const image = post.image
     ? [
         {
@@ -63,7 +65,6 @@ export async function generateMetadata({
   return {
     title: post.title,
     description: post.excerpt,
-    keywords: post.tags,
     authors: [{ name: post.author.name, url: `${SITE_URL}/equipe` }],
     alternates: { canonical: url },
     openGraph: {
@@ -74,7 +75,7 @@ export async function generateMetadata({
       siteName: "Krealabs",
       locale: "fr_FR",
       publishedTime: isoDate,
-      modifiedTime: isoDate,
+      modifiedTime: isoModified,
       authors: [post.author.name],
       tags: post.tags,
       section: post.category,
@@ -109,6 +110,10 @@ export default async function BlogPostPage({
   const publishedPosts = getPublishedPosts();
   const url = `${SITE_URL}/blog/${post.slug}`;
   const isoDate = frenchDateToISO(post.date);
+  const isoModifiedDate = post.updatedAt
+    ? frenchDateToISO(post.updatedAt)
+    : isoDate;
+  const wasUpdated = post.updatedAt && isoModifiedDate !== isoDate;
   const wordCount =
     post.content.introduction.split(/\s+/).length +
     post.content.sections.reduce(
@@ -136,7 +141,7 @@ export default async function BlogPostPage({
     description: post.excerpt,
     image: post.image ? [post.image] : undefined,
     datePublished: isoDate,
-    dateModified: isoDate,
+    dateModified: isoModifiedDate,
     author: {
       "@type": "Person",
       name: post.author.name,
@@ -176,8 +181,6 @@ export default async function BlogPostPage({
           { name: post.title, url },
         ]}
       />
-      <HowToSchema post={post} pageUrl={url} />
-
       {/* ========== HERO IMAGE + TITLE ========== */}
       <header className="relative pt-24 pb-12 md:pt-32 md:pb-16 overflow-hidden">
         {/* Background image with overlay */}
@@ -221,6 +224,16 @@ export default async function BlogPostPage({
                 <Calendar className="size-3.5" />
                 {post.date}
               </time>
+              {wasUpdated && (
+                <time
+                  dateTime={isoModifiedDate}
+                  className="inline-flex items-center gap-1.5 text-[var(--accent)]"
+                  title="Date de dernière mise à jour"
+                >
+                  <span className="size-1.5 rounded-full bg-[var(--accent)]" />
+                  Mis à jour le {post.updatedAt}
+                </time>
+              )}
               <span className="inline-flex items-center gap-1.5">
                 <Clock className="size-3.5" />
                 {post.readTime}

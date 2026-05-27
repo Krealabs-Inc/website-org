@@ -36,7 +36,6 @@ export async function generateMetadata({
   return {
     title: data.title,
     description: data.description,
-    keywords: data.keywords,
     alternates: { canonical: `${BASE_URL}/comparateur/${slug}` },
     openGraph: {
       title: `${data.title} — Krealabs`,

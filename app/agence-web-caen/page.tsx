@@ -8,7 +8,6 @@ const city = CITIES.caen;
 export const metadata: Metadata = {
   title: city.title,
   description: city.description,
-  keywords: city.keywords,
   alternates: { canonical: `https://krealabs.fr${city.path}` },
   openGraph: {
     title: `${city.title} — Krealabs`,

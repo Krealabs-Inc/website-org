@@ -85,6 +85,8 @@ const SLUG_TO_NAME: Record<string, string> = {
   outils: "Outils",
 };
 
+const MIN_ARTICLES_PER_CATEGORY = 3;
+
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
@@ -100,10 +102,17 @@ export async function generateMetadata({
   const cat = CATEGORY_META[slug];
   if (!cat) return {};
 
+  const categoryName = SLUG_TO_NAME[slug];
+  const postCount = getPublishedPosts().filter(
+    (p) => p.category === categoryName,
+  ).length;
+  const isThin = postCount < MIN_ARTICLES_PER_CATEGORY;
+
   return {
     title: cat.title,
     description: cat.description,
     alternates: { canonical: `${BASE_URL}/blog/category/${slug}` },
+    robots: isThin ? { index: false, follow: true } : undefined,
     openGraph: {
       title: cat.title,
       description: cat.description,

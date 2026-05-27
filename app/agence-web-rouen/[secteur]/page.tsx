@@ -30,7 +30,6 @@ export async function generateMetadata({
   return {
     title: data.title,
     description: data.description,
-    keywords: data.keywords,
     alternates: {
       canonical: `https://krealabs.fr/agence-web-rouen/${secteur}`,
     },

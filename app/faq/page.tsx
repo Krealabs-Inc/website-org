@@ -14,12 +14,6 @@ export const metadata: Metadata = {
   title: "FAQ — Questions fréquentes",
   description:
     "Réponses aux questions fréquentes sur nos services de développement web et mobile à Rouen. Délais, technologies, méthode, maintenance, SEO.",
-  keywords: [
-    "faq développement web",
-    "questions agence web rouen",
-    "délais site internet",
-    "méthode agence digitale",
-  ],
   alternates: { canonical: "https://krealabs.fr/faq" },
 };
 

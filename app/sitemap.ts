@@ -1,5 +1,5 @@
 import { MetadataRoute } from "next";
-import { getPublishedPosts } from "@/lib/blog-data";
+import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
 import { CITIES } from "@/lib/cities";
 import { SECTOR_SLUGS } from "@/lib/sectors";
 import { TEAM_SLUGS } from "@/lib/team";
@@ -176,7 +176,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // Inclut images pour Google Images (post.image + OG dynamique)
   const blogArticles: MetadataRoute.Sitemap = getPublishedPosts().map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: now,
+    // Date réelle de modif si renseignée, sinon date de publication.
+    // Évite que tous les articles se présentent comme "modifiés aujourd'hui"
+    // ce qui dilue le signal de fraîcheur côté Google.
+    lastModified: new Date(frenchDateToISO(post.updatedAt || post.date)),
     changeFrequency: "monthly",
     priority: post.featured ? 0.75 : 0.65,
     images: [

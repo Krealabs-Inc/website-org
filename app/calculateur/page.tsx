@@ -6,16 +6,9 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { QuoteCalculator } from "@/components/calculator/quote-calculator";
 
 export const metadata: Metadata = {
-  title: "Calculateur de devis — Estimer le prix de votre projet web · Krealabs",
+  title: "Calculateur de devis — Estimer le prix de votre projet web",
   description:
     "Calculateur gratuit : fourchette de prix réaliste pour un site web, e-commerce, SaaS ou application mobile. Marché normand 2026, basé sur les vrais coûts d'agence.",
-  keywords: [
-    "calculateur prix site web",
-    "estimer coût site internet",
-    "devis en ligne site web",
-    "prix application mobile",
-    "tarif refonte site web rouen",
-  ],
   alternates: { canonical: "https://krealabs.fr/calculateur" },
   openGraph: {
     title: "Calculateur de devis web — Krealabs",

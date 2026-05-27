@@ -27,21 +27,6 @@ export const metadata: Metadata = {
   title: "Agence WordPress à Rouen — Création, refonte, WooCommerce, SEO",
   description:
     "Agence WordPress à Rouen et en Normandie. Création sur mesure, refonte, WooCommerce, SEO, maintenance et sécurité WordPress. Thèmes custom, plugins développés sur mesure, pas de page builders.",
-  keywords: [
-    "agence wordpress rouen",
-    "agence wordpress normandie",
-    "création site wordpress rouen",
-    "refonte wordpress",
-    "développeur wordpress rouen",
-    "woocommerce rouen",
-    "e-commerce wordpress rouen",
-    "maintenance wordpress",
-    "sécurité wordpress",
-    "seo wordpress",
-    "headless wordpress",
-    "thème wordpress sur mesure",
-    "plugin wordpress sur mesure",
-  ],
   alternates: { canonical: "https://krealabs.fr/services/wordpress" },
   openGraph: {
     title: "Agence WordPress à Rouen — Krealabs",

@@ -9,16 +9,9 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { GLOSSARY, GLOSSARY_SLUGS } from "@/lib/glossary";
 
 export const metadata: Metadata = {
-  title: "Lexique du web — Définitions techniques · Krealabs",
+  title: "Lexique du web — Définitions techniques",
   description:
     "Lexique technique web : headless WordPress, Core Web Vitals, schema.org, SEO local, Next.js, TypeScript, Lighthouse, E-E-A-T... Définitions claires par une agence web à Rouen.",
-  keywords: [
-    "lexique web",
-    "glossaire technique web",
-    "définition wordpress",
-    "définition seo",
-    "définition next.js",
-  ],
   alternates: { canonical: "https://krealabs.fr/lexique" },
 };
 

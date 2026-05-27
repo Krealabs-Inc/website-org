@@ -16,12 +16,6 @@ export const metadata: Metadata = {
   title: "L'équipe — 2 co-fondateurs à Rouen",
   description:
     "Découvrez l'équipe Krealabs : 2 co-fondateurs développeurs basés à Rouen. Une équipe à taille humaine, joignable directement, qui code vos projets de A à Z.",
-  keywords: [
-    "équipe krealabs",
-    "co-fondateurs rouen",
-    "développeurs rouen",
-    "agence digitale équipe normandie",
-  ],
   alternates: { canonical: "https://krealabs.fr/equipe" },
 };
 

@@ -12,14 +12,6 @@ export const metadata: Metadata = {
   title: "Performance & SEO à Rouen — Core Web Vitals, référencement local",
   description:
     "Audit SEO, optimisation Core Web Vitals, référencement local Rouen. Améliorez votre visibilité Google et la vitesse de votre site. Agence SEO à Rouen.",
-  keywords: [
-    "seo rouen",
-    "audit seo rouen",
-    "référencement local rouen",
-    "agence seo normandie",
-    "core web vitals optimisation",
-    "performance site web rouen",
-  ],
   alternates: { canonical: "https://krealabs.fr/services/performance-seo" },
 };
 

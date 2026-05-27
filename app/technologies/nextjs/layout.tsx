@@ -3,7 +3,6 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Développement Next.js - Agence Next.js à Rouen',
   description: 'Agence Next.js à Rouen. Création de sites ultra-rapides avec Next.js 16, App Router, Server Components, SSR, SSG. Experts Next.js certifiés.',
-  keywords: ['développeur nextjs rouen', 'agence nextjs', 'expert nextjs', 'next.js 16', 'app router'],
   openGraph: {
     title: 'Développement Next.js - Agence Next.js à Rouen | Krealabs',
     description: 'Sites ultra-rapides avec Next.js 16 et App Router.',

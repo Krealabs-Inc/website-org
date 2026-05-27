@@ -31,12 +31,6 @@ export async function generateMetadata({
   return {
     title: `${entry.term} : définition · Lexique web Krealabs`,
     description: entry.shortDef,
-    keywords: [
-      entry.term.toLowerCase(),
-      `${entry.term.toLowerCase()} définition`,
-      `qu'est-ce que ${entry.term.toLowerCase()}`,
-      ...(entry.synonyms?.map((s) => s.toLowerCase()) || []),
-    ],
     alternates: { canonical: `${BASE_URL}/lexique/${slug}` },
     openGraph: {
       title: `${entry.term} : définition`,

@@ -17,6 +17,9 @@ import {
   Smartphone,
   Cpu,
   Search,
+  Shield,
+  ListChecks,
+  Route,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -148,6 +151,163 @@ function ContactPageInner() {
             ouvrées avec un premier retour concret.
           </p>
         </header>
+
+        {/* ============== EXPECTATIONS BLOCK (brief checklist + ladder + reassurance) ============== */}
+        <section className="mb-16 border-y border-[var(--border)] py-12 md:py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            {/* LEFT — Brief checklist */}
+            <div className="bg-[var(--background)] p-8 md:p-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="size-9 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center">
+                  <ListChecks className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
+                </div>
+                <h2 className="text-h4">
+                  Ce qu&apos;il faut nous <em>dire</em>
+                </h2>
+              </div>
+              <p className="text-body-sm text-[var(--muted-foreground)] mb-6">
+                Plus le brief est précis, plus notre premier retour est utile.
+                Pas besoin de tout savoir — partagez ce que vous avez :
+              </p>
+              <ul className="space-y-3 text-body-sm">
+                <li className="flex gap-3">
+                  <span className="mt-1.5 size-1 rounded-full bg-[var(--accent)] shrink-0" />
+                  <span>
+                    <strong className="text-[var(--foreground)] font-medium">
+                      Le contexte
+                    </strong>{" "}
+                    : votre activité, votre marché, ce qui déclenche le projet
+                    aujourd&apos;hui (refonte, lancement, problème
+                    spécifique…).
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1.5 size-1 rounded-full bg-[var(--accent)] shrink-0" />
+                  <span>
+                    <strong className="text-[var(--foreground)] font-medium">
+                      L&apos;objectif
+                    </strong>{" "}
+                    : ce que vous voulez obtenir concrètement (plus de leads,
+                    automatiser un process, outiller une équipe…).
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1.5 size-1 rounded-full bg-[var(--accent)] shrink-0" />
+                  <span>
+                    <strong className="text-[var(--foreground)] font-medium">
+                      Le périmètre
+                    </strong>{" "}
+                    : type de projet (site, app, logiciel), fonctionnalités
+                    incontournables, intégrations attendues.
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1.5 size-1 rounded-full bg-[var(--accent)] shrink-0" />
+                  <span>
+                    <strong className="text-[var(--foreground)] font-medium">
+                      Les contraintes
+                    </strong>{" "}
+                    : deadline, budget envisagé (même approximatif), existant
+                    technique, équipe interne disponible.
+                  </span>
+                </li>
+                <li className="flex gap-3">
+                  <span className="mt-1.5 size-1 rounded-full bg-[var(--accent)] shrink-0" />
+                  <span>
+                    <strong className="text-[var(--foreground)] font-medium">
+                      Les pièces utiles
+                    </strong>{" "}
+                    : maquettes, cahier des charges, références
+                    d&apos;inspiration — à joindre par retour de mail si vous
+                    en avez.
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            {/* RIGHT — Process ladder */}
+            <div className="bg-[var(--background)] p-8 md:p-10">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="size-9 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center">
+                  <Route className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
+                </div>
+                <h2 className="text-h4">
+                  Ce qui se <em>passe</em> ensuite
+                </h2>
+              </div>
+              <p className="text-body-sm text-[var(--muted-foreground)] mb-6">
+                Aucune surprise. Trois étapes claires, vous décidez à chacune
+                d&apos;elles :
+              </p>
+              <ol className="space-y-5">
+                <li className="flex gap-4">
+                  <span className="shrink-0 size-7 rounded-full border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center text-eyebrow text-[var(--accent)]">
+                    1
+                  </span>
+                  <div>
+                    <p className="text-body-sm font-medium mb-1">
+                      Premier retour sous 24h ouvrées
+                    </p>
+                    <p className="text-body-sm text-[var(--muted-foreground)]">
+                      Lecture de votre brief, questions de clarification, et un
+                      avis honnête sur la faisabilité — y compris si on
+                      n&apos;est pas la bonne équipe pour vous.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="shrink-0 size-7 rounded-full border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center text-eyebrow text-[var(--accent)]">
+                    2
+                  </span>
+                  <div>
+                    <p className="text-body-sm font-medium mb-1">
+                      RDV de cadrage gratuit (30-45 min)
+                    </p>
+                    <p className="text-body-sm text-[var(--muted-foreground)]">
+                      Visio ou présentiel à Rouen. On creuse le besoin, on
+                      challenge votre approche si nécessaire, on dégrossit le
+                      périmètre et le planning.
+                    </p>
+                  </div>
+                </li>
+                <li className="flex gap-4">
+                  <span className="shrink-0 size-7 rounded-full border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center text-eyebrow text-[var(--accent)]">
+                    3
+                  </span>
+                  <div>
+                    <p className="text-body-sm font-medium mb-1">
+                      Devis détaillé à prix fixe
+                    </p>
+                    <p className="text-body-sm text-[var(--muted-foreground)]">
+                      Sous 5 jours ouvrés après le cadrage : périmètre,
+                      livrables, jalons, prix engageant. Pas de régie déguisée,
+                      pas de ligne floue.
+                    </p>
+                  </div>
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          {/* Reassurance row */}
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <ReassuranceCard
+              icon={Shield}
+              title="NDA sur demande"
+              detail="Nous signons votre accord de confidentialité avant tout échange détaillé si votre projet l'exige."
+            />
+            <ReassuranceCard
+              icon={Check}
+              title="RGPD-friendly"
+              detail="Vos données ne servent qu'à vous répondre. Aucun tracking publicitaire, aucun transfert hors UE."
+            />
+            <ReassuranceCard
+              icon={MessageSquare}
+              title="Sans engagement"
+              detail="Le premier retour et le RDV de cadrage sont offerts. Vous repartez avec des éléments concrets, même sans suite."
+            />
+          </div>
+        </section>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* ============== LEFT : Info ============== */}
@@ -387,6 +547,30 @@ function Field({
         {required && <span className="text-[var(--accent)] ml-1">*</span>}
       </label>
       {children}
+    </div>
+  );
+}
+
+function ReassuranceCard({
+  icon: Icon,
+  title,
+  detail,
+}: {
+  icon: typeof Shield;
+  title: string;
+  detail: string;
+}) {
+  return (
+    <div className="flex gap-4 p-5 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]">
+      <div className="size-8 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--background)] flex items-center justify-center">
+        <Icon className="size-3.5 text-[var(--accent)]" strokeWidth={1.75} />
+      </div>
+      <div>
+        <p className="text-body-sm font-medium mb-1">{title}</p>
+        <p className="text-body-sm text-[var(--muted-foreground)] leading-relaxed">
+          {detail}
+        </p>
+      </div>
     </div>
   );
 }

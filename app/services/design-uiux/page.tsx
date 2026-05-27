@@ -12,13 +12,6 @@ export const metadata: Metadata = {
   title: "Design UI/UX à Rouen — Interfaces & design system",
   description:
     "Design UI/UX à Rouen : wireframes, maquettes Figma, design system, prototypage. Interfaces accessibles, mémorables, pensées pour convertir. Agence digitale Normandie.",
-  keywords: [
-    "design ui ux rouen",
-    "designer figma rouen",
-    "design system normandie",
-    "maquette site web rouen",
-    "ux designer rouen",
-  ],
   alternates: { canonical: "https://krealabs.fr/services/design-uiux" },
 };
 

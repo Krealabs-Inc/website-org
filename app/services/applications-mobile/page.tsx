@@ -12,13 +12,6 @@ export const metadata: Metadata = {
   title: "Applications mobiles à Rouen — React Native iOS & Android",
   description:
     "Développement d'applications mobiles iOS et Android à Rouen. Apps cross-platform en React Native. Une base de code, deux App Stores. Publication, OTA, notifications push.",
-  keywords: [
-    "application mobile rouen",
-    "développement application mobile normandie",
-    "react native rouen",
-    "agence mobile rouen",
-    "app ios android rouen",
-  ],
   alternates: { canonical: "https://krealabs.fr/services/applications-mobile" },
 };
 

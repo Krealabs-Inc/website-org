@@ -8,7 +8,7 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { COMPARATORS, COMPARATOR_SLUGS } from "@/lib/comparators";
 
 export const metadata: Metadata = {
-  title: "Comparateurs techniques — Choisir entre 2 stacks · Krealabs",
+  title: "Comparateurs techniques — Choisir entre 2 stacks",
   description:
     "Comparateurs neutres : WordPress vs Webflow, WooCommerce vs Shopify, Next.js vs WordPress, React Native vs Flutter. Le bilan d'une agence web à Rouen.",
   alternates: { canonical: "https://krealabs.fr/comparateur" },

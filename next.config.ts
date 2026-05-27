@@ -9,9 +9,14 @@ const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-// CSP report-only : observe les violations sans rien casser. À durcir
-// progressivement après quelques semaines d'observation des reports.
-// Permet : Vercel Analytics, Resend API, polices Google, Unsplash images.
+// Politique CSP. Par défaut envoyée en `Content-Security-Policy-Report-Only`
+// (observation, aucun blocage). Pour passer en mode bloquant, setter la var
+// d'env `CSP_ENFORCE=true` sur Vercel — pas besoin de redeploy de code.
+//
+// Avant d'enforcer :
+//   1. Vérifier que les reports CSP sont silencieux (DevTools console + reports envoyés)
+//   2. Tester /, /contact (form submit), /blog (images Unsplash), /admin (auth)
+//   3. Tester en navigation privée sans extensions
 const csp = [
   "default-src 'self'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://vercel.live",
@@ -26,6 +31,11 @@ const csp = [
   "upgrade-insecure-requests",
 ].join("; ");
 
+const CSP_ENFORCED = process.env.CSP_ENFORCE === "true";
+const cspHeaderKey = CSP_ENFORCED
+  ? "Content-Security-Policy"
+  : "Content-Security-Policy-Report-Only";
+
 const securityHeaders = [
   // Force HTTPS pour 2 ans, includeSubDomains, preload
   // Pour la liste preload : soumettre sur https://hstspreload.org après mise en prod
@@ -38,9 +48,10 @@ const securityHeaders = [
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   // Désactive APIs sensibles non utilisées
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=(), interest-cohort=()" },
-  // CSP en mode report-only : aucun blocage, juste signal Google + visibilité
-  // sur les violations. À promouvoir en Content-Security-Policy quand stable.
-  { key: "Content-Security-Policy-Report-Only", value: csp },
+  // CSP : header name piloté par `CSP_ENFORCE` (env Vercel).
+  // - CSP_ENFORCE non set / false → Content-Security-Policy-Report-Only (observation)
+  // - CSP_ENFORCE=true            → Content-Security-Policy (bloquant)
+  { key: cspHeaderKey, value: csp },
   // Cross-Origin Opener Policy : isole les BrowsingContext (anti-spectre)
   // same-origin-allow-popups conserve les popups d'auth tiers (Stripe, Google).
   { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },

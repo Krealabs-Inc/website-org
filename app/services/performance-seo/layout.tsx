@@ -3,15 +3,6 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Optimisation SEO & Performance Web à Rouen',
   description: 'Agence SEO à Rouen spécialisée en optimisation performance web. Core Web Vitals, référencement naturel, audit SEO technique, amélioration vitesse site. Résultats garantis.',
-  keywords: [
-    'seo rouen',
-    'optimisation performance web',
-    'core web vitals',
-    'audit seo technique',
-    'référencement naturel rouen',
-    'agence seo normandie',
-    'amélioration vitesse site',
-  ],
   openGraph: {
     title: 'Optimisation SEO & Performance Web à Rouen | Krealabs',
     description: 'Optimisation SEO et performance web. Core Web Vitals, référencement naturel.',

@@ -4,7 +4,14 @@ export interface BlogPost {
   excerpt: string;
   /** Cluster thématique principal (Web | Mobile | SEO | Outils) */
   category: string;
+  /** Date de publication initiale (format français "5 mai 2026"). */
   date: string;
+  /**
+   * Date de dernière mise à jour significative (format français "5 mai 2026").
+   * Optionnel — laisser undefined sur les articles jamais retouchés.
+   * Quand renseigné, alimente `dateModified` du schema Article + sitemap.
+   */
+  updatedAt?: string;
   readTime: string;
   image: string;
   featured: boolean;

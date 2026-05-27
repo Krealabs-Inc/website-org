@@ -16,13 +16,6 @@ export const metadata: Metadata = {
   title: "Développement web à Rouen — Sites & applications",
   description:
     "Création de sites internet, plateformes SaaS et applications métier sur mesure à Rouen. Stack moderne Next.js, React, TypeScript. Architecture scalable, performance native.",
-  keywords: [
-    "développement web rouen",
-    "création site internet rouen",
-    "agence next.js rouen",
-    "développeur react rouen",
-    "site web entreprise normandie",
-  ],
   alternates: { canonical: "https://krealabs.fr/services/developpement-web" },
 };
 
