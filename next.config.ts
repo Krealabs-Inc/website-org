@@ -24,7 +24,7 @@ const csp = [
   "font-src 'self' https://fonts.gstatic.com data:",
   "img-src 'self' data: blob: https:",
   "connect-src 'self' https://api.resend.com https://va.vercel-scripts.com https://vitals.vercel-insights.com https://vercel.live wss:",
-  "frame-src 'self' https://vercel.live",
+  "frame-src 'self' https://vercel.live https://www.google.com https://maps.google.com",
   "frame-ancestors 'none'",
   "base-uri 'self'",
   "form-action 'self'",

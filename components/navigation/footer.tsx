@@ -279,7 +279,13 @@ export function Footer() {
           <Container>
             <div className="py-5 md:py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-4">
               <p className="text-caption">
-                © {year} Krealabs · Tous droits réservés · Rouen, France
+                © {year} Krealabs · Tous droits réservés · Rouen, France ·{" "}
+                <span className="text-[var(--muted-foreground)]">
+                  Disponible{" "}
+                  <time itemProp="openingHours" dateTime="Mo-Fr 09:00-18:00">
+                    lun-ven 9h-18h
+                  </time>
+                </span>
               </p>
               <ul className="flex flex-wrap items-center gap-x-4 sm:gap-x-6 gap-y-2">
                 {nav.legal.map((l) => (

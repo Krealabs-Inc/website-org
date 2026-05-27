@@ -324,6 +324,23 @@ function ContactPageInner() {
               value="Rouen, Normandie"
               detail="Intervention France entière"
             />
+
+            {/* Map embed — signal local visuel, iframe lazy-loaded pour ne
+                pas peser sur le LCP. Pas d'API key requise (URL embed publique).
+                CSP: maps.google.com whitelisté dans frame-src de next.config.ts. */}
+            <div className="rounded-[var(--radius)] border border-[var(--border)] overflow-hidden bg-[var(--surface)]">
+              <iframe
+                title="Krealabs — Rouen, Normandie"
+                src="https://maps.google.com/maps?q=Rouen+76000+France&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                width="100%"
+                height="220"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                style={{ border: 0, display: "block" }}
+                aria-label="Localisation Krealabs sur Google Maps — Rouen, France"
+              />
+            </div>
+
             <InfoCard
               icon={Clock}
               eyebrow="Délai de réponse"
