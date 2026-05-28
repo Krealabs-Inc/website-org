@@ -20,6 +20,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
 import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
@@ -128,6 +129,14 @@ export default function ApplicationsMobilePage() {
           <NewsletterSignup variant="card" source="services-mobile" />
         </Container>
       </section>
+
+      <ServiceResources
+        articles={[
+          { href: "/blog/react-native-2026-etat-des-lieux", kicker: "React Native", title: "React Native en 2026 : où on en est vraiment" },
+          { href: "/blog/expo-router-production-retours", kicker: "Expo Router", title: "Expo Router en production : retours d'expérience après 12 mois" },
+          { href: "/blog/notifications-push-onesignal-firebase-expo", kicker: "Notifications push", title: "Notifications push mobile : OneSignal vs Firebase vs Expo" },
+        ]}
+      />
 
       <ServiceCta
         title={

@@ -20,6 +20,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
 import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
@@ -129,6 +130,16 @@ export default function PerformanceSeoPage() {
           <NewsletterSignup variant="card" source="services-seo" />
         </Container>
       </section>
+
+      <ServiceResources
+        articles={[
+          { href: "/blog/seo-local-rouen-guide-pme", kicker: "SEO local", title: "Guide SEO local pour les PME de Rouen et Normandie" },
+          { href: "/blog/core-web-vitals-2026-inp", kicker: "Core Web Vitals", title: "Core Web Vitals 2026 : INP a remplacé FID, ce que ça change" },
+          { href: "/blog/lighthouse-100-guide-pme", kicker: "Performance", title: "Lighthouse 100/100 : le guide pratique pour PME" },
+          { href: "/blog/schema-org-agences-web", kicker: "Données structurées", title: "Schema.org pour agences web : guide balisage complet" },
+          { href: "/blog/ai-search-agences-adaptation-2026", kicker: "AI search", title: "AI search : comment les agences web doivent s'adapter en 2026" },
+        ]}
+      />
 
       <ServiceCta
         title={

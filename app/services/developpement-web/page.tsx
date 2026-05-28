@@ -24,6 +24,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
 import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
@@ -135,6 +136,15 @@ export default function DeveloppementWebPage() {
           <NewsletterSignup variant="card" source="services-dev-web" />
         </Container>
       </section>
+
+      <ServiceResources
+        articles={[
+          { href: "/blog/nextjs-16-app-router-2026", kicker: "Next.js", title: "Next.js 16 : ce qui change vraiment en 2026" },
+          { href: "/blog/react-19-production-bilan-1-an", kicker: "React", title: "React 19 en production : bilan honnête après 1 an d'usage" },
+          { href: "/blog/typescript-10-patterns-agence", kicker: "TypeScript", title: "TypeScript : 10 patterns qui sauvent le code en agence" },
+          { href: "/blog/prisma-6-postgres-orm", kicker: "Base de données", title: "Prisma 6 : pourquoi c'est notre ORM de référence" },
+        ]}
+      />
 
       <ServiceCta
         title={

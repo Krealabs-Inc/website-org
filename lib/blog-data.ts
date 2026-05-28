@@ -768,7 +768,7 @@ export function LikeButton({ likes, onLike }) {
         },
       ],
       conclusion:
-        "Les Server Components changent le paradigme React de fond en comble. Bien utilisés, ils réduisent le bundle JS de 40 à 60% sur un site type, et permettent un mental model plus simple (le serveur = serveur, le client = client, fini les hacks). Mal utilisés, ils créent une confusion entre données serveur et état client. Investissez du temps dans la formation de l'équipe avant la migration. Chez Krealabs, on a passé environ 2 semaines d'apprentissage en équipe avant de se sentir vraiment à l'aise. Le gain en productivité ensuite est réel.",
+        "Les Server Components changent le paradigme React de fond en comble. Bien utilisés, ils réduisent le bundle JS de 40 à 60% sur un site type, et permettent un mental model plus simple (le serveur = serveur, le client = client, fini les hacks). Mal utilisés, ils créent une confusion entre données serveur et état client. Investissez du temps dans la formation de l'équipe avant la migration. Chez Krealabs, on a passé environ 2 semaines d'apprentissage en équipe avant de se sentir vraiment à l'aise. Le gain en productivité ensuite est réel. Voir aussi notre [retour sur la migration Tailwind CSS 4](/blog/tailwind-4-migration-2026).",
     },
   },
   {
@@ -1747,7 +1747,7 @@ jobs:
         },
       ],
       conclusion:
-        "L'IA accélère les bons développeurs et masque les faiblesses des mauvais. Chez Krealabs, on l'utilise quotidiennement — et on rend toujours du code qu'on comprend, qu'on a testé et qu'on assume. Si vous démarrez un projet en 2026 sans utiliser l'IA, vous perdez du temps. Si vous l'utilisez sans discipline, vous accumulez de la dette technique invisible. L'équilibre se trouve dans le métier : savoir quand utiliser l'outil et quand ne pas s'en servir. Notre conviction : l'IA est un super junior qui ne dort pas. Comme tout junior, à manager.",
+        "L'IA accélère les bons développeurs et masque les faiblesses des mauvais. Chez Krealabs, on l'utilise quotidiennement — et on rend toujours du code qu'on comprend, qu'on a testé et qu'on assume. Si vous démarrez un projet en 2026 sans utiliser l'IA, vous perdez du temps. Si vous l'utilisez sans discipline, vous accumulez de la dette technique invisible. L'équilibre se trouve dans le métier : savoir quand utiliser l'outil et quand ne pas s'en servir. Notre conviction : l'IA est un super junior qui ne dort pas. Comme tout junior, à manager. Voir aussi notre [pipeline CI/CD pour PME avec GitHub Actions](/blog/github-actions-pme-cicd-zero) et notre [guide Stripe Billing pour SaaS B2B](/blog/stripe-billing-saas-b2b-guide).",
     },
   },
   {
@@ -1915,7 +1915,7 @@ updates:
         },
       ],
       conclusion:
-        "Il n'y a pas de mauvais choix entre Vercel, o2switch, Scaleway, AWS — juste un choix adapté à votre contexte. Le coût d'hébergement est rarement la variable la plus importante (en dessous de 10k€/an) — c'est plutôt le coût d'opération sur 3 ans qu'il faut regarder, la portabilité, et la possibilité d'évoluer sans tout réécrire. Si vous hésitez pour votre projet entre 2-3 options, on peut vous aider à cadrer le bon choix selon votre stack et vos contraintes — premier échange offert chez Krealabs.",
+        "Il n'y a pas de mauvais choix entre Vercel, o2switch, Scaleway, AWS — juste un choix adapté à votre contexte. Le coût d'hébergement est rarement la variable la plus importante (en dessous de 10k€/an) — c'est plutôt le coût d'opération sur 3 ans qu'il faut regarder, la portabilité, et la possibilité d'évoluer sans tout réécrire. Si vous hésitez pour votre projet entre 2-3 options, on peut vous aider à cadrer le bon choix selon votre stack et vos contraintes — premier échange offert chez Krealabs. Pour élargir, voir notre [panorama des hébergeurs français en 2026](/blog/hebergement-francais-2026-panorama).",
     },
   },
 
@@ -2173,7 +2173,7 @@ updates:
         },
       ],
       conclusion:
-        "Digitaliser une PME normande en 2026 n'a rien d'un grand chantier impressionnant : c'est une suite de petits leviers, activés dans le bon ordre, qui composent sur 18-24 mois. Commencer par l'audit (gratuit) et Google Business Profile (gratuit, ROI immédiat), puis monter en gamme vers la refonte SEO, le CRM, le contenu. Évitez le piège du « tout en même temps » — choisissez 2-3 leviers par trimestre. Pour cadrer ensemble une stratégie de digitalisation adaptée à votre PME, [contactez Krealabs](/contact) ou découvrez nos [services](/services). Premier échange offert, en présentiel à Rouen ou en visio.",
+        "Digitaliser une PME normande en 2026 n'a rien d'un grand chantier impressionnant : c'est une suite de petits leviers, activés dans le bon ordre, qui composent sur 18-24 mois. Commencer par l'audit (gratuit) et Google Business Profile (gratuit, ROI immédiat), puis monter en gamme vers la refonte SEO, le CRM, le contenu. Évitez le piège du « tout en même temps » — choisissez 2-3 leviers par trimestre. Pour cadrer ensemble une stratégie de digitalisation adaptée à votre PME, [contactez Krealabs](/contact) ou découvrez nos [services](/services). Voir aussi nos [cas clients de PME normandes digitalisées](/blog/pme-normandes-digital-2026-cas-clients). Premier échange offert, en présentiel à Rouen ou en visio.",
     },
   },
 
@@ -2613,7 +2613,7 @@ await fetch('https://exp.host/--/api/v2/push/send', {
         },
       ],
       conclusion:
-        "Les notifications push restent un canal de retention essentiel en 2026 — bien utilisées (peu, contextuelles, valeur ajoutée), elles boostent la rétention 7j de +20-40%. Mal utilisées (spam), elles font fuir 50% des utilisateurs. Choisir le bon outil (Expo / FCM / OneSignal) selon votre échelle et votre équipe. Pour intégrer des notifications push sur votre app React Native, [contactez Krealabs](/contact). Voir aussi notre [comparateur React Native vs Flutter](/comparateur/react-native-vs-flutter), notre [stack React Native](/technologies/react-native), et nos [services applications mobiles](/services/applications-mobile).",
+        "Les notifications push restent un canal de retention essentiel en 2026 — bien utilisées (peu, contextuelles, valeur ajoutée), elles boostent la rétention 7j de +20-40%. Mal utilisées (spam), elles font fuir 50% des utilisateurs. Choisir le bon outil (Expo / FCM / OneSignal) selon votre échelle et votre équipe. Pour intégrer des notifications push sur votre app React Native, [contactez Krealabs](/contact). Voir aussi notre [comparateur React Native vs Flutter](/comparateur/react-native-vs-flutter), notre [stack React Native](/technologies/react-native), notre [premier guide notifications push Expo + Firebase](/blog/notifications-push-expo-firebase), et nos [services applications mobiles](/services/applications-mobile).",
     },
   },
 

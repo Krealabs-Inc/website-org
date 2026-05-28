@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/badge";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
+import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 import { ServiceSchema } from "@/components/seo/service-schema";
@@ -218,6 +219,15 @@ export default function WordpressPage() {
           <NewsletterSignup variant="card" source="services-wordpress" />
         </Container>
       </section>
+
+      <ServiceResources
+        articles={[
+          { href: "/blog/pourquoi-wordpress-reste-le-bon-choix-2026", kicker: "WordPress", title: "Pourquoi WordPress reste le bon choix en 2026" },
+          { href: "/blog/refonte-wordpress-2026-methode-agence-rouen", kicker: "Refonte", title: "Refonte WordPress 2026 : la méthode complète d'une agence à Rouen" },
+          { href: "/blog/delais-livraison-site-wordpress", kicker: "Planning", title: "Combien de temps pour livrer un site WordPress ?" },
+          { href: "/blog/woocommerce-b2b-erp-tarifs-negocies", kicker: "WooCommerce B2B", title: "WooCommerce B2B : intégrations ERP et tarifs négociés" },
+        ]}
+      />
 
       <ServiceCta
         title={
