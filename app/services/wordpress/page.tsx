@@ -222,6 +222,7 @@ export default function WordpressPage() {
 
       <ServiceResources
         articles={[
+          { href: "/blog/headless-wordpress-nextjs-guide", kicker: "Headless", title: "Headless WordPress avec Next.js : le guide honnête (et quand l'éviter)" },
           { href: "/blog/pourquoi-wordpress-reste-le-bon-choix-2026", kicker: "WordPress", title: "Pourquoi WordPress reste le bon choix en 2026" },
           { href: "/blog/refonte-wordpress-2026-methode-agence-rouen", kicker: "Refonte", title: "Refonte WordPress 2026 : la méthode complète d'une agence à Rouen" },
           { href: "/blog/delais-livraison-site-wordpress", kicker: "Planning", title: "Combien de temps pour livrer un site WordPress ?" },

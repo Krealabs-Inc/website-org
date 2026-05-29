@@ -105,6 +105,83 @@ export function isPostPublished(post: BlogPost): boolean {
 
 export const blogPosts: BlogPost[] = [
   // ===========================================================================
+  // PILIER — Headless WordPress + Next.js (différenciateur agence)
+  // ===========================================================================
+  {
+    slug: "headless-wordpress-nextjs-guide",
+    title: "Headless WordPress avec Next.js : le guide honnête (et quand l'éviter)",
+    excerpt:
+      "WordPress pour l'édition, Next.js pour le rendu : le headless promet performance et liberté. Mais 90% des sites n'en ont pas besoin. Notre guide complet — architecture, coût réel, pièges — par une agence qui maîtrise les deux côtés.",
+    category: "WordPress",
+    date: "27 mai 2026",
+    readTime: "18 min",
+    image: "/blog/unsplash-1517180102446-f3ece451e9d8.jpg",
+    featured: true,
+    author,
+    tags: ["Headless WordPress", "Next.js", "WPGraphQL", "Architecture", "WordPress"],
+    content: {
+      introduction:
+        "Le headless WordPress est partout dans les discussions techniques de 2026 : on garde WordPress comme back-office d'édition, et on remplace son thème par un frontend Next.js. La promesse est séduisante — performances natives, score Lighthouse au plafond, liberté totale de développement. La réalité est plus nuancée. Chez Krealabs, on a une position rare : on développe des thèmes WordPress sur mesure depuis plus de 10 ans ET des applications Next.js en production. On voit donc les deux côtés sans dogmatisme. Ce guide vous dit exactement quand le headless vaut le coup, quand c'est une régression coûteuse, et comment on l'implémente quand c'est justifié.",
+      sections: [
+        {
+          title: "Qu'est-ce que le headless WordPress, concrètement",
+          content:
+            "Dans un WordPress classique, le même logiciel gère deux choses : l'administration du contenu (le back-office wp-admin) et l'affichage public (le thème PHP qui génère les pages HTML). Le « headless » découple ces deux rôles. WordPress devient une pure source de contenu, exposée via une API — soit l'API REST native, soit GraphQL via l'extension WPGraphQL. Un frontend séparé, ici Next.js, consomme cette API et génère les pages. On parle de « headless » (sans tête) parce qu'on coupe la tête d'affichage de WordPress pour la remplacer. Pour comprendre les briques, voir nos définitions du [headless WordPress](/lexique/headless-wordpress), de [WPGraphQL](/lexique/wpgraphql) et des [React Server Components](/lexique/react-server-components-rsc) qui changent la donne côté Next.js. L'éditeur garde son confort Gutenberg ; le visiteur reçoit une page Next.js optimisée.",
+        },
+        {
+          title: "Quand le headless a du sens — et quand c'est une régression",
+          content:
+            "Soyons direct : 90% des sites WordPress n'ont aucun besoin de passer en headless. Si votre site est un site vitrine, un blog, ou une boutique WooCommerce standard, un thème WordPress bien développé (code propre, pas de page builder lourd) atteint déjà d'excellentes performances pour une fraction du coût. Le headless se justifie dans des cas précis : (1) vous avez déjà une équipe ou un budget Next.js, et WordPress n'est qu'une des sources de données parmi d'autres ; (2) vous avez besoin d'interactions front très riches (application web, dashboards, temps réel) que le modèle de thème PHP rend pénibles ; (3) vous mutualisez un même back-office de contenu sur plusieurs frontends (site + app + bornes). En dehors de ces cas, le « faux headless » — mettre Next.js juste pour gagner des points Lighthouse — est presque toujours une mauvaise affaire : vous payez 2 à 5 fois plus cher pour reconstruire ce que WordPress faisait gratuitement. Notre [comparateur Next.js vs WordPress](/comparateur/nextjs-vs-wordpress) détaille les arbitrages stack par stack.",
+        },
+        {
+          title: "L'architecture WordPress + Next.js + WPGraphQL en pratique",
+          content:
+            "L'architecture type qu'on déploie : WordPress tourne sur un hébergement PHP classique (mutualisé ou VPS), rôle 100% back-office, bloqué à l'indexation. WPGraphQL expose le contenu en GraphQL. Next.js, hébergé sur Vercel, interroge cette API au build (génération statique / ISR) ou à la demande (rendu serveur). Les pages sont régénérées via revalidation à la sauvegarde d'un article (webhook WordPress → Next.js). Le visiteur ne touche jamais WordPress directement : il reçoit du HTML Next.js servi en edge. Côté requêtes, on récupère un article et ses métadonnées en une seule requête GraphQL typée, ce qui évite les multiples allers-retours de l'API REST.",
+          code: `// app/blog/[slug]/page.tsx — récupération via WPGraphQL
+async function getPost(slug: string) {
+  const res = await fetch(process.env.WPGRAPHQL_URL!, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: \`query Post($slug: ID!) {
+        post(id: $slug, idType: SLUG) {
+          title
+          content
+          date
+          modified
+          seo { title metaDesc }   # via WPGraphQL for Yoast
+        }
+      }\`,
+      variables: { slug },
+    }),
+    // ISR : revalide via webhook on-publish, sinon toutes les heures
+    next: { revalidate: 3600, tags: [\`post:\${slug}\`] },
+  });
+  const { data } = await res.json();
+  return data.post;
+}`,
+        },
+        {
+          title: "Le coût réel : ce que les plugins faisaient gratuitement",
+          content:
+            "C'est le point que les articles enthousiastes oublient. En headless, vous perdez l'écosystème de plugins WordPress côté affichage — et environ 40% de l'effort de migration consiste à recoder à la main ce qui était gratuit : le formulaire de contact (plus de Contact Form 7, il faut une route API + anti-spam), le balisage Schema.org (plus de plugin SEO automatique, voir notre [guide Schema.org pour agences](/blog/schema-org-agences-web)), les redirections, le sitemap, l'aperçu en éditeur (Gutenberg affiche le thème par défaut, pas votre frontend Next.js — le bouton « Aperçu » devient inutile sans travail supplémentaire), le cache et sa revalidation, la gestion des formulaires, les embeds, les shortcodes. Chacun de ces éléments devient un mini-projet. Sur un budget de PME, ça transforme un site à 5 000 € en projet à 15 000-25 000 €. Pour un comparatif des coûts d'hébergement entre les deux mondes, voir [Vercel vs OVH](/blog/vercel-vs-ovh-hebergement-2026).",
+        },
+        {
+          title: "Performance & SEO : le vrai gain, mesuré",
+          content:
+            "Quand le headless est bien fait, le gain de performance est réel : un frontend Next.js avec rendu serveur et images optimisées atteint des Core Web Vitals excellents sans bidouille. Là où un WordPress mal optimisé peine à passer sous 2,5s de LCP sur mobile, un Next.js bien construit y arrive nativement. Mais attention au piège : un thème WordPress développé proprement (sans Elementor/Divi, avec un cache correct et WP Rocket) atteint AUSSI de très bons scores. Le headless n'est pas magique — il supprime juste le plafond de verre des thèmes lourds. Pour mesurer objectivement, on s'appuie sur notre [méthode d'audit Lighthouse](/blog/audit-lighthouse-methode-agence) et notre lecture des [Core Web Vitals 2026 où l'INP a remplacé le FID](/blog/core-web-vitals-2026-inp). Le SEO, lui, est neutre côté technique : Google indexe parfaitement le HTML rendu par Next.js, à condition que le rendu serveur soit bien configuré (pas de contenu critique chargé uniquement côté client).",
+        },
+        {
+          title: "Notre retour d'expérience agence",
+          content:
+            "Sur nos projets, on applique une règle simple : on ne propose le headless que si le client coche une des trois cases qui le justifient (équipe/budget Next.js existant, front très interactif, multi-frontend). Pour un site vitrine ou une boutique standard, on recommande un WordPress sur mesure bien développé — c'est plus rapide à livrer, moins cher à maintenir, et le client reste autonome. Quand le headless est justifié, on construit l'architecture WordPress + WPGraphQL + Next.js + Vercel décrite plus haut, en budgétisant honnêtement le recodage des fonctionnalités perdues dès le devis. La pire situation, qu'on refuse de vendre : le « headless pour faire moderne » sur un projet qui n'en a pas besoin. Ça coûte cher au client pour un bénéfice marginal. Notre rôle d'agence, c'est aussi de dire non au sur-engineering.",
+        },
+      ],
+      conclusion:
+        "Le headless WordPress avec Next.js est un excellent choix — pour les bons projets. Performance native, liberté de développement, mutualisation du contenu : les avantages sont réels quand le contexte le justifie. Mais pour 9 sites sur 10, un WordPress sur mesure bien développé reste le meilleur rapport qualité/prix/autonomie. La vraie expertise, ce n'est pas de pousser la techno la plus à la mode, c'est de choisir la bonne pour votre situation. Chez Krealabs, on maîtrise les deux : [création WordPress sur mesure](/services/wordpress) comme [développement Next.js custom](/services/developpement-web). Pour trancher sur votre projet, voir notre [comparateur Next.js vs WordPress](/comparateur/nextjs-vs-wordpress) ou [parlons-en directement](/contact) — premier échange offert, on vous dira honnêtement si le headless vaut le coup chez vous.",
+    },
+  },
+  // ===========================================================================
   // CLUSTER WORDPRESS (5 articles) — Spécialité agence
   // ===========================================================================
   {
@@ -179,7 +256,7 @@ const QUERY = gql\`
         },
       ],
       conclusion:
-        "WordPress n'est pas mort, mais il n'est pas non plus la solution universelle. C'est l'outil le plus pragmatique pour 80% des PME et associations, à condition d'être bien fait. Mal fait, c'est l'enfer. La différence se joue sur l'agence qui le pose. Si vous avez un projet WordPress — création, refonte, migration — découvrez notre offre dédiée [WordPress](/services/wordpress) et nos guides sur la [refonte sans perdre le SEO](/blog/refonte-wordpress-sans-perdre-seo) et [WooCommerce vs Shopify pour PME](/blog/woocommerce-vs-shopify-pme). Pour les projets qui sortent du périmètre WP, on couvre aussi la stack moderne ([Next.js, Python, React Native](/services/developpement-web)). Mais pour la plupart des entreprises rouennaises et normandes, WordPress reste la réponse la plus économique et la plus durable.",
+        "WordPress n'est pas mort, mais il n'est pas non plus la solution universelle. C'est l'outil le plus pragmatique pour 80% des PME et associations, à condition d'être bien fait. Mal fait, c'est l'enfer. La différence se joue sur l'agence qui le pose. Si vous avez un projet WordPress — création, refonte, migration — découvrez notre offre dédiée [WordPress](/services/wordpress) et nos guides sur la [refonte sans perdre le SEO](/blog/refonte-wordpress-sans-perdre-seo) et [WooCommerce vs Shopify pour PME](/blog/woocommerce-vs-shopify-pme). Pour les projets qui sortent du périmètre WP, on couvre aussi la stack moderne ([Next.js, Python, React Native](/services/developpement-web)). Mais pour la plupart des entreprises rouennaises et normandes, WordPress reste la réponse la plus économique et la plus durable. Et si vous vous demandez s'il faut passer en headless avec Next.js, lisez notre [guide honnête sur le headless WordPress](/blog/headless-wordpress-nextjs-guide) avant de vous lancer.",
     },
   },
   {
@@ -1061,6 +1138,52 @@ const prisma = new PrismaClient().$extends({
   // ===========================================================================
   // CLUSTER MOBILE (3 articles)
   // ===========================================================================
+  {
+    slug: "prix-application-mobile-2026",
+    title: "Prix d'une application mobile en 2026 : le vrai budget",
+    excerpt:
+      "Combien coûte une app mobile iOS + Android en 2026 ? Fourchettes réelles (30k à 150k€), ce qui fait varier le prix, pourquoi React Native réduit la facture, et les coûts cachés que personne ne chiffre. Par une agence normande.",
+    category: "Mobile",
+    date: "27 mai 2026",
+    readTime: "12 min",
+    image: "/blog/unsplash-1565106430482-8f6e74349ca1.jpg",
+    featured: false,
+    author,
+    tags: ["Application mobile", "Prix", "React Native", "Budget", "Mobile"],
+    content: {
+      introduction:
+        "« Combien coûte une application mobile ? » C'est la première question de presque tous nos prospects mobile. Et la réponse honnête — « ça dépend » — n'aide personne. Alors voici des fourchettes concrètes, basées sur les projets qu'on chiffre réellement à Rouen, et surtout une grille pour comprendre ce qui fait varier le prix du simple au triple. On complète ainsi notre [article sur le prix d'un site internet](/blog/prix-site-internet-rouen-2026), car une app n'obéit pas du tout à la même économie qu'un site web.",
+      sections: [
+        {
+          title: "Les fourchettes réelles en 2026",
+          content:
+            "Trois grandes catégories, qu'on retrouve sur la majorité des projets. MVP simple — 30 000 à 50 000 € : 5 à 8 écrans, authentification, 1 ou 2 fonctionnalités centrales, un back-end minimal. C'est l'app pour valider une idée ou lancer un service simple. App fonctionnelle — 50 000 à 80 000 € : 15 à 25 écrans, paiements in-app ou Stripe, notifications push, géolocalisation, comptes utilisateurs riches. C'est le gros du marché PME/startup. App complexe — 80 000 à 150 000 € : mode hors-ligne avec synchronisation, intégrations tierces (ERP, CRM, IoT), temps réel, logique métier lourde. Au-delà de 150 000 €, on parle de plateformes (marketplace mobile, multi-tenant). Ces fourchettes incluent conception, développement iOS + Android, back-end et mise en production — pas le marketing ni l'acquisition.",
+        },
+        {
+          title: "Pourquoi une app coûte plus cher qu'un site",
+          content:
+            "À périmètre apparent égal, une app coûte 3 à 5 fois plus qu'un site vitrine. Trois raisons structurelles. (1) Deux plateformes : iOS et Android ont des règles, des composants et des process de validation différents. Même en cross-platform, certaines parties demandent du code spécifique par OS. (2) Un back-end est quasi toujours nécessaire : une app sans API ni base de données est rare — il faut gérer comptes, données, synchronisation, sécurité. C'est un projet web à part entière qui s'ajoute au mobile. (3) Des contraintes UX strictes : Apple et Google imposent leurs guidelines (Human Interface Guidelines, Material Design) et valident chaque soumission. Une app refusée par l'App Store, c'est des jours de retard. Ces trois facteurs expliquent l'écart de budget avec un site, qu'on détaille dans notre [comparateur de coûts site vs app](/blog/prix-site-internet-rouen-2026).",
+        },
+        {
+          title: "React Native : le levier qui réduit la facture de 30-40%",
+          content:
+            "Le natif pur, c'est deux bases de code séparées : Swift/SwiftUI pour iOS, Kotlin pour Android. Deux fois le travail, deux fois la maintenance. React Native (ou Flutter) permet une base de code unique partagée entre les deux plateformes, avec du code natif uniquement là où c'est nécessaire. Résultat : 30 à 40% d'économie sur le développement initial, et une maintenance bien plus légère ensuite. C'est la stack qu'on privilégie chez Krealabs — voir notre [état des lieux React Native 2026](/blog/react-native-2026-etat-des-lieux) et notre [comparateur React Native vs Flutter](/comparateur/react-native-vs-flutter). Le natif pur ne se justifie que pour les apps à très forte exigence de performance graphique (jeux, AR/VR) ou d'accès matériel poussé. Pour 90% des apps métier et grand public, React Native offre le meilleur rapport coût/qualité.",
+        },
+        {
+          title: "Les coûts cachés que personne ne chiffre",
+          content:
+            "Le devis de développement n'est pas le coût total. Ce qu'il faut anticiper : les comptes développeur (Apple Developer Program 99 $/an, Google Play 25 $ une fois) ; l'hébergement du back-end (20-200 €/mois selon la charge — voir notre [panorama des hébergeurs français](/blog/hebergement-francais-2026-panorama)) ; la maintenance corrective et évolutive (compter 15-20% du coût initial par an) ; surtout, les mises à jour OS : Apple et Google sortent une version majeure par an, et une app non maintenue casse en 12-24 mois. Une app n'est pas un livrable figé comme un site vitrine — c'est un produit vivant. Budgétiser uniquement le développement initial, c'est se préparer une mauvaise surprise à 18 mois. On chiffre toujours la maintenance dès le départ pour éviter ça.",
+        },
+        {
+          title: "Comment on chiffre chez Krealabs",
+          content:
+            "Notre méthode : on raisonne en jours-homme. À Rouen, un développeur mobile senior se situe autour de 600-900 €/jour (contre 800-1 200 € à Paris — voir [agence digitale Rouen vs Paris](/blog/agence-digitale-rouen-vs-paris)). Un MVP solide représente 50 à 70 jours de travail, soit 35-55 000 €. On découpe toujours le projet en lots : cadrage et maquettes d'abord (pour figer le périmètre et éviter l'effet tunnel), puis développement par sprints, puis mise en production et accompagnement. Ça permet de valider le budget à chaque étape, sans engagement total dès le départ. Pour une estimation immédiate selon votre périmètre, notre [calculateur de devis](/calculateur) donne une fourchette en 60 secondes — basée sur les vrais coûts du marché normand 2026.",
+        },
+      ],
+      conclusion:
+        "Une application mobile en 2026, c'est un investissement de 30 000 € (MVP) à 150 000 € (app complexe), avec React Native qui réduit la facture de 30-40% vs natif pur, et des coûts récurrents à ne jamais oublier (back-end, maintenance, mises à jour OS). La vraie question n'est pas « combien ça coûte » dans l'absolu, mais « quel périmètre pour quel budget » — et ça se cadre ensemble. Pour estimer votre projet, lancez notre [calculateur de devis](/calculateur), découvrez notre offre [développement d'applications mobiles](/services/applications-mobile), ou [parlons-en directement](/contact). Premier échange offert, en présentiel à Rouen ou en visio.",
+    },
+  },
   {
     slug: "react-native-2026-etat-des-lieux",
     title: "React Native en 2026 : où on en est vraiment",
@@ -2017,7 +2140,7 @@ updates:
         {
           title: "Application mobile native (iOS + Android) : 30 000 € à 100 000 €",
           content:
-            "Une app mobile coûte plus cher qu'un site web pour 3 raisons : 2 plateformes (iOS + Android, même en React Native il y a des spécificités), un back-end nécessaire (API + base de données), des contraintes UX strictes (Apple/Google validation, Human Interface Guidelines). Fourchettes 2026 : 30 000-50 000 € pour un MVP simple (5-8 écrans, authentification, 1-2 fonctionnalités centrales), 50 000-80 000 € pour une app fonctionnelle (15-25 écrans, paiements, notifications push, géolocalisation), 80 000-150 000 € pour une app complexe (offline, sync, intégrations). On code en React Native ([article sur l'état React Native 2026](/blog/react-native-2026-etat-des-lieux)), ce qui économise 30-40% vs natif Swift/Kotlin séparé. Voir [application mobile chez Krealabs](/services/applications-mobile).",
+            "Une app mobile coûte plus cher qu'un site web pour 3 raisons : 2 plateformes (iOS + Android, même en React Native il y a des spécificités), un back-end nécessaire (API + base de données), des contraintes UX strictes (Apple/Google validation, Human Interface Guidelines). Fourchettes 2026 : 30 000-50 000 € pour un MVP simple (5-8 écrans, authentification, 1-2 fonctionnalités centrales), 50 000-80 000 € pour une app fonctionnelle (15-25 écrans, paiements, notifications push, géolocalisation), 80 000-150 000 € pour une app complexe (offline, sync, intégrations). On code en React Native ([article sur l'état React Native 2026](/blog/react-native-2026-etat-des-lieux)), ce qui économise 30-40% vs natif Swift/Kotlin séparé. Pour le détail complet du budget d'une app, voir notre [guide prix application mobile 2026](/blog/prix-application-mobile-2026). Voir [application mobile chez Krealabs](/services/applications-mobile).",
         },
         {
           title: "Refonte SEO d'un site existant : 4 000 € à 12 000 €",

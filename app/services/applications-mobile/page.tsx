@@ -132,6 +132,7 @@ export default function ApplicationsMobilePage() {
 
       <ServiceResources
         articles={[
+          { href: "/blog/prix-application-mobile-2026", kicker: "Budget", title: "Prix d'une application mobile en 2026 : le vrai budget" },
           { href: "/blog/react-native-2026-etat-des-lieux", kicker: "React Native", title: "React Native en 2026 : où on en est vraiment" },
           { href: "/blog/expo-router-production-retours", kicker: "Expo Router", title: "Expo Router en production : retours d'expérience après 12 mois" },
           { href: "/blog/notifications-push-onesignal-firebase-expo", kicker: "Notifications push", title: "Notifications push mobile : OneSignal vs Firebase vs Expo" },
