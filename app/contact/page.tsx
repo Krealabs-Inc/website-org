@@ -20,6 +20,7 @@ import {
   Shield,
   ListChecks,
   Route,
+  Phone,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -46,7 +47,16 @@ function ContactPageInner() {
   const searchParams = useSearchParams();
   const initialType = searchParams.get("type") === "partenariat" ? "partenariat" : "devis";
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    requestType: string;
+    name: string;
+    email: string;
+    phone: string;
+    company: string;
+    pricingOption: string;
+    message: string;
+    callbackRequested: "" | "yes";
+  }>({
     requestType: initialType,
     name: "",
     email: "",
@@ -54,6 +64,7 @@ function ContactPageInner() {
     company: "",
     pricingOption: "",
     message: "",
+    callbackRequested: "",
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
@@ -126,6 +137,7 @@ function ContactPageInner() {
         company: "",
         pricingOption: "",
         message: "",
+        callbackRequested: "",
       });
     } catch {
       setStatus("error");
@@ -421,14 +433,60 @@ function ContactPageInner() {
                     placeholder="jean@entreprise.fr"
                   />
                 </Field>
-                <Field label="Téléphone (optionnel)">
-                  <Input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={(e) => update("phone", e.target.value)}
-                    placeholder="06 12 34 56 78"
-                  />
-                </Field>
+                <div className="space-y-3">
+                  <Field label={formData.callbackRequested === "yes" ? "Téléphone" : "Téléphone (optionnel)"}>
+                    <Input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => update("phone", e.target.value)}
+                      placeholder="06 12 34 56 78"
+                      className={cn(
+                        formData.callbackRequested === "yes" &&
+                          "border-[var(--accent)] ring-1 ring-[var(--accent-subtle)]",
+                      )}
+                    />
+                  </Field>
+                  {/* Callback toggle */}
+                  <label className="flex items-center gap-2.5 cursor-pointer select-none group w-fit">
+                    <span
+                      role="checkbox"
+                      aria-checked={formData.callbackRequested === "yes"}
+                      tabIndex={0}
+                      onKeyDown={(e) => {
+                        if (e.key === " " || e.key === "Enter") {
+                          e.preventDefault();
+                          update("callbackRequested", formData.callbackRequested === "yes" ? "" : "yes");
+                        }
+                      }}
+                      onClick={() =>
+                        update("callbackRequested", formData.callbackRequested === "yes" ? "" : "yes")
+                      }
+                      className={cn(
+                        "size-4 shrink-0 rounded border flex items-center justify-center transition-colors",
+                        formData.callbackRequested === "yes"
+                          ? "border-[var(--accent)] bg-[var(--accent)]"
+                          : "border-[var(--border-strong)] bg-[var(--background)] group-hover:border-[var(--accent)]",
+                      )}
+                    >
+                      {formData.callbackRequested === "yes" && (
+                        <Check className="size-2.5 text-white" strokeWidth={3} />
+                      )}
+                    </span>
+                    <span className="text-body-sm text-[var(--foreground)]">
+                      Je préfère être rappelé(e)
+                    </span>
+                  </label>
+                  {formData.callbackRequested === "yes" && (
+                    <div className="flex items-start gap-2 px-3 py-2.5 rounded-[var(--radius)] border border-[var(--accent-subtle)] bg-[var(--accent-subtle)]/40">
+                      <Phone className="size-3.5 shrink-0 mt-0.5 text-[var(--accent)]" strokeWidth={1.75} />
+                      <p className="text-caption text-[var(--foreground)]">
+                        On vous rappelle sous{" "}
+                        <strong className="font-medium">1h ouvrée</strong>{" "}
+                        (lun–ven 9h–18h).
+                      </p>
+                    </div>
+                  )}
+                </div>
                 <Field label="Entreprise (optionnel)">
                   <Input
                     value={formData.company}
