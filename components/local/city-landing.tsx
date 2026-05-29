@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { ServiceCta } from "@/components/services/service-cta";
 import type { CityData } from "@/lib/cities";
+import { CITY_FAQ } from "@/lib/city-faq";
 
 /**
  * Template réutilisable pour les landing pages locales "Agence web à [Ville]".
@@ -28,6 +29,36 @@ export function CityLanding({ city }: { city: CityData }) {
   const baseUrl = "https://krealabs.fr";
   const REASONS = buildReasons(city);
   const LOCAL_SERVICES = buildServices(city);
+  const faq = CITY_FAQ[city.slug] ?? [];
+
+  // Service (pas LocalBusiness) : Krealabs est basé à Rouen et DESSERT cette
+  // ville. areaServed = la ville, provider = l'org canonique via @id.
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${baseUrl}${city.path}#service`,
+    name: `Agence web ${city.cityArticle}`,
+    serviceType: "Création de site internet, application mobile, SEO",
+    url: `${baseUrl}${city.path}`,
+    provider: { "@id": `${baseUrl}/#organization` },
+    areaServed: { "@type": "City", name: city.name },
+  };
+
+  // FAQPage : uniquement si la ville a une FAQ. Le contenu du schema doit
+  // correspondre au contenu visible (section FAQ ci-dessous) — policy Google.
+  const faqSchema =
+    faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": `${baseUrl}${city.path}#faq`,
+          mainEntity: faq.map((f) => ({
+            "@type": "Question",
+            name: f.question,
+            acceptedAnswer: { "@type": "Answer", text: f.answer },
+          })),
+        }
+      : null;
 
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
@@ -37,6 +68,16 @@ export function CityLanding({ city }: { city: CityData }) {
           { name: `Agence web ${city.cityArticle}`, url: `${baseUrl}${city.path}` },
         ]}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      {faqSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+        />
+      )}
 
       {/* HERO */}
       <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
@@ -231,6 +272,39 @@ export function CityLanding({ city }: { city: CityData }) {
           </div>
         </Container>
       </section>
+
+      {/* FAQ LOCALE */}
+      {faq.length > 0 && (
+        <section className="section-y border-t border-[var(--border)]">
+          <Container size="narrow">
+            <Eyebrow number="04" className="mb-6">Questions fréquentes</Eyebrow>
+            <h2 className="text-h1 mb-10">
+              Une <em>agence web {city.cityArticle}</em>, en pratique.
+            </h2>
+            <div className="border-y border-[var(--border)]">
+              {faq.map((f) => (
+                <details
+                  key={f.question}
+                  className="group border-b border-[var(--border)] last:border-b-0 py-5"
+                >
+                  <summary className="flex items-center justify-between gap-4 cursor-pointer list-none text-body font-medium [&::-webkit-details-marker]:hidden">
+                    {f.question}
+                    <span
+                      aria-hidden
+                      className="shrink-0 text-h4 leading-none text-[var(--accent)] transition-transform group-open:rotate-45"
+                    >
+                      +
+                    </span>
+                  </summary>
+                  <p className="text-body-sm text-[var(--muted-foreground)] mt-3 leading-relaxed">
+                    {f.answer}
+                  </p>
+                </details>
+              ))}
+            </div>
+          </Container>
+        </section>
+      )}
 
       <ServiceCta
         title={
