@@ -21,6 +21,7 @@ export async function POST(request: NextRequest) {
     const company = formData.get("company") as string;
     const pricingOption = formData.get("pricingOption") as string;
     const message = formData.get("message") as string;
+    const callbackRequested = formData.get("callbackRequested") as string;
 
     if (!name || !email || !message) {
       return NextResponse.json(
@@ -28,6 +29,13 @@ export async function POST(request: NextRequest) {
         { status: 400 },
       );
     }
+
+    // Marqueur de demande de rappel : préfixe le message (visible en DB + email),
+    // pas de colonne dédiée pour éviter une migration Prisma.
+    const finalMessage =
+      callbackRequested === "yes"
+        ? `[DEMANDE DE RAPPEL sous 1h ouvrée${phone ? ` — Tél : ${phone}` : " — numéro non fourni"}]\n\n${message}`
+        : message;
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
@@ -46,7 +54,7 @@ export async function POST(request: NextRequest) {
         phone: phone || null,
         company: company || null,
         pricingOption: pricingOption || null,
-        message,
+        message: finalMessage,
         filesCount: 0,
       },
     });
@@ -59,7 +67,7 @@ export async function POST(request: NextRequest) {
         phone: phone || undefined,
         company: company || undefined,
         pricingOption: pricingOption || undefined,
-        message,
+        message: finalMessage,
         filesCount: 0,
       });
     } catch (err) {
