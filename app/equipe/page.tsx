@@ -13,9 +13,9 @@ import { PersonSchema } from "@/components/seo/person-schema";
 import { TEAM, type TeamMember } from "@/lib/team";
 
 export const metadata: Metadata = {
-  title: "L'équipe — 2 co-fondateurs à Rouen",
+  title: "L'équipe — le développeur derrière Krealabs (Rouen)",
   description:
-    "Découvrez l'équipe Krealabs : 2 co-fondateurs développeurs basés à Rouen. Une équipe à taille humaine, joignable directement, qui code vos projets de A à Z.",
+    "Krealabs, c'est Maxime Dubois : un développeur fondateur basé à Rouen. Une agence à taille humaine, joignable directement, qui code vos projets de A à Z.",
   alternates: { canonical: "https://krealabs.fr/equipe" },
 };
 
@@ -51,15 +51,14 @@ export default function EquipePage() {
           <MotionReveal className="max-w-4xl">
             <Eyebrow dot className="mb-8">L'équipe Krealabs</Eyebrow>
             <h1 className="text-display">
-              Deux <em>développeurs</em>,
+              Un <em>développeur</em>,
               <br />
-              une seule équipe.
+              zéro intermédiaire.
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Krealabs c'est avant tout deux co-fondateurs basés à Rouen, qui
-              codent eux-mêmes vos projets. Pas de chef de projet intermédiaire,
-              pas de sous-traitance. Vous parlez directement à ceux qui
-              construisent.
+              Krealabs, c'est un développeur fondateur basé à Rouen, qui code
+              lui-même vos projets. Pas de chef de projet intermédiaire, pas de
+              sous-traitance. Vous parlez directement à celui qui construit.
             </p>
           </MotionReveal>
         </Container>
@@ -68,7 +67,7 @@ export default function EquipePage() {
       {/* TEAM CARDS */}
       <section className="border-t border-[var(--border)]">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border-x border-b border-[var(--border)]">
+          <div className="grid grid-cols-1 max-w-3xl mx-auto gap-px bg-[var(--border)] border-x border-b border-[var(--border)]">
             {TEAM.map((member, i) => (
               <MotionReveal key={member.name} delay={i * 0.1}>
                 <article
@@ -170,12 +169,12 @@ export default function EquipePage() {
           <div className="max-w-3xl mx-auto text-center">
             <Eyebrow className="mb-6 justify-center">Notre manière de travailler</Eyebrow>
             <h2 className="text-h1 mb-8">
-              Une équipe à <em>taille humaine</em>, par choix.
+              Une agence à <em>taille humaine</em>, par choix.
             </h2>
             <p className="text-body-lg text-[var(--muted-foreground)] mb-12">
-              Nous aurions pu grossir, embaucher, sous-traiter. Nous avons fait
-              le choix inverse : rester deux pour garder la maîtrise totale du
-              code et la qualité de la relation client.
+              J'aurais pu grossir, embaucher, sous-traiter. J'ai fait le choix
+              inverse : rester une structure ramassée pour garder la maîtrise
+              totale du code et la qualité de la relation client.
             </p>
           </div>
 
@@ -263,10 +262,10 @@ function SocialLink({
 
 const VALUES = [
   {
-    label: "Petite équipe",
-    title: "Deux et c'est tout",
+    label: "Interlocuteur unique",
+    title: "Un seul contact",
     description:
-      "Pas de chef de projet, pas de commercial, pas de sous-traitant. Vous nous appelez, nous répondons. Vous nous écrivez, nous lisons.",
+      "Pas de chef de projet, pas de commercial, pas de sous-traitant. Vous appelez, je réponds. Vous écrivez, je lis.",
   },
   {
     label: "Polyvalence",

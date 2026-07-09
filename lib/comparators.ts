@@ -359,7 +359,7 @@ export const COMPARATORS: Record<string, ComparatorData> = {
       {
         question: "Krealabs maîtrise-t-il les deux ?",
         answer:
-          "Oui, c'est notre proposition. Maxime intervient majoritairement sur Next.js / React / TypeScript, Romain sur le back-end Node.js / PHP / Postgres et l'intégration. Nous travaillons sur les deux stacks quotidiennement et orientons le client vers la bonne option selon le projet, pas selon nos préférences techniques.",
+          "Oui, c'est notre proposition. Nous travaillons quotidiennement sur les deux stacks — Next.js / React / TypeScript comme le back-end Node.js / PHP / Postgres et l'intégration — et orientons le client vers la bonne option selon le projet, pas selon nos préférences techniques.",
       },
     ],
     keywords: [

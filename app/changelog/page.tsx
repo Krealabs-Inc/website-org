@@ -290,7 +290,7 @@ const CHANGELOG: Entry[] = [
     type: "major",
     highlights: ["Lancement de Krealabs"],
     items: [
-      "Création de l'agence à Rouen par Maxime Dubois et Romain Clatot",
+      "Création de l'agence à Rouen par Maxime Dubois",
       "Choix éditorial : faire du web qui dure, sans intermédiaires, équipe à taille humaine",
       "Premier site krealabs.fr (WordPress, refondu plus tard)",
     ],

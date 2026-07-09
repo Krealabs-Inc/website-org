@@ -20,7 +20,7 @@ export default async function Image({
   const { slug } = await params;
   const member = getMember(slug);
   const name = member?.name || "Équipe Krealabs";
-  const role = member?.role || "Co-fondateur · Développeur";
+  const role = member?.role || "Fondateur · Développeur";
   const initials = member?.initials || "K";
 
   const [switzer600, switzer700] = await Promise.all([

@@ -117,7 +117,7 @@ export function CityLanding({ city }: { city: CityData }) {
 
           <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
             {[
-              { value: "2", label: "Co-fondateurs · développeurs" },
+              { value: "1", label: "Interlocuteur unique" },
               { value: `${city.distanceFromRouen} km`, label: city.distanceFromRouen === 0 ? "Centre-ville" : "De notre QG Rouen" },
               { value: "< 24h", label: "Délai de réponse" },
               { value: "5 ans", label: "D'expérience locale" },

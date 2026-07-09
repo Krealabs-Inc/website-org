@@ -154,7 +154,7 @@ Pour passer de `noreply@send.krealabs.fr` à autre chose :
 
 ```bash
 # Vercel env
-EMAIL_FROM=Romain de Krealabs <romain@send.krealabs.fr>
+EMAIL_FROM=Maxime de Krealabs <maxime@send.krealabs.fr>
 ```
 
 Tout email avant le `@` est accepté (pas besoin de créer une boîte —

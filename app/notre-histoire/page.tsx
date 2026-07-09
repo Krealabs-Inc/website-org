@@ -64,16 +64,9 @@ const TEAM_PREVIEW = [
   {
     name: "Maxime Dubois",
     initials: "MD",
-    role: "Co-fondateur · Développeur",
+    role: "Fondateur · Développeur full-stack",
     shortBio:
-      "10 ans d'expérience web. Pilote l'architecture technique et la relation client sur les projets Krealabs.",
-  },
-  {
-    name: "Romain Clatot",
-    initials: "RC",
-    role: "Co-fondateur · Développeur",
-    shortBio:
-      "Profil back-end et intégrations. Pilote les choix d'architecture serveur, les API et les bases de données sur nos projets.",
+      "10 ans d'expérience web. Pilote l'architecture technique, le développement et la relation client sur les projets Krealabs, de la conception au déploiement.",
   },
 ];
 
@@ -98,9 +91,9 @@ const VALUES = [
   },
   {
     label: "Proximité",
-    title: "Une équipe accessible",
+    title: "Un contact accessible",
     description:
-      "Basés à Rouen, joignables directement. Vous parlez à ceux qui codent — pas à des chefs de projet.",
+      "Basé à Rouen, joignable directement. Vous parlez à celui qui code — pas à un chef de projet.",
   },
 ];
 
@@ -180,16 +173,16 @@ export default function NotreHistoirePage() {
             <div className="max-w-2xl">
               <Eyebrow number="02" className="mb-6">L'équipe</Eyebrow>
               <h2 className="text-h1">
-                Deux <em>co-fondateurs</em>, une seule équipe.
+                Le <em>développeur</em> derrière chaque projet.
               </h2>
             </div>
             <p className="text-body text-[var(--muted-foreground)] max-w-md">
-              Pas de chef de projet, pas de sous-traitance. Les deux personnes
-              que vous rencontrez sont celles qui codent votre projet.
+              Pas de chef de projet, pas de sous-traitance. La personne que vous
+              rencontrez est celle qui code votre projet.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="grid grid-cols-1 max-w-2xl gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
             {TEAM_PREVIEW.map((m) => (
               <div key={m.name} className="bg-[var(--background)] p-8 md:p-10">
                 <div className="flex items-start gap-5 mb-5">

@@ -34,7 +34,7 @@ export interface BlogPost {
 
 const author = {
   name: "Maxime Dubois",
-  role: "Co-fondateur · Krealabs",
+  role: "Fondateur · Krealabs",
   avatar: "https://avatars.githubusercontent.com/u/36298487?v=4",
 };
 
@@ -1679,7 +1679,7 @@ function processInChunks(items, chunkSize = 50) {
         {
           title: "Person — pour pages équipe et auteurs",
           content:
-            "Sur votre page équipe (/equipe chez nous), un Person par membre avec name, jobTitle, image, sameAs (liens LinkedIn/GitHub/Twitter), knowsAbout. Sur les articles de blog, l'author dans l'Article schema peut renvoyer vers cette Person. Cela aide Google à construire la \"Knowledge Graph\" autour de votre équipe — les co-fondateurs et experts deviennent plus visibles dans les recherches nominatives.",
+            "Sur votre page équipe (/equipe chez nous), un Person par membre avec name, jobTitle, image, sameAs (liens LinkedIn/GitHub/Twitter), knowsAbout. Sur les articles de blog, l'author dans l'Article schema peut renvoyer vers cette Person. Cela aide Google à construire la \"Knowledge Graph\" autour de votre équipe — les fondateurs et experts deviennent plus visibles dans les recherches nominatives.",
         },
         {
           title: "Review et AggregateRating — étoiles dans la SERP",
@@ -1838,7 +1838,7 @@ jobs:
         {
           title: "Notre workflow Krealabs",
           content:
-            "Pair programming avec Cursor / Claude Code pour les tâches concrètes, JAMAIS pour la planification architecturale (cette décision reste humaine, après discussion entre les deux co-fondateurs). Reviews humaines systématiques : tout code généré par IA passe en review avant merge, comme du code humain. Tests automatisés non négociables — si l'IA a produit le code, le test garantit qu'il fait ce qu'il prétend faire. Documentation des prompts : on garde une bibliothèque de prompts efficaces (ex: \"refactor this React class to function component using TypeScript strict, preserving all props and lifecycle behavior\") pour cohérence dans l'équipe.",
+            "Pair programming avec Cursor / Claude Code pour les tâches concrètes, JAMAIS pour la planification architecturale (cette décision reste humaine). Reviews humaines systématiques : tout code généré par IA passe en review avant merge, comme du code humain. Tests automatisés non négociables — si l'IA a produit le code, le test garantit qu'il fait ce qu'il prétend faire. Documentation des prompts : on garde une bibliothèque de prompts efficaces (ex: \"refactor this React class to function component using TypeScript strict, preserving all props and lifecycle behavior\") pour cohérence dans l'équipe.",
           code: `# Notre .cursorrules type (instructions persistantes pour Cursor)
 - Stack: Next.js 16, React 19, TypeScript strict, Tailwind 4, Prisma 6
 - Always use Server Components by default, 'use client' only when needed
@@ -2064,12 +2064,12 @@ updates:
         {
           title: "1. Vérifier qui code vraiment (équipe interne vs sous-traitance)",
           content:
-            "C'est le critère #1, et personne ne le pose. La majorité des agences web à Rouen revendent du travail effectué ailleurs : freelances Upwork, devs en Tunisie, prestataires polonais. Le commercial qui vous reçoit ne code pas. Le « chef de projet » coordonne. Et le code est livré par quelqu'un que vous ne rencontrerez jamais. Posez la question directement : « Qui va coder mon projet et où ? ». Demandez à parler au développeur lead AVANT de signer. Si la réponse est floue, ou si on vous parle de « notre équipe partenaire », c'est de la sous-traitance déguisée. Ce n'est pas illégal — beaucoup de PME se contentent de ça — mais le risque qualité explose : timezone, communication, propriété intellectuelle, maintenance long terme. À Krealabs, vous parlez directement à Maxime ou Romain, les deux qui codent. Pas d'intermédiaire, pas de filtre. C'est notre choix éditorial, c'est aussi pourquoi on accepte moins de projets que les agences classiques.",
+            "C'est le critère #1, et personne ne le pose. La majorité des agences web à Rouen revendent du travail effectué ailleurs : freelances Upwork, devs en Tunisie, prestataires polonais. Le commercial qui vous reçoit ne code pas. Le « chef de projet » coordonne. Et le code est livré par quelqu'un que vous ne rencontrerez jamais. Posez la question directement : « Qui va coder mon projet et où ? ». Demandez à parler au développeur lead AVANT de signer. Si la réponse est floue, ou si on vous parle de « notre équipe partenaire », c'est de la sous-traitance déguisée. Ce n'est pas illégal — beaucoup de PME se contentent de ça — mais le risque qualité explose : timezone, communication, propriété intellectuelle, maintenance long terme. À Krealabs, vous parlez directement à Maxime, le développeur qui code votre projet. Pas d'intermédiaire, pas de filtre. C'est notre choix éditorial, c'est aussi pourquoi on accepte moins de projets que les agences classiques.",
         },
         {
           title: "2. Demander à voir le code source d'un projet existant",
           content:
-            "Une agence web sérieuse a des dépôts Git visibles (sur GitHub, GitLab, Bitbucket). Pas tous publics — beaucoup de projets clients sont sous NDA — mais une agence qui prétend coder doit pouvoir vous MONTRER du code, ne serait-ce qu'anonymisé. Demandez : « Pouvez-vous m'envoyer un extrait de code d'un projet récent ? ». Si vous recevez un screenshot Photoshop d'une UI, c'est mauvais signe. Si on vous envoie un repo GitHub avec des commits réguliers et des PRs reviewées, vous avez en face de vous une vraie équipe technique. Pour aller plus loin : demandez le profil GitHub des développeurs. Sur le nôtre ([github.com/makcimerrr](https://github.com/makcimerrr) pour Maxime, [github.com/CLTRomain](https://github.com/CLTRomain) pour Romain) vous voyez l'historique réel — contributions, projets open source, langages maîtrisés. C'est imparable comme preuve d'expertise.",
+            "Une agence web sérieuse a des dépôts Git visibles (sur GitHub, GitLab, Bitbucket). Pas tous publics — beaucoup de projets clients sont sous NDA — mais une agence qui prétend coder doit pouvoir vous MONTRER du code, ne serait-ce qu'anonymisé. Demandez : « Pouvez-vous m'envoyer un extrait de code d'un projet récent ? ». Si vous recevez un screenshot Photoshop d'une UI, c'est mauvais signe. Si on vous envoie un repo GitHub avec des commits réguliers et des PRs reviewées, vous avez en face de vous une vraie équipe technique. Pour aller plus loin : demandez le profil GitHub du développeur. Sur le mien ([github.com/makcimerrr](https://github.com/makcimerrr)) vous voyez l'historique réel — contributions, projets open source, langages maîtrisés. C'est imparable comme preuve d'expertise.",
         },
         {
           title: "3. Tester la disponibilité : SLA et délai de réponse",
@@ -2201,7 +2201,7 @@ updates:
         {
           title: "4. Réactivité et joignabilité",
           content:
-            "Une agence parisienne avec 30 clients actifs gère les demandes en mode ticket. Vous envoyez un email, vous attendez 48-72h. Une agence rouennaise à taille humaine (5-10 personnes ou moins) répond généralement en quelques heures. À Krealabs, nous sommes 2 co-fondateurs développeurs, joignables directement sur WhatsApp pro, email, ou Slack partagé. Réponse moyenne en heures ouvrées : sous 2h. Cette différence se mesure concrètement quand votre site tombe à 16h un vendredi — l'agence parisienne traite ça lundi 10h, l'agence rouennaise vous appelle dans l'heure. Le différentiel de réactivité explose en cas d'incident production. Important pour des sites qui génèrent du CA — chaque heure de downtime coûte du chiffre.",
+            "Une agence parisienne avec 30 clients actifs gère les demandes en mode ticket. Vous envoyez un email, vous attendez 48-72h. Une agence rouennaise à taille humaine (5-10 personnes ou moins) répond généralement en quelques heures. À Krealabs, vous avez un développeur joignable directement sur WhatsApp pro, email, ou Slack partagé. Réponse moyenne en heures ouvrées : sous 2h. Cette différence se mesure concrètement quand votre site tombe à 16h un vendredi — l'agence parisienne traite ça lundi 10h, l'agence rouennaise vous appelle dans l'heure. Le différentiel de réactivité explose en cas d'incident production. Important pour des sites qui génèrent du CA — chaque heure de downtime coûte du chiffre.",
         },
         {
           title: "5. Le réseau local, levier SEO sous-estimé",
@@ -2345,7 +2345,7 @@ updates:
         {
           title: "5. Développement : sprints + démos hebdomadaires",
           content:
-            "Une fois les maquettes validées, on entre en sprints de dev. Notre méthode : sprints d'une semaine, démo client en fin de chaque sprint (15-30 minutes en visio), feedback structuré. Pour une refonte type, compter 6-10 sprints (6-10 semaines de dev). Pendant les sprints : code review entre Maxime et Romain sur chaque PR, tests Lighthouse sur les pages clés à chaque étape (objectif 90+ tout le long, pas seulement à la fin), staging Vercel preview pour validation client. Côté technique : thème WordPress custom en PHP/HTML/CSS, ACF Pro pour les contenus, gulp/vite pour les assets, pas d'Elementor.",
+            "Une fois les maquettes validées, on entre en sprints de dev. Notre méthode : sprints d'une semaine, démo client en fin de chaque sprint (15-30 minutes en visio), feedback structuré. Pour une refonte type, compter 6-10 sprints (6-10 semaines de dev). Pendant les sprints : code review systématique sur chaque PR, tests Lighthouse sur les pages clés à chaque étape (objectif 90+ tout le long, pas seulement à la fin), staging Vercel preview pour validation client. Côté technique : thème WordPress custom en PHP/HTML/CSS, ACF Pro pour les contenus, gulp/vite pour les assets, pas d'Elementor.",
         },
         {
           title: "6. Migration & mise en ligne : la phase critique",
@@ -3142,7 +3142,7 @@ const config = {
         {
           title: "Citations externes : la nouvelle métrique d'autorité",
           content:
-            "Les LLMs accordent plus de poids aux sources fréquemment **citées par d'autres sources fiables**. Stratégies pour augmenter votre autorité : (1) **Articles invités** sur des blogs tech respectés (Paris-Normandie, FrenchWeb), (2) **Publications LinkedIn longues** par les fondateurs (les LLMs scrapent LinkedIn), (3) **Wikipedia** : pages d'entreprise ou wikis spécialisés (sectoriels), (4) **GitHub** : projets open-source visibles, contributions, (5) **Forums spécialisés** : StackOverflow, Reddit, Hacker News si le contenu s'y prête. Krealabs publie depuis 2024 sur LinkedIn (Maxime + Romain) : on observe des citations Perplexity issues directement de posts LinkedIn.",
+            "Les LLMs accordent plus de poids aux sources fréquemment **citées par d'autres sources fiables**. Stratégies pour augmenter votre autorité : (1) **Articles invités** sur des blogs tech respectés (Paris-Normandie, FrenchWeb), (2) **Publications LinkedIn longues** par les fondateurs (les LLMs scrapent LinkedIn), (3) **Wikipedia** : pages d'entreprise ou wikis spécialisés (sectoriels), (4) **GitHub** : projets open-source visibles, contributions, (5) **Forums spécialisés** : StackOverflow, Reddit, Hacker News si le contenu s'y prête. Krealabs publie depuis 2024 sur LinkedIn (Maxime) : on observe des citations Perplexity issues directement de posts LinkedIn.",
         },
         {
           title: "Mesurer la performance AI search",

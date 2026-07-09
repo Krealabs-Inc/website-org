@@ -27,28 +27,31 @@ export default function MentionsLegalesPage() {
 
       <h2>Éditeur du site</h2>
       <p>
-        Le site krealabs.fr est édité par <strong>Krealabs</strong>, Groupement
-        d&apos;Intérêt Économique (GIE) régi par les articles L.251-1 à
-        L.251-23 du Code de commerce.
+        Le site krealabs.fr est édité par <strong>Maxime Dubois</strong>,
+        exerçant sous l&apos;enseigne <strong>Krealabs</strong>.
       </p>
       <ul>
         <li>
-          <strong>Dénomination :</strong> Krealabs
+          <strong>Éditeur :</strong> Maxime Dubois
         </li>
         <li>
-          <strong>Forme juridique :</strong> Groupement d&apos;Intérêt
-          Économique (GIE)
+          <strong>Enseigne :</strong> Krealabs
+        </li>
+        <li>
+          <strong>Forme juridique :</strong>{" "}
+          <Placeholder>FORME JURIDIQUE (ex : EI, SASU)</Placeholder>
         </li>
         <li>
           <strong>SIRET :</strong> <Placeholder>SIRET</Placeholder>
         </li>
         <li>
-          <strong>RCS :</strong>{" "}
-          <Placeholder>RCS DE [VILLE] - N° XXX XXX XXX</Placeholder>
+          <strong>RCS / RM :</strong>{" "}
+          <Placeholder>RCS/RM DE [VILLE] - N° XXX XXX XXX</Placeholder>{" "}
+          (le cas échéant)
         </li>
         <li>
-          <strong>Siège social :</strong>{" "}
-          <Placeholder>ADRESSE COMPLÈTE DU SIÈGE</Placeholder>
+          <strong>Adresse :</strong>{" "}
+          <Placeholder>ADRESSE COMPLÈTE</Placeholder>
         </li>
         <li>
           <strong>N° TVA intracommunautaire :</strong>{" "}
@@ -64,27 +67,10 @@ export default function MentionsLegalesPage() {
         </li>
       </ul>
 
-      <h2>Membres du GIE</h2>
-      <p>Le GIE Krealabs est constitué des membres suivants :</p>
-      <ul>
-        <li>
-          <strong>Maxime Dubois</strong> —{" "}
-          <Placeholder>FORME JURIDIQUE MEMBRE 1 (ex : EI)</Placeholder>,
-          immatriculé sous le SIRET{" "}
-          <Placeholder>SIRET MEMBRE 1</Placeholder>
-        </li>
-        <li>
-          <strong>Romain Clatot</strong> —{" "}
-          <Placeholder>FORME JURIDIQUE MEMBRE 2 (ex : EI)</Placeholder>,
-          immatriculé sous le SIRET{" "}
-          <Placeholder>SIRET MEMBRE 2</Placeholder>
-        </li>
-      </ul>
-
-      <h2>Administrateur du GIE et directeur de la publication</h2>
+      <h2>Directeur de la publication</h2>
       <p>
-        L&apos;administrateur du GIE, également directeur de la publication
-        du site krealabs.fr, est <Placeholder>NOM ADMINISTRATEUR</Placeholder>.
+        Le directeur de la publication du site krealabs.fr est{" "}
+        <strong>Maxime Dubois</strong>.
       </p>
 
       <h2>Hébergement</h2>

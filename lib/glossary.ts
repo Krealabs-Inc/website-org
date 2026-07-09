@@ -303,7 +303,7 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
     whyItMatters:
       "Sur les requêtes compétitives, Google favorise désormais les contenus signés par des auteurs identifiables avec une autorité reconnue dans leur domaine. Un blog anonyme ou pseudonyme se positionne mal sur les requêtes \"informationnelles\" compétitives en 2026.",
     ourApproach:
-      "Sur tous nos projets blogs/contenus, nous mettons en place : (1) pages auteur dédiées avec bio, photo, expertise, contributions externes, (2) schema Person enrichi avec sameAs (GitHub, LinkedIn), knowsAbout, (3) byline systématique avec lien vers la page auteur, (4) mentions légales et coordonnées transparentes. Sur Krealabs.fr, voir nos pages [/equipe/maxime-dubois](/equipe/maxime-dubois) et [/equipe/romain-clatot](/equipe/romain-clatot).",
+      "Sur tous nos projets blogs/contenus, nous mettons en place : (1) pages auteur dédiées avec bio, photo, expertise, contributions externes, (2) schema Person enrichi avec sameAs (GitHub, LinkedIn), knowsAbout, (3) byline systématique avec lien vers la page auteur, (4) mentions légales et coordonnées transparentes. Sur Krealabs.fr, voir notre page [/equipe/maxime-dubois](/equipe/maxime-dubois).",
     relatedTerms: ["schema-org", "core-web-vitals"],
   },
 
