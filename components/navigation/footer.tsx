@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -79,7 +79,7 @@ export function Footer() {
       style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
     >
       <footer className="relative md:fixed md:bottom-0 md:left-0 md:right-0 flex w-full flex-col overflow-hidden border-t border-[var(--border)] bg-[var(--background)] md:h-screen md:min-h-[760px]">
-        {/* Aurora breathing glow — desktop only (perf mobile) */}
+        {/* Aurora breathing glow - desktop only (perf mobile) */}
         <div
           aria-hidden
           className="pointer-events-none absolute left-1/2 top-1/2 h-[60vh] w-[80vw] rounded-full blur-[100px] hidden md:block animate-footer-breathe"
@@ -89,7 +89,7 @@ export function Footer() {
           }}
         />
 
-        {/* Grid mask — visible mobile mais plus discret */}
+        {/* Grid mask - visible mobile mais plus discret */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 z-0"
@@ -104,7 +104,7 @@ export function Footer() {
           }}
         />
 
-        {/* Giant wordmark — desktop only (parallax + stroke + gradient clip).
+        {/* Giant wordmark - desktop only (parallax + stroke + gradient clip).
             Caché sur mobile : pas de curtain reveal donc l'effet n'a pas
             de sens, et le 26vw écrasait/masquait le contenu lisible. */}
         <motion.div
@@ -155,7 +155,7 @@ export function Footer() {
           </div>
         </Container>
 
-        {/* Main content — brand + link columns */}
+        {/* Main content - brand + link columns */}
         <Container className="relative z-10 flex flex-1 flex-col justify-end">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-12 lg:gap-8 py-10 md:py-16 lg:py-20">
             {/* Brand block */}
@@ -163,7 +163,7 @@ export function Footer() {
               <Link
                 href="/"
                 className="inline-flex items-center"
-                aria-label="Krealabs — Accueil"
+                aria-label="Krealabs - Accueil"
               >
                 <Image
                   src="/logo.png"
@@ -184,7 +184,7 @@ export function Footer() {
                 Normandie.
               </p>
 
-              {/* Address — SEO local */}
+              {/* Address - SEO local */}
               <address className="not-italic space-y-3">
                 <div className="flex items-start gap-2 text-body-sm text-[var(--muted-foreground)]">
                   <MapPin className="size-4 mt-0.5 text-[var(--accent)] shrink-0" />
@@ -197,10 +197,17 @@ export function Footer() {
                 </div>
                 <a
                   href="mailto:contact@krealabs.fr"
-                  className="inline-flex items-center gap-2 text-body-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                  className="flex w-fit items-center gap-2 text-body-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
                 >
                   <Mail className="size-4 text-[var(--accent)]" />
                   contact@krealabs.fr
+                </a>
+                <a
+                  href="tel:+33781758188"
+                  className="flex w-fit items-center gap-2 text-body-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                >
+                  <Phone className="size-4 text-[var(--accent)]" />
+                  07 81 75 81 88
                 </a>
               </address>
 

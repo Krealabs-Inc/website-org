@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
-import { LegalPage, Placeholder } from "../_components/legal-page";
+import { LegalPage } from "../_components/legal-page";
 
 export const metadata: Metadata = {
-  title: "Mentions légales — Krealabs",
+  title: "Mentions légales - Krealabs",
   description:
     "Informations légales relatives à l'édition du site krealabs.fr : éditeur, hébergeur, propriété intellectuelle, contact.",
   alternates: { canonical: "https://krealabs.fr/legal/mentions-legales" },
@@ -15,7 +15,7 @@ export default function MentionsLegalesPage() {
     <LegalPage
       eyebrow="Légal"
       title="Mentions légales"
-      lastUpdated="13 mai 2026"
+      lastUpdated="17 août 2026"
     >
       <p>
         Conformément aux dispositions des articles 6-III et 19 de la loi
@@ -27,35 +27,42 @@ export default function MentionsLegalesPage() {
 
       <h2>Éditeur du site</h2>
       <p>
-        Le site krealabs.fr est édité par <strong>Maxime Dubois</strong>,
-        exerçant sous l&apos;enseigne <strong>Krealabs</strong>.
+        Le site krealabs.fr est édité par le groupement d&apos;intérêt
+        économique <strong>KREALABS</strong>, immatriculé au registre du
+        commerce et des sociétés de Rouen.
       </p>
       <ul>
         <li>
-          <strong>Éditeur :</strong> Maxime Dubois
+          <strong>Dénomination sociale :</strong> KREALABS
         </li>
         <li>
-          <strong>Enseigne :</strong> Krealabs
+          <strong>Forme juridique :</strong> Groupement d&apos;intérêt
+          économique (GIE)
         </li>
         <li>
-          <strong>Forme juridique :</strong>{" "}
-          <Placeholder>FORME JURIDIQUE (ex : EI, SASU)</Placeholder>
+          <strong>Capital social :</strong> GIE constitué sans capital
+          (art. L.251-3 du Code de commerce)
         </li>
         <li>
-          <strong>SIRET :</strong> <Placeholder>SIRET</Placeholder>
+          <strong>SIREN :</strong> 993 760 248
         </li>
         <li>
-          <strong>RCS / RM :</strong>{" "}
-          <Placeholder>RCS/RM DE [VILLE] - N° XXX XXX XXX</Placeholder>{" "}
-          (le cas échéant)
+          <strong>SIRET (siège) :</strong> 993 760 248 00019
         </li>
         <li>
-          <strong>Adresse :</strong>{" "}
-          <Placeholder>ADRESSE COMPLÈTE</Placeholder>
+          <strong>RCS :</strong> Rouen, n° 993 760 248 (immatriculation du
+          21 novembre 2025)
         </li>
         <li>
-          <strong>N° TVA intracommunautaire :</strong>{" "}
-          <Placeholder>FRXX XXX XXX XXX</Placeholder> (le cas échéant)
+          <strong>Code APE / NAF :</strong> 62.01Z - Programmation
+          informatique
+        </li>
+        <li>
+          <strong>Siège social :</strong> 24 allée du Clos Demont,
+          76520 La Neuville-Chant-d&apos;Oisel, France
+        </li>
+        <li>
+          <strong>N° TVA intracommunautaire :</strong> FR15 993 760 248
         </li>
         <li>
           <strong>Email :</strong>{" "}
@@ -63,14 +70,23 @@ export default function MentionsLegalesPage() {
         </li>
         <li>
           <strong>Téléphone :</strong>{" "}
-          <Placeholder>TÉLÉPHONE</Placeholder> (le cas échéant)
+          <a href="tel:+33781758188">07 81 75 81 88</a>
         </li>
       </ul>
+
+      <h2>Représentants légaux</h2>
+      <p>
+        Le GIE Krealabs est administré par <strong>Maxime Dubois</strong> et{" "}
+        <strong>Romain Clatot</strong>, administrateurs et membres du
+        groupement. Le contrôle des comptes est assuré par{" "}
+        <strong>Xavier Dubois</strong>.
+      </p>
 
       <h2>Directeur de la publication</h2>
       <p>
         Le directeur de la publication du site krealabs.fr est{" "}
-        <strong>Maxime Dubois</strong>.
+        <strong>Maxime Dubois</strong>, en qualité d&apos;administrateur du
+        GIE Krealabs.
       </p>
 
       <h2>Hébergement</h2>

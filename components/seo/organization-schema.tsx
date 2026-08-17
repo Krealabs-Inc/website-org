@@ -1,5 +1,5 @@
 /**
- * LocalBusinessSchema — JSON-LD pour le SEO local Rouen.
+ * LocalBusinessSchema - JSON-LD pour le SEO local Rouen.
  * Type ProfessionalService (subclass de LocalBusiness) optimisé pour Google.
  */
 export function OrganizationSchema() {
@@ -16,6 +16,7 @@ export function OrganizationSchema() {
     description:
       "Agence web à Rouen spécialisée en développement de sites internet, applications mobiles et logiciels sur mesure. Experts React, Next.js, React Native et TypeScript pour la Normandie.",
     email: "contact@krealabs.fr",
+    telephone: "+33781758188",
     foundingDate: "2020",
     slogan: "Sites web et logiciels sur mesure, conçus à Rouen.",
 
@@ -126,6 +127,7 @@ export function OrganizationSchema() {
         "@type": "ContactPoint",
         contactType: "Customer Service",
         email: "contact@krealabs.fr",
+        telephone: "+33781758188",
         areaServed: "FR",
         availableLanguage: ["French"],
       },
@@ -142,7 +144,7 @@ export function OrganizationSchema() {
 
   // AggregateRating env-driven : injecté SEULEMENT si les vars d'env existent.
   // À setter une fois qu'on a la note Google Business réelle (jamais inventer
-  // une note — Google pénalise sévèrement les ratings fake).
+  // une note - Google pénalise sévèrement les ratings fake).
   // Côté Vercel :
   //   NEXT_PUBLIC_RATING_VALUE=4.9
   //   NEXT_PUBLIC_RATING_COUNT=23

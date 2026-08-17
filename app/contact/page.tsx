@@ -167,7 +167,7 @@ function ContactPageInner() {
         {/* ============== EXPECTATIONS BLOCK (brief checklist + ladder + reassurance) ============== */}
         <section className="mb-16 border-y border-[var(--border)] py-12 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
-            {/* LEFT — Brief checklist */}
+            {/* LEFT - Brief checklist */}
             <div className="bg-[var(--background)] p-8 md:p-10">
               <div className="flex items-center gap-3 mb-6">
                 <div className="size-9 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center">
@@ -179,7 +179,7 @@ function ContactPageInner() {
               </div>
               <p className="text-body-sm text-[var(--muted-foreground)] mb-6">
                 Plus le brief est précis, plus notre premier retour est utile.
-                Pas besoin de tout savoir — partagez ce que vous avez :
+                Pas besoin de tout savoir - partagez ce que vous avez :
               </p>
               <ul className="space-y-3 text-body-sm">
                 <li className="flex gap-3">
@@ -230,14 +230,14 @@ function ContactPageInner() {
                       Les pièces utiles
                     </strong>{" "}
                     : maquettes, cahier des charges, références
-                    d&apos;inspiration — à joindre par retour de mail si vous
+                    d&apos;inspiration - à joindre par retour de mail si vous
                     en avez.
                   </span>
                 </li>
               </ul>
             </div>
 
-            {/* RIGHT — Process ladder */}
+            {/* RIGHT - Process ladder */}
             <div className="bg-[var(--background)] p-8 md:p-10">
               <div className="flex items-center gap-3 mb-6">
                 <div className="size-9 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center">
@@ -262,7 +262,7 @@ function ContactPageInner() {
                     </p>
                     <p className="text-body-sm text-[var(--muted-foreground)]">
                       Lecture de votre brief, questions de clarification, et un
-                      avis honnête sur la faisabilité — y compris si on
+                      avis honnête sur la faisabilité - y compris si on
                       n&apos;est pas la bonne équipe pour vous.
                     </p>
                   </div>
@@ -329,6 +329,13 @@ function ContactPageInner() {
               eyebrow="Email"
               value="contact@krealabs.fr"
               href="mailto:contact@krealabs.fr"
+            />
+            <InfoCard
+              icon={Phone}
+              eyebrow="Téléphone"
+              value="07 81 75 81 88"
+              href="tel:+33781758188"
+              detail="Du lundi au vendredi, 9h-18h"
             />
             <InfoCard
               icon={MapPin}

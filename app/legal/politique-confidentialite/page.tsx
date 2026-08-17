@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 
-import { LegalPage, Placeholder } from "../_components/legal-page";
+import { LegalPage } from "../_components/legal-page";
 
 export const metadata: Metadata = {
-  title: "Politique de confidentialité — Krealabs",
+  title: "Politique de confidentialité - Krealabs",
   description:
     "Comment Krealabs collecte, utilise et protège vos données personnelles. Vos droits RGPD et les moyens de les exercer.",
   alternates: {
@@ -31,8 +31,8 @@ export default function PolitiqueConfidentialitePage() {
       <p>
         Le responsable de traitement est le GIE <strong>Krealabs</strong>{" "}
         (cf. <a href="/legal/mentions-legales">mentions légales</a>).
-        L&apos;administrateur, <Placeholder>NOM ADMINISTRATEUR</Placeholder>,
-        est en charge des questions relatives à la protection des données.
+        L&apos;administrateur, <strong>Maxime Dubois</strong>, est en charge
+        des questions relatives à la protection des données.
         Aucun Délégué à la Protection des Données (DPO) n&apos;a été désigné,
         Krealabs ne remplissant pas les critères de désignation obligatoire
         (art. 37 RGPD).
@@ -82,22 +82,22 @@ export default function PolitiqueConfidentialitePage() {
       <h2>Finalités et bases légales</h2>
       <ul>
         <li>
-          <strong>Répondre à vos demandes de contact</strong> — base
+          <strong>Répondre à vos demandes de contact</strong> - base
           légale : exécution de mesures précontractuelles à votre demande
           (art. 6.1.b RGPD).
         </li>
         <li>
-          <strong>Vous tenir informé via la liste d&apos;attente</strong> —
+          <strong>Vous tenir informé via la liste d&apos;attente</strong> -
           base légale : votre consentement (art. 6.1.a RGPD), révocable à
           tout moment.
         </li>
         <li>
           <strong>Sécurité, prévention des abus, diagnostic
-          technique</strong> — base légale : intérêt légitime du
+          technique</strong> - base légale : intérêt légitime du
           responsable de traitement (art. 6.1.f RGPD).
         </li>
         <li>
-          <strong>Respect des obligations légales et comptables</strong> —
+          <strong>Respect des obligations légales et comptables</strong> -
           base légale : obligation légale (art. 6.1.c RGPD).
         </li>
       </ul>
@@ -111,21 +111,21 @@ export default function PolitiqueConfidentialitePage() {
       </p>
       <ul>
         <li>
-          <strong>Vercel Inc.</strong> (États-Unis) — hébergement du site
+          <strong>Vercel Inc.</strong> (États-Unis) - hébergement du site
           et des fonctions serveur.
         </li>
         <li>
           <strong>Neon Inc.</strong> (États-Unis, base de données hébergée
-          dans l&apos;UE — région eu-central-1, Francfort) — stockage des
+          dans l&apos;UE - région eu-central-1, Francfort) - stockage des
           formulaires de contact et de la liste d&apos;attente.
         </li>
         <li>
-          <strong>Resend Inc.</strong> (États-Unis) — envoi des emails
+          <strong>Resend Inc.</strong> (États-Unis) - envoi des emails
           transactionnels (notification interne + accusé de réception
           visiteur).
         </li>
         <li>
-          <strong>Proton AG</strong> (Suisse) — réception des emails du
+          <strong>Proton AG</strong> (Suisse) - réception des emails du
           domaine krealabs.fr.
         </li>
       </ul>
@@ -193,11 +193,11 @@ export default function PolitiqueConfidentialitePage() {
       </p>
       <ul>
         <li>
-          <strong>Droit d&apos;accès</strong> — obtenir une copie des
+          <strong>Droit d&apos;accès</strong> - obtenir une copie des
           données que nous détenons sur vous.
         </li>
         <li>
-          <strong>Droit de rectification</strong> — corriger des données
+          <strong>Droit de rectification</strong> - corriger des données
           inexactes ou incomplètes.
         </li>
         <li>
@@ -244,7 +244,7 @@ export default function PolitiqueConfidentialitePage() {
         >
           cnil.fr/fr/plaintes
         </a>{" "}
-        — 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07.
+        - 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07.
       </p>
 
       <h2>Modifications</h2>
