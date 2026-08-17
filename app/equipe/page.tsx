@@ -10,12 +10,17 @@ import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 import { MotionReveal } from "@/components/animations/motion-reveal";
 import { PersonSchema } from "@/components/seo/person-schema";
-import { TEAM, type TeamMember } from "@/lib/team";
+import {
+  TEAM,
+  UPCOMING_TEAM,
+  type TeamMember,
+  type UpcomingMember,
+} from "@/lib/team";
 
 export const metadata: Metadata = {
-  title: "L'équipe — le développeur derrière Krealabs (Rouen)",
+  title: "L'équipe : les fondateurs derrière Krealabs (Rouen)",
   description:
-    "Krealabs, c'est Maxime Dubois : un développeur fondateur basé à Rouen. Une agence à taille humaine, joignable directement, qui code vos projets de A à Z.",
+    "Krealabs, c'est un collectif de trois fondateurs basé à Rouen. Une agence à taille humaine, joignable directement, qui code vos projets de A à Z.",
   alternates: { canonical: "https://krealabs.fr/equipe" },
 };
 
@@ -51,14 +56,14 @@ export default function EquipePage() {
           <MotionReveal className="max-w-4xl">
             <Eyebrow dot className="mb-8">L'équipe Krealabs</Eyebrow>
             <h1 className="text-display">
-              Un <em>développeur</em>,
+              Trois <em>fondateurs</em>,
               <br />
               zéro intermédiaire.
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Krealabs, c'est un développeur fondateur basé à Rouen, qui code
-              lui-même vos projets. Pas de chef de projet intermédiaire, pas de
-              sous-traitance. Vous parlez directement à celui qui construit.
+              Krealabs, c'est un collectif de trois fondateurs basé à Rouen, qui
+              code lui-même vos projets. Pas de chef de projet intermédiaire, pas
+              de sous-traitance. Vous parlez directement à ceux qui construisent.
             </p>
           </MotionReveal>
         </Container>
@@ -101,7 +106,7 @@ export default function EquipePage() {
                   {member.bio}
                 </p>
 
-                {/* Ce que j'aime — accent serif italique */}
+                {/* Ce que j'aime - accent serif italique */}
                 <div className="border-l-2 border-[var(--accent)] pl-5 py-1">
                   <p className="text-caption mb-1.5">Ce que j'aime</p>
                   <p
@@ -159,6 +164,15 @@ export default function EquipePage() {
                 </article>
               </MotionReveal>
             ))}
+
+            {UPCOMING_TEAM.map((member, i) => (
+              <MotionReveal
+                key={`upcoming-${i}`}
+                delay={(TEAM.length + i) * 0.1}
+              >
+                <UpcomingCard member={member} index={TEAM.length + i} />
+              </MotionReveal>
+            ))}
           </div>
         </Container>
       </section>
@@ -172,9 +186,9 @@ export default function EquipePage() {
               Une agence à <em>taille humaine</em>, par choix.
             </h2>
             <p className="text-body-lg text-[var(--muted-foreground)] mb-12">
-              J'aurais pu grossir, embaucher, sous-traiter. J'ai fait le choix
-              inverse : rester une structure ramassée pour garder la maîtrise
-              totale du code et la qualité de la relation client.
+              Nous aurions pu grossir, embaucher, sous-traiter. Nous avons fait le
+              choix inverse : rester une structure ramassée pour garder la
+              maîtrise totale du code et la qualité de la relation client.
             </p>
           </div>
 
@@ -234,6 +248,73 @@ function Avatar({ member }: { member: TeamMember }) {
   );
 }
 
+/**
+ * Carte d'un fondateur dont le profil n'est pas encore publié.
+ * Aucun lien, aucun schema Person : uniquement un état « SOON ».
+ */
+function UpcomingCard({
+  member,
+  index,
+}: {
+  member: UpcomingMember;
+  index: number;
+}) {
+  return (
+    <article className="relative bg-[var(--background)] p-8 md:p-12 flex flex-col gap-8 h-full">
+      <header className="flex items-start gap-6">
+        <div className="size-20 md:size-24 shrink-0 rounded-[var(--radius)] border border-dashed border-[var(--border-strong)] bg-[var(--surface)] flex items-center justify-center">
+          <span className="text-h2 font-semibold text-[var(--subtle-foreground)]">
+            {member.initials}
+          </span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-caption mb-2">
+            Membre {String(index + 1).padStart(2, "0")}
+          </p>
+          <div className="flex flex-wrap items-center gap-3 mb-1">
+            <h2 className="text-h2 text-[var(--muted-foreground)]">
+              {member.name}
+            </h2>
+            <Badge variant="outline">Bientôt</Badge>
+          </div>
+          <p className="text-body text-[var(--accent)] font-medium">
+            {member.role}
+          </p>
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-body-sm text-[var(--subtle-foreground)]">
+            <span className="inline-flex items-center gap-1.5">
+              <MapPin className="size-3.5" />
+              SOON
+            </span>
+            <span aria-hidden className="text-[var(--subtle-foreground)]">·</span>
+            <span className="inline-flex items-center gap-1.5">
+              <Briefcase className="size-3.5" />
+              SOON
+            </span>
+          </div>
+        </div>
+      </header>
+
+      <p className="text-body text-[var(--muted-foreground)]">{member.teaser}</p>
+
+      <div>
+        <p className="text-eyebrow mb-3">Spécialités</p>
+        <Badge variant="secondary">SOON</Badge>
+      </div>
+
+      <div>
+        <p className="text-eyebrow mb-3">Stack quotidienne</p>
+        <Badge variant="outline">SOON</Badge>
+      </div>
+
+      <div className="pt-6 border-t border-[var(--border)]">
+        <p className="text-body-sm text-[var(--subtle-foreground)]">
+          Profil détaillé à venir.
+        </p>
+      </div>
+    </article>
+  );
+}
+
 function SocialLink({
   href,
   label,
@@ -265,7 +346,7 @@ const VALUES = [
     label: "Interlocuteur unique",
     title: "Un seul contact",
     description:
-      "Pas de chef de projet, pas de commercial, pas de sous-traitant. Vous appelez, je réponds. Vous écrivez, je lis.",
+      "Pas de chef de projet, pas de commercial, pas de sous-traitant. Vous appelez, nous répondons. Vous écrivez, nous lisons.",
   },
   {
     label: "Polyvalence",
@@ -277,6 +358,6 @@ const VALUES = [
     label: "Engagement",
     title: "Vos projets, nos signatures",
     description:
-      "Chaque projet que nous livrons est signé Krealabs. Notre nom est sur la ligne — la qualité l'est aussi.",
+      "Chaque projet que nous livrons est signé Krealabs. Notre nom est sur la ligne - la qualité l'est aussi.",
   },
 ];

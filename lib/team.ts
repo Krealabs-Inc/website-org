@@ -80,7 +80,7 @@ export const TEAM: TeamMember[] = [
       "Hébergement web",
       "Agence digitale Rouen",
     ],
-    metaTitle: "Maxime Dubois — Fondateur & développeur Krealabs (Rouen)",
+    metaTitle: "Maxime Dubois - Fondateur & développeur Krealabs (Rouen)",
     metaDescription:
       "Maxime Dubois, fondateur et développeur full-stack de Krealabs à Rouen. 10+ ans en développement web, expert Next.js, React, TypeScript et architecture frontend moderne.",
   },
@@ -91,3 +91,37 @@ export const TEAM_SLUGS = TEAM.map((m) => m.slug);
 export function getMember(slug: string): TeamMember | undefined {
   return TEAM.find((m) => m.slug === slug);
 }
+
+/**
+ * Fondateurs dont le profil public n'est pas encore publié.
+ * Volontairement séparés de TEAM : pas de page /equipe/[slug], pas de
+ * schema Person, pas d'entrée sitemap ni de résultat de recherche tant
+ * que les informations réelles ne sont pas renseignées.
+ */
+export interface UpcomingMember {
+  /** Libellé affiché à la place du nom */
+  name: string;
+  /** Rôle affiché */
+  role: string;
+  /** Placeholder d'avatar */
+  initials: string;
+  /** Phrase affichée à la place de la bio */
+  teaser: string;
+}
+
+export const UPCOMING_TEAM: UpcomingMember[] = [
+  {
+    name: "SOON",
+    role: "Fondateur",
+    initials: "?",
+    teaser:
+      "Profil en cours de préparation. Nom, rôle détaillé et parcours seront publiés ici prochainement.",
+  },
+  {
+    name: "SOON",
+    role: "Fondateur",
+    initials: "?",
+    teaser:
+      "Profil en cours de préparation. Nom, rôle détaillé et parcours seront publiés ici prochainement.",
+  },
+];

@@ -43,7 +43,7 @@ export interface SearchItem {
 const STATIC_PAGES: SearchItem[] = [
   { url: "/", title: "Accueil", excerpt: "Krealabs, agence digitale à Rouen.", category: "Page" },
   { url: "/notre-histoire", title: "Notre histoire", excerpt: "L'histoire de l'agence Krealabs depuis 2020.", category: "Page" },
-  { url: "/equipe", title: "L'équipe", excerpt: "Maxime Dubois, développeur fondateur de Krealabs.", category: "Page" },
+  { url: "/equipe", title: "L'équipe", excerpt: "Les trois fondateurs de Krealabs, agence digitale à Rouen.", category: "Page" },
   { url: "/expertise", title: "Expertise & savoir-faire", excerpt: "Compétences techniques et secteurs accompagnés.", category: "Page" },
   { url: "/clients", title: "Travaux clients", excerpt: "Études de cas anonymisées de projets Krealabs.", category: "Page" },
   { url: "/faq", title: "FAQ", excerpt: "Questions fréquentes : délais, méthode, tarifs.", category: "Page" },
