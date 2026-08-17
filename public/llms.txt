@@ -1,6 +1,6 @@
 # Krealabs
 
-> Agence digitale à Rouen (Normandie) — conception et développement de sites internet, applications mobiles et logiciels sur mesure. Spécialiste WordPress, Next.js, React Native, TypeScript. Co-fondée par Maxime Dubois et Romain Clatot.
+> Agence digitale à Rouen (Normandie) - conception et développement de sites internet, applications mobiles et logiciels sur mesure. Spécialiste WordPress, Next.js, React Native, TypeScript. Co-fondée par Maxime Dubois et Romain Clatot.
 
 Krealabs accompagne les PME, startups et grandes entreprises rouennaises et normandes dans leur transformation digitale : refonte de sites, lancement de plateformes SaaS, applications mobiles cross-platform, audit SEO, performance et maintenance.
 
@@ -18,7 +18,7 @@ Pour le full-text des articles : https://krealabs.fr/llms-full.txt
 ## Services
 
 - [Tous les services](https://krealabs.fr/services): Vue d'ensemble.
-- [WordPress sur mesure](https://krealabs.fr/services/wordpress): Spécialité — thèmes custom, ACF, WooCommerce, maintenance.
+- [WordPress sur mesure](https://krealabs.fr/services/wordpress): Spécialité - thèmes custom, ACF, WooCommerce, maintenance.
 - [Développement web custom](https://krealabs.fr/services/developpement-web): Next.js, React, Python, Node.js. Plateformes SaaS et logiciels métier.
 - [Applications mobiles](https://krealabs.fr/services/applications-mobile): React Native iOS + Android.
 - [Design UI/UX](https://krealabs.fr/services/design-uiux): Maquettes Figma, design systems.

@@ -162,7 +162,7 @@ export const URGENCY_MULTIPLIERS: Record<Urgency, { multiplier: number; label: s
   flexible: {
     multiplier: 0.95,
     label: "Pas urgent (3 mois +)",
-    description: "Vous laissez le temps de bien faire — -5% sur le total.",
+    description: "Vous laissez le temps de bien faire : -5% sur le total.",
   },
   normal: {
     multiplier: 1.0,
@@ -172,7 +172,7 @@ export const URGENCY_MULTIPLIERS: Record<Urgency, { multiplier: number; label: s
   urgent: {
     multiplier: 1.2,
     label: "Urgent (< 4 semaines)",
-    description: "Mobilisation prioritaire de l'équipe — +20% sur le total.",
+    description: "Mobilisation prioritaire de l'équipe - +20% sur le total.",
   },
 };
 

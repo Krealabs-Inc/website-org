@@ -52,7 +52,7 @@ export function Navbar() {
             <Link
               href="/"
               className="group flex items-center -ml-1 px-1 py-1 rounded-[var(--radius)] hover:bg-[var(--surface)] transition-colors"
-              aria-label="Krealabs — Accueil"
+              aria-label="Krealabs - Accueil"
             >
               <Image
                 src="/logo.png"
@@ -118,7 +118,7 @@ export function Navbar() {
         </Container>
       </header>
 
-      {/* Mobile sheet — CSS-only transitions (pas de framer-motion) */}
+      {/* Mobile sheet - CSS-only transitions (pas de framer-motion) */}
       <div
         id="mobile-menu"
         aria-hidden={!isMobileMenuOpen}

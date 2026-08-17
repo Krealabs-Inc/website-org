@@ -63,7 +63,7 @@ export function CookieConsent() {
       // Custom event pour les autres composants
       window.dispatchEvent(new CustomEvent("krealabs:cookie-consent", { detail: state }));
     } catch {
-      // localStorage indispo (incognito strict) — on cache quand même
+      // localStorage indispo (incognito strict) - on cache quand même
     }
     setVisible(false);
   }
@@ -96,7 +96,7 @@ export function CookieConsent() {
               "md:border md:rounded-[var(--radius-lg)]",
             ].join(" ")}
           >
-            {/* Close X — desktop uniquement (sur mobile, les boutons font le job) */}
+            {/* Close X - desktop uniquement (sur mobile, les boutons font le job) */}
             <button
               onClick={() => decide("rejected")}
               aria-label="Fermer"

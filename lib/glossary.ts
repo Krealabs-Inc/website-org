@@ -36,7 +36,7 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
     synonyms: ["WordPress découplé", "WordPress decoupled", "WP headless"],
     category: "WordPress",
     definition:
-      "Le **headless WordPress** sépare le back-office (où les rédacteurs créent et éditent du contenu) du front-end (le site web public que voient les visiteurs). WordPress garde son interface admin familière et expose les contenus via une API REST ou GraphQL (avec le plugin WPGraphQL). Un framework moderne — typiquement **Next.js**, Astro ou Gatsby — consomme cette API et génère un site web haute performance. Cette approche combine le meilleur des deux mondes : l'ergonomie WordPress pour l'équipe édito + la rapidité native de Next.js pour les visiteurs.",
+      "Le **headless WordPress** sépare le back-office (où les rédacteurs créent et éditent du contenu) du front-end (le site web public que voient les visiteurs). WordPress garde son interface admin familière et expose les contenus via une API REST ou GraphQL (avec le plugin WPGraphQL). Un framework moderne - typiquement **Next.js**, Astro ou Gatsby - consomme cette API et génère un site web haute performance. Cette approche combine le meilleur des deux mondes : l'ergonomie WordPress pour l'équipe édito + la rapidité native de Next.js pour les visiteurs.",
     whyItMatters:
       "Pour les sites WordPress qui souffrent de performances médiocres (Lighthouse <70, LCP >3s), le headless est souvent la meilleure réponse sans devoir abandonner WordPress. Les rédacteurs continuent d'utiliser WordPress comme avant. Les visiteurs accèdent à un site 3-5x plus rapide. Le SEO en bénéficie directement (Core Web Vitals 95+ accessibles).",
     ourApproach:
@@ -87,7 +87,7 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
     definition:
       "**Schema.org** est un vocabulaire de markup partagé entre tous les moteurs de recherche pour décrire structurellement le contenu d'une page (article, produit, événement, recette, personne, organisation, etc.). Le format moderne utilisé est **JSON-LD** : un script JSON inclus dans la balise `<head>` de la page. Google utilise ces données pour générer des **rich snippets** (résultats enrichis) : étoiles d'évaluation, FAQ déroulantes, fil d'Ariane, image de recette, etc. Présence dans les SERPs : +30 à +50% de CTR mesuré sur les pages avec rich snippets.",
     whyItMatters:
-      "Le schema.org n'est plus optionnel en 2026 — il est attendu par défaut par Google. Pour un site agence, les schemas les plus rentables sont : **Organization/ProfessionalService** (Knowledge Panel), **Article** sur les blog posts, **FAQPage** sur les FAQ (rich snippets accordéon), **BreadcrumbList** (fil d'Ariane dans SERP), **Person** sur les auteurs (E-E-A-T), **AggregateRating** quand on a des avis vérifiés.",
+      "Le schema.org n'est plus optionnel en 2026 - il est attendu par défaut par Google. Pour un site agence, les schemas les plus rentables sont : **Organization/ProfessionalService** (Knowledge Panel), **Article** sur les blog posts, **FAQPage** sur les FAQ (rich snippets accordéon), **BreadcrumbList** (fil d'Ariane dans SERP), **Person** sur les auteurs (E-E-A-T), **AggregateRating** quand on a des avis vérifiés.",
     ourApproach:
       "Sur tous nos projets Krealabs, nous injectons 5-7 schemas par page selon le type : Organization sitewide, Article + BreadcrumbList + HowTo sur les guides, FAQPage sur les FAQ services, Person sur les pages auteur (/equipe/[slug]). Tests systématiques sur le Rich Results Test de Google + Schema.org Validator avant mise en prod.",
     relatedTerms: ["seo-local", "core-web-vitals", "e-e-a-t"],
@@ -236,7 +236,7 @@ export const GLOSSARY: Record<string, GlossaryEntry> = {
     whyItMatters:
       "Les RSC changent la donne pour les sites haute performance : on retrouve la légèreté d'un site statique classique tout en gardant la DX de React. Pour un site avec beaucoup de pages éditoriales et peu d'interactivité, le bundle JS peut tomber sous 50KB (vs 200-500KB pour un SPA React classique). Impact direct sur LCP, INP, et Lighthouse.",
     ourApproach:
-      "Chez Krealabs, nous adoptons les RSC par défaut sur tous les nouveaux projets Next.js depuis 2024. Règle simple : tout est Server Component sauf si on a explicitement besoin de useState, useEffect, ou d'un event handler — alors on isole en Client Component (`\"use client\"`). Résultat : Lighthouse 95+ accessible sans optimisation manuelle.",
+      "Chez Krealabs, nous adoptons les RSC par défaut sur tous les nouveaux projets Next.js depuis 2024. Règle simple : tout est Server Component sauf si on a explicitement besoin de useState, useEffect, ou d'un event handler - alors on isole en Client Component (`\"use client\"`). Résultat : Lighthouse 95+ accessible sans optimisation manuelle.",
     relatedTerms: ["next-js", "core-web-vitals"],
     relatedLinks: [
       {

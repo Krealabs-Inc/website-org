@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge";
 import { SEARCH_INDEX, type SearchItem } from "@/lib/search-index";
 
 // SSR-only : route SEO pour SearchAction schema (sitelinks search box).
-// Pas d'ISR — chaque visite filtre l'index en mémoire.
+// Pas d'ISR - chaque visite filtre l'index en mémoire.
 export const dynamic = "force-static";
 
 export const metadata: Metadata = {

@@ -36,21 +36,21 @@ export const SECTORS: Record<string, SectorData> = {
     name: "restaurant",
     namePlural: "restaurants",
     nameLabeled: "les restaurants",
-    title: "Agence web pour restaurant à Rouen — Sites & réservation",
+    title: "Agence web pour restaurant à Rouen - Sites & réservation",
     description:
       "Création de sites internet pour restaurants à Rouen et en Normandie : carte en ligne, réservation, click & collect, SEO local. Spécialiste WordPress et Next.js.",
     intro:
-      "Vous tenez un restaurant à Rouen et vous cherchez une agence web qui comprend les contraintes du secteur ? Les restaurateurs rouennais ont des besoins très spécifiques : afficher leur carte de manière lisible (et la mettre à jour souvent), prendre des réservations sans payer 30% à TheFork, gérer le click & collect, capter le trafic local sur \"restaurant Rouen\". Cet article résume notre approche pour les restaurants — de la pizzeria de quartier au bistronomique du centre-ville, en passant par les chaînes locales.",
+      "Vous tenez un restaurant à Rouen et vous cherchez une agence web qui comprend les contraintes du secteur ? Les restaurateurs rouennais ont des besoins très spécifiques : afficher leur carte de manière lisible (et la mettre à jour souvent), prendre des réservations sans payer 30% à TheFork, gérer le click & collect, capter le trafic local sur \"restaurant Rouen\". Cet article résume notre approche pour les restaurants - de la pizzeria de quartier au bistronomique du centre-ville, en passant par les chaînes locales.",
     challenges: [
       {
         title: "Mise à jour de la carte fréquente",
         description:
-          "La carte évolue chaque semaine ou chaque mois. Un site classique demande à votre dev de modifier — coûteux. Notre solution : un back-office WordPress simple où vous éditez la carte vous-même en 5 minutes.",
+          "La carte évolue chaque semaine ou chaque mois. Un site classique demande à votre dev de modifier - coûteux. Notre solution : un back-office WordPress simple où vous éditez la carte vous-même en 5 minutes.",
       },
       {
         title: "Réservations sans dépendre des plateformes tierces",
         description:
-          "TheFork prend 2-7€ par couvert + 30% sur les promotions. Votre site doit pouvoir prendre des réservations directes — économies massives sur le long terme.",
+          "TheFork prend 2-7€ par couvert + 30% sur les promotions. Votre site doit pouvoir prendre des réservations directes - économies massives sur le long terme.",
       },
       {
         title: "SEO local hyper-compétitif à Rouen",
@@ -67,7 +67,7 @@ export const SECTORS: Record<string, SectorData> = {
       {
         title: "Module de réservation directe",
         description:
-          "Intégration Zenchef, GuestOnline, ResDiary ou solution custom — votre client réserve sans intermédiaire, vous gardez la marge.",
+          "Intégration Zenchef, GuestOnline, ResDiary ou solution custom - votre client réserve sans intermédiaire, vous gardez la marge.",
       },
       {
         title: "Carte digitale + QR code",
@@ -77,7 +77,7 @@ export const SECTORS: Record<string, SectorData> = {
       {
         title: "Click & collect / commande en ligne",
         description:
-          "Si vous faites de la vente à emporter ou de la livraison locale, on intègre un système simple avec Stripe — sans dépendre d'Uber Eats.",
+          "Si vous faites de la vente à emporter ou de la livraison locale, on intègre un système simple avec Stripe - sans dépendre d'Uber Eats.",
       },
       {
         title: "SEO local Rouen + Google Business",
@@ -118,11 +118,11 @@ export const SECTORS: Record<string, SectorData> = {
     name: "hôtel",
     namePlural: "hôtels",
     nameLabeled: "les hôtels",
-    title: "Agence web pour hôtel à Rouen — Sites & réservation directe",
+    title: "Agence web pour hôtel à Rouen - Sites & réservation directe",
     description:
       "Création de sites internet pour hôtels à Rouen et en Normandie. Moteur de réservation, intégration Booking.com, SEO local. WordPress / Next.js sur mesure.",
     intro:
-      "Vous gérez un hôtel à Rouen, en Normandie ou sur la côte ? Le secteur hôtelier subit la guerre des OTAs (Booking, Expedia) qui ponctionnent 15-25% de commission. Votre site web doit faire l'inverse : capter le maximum de réservations directes pour préserver votre marge. Cet article détaille notre approche pour les hôteliers — du petit B&B 5 chambres à l'hôtel 3-4 étoiles du centre de Rouen.",
+      "Vous gérez un hôtel à Rouen, en Normandie ou sur la côte ? Le secteur hôtelier subit la guerre des OTAs (Booking, Expedia) qui ponctionnent 15-25% de commission. Votre site web doit faire l'inverse : capter le maximum de réservations directes pour préserver votre marge. Cet article détaille notre approche pour les hôteliers - du petit B&B 5 chambres à l'hôtel 3-4 étoiles du centre de Rouen.",
     challenges: [
       {
         title: "Disparité de prix avec les OTAs",
@@ -200,11 +200,11 @@ export const SECTORS: Record<string, SectorData> = {
     name: "cabinet comptable",
     namePlural: "cabinets comptables",
     nameLabeled: "les cabinets comptables",
-    title: "Agence web pour cabinet comptable à Rouen — Sites pro & client",
+    title: "Agence web pour cabinet comptable à Rouen - Sites pro & client",
     description:
       "Sites internet pour cabinets comptables à Rouen : portail client, prise de RDV, blog conseils. Krealabs développe des sites WordPress et Next.js sur mesure.",
     intro:
-      "Les cabinets comptables à Rouen évoluent vers un modèle hybride : conseil + expertise + outils digitaux pour les clients. Votre site web n'est plus seulement une vitrine — c'est une porte d'entrée pour vos services dématérialisés. Cet article résume notre approche pour les experts-comptables rouennais et normands, du cabinet 2-3 collaborateurs à la structure 30+ salariés.",
+      "Les cabinets comptables à Rouen évoluent vers un modèle hybride : conseil + expertise + outils digitaux pour les clients. Votre site web n'est plus seulement une vitrine - c'est une porte d'entrée pour vos services dématérialisés. Cet article résume notre approche pour les experts-comptables rouennais et normands, du cabinet 2-3 collaborateurs à la structure 30+ salariés.",
     challenges: [
       {
         title: "Crédibilité et confiance",
@@ -277,7 +277,7 @@ export const SECTORS: Record<string, SectorData> = {
     name: "cabinet d'avocats",
     namePlural: "cabinets d'avocats",
     nameLabeled: "les cabinets d'avocats",
-    title: "Agence web pour avocat à Rouen — Site cabinet conforme",
+    title: "Agence web pour avocat à Rouen - Site cabinet conforme",
     description:
       "Création de sites internet pour avocats à Rouen et en Normandie : conformité ordre, blog expertise, prise de RDV. Sites WordPress et Next.js sur mesure.",
     intro:
@@ -354,7 +354,7 @@ export const SECTORS: Record<string, SectorData> = {
     name: "agence immobilière",
     namePlural: "agences immobilières",
     nameLabeled: "les agences immobilières",
-    title: "Agence web pour agence immobilière à Rouen — Sites & catalogues",
+    title: "Agence web pour agence immobilière à Rouen - Sites & catalogues",
     description:
       "Sites internet pour agences immobilières à Rouen : catalogue de biens, recherche multicritères, synchro logiciel transactionnel. WordPress / Next.js sur mesure.",
     intro:
@@ -400,7 +400,7 @@ export const SECTORS: Record<string, SectorData> = {
       {
         title: "Formulaires de prospection sortants",
         description:
-          "Estimation gratuite en ligne, alerte mail pour nouveaux biens, demande de RDV — chaque formulaire envoie en CRM (Hubspot, Pipedrive, ou intégré au logiciel transactionnel).",
+          "Estimation gratuite en ligne, alerte mail pour nouveaux biens, demande de RDV - chaque formulaire envoie en CRM (Hubspot, Pipedrive, ou intégré au logiciel transactionnel).",
       },
     ],
     recommendedStack:
@@ -431,7 +431,7 @@ export const SECTORS: Record<string, SectorData> = {
     name: "salon de coiffure",
     namePlural: "salons de coiffure",
     nameLabeled: "les salons de coiffure",
-    title: "Agence web pour salon de coiffure à Rouen — Site & réservation",
+    title: "Agence web pour salon de coiffure à Rouen - Site & réservation",
     description:
       "Création de sites internet pour salons de coiffure à Rouen : prise de RDV en ligne, galerie photos, SEO local. Spécialiste WordPress et Next.js.",
     intro:
@@ -585,7 +585,7 @@ export const SECTORS: Record<string, SectorData> = {
     name: "cabinet dentaire",
     namePlural: "cabinets dentaires",
     nameLabeled: "les cabinets dentaires",
-    title: "Agence web pour dentiste à Rouen — Sites & prise de RDV",
+    title: "Agence web pour dentiste à Rouen - Sites & prise de RDV",
     description:
       "Création de sites internet pour cabinets dentaires à Rouen : informations patients, RDV en ligne, photos équipe & équipements. WordPress et Next.js.",
     intro:
@@ -657,7 +657,7 @@ export const SECTORS: Record<string, SectorData> = {
     name: "garage automobile",
     namePlural: "garages automobile",
     nameLabeled: "les garages",
-    title: "Agence web pour garage automobile à Rouen — Sites & RDV",
+    title: "Agence web pour garage automobile à Rouen - Sites & RDV",
     description:
       "Création de sites internet pour garages automobile à Rouen : prise de RDV, devis en ligne, catalogue véhicules. Sites WordPress et Next.js sur mesure.",
     intro:
@@ -729,11 +729,11 @@ export const SECTORS: Record<string, SectorData> = {
     name: "association",
     namePlural: "associations",
     nameLabeled: "les associations",
-    title: "Agence web pour association à Rouen — Sites loi 1901",
+    title: "Agence web pour association à Rouen - Sites loi 1901",
     description:
       "Création de sites internet pour associations à Rouen et en Normandie : présentation, adhésions en ligne, dons, agenda événements. WordPress et Next.js sur mesure.",
     intro:
-      "Vous gérez une association loi 1901 à Rouen ou en Normandie ? Votre site web est l'épine dorsale de votre visibilité et de votre vie associative : recruter de nouveaux adhérents, collecter des dons, annoncer les événements, rassurer les financeurs. Krealabs intervient pour des associations de toutes tailles — du petit collectif de quartier à la fédération régionale — avec des solutions adaptées aux budgets limités.",
+      "Vous gérez une association loi 1901 à Rouen ou en Normandie ? Votre site web est l'épine dorsale de votre visibilité et de votre vie associative : recruter de nouveaux adhérents, collecter des dons, annoncer les événements, rassurer les financeurs. Krealabs intervient pour des associations de toutes tailles - du petit collectif de quartier à la fédération régionale - avec des solutions adaptées aux budgets limités.",
     challenges: [
       {
         title: "Budget contraint, exigence professionnelle",
@@ -806,7 +806,7 @@ export const SECTORS: Record<string, SectorData> = {
     name: "EHPAD / maison de retraite",
     namePlural: "EHPAD et maisons de retraite",
     nameLabeled: "les EHPAD",
-    title: "Agence web pour EHPAD à Rouen — Sites & familles",
+    title: "Agence web pour EHPAD à Rouen - Sites & familles",
     description:
       "Création de sites internet pour EHPAD et maisons de retraite à Rouen et en Normandie : informations familles, agenda visites, photos résidence. WordPress sur mesure.",
     intro:
@@ -960,7 +960,7 @@ export const SECTORS: Record<string, SectorData> = {
     name: "plombier",
     namePlural: "plombiers",
     nameLabeled: "les plombiers",
-    title: "Agence web pour plombier à Rouen — Sites & devis en ligne",
+    title: "Agence web pour plombier à Rouen - Sites & devis en ligne",
     description:
       "Création de sites internet pour plombiers à Rouen : devis express, urgence 24/7, SEO local par quartier. Spécialiste WordPress et SEO local.",
     intro:
@@ -1037,7 +1037,7 @@ export const SECTORS: Record<string, SectorData> = {
     name: "électricien",
     namePlural: "électriciens",
     nameLabeled: "les électriciens",
-    title: "Agence web pour électricien à Rouen — Sites & devis",
+    title: "Agence web pour électricien à Rouen - Sites & devis",
     description:
       "Création de sites internet pour électriciens à Rouen et en Normandie : devis en ligne, prestations détaillées, certifications RGE. Spécialiste SEO local.",
     intro:
@@ -1097,7 +1097,7 @@ export const SECTORS: Record<string, SectorData> = {
       {
         question: "Faut-il afficher les tarifs sur le site d'un électricien ?",
         answer:
-          "Pour les prestations standardisées (mise à la terre, remplacement disjoncteur, dépannage forfaitaire), oui — c'est un avantage concurrentiel. Pour les prestations sur mesure (rénovation totale, photovoltaïque), non — on renvoie vers un devis personnalisé. Le mix des deux est idéal.",
+          "Pour les prestations standardisées (mise à la terre, remplacement disjoncteur, dépannage forfaitaire), oui - c'est un avantage concurrentiel. Pour les prestations sur mesure (rénovation totale, photovoltaïque), non - on renvoie vers un devis personnalisé. Le mix des deux est idéal.",
       },
     ],
     keywords: [
@@ -1118,7 +1118,7 @@ export const SECTORS: Record<string, SectorData> = {
     description:
       "Création de sites internet pour agences de communication à Rouen : portfolio dynamique, études de cas, blog expertise. WordPress et Next.js sur mesure.",
     intro:
-      "Vous dirigez une agence de communication, de design ou de publicité à Rouen ou en Normandie ? Votre site web EST votre principal commercial : il doit projeter votre niveau de créativité, vos réalisations, votre identité visuelle. C'est un exercice particulièrement délicat — votre site doit être plus beau que ceux que vous concevez pour vos clients. Krealabs accompagne plusieurs agences de communication normandes sur cette tension.",
+      "Vous dirigez une agence de communication, de design ou de publicité à Rouen ou en Normandie ? Votre site web EST votre principal commercial : il doit projeter votre niveau de créativité, vos réalisations, votre identité visuelle. C'est un exercice particulièrement délicat - votre site doit être plus beau que ceux que vous concevez pour vos clients. Krealabs accompagne plusieurs agences de communication normandes sur cette tension.",
     challenges: [
       {
         title: "Le site = vitrine de votre créativité",
@@ -1191,11 +1191,11 @@ export const SECTORS: Record<string, SectorData> = {
     name: "pharmacie",
     namePlural: "pharmacies",
     nameLabeled: "les pharmacies",
-    title: "Agence web pour pharmacie à Rouen — Sites & click & collect",
+    title: "Agence web pour pharmacie à Rouen - Sites & click & collect",
     description:
       "Sites internet pour pharmacies à Rouen et en Normandie : click & collect ordonnances, parapharmacie en ligne, conformité ARS. WordPress et Next.js.",
     intro:
-      "Vous tenez une pharmacie d'officine à Rouen ou en Normandie ? Le secteur évolue : click & collect d'ordonnances, télé-services (vaccinations, tests, conseil pharmaceutique), parapharmacie en ligne. Votre site web est un canal commercial complémentaire de l'officine physique — à condition de respecter les règles strictes du Code de déontologie pharmaceutique et de l'Ordre.",
+      "Vous tenez une pharmacie d'officine à Rouen ou en Normandie ? Le secteur évolue : click & collect d'ordonnances, télé-services (vaccinations, tests, conseil pharmaceutique), parapharmacie en ligne. Votre site web est un canal commercial complémentaire de l'officine physique - à condition de respecter les règles strictes du Code de déontologie pharmaceutique et de l'Ordre.",
     challenges: [
       {
         title: "Conformité Ordre des Pharmaciens (article R.4235-22 CSP)",
@@ -1268,7 +1268,7 @@ export const SECTORS: Record<string, SectorData> = {
     name: "société de transport et logistique",
     namePlural: "sociétés de transport et logistique",
     nameLabeled: "les sociétés de transport et logistique",
-    title: "Agence web pour transport & logistique à Rouen — Sites B2B",
+    title: "Agence web pour transport & logistique à Rouen - Sites B2B",
     description:
       "Sites internet pour entreprises de transport et logistique à Rouen : suivi de commandes, devis transport, intégrations ERP. WordPress et Next.js sur mesure.",
     intro:
@@ -1345,11 +1345,11 @@ export const SECTORS: Record<string, SectorData> = {
     name: "e-commerce",
     namePlural: "sites e-commerce",
     nameLabeled: "les e-commerces",
-    title: "Agence e-commerce à Rouen — Création de boutiques en ligne",
+    title: "Agence e-commerce à Rouen - Création de boutiques en ligne",
     description:
       "Création de sites e-commerce à Rouen : WooCommerce, Shopify, headless. Intégration Stripe, gestion de stock, SEO produit. Agence digitale normande.",
     intro:
-      "Vous lancez ou refondez votre site e-commerce à Rouen, en Normandie ou ailleurs ? Le choix de la plateforme et de l'architecture conditionne 80% du succès à 3 ans. WooCommerce, Shopify, headless avec Next.js : chaque option a ses avantages selon votre catalogue, vos volumes, votre stratégie. Cet article résume notre approche e-commerce pour les PME normandes — boutique de 50 produits ou marketplace de 5000+ SKUs.",
+      "Vous lancez ou refondez votre site e-commerce à Rouen, en Normandie ou ailleurs ? Le choix de la plateforme et de l'architecture conditionne 80% du succès à 3 ans. WooCommerce, Shopify, headless avec Next.js : chaque option a ses avantages selon votre catalogue, vos volumes, votre stratégie. Cet article résume notre approche e-commerce pour les PME normandes - boutique de 50 produits ou marketplace de 5000+ SKUs.",
     challenges: [
       {
         title: "Choix de plateforme : WooCommerce vs Shopify vs custom",

@@ -1,5 +1,5 @@
 /**
- * Pipeline newsletter Krealabs — orchestre :
+ * Pipeline newsletter Krealabs - orchestre :
  *  1. Stockage Prisma (NewsletterSubscriber) → source de vérité
  *  2. Sync Resend Audience (si RESEND_AUDIENCE_ID configuré)
  *  3. Welcome email transactionnel

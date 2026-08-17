@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 /**
- * Button — Krealabs DS v2
+ * Button - Krealabs DS v2
  *
  * Cohérence stricte : radius unique (0.625rem), 2 tailles (md/lg), 3 variantes
  * principales (default/secondary/ghost) + 2 spécialisées (destructive/link).

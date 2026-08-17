@@ -5,7 +5,7 @@ import { isAdminAuthenticated, getAdminAuthError } from "@/lib/admin-auth";
  * Stub : envoi newsletter bulk désactivé dans le setup actuel.
  *
  * Le service email (Formsubmit) du site est conçu pour envoyer
- * UN formulaire visiteur vers contact@krealabs.fr — pas pour
+ * UN formulaire visiteur vers contact@krealabs.fr - pas pour
  * envoyer en bulk à plusieurs destinataires arbitraires.
  *
  * Pour réactiver la newsletter admin, options :

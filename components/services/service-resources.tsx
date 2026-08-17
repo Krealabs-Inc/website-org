@@ -19,7 +19,7 @@ interface ServiceResourcesProps {
 }
 
 /**
- * Section "Pour aller plus loin" sur les pages services — câble le hub
+ * Section "Pour aller plus loin" sur les pages services - câble le hub
  * (page service) vers ses spokes (articles blog). Complète le maillage
  * hub-and-spoke et fait découvrir la profondeur éditoriale depuis les
  * pages commerciales.

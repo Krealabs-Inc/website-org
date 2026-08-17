@@ -95,7 +95,7 @@ export const ContactEmailTemplate: React.FC<ContactEmailTemplateProps> = ({
 
   return (
     <EmailShell
-      title={`${label} — ${name}`}
+      title={`${label} - ${name}`}
       preview={`${label} de ${name}${company ? ` (${company})` : ""}`}
     >
       <EmailHeader subtitle={label} />
@@ -210,7 +210,7 @@ export const ContactEmailTemplate: React.FC<ContactEmailTemplateProps> = ({
                 <td>
                   <a
                     href={`mailto:${email}?subject=${encodeURIComponent(
-                      `Re: ${label} — Krealabs`,
+                      `Re: ${label} - Krealabs`,
                     )}`}
                     style={{
                       display: "inline-block",

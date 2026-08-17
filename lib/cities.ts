@@ -37,7 +37,7 @@ export interface CityData {
   geo: { lat: number; lng: number };
   /** Distance routière depuis Krealabs HQ Rouen (en km) */
   distanceFromRouen: number;
-  /** Hero — intro paragraph unique pour cette ville */
+  /** Hero - intro paragraph unique pour cette ville */
   heroIntro: string;
   /** Liste de quartiers / zones d'activité */
   zonesActivite: string[];
@@ -105,7 +105,7 @@ export const CITIES: Record<string, CityData> = {
       "Métropole Rouen Normandie",
       "Université de Rouen",
     ],
-    title: "Agence web à Rouen — Création de sites & applications",
+    title: "Agence web à Rouen - Création de sites & applications",
     description:
       "Krealabs, agence web à Rouen en Normandie. Création de sites internet, applications mobiles et logiciels sur mesure pour les entreprises rouennaises. Devis gratuit sous 24h.",
     keywords: [
@@ -142,7 +142,7 @@ export const CITIES: Record<string, CityData> = {
     geo: { lat: 49.4944, lng: 0.1079 },
     distanceFromRouen: 88,
     heroIntro:
-      "Krealabs est une agence web normande qui accompagne les entreprises havraises dans la création de leurs sites internet, applications mobiles et logiciels métier. Port industriel majeur, Le Havre concentre des PME et grands comptes des secteurs logistique, énergie, maritime et industrie — des besoins spécifiques que nous savons cadrer.",
+      "Krealabs est une agence web normande qui accompagne les entreprises havraises dans la création de leurs sites internet, applications mobiles et logiciels métier. Port industriel majeur, Le Havre concentre des PME et grands comptes des secteurs logistique, énergie, maritime et industrie - des besoins spécifiques que nous savons cadrer.",
     zonesActivite: [
       "Ville haute",
       "Port autonome",
@@ -172,7 +172,7 @@ export const CITIES: Record<string, CityData> = {
       "Université Le Havre Normandie",
       "Quartier Saint-François",
     ],
-    title: "Agence web au Havre — Création de sites & applications en Normandie",
+    title: "Agence web au Havre - Création de sites & applications en Normandie",
     description:
       "Agence web au Havre et en Normandie. Krealabs accompagne les entreprises havraises : sites internet, applications mobiles, logiciels sur mesure. Spécialiste WordPress, Next.js, React Native. Devis 24h.",
     keywords: [
@@ -187,7 +187,7 @@ export const CITIES: Record<string, CityData> = {
       "agence wordpress le havre",
     ],
     cityReason:
-      "Le Havre est à 1h de route de notre QG rouennais. Nous nous déplaçons régulièrement pour nos clients havrais — kick-off projet, ateliers UX, formations équipe sur site. La spécificité industrielle et portuaire de la ville demande une connaissance terrain : intégrations ERP, contraintes logistiques, contenu B2B technique.",
+      "Le Havre est à 1h de route de notre QG rouennais. Nous nous déplaçons régulièrement pour nos clients havrais - kick-off projet, ateliers UX, formations équipe sur site. La spécificité industrielle et portuaire de la ville demande une connaissance terrain : intégrations ERP, contraintes logistiques, contenu B2B technique.",
   },
 
   caen: {
@@ -208,7 +208,7 @@ export const CITIES: Record<string, CityData> = {
     geo: { lat: 49.1829, lng: -0.3707 },
     distanceFromRouen: 120,
     heroIntro:
-      "Krealabs est une agence web qui sert les entreprises caennaises depuis Rouen — 1h30 de route, accessibilité fluide pour les RDV stratégiques. Caen concentre un tissu PME dynamique sur l'agroalimentaire, la recherche (GANIL, Université), la santé et les services. Nous intervenons sur la création de sites internet, le développement d'applications et la refonte SEO pour des structures de toutes tailles.",
+      "Krealabs est une agence web qui sert les entreprises caennaises depuis Rouen - 1h30 de route, accessibilité fluide pour les RDV stratégiques. Caen concentre un tissu PME dynamique sur l'agroalimentaire, la recherche (GANIL, Université), la santé et les services. Nous intervenons sur la création de sites internet, le développement d'applications et la refonte SEO pour des structures de toutes tailles.",
     zonesActivite: [
       "Centre-ville",
       "Hérouville-Saint-Clair",
@@ -239,7 +239,7 @@ export const CITIES: Record<string, CityData> = {
       "Université Caen Normandie",
       "GANIL (recherche nucléaire)",
     ],
-    title: "Agence web à Caen — Création de sites & applications en Normandie",
+    title: "Agence web à Caen - Création de sites & applications en Normandie",
     description:
       "Agence web à Caen et en Normandie. Krealabs développe sites internet, applications mobiles et logiciels sur mesure pour les PME et startups caennaises. Spécialiste WordPress, Next.js. Devis gratuit sous 24h.",
     keywords: [
@@ -275,7 +275,7 @@ export const CITIES: Record<string, CityData> = {
     geo: { lat: 49.9229, lng: 1.0775 },
     distanceFromRouen: 70,
     heroIntro:
-      "Krealabs accompagne les entreprises dieppoises depuis Rouen — 1h15 de route. Dieppe, ville portuaire de Seine-Maritime, concentre une économie tournée vers la pêche, le tourisme balnéaire, les ferries vers l'Angleterre (Newhaven) et un tissu PME local. Nous y intervenons sur la création de sites internet, la refonte SEO et le développement d'applications pour des structures à taille humaine.",
+      "Krealabs accompagne les entreprises dieppoises depuis Rouen - 1h15 de route. Dieppe, ville portuaire de Seine-Maritime, concentre une économie tournée vers la pêche, le tourisme balnéaire, les ferries vers l'Angleterre (Newhaven) et un tissu PME local. Nous y intervenons sur la création de sites internet, la refonte SEO et le développement d'applications pour des structures à taille humaine.",
     zonesActivite: [
       "Centre-ville",
       "Quartier du Pollet",
@@ -305,7 +305,7 @@ export const CITIES: Record<string, CityData> = {
       "Cité de la Mer",
       "Église Saint-Jacques",
     ],
-    title: "Agence web à Dieppe — Création de sites en Seine-Maritime",
+    title: "Agence web à Dieppe - Création de sites en Seine-Maritime",
     description:
       "Agence web à Dieppe et en Seine-Maritime. Krealabs développe sites internet, applications mobiles et logiciels sur mesure pour les PME dieppoises et normandes. WordPress, Next.js, React Native.",
     keywords: [
@@ -319,7 +319,7 @@ export const CITIES: Record<string, CityData> = {
       "agence web normandie",
     ],
     cityReason:
-      "Dieppe est à 1h15 de notre QG rouennais. Ville portuaire dynamique, elle accueille des entreprises tournées vers la mer, le tourisme et le commerce de proximité — des besoins web spécifiques (saisonnalité, multilingue FR/EN pour les ferries anglais, gestion des réservations). Notre expérience du secteur tourisme balnéaire normand fait la différence.",
+      "Dieppe est à 1h15 de notre QG rouennais. Ville portuaire dynamique, elle accueille des entreprises tournées vers la mer, le tourisme et le commerce de proximité - des besoins web spécifiques (saisonnalité, multilingue FR/EN pour les ferries anglais, gestion des réservations). Notre expérience du secteur tourisme balnéaire normand fait la différence.",
   },
 
   fecamp: {
@@ -340,7 +340,7 @@ export const CITIES: Record<string, CityData> = {
     geo: { lat: 49.7558, lng: 0.3713 },
     distanceFromRouen: 90,
     heroIntro:
-      "Krealabs intervient à Fécamp et sur la Côte d'Albâtre pour la création de sites internet, applications mobiles et outils métier sur mesure. Cette cité historique du Pays de Caux — connue pour sa Bénédictine, son port de pêche et son patrimoine maritime — concentre des PME et artisans qui méritent une présence web à la hauteur. Nous travaillons depuis Rouen, à 1h30 de Fécamp.",
+      "Krealabs intervient à Fécamp et sur la Côte d'Albâtre pour la création de sites internet, applications mobiles et outils métier sur mesure. Cette cité historique du Pays de Caux - connue pour sa Bénédictine, son port de pêche et son patrimoine maritime - concentre des PME et artisans qui méritent une présence web à la hauteur. Nous travaillons depuis Rouen, à 1h30 de Fécamp.",
     zonesActivite: [
       "Centre-ville",
       "Quartier du Port",
@@ -369,7 +369,7 @@ export const CITIES: Record<string, CityData> = {
       "Abbatiale de la Sainte-Trinité",
       "Côte d'Albâtre",
     ],
-    title: "Agence web à Fécamp — Sites internet & Côte d'Albâtre",
+    title: "Agence web à Fécamp - Sites internet & Côte d'Albâtre",
     description:
       "Agence web à Fécamp et sur la Côte d'Albâtre. Krealabs crée des sites internet, applications mobiles et logiciels métier pour les entreprises fécampoises et normandes. WordPress, Next.js.",
     keywords: [
@@ -431,7 +431,7 @@ export const CITIES: Record<string, CityData> = {
       "Cimetière militaire britannique",
       "Plages du Débarquement (proximité)",
     ],
-    title: "Agence web à Bayeux — Sites internet & multilingue Calvados",
+    title: "Agence web à Bayeux - Sites internet & multilingue Calvados",
     description:
       "Agence web à Bayeux et dans le Calvados. Krealabs crée des sites internet multilingues, applications et plateformes pour hôtels, restaurants, artisans bayeusains. WordPress, Next.js.",
     keywords: [
@@ -496,7 +496,7 @@ export const CITIES: Record<string, CityData> = {
       "Arsenal de Cherbourg",
       "Théâtre à l'italienne",
     ],
-    title: "Agence web à Cherbourg-en-Cotentin — Sites & applications Manche",
+    title: "Agence web à Cherbourg-en-Cotentin - Sites & applications Manche",
     description:
       "Agence web à Cherbourg-en-Cotentin et dans la Manche. Krealabs crée sites internet, applications mobiles et plateformes pour PME et industriels cherbourgeois. WordPress, Next.js, React Native.",
     keywords: [
@@ -509,7 +509,7 @@ export const CITIES: Record<string, CityData> = {
       "développeur cherbourg",
     ],
     cityReason:
-      "Cherbourg est à 2h30 de notre QG rouennais, ce qui permet 1-2 déplacements par projet. Pour les missions au quotidien, nous travaillons en visio + Slack — méthode parfaitement rodée. La spécificité industrielle de Cherbourg (Naval Group, Orano) demande une compréhension B2B technique forte : intégrations ERP, sites institutionnels, plateformes intranet. Stack Next.js + TypeScript adaptée.",
+      "Cherbourg est à 2h30 de notre QG rouennais, ce qui permet 1-2 déplacements par projet. Pour les missions au quotidien, nous travaillons en visio + Slack - méthode parfaitement rodée. La spécificité industrielle de Cherbourg (Naval Group, Orano) demande une compréhension B2B technique forte : intégrations ERP, sites institutionnels, plateformes intranet. Stack Next.js + TypeScript adaptée.",
   },
 
   granville: {
@@ -560,7 +560,7 @@ export const CITIES: Record<string, CityData> = {
       "Pointe du Roc",
       "Îles Chausey (au large)",
     ],
-    title: "Agence web à Granville — Sites internet & Manche balnéaire",
+    title: "Agence web à Granville - Sites internet & Manche balnéaire",
     description:
       "Agence web à Granville et dans la Manche. Krealabs crée des sites internet, applications et plateformes pour PME granvillaises : tourisme, conchyliculture, commerce. WordPress et Next.js.",
     keywords: [
@@ -573,7 +573,7 @@ export const CITIES: Record<string, CityData> = {
       "agence web granville terre et mer",
     ],
     cityReason:
-      "Granville est à 2h30 de notre QG rouennais — collaboration majoritairement en visio + Slack, avec 1-2 déplacements clés par projet. Le tissu économique granvillais est dominé par le tourisme balnéaire haut de gamme et la pêche/conchyliculture (Coquilles Saint-Jacques, huîtres, moules). Les sites web granvillais doivent allier image premium, multilingue (FR/EN/DE) et fonctionnalités e-commerce pour la vente directe de produits de la mer.",
+      "Granville est à 2h30 de notre QG rouennais - collaboration majoritairement en visio + Slack, avec 1-2 déplacements clés par projet. Le tissu économique granvillais est dominé par le tourisme balnéaire haut de gamme et la pêche/conchyliculture (Coquilles Saint-Jacques, huîtres, moules). Les sites web granvillais doivent allier image premium, multilingue (FR/EN/DE) et fonctionnalités e-commerce pour la vente directe de produits de la mer.",
   },
 
   evreux: {
@@ -625,7 +625,7 @@ export const CITIES: Record<string, CityData> = {
       "CHI Eure-Seine",
       "Préfecture de l'Eure",
     ],
-    title: "Agence web à Évreux — Création de sites & applications en Eure / Normandie",
+    title: "Agence web à Évreux - Création de sites & applications en Eure / Normandie",
     description:
       "Agence web à Évreux et dans l'Eure. Krealabs développe sites internet, applications mobiles et logiciels sur mesure pour les PME ébroïciennes et euroises. WordPress, Next.js, React Native. Devis 24h.",
     keywords: [
@@ -640,7 +640,7 @@ export const CITIES: Record<string, CityData> = {
       "développeur évreux",
     ],
     cityReason:
-      "Évreux est à 1h de Rouen et 1h30 de Paris — un positionnement stratégique pour des PME qui veulent rayonner sur les 2 marchés. Le tissu économique ébroïcien est dominé par l'industrie pharmaceutique (GSK, Sanofi à proximité), l'agroalimentaire et la logistique. Nos clients ébroïciens cherchent souvent à combiner SEO local (Évreux, Eure) et capacité à attirer des prospects parisiens.",
+      "Évreux est à 1h de Rouen et 1h30 de Paris - un positionnement stratégique pour des PME qui veulent rayonner sur les 2 marchés. Le tissu économique ébroïcien est dominé par l'industrie pharmaceutique (GSK, Sanofi à proximité), l'agroalimentaire et la logistique. Nos clients ébroïciens cherchent souvent à combiner SEO local (Évreux, Eure) et capacité à attirer des prospects parisiens.",
   },
 };
 

@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Performance & SEO à Rouen — Core Web Vitals, référencement local",
+  title: "Performance & SEO à Rouen - Core Web Vitals, référencement local",
   description:
     "Audit SEO, optimisation Core Web Vitals, référencement local Rouen. Améliorez votre visibilité Google et la vitesse de votre site. Agence SEO à Rouen.",
   alternates: { canonical: "https://krealabs.fr/services/performance-seo" },
@@ -63,7 +63,7 @@ export default function PerformanceSeoPage() {
             Six leviers, un seul <em>objectif</em>.
           </>
         }
-        intro="Chaque levier est mesuré avant/après. Les chiffres parlent — vous savez exactement ce que votre investissement rapporte."
+        intro="Chaque levier est mesuré avant/après. Les chiffres parlent - vous savez exactement ce que votre investissement rapporte."
         features={FEATURES}
       />
 
@@ -156,7 +156,7 @@ const FAQ = [
   {
     question: "Comment mesurez-vous la performance d'un site ?",
     answer:
-      "Audit complet en 3 axes : (1) Core Web Vitals via Lighthouse + PageSpeed Insights (LCP, INP, CLS — objectif 90+ sur les 3). (2) Audit SEO technique : crawl du site (Screaming Frog), schema.org, balises, vitesse, mobile-friendliness. (3) Audit sémantique : positions actuelles sur les mots-clés cibles, concurrence locale Rouen / Normandie, opportunités content. Rapport écrit avec recommandations priorisées par impact / effort.",
+      "Audit complet en 3 axes : (1) Core Web Vitals via Lighthouse + PageSpeed Insights (LCP, INP, CLS - objectif 90+ sur les 3). (2) Audit SEO technique : crawl du site (Screaming Frog), schema.org, balises, vitesse, mobile-friendliness. (3) Audit sémantique : positions actuelles sur les mots-clés cibles, concurrence locale Rouen / Normandie, opportunités content. Rapport écrit avec recommandations priorisées par impact / effort.",
   },
   {
     question: "Combien coûte un audit SEO + perf complet à Rouen ?",
@@ -166,12 +166,12 @@ const FAQ = [
   {
     question: "Quels sont les délais visibles sur les positions Google après corrections ?",
     answer:
-      "Cas typiques observés : améliorations Core Web Vitals → +5-15% de trafic en 4-8 semaines. Corrections schema.org + technique → +10-30% en 8-16 semaines. Contenu nouveau ciblé local Rouen → +50-200% sur les longues traînes en 6-12 mois. Le SEO est un investissement long terme — pas de gain instantané sauf bugs techniques majeurs.",
+      "Cas typiques observés : améliorations Core Web Vitals → +5-15% de trafic en 4-8 semaines. Corrections schema.org + technique → +10-30% en 8-16 semaines. Contenu nouveau ciblé local Rouen → +50-200% sur les longues traînes en 6-12 mois. Le SEO est un investissement long terme - pas de gain instantané sauf bugs techniques majeurs.",
   },
   {
     question: "Garantissez-vous la première position sur \"agence web Rouen\" ?",
     answer:
-      "Non — et toute agence qui vous garantit la 1ère position ment. Google a 200+ critères de ranking dont seuls une trentaine sont contrôlables côté technique/contenu. Les autres dépendent de l'autorité du domaine (âge, backlinks), de la concurrence locale, du contexte utilisateur. Ce qu'on garantit : application des best practices, mesure transparente, progression continue.",
+      "Non - et toute agence qui vous garantit la 1ère position ment. Google a 200+ critères de ranking dont seuls une trentaine sont contrôlables côté technique/contenu. Les autres dépendent de l'autorité du domaine (âge, backlinks), de la concurrence locale, du contexte utilisateur. Ce qu'on garantit : application des best practices, mesure transparente, progression continue.",
   },
   {
     question: "Travaillez-vous avec mon agence SEO existante ?",
@@ -181,7 +181,7 @@ const FAQ = [
   {
     question: "Quels outils utilisez-vous ?",
     answer:
-      "Audit technique : Lighthouse, PageSpeed Insights, Screaming Frog, Sitebulb. Monitoring : Search Console (gratuit), Vercel Analytics, Plausible. Sémantique : Ahrefs ou Semrush selon le projet. AI : Claude / GPT pour la rédaction assistée. Nous ne sommes pas équipés d'outils SEO marketing lourds (Ahrefs Premium 500$/mois) — pour ça, on collabore avec votre agence de référencement.",
+      "Audit technique : Lighthouse, PageSpeed Insights, Screaming Frog, Sitebulb. Monitoring : Search Console (gratuit), Vercel Analytics, Plausible. Sémantique : Ahrefs ou Semrush selon le projet. AI : Claude / GPT pour la rédaction assistée. Nous ne sommes pas équipés d'outils SEO marketing lourds (Ahrefs Premium 500$/mois) - pour ça, on collabore avec votre agence de référencement.",
   },
 ];
 
@@ -225,7 +225,7 @@ const STEPS = [
   },
   {
     title: "Plan d'action",
-    description: "Priorisation des chantiers par impact. Vous validez ce qu'on implémente — et dans quel ordre.",
+    description: "Priorisation des chantiers par impact. Vous validez ce qu'on implémente - et dans quel ordre.",
   },
   {
     title: "Implémentation",

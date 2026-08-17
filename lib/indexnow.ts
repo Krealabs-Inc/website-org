@@ -1,5 +1,5 @@
 /**
- * IndexNow — protocol pour notifier les moteurs de recherche (Bing, Yandex,
+ * IndexNow - protocol pour notifier les moteurs de recherche (Bing, Yandex,
  * Naver, Seznam, Yep) qu'une URL a été créée, mise à jour ou supprimée.
  * Google supporte indirectement via les partenariats.
  *

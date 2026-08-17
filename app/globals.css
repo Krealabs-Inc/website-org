@@ -4,7 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ===================================================================
-   THEME — tokens exposés à Tailwind 4 via @theme inline
+   THEME - tokens exposés à Tailwind 4 via @theme inline
    =================================================================== */
 
 @theme inline {
@@ -167,7 +167,7 @@
 }
 
 /* ===================================================================
-   ROOT VARS — dark by default, light via .light class
+   ROOT VARS - dark by default, light via .light class
    =================================================================== */
 
 :root {
@@ -304,7 +304,7 @@ body {
    =================================================================== */
 
 @layer utilities {
-  /* Display — hero only */
+  /* Display - hero only */
   .text-display {
     font-family: var(--font-switzer);
     font-size: clamp(2.75rem, 7vw, 5.5rem);
@@ -313,7 +313,7 @@ body {
     letter-spacing: -0.04em;
   }
 
-  /* Display with serif italic accent — wrap accented words in <em> */
+  /* Display with serif italic accent - wrap accented words in <em> */
   .text-display em,
   .display-serif {
     font-family: var(--font-instrument-serif);
@@ -376,7 +376,7 @@ body {
     font-weight: 400;
   }
 
-  /* Eyebrow — mono uppercase tag used over h2 */
+  /* Eyebrow - mono uppercase tag used over h2 */
   .text-eyebrow {
     font-family: var(--font-geist-mono);
     font-size: 0.75rem;
@@ -417,7 +417,7 @@ body {
   }
 
   /* ===================================================================
-     DECORATIVE PATTERNS — grid + noise
+     DECORATIVE PATTERNS - grid + noise
      =================================================================== */
 
   .bg-grid {

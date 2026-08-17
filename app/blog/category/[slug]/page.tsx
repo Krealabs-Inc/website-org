@@ -30,7 +30,7 @@ const CATEGORY_META: Record<
   wordpress: {
     slug: "wordpress",
     name: "WordPress",
-    title: "Articles WordPress — Blog Krealabs",
+    title: "Articles WordPress - Blog Krealabs",
     description:
       "Articles sur WordPress : refonte, sécurité, WooCommerce, headless, SEO. Retours d'expérience d'une agence WordPress à Rouen.",
     intro:
@@ -39,7 +39,7 @@ const CATEGORY_META: Record<
   web: {
     slug: "web",
     name: "Web",
-    title: "Articles développement web — Blog Krealabs",
+    title: "Articles développement web - Blog Krealabs",
     description:
       "Articles sur Next.js, React, TypeScript, Tailwind, Prisma. Retours d'expérience d'une agence digitale à Rouen sur le développement web moderne.",
     intro:
@@ -48,7 +48,7 @@ const CATEGORY_META: Record<
   mobile: {
     slug: "mobile",
     name: "Mobile",
-    title: "Articles applications mobiles — Blog Krealabs",
+    title: "Articles applications mobiles - Blog Krealabs",
     description:
       "Articles sur React Native, Expo, notifications push, app store. Retours d'expérience d'une agence mobile à Rouen sur le développement cross-platform.",
     intro:
@@ -57,16 +57,16 @@ const CATEGORY_META: Record<
   seo: {
     slug: "seo",
     name: "SEO",
-    title: "Articles SEO & performance — Blog Krealabs",
+    title: "Articles SEO & performance - Blog Krealabs",
     description:
       "Articles SEO et Core Web Vitals : audit Lighthouse, schema.org, INP, SEO local Rouen et Normandie. Retours d'expérience d'une agence SEO.",
     intro:
-      "Articles sur le SEO, les Core Web Vitals, l'audit Lighthouse, le schema.org et le SEO local. Notre objectif : faire ressortir nos clients sur les requêtes qui comptent — notamment en Normandie.",
+      "Articles sur le SEO, les Core Web Vitals, l'audit Lighthouse, le schema.org et le SEO local. Notre objectif : faire ressortir nos clients sur les requêtes qui comptent - notamment en Normandie.",
   },
   outils: {
     slug: "outils",
     name: "Outils",
-    title: "Articles outils & DevOps — Blog Krealabs",
+    title: "Articles outils & DevOps - Blog Krealabs",
     description:
       "Articles sur les outils du quotidien d'une agence : AI coding (Claude, Cursor), GitHub Actions, hébergement (Vercel, OVH, Scaleway).",
     intro:

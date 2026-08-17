@@ -34,7 +34,7 @@ export async function generateMetadata({
       canonical: `https://krealabs.fr/agence-web-rouen/${secteur}`,
     },
     openGraph: {
-      title: `${data.title} — Krealabs`,
+      title: `${data.title} - Krealabs`,
       description: data.description,
       url: `https://krealabs.fr/agence-web-rouen/${secteur}`,
       type: "website",
@@ -233,7 +233,7 @@ export default async function AgenceWebRouenSecteurPage({
             Démarrons votre <em>projet {data.name}</em>.
           </>
         }
-        description={`Vous êtes ${data.name === "e-commerce" ? "porteur d'un projet e-commerce" : `gérant ${data.nameLabeled === "les e-commerces" ? "d'un e-commerce" : "d'" + data.nameLabeled.replace("les ", "")}`} à Rouen ou en Normandie ? Premier rendez-vous offert pour cadrer votre projet — en présentiel ou en visio.`}
+        description={`Vous êtes ${data.name === "e-commerce" ? "porteur d'un projet e-commerce" : `gérant ${data.nameLabeled === "les e-commerces" ? "d'un e-commerce" : "d'" + data.nameLabeled.replace("les ", "")}`} à Rouen ou en Normandie ? Premier rendez-vous offert pour cadrer votre projet - en présentiel ou en visio.`}
         primaryLabel="Prendre rendez-vous"
       />
     </main>

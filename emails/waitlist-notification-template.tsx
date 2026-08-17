@@ -23,7 +23,7 @@ export const WaitlistNotificationTemplate: React.FC<WaitlistNotificationTemplate
 
   return (
     <EmailShell
-      title={`Nouvelle inscription waitlist — ${email}`}
+      title={`Nouvelle inscription waitlist - ${email}`}
       preview={`${email} vient de rejoindre la liste d'attente.`}
     >
       <EmailHeader subtitle="Waitlist" />

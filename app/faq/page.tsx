@@ -11,7 +11,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
 
 export const metadata: Metadata = {
-  title: "FAQ — Questions fréquentes",
+  title: "FAQ - Questions fréquentes",
   description:
     "Réponses aux questions fréquentes sur nos services de développement web et mobile à Rouen. Délais, technologies, méthode, maintenance, SEO.",
   alternates: { canonical: "https://krealabs.fr/faq" },

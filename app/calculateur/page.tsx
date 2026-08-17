@@ -6,12 +6,12 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { QuoteCalculator } from "@/components/calculator/quote-calculator";
 
 export const metadata: Metadata = {
-  title: "Calculateur de devis — Estimer le prix de votre projet web",
+  title: "Calculateur de devis - Estimer le prix de votre projet web",
   description:
     "Calculateur gratuit : fourchette de prix réaliste pour un site web, e-commerce, SaaS ou application mobile. Marché normand 2026, basé sur les vrais coûts d'agence.",
   alternates: { canonical: "https://krealabs.fr/calculateur" },
   openGraph: {
-    title: "Calculateur de devis web — Krealabs",
+    title: "Calculateur de devis web - Krealabs",
     description:
       "Estimez en 4 étapes le prix de votre projet web (vitrine, e-commerce, SaaS, app mobile). Fourchette indicative basée sur le marché normand 2026.",
     url: "https://krealabs.fr/calculateur",
@@ -44,7 +44,7 @@ export default function CalculateurPage() {
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-3xl">
               En 4 étapes (60 secondes), obtenez une fourchette de prix réaliste
-              pour votre projet web — site vitrine, e-commerce, SaaS,
+              pour votre projet web - site vitrine, e-commerce, SaaS,
               application mobile, refonte. Basé sur le vrai marché normand
               2026, pas sur une boîte noire.
             </p>
@@ -85,7 +85,7 @@ export default function CalculateurPage() {
               </strong>{" "}
               Pour un chiffrage précis, on a besoin d&apos;un cadrage (besoins
               exacts, contraintes, intégrations spécifiques). C&apos;est ce
-              qu&apos;on fait en premier RDV — gratuit. Pour en savoir plus sur
+              qu&apos;on fait en premier RDV - gratuit. Pour en savoir plus sur
               nos tarifs, lire notre{" "}
               <a
                 href="/blog/prix-site-internet-rouen-2026"

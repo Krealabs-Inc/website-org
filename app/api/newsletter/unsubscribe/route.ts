@@ -46,7 +46,7 @@ export async function GET(request: NextRequest) {
 /**
  * POST /api/newsletter/unsubscribe avec header List-Unsubscribe-Post.
  * Gmail/Apple Mail envoient un POST direct sans passer par le navigateur
- * (RFC 8058) — on doit répondre 200 sans redirect.
+ * (RFC 8058) - on doit répondre 200 sans redirect.
  */
 export async function POST(request: NextRequest) {
   const token = request.nextUrl.searchParams.get("token");

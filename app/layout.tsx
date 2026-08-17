@@ -13,7 +13,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CookieConsent } from "@/components/legal/cookie-consent";
 import { SearchModal } from "@/components/search/search-modal";
 
-// Switzer — sans-serif principale (auto-hébergée, Fontshare)
+// Switzer - sans-serif principale (auto-hébergée, Fontshare)
 const switzer = localFont({
   variable: "--font-switzer",
   display: "swap",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://krealabs.fr'),
 
   title: {
-    default: 'Krealabs — Agence web à Rouen | Sites internet, applications mobiles, logiciels',
+    default: 'Krealabs - Agence web à Rouen | Sites internet, applications mobiles, logiciels',
     template: '%s · Krealabs',
   },
 
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
   },
 
   icons: {
-    // app/favicon.ico est auto-détecté par Next.js — pas besoin de le redéclarer
+    // app/favicon.ico est auto-détecté par Next.js - pas besoin de le redéclarer
     icon: [
       { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
       { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
@@ -88,14 +88,14 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'fr_FR',
     url: 'https://krealabs.fr',
-    title: 'Krealabs — Agence web à Rouen',
+    title: 'Krealabs - Agence web à Rouen',
     description: 'Sites internet, applications mobiles et logiciels sur mesure. Agence basée à Rouen, intervention France entière.',
     siteName: 'Krealabs',
   },
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Krealabs — Agence web à Rouen',
+    title: 'Krealabs - Agence web à Rouen',
     description: 'Sites internet, applications mobiles et logiciels sur mesure en Normandie.',
     creator: '@krealabs_',
     site: '@krealabs_',

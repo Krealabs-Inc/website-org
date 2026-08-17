@@ -115,7 +115,7 @@ export const COMPARATORS: Record<string, ComparatorData> = {
       },
     ],
     verdict:
-      "Pour 80% des PME normandes que nous accompagnons : WordPress reste le bon choix. Plus flexible, moins cher sur 5 ans, écosystème massif, propriété du code. Webflow brille pour les agences créatives qui veulent itérer vite sur le design sans dev, ou pour des sites portfolio à fort enjeu visuel. Si vous hésitez sur votre projet, contactez-nous — premier échange offert pour cadrer le bon choix.",
+      "Pour 80% des PME normandes que nous accompagnons : WordPress reste le bon choix. Plus flexible, moins cher sur 5 ans, écosystème massif, propriété du code. Webflow brille pour les agences créatives qui veulent itérer vite sur le design sans dev, ou pour des sites portfolio à fort enjeu visuel. Si vous hésitez sur votre projet, contactez-nous - premier échange offert pour cadrer le bon choix.",
     faq: [
       {
         question: "Peut-on migrer de Webflow vers WordPress (ou inverse) ?",
@@ -125,7 +125,7 @@ export const COMPARATORS: Record<string, ComparatorData> = {
       {
         question: "Webflow est-il vraiment plus rapide à mettre en place ?",
         answer:
-          "Pour un dev qui maîtrise WordPress, non — un thème custom WordPress se développe en 5-10 jours et offre plus de flexibilité. Pour un designer ou un non-dev, oui largement : un site Webflow simple sort en 3-5 jours sans backend dev. Le critère vitesse dépend donc de qui code.",
+          "Pour un dev qui maîtrise WordPress, non - un thème custom WordPress se développe en 5-10 jours et offre plus de flexibilité. Pour un designer ou un non-dev, oui largement : un site Webflow simple sort en 3-5 jours sans backend dev. Le critère vitesse dépend donc de qui code.",
       },
       {
         question: "Comment ressortir sur Google avec Webflow ?",
@@ -270,7 +270,7 @@ export const COMPARATORS: Record<string, ComparatorData> = {
     description:
       "Comparatif Next.js vs WordPress pour PME et startups en 2026 : performance, coûts, équipe, écosystème. Le bilan d'une agence rouennaise.",
     intro:
-      "Next.js et WordPress ne sont pas tout à fait des concurrents : ce sont deux outils pour deux problèmes différents. WordPress reste le meilleur CMS du marché pour les sites de contenu éditorial. Next.js est le framework de référence pour construire des SaaS, des outils métier et des sites haute performance. Cette page compare honnêtement quand choisir l'un ou l'autre — un sujet qu'on traite plusieurs fois par semaine en agence à Rouen.",
+      "Next.js et WordPress ne sont pas tout à fait des concurrents : ce sont deux outils pour deux problèmes différents. WordPress reste le meilleur CMS du marché pour les sites de contenu éditorial. Next.js est le framework de référence pour construire des SaaS, des outils métier et des sites haute performance. Cette page compare honnêtement quand choisir l'un ou l'autre - un sujet qu'on traite plusieurs fois par semaine en agence à Rouen.",
     criteria: [
       {
         label: "Type de projet adapté",
@@ -359,7 +359,7 @@ export const COMPARATORS: Record<string, ComparatorData> = {
       {
         question: "Krealabs maîtrise-t-il les deux ?",
         answer:
-          "Oui, c'est notre proposition. Nous travaillons quotidiennement sur les deux stacks — Next.js / React / TypeScript comme le back-end Node.js / PHP / Postgres et l'intégration — et orientons le client vers la bonne option selon le projet, pas selon nos préférences techniques.",
+          "Oui, c'est notre proposition. Nous travaillons quotidiennement sur les deux stacks - Next.js / React / TypeScript comme le back-end Node.js / PHP / Postgres et l'intégration - et orientons le client vers la bonne option selon le projet, pas selon nos préférences techniques.",
       },
     ],
     keywords: [
@@ -612,7 +612,7 @@ export const COMPARATORS: Record<string, ComparatorData> = {
       {
         label: "DX et apprentissage",
         a: "Plus simple à prendre en main pour un dev HTML/CSS. Syntaxe .astro proche du HTML. Apprentissage court.",
-        b: "Plus complexe. Server Components, App Router, Suspense, streaming — courbe d'apprentissage plus longue.",
+        b: "Plus complexe. Server Components, App Router, Suspense, streaming - courbe d'apprentissage plus longue.",
         winner: "a",
       },
       {
@@ -778,7 +778,7 @@ export const COMPARATORS: Record<string, ComparatorData> = {
       {
         question: "Krealabs développe-t-il aussi en Flutter ?",
         answer:
-          "Nous codons en React Native + Expo, qui est notre stack mobile principale. Pour un projet Flutter, nous orientons vers nos partenaires spécialisés Dart/Flutter — ou nous le faisons en équipe étendue si c'est strictement nécessaire. Notre maîtrise est davantage sur l'écosystème React/JS.",
+          "Nous codons en React Native + Expo, qui est notre stack mobile principale. Pour un projet Flutter, nous orientons vers nos partenaires spécialisés Dart/Flutter - ou nous le faisons en équipe étendue si c'est strictement nécessaire. Notre maîtrise est davantage sur l'écosystème React/JS.",
       },
     ],
     keywords: [

@@ -42,7 +42,7 @@ export default function NotFound() {
           </h2>
           <p className="text-body-lg text-[var(--muted-foreground)] mt-6">
             La page que vous cherchez a été déplacée, renommée, ou n'a jamais
-            existé. Aucun mal — voici par où poursuivre.
+            existé. Aucun mal - voici par où poursuivre.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">

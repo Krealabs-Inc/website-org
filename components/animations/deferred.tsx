@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 /**
  * Wrappers Client Component pour les animations décoratives, code-splittées
  * via `next/dynamic` avec `ssr: false`. Next.js 16 interdit `ssr: false`
- * directement dans un Server Component — ce fichier sert d'intermédiaire.
+ * directement dans un Server Component - ce fichier sert d'intermédiaire.
  *
  * Bénéfice : ces composants ne sont pas dans le JS critique de la homepage,
  * leur évaluation arrive après hydration. -360ms de TBT en Lighthouse mobile.

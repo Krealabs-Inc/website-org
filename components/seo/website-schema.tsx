@@ -1,5 +1,5 @@
 /**
- * WebSiteSchema — JSON-LD WebSite avec SearchAction.
+ * WebSiteSchema - JSON-LD WebSite avec SearchAction.
  * Cible : sitelinks search box pour les requêtes branded "krealabs" dans Google.
  * Pointe vers /search?q={query} (route SSR existante).
  */
@@ -10,9 +10,9 @@ export function WebSiteSchema() {
     "@id": "https://krealabs.fr/#website",
     url: "https://krealabs.fr",
     name: "Krealabs",
-    alternateName: "Krealabs — Agence web Rouen",
+    alternateName: "Krealabs - Agence web Rouen",
     description:
-      "Agence digitale à Rouen — sites web, applications mobiles, logiciels sur mesure.",
+      "Agence digitale à Rouen - sites web, applications mobiles, logiciels sur mesure.",
     inLanguage: "fr-FR",
     publisher: { "@id": "https://krealabs.fr/#organization" },
     potentialAction: {

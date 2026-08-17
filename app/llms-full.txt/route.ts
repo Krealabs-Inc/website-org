@@ -3,7 +3,7 @@ import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
 const BASE_URL = "https://krealabs.fr";
 
 /**
- * /llms-full.txt — variante "full-text" de la convention llms.txt.
+ * /llms-full.txt - variante "full-text" de la convention llms.txt.
  * Expose le contenu complet des articles du blog en markdown, pour que les
  * crawlers IA (ChatGPT, Claude, Perplexity, Gemini) puissent ingérer la
  * matière éditoriale sans re-crawler chaque URL.
@@ -17,7 +17,7 @@ export async function GET() {
       frenchDateToISO(b.date).localeCompare(frenchDateToISO(a.date)),
     );
 
-  const header = `# Krealabs — Contenu intégral du blog
+  const header = `# Krealabs - Contenu intégral du blog
 
 > Agence digitale à Rouen. Articles techniques et retours d'expérience sur
 > WordPress, Next.js, React Native, SEO et performance web.

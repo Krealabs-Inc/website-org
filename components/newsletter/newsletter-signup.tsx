@@ -10,7 +10,7 @@ type Status = "idle" | "loading" | "success" | "error" | "already";
 interface NewsletterSignupProps {
   /** Source d'inscription envoyée à l'API pour analytics */
   source?: string;
-  /** Variante visuelle — `compact` pour le footer, `card` pour landing pages */
+  /** Variante visuelle - `compact` pour le footer, `card` pour landing pages */
   variant?: "compact" | "card";
   className?: string;
 }

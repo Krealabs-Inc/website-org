@@ -27,9 +27,9 @@ import { MotionReveal } from "@/components/animations/motion-reveal";
 import { MeshGradient } from "@/components/animations/mesh-gradient";
 
 export const metadata: Metadata = {
-  title: "Expertise — Savoir-faire & technologies",
+  title: "Expertise - Savoir-faire & technologies",
   description:
-    "Méthodes, savoir-faire et stack technique de l'agence Krealabs à Rouen. Architecture, sécurité, performance, CI/CD, accessibilité — l'ensemble de nos compétences pour réussir vos projets web et mobile.",
+    "Méthodes, savoir-faire et stack technique de l'agence Krealabs à Rouen. Architecture, sécurité, performance, CI/CD, accessibilité - l'ensemble de nos compétences pour réussir vos projets web et mobile.",
   alternates: { canonical: "https://krealabs.fr/expertise" },
 };
 
@@ -50,7 +50,7 @@ export default function ExpertisePage() {
               rigueur d'<em>artisan</em>.
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Architecture, performance, sécurité, accessibilité — les
+              Architecture, performance, sécurité, accessibilité - les
               compétences que nous mobilisons sur chaque projet pour livrer du
               code propre, maintenable, et qui dure dans le temps.
             </p>
@@ -69,7 +69,7 @@ export default function ExpertisePage() {
         </Container>
       </section>
 
-      {/* SAVOIR-FAIRE — 6 COMPÉTENCES PHARES */}
+      {/* SAVOIR-FAIRE - 6 COMPÉTENCES PHARES */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
@@ -215,7 +215,7 @@ export default function ExpertisePage() {
             Discutons de votre <em>projet</em>.
           </>
         }
-        description="Quelque soit le projet — site, app mobile, logiciel — la première étape est toujours un échange pour comprendre votre contexte."
+        description="Quelque soit le projet - site, app mobile, logiciel - la première étape est toujours un échange pour comprendre votre contexte."
         primaryLabel="Démarrer la conversation"
       />
     </main>

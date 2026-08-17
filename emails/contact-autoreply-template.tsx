@@ -31,7 +31,7 @@ export function ContactAutoreplyTemplate({
 
   return (
     <EmailShell
-      title="Votre demande est bien reçue — Krealabs"
+      title="Votre demande est bien reçue - Krealabs"
       preview={`Bonjour ${firstName}, on a bien reçu votre ${label} et on revient vers vous sous 24h.`}
     >
       <EmailHeader subtitle="Demande reçue" />
@@ -125,7 +125,7 @@ export function ContactAutoreplyTemplate({
               margin: 0,
             }}
           >
-            Une question urgente ? Répondez simplement à cet email — votre
+            Une question urgente ? Répondez simplement à cet email - votre
             réponse arrive directement dans notre boîte.
           </p>
         </td>

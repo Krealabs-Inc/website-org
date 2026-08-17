@@ -13,7 +13,7 @@ interface ServiceSchemaProps {
 }
 
 /**
- * ServiceSchema — JSON-LD pour une page service.
+ * ServiceSchema - JSON-LD pour une page service.
  * Aide Google à comprendre le catalogue d'offres précis.
  */
 export function ServiceSchema({

@@ -14,7 +14,7 @@ interface PersonSchemaProps {
 }
 
 /**
- * PersonSchema — JSON-LD pour les membres de l'équipe.
+ * PersonSchema - JSON-LD pour les membres de l'équipe.
  * Aide Google à construire le Knowledge Graph autour de l'équipe
  * et améliore la visibilité dans les recherches nominatives.
  */

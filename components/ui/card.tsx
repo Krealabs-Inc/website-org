@@ -3,7 +3,7 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 /**
- * Card — Krealabs DS v2
+ * Card - Krealabs DS v2
  * Surface + bordure 1px, radius unique, transitions hover subtiles.
  */
 

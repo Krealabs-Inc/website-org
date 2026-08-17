@@ -1,4 +1,4 @@
-# Krealabs — Security disclosure policy
+# Krealabs - Security disclosure policy
 # Format: RFC 9116
 
 Contact: mailto:contact@krealabs.fr

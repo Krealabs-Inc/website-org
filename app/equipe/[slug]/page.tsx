@@ -263,7 +263,7 @@ export default async function AuthorPage({ params }: PageProps) {
         </Container>
       </section>
 
-      {/* ARTICLES SIGNÉS — E-E-A-T : preuve d'expertise */}
+      {/* ARTICLES SIGNÉS - E-E-A-T : preuve d'expertise */}
       {authoredPosts.length > 0 && (
         <section className="section-y border-t border-[var(--border)]">
           <Container>
@@ -362,7 +362,7 @@ export default async function AuthorPage({ params }: PageProps) {
             Travailler avec <em>{member.name.split(" ")[0]}</em> ?
           </>
         }
-        description={`Pour discuter d'un projet où ${member.name.split(" ")[0]} pourrait intervenir, contactez-nous — premier échange offert, en présentiel à Rouen ou en visio.`}
+        description={`Pour discuter d'un projet où ${member.name.split(" ")[0]} pourrait intervenir, contactez-nous - premier échange offert, en présentiel à Rouen ou en visio.`}
         primaryLabel="Prendre rendez-vous"
       />
     </main>

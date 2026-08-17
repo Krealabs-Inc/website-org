@@ -181,7 +181,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  // Articles de blog individuels — chargés depuis blog-data.ts
+  // Articles de blog individuels - chargés depuis blog-data.ts
   // Inclut images pour Google Images (post.image + OG dynamique)
   const blogArticles: MetadataRoute.Sitemap = getPublishedPosts().map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,

@@ -1,5 +1,5 @@
 /**
- * Design Tokens — Krealabs
+ * Design Tokens - Krealabs
  *
  * Source unique de vérité pour les valeurs du design system v2.
  * Les vraies valeurs CSS vivent dans app/globals.css ; ce fichier sert

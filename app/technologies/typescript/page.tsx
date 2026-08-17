@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "TypeScript à Rouen — Langage typé pour code maintenable",
+  title: "TypeScript à Rouen - Langage typé pour code maintenable",
   description:
     "Expertise TypeScript à Rouen. Typage strict, refactoring serein, autocomplétion partout. La fondation de tous nos projets web et mobile.",
   alternates: { canonical: "https://krealabs.fr/technologies/typescript" },
@@ -26,7 +26,7 @@ import { ServiceCta } from "@/components/services/service-cta";
 
 const FEATURES = [
   { icon: ShieldCheck, title: "Typage strict", description: "Les erreurs sont attrapées à la compilation, pas en production." },
-  { icon: Bot, title: "Autocomplétion partout", description: "VS Code devient un copilote — pas besoin de relire la doc." },
+  { icon: Bot, title: "Autocomplétion partout", description: "VS Code devient un copilote - pas besoin de relire la doc." },
   { icon: GitMerge, title: "Refactoring serein", description: "Renommer une variable propage les changements partout, sans casse." },
   { icon: BookOpenText, title: "Documentation vivante", description: "Les types sont la documentation. Toujours à jour, jamais fausse." },
   { icon: Wrench, title: "Outillage mature", description: "TypeScript Language Server, Prettier, ESLint. Tout marche ensemble." },

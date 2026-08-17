@@ -23,7 +23,7 @@ export function NewsletterWelcomeTemplate({
   return (
     <EmailShell
       title="Bienvenue sur la newsletter Krealabs"
-      preview={`Inscription confirmée pour ${email}. Articles, retours d'expérience, veille tech — 1 mail par mois max.`}
+      preview={`Inscription confirmée pour ${email}. Articles, retours d'expérience, veille tech - 1 mail par mois max.`}
     >
       <EmailHeader subtitle="Newsletter" />
 
@@ -86,7 +86,7 @@ export function NewsletterWelcomeTemplate({
                 <td style={{ padding: "18px 20px" }}>
                   <Bullet>
                     <strong style={{ color: colors.text }}>1 email max par mois</strong>{" "}
-                    — pas plus, on a horreur du spam autant que vous.
+                    - pas plus, on a horreur du spam autant que vous.
                   </Bullet>
                   <Bullet>
                     Articles techniques (WordPress, Next.js, SEO, perf) +
@@ -146,7 +146,7 @@ export function NewsletterWelcomeTemplate({
             >
               ce lien
             </a>{" "}
-            — c&apos;est instantané, pas de formulaire à remplir.
+            - c&apos;est instantané, pas de formulaire à remplir.
           </p>
         </td>
       </tr>

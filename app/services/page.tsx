@@ -76,7 +76,7 @@ export default function ServicesIndexPage() {
             <p className="text-body-lg text-[var(--muted-foreground)]">
               Tous nos projets suivent la même méthodologie : cadrage, design,
               développement itératif, mise en ligne, suivi. Vous savez à tout
-              moment où nous en sommes — et combien il reste à faire.
+              moment où nous en sommes - et combien il reste à faire.
             </p>
           </div>
 

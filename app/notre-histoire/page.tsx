@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight, Rocket, Layers, TrendingUp, MapPin } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Notre histoire — Agence web à Rouen depuis 2020",
+  title: "Notre histoire - Agence web à Rouen depuis 2020",
   description:
     "Découvrez Krealabs, agence digitale fondée à Rouen en 2020. Notre parcours, nos valeurs, notre méthode artisanale au service des entreprises de Normandie.",
   alternates: { canonical: "https://krealabs.fr/notre-histoire" },
@@ -81,7 +81,7 @@ const VALUES = [
     label: "Artisanat",
     title: "Pas de copy-paste",
     description:
-      "Chaque projet est conçu pour son contexte. Thèmes WordPress custom, applications Next.js sur mesure — pas de template recyclé, pas de page builder bloated.",
+      "Chaque projet est conçu pour son contexte. Thèmes WordPress custom, applications Next.js sur mesure - pas de template recyclé, pas de page builder bloated.",
   },
   {
     label: "Pérennité",
@@ -93,7 +93,7 @@ const VALUES = [
     label: "Proximité",
     title: "Un contact accessible",
     description:
-      "Basé à Rouen, joignable directement. Vous parlez à celui qui code — pas à un chef de projet.",
+      "Basé à Rouen, joignable directement. Vous parlez à celui qui code - pas à un chef de projet.",
   },
 ];
 
@@ -166,7 +166,7 @@ export default function NotreHistoirePage() {
         </Container>
       </section>
 
-      {/* EQUIPE — aperçu */}
+      {/* EQUIPE - aperçu */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">

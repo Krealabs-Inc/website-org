@@ -38,7 +38,7 @@ export async function generateMetadata({
     description: data.description,
     alternates: { canonical: `${BASE_URL}/comparateur/${slug}` },
     openGraph: {
-      title: `${data.title} — Krealabs`,
+      title: `${data.title} - Krealabs`,
       description: data.description,
       url: `${BASE_URL}/comparateur/${slug}`,
       type: "article",
@@ -136,7 +136,7 @@ export default async function ComparatorPage({ params }: PageProps) {
           </div>
 
           <div className="rounded-[var(--radius-lg)] border border-[var(--border)] overflow-hidden">
-            {/* Header — desktop only */}
+            {/* Header - desktop only */}
             <div className="hidden md:grid grid-cols-[1fr_2fr_2fr_auto] bg-[var(--surface)] text-eyebrow border-b border-[var(--border)]">
               <div className="px-6 py-4">Critère</div>
               <div className="px-6 py-4 border-l border-[var(--border)]">
@@ -202,7 +202,7 @@ export default async function ComparatorPage({ params }: PageProps) {
                   </span>
                   {c.b}
                 </div>
-                {/* Verdict — desktop only (mobile badge is inside label row) */}
+                {/* Verdict - desktop only (mobile badge is inside label row) */}
                 <div className="hidden md:flex px-6 py-5 border-l border-[var(--border)] w-24 items-center justify-center">
                   {c.winner === "a" && (
                     <span className="inline-flex items-center justify-center size-7 rounded-full bg-[var(--accent)] text-[#0a0a0a] text-body-sm font-bold">

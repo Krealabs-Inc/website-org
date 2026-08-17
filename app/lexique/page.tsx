@@ -9,7 +9,7 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { GLOSSARY, GLOSSARY_SLUGS } from "@/lib/glossary";
 
 export const metadata: Metadata = {
-  title: "Lexique du web — Définitions techniques",
+  title: "Lexique du web - Définitions techniques",
   description:
     "Lexique technique web : headless WordPress, Core Web Vitals, schema.org, SEO local, Next.js, TypeScript, Lighthouse, E-E-A-T... Définitions claires par une agence web à Rouen.",
   alternates: { canonical: "https://krealabs.fr/lexique" },
@@ -93,7 +93,7 @@ export default function LexiqueIndexPage() {
             Un projet à <em>discuter</em> ?
           </>
         }
-        description="Premier échange offert pour cadrer votre projet — sites, apps, plateformes. On parle technique sans jargon."
+        description="Premier échange offert pour cadrer votre projet - sites, apps, plateformes. On parle technique sans jargon."
         primaryLabel="Prendre rendez-vous"
       />
     </main>

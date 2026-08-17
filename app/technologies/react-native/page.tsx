@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "React Native à Rouen — Apps iOS & Android cross-platform",
+  title: "React Native à Rouen - Apps iOS & Android cross-platform",
   description:
     "Développement React Native à Rouen. Applications mobiles iOS et Android avec une seule base de code. Performance native, OTA, notifications push.",
   alternates: { canonical: "https://krealabs.fr/technologies/react-native" },

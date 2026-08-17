@@ -5,7 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 
 export const metadata: Metadata = {
-  title: "Changelog — Journal des versions",
+  title: "Changelog - Journal des versions",
   description:
     "Journal des évolutions du site et de l'agence Krealabs depuis la création en 2020. Versions majeures, nouveautés et étapes au fil du temps.",
   alternates: { canonical: "https://krealabs.fr/changelog" },
@@ -22,7 +22,7 @@ interface Entry {
 }
 
 const CHANGELOG: Entry[] = [
-  // ===== 2026 — La grande refonte =====
+  // ===== 2026 - La grande refonte =====
   {
     version: "3.3.0",
     date: "Mai 2026",
@@ -92,7 +92,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
 
-  // ===== 2025 — Modernisation stack =====
+  // ===== 2025 - Modernisation stack =====
   {
     version: "2.8.0",
     date: "Décembre 2025",
@@ -150,7 +150,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
 
-  // ===== 2024 — Existant historique =====
+  // ===== 2024 - Existant historique =====
   {
     version: "2.3.0",
     date: "29 novembre 2024",
@@ -217,7 +217,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
 
-  // ===== 2023 — Refonte interne =====
+  // ===== 2023 - Refonte interne =====
   {
     version: "1.5.0",
     date: "Mars 2023",
@@ -229,7 +229,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
 
-  // ===== 2022 — Premier SaaS =====
+  // ===== 2022 - Premier SaaS =====
   {
     version: "1.2.0",
     date: "Octobre 2022",
@@ -252,7 +252,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
 
-  // ===== 2021 — Mobile =====
+  // ===== 2021 - Mobile =====
   {
     version: "0.8.0",
     date: "Septembre 2021",
@@ -274,7 +274,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
 
-  // ===== 2020 — Création =====
+  // ===== 2020 - Création =====
   {
     version: "0.2.0",
     date: "Juin 2020",

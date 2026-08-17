@@ -61,7 +61,7 @@ export default function HomePage() {
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
               Krealabs construit des sites web, des applications mobile et des
               logiciels sur mesure. Du WordPress soigné au Next.js taillé sur
-              mesure — on choisit la stack en fonction de votre projet, pas
+              mesure - on choisit la stack en fonction de votre projet, pas
               l'inverse.
             </p>
 
@@ -121,7 +121,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ========== WORDPRESS — SPÉCIALITÉ HÉROS ========== */}
+      {/* ========== WORDPRESS - SPÉCIALITÉ HÉROS ========== */}
       <section className="section-y border-t border-[var(--border)] relative overflow-hidden">
         <Container>
           <MotionReveal>
@@ -137,7 +137,7 @@ export default function HomePage() {
                   Depuis plus de 10 ans, nous développons des sites WordPress
                   sur mesure : thèmes custom, WooCommerce, refontes, SEO,
                   maintenance, sécurité. La plupart de nos clients sont sur
-                  WordPress — et ça nous va parfaitement.
+                  WordPress - et ça nous va parfaitement.
                 </p>
                 <ul className="space-y-3 mb-10">
                   {WP_HIGHLIGHTS.map((h) => (
@@ -199,7 +199,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ========== SERVICES — AUTRES ========== */}
+      {/* ========== SERVICES - AUTRES ========== */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <MotionReveal>
@@ -213,7 +213,7 @@ export default function HomePage() {
               <p className="text-body text-[var(--muted-foreground)] max-w-md">
                 On ne se limite pas à WordPress. Quand votre projet l'exige,
                 nous concevons des applications sur mesure dans la stack la
-                plus adaptée — Next.js, React Native, Python, peu importe.
+                plus adaptée - Next.js, React Native, Python, peu importe.
               </p>
             </div>
           </MotionReveal>
@@ -330,7 +330,7 @@ export default function HomePage() {
         </Container>
       </section>
 
-      {/* ========== ROUEN — SEO LOCAL ========== */}
+      {/* ========== ROUEN - SEO LOCAL ========== */}
       <section className="section-y border-t border-[var(--border)] relative overflow-hidden">
         <div className="absolute inset-0 bg-dot opacity-50" aria-hidden />
         <ParticlesBg count={30} />

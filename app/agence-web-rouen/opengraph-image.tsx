@@ -1,7 +1,7 @@
 import { renderCityOg, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og-renderers";
 
 export const runtime = "nodejs";
-export const alt = "Agence web à Rouen — Krealabs";
+export const alt = "Agence web à Rouen - Krealabs";
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 

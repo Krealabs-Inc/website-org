@@ -100,7 +100,7 @@ export function QuoteCalculator() {
         <p className="text-body-lg text-[var(--muted-foreground)] max-w-xl mx-auto">
           On revient vers vous sous 24h ouvrées par email à{" "}
           <strong className="text-[var(--foreground)]">{contact.email}</strong>.
-          La fourchette estimée vous a été récapitulée — on pourra l&apos;affiner
+          La fourchette estimée vous a été récapitulée - on pourra l&apos;affiner
           ensemble lors d&apos;un premier RDV gratuit.
         </p>
       </div>
@@ -124,7 +124,7 @@ export function QuoteCalculator() {
             <span className="hidden md:inline">Étape </span>
             {String(s).padStart(2, "0")}
             <span className="hidden md:inline">
-              {" — "}
+              {" - "}
               {STEP_LABELS[s as Step]}
             </span>
           </div>
@@ -400,7 +400,7 @@ function Step4({
       <h2 className="text-h2 mb-2">Votre fourchette indicative</h2>
       <p className="text-body text-[var(--muted-foreground)] mb-8">
         Cette estimation est basée sur le marché normand 2026, hors TVA. Elle
-        n&apos;est pas contractuelle — le devis définitif demandera un cadrage
+        n&apos;est pas contractuelle - le devis définitif demandera un cadrage
         plus précis.
       </p>
 
@@ -455,7 +455,7 @@ function Step4({
           />
         </div>
         <textarea
-          placeholder="Message (optionnel) — précisez votre contexte si vous le souhaitez"
+          placeholder="Message (optionnel) - précisez votre contexte si vous le souhaitez"
           rows={3}
           value={contact.message}
           onChange={(e) => setContact({ ...contact, message: e.target.value })}

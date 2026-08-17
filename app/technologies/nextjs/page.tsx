@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Next.js à Rouen — Framework React production",
+  title: "Next.js à Rouen - Framework React production",
   description:
     "Expertise Next.js à Rouen. Server Components, App Router, SEO natif, performance extrême. Notre framework de prédilection pour les sites web modernes.",
   alternates: { canonical: "https://krealabs.fr/technologies/nextjs" },

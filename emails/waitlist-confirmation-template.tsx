@@ -19,7 +19,7 @@ export const WaitlistConfirmationTemplate: React.FC<WaitlistConfirmationTemplate
 }) => {
   return (
     <EmailShell
-      title="Bienvenue sur la waitlist — Krealabs"
+      title="Bienvenue sur la waitlist - Krealabs"
       preview="Vous êtes sur la liste. On vous prévient dès qu'une nouveauté arrive."
     >
       <EmailHeader subtitle="Waitlist" />

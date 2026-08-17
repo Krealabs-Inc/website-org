@@ -74,7 +74,7 @@ export async function sendContactEmails(data: ContactFormData): Promise<void> {
       from: FROM,
       to: [ADMIN_TO],
       replyTo: data.email,
-      subject: `${typeLabel} — ${data.name}`,
+      subject: `${typeLabel} - ${data.name}`,
       react: React.createElement(ContactEmailTemplate, {
         requestType: data.requestType,
         name: data.name,
@@ -90,7 +90,7 @@ export async function sendContactEmails(data: ContactFormData): Promise<void> {
       from: FROM,
       to: [data.email],
       replyTo: ADMIN_TO,
-      subject: "Votre demande est bien reçue — Krealabs",
+      subject: "Votre demande est bien reçue - Krealabs",
       react: React.createElement(ContactAutoreplyTemplate, {
         name: data.name,
         requestType: data.requestType,
@@ -134,7 +134,7 @@ export async function sendWaitlistEmails(email: string): Promise<void> {
       from: FROM,
       to: [ADMIN_TO],
       replyTo: email,
-      subject: `Nouvelle inscription waitlist — ${email}`,
+      subject: `Nouvelle inscription waitlist - ${email}`,
       react: React.createElement(WaitlistNotificationTemplate, { email }),
     }),
     resend.emails.send({

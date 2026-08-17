@@ -8,7 +8,7 @@ interface BreadcrumbSchemaProps {
 }
 
 /**
- * BreadcrumbSchema — JSON-LD pour les fils d'Ariane.
+ * BreadcrumbSchema - JSON-LD pour les fils d'Ariane.
  * Améliore l'affichage Google avec les breadcrumbs sous le titre.
  */
 export function BreadcrumbSchema({ items }: BreadcrumbSchemaProps) {

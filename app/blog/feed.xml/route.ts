@@ -52,7 +52,7 @@ ${categories}
      xmlns:dc="http://purl.org/dc/elements/1.1/"
      xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Blog Krealabs — Agence web à Rouen</title>
+    <title>Blog Krealabs - Agence web à Rouen</title>
     <link>${BASE_URL}/blog</link>
     <atom:link href="${BASE_URL}/blog/feed.xml" rel="self" type="application/rss+xml" />
     <description>Articles techniques, retours d'expérience et veille sur les technologies web modernes par l'équipe Krealabs.</description>
@@ -61,7 +61,7 @@ ${categories}
     <managingEditor>contact@krealabs.fr (Krealabs)</managingEditor>
     <webMaster>contact@krealabs.fr (Krealabs)</webMaster>
     <lastBuildDate>${lastBuildDate}</lastBuildDate>
-    <generator>Next.js — krealabs.fr</generator>
+    <generator>Next.js - krealabs.fr</generator>
     <image>
       <url>${BASE_URL}/apple-touch-icon.png</url>
       <title>Krealabs</title>

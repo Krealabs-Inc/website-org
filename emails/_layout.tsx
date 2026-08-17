@@ -143,7 +143,7 @@ export function EmailShell({ title, preview, children }: EmailShellProps) {
   );
 }
 
-/** Header avec logo + wordmark — utilisé par tous les templates. */
+/** Header avec logo + wordmark - utilisé par tous les templates. */
 export function EmailHeader({ subtitle }: { subtitle?: string }) {
   return (
     <tr>
@@ -199,7 +199,7 @@ export function EmailHeader({ subtitle }: { subtitle?: string }) {
   );
 }
 
-/** Footer minimal — par défaut un séparateur + ligne d'infos. */
+/** Footer minimal - par défaut un séparateur + ligne d'infos. */
 export function EmailFooter({ children }: { children?: React.ReactNode }) {
   return (
     <tr>

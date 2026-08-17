@@ -49,7 +49,7 @@ jobs:
           echo "Slugs détectés ($count) :"
           cat new-slugs.txt || true
 
-      - name: No new slugs — skip
+      - name: No new slugs - skip
         if: steps.slugs.outputs.count == '0'
         run: echo "Aucun nouveau slug détecté dans ce push, rien à faire."
 

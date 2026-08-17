@@ -21,7 +21,7 @@ import { TEAM } from "@/lib/team";
 
 const SITE_URL = "https://krealabs.fr";
 
-/** Préfixe une URL relative par SITE_URL — les schémas et OG exigent l'absolu. */
+/** Préfixe une URL relative par SITE_URL - les schémas et OG exigent l'absolu. */
 function absolutize(path: string): string {
   if (/^https?:\/\//i.test(path)) return path;
   return `${SITE_URL}${path.startsWith("/") ? "" : "/"}${path}`;
@@ -32,7 +32,7 @@ function absolutize(path: string): string {
 export const revalidate = 3600;
 
 // ============================================================
-// STATIC PARAMS — un fichier par article publié au build
+// STATIC PARAMS - un fichier par article publié au build
 // ============================================================
 
 export async function generateStaticParams() {
@@ -40,7 +40,7 @@ export async function generateStaticParams() {
 }
 
 // ============================================================
-// METADATA — OpenGraph, Twitter, canonical par article
+// METADATA - OpenGraph, Twitter, canonical par article
 // ============================================================
 
 export async function generateMetadata({
@@ -308,7 +308,7 @@ export default async function BlogPostPage({
             </section>
           ))}
 
-          {/* Conclusion — supporte les liens markdown [texte](/url) */}
+          {/* Conclusion - supporte les liens markdown [texte](/url) */}
           <div className="mt-16 p-8 rounded-[var(--radius)] border-l-4 border-[var(--accent)] bg-[var(--accent-subtle)]/30">
             <Eyebrow className="mb-4">En résumé</Eyebrow>
             <p className="text-body-lg text-[var(--foreground)]/90 leading-relaxed">
@@ -467,7 +467,7 @@ export default async function BlogPostPage({
               </h2>
               <p className="text-body-lg text-[var(--muted-foreground)] mb-8 max-w-xl mx-auto">
                 Si cet article t'a parlé et que tu as un projet en cours (ou
-                naissant), écris-nous — premier échange offert.
+                naissant), écris-nous - premier échange offert.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <Button size="lg" asChild>

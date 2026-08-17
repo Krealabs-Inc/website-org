@@ -8,7 +8,7 @@ export interface BlogPost {
   date: string;
   /**
    * Date de dernière mise à jour significative (format français "5 mai 2026").
-   * Optionnel — laisser undefined sur les articles jamais retouchés.
+   * Optionnel - laisser undefined sur les articles jamais retouchés.
    * Quand renseigné, alimente `dateModified` du schema Article + sitemap.
    */
   updatedAt?: string;
@@ -105,13 +105,13 @@ export function isPostPublished(post: BlogPost): boolean {
 
 export const blogPosts: BlogPost[] = [
   // ===========================================================================
-  // PILIER — Headless WordPress + Next.js (différenciateur agence)
+  // PILIER - Headless WordPress + Next.js (différenciateur agence)
   // ===========================================================================
   {
     slug: "headless-wordpress-nextjs-guide",
     title: "Headless WordPress avec Next.js : le guide honnête (et quand l'éviter)",
     excerpt:
-      "WordPress pour l'édition, Next.js pour le rendu : le headless promet performance et liberté. Mais 90% des sites n'en ont pas besoin. Notre guide complet — architecture, coût réel, pièges — par une agence qui maîtrise les deux côtés.",
+      "WordPress pour l'édition, Next.js pour le rendu : le headless promet performance et liberté. Mais 90% des sites n'en ont pas besoin. Notre guide complet - architecture, coût réel, pièges - par une agence qui maîtrise les deux côtés.",
     category: "WordPress",
     date: "27 mai 2026",
     readTime: "18 min",
@@ -121,23 +121,23 @@ export const blogPosts: BlogPost[] = [
     tags: ["Headless WordPress", "Next.js", "WPGraphQL", "Architecture", "WordPress"],
     content: {
       introduction:
-        "Le headless WordPress est partout dans les discussions techniques de 2026 : on garde WordPress comme back-office d'édition, et on remplace son thème par un frontend Next.js. La promesse est séduisante — performances natives, score Lighthouse au plafond, liberté totale de développement. La réalité est plus nuancée. Chez Krealabs, on a une position rare : on développe des thèmes WordPress sur mesure depuis plus de 10 ans ET des applications Next.js en production. On voit donc les deux côtés sans dogmatisme. Ce guide vous dit exactement quand le headless vaut le coup, quand c'est une régression coûteuse, et comment on l'implémente quand c'est justifié.",
+        "Le headless WordPress est partout dans les discussions techniques de 2026 : on garde WordPress comme back-office d'édition, et on remplace son thème par un frontend Next.js. La promesse est séduisante - performances natives, score Lighthouse au plafond, liberté totale de développement. La réalité est plus nuancée. Chez Krealabs, on a une position rare : on développe des thèmes WordPress sur mesure depuis plus de 10 ans ET des applications Next.js en production. On voit donc les deux côtés sans dogmatisme. Ce guide vous dit exactement quand le headless vaut le coup, quand c'est une régression coûteuse, et comment on l'implémente quand c'est justifié.",
       sections: [
         {
           title: "Qu'est-ce que le headless WordPress, concrètement",
           content:
-            "Dans un WordPress classique, le même logiciel gère deux choses : l'administration du contenu (le back-office wp-admin) et l'affichage public (le thème PHP qui génère les pages HTML). Le « headless » découple ces deux rôles. WordPress devient une pure source de contenu, exposée via une API — soit l'API REST native, soit GraphQL via l'extension WPGraphQL. Un frontend séparé, ici Next.js, consomme cette API et génère les pages. On parle de « headless » (sans tête) parce qu'on coupe la tête d'affichage de WordPress pour la remplacer. Pour comprendre les briques, voir nos définitions du [headless WordPress](/lexique/headless-wordpress), de [WPGraphQL](/lexique/wpgraphql) et des [React Server Components](/lexique/react-server-components-rsc) qui changent la donne côté Next.js. L'éditeur garde son confort Gutenberg ; le visiteur reçoit une page Next.js optimisée.",
+            "Dans un WordPress classique, le même logiciel gère deux choses : l'administration du contenu (le back-office wp-admin) et l'affichage public (le thème PHP qui génère les pages HTML). Le « headless » découple ces deux rôles. WordPress devient une pure source de contenu, exposée via une API - soit l'API REST native, soit GraphQL via l'extension WPGraphQL. Un frontend séparé, ici Next.js, consomme cette API et génère les pages. On parle de « headless » (sans tête) parce qu'on coupe la tête d'affichage de WordPress pour la remplacer. Pour comprendre les briques, voir nos définitions du [headless WordPress](/lexique/headless-wordpress), de [WPGraphQL](/lexique/wpgraphql) et des [React Server Components](/lexique/react-server-components-rsc) qui changent la donne côté Next.js. L'éditeur garde son confort Gutenberg ; le visiteur reçoit une page Next.js optimisée.",
         },
         {
-          title: "Quand le headless a du sens — et quand c'est une régression",
+          title: "Quand le headless a du sens - et quand c'est une régression",
           content:
-            "Soyons direct : 90% des sites WordPress n'ont aucun besoin de passer en headless. Si votre site est un site vitrine, un blog, ou une boutique WooCommerce standard, un thème WordPress bien développé (code propre, pas de page builder lourd) atteint déjà d'excellentes performances pour une fraction du coût. Le headless se justifie dans des cas précis : (1) vous avez déjà une équipe ou un budget Next.js, et WordPress n'est qu'une des sources de données parmi d'autres ; (2) vous avez besoin d'interactions front très riches (application web, dashboards, temps réel) que le modèle de thème PHP rend pénibles ; (3) vous mutualisez un même back-office de contenu sur plusieurs frontends (site + app + bornes). En dehors de ces cas, le « faux headless » — mettre Next.js juste pour gagner des points Lighthouse — est presque toujours une mauvaise affaire : vous payez 2 à 5 fois plus cher pour reconstruire ce que WordPress faisait gratuitement. Notre [comparateur Next.js vs WordPress](/comparateur/nextjs-vs-wordpress) détaille les arbitrages stack par stack.",
+            "Soyons direct : 90% des sites WordPress n'ont aucun besoin de passer en headless. Si votre site est un site vitrine, un blog, ou une boutique WooCommerce standard, un thème WordPress bien développé (code propre, pas de page builder lourd) atteint déjà d'excellentes performances pour une fraction du coût. Le headless se justifie dans des cas précis : (1) vous avez déjà une équipe ou un budget Next.js, et WordPress n'est qu'une des sources de données parmi d'autres ; (2) vous avez besoin d'interactions front très riches (application web, dashboards, temps réel) que le modèle de thème PHP rend pénibles ; (3) vous mutualisez un même back-office de contenu sur plusieurs frontends (site + app + bornes). En dehors de ces cas, le « faux headless » - mettre Next.js juste pour gagner des points Lighthouse - est presque toujours une mauvaise affaire : vous payez 2 à 5 fois plus cher pour reconstruire ce que WordPress faisait gratuitement. Notre [comparateur Next.js vs WordPress](/comparateur/nextjs-vs-wordpress) détaille les arbitrages stack par stack.",
         },
         {
           title: "L'architecture WordPress + Next.js + WPGraphQL en pratique",
           content:
             "L'architecture type qu'on déploie : WordPress tourne sur un hébergement PHP classique (mutualisé ou VPS), rôle 100% back-office, bloqué à l'indexation. WPGraphQL expose le contenu en GraphQL. Next.js, hébergé sur Vercel, interroge cette API au build (génération statique / ISR) ou à la demande (rendu serveur). Les pages sont régénérées via revalidation à la sauvegarde d'un article (webhook WordPress → Next.js). Le visiteur ne touche jamais WordPress directement : il reçoit du HTML Next.js servi en edge. Côté requêtes, on récupère un article et ses métadonnées en une seule requête GraphQL typée, ce qui évite les multiples allers-retours de l'API REST.",
-          code: `// app/blog/[slug]/page.tsx — récupération via WPGraphQL
+          code: `// app/blog/[slug]/page.tsx - récupération via WPGraphQL
 async function getPost(slug: string) {
   const res = await fetch(process.env.WPGRAPHQL_URL!, {
     method: "POST",
@@ -164,25 +164,25 @@ async function getPost(slug: string) {
         {
           title: "Le coût réel : ce que les plugins faisaient gratuitement",
           content:
-            "C'est le point que les articles enthousiastes oublient. En headless, vous perdez l'écosystème de plugins WordPress côté affichage — et environ 40% de l'effort de migration consiste à recoder à la main ce qui était gratuit : le formulaire de contact (plus de Contact Form 7, il faut une route API + anti-spam), le balisage Schema.org (plus de plugin SEO automatique, voir notre [guide Schema.org pour agences](/blog/schema-org-agences-web)), les redirections, le sitemap, l'aperçu en éditeur (Gutenberg affiche le thème par défaut, pas votre frontend Next.js — le bouton « Aperçu » devient inutile sans travail supplémentaire), le cache et sa revalidation, la gestion des formulaires, les embeds, les shortcodes. Chacun de ces éléments devient un mini-projet. Sur un budget de PME, ça transforme un site à 5 000 € en projet à 15 000-25 000 €. Pour un comparatif des coûts d'hébergement entre les deux mondes, voir [Vercel vs OVH](/blog/vercel-vs-ovh-hebergement-2026).",
+            "C'est le point que les articles enthousiastes oublient. En headless, vous perdez l'écosystème de plugins WordPress côté affichage - et environ 40% de l'effort de migration consiste à recoder à la main ce qui était gratuit : le formulaire de contact (plus de Contact Form 7, il faut une route API + anti-spam), le balisage Schema.org (plus de plugin SEO automatique, voir notre [guide Schema.org pour agences](/blog/schema-org-agences-web)), les redirections, le sitemap, l'aperçu en éditeur (Gutenberg affiche le thème par défaut, pas votre frontend Next.js - le bouton « Aperçu » devient inutile sans travail supplémentaire), le cache et sa revalidation, la gestion des formulaires, les embeds, les shortcodes. Chacun de ces éléments devient un mini-projet. Sur un budget de PME, ça transforme un site à 5 000 € en projet à 15 000-25 000 €. Pour un comparatif des coûts d'hébergement entre les deux mondes, voir [Vercel vs OVH](/blog/vercel-vs-ovh-hebergement-2026).",
         },
         {
           title: "Performance & SEO : le vrai gain, mesuré",
           content:
-            "Quand le headless est bien fait, le gain de performance est réel : un frontend Next.js avec rendu serveur et images optimisées atteint des Core Web Vitals excellents sans bidouille. Là où un WordPress mal optimisé peine à passer sous 2,5s de LCP sur mobile, un Next.js bien construit y arrive nativement. Mais attention au piège : un thème WordPress développé proprement (sans Elementor/Divi, avec un cache correct et WP Rocket) atteint AUSSI de très bons scores. Le headless n'est pas magique — il supprime juste le plafond de verre des thèmes lourds. Pour mesurer objectivement, on s'appuie sur notre [méthode d'audit Lighthouse](/blog/audit-lighthouse-methode-agence) et notre lecture des [Core Web Vitals 2026 où l'INP a remplacé le FID](/blog/core-web-vitals-2026-inp). Le SEO, lui, est neutre côté technique : Google indexe parfaitement le HTML rendu par Next.js, à condition que le rendu serveur soit bien configuré (pas de contenu critique chargé uniquement côté client).",
+            "Quand le headless est bien fait, le gain de performance est réel : un frontend Next.js avec rendu serveur et images optimisées atteint des Core Web Vitals excellents sans bidouille. Là où un WordPress mal optimisé peine à passer sous 2,5s de LCP sur mobile, un Next.js bien construit y arrive nativement. Mais attention au piège : un thème WordPress développé proprement (sans Elementor/Divi, avec un cache correct et WP Rocket) atteint AUSSI de très bons scores. Le headless n'est pas magique - il supprime juste le plafond de verre des thèmes lourds. Pour mesurer objectivement, on s'appuie sur notre [méthode d'audit Lighthouse](/blog/audit-lighthouse-methode-agence) et notre lecture des [Core Web Vitals 2026 où l'INP a remplacé le FID](/blog/core-web-vitals-2026-inp). Le SEO, lui, est neutre côté technique : Google indexe parfaitement le HTML rendu par Next.js, à condition que le rendu serveur soit bien configuré (pas de contenu critique chargé uniquement côté client).",
         },
         {
           title: "Notre retour d'expérience agence",
           content:
-            "Sur nos projets, on applique une règle simple : on ne propose le headless que si le client coche une des trois cases qui le justifient (équipe/budget Next.js existant, front très interactif, multi-frontend). Pour un site vitrine ou une boutique standard, on recommande un WordPress sur mesure bien développé — c'est plus rapide à livrer, moins cher à maintenir, et le client reste autonome. Quand le headless est justifié, on construit l'architecture WordPress + WPGraphQL + Next.js + Vercel décrite plus haut, en budgétisant honnêtement le recodage des fonctionnalités perdues dès le devis. La pire situation, qu'on refuse de vendre : le « headless pour faire moderne » sur un projet qui n'en a pas besoin. Ça coûte cher au client pour un bénéfice marginal. Notre rôle d'agence, c'est aussi de dire non au sur-engineering.",
+            "Sur nos projets, on applique une règle simple : on ne propose le headless que si le client coche une des trois cases qui le justifient (équipe/budget Next.js existant, front très interactif, multi-frontend). Pour un site vitrine ou une boutique standard, on recommande un WordPress sur mesure bien développé - c'est plus rapide à livrer, moins cher à maintenir, et le client reste autonome. Quand le headless est justifié, on construit l'architecture WordPress + WPGraphQL + Next.js + Vercel décrite plus haut, en budgétisant honnêtement le recodage des fonctionnalités perdues dès le devis. La pire situation, qu'on refuse de vendre : le « headless pour faire moderne » sur un projet qui n'en a pas besoin. Ça coûte cher au client pour un bénéfice marginal. Notre rôle d'agence, c'est aussi de dire non au sur-engineering.",
         },
       ],
       conclusion:
-        "Le headless WordPress avec Next.js est un excellent choix — pour les bons projets. Performance native, liberté de développement, mutualisation du contenu : les avantages sont réels quand le contexte le justifie. Mais pour 9 sites sur 10, un WordPress sur mesure bien développé reste le meilleur rapport qualité/prix/autonomie. La vraie expertise, ce n'est pas de pousser la techno la plus à la mode, c'est de choisir la bonne pour votre situation. Chez Krealabs, on maîtrise les deux : [création WordPress sur mesure](/services/wordpress) comme [développement Next.js custom](/services/developpement-web). Pour trancher sur votre projet, voir notre [comparateur Next.js vs WordPress](/comparateur/nextjs-vs-wordpress) ou [parlons-en directement](/contact) — premier échange offert, on vous dira honnêtement si le headless vaut le coup chez vous.",
+        "Le headless WordPress avec Next.js est un excellent choix - pour les bons projets. Performance native, liberté de développement, mutualisation du contenu : les avantages sont réels quand le contexte le justifie. Mais pour 9 sites sur 10, un WordPress sur mesure bien développé reste le meilleur rapport qualité/prix/autonomie. La vraie expertise, ce n'est pas de pousser la techno la plus à la mode, c'est de choisir la bonne pour votre situation. Chez Krealabs, on maîtrise les deux : [création WordPress sur mesure](/services/wordpress) comme [développement Next.js custom](/services/developpement-web). Pour trancher sur votre projet, voir notre [comparateur Next.js vs WordPress](/comparateur/nextjs-vs-wordpress) ou [parlons-en directement](/contact) - premier échange offert, on vous dira honnêtement si le headless vaut le coup chez vous.",
     },
   },
   // ===========================================================================
-  // CLUSTER WORDPRESS (5 articles) — Spécialité agence
+  // CLUSTER WORDPRESS (5 articles) - Spécialité agence
   // ===========================================================================
   {
     slug: "pourquoi-wordpress-reste-le-bon-choix-2026",
@@ -208,12 +208,12 @@ async function getPost(slug: string) {
         {
           title: "Quand WordPress reste imbattable",
           content:
-            "Site vitrine institutionnel pour PME, blog éditorial avec rédaction régulière, e-commerce TPE/PME via WooCommerce, site multilingue (WPML/Polylang), plateformes média ou magazines — sur ces cas d'usage, WordPress n'a pratiquement aucun concurrent au même rapport qualité/coût/délai. Une équipe non-technique peut gérer les contenus quotidiennement sans solliciter le développeur. Les rédacteurs aiment l'éditeur Gutenberg, qui a énormément progressé depuis 2024 avec le Full Site Editing. Les marketeurs apprécient les intégrations natives avec les outils SEO (Yoast, RankMath), email (Mailchimp, Brevo), analytics (GA4, Plausible) et CRM (HubSpot, Salesforce). Bref : WordPress reste l'outil le plus universel pour les sites où le contenu est central.",
+            "Site vitrine institutionnel pour PME, blog éditorial avec rédaction régulière, e-commerce TPE/PME via WooCommerce, site multilingue (WPML/Polylang), plateformes média ou magazines - sur ces cas d'usage, WordPress n'a pratiquement aucun concurrent au même rapport qualité/coût/délai. Une équipe non-technique peut gérer les contenus quotidiennement sans solliciter le développeur. Les rédacteurs aiment l'éditeur Gutenberg, qui a énormément progressé depuis 2024 avec le Full Site Editing. Les marketeurs apprécient les intégrations natives avec les outils SEO (Yoast, RankMath), email (Mailchimp, Brevo), analytics (GA4, Plausible) et CRM (HubSpot, Salesforce). Bref : WordPress reste l'outil le plus universel pour les sites où le contenu est central.",
         },
         {
           title: "Le mythe de WordPress lent",
           content:
-            "« WordPress c'est lent. » C'est l'argument numéro un des détracteurs. Il est faux dans l'absolu, vrai dans la pratique pour beaucoup de sites. La différence ? La qualité de la construction. Un WordPress bien fait — thème custom léger, hébergement spécialisé (o2switch, Kinsta, WP Engine), cache (WP Rocket), CDN (Cloudflare), images optimisées (WebP/AVIF) — peut tenir des Core Web Vitals au top, comparable à un site Next.js bien construit. Un WordPress mal fait — thème Divi/Elementor avec 200 plugins, hébergement mutualisé bas de gamme, 0 optimisation — sera effectivement lent. Le problème n'est pas WordPress, c'est l'exécution.",
+            "« WordPress c'est lent. » C'est l'argument numéro un des détracteurs. Il est faux dans l'absolu, vrai dans la pratique pour beaucoup de sites. La différence ? La qualité de la construction. Un WordPress bien fait - thème custom léger, hébergement spécialisé (o2switch, Kinsta, WP Engine), cache (WP Rocket), CDN (Cloudflare), images optimisées (WebP/AVIF) - peut tenir des Core Web Vitals au top, comparable à un site Next.js bien construit. Un WordPress mal fait - thème Divi/Elementor avec 200 plugins, hébergement mutualisé bas de gamme, 0 optimisation - sera effectivement lent. Le problème n'est pas WordPress, c'est l'exécution.",
           code: `// Optimisations critiques sur un projet WP performant
 // 1. Thème custom sans page builder
 // 2. WP Rocket : cache pages, minify CSS/JS, lazyload
@@ -224,12 +224,12 @@ async function getPost(slug: string) {
         {
           title: "Les vrais inconvénients à connaître",
           content:
-            "Soyons honnêtes, WordPress a aussi ses limites. L'admin est lourde sur les gros catalogues (WooCommerce 50k+ produits commence à souffrir). La sécurité demande une attention continue : mises à jour, monitoring, durcissement — ce n'est pas plug-and-forget. Les plugins varient en qualité : certains sont des bombes à retardement (abandon, conflits, vulnérabilités). L'écosystème est verrouillé sur PHP, ce qui peut paraître démodé face à TypeScript/Rust/Go. Pour des apps web complexes type SaaS multi-tenants ou outils temps réel (chat, collaboration live), WordPress n'est pas adapté — c'est là que les frameworks modernes comme Next.js entrent en jeu.",
+            "Soyons honnêtes, WordPress a aussi ses limites. L'admin est lourde sur les gros catalogues (WooCommerce 50k+ produits commence à souffrir). La sécurité demande une attention continue : mises à jour, monitoring, durcissement - ce n'est pas plug-and-forget. Les plugins varient en qualité : certains sont des bombes à retardement (abandon, conflits, vulnérabilités). L'écosystème est verrouillé sur PHP, ce qui peut paraître démodé face à TypeScript/Rust/Go. Pour des apps web complexes type SaaS multi-tenants ou outils temps réel (chat, collaboration live), WordPress n'est pas adapté - c'est là que les frameworks modernes comme Next.js entrent en jeu.",
         },
         {
           title: "WordPress vs Wix, Squarespace, Webflow",
           content:
-            "Comparons avec les concurrents directs en 2026. Wix et Squarespace offrent une UX d'édition très simple mais vous êtes prisonnier : impossible d'exporter votre site, contraintes de design lourdes, scaling limité au-delà de 50 pages, SEO bridé. Webflow est plus puissant et permet du custom code, mais reste un SaaS propriétaire — abonnement à vie obligatoire, et la migration est complexe si vous voulez sortir. WordPress, lui, vous donne propriété complète du code, des données, et du contenu. Vous pouvez changer d'hébergeur en 30 minutes, changer d'agence sans perdre un seul fichier. C'est la différence open-source vs SaaS — et pour un projet long-terme, ça compte énormément.",
+            "Comparons avec les concurrents directs en 2026. Wix et Squarespace offrent une UX d'édition très simple mais vous êtes prisonnier : impossible d'exporter votre site, contraintes de design lourdes, scaling limité au-delà de 50 pages, SEO bridé. Webflow est plus puissant et permet du custom code, mais reste un SaaS propriétaire - abonnement à vie obligatoire, et la migration est complexe si vous voulez sortir. WordPress, lui, vous donne propriété complète du code, des données, et du contenu. Vous pouvez changer d'hébergeur en 30 minutes, changer d'agence sans perdre un seul fichier. C'est la différence open-source vs SaaS - et pour un projet long-terme, ça compte énormément.",
         },
         {
           title: "Le futur : Headless WordPress + Block Editor",
@@ -252,18 +252,18 @@ const QUERY = gql\`
         {
           title: "Comment bien choisir un partenaire WordPress",
           content:
-            "Le choix de l'agence pèse plus que le choix du CMS. Quelques signaux à regarder : utilise-t-elle un thème custom (pas un Divi/Elementor recyclé) ? Code-t-elle ses plugins métier ou n'achète-t-elle que des plugins premium ? Propose-t-elle un forfait maintenance/sécurité crédible ? Vous donne-t-elle accès au dépôt Git du thème ? Documente-t-elle ses choix dans un README ? Si la réponse est non sur la moitié des points, fuyez : vous tombez sur un assembleur de page builder qui vous laissera face à un site impossible à faire évoluer dans 2 ans. Les bons partenaires WP sont rares mais existent — ils traitent WordPress comme un projet de développement sérieux, pas comme du clic-glisse.",
+            "Le choix de l'agence pèse plus que le choix du CMS. Quelques signaux à regarder : utilise-t-elle un thème custom (pas un Divi/Elementor recyclé) ? Code-t-elle ses plugins métier ou n'achète-t-elle que des plugins premium ? Propose-t-elle un forfait maintenance/sécurité crédible ? Vous donne-t-elle accès au dépôt Git du thème ? Documente-t-elle ses choix dans un README ? Si la réponse est non sur la moitié des points, fuyez : vous tombez sur un assembleur de page builder qui vous laissera face à un site impossible à faire évoluer dans 2 ans. Les bons partenaires WP sont rares mais existent - ils traitent WordPress comme un projet de développement sérieux, pas comme du clic-glisse.",
         },
       ],
       conclusion:
-        "WordPress n'est pas mort, mais il n'est pas non plus la solution universelle. C'est l'outil le plus pragmatique pour 80% des PME et associations, à condition d'être bien fait. Mal fait, c'est l'enfer. La différence se joue sur l'agence qui le pose. Si vous avez un projet WordPress — création, refonte, migration — découvrez notre offre dédiée [WordPress](/services/wordpress) et nos guides sur la [refonte sans perdre le SEO](/blog/refonte-wordpress-sans-perdre-seo) et [WooCommerce vs Shopify pour PME](/blog/woocommerce-vs-shopify-pme). Pour les projets qui sortent du périmètre WP, on couvre aussi la stack moderne ([Next.js, Python, React Native](/services/developpement-web)). Mais pour la plupart des entreprises rouennaises et normandes, WordPress reste la réponse la plus économique et la plus durable. Et si vous vous demandez s'il faut passer en headless avec Next.js, lisez notre [guide honnête sur le headless WordPress](/blog/headless-wordpress-nextjs-guide) avant de vous lancer.",
+        "WordPress n'est pas mort, mais il n'est pas non plus la solution universelle. C'est l'outil le plus pragmatique pour 80% des PME et associations, à condition d'être bien fait. Mal fait, c'est l'enfer. La différence se joue sur l'agence qui le pose. Si vous avez un projet WordPress - création, refonte, migration - découvrez notre offre dédiée [WordPress](/services/wordpress) et nos guides sur la [refonte sans perdre le SEO](/blog/refonte-wordpress-sans-perdre-seo) et [WooCommerce vs Shopify pour PME](/blog/woocommerce-vs-shopify-pme). Pour les projets qui sortent du périmètre WP, on couvre aussi la stack moderne ([Next.js, Python, React Native](/services/developpement-web)). Mais pour la plupart des entreprises rouennaises et normandes, WordPress reste la réponse la plus économique et la plus durable. Et si vous vous demandez s'il faut passer en headless avec Next.js, lisez notre [guide honnête sur le headless WordPress](/blog/headless-wordpress-nextjs-guide) avant de vous lancer.",
     },
   },
   {
     slug: "refonte-wordpress-sans-perdre-seo",
     title: "Refonte WordPress : ne perdez pas votre SEO",
     excerpt:
-      "Une refonte mal pilotée peut faire perdre 30 à 80% du trafic organique. Méthode complète pour refondre un site WordPress en préservant votre positionnement Google — checklist agence.",
+      "Une refonte mal pilotée peut faire perdre 30 à 80% du trafic organique. Méthode complète pour refondre un site WordPress en préservant votre positionnement Google - checklist agence.",
     category: "WordPress",
     date: "9 mai 2026",
     readTime: "16 min",
@@ -273,7 +273,7 @@ const QUERY = gql\`
     tags: ["WordPress", "Refonte", "SEO", "Redirections 301", "Migration"],
     content: {
       introduction:
-        "Vous avez un site WordPress qui fonctionne, qui a accumulé du trafic organique au fil des années, et vous voulez le refondre — design daté, performance médiocre, structure devenue ingérable. Le risque #1 d'une refonte : tout casser côté SEO et voir vos positions Google s'effondrer pendant des mois. Nous avons piloté des dizaines de refontes WordPress chez Krealabs, certaines avec gain de trafic immédiat (+30% en 2 mois), d'autres où le client avait fait n'importe quoi avant et où on a dû réparer (perte de 50% pour rattraper sur 6 mois). Voici la méthode que nous appliquons systématiquement pour éviter le second scénario.",
+        "Vous avez un site WordPress qui fonctionne, qui a accumulé du trafic organique au fil des années, et vous voulez le refondre - design daté, performance médiocre, structure devenue ingérable. Le risque #1 d'une refonte : tout casser côté SEO et voir vos positions Google s'effondrer pendant des mois. Nous avons piloté des dizaines de refontes WordPress chez Krealabs, certaines avec gain de trafic immédiat (+30% en 2 mois), d'autres où le client avait fait n'importe quoi avant et où on a dû réparer (perte de 50% pour rattraper sur 6 mois). Voici la méthode que nous appliquons systématiquement pour éviter le second scénario.",
       sections: [
         {
           title: "Avant tout : audit SEO complet de l'existant",
@@ -283,7 +283,7 @@ const QUERY = gql\`
         {
           title: "Cartographier les URLs existantes",
           content:
-            "Exporter la liste complète des URLs du site actuel, avec leur trafic Search Console des 12 derniers mois et leurs backlinks principaux (via Ahrefs ou Semrush). Identifier le top 50 des pages à fort trafic — ce sont elles qu'il faut protéger absolument. Pour chacune, noter : URL actuelle, titre, meta description, contenu principal, redirections sortantes éventuelles, backlinks pointant vers elle. Cette liste devient votre Bible de migration. À chaque URL doit correspondre une URL équivalente dans le nouveau site, soit identique (idéal), soit redirigée 301 vers la nouvelle URL pertinente.",
+            "Exporter la liste complète des URLs du site actuel, avec leur trafic Search Console des 12 derniers mois et leurs backlinks principaux (via Ahrefs ou Semrush). Identifier le top 50 des pages à fort trafic - ce sont elles qu'il faut protéger absolument. Pour chacune, noter : URL actuelle, titre, meta description, contenu principal, redirections sortantes éventuelles, backlinks pointant vers elle. Cette liste devient votre Bible de migration. À chaque URL doit correspondre une URL équivalente dans le nouveau site, soit identique (idéal), soit redirigée 301 vers la nouvelle URL pertinente.",
           code: `# Export Screaming Frog : Internal URLs (CSV)
 # Colonnes critiques :
 - Address (URL actuelle)
@@ -299,7 +299,7 @@ const QUERY = gql\`
           title: "Définir le plan de redirections 301",
           content:
             "Pour chaque URL qui change, il faut une redirection 301 (permanente) vers la nouvelle URL. Pas de 302, pas de chaînes de redirections (301 → 301 → 301 c'est catastrophique pour le SEO). Le plan de redirections doit être documenté dans un fichier (CSV ou tableur partagé) avec source → destination. Implémentation : via plugin (Redirection, Rank Math Redirections), via le .htaccess directement, ou via les règles serveur si Nginx. Tester chaque redirection après mise en ligne avec un outil comme HTTPstatus.io ou simplement curl en CLI.",
-          code: `# .htaccess WordPress — exemples de redirections 301
+          code: `# .htaccess WordPress - exemples de redirections 301
 Redirect 301 /ancien-blog/article-1 https://exemple.fr/blog/nouveau-titre-article
 Redirect 301 /services-anciens/web-design https://exemple.fr/services/design-uiux
 
@@ -309,7 +309,7 @@ RedirectMatch 301 ^/blog/category/([a-z-]+)$ https://exemple.fr/blog/?categorie=
         {
           title: "Préserver la structure des URLs (slug history)",
           content:
-            "Idéalement, gardez la même structure de permaliens (`/blog/%postname%/` par exemple). Si vous devez la changer, faites-le UNE fois, jamais en cours de route. Pour WordPress, le plugin « Permalink Manager Pro » permet de gérer les URLs custom et leurs historiques de redirections, particulièrement utile pour les boutiques WooCommerce avec catégories produits. Erreur classique à éviter : changer de `?p=ID` vers `/postname/` sans plan de redirection — perte massive de SEO sur l'ancien format.",
+            "Idéalement, gardez la même structure de permaliens (`/blog/%postname%/` par exemple). Si vous devez la changer, faites-le UNE fois, jamais en cours de route. Pour WordPress, le plugin « Permalink Manager Pro » permet de gérer les URLs custom et leurs historiques de redirections, particulièrement utile pour les boutiques WooCommerce avec catégories produits. Erreur classique à éviter : changer de `?p=ID` vers `/postname/` sans plan de redirection - perte massive de SEO sur l'ancien format.",
         },
         {
           title: "Migration des contenus, taxonomies et métadonnées",
@@ -319,7 +319,7 @@ RedirectMatch 301 ^/blog/category/([a-z-]+)$ https://exemple.fr/blog/?categorie=
         {
           title: "Préserver les balises Title, meta et schema",
           content:
-            "Les balises Title et meta description sont vos cartes de visite dans Google. Sur chaque page principale (home, services, catégories, top articles), gardez les Titles existants — ils ont été indexés et fonctionnent. Vous pouvez les optimiser, mais ne les remplacez pas radicalement sans raison. Pour le schema.org (balisages JSON-LD : Article, Product, FAQPage, BreadcrumbList, LocalBusiness), refaites-les sur le nouveau site avec les mêmes informations. RankMath et Yoast génèrent du schema automatiquement, mais customisez-le pour vos cas spécifiques.",
+            "Les balises Title et meta description sont vos cartes de visite dans Google. Sur chaque page principale (home, services, catégories, top articles), gardez les Titles existants - ils ont été indexés et fonctionnent. Vous pouvez les optimiser, mais ne les remplacez pas radicalement sans raison. Pour le schema.org (balisages JSON-LD : Article, Product, FAQPage, BreadcrumbList, LocalBusiness), refaites-les sur le nouveau site avec les mêmes informations. RankMath et Yoast génèrent du schema automatiquement, mais customisez-le pour vos cas spécifiques.",
         },
         {
           title: "Performance + Core Web Vitals : où la refonte aide",
@@ -334,16 +334,16 @@ RedirectMatch 301 ^/blog/category/([a-z-]+)$ https://exemple.fr/blog/?categorie=
         {
           title: "Mise en ligne et monitoring post-lancement",
           content:
-            "Bascule prod : pendant les 48h critiques après, surveiller toutes les heures via Search Console (rapport Couverture, erreurs d'exploration). Lancer un crawl Screaming Frog sur la prod pour vérifier que tout est OK. Soumettre le nouveau sitemap.xml dans Search Console. Forcer l'indexation des pages les plus importantes via URL Inspection. Surveiller : positions sur top 20 requêtes, trafic Google Analytics, vitesse Core Web Vitals (CrUX data). Si une régression apparaît, on a 7 jours pour rétablir avant que Google ne re-fixe ses positions à la baisse — d'où l'importance du suivi rapproché.",
+            "Bascule prod : pendant les 48h critiques après, surveiller toutes les heures via Search Console (rapport Couverture, erreurs d'exploration). Lancer un crawl Screaming Frog sur la prod pour vérifier que tout est OK. Soumettre le nouveau sitemap.xml dans Search Console. Forcer l'indexation des pages les plus importantes via URL Inspection. Surveiller : positions sur top 20 requêtes, trafic Google Analytics, vitesse Core Web Vitals (CrUX data). Si une régression apparaît, on a 7 jours pour rétablir avant que Google ne re-fixe ses positions à la baisse - d'où l'importance du suivi rapproché.",
         },
         {
           title: "Pièges classiques à éviter absolument",
           content:
-            "Trois erreurs que nous voyons trop souvent : 1) Mettre en ligne sans plan de redirections — résultat 50% de 404 et chute SEO immédiate. 2) Changer la structure des permaliens sans réfléchir — les ID changent, les anciennes URLs deviennent inaccessibles. 3) Désindexer le staging trop tard ou pas du tout — Google indexe les deux versions, contenu dupliqué, sanction. Une refonte mal préparée coûte plus cher que la refonte elle-même en perte de trafic. Prenez le temps de l'audit en amont.",
+            "Trois erreurs que nous voyons trop souvent : 1) Mettre en ligne sans plan de redirections - résultat 50% de 404 et chute SEO immédiate. 2) Changer la structure des permaliens sans réfléchir - les ID changent, les anciennes URLs deviennent inaccessibles. 3) Désindexer le staging trop tard ou pas du tout - Google indexe les deux versions, contenu dupliqué, sanction. Une refonte mal préparée coûte plus cher que la refonte elle-même en perte de trafic. Prenez le temps de l'audit en amont.",
         },
       ],
       conclusion:
-        "Une refonte WordPress n'est jamais juste un redesign : c'est un chantier SEO autant que graphique. Méthode rigoureuse + outils corrects + monitoring serré = positions préservées voire améliorées. Si vous avez un projet de refonte WordPress et que vous voulez sécuriser le SEO, c'est exactement notre métier — on intervient sur des refontes de PME normandes, mais aussi à distance partout en France. Un premier audit SEO de votre site actuel est offert pour cadrer le périmètre.",
+        "Une refonte WordPress n'est jamais juste un redesign : c'est un chantier SEO autant que graphique. Méthode rigoureuse + outils corrects + monitoring serré = positions préservées voire améliorées. Si vous avez un projet de refonte WordPress et que vous voulez sécuriser le SEO, c'est exactement notre métier - on intervient sur des refontes de PME normandes, mais aussi à distance partout en France. Un premier audit SEO de votre site actuel est offert pour cadrer le périmètre.",
     },
   },
   {
@@ -375,7 +375,7 @@ RedirectMatch 301 ^/blog/category/([a-z-]+)$ https://exemple.fr/blog/?categorie=
         {
           title: "Personnalisation : niveau de liberté",
           content:
-            "Shopify utilise Liquid comme moteur de templates et a ouvert son frontend depuis Hydrogen (Next.js + React). Vous pouvez personnaliser la plupart des choses, mais certaines parties restent fermées (logique panier, fonctionnement checkout sur les plans inférieurs). WooCommerce, c'est du WordPress et du PHP — donc une personnalisation à 100%. Modifier le tunnel d'achat, créer des types de produits custom, intégrer un PIM externe, automatiser des règles métier complexes : tout est possible sans contrainte. La contrepartie : ça demande un développeur compétent. Avec Shopify, vous pouvez aller plus loin avec moins de code.",
+            "Shopify utilise Liquid comme moteur de templates et a ouvert son frontend depuis Hydrogen (Next.js + React). Vous pouvez personnaliser la plupart des choses, mais certaines parties restent fermées (logique panier, fonctionnement checkout sur les plans inférieurs). WooCommerce, c'est du WordPress et du PHP - donc une personnalisation à 100%. Modifier le tunnel d'achat, créer des types de produits custom, intégrer un PIM externe, automatiser des règles métier complexes : tout est possible sans contrainte. La contrepartie : ça demande un développeur compétent. Avec Shopify, vous pouvez aller plus loin avec moins de code.",
           code: `// WooCommerce : hook pour modifier le prix selon une logique custom
 add_filter('woocommerce_get_price_html', function($price, $product) {
     if (is_user_logged_in() && get_user_role() === 'wholesale') {
@@ -388,7 +388,7 @@ add_filter('woocommerce_get_price_html', function($price, $product) {
         {
           title: "Performance et vitesse",
           content:
-            "Shopify est hébergé sur leur infrastructure mondiale et gère automatiquement le scaling, CDN, cache, etc. Vous n'avez rien à faire — site relativement rapide par défaut. WooCommerce dépend de votre hébergement : sur un hébergement mutualisé à 5€/mois, c'est lent. Sur un Kinsta ou WP Engine spécialisé, c'est aussi rapide que Shopify. Sur un VPS bien configuré avec Cloudflare en frontal, on peut faire mieux que Shopify (latence édge optimisée). Bref : WooCommerce demande plus d'effort de setup performance, mais permet d'aller plus loin si on s'en occupe.",
+            "Shopify est hébergé sur leur infrastructure mondiale et gère automatiquement le scaling, CDN, cache, etc. Vous n'avez rien à faire - site relativement rapide par défaut. WooCommerce dépend de votre hébergement : sur un hébergement mutualisé à 5€/mois, c'est lent. Sur un Kinsta ou WP Engine spécialisé, c'est aussi rapide que Shopify. Sur un VPS bien configuré avec Cloudflare en frontal, on peut faire mieux que Shopify (latence édge optimisée). Bref : WooCommerce demande plus d'effort de setup performance, mais permet d'aller plus loin si on s'en occupe.",
         },
         {
           title: "SEO : avantage WooCommerce",
@@ -408,28 +408,28 @@ add_filter('woocommerce_get_price_html', function($price, $product) {
         {
           title: "Paiements et frais",
           content:
-            "Shopify Payments (powered by Stripe) impose 2,9% + 0,30$ par transaction sur le plan Basic, dégressif sur les plans supérieurs. Si vous utilisez un autre processeur (Stripe direct, PayPal, Mollie), Shopify ajoute une commission supplémentaire (0,5 à 2%) pour vous pénaliser. WooCommerce ne prend AUCUNE commission sur vos ventes — vous payez uniquement les frais standard de votre processeur (Stripe : 1,4-2,9% selon le marché européen). Pour une boutique qui fait 100k€/an de CA, la différence cumulée représente facilement 500 à 2000€ par an.",
+            "Shopify Payments (powered by Stripe) impose 2,9% + 0,30$ par transaction sur le plan Basic, dégressif sur les plans supérieurs. Si vous utilisez un autre processeur (Stripe direct, PayPal, Mollie), Shopify ajoute une commission supplémentaire (0,5 à 2%) pour vous pénaliser. WooCommerce ne prend AUCUNE commission sur vos ventes - vous payez uniquement les frais standard de votre processeur (Stripe : 1,4-2,9% selon le marché européen). Pour une boutique qui fait 100k€/an de CA, la différence cumulée représente facilement 500 à 2000€ par an.",
         },
         {
           title: "B2B et fonctionnalités métier complexes",
           content:
-            "Pour le B2B (catalogues par client, tarifs négociés, devis avant achat, comptes pro multi-utilisateurs, demandes de quote), WooCommerce a un écosystème mature : B2B for WooCommerce, WooCommerce Memberships, WooCommerce Subscriptions, Gravity Forms pour les devis personnalisés. Shopify a B2B intégré depuis 2024, mais c'est encore moins flexible que WooCommerce. Pour un wholesale, distributeur, marché de niche industriel — WooCommerce est presque toujours le choix. Pour B2C standard, Shopify peut suffire.",
+            "Pour le B2B (catalogues par client, tarifs négociés, devis avant achat, comptes pro multi-utilisateurs, demandes de quote), WooCommerce a un écosystème mature : B2B for WooCommerce, WooCommerce Memberships, WooCommerce Subscriptions, Gravity Forms pour les devis personnalisés. Shopify a B2B intégré depuis 2024, mais c'est encore moins flexible que WooCommerce. Pour un wholesale, distributeur, marché de niche industriel - WooCommerce est presque toujours le choix. Pour B2C standard, Shopify peut suffire.",
         },
         {
           title: "Notre recommandation finale",
           content:
-            "Pour les PME normandes que nous accompagnons (artisans, retailers locaux, producteurs, marques DTC, B2B technique), nous recommandons WooCommerce dans 80% des cas. Pour les raisons suivantes : coûts long-terme plus bas, pas de commission sur les ventes, intégration avec un site WordPress existant (contenu + e-commerce), maîtrise totale sur les évolutions, écosystème français mature (transporteurs Colissimo/Chronopost, comptables, etc.). Pour les 20% restants — démarrage très rapide, équipe non-technique, focus sur ads et pas SEO — Shopify reste un choix pertinent. La pire option, c'est de choisir au hasard ou pour mauvaises raisons.",
+            "Pour les PME normandes que nous accompagnons (artisans, retailers locaux, producteurs, marques DTC, B2B technique), nous recommandons WooCommerce dans 80% des cas. Pour les raisons suivantes : coûts long-terme plus bas, pas de commission sur les ventes, intégration avec un site WordPress existant (contenu + e-commerce), maîtrise totale sur les évolutions, écosystème français mature (transporteurs Colissimo/Chronopost, comptables, etc.). Pour les 20% restants - démarrage très rapide, équipe non-technique, focus sur ads et pas SEO - Shopify reste un choix pertinent. La pire option, c'est de choisir au hasard ou pour mauvaises raisons.",
         },
       ],
       conclusion:
-        "Il n'y a pas de mauvais outil entre WooCommerce et Shopify — il y a juste des bons et des mauvais alignements avec votre projet. Si vous hésitez encore, écrivez-nous : on fait un état des lieux gratuit de votre contexte (catalogue, budget, équipe, objectifs SEO) et on vous oriente vers la bonne solution même si ce n'est pas la nôtre. Chez Krealabs, on développe et maintient des boutiques WooCommerce depuis 2014, et on a aussi piloté des migrations Shopify → WooCommerce et inversement. L'expertise se mesure à savoir dire « non, ce n'est pas pour vous » quand c'est le cas.",
+        "Il n'y a pas de mauvais outil entre WooCommerce et Shopify - il y a juste des bons et des mauvais alignements avec votre projet. Si vous hésitez encore, écrivez-nous : on fait un état des lieux gratuit de votre contexte (catalogue, budget, équipe, objectifs SEO) et on vous oriente vers la bonne solution même si ce n'est pas la nôtre. Chez Krealabs, on développe et maintient des boutiques WooCommerce depuis 2014, et on a aussi piloté des migrations Shopify → WooCommerce et inversement. L'expertise se mesure à savoir dire « non, ce n'est pas pour vous » quand c'est le cas.",
     },
   },
   {
     slug: "audit-seo-wordpress-12-points",
     title: "Audit SEO WordPress : 12 points techniques à vérifier",
     excerpt:
-      "Votre WordPress est-il vraiment optimisé pour Google ? La méthode d'audit que nous appliquons en agence avant chaque projet SEO — 12 points concrets, mesurables, actionnables.",
+      "Votre WordPress est-il vraiment optimisé pour Google ? La méthode d'audit que nous appliquons en agence avant chaque projet SEO - 12 points concrets, mesurables, actionnables.",
     category: "WordPress",
     date: "6 mai 2026",
     readTime: "18 min",
@@ -449,7 +449,7 @@ add_filter('woocommerce_get_price_html', function($price, $product) {
         {
           title: "2. Vitesse & Core Web Vitals",
           content:
-            "Depuis 2021, les Core Web Vitals influencent directement le classement Google. Mesurer : LCP (Largest Contentful Paint, viser < 2,5s), INP (Interaction to Next Paint, viser < 200ms — a remplacé FID en mars 2024), CLS (Cumulative Layout Shift, viser < 0,1). Outils : PageSpeed Insights (Google), Lighthouse en local, et surtout le rapport Core Web Vitals de Search Console (données réelles utilisateurs via CrUX). Sur WordPress, les leviers principaux : caching (WP Rocket), images WebP, suppression de plugins inutiles, hébergement performant, CDN Cloudflare.",
+            "Depuis 2021, les Core Web Vitals influencent directement le classement Google. Mesurer : LCP (Largest Contentful Paint, viser < 2,5s), INP (Interaction to Next Paint, viser < 200ms - a remplacé FID en mars 2024), CLS (Cumulative Layout Shift, viser < 0,1). Outils : PageSpeed Insights (Google), Lighthouse en local, et surtout le rapport Core Web Vitals de Search Console (données réelles utilisateurs via CrUX). Sur WordPress, les leviers principaux : caching (WP Rocket), images WebP, suppression de plugins inutiles, hébergement performant, CDN Cloudflare.",
           code: `// Mesurer le LCP via la Web Vitals JS API
 import { onLCP } from 'web-vitals';
 
@@ -466,7 +466,7 @@ onLCP((metric) => {
         {
           title: "4. Balises Title et meta description",
           content:
-            "Chaque page importante doit avoir : un Title unique de 50-60 caractères incluant le mot-clé principal, une meta description de 140-160 caractères avec CTA, des balises Open Graph et Twitter Card. Sur WordPress, RankMath ou Yoast permet de cadrer ces meta page par page. Audit : Screaming Frog peut crawler le site et lister tous les Titles/meta — identifier les pages avec Title manquant, dupliqué, ou trop long/court. Critique pour le CTR organique dans Google.",
+            "Chaque page importante doit avoir : un Title unique de 50-60 caractères incluant le mot-clé principal, une meta description de 140-160 caractères avec CTA, des balises Open Graph et Twitter Card. Sur WordPress, RankMath ou Yoast permet de cadrer ces meta page par page. Audit : Screaming Frog peut crawler le site et lister tous les Titles/meta - identifier les pages avec Title manquant, dupliqué, ou trop long/court. Critique pour le CTR organique dans Google.",
         },
         {
           title: "5. Schema.org : Article, Product, FAQ, LocalBusiness",
@@ -499,12 +499,12 @@ onLCP((metric) => {
         {
           title: "8. Maillage interne : catégories, tags, related",
           content:
-            "Le maillage interne (liens internes entre les pages de votre site) est sous-estimé. Il distribue le « jus SEO » aux pages importantes et aide Google à comprendre la structure. Sur WordPress : utiliser correctement les catégories et tags, ajouter manuellement des liens dans le contenu vers vos pages piliers, mettre en place des « related posts » sur les articles de blog. Outil utile : Screaming Frog peut mesurer le nombre de liens internes vers chaque URL — vos pages cibles SEO devraient avoir >10 liens internes pointant vers elles.",
+            "Le maillage interne (liens internes entre les pages de votre site) est sous-estimé. Il distribue le « jus SEO » aux pages importantes et aide Google à comprendre la structure. Sur WordPress : utiliser correctement les catégories et tags, ajouter manuellement des liens dans le contenu vers vos pages piliers, mettre en place des « related posts » sur les articles de blog. Outil utile : Screaming Frog peut mesurer le nombre de liens internes vers chaque URL - vos pages cibles SEO devraient avoir >10 liens internes pointant vers elles.",
         },
         {
           title: "9. Optimisation des images",
           content:
-            "Les images représentent souvent 60-80% du poids d'une page WordPress. Trois leviers : 1) Compression — utiliser ShortPixel ou Imagify pour compresser automatiquement à l'upload. 2) Format WebP/AVIF — convertir tous les JPG/PNG en WebP via WebP Express ou un plugin similaire. 3) Lazy loading — natif depuis WordPress 5.5 (`loading=\"lazy\"` sur les images hors viewport). Bonus : alt text systématique sur chaque image (accessibilité + SEO).",
+            "Les images représentent souvent 60-80% du poids d'une page WordPress. Trois leviers : 1) Compression - utiliser ShortPixel ou Imagify pour compresser automatiquement à l'upload. 2) Format WebP/AVIF - convertir tous les JPG/PNG en WebP via WebP Express ou un plugin similaire. 3) Lazy loading - natif depuis WordPress 5.5 (`loading=\"lazy\"` sur les images hors viewport). Bonus : alt text systématique sur chaque image (accessibilité + SEO).",
         },
         {
           title: "10. Contenu dupliqué et balises canonical",
@@ -519,11 +519,11 @@ onLCP((metric) => {
         {
           title: "12. Outils essentiels à mettre en place",
           content:
-            "Sans monitoring, vous naviguez à l'aveugle. Outils gratuits indispensables : Google Search Console (positions, requêtes, erreurs d'exploration, Core Web Vitals), Google Analytics 4 ou Plausible (trafic, comportement, conversions), Bing Webmaster Tools (5% du marché mais moins concurrentiel). Outils payants utiles : Ahrefs ou Semrush (suivi positions, analyse concurrence, backlinks — 99$/mois), Screaming Frog SEO Spider (audit on-page, 200€/an). Sur WordPress même : RankMath Pro ou Yoast Premium pour les fonctions SEO avancées.",
+            "Sans monitoring, vous naviguez à l'aveugle. Outils gratuits indispensables : Google Search Console (positions, requêtes, erreurs d'exploration, Core Web Vitals), Google Analytics 4 ou Plausible (trafic, comportement, conversions), Bing Webmaster Tools (5% du marché mais moins concurrentiel). Outils payants utiles : Ahrefs ou Semrush (suivi positions, analyse concurrence, backlinks - 99$/mois), Screaming Frog SEO Spider (audit on-page, 200€/an). Sur WordPress même : RankMath Pro ou Yoast Premium pour les fonctions SEO avancées.",
         },
       ],
       conclusion:
-        "Cette checklist couvre 90% des audits techniques que Google attend. Un site qui passe ces 12 points est solide. Si vous ne savez pas par où commencer, RankMath fait un score SEO interne (>80/100 visé) qui vous oriente vers les principales lacunes. Mais l'œil d'un audit humain reste différent — un consultant SEO trouve souvent des problèmes que les plugins ratent. Allez plus loin avec notre [guide SEO local Rouen](/blog/seo-local-rouen-guide-pme), notre [méthode d'audit Lighthouse](/blog/audit-lighthouse-methode-agence), et notre [checklist sécurité WordPress](/blog/securite-wordpress-checklist-2026). Pour un audit complet de votre site WordPress par nos soins, c'est notre [service WordPress](/services/wordpress) ou [Performance & SEO](/services/performance-seo) qui s'en occupent. Premier diagnostic offert.",
+        "Cette checklist couvre 90% des audits techniques que Google attend. Un site qui passe ces 12 points est solide. Si vous ne savez pas par où commencer, RankMath fait un score SEO interne (>80/100 visé) qui vous oriente vers les principales lacunes. Mais l'œil d'un audit humain reste différent - un consultant SEO trouve souvent des problèmes que les plugins ratent. Allez plus loin avec notre [guide SEO local Rouen](/blog/seo-local-rouen-guide-pme), notre [méthode d'audit Lighthouse](/blog/audit-lighthouse-methode-agence), et notre [checklist sécurité WordPress](/blog/securite-wordpress-checklist-2026). Pour un audit complet de votre site WordPress par nos soins, c'est notre [service WordPress](/services/wordpress) ou [Performance & SEO](/services/performance-seo) qui s'en occupent. Premier diagnostic offert.",
     },
   },
   {
@@ -540,13 +540,13 @@ onLCP((metric) => {
     tags: ["Sécurité WordPress", "Wordfence", "Maintenance", "WAF", "Hardening"],
     content: {
       introduction:
-        "WordPress est attaqué en permanence — pas parce qu'il est mal sécurisé, mais parce qu'il propulse 43% du web : la surface d'attaque est immense. Les bots scannent en continu des millions de sites à la recherche de versions obsolètes, mots de passe faibles, plugins vulnérables. La majorité des compromissions WordPress n'a rien à voir avec des hackers ciblés : ce sont des attaques automatisées qui frappent au hasard. La bonne nouvelle : 90% des risques se neutralisent avec une bonne hygiène. Voici notre checklist complète, appliquée sur tous nos forfaits de maintenance Krealabs.",
+        "WordPress est attaqué en permanence - pas parce qu'il est mal sécurisé, mais parce qu'il propulse 43% du web : la surface d'attaque est immense. Les bots scannent en continu des millions de sites à la recherche de versions obsolètes, mots de passe faibles, plugins vulnérables. La majorité des compromissions WordPress n'a rien à voir avec des hackers ciblés : ce sont des attaques automatisées qui frappent au hasard. La bonne nouvelle : 90% des risques se neutralisent avec une bonne hygiène. Voici notre checklist complète, appliquée sur tous nos forfaits de maintenance Krealabs.",
       sections: [
         {
           title: "1. Mises à jour : noyau, plugins, thèmes",
           content:
-            "Le vecteur d'attaque #1 sur WordPress, c'est un plugin obsolète avec faille connue. La majorité des compromissions exploite des vulnérabilités publiées depuis plus de 6 mois — donc patchées, mais sur des sites qui n'ont pas mis à jour. Stratégie : activer les mises à jour automatiques pour les versions mineures (WP, plugins, thèmes), valider manuellement les versions majeures (qui peuvent casser des choses). Outils de monitoring : ManageWP ou MainWP centralisent les MAJ sur plusieurs sites. Plugin recommandé : Easy Updates Manager pour le contrôle fin par type.",
-          code: `// wp-config.php — activer auto-update du core
+            "Le vecteur d'attaque #1 sur WordPress, c'est un plugin obsolète avec faille connue. La majorité des compromissions exploite des vulnérabilités publiées depuis plus de 6 mois - donc patchées, mais sur des sites qui n'ont pas mis à jour. Stratégie : activer les mises à jour automatiques pour les versions mineures (WP, plugins, thèmes), valider manuellement les versions majeures (qui peuvent casser des choses). Outils de monitoring : ManageWP ou MainWP centralisent les MAJ sur plusieurs sites. Plugin recommandé : Easy Updates Manager pour le contrôle fin par type.",
+          code: `// wp-config.php - activer auto-update du core
 define('WP_AUTO_UPDATE_CORE', true);
 
 // Pour les plugins (avec précaution)
@@ -568,13 +568,13 @@ add_filter('auto_update_plugin', '__return_true');
         {
           title: "4. Cacher /wp-admin et /wp-login.php",
           content:
-            "Tous les bots ciblent `/wp-admin/` et `/wp-login.php`. Changer ces URLs est une protection par obscurité — pas une vraie sécurité, mais ça élimine 95% des attaques automatisées. Plugin recommandé : WPS Hide Login (renomme en `/secret-login-url`). Important : ne pas perdre l'URL custom (la stocker dans le gestionnaire de mots de passe), et garder une redirection ou une page d'erreur 404 sur l'ancienne URL. Combiné avec la 2FA, ça réduit drastiquement la surface d'attaque.",
+            "Tous les bots ciblent `/wp-admin/` et `/wp-login.php`. Changer ces URLs est une protection par obscurité - pas une vraie sécurité, mais ça élimine 95% des attaques automatisées. Plugin recommandé : WPS Hide Login (renomme en `/secret-login-url`). Important : ne pas perdre l'URL custom (la stocker dans le gestionnaire de mots de passe), et garder une redirection ou une page d'erreur 404 sur l'ancienne URL. Combiné avec la 2FA, ça réduit drastiquement la surface d'attaque.",
         },
         {
           title: "5. Permissions fichiers et durcissement wp-config",
           content:
             "Les permissions Unix doivent être correctes : 644 pour les fichiers, 755 pour les dossiers, 600 ou 640 pour `wp-config.php` (le plus sensible). Désactiver l'édition de fichiers depuis l'admin WP (impossible pour un attaquant qui obtient un accès admin de modifier du code via l'interface) :",
-          code: `// wp-config.php — durcissement standard
+          code: `// wp-config.php - durcissement standard
 
 // Empêcher l'édition de fichiers depuis l'admin
 define('DISALLOW_FILE_EDIT', true);
@@ -592,32 +592,32 @@ define('SECURE_AUTH_KEY', '...');
         {
           title: "6. Désactivation XML-RPC et REST API publique",
           content:
-            "XML-RPC est une vieille API WordPress utilisée pour les pingbacks, l'application mobile WordPress, etc. Si vous ne l'utilisez pas (cas le plus courant), désactivez-la : c'est un vecteur d'attaque récurrent (amplification DDoS, brute-force via xmlrpc.php). Plugin Disable XML-RPC ou règle .htaccess. La REST API WordPress (`/wp-json/`) est utile mais expose par défaut la liste des utilisateurs (`/wp-json/wp/v2/users`) — utile pour un attaquant pour trouver les usernames. Restreindre via plugin Disable REST API ou code custom pour ne laisser passer que les endpoints nécessaires.",
+            "XML-RPC est une vieille API WordPress utilisée pour les pingbacks, l'application mobile WordPress, etc. Si vous ne l'utilisez pas (cas le plus courant), désactivez-la : c'est un vecteur d'attaque récurrent (amplification DDoS, brute-force via xmlrpc.php). Plugin Disable XML-RPC ou règle .htaccess. La REST API WordPress (`/wp-json/`) est utile mais expose par défaut la liste des utilisateurs (`/wp-json/wp/v2/users`) - utile pour un attaquant pour trouver les usernames. Restreindre via plugin Disable REST API ou code custom pour ne laisser passer que les endpoints nécessaires.",
         },
         {
           title: "7. WAF : Cloudflare, Sucuri, Wordfence",
           content:
-            "Un Web Application Firewall filtre les requêtes malveillantes AVANT qu'elles n'atteignent WordPress. Trois options crédibles : Cloudflare (gratuit en version basic, WAF avancé en payant ~20$/mois), Sucuri (~200$/an, spécialisé WP), Wordfence (gratuit + payant ~99$/an pour le WAF avancé). Cloudflare en frontal est notre recommandation #1 — il offre CDN + DDoS protection + WAF + analytics. Configurer les règles : bloquer les bots malveillants connus, geo-blocking si vous ne servez qu'un marché (FR/EU), rate limiting agressif sur `/wp-login.php`.",
+            "Un Web Application Firewall filtre les requêtes malveillantes AVANT qu'elles n'atteignent WordPress. Trois options crédibles : Cloudflare (gratuit en version basic, WAF avancé en payant ~20$/mois), Sucuri (~200$/an, spécialisé WP), Wordfence (gratuit + payant ~99$/an pour le WAF avancé). Cloudflare en frontal est notre recommandation #1 - il offre CDN + DDoS protection + WAF + analytics. Configurer les règles : bloquer les bots malveillants connus, geo-blocking si vous ne servez qu'un marché (FR/EU), rate limiting agressif sur `/wp-login.php`.",
         },
         {
           title: "8. Sauvegardes : fréquence, lieu, restauration testée",
           content:
-            "Sauvegarde = la dernière ligne de défense. Critères : fréquence adaptée (quotidienne pour un site actif, hebdomadaire pour un site vitrine), stockage offsite (Amazon S3, Backblaze, Google Drive — PAS sur le même serveur), rétention 30+ jours, restauration TESTÉE régulièrement (un backup non testé n'est pas un backup). Plugins recommandés : UpdraftPlus (gratuit + Premium 70$/an), BackWPup (open-source), BlogVault (payant mais excellent). Tester la restauration au moins une fois par trimestre sur un staging.",
+            "Sauvegarde = la dernière ligne de défense. Critères : fréquence adaptée (quotidienne pour un site actif, hebdomadaire pour un site vitrine), stockage offsite (Amazon S3, Backblaze, Google Drive - PAS sur le même serveur), rétention 30+ jours, restauration TESTÉE régulièrement (un backup non testé n'est pas un backup). Plugins recommandés : UpdraftPlus (gratuit + Premium 70$/an), BackWPup (open-source), BlogVault (payant mais excellent). Tester la restauration au moins une fois par trimestre sur un staging.",
         },
         {
           title: "9. Monitoring et alerting",
           content:
-            "Détecter une compromission rapidement = limiter les dégâts. Outils : Wordfence (alerte si fichiers core modifiés, nouveaux plugins suspects, comptes admin créés), Sucuri SiteCheck (scan quotidien), ManageWP (monitoring uptime + sécurité). Configurer alertes par email/Slack sur événements critiques : nouveau compte admin créé, fichier core modifié, plugin ajouté, downtime > 5 min. Plus tôt vous détectez, plus tôt vous réagissez — souvent la différence entre 1h de réparation et 48h de catastrophe.",
+            "Détecter une compromission rapidement = limiter les dégâts. Outils : Wordfence (alerte si fichiers core modifiés, nouveaux plugins suspects, comptes admin créés), Sucuri SiteCheck (scan quotidien), ManageWP (monitoring uptime + sécurité). Configurer alertes par email/Slack sur événements critiques : nouveau compte admin créé, fichier core modifié, plugin ajouté, downtime > 5 min. Plus tôt vous détectez, plus tôt vous réagissez - souvent la différence entre 1h de réparation et 48h de catastrophe.",
         },
         {
           title: "10. SSL/TLS bien configuré",
           content:
-            "HTTPS oui, mais bien fait. Vérifier : version TLS 1.2 minimum (idéalement 1.3 only), certificat valide pas seulement présent, HSTS activé (Strict-Transport-Security header), pas de mixed content (toutes ressources internes en HTTPS), redirect 301 systématique HTTP→HTTPS. Outil de test : SSL Labs (ssllabs.com/ssltest) — viser score A ou A+. Sur WordPress : plugin Really Simple SSL pour automatiser, ou configurer manuellement dans Nginx/Apache.",
+            "HTTPS oui, mais bien fait. Vérifier : version TLS 1.2 minimum (idéalement 1.3 only), certificat valide pas seulement présent, HSTS activé (Strict-Transport-Security header), pas de mixed content (toutes ressources internes en HTTPS), redirect 301 systématique HTTP→HTTPS. Outil de test : SSL Labs (ssllabs.com/ssltest) - viser score A ou A+. Sur WordPress : plugin Really Simple SSL pour automatiser, ou configurer manuellement dans Nginx/Apache.",
         },
         {
           title: "11. Choisir un hébergement WordPress-friendly",
           content:
-            "Un hébergement mutualisé bas de gamme (OVH Perso, 1&1 IONOS basic) = WordPress vulnérable par construction. Caractéristiques d'un bon hébergement WP : PHP 8.2+ avec OPcache, MySQL 8 ou MariaDB 10.6+, isolation entre comptes (pas de neighbor risk), monitoring sécurité par l'hébergeur, sauvegardes automatiques quotidiennes, support réactif. Recommandations : o2switch (français, RGPD, ~7€/mois — excellent pour PME), Kinsta (premium WordPress géré, 35$/mois), WP Engine (US premium, 30$/mois), AWS Lightsail (technique, 5$/mois). Éviter : les revendeurs cPanel à 2€/mois.",
+            "Un hébergement mutualisé bas de gamme (OVH Perso, 1&1 IONOS basic) = WordPress vulnérable par construction. Caractéristiques d'un bon hébergement WP : PHP 8.2+ avec OPcache, MySQL 8 ou MariaDB 10.6+, isolation entre comptes (pas de neighbor risk), monitoring sécurité par l'hébergeur, sauvegardes automatiques quotidiennes, support réactif. Recommandations : o2switch (français, RGPD, ~7€/mois - excellent pour PME), Kinsta (premium WordPress géré, 35$/mois), WP Engine (US premium, 30$/mois), AWS Lightsail (technique, 5$/mois). Éviter : les revendeurs cPanel à 2€/mois.",
         },
         {
           title: "12. Plan d'incident : que faire en cas de compromission",
@@ -626,7 +626,7 @@ define('SECURE_AUTH_KEY', '...');
         },
       ],
       conclusion:
-        "La sécurité WordPress n'est pas une option, c'est une discipline continue. Tous nos forfaits de maintenance Krealabs incluent cette checklist appliquée et monitorée. Si vous gérez votre site vous-même, cette liste vous donne le minimum à mettre en place. Si vous voulez déléguer — pour vous concentrer sur votre métier plutôt que sur les patchs sécurité du dimanche soir — nos forfaits maintenance commencent à un tarif raisonnable et couvrent l'ensemble. Parlons-en si vous voulez dormir tranquille.",
+        "La sécurité WordPress n'est pas une option, c'est une discipline continue. Tous nos forfaits de maintenance Krealabs incluent cette checklist appliquée et monitorée. Si vous gérez votre site vous-même, cette liste vous donne le minimum à mettre en place. Si vous voulez déléguer - pour vous concentrer sur votre métier plutôt que sur les patchs sécurité du dimanche soir - nos forfaits maintenance commencent à un tarif raisonnable et couvrent l'ensemble. Parlons-en si vous voulez dormir tranquille.",
     },
   },
 
@@ -652,13 +652,13 @@ define('SECURE_AUTH_KEY', '...');
         {
           title: "Turbopack par défaut, Webpack en retraite",
           content:
-            "Turbopack remplace désormais Webpack comme bundler par défaut, en développement comme en production. Les builds sont jusqu'à 5x plus rapides sur les projets de taille moyenne, avec des écarts encore plus marqués sur les gros monorepos (où on observait des temps de cold build de 8-10 minutes, désormais ramenés à 1-2 minutes). Le hot reload est quasi instantané, même sur des bases de code de plusieurs centaines de composants. Concrètement pour une équipe de dev : moins d'attente, plus de focus, et un dev server qui ne crashe plus quand on installe un gros paquet npm. Petit caveat : si vous utilisez un custom webpack.config.js (très rare en 2026), il faut migrer vers la config Turbopack qui est différente — la majorité des cas sont supportés natiment, mais quelques plugins exotiques (analyse de bundle, modules wasm anciens) demandent une adaptation.",
+            "Turbopack remplace désormais Webpack comme bundler par défaut, en développement comme en production. Les builds sont jusqu'à 5x plus rapides sur les projets de taille moyenne, avec des écarts encore plus marqués sur les gros monorepos (où on observait des temps de cold build de 8-10 minutes, désormais ramenés à 1-2 minutes). Le hot reload est quasi instantané, même sur des bases de code de plusieurs centaines de composants. Concrètement pour une équipe de dev : moins d'attente, plus de focus, et un dev server qui ne crashe plus quand on installe un gros paquet npm. Petit caveat : si vous utilisez un custom webpack.config.js (très rare en 2026), il faut migrer vers la config Turbopack qui est différente - la majorité des cas sont supportés natiment, mais quelques plugins exotiques (analyse de bundle, modules wasm anciens) demandent une adaptation.",
         },
         {
           title: "Server Components stabilisés et par défaut",
           content:
-            "Les React Server Components sont maintenant le mode par défaut dans l'App Router. Le code qui ne nécessite pas d'interactivité ne descend plus côté client — moins de JavaScript, donc des pages plus rapides et un meilleur SEO. La frontière entre client et serveur est plus claire grâce à la directive 'use client' explicite. En pratique, on observe sur nos projets une réduction de 40 à 60% du bundle JS livré au navigateur par rapport à un Next.js 13 en pages router. Pour un site contenu (blog, marketing, e-commerce avec interactions limitées), c'est un game-changer pour les Core Web Vitals.",
-          code: `// app/page.tsx — composant serveur par défaut
+            "Les React Server Components sont maintenant le mode par défaut dans l'App Router. Le code qui ne nécessite pas d'interactivité ne descend plus côté client - moins de JavaScript, donc des pages plus rapides et un meilleur SEO. La frontière entre client et serveur est plus claire grâce à la directive 'use client' explicite. En pratique, on observe sur nos projets une réduction de 40 à 60% du bundle JS livré au navigateur par rapport à un Next.js 13 en pages router. Pour un site contenu (blog, marketing, e-commerce avec interactions limitées), c'est un game-changer pour les Core Web Vitals.",
+          code: `// app/page.tsx - composant serveur par défaut
 // Pas de useState ni d'event handler côté serveur
 export default async function Home() {
   const data = await fetch('https://api.exemple.fr/posts').then(r => r.json())
@@ -690,7 +690,7 @@ async function getPosts() {
           title: "Streaming UI et Suspense en pratique",
           content:
             "Next.js 16 pousse fortement le streaming SSR via Suspense. Concrètement : votre page peut commencer à s'afficher dès que la partie statique est prête, et les sections qui dépendent de données async se chargent progressivement avec des skeletons en attendant. Pour l'utilisateur, c'est un Time To First Byte (TTFB) divisé par 2 ou 3 sur des pages complexes. Pour Google, c'est un LCP bien plus rapide. La syntaxe est limpide : envelopper la zone async dans un <Suspense fallback={<Skeleton />}> et React Streaming gère la suite. Sur nos projets, on streamse systématiquement les sections \"below the fold\" qui dépendent d'API tierces (recommandations produits, témoignages dynamiques, posts blog).",
-          code: `// app/dashboard/page.tsx — streaming via Suspense
+          code: `// app/dashboard/page.tsx - streaming via Suspense
 export default function Dashboard() {
   return (
     <>
@@ -708,7 +708,7 @@ export default function Dashboard() {
         {
           title: "Performance & SEO : les gains mesurés",
           content:
-            "Combinés, ces changements amènent un gain mesurable sur les Core Web Vitals. Sur des projets typiques chez Krealabs : LCP en baisse de 15 à 30% par rapport à Next.js 13/14, INP sous le seuil Google par défaut (< 200ms) grâce à la réduction du JS, CLS quasi nul si on respecte les conventions next/image (width/height obligatoires). Pour le SEO, c'est un atout direct : Google favorise les pages rapides, et avec les Server Components, on a moins de problèmes d'hydration qui pénalisent l'INP. À noter : tous ces gains nécessitent une vraie discipline architecture — un projet Next.js 16 mal codé reste lent. Le framework ne fait pas tout.",
+            "Combinés, ces changements amènent un gain mesurable sur les Core Web Vitals. Sur des projets typiques chez Krealabs : LCP en baisse de 15 à 30% par rapport à Next.js 13/14, INP sous le seuil Google par défaut (< 200ms) grâce à la réduction du JS, CLS quasi nul si on respecte les conventions next/image (width/height obligatoires). Pour le SEO, c'est un atout direct : Google favorise les pages rapides, et avec les Server Components, on a moins de problèmes d'hydration qui pénalisent l'INP. À noter : tous ces gains nécessitent une vraie discipline architecture - un projet Next.js 16 mal codé reste lent. Le framework ne fait pas tout.",
         },
         {
           title: "Migration depuis Next.js 14 ou 15 : la méthode",
@@ -718,11 +718,11 @@ export default function Dashboard() {
         {
           title: "Quand Next.js 16 n'est PAS le bon choix",
           content:
-            "Next.js 16 brille pour les sites web modernes, marketing, e-commerce, dashboards et apps SaaS standards. Mais il y a des cas où d'autres outils sont préférables : pour un blog ultra-statique avec contenu en Markdown et zéro interaction, Astro est plus léger. Pour un site WordPress avec écosystème de plugins établi, WordPress reste imbattable (et oui, c'est notre spécialité chez Krealabs). Pour une app temps réel intensive (chat collaboratif, jeux), une stack avec un backend WebSocket dédié (Socket.io, Liveblocks, Convex) est plus adaptée — Next.js peut le faire mais ce n'est pas son terrain natif. Pour du mobile, c'est React Native évidemment, pas Next.js. Bref : Next.js 16 n'est pas une religion, c'est un outil parmi d'autres dans notre boîte à outils.",
+            "Next.js 16 brille pour les sites web modernes, marketing, e-commerce, dashboards et apps SaaS standards. Mais il y a des cas où d'autres outils sont préférables : pour un blog ultra-statique avec contenu en Markdown et zéro interaction, Astro est plus léger. Pour un site WordPress avec écosystème de plugins établi, WordPress reste imbattable (et oui, c'est notre spécialité chez Krealabs). Pour une app temps réel intensive (chat collaboratif, jeux), une stack avec un backend WebSocket dédié (Socket.io, Liveblocks, Convex) est plus adaptée - Next.js peut le faire mais ce n'est pas son terrain natif. Pour du mobile, c'est React Native évidemment, pas Next.js. Bref : Next.js 16 n'est pas une religion, c'est un outil parmi d'autres dans notre boîte à outils.",
         },
       ],
       conclusion:
-        "Pour un projet neuf, Next.js 16 est le meilleur choix pour démarrer en 2026 — à condition que le besoin justifie cette stack. Pour un projet en Next.js 14 ou 15, la migration vaut le coup mais demande un audit (notamment du caching et des Server Components vs Client Components). Chez Krealabs, nous l'utilisons sur tous nos projets web qui ne sont pas sur WordPress (SaaS, dashboards, plateformes B2B, sites complexes). Si vous hésitez entre WordPress, Next.js, ou une autre stack pour votre projet, écrivez-nous : on cadre gratuitement le bon outil pour le bon besoin.",
+        "Pour un projet neuf, Next.js 16 est le meilleur choix pour démarrer en 2026 - à condition que le besoin justifie cette stack. Pour un projet en Next.js 14 ou 15, la migration vaut le coup mais demande un audit (notamment du caching et des Server Components vs Client Components). Chez Krealabs, nous l'utilisons sur tous nos projets web qui ne sont pas sur WordPress (SaaS, dashboards, plateformes B2B, sites complexes). Si vous hésitez entre WordPress, Next.js, ou une autre stack pour votre projet, écrivez-nous : on cadre gratuitement le bon outil pour le bon besoin.",
     },
   },
   {
@@ -794,7 +794,7 @@ export default function Page() {
         {
           title: "Actions et useActionState",
           content:
-            "Les Server Actions sont matures : fonctions serveur appelables directement depuis un formulaire client. Plus besoin d'API route REST pour un POST de formulaire simple. Le hook useActionState gère l'état (pending, error, result) de manière idiomatique, et useFormStatus permet d'accéder à l'état de submission depuis un sous-composant. Sur nos formulaires de contact, devis, signup, on utilise ce pattern systématiquement — il remplace toute la boilerplate axios/fetch + useState + try/catch qu'on avait dans les apps React 18.",
+            "Les Server Actions sont matures : fonctions serveur appelables directement depuis un formulaire client. Plus besoin d'API route REST pour un POST de formulaire simple. Le hook useActionState gère l'état (pending, error, result) de manière idiomatique, et useFormStatus permet d'accéder à l'état de submission depuis un sous-composant. Sur nos formulaires de contact, devis, signup, on utilise ce pattern systématiquement - il remplace toute la boilerplate axios/fetch + useState + try/catch qu'on avait dans les apps React 18.",
           code: `'use client'
 import { useActionState } from 'react'
 
@@ -831,12 +831,12 @@ export function LikeButton({ likes, onLike }) {
         {
           title: "Pièges classiques à éviter",
           content:
-            "Premier piège : utiliser 'use client' trop large. Marquer un composant feuille comme client n'a pas d'impact, mais marquer le layout principal force tout l'arbre en client — gaspillage massif du bundle JS. Deuxième piège : appeler une fonction asynchrone côté client en oubliant Suspense — le bug est subtil et coûte cher en debug. Troisième piège : oublier que les Server Components ne peuvent pas être interactifs, et essayer d'y mettre un onClick (erreur de build claire heureusement). Quatrième piège : partager du state entre Server et Client Components — impossible par nature. Pour le state global, utilisez TanStack Query, Zustand côté client, ou la DB côté serveur.",
+            "Premier piège : utiliser 'use client' trop large. Marquer un composant feuille comme client n'a pas d'impact, mais marquer le layout principal force tout l'arbre en client - gaspillage massif du bundle JS. Deuxième piège : appeler une fonction asynchrone côté client en oubliant Suspense - le bug est subtil et coûte cher en debug. Troisième piège : oublier que les Server Components ne peuvent pas être interactifs, et essayer d'y mettre un onClick (erreur de build claire heureusement). Quatrième piège : partager du state entre Server et Client Components - impossible par nature. Pour le state global, utilisez TanStack Query, Zustand côté client, ou la DB côté serveur.",
         },
         {
           title: "Quand utiliser Server vs Client Components",
           content:
-            "Heuristique simple : tout ce qui peut être Server Component DOIT l'être. Les Client Components sont réservés à ce qui nécessite : event handlers (onClick, onChange, onSubmit), hooks (useState, useEffect, useRef), API navigateur (localStorage, window, document), bibliothèques third-party qui en ont besoin (Framer Motion, Mapbox, certains UI kits). Pour tout le reste — affichage de données, accès à la DB, fetch externe, calculs serveur — Server Component. Cette discipline divise par 2 à 3 le bundle JS final.",
+            "Heuristique simple : tout ce qui peut être Server Component DOIT l'être. Les Client Components sont réservés à ce qui nécessite : event handlers (onClick, onChange, onSubmit), hooks (useState, useEffect, useRef), API navigateur (localStorage, window, document), bibliothèques third-party qui en ont besoin (Framer Motion, Mapbox, certains UI kits). Pour tout le reste - affichage de données, accès à la DB, fetch externe, calculs serveur - Server Component. Cette discipline divise par 2 à 3 le bundle JS final.",
         },
         {
           title: "Migration React 18 → 19 : la méthode",
@@ -867,7 +867,7 @@ export function LikeButton({ likes, onLike }) {
         {
           title: "Ce que strict change vraiment",
           content:
-            "Le mode strict force à gérer explicitement les cas null/undefined (strictNullChecks), les types implicites any (noImplicitAny), les fonctions qui ne couvrent pas tous les cas (strictFunctionTypes), et les méthodes appelées sur des valeurs potentiellement nulles (alwaysStrict). Sur une base de code typique de 50k lignes, l'activation révèle 100 à 500 bugs latents — la plupart silencieux en production : variables undefined dans certains edge cases, propriétés d'objet manquantes, fonctions qui retournent parfois undefined sans que personne ne le sache. Les développeurs qui ont vécu une migration n'imaginent plus revenir en arrière.",
+            "Le mode strict force à gérer explicitement les cas null/undefined (strictNullChecks), les types implicites any (noImplicitAny), les fonctions qui ne couvrent pas tous les cas (strictFunctionTypes), et les méthodes appelées sur des valeurs potentiellement nulles (alwaysStrict). Sur une base de code typique de 50k lignes, l'activation révèle 100 à 500 bugs latents - la plupart silencieux en production : variables undefined dans certains edge cases, propriétés d'objet manquantes, fonctions qui retournent parfois undefined sans que personne ne le sache. Les développeurs qui ont vécu une migration n'imaginent plus revenir en arrière.",
         },
         {
           title: "L'option qui change tout : noUncheckedIndexedAccess",
@@ -937,11 +937,11 @@ const user = UserSchema.parse(req.body) // Throw si invalide
         {
           title: "Les libs tierces non-strict : que faire",
           content:
-            "Le frein principal à strict mode dans un projet existant : les bibliothèques tierces dont les types sont mal écrits ou pas à jour. Solutions : 1) Préférer les libs maintenues avec des types corrects (TanStack Query, Zod, Prisma — excellents). 2) Pour les libs avec mauvais types, écrire un wrapper typé qui isole l'incohérence. 3) En dernier recours, declare module 'lib-name' pour overrider les types. 4) Contribuer aux types upstream si possible (DefinitelyTyped) — geste citoyen et ça résout pour tout le monde.",
+            "Le frein principal à strict mode dans un projet existant : les bibliothèques tierces dont les types sont mal écrits ou pas à jour. Solutions : 1) Préférer les libs maintenues avec des types corrects (TanStack Query, Zod, Prisma - excellents). 2) Pour les libs avec mauvais types, écrire un wrapper typé qui isole l'incohérence. 3) En dernier recours, declare module 'lib-name' pour overrider les types. 4) Contribuer aux types upstream si possible (DefinitelyTyped) - geste citoyen et ça résout pour tout le monde.",
         },
       ],
       conclusion:
-        "Tous nos projets Krealabs démarrent en strict mode + noUncheckedIndexedAccess. C'est non négociable : le coût initial est minime, le bénéfice sur 2-3 ans est énorme. Si vous héritez d'une base de code non stricte, la migration vaut largement l'investissement — mais demande du temps dédié, pas seulement quelques heures volées entre deux features. Si vous voulez accompagnement pour migrer votre base de code TypeScript vers strict, c'est exactement le type de mission qu'on adore.",
+        "Tous nos projets Krealabs démarrent en strict mode + noUncheckedIndexedAccess. C'est non négociable : le coût initial est minime, le bénéfice sur 2-3 ans est énorme. Si vous héritez d'une base de code non stricte, la migration vaut largement l'investissement - mais demande du temps dédié, pas seulement quelques heures volées entre deux features. Si vous voulez accompagnement pour migrer votre base de code TypeScript vers strict, c'est exactement le type de mission qu'on adore.",
     },
   },
   {
@@ -1013,7 +1013,7 @@ const user = UserSchema.parse(req.body) // Throw si invalide
         {
           title: "Pièges classiques de la migration",
           content:
-            "Si vous utilisez @apply massivement, attention : Tailwind 4 le décourage (et il est plus lent qu'avant). Préférez les classes utilitaires inline ou les variantes de composants via cva. Les plugins JavaScript existants (tailwindcss-animate, typography, forms) ne sont pas tous compatibles — vérifier la doc officielle de chacun avant la mise à jour. Le scan automatique de fichiers peut détecter des classes en commentaires ou dans des chaînes de caractères inattendues (logs, JSON) — vérifier que rien n'arrive en prod par erreur. Les modes JIT et Just-In-Time ne sont plus configurables car c'est le mode par défaut.",
+            "Si vous utilisez @apply massivement, attention : Tailwind 4 le décourage (et il est plus lent qu'avant). Préférez les classes utilitaires inline ou les variantes de composants via cva. Les plugins JavaScript existants (tailwindcss-animate, typography, forms) ne sont pas tous compatibles - vérifier la doc officielle de chacun avant la mise à jour. Le scan automatique de fichiers peut détecter des classes en commentaires ou dans des chaînes de caractères inattendues (logs, JSON) - vérifier que rien n'arrive en prod par erreur. Les modes JIT et Just-In-Time ne sont plus configurables car c'est le mode par défaut.",
         },
         {
           title: "Migration de Tailwind 3 vers 4 : le pas-à-pas",
@@ -1049,7 +1049,7 @@ const user = UserSchema.parse(req.body) // Throw si invalide
         {
           title: "Schema as source of truth",
           content:
-            "Le schema.prisma décrit la structure de la base de manière déclarative dans un DSL spécifique (mais très lisible). Les types TypeScript du client Prisma sont générés automatiquement, les migrations SQL aussi. La duplication entre code applicatif et structure de base est éliminée. Quand vous ajoutez une colonne, vous modifiez le schema, vous régénérez le client (prisma generate), et toutes les références dans votre code TypeScript savent qu'elle existe — type checking + autocomplétion + refactoring serein.",
+            "Le schema.prisma décrit la structure de la base de manière déclarative dans un DSL spécifique (mais très lisible). Les types TypeScript du client Prisma sont générés automatiquement, les migrations SQL aussi. La duplication entre code applicatif et structure de base est éliminée. Quand vous ajoutez une colonne, vous modifiez le schema, vous régénérez le client (prisma generate), et toutes les références dans votre code TypeScript savent qu'elle existe - type checking + autocomplétion + refactoring serein.",
           code: `// schema.prisma
 model Post {
   id        String   @id @default(cuid())
@@ -1075,7 +1075,7 @@ enum PostStatus {
         {
           title: "Typage strict de bout en bout",
           content:
-            "Une requête `prisma.post.findMany({ include: { author: true } })` retourne un type qui inclut l'objet auteur. Si vous omettez `include`, le type le sait : impossible d'accéder à `post.author` par erreur. Refactoring infiniment plus serein. Combinée avec strict mode TypeScript et noUncheckedIndexedAccess, cette discipline élimine pratiquement les erreurs runtime liées aux requêtes DB. Sur nos projets, on ne voit pratiquement jamais d'erreur SQL en production qui ne soit pas une erreur métier — pas une erreur de typage.",
+            "Une requête `prisma.post.findMany({ include: { author: true } })` retourne un type qui inclut l'objet auteur. Si vous omettez `include`, le type le sait : impossible d'accéder à `post.author` par erreur. Refactoring infiniment plus serein. Combinée avec strict mode TypeScript et noUncheckedIndexedAccess, cette discipline élimine pratiquement les erreurs runtime liées aux requêtes DB. Sur nos projets, on ne voit pratiquement jamais d'erreur SQL en production qui ne soit pas une erreur métier - pas une erreur de typage.",
           code: `const posts = await prisma.post.findMany({
   where: { status: 'PUBLISHED' },
   include: { author: { select: { name: true } } },
@@ -1131,7 +1131,7 @@ const prisma = new PrismaClient().$extends({
         },
       ],
       conclusion:
-        "Prisma 6/7 est mature, performant, et offre une DX (developer experience) inégalée. Pour 95% de nos projets, c'est le bon choix. Combiné avec Next.js et TypeScript, vous avez une stack full-typed du frontend à la base — refactorings sereins, bugs runtime divisés par 5, onboarding accéléré. Si vous démarrez un projet et hésitez entre Prisma, Drizzle, Kysely ou SQL brut, on peut vous aider à cadrer le bon choix selon votre contexte. Premier échange offert.",
+        "Prisma 6/7 est mature, performant, et offre une DX (developer experience) inégalée. Pour 95% de nos projets, c'est le bon choix. Combiné avec Next.js et TypeScript, vous avez une stack full-typed du frontend à la base - refactorings sereins, bugs runtime divisés par 5, onboarding accéléré. Si vous démarrez un projet et hésitez entre Prisma, Drizzle, Kysely ou SQL brut, on peut vous aider à cadrer le bon choix selon votre contexte. Premier échange offert.",
     },
   },
 
@@ -1152,36 +1152,36 @@ const prisma = new PrismaClient().$extends({
     tags: ["Application mobile", "Prix", "React Native", "Budget", "Mobile"],
     content: {
       introduction:
-        "« Combien coûte une application mobile ? » C'est la première question de presque tous nos prospects mobile. Et la réponse honnête — « ça dépend » — n'aide personne. Alors voici des fourchettes concrètes, basées sur les projets qu'on chiffre réellement à Rouen, et surtout une grille pour comprendre ce qui fait varier le prix du simple au triple. On complète ainsi notre [article sur le prix d'un site internet](/blog/prix-site-internet-rouen-2026), car une app n'obéit pas du tout à la même économie qu'un site web.",
+        "« Combien coûte une application mobile ? » C'est la première question de presque tous nos prospects mobile. Et la réponse honnête - « ça dépend » - n'aide personne. Alors voici des fourchettes concrètes, basées sur les projets qu'on chiffre réellement à Rouen, et surtout une grille pour comprendre ce qui fait varier le prix du simple au triple. On complète ainsi notre [article sur le prix d'un site internet](/blog/prix-site-internet-rouen-2026), car une app n'obéit pas du tout à la même économie qu'un site web.",
       sections: [
         {
           title: "Les fourchettes réelles en 2026",
           content:
-            "Trois grandes catégories, qu'on retrouve sur la majorité des projets. MVP simple — 30 000 à 50 000 € : 5 à 8 écrans, authentification, 1 ou 2 fonctionnalités centrales, un back-end minimal. C'est l'app pour valider une idée ou lancer un service simple. App fonctionnelle — 50 000 à 80 000 € : 15 à 25 écrans, paiements in-app ou Stripe, notifications push, géolocalisation, comptes utilisateurs riches. C'est le gros du marché PME/startup. App complexe — 80 000 à 150 000 € : mode hors-ligne avec synchronisation, intégrations tierces (ERP, CRM, IoT), temps réel, logique métier lourde. Au-delà de 150 000 €, on parle de plateformes (marketplace mobile, multi-tenant). Ces fourchettes incluent conception, développement iOS + Android, back-end et mise en production — pas le marketing ni l'acquisition.",
+            "Trois grandes catégories, qu'on retrouve sur la majorité des projets. MVP simple - 30 000 à 50 000 € : 5 à 8 écrans, authentification, 1 ou 2 fonctionnalités centrales, un back-end minimal. C'est l'app pour valider une idée ou lancer un service simple. App fonctionnelle - 50 000 à 80 000 € : 15 à 25 écrans, paiements in-app ou Stripe, notifications push, géolocalisation, comptes utilisateurs riches. C'est le gros du marché PME/startup. App complexe - 80 000 à 150 000 € : mode hors-ligne avec synchronisation, intégrations tierces (ERP, CRM, IoT), temps réel, logique métier lourde. Au-delà de 150 000 €, on parle de plateformes (marketplace mobile, multi-tenant). Ces fourchettes incluent conception, développement iOS + Android, back-end et mise en production - pas le marketing ni l'acquisition.",
         },
         {
           title: "Pourquoi une app coûte plus cher qu'un site",
           content:
-            "À périmètre apparent égal, une app coûte 3 à 5 fois plus qu'un site vitrine. Trois raisons structurelles. (1) Deux plateformes : iOS et Android ont des règles, des composants et des process de validation différents. Même en cross-platform, certaines parties demandent du code spécifique par OS. (2) Un back-end est quasi toujours nécessaire : une app sans API ni base de données est rare — il faut gérer comptes, données, synchronisation, sécurité. C'est un projet web à part entière qui s'ajoute au mobile. (3) Des contraintes UX strictes : Apple et Google imposent leurs guidelines (Human Interface Guidelines, Material Design) et valident chaque soumission. Une app refusée par l'App Store, c'est des jours de retard. Ces trois facteurs expliquent l'écart de budget avec un site, qu'on détaille dans notre [comparateur de coûts site vs app](/blog/prix-site-internet-rouen-2026).",
+            "À périmètre apparent égal, une app coûte 3 à 5 fois plus qu'un site vitrine. Trois raisons structurelles. (1) Deux plateformes : iOS et Android ont des règles, des composants et des process de validation différents. Même en cross-platform, certaines parties demandent du code spécifique par OS. (2) Un back-end est quasi toujours nécessaire : une app sans API ni base de données est rare - il faut gérer comptes, données, synchronisation, sécurité. C'est un projet web à part entière qui s'ajoute au mobile. (3) Des contraintes UX strictes : Apple et Google imposent leurs guidelines (Human Interface Guidelines, Material Design) et valident chaque soumission. Une app refusée par l'App Store, c'est des jours de retard. Ces trois facteurs expliquent l'écart de budget avec un site, qu'on détaille dans notre [comparateur de coûts site vs app](/blog/prix-site-internet-rouen-2026).",
         },
         {
           title: "React Native : le levier qui réduit la facture de 30-40%",
           content:
-            "Le natif pur, c'est deux bases de code séparées : Swift/SwiftUI pour iOS, Kotlin pour Android. Deux fois le travail, deux fois la maintenance. React Native (ou Flutter) permet une base de code unique partagée entre les deux plateformes, avec du code natif uniquement là où c'est nécessaire. Résultat : 30 à 40% d'économie sur le développement initial, et une maintenance bien plus légère ensuite. C'est la stack qu'on privilégie chez Krealabs — voir notre [état des lieux React Native 2026](/blog/react-native-2026-etat-des-lieux) et notre [comparateur React Native vs Flutter](/comparateur/react-native-vs-flutter). Le natif pur ne se justifie que pour les apps à très forte exigence de performance graphique (jeux, AR/VR) ou d'accès matériel poussé. Pour 90% des apps métier et grand public, React Native offre le meilleur rapport coût/qualité.",
+            "Le natif pur, c'est deux bases de code séparées : Swift/SwiftUI pour iOS, Kotlin pour Android. Deux fois le travail, deux fois la maintenance. React Native (ou Flutter) permet une base de code unique partagée entre les deux plateformes, avec du code natif uniquement là où c'est nécessaire. Résultat : 30 à 40% d'économie sur le développement initial, et une maintenance bien plus légère ensuite. C'est la stack qu'on privilégie chez Krealabs - voir notre [état des lieux React Native 2026](/blog/react-native-2026-etat-des-lieux) et notre [comparateur React Native vs Flutter](/comparateur/react-native-vs-flutter). Le natif pur ne se justifie que pour les apps à très forte exigence de performance graphique (jeux, AR/VR) ou d'accès matériel poussé. Pour 90% des apps métier et grand public, React Native offre le meilleur rapport coût/qualité.",
         },
         {
           title: "Les coûts cachés que personne ne chiffre",
           content:
-            "Le devis de développement n'est pas le coût total. Ce qu'il faut anticiper : les comptes développeur (Apple Developer Program 99 $/an, Google Play 25 $ une fois) ; l'hébergement du back-end (20-200 €/mois selon la charge — voir notre [panorama des hébergeurs français](/blog/hebergement-francais-2026-panorama)) ; la maintenance corrective et évolutive (compter 15-20% du coût initial par an) ; surtout, les mises à jour OS : Apple et Google sortent une version majeure par an, et une app non maintenue casse en 12-24 mois. Une app n'est pas un livrable figé comme un site vitrine — c'est un produit vivant. Budgétiser uniquement le développement initial, c'est se préparer une mauvaise surprise à 18 mois. On chiffre toujours la maintenance dès le départ pour éviter ça.",
+            "Le devis de développement n'est pas le coût total. Ce qu'il faut anticiper : les comptes développeur (Apple Developer Program 99 $/an, Google Play 25 $ une fois) ; l'hébergement du back-end (20-200 €/mois selon la charge - voir notre [panorama des hébergeurs français](/blog/hebergement-francais-2026-panorama)) ; la maintenance corrective et évolutive (compter 15-20% du coût initial par an) ; surtout, les mises à jour OS : Apple et Google sortent une version majeure par an, et une app non maintenue casse en 12-24 mois. Une app n'est pas un livrable figé comme un site vitrine - c'est un produit vivant. Budgétiser uniquement le développement initial, c'est se préparer une mauvaise surprise à 18 mois. On chiffre toujours la maintenance dès le départ pour éviter ça.",
         },
         {
           title: "Comment on chiffre chez Krealabs",
           content:
-            "Notre méthode : on raisonne en jours-homme. À Rouen, un développeur mobile senior se situe autour de 600-900 €/jour (contre 800-1 200 € à Paris — voir [agence digitale Rouen vs Paris](/blog/agence-digitale-rouen-vs-paris)). Un MVP solide représente 50 à 70 jours de travail, soit 35-55 000 €. On découpe toujours le projet en lots : cadrage et maquettes d'abord (pour figer le périmètre et éviter l'effet tunnel), puis développement par sprints, puis mise en production et accompagnement. Ça permet de valider le budget à chaque étape, sans engagement total dès le départ. Pour une estimation immédiate selon votre périmètre, notre [calculateur de devis](/calculateur) donne une fourchette en 60 secondes — basée sur les vrais coûts du marché normand 2026.",
+            "Notre méthode : on raisonne en jours-homme. À Rouen, un développeur mobile senior se situe autour de 600-900 €/jour (contre 800-1 200 € à Paris - voir [agence digitale Rouen vs Paris](/blog/agence-digitale-rouen-vs-paris)). Un MVP solide représente 50 à 70 jours de travail, soit 35-55 000 €. On découpe toujours le projet en lots : cadrage et maquettes d'abord (pour figer le périmètre et éviter l'effet tunnel), puis développement par sprints, puis mise en production et accompagnement. Ça permet de valider le budget à chaque étape, sans engagement total dès le départ. Pour une estimation immédiate selon votre périmètre, notre [calculateur de devis](/calculateur) donne une fourchette en 60 secondes - basée sur les vrais coûts du marché normand 2026.",
         },
       ],
       conclusion:
-        "Une application mobile en 2026, c'est un investissement de 30 000 € (MVP) à 150 000 € (app complexe), avec React Native qui réduit la facture de 30-40% vs natif pur, et des coûts récurrents à ne jamais oublier (back-end, maintenance, mises à jour OS). La vraie question n'est pas « combien ça coûte » dans l'absolu, mais « quel périmètre pour quel budget » — et ça se cadre ensemble. Pour estimer votre projet, lancez notre [calculateur de devis](/calculateur), découvrez notre offre [développement d'applications mobiles](/services/applications-mobile), ou [parlons-en directement](/contact). Premier échange offert, en présentiel à Rouen ou en visio.",
+        "Une application mobile en 2026, c'est un investissement de 30 000 € (MVP) à 150 000 € (app complexe), avec React Native qui réduit la facture de 30-40% vs natif pur, et des coûts récurrents à ne jamais oublier (back-end, maintenance, mises à jour OS). La vraie question n'est pas « combien ça coûte » dans l'absolu, mais « quel périmètre pour quel budget » - et ça se cadre ensemble. Pour estimer votre projet, lancez notre [calculateur de devis](/calculateur), découvrez notre offre [développement d'applications mobiles](/services/applications-mobile), ou [parlons-en directement](/contact). Premier échange offert, en présentiel à Rouen ou en visio.",
     },
   },
   {
@@ -1198,7 +1198,7 @@ const prisma = new PrismaClient().$extends({
     tags: ["React Native", "Mobile", "iOS", "Android", "Expo", "Flutter"],
     content: {
       introduction:
-        "Cinq ans après les premiers grands déploiements en production (Facebook, Shopify, Discord, Coinbase), React Native a vraiment mûri. La New Architecture est devenue le standard depuis 2024, Expo a redéfini complètement le tooling, et le débat avec Flutter est plus que jamais d'actualité. Cet article fait le point honnête sur où en est RN en 2026 — ses forces, ses limites, et notre position d'agence après plus de 15 apps publiées sur les stores. Si vous hésitez à investir dans React Native pour un projet, vous trouverez ici les éléments factuels pour décider.",
+        "Cinq ans après les premiers grands déploiements en production (Facebook, Shopify, Discord, Coinbase), React Native a vraiment mûri. La New Architecture est devenue le standard depuis 2024, Expo a redéfini complètement le tooling, et le débat avec Flutter est plus que jamais d'actualité. Cet article fait le point honnête sur où en est RN en 2026 - ses forces, ses limites, et notre position d'agence après plus de 15 apps publiées sur les stores. Si vous hésitez à investir dans React Native pour un projet, vous trouverez ici les éléments factuels pour décider.",
       sections: [
         {
           title: "La New Architecture, enfin par défaut",
@@ -1218,7 +1218,7 @@ const prisma = new PrismaClient().$extends({
         {
           title: "L'écosystème en 2026 : matures et fragmentés",
           content:
-            "Les bibliothèques essentielles sont matures : React Navigation 7 / Expo Router pour la nav, TanStack Query pour le data fetching, React Native Reanimated 4 pour les animations, react-native-mmkv pour le stockage rapide, react-native-purchases (RevenueCat) pour les achats in-app, react-native-firebase pour la stack Google. Le défi reste la fragmentation : certaines libs sont abandonnées, d'autres sont en concurrence directe (ex: bottom-sheet — 3 libs principales). Notre conseil : démarrez avec les libs maintenues par Expo ou Software Mansion, c'est un signal de pérennité.",
+            "Les bibliothèques essentielles sont matures : React Navigation 7 / Expo Router pour la nav, TanStack Query pour le data fetching, React Native Reanimated 4 pour les animations, react-native-mmkv pour le stockage rapide, react-native-purchases (RevenueCat) pour les achats in-app, react-native-firebase pour la stack Google. Le défi reste la fragmentation : certaines libs sont abandonnées, d'autres sont en concurrence directe (ex: bottom-sheet - 3 libs principales). Notre conseil : démarrez avec les libs maintenues par Expo ou Software Mansion, c'est un signal de pérennité.",
         },
         {
           title: "RN vs Flutter en 2026",
@@ -1228,7 +1228,7 @@ const prisma = new PrismaClient().$extends({
         {
           title: "RN vs Natif Swift/Kotlin",
           content:
-            "Le natif reste imbattable pour : apps de jeux ou rendu 3D (Metal/Vulkan direct), apps audio temps réel pro (musicales, broadcast), apps avec ML embarqué lourd (CoreML/MLKit avec models custom), apps qui doivent intégrer des SDK très spécifiques (banking, identité régalienne). Mais le coût en temps de dev est multiplié par 1.8-2.5 (deux équipes au lieu d'une, deux codebases à maintenir). Pour 95% des apps métier B2B, e-commerce, productivité, contenu — React Native est largement suffisant ET plus rapide à livrer. Le choix natif se justifie sur des cas vraiment exigeants.",
+            "Le natif reste imbattable pour : apps de jeux ou rendu 3D (Metal/Vulkan direct), apps audio temps réel pro (musicales, broadcast), apps avec ML embarqué lourd (CoreML/MLKit avec models custom), apps qui doivent intégrer des SDK très spécifiques (banking, identité régalienne). Mais le coût en temps de dev est multiplié par 1.8-2.5 (deux équipes au lieu d'une, deux codebases à maintenir). Pour 95% des apps métier B2B, e-commerce, productivité, contenu - React Native est largement suffisant ET plus rapide à livrer. Le choix natif se justifie sur des cas vraiment exigeants.",
         },
         {
           title: "Distribution : publication App Store / Play Store",
@@ -1242,7 +1242,7 @@ const prisma = new PrismaClient().$extends({
         },
       ],
       conclusion:
-        "React Native est l'investissement le plus rationnel pour une PME, startup ou association qui veut être sur iOS et Android sans doubler son équipe. Les arguments anti-RN d'il y a 5 ans sont largement obsolètes. Chez Krealabs, c'est notre stack mobile par défaut, avec quelques exceptions pour les projets très exigeants techniquement. Si vous avez un projet d'app mobile et vous hésitez sur le choix techno (RN, Flutter, natif), parlons-en — premier rendez-vous offert.",
+        "React Native est l'investissement le plus rationnel pour une PME, startup ou association qui veut être sur iOS et Android sans doubler son équipe. Les arguments anti-RN d'il y a 5 ans sont largement obsolètes. Chez Krealabs, c'est notre stack mobile par défaut, avec quelques exceptions pour les projets très exigeants techniquement. Si vous avez un projet d'app mobile et vous hésitez sur le choix techno (RN, Flutter, natif), parlons-en - premier rendez-vous offert.",
     },
   },
   {
@@ -1316,7 +1316,7 @@ export default {
 // Usage : autocomplete + erreurs de build
 import { router } from 'expo-router'
 router.push('/posts/123') // ✅ OK
-router.push('/post/123')  // ❌ Erreur TS — pas de route /post`,
+router.push('/post/123')  // ❌ Erreur TS - pas de route /post`,
         },
         {
           title: "Migration depuis React Navigation : étape par étape",
@@ -1326,7 +1326,7 @@ router.push('/post/123')  // ❌ Erreur TS — pas de route /post`,
         {
           title: "Cas d'usage avancés : modal, search, web",
           content:
-            "Expo Router gère bien les patterns mobile modernes : modals via la propriété `presentation: 'modal'`, recherche globale via un screen layout particulier, gestures de retour Apple/Android natif. Bonus : Expo Router fonctionne aussi sur le WEB (Expo for Web). Vous pouvez déployer la même base de code en app + web responsive — gain massif pour les startups en early stage qui veulent prototyper rapidement avant de décider plateforme cible.",
+            "Expo Router gère bien les patterns mobile modernes : modals via la propriété `presentation: 'modal'`, recherche globale via un screen layout particulier, gestures de retour Apple/Android natif. Bonus : Expo Router fonctionne aussi sur le WEB (Expo for Web). Vous pouvez déployer la même base de code en app + web responsive - gain massif pour les startups en early stage qui veulent prototyper rapidement avant de décider plateforme cible.",
         },
         {
           title: "Limites et points d'attention",
@@ -1335,7 +1335,7 @@ router.push('/post/123')  // ❌ Erreur TS — pas de route /post`,
         },
       ],
       conclusion:
-        "Expo Router rapproche le DX mobile et web. Pour les équipes qui font du Next.js le jour et du React Native le soir (comme Krealabs), c'est un gain immédiat — même mental model, mêmes patterns, productivité décuplée. Plus jamais de fichier route.config.ts à 800 lignes. Pour les nouveaux projets, on recommande systématiquement Expo Router. Pour les apps existantes en React Navigation qui marchent bien, la migration n'est pas urgente — décidez selon votre roadmap.",
+        "Expo Router rapproche le DX mobile et web. Pour les équipes qui font du Next.js le jour et du React Native le soir (comme Krealabs), c'est un gain immédiat - même mental model, mêmes patterns, productivité décuplée. Plus jamais de fichier route.config.ts à 800 lignes. Pour les nouveaux projets, on recommande systématiquement Expo Router. Pour les apps existantes en React Navigation qui marchent bien, la migration n'est pas urgente - décidez selon votre roadmap.",
     },
   },
   {
@@ -1352,12 +1352,12 @@ router.push('/post/123')  // ❌ Erreur TS — pas de route /post`,
     tags: ["Notifications push", "Expo", "Firebase", "Mobile", "FCM", "OneSignal"],
     content: {
       introduction:
-        "Les notifications push sont incontournables dans une app mobile moderne — rétention, engagement, conversions. Pour une app React Native en 2026, trois choix dominent : Expo Push (la solution intégrée Expo, simple et rapide), Firebase Cloud Messaging (FCM, le standard Google avec écosystème complet), et OneSignal (alternative cross-platform avec UX marketing très poussée). Comparatif détaillé pour choisir la bonne solution selon votre contexte, avec retour d'expérience sur 15+ apps Krealabs en production.",
+        "Les notifications push sont incontournables dans une app mobile moderne - rétention, engagement, conversions. Pour une app React Native en 2026, trois choix dominent : Expo Push (la solution intégrée Expo, simple et rapide), Firebase Cloud Messaging (FCM, le standard Google avec écosystème complet), et OneSignal (alternative cross-platform avec UX marketing très poussée). Comparatif détaillé pour choisir la bonne solution selon votre contexte, avec retour d'expérience sur 15+ apps Krealabs en production.",
       sections: [
         {
           title: "Expo Push : simple et suffisant",
           content:
-            "Si votre app est créée avec Expo (notre cas par défaut), Expo Push est intégré nativement. Récupération du token, envoi via HTTP simple, scheduling basique. Idéal pour 80% des cas : notifications transactionnelles (confirmation commande, message reçu, rappel RDV), notifications éditoriales (nouveau contenu publié, alerte info). Pas besoin de configurer Firebase ou Apple Push Notifications Service (APNs) manuellement — Expo gère tout. Limites : pas de segmentation avancée, pas d'A/B testing, pas d'analytics native (ouvertures, clics).",
+            "Si votre app est créée avec Expo (notre cas par défaut), Expo Push est intégré nativement. Récupération du token, envoi via HTTP simple, scheduling basique. Idéal pour 80% des cas : notifications transactionnelles (confirmation commande, message reçu, rappel RDV), notifications éditoriales (nouveau contenu publié, alerte info). Pas besoin de configurer Firebase ou Apple Push Notifications Service (APNs) manuellement - Expo gère tout. Limites : pas de segmentation avancée, pas d'A/B testing, pas d'analytics native (ouvertures, clics).",
           code: `import * as Notifications from 'expo-notifications'
 
 // Récupérer le token unique du device
@@ -1380,7 +1380,7 @@ await fetch('https://exp.host/--/api/v2/push/send', {
         {
           title: "Firebase Cloud Messaging (FCM) : le standard Google",
           content:
-            "Si vous avez besoin de : segmentation avancée (topic subscription, conditions complexes), campagnes A/B sur le contenu des push, analytics intégrées (delivery rate, open rate par notification), notifications côté web ET mobile depuis la même infra — FCM est plus complet. La mise en place est plus lourde (config Firebase Console, fichiers GoogleService-Info.plist, intégration native iOS/Android), mais l'outillage est mature. La console Firebase permet aux marketeurs d'envoyer des campagnes sans toucher au code. Coût : gratuit pour des volumes raisonnables, payant au-delà via Firebase Blaze plan.",
+            "Si vous avez besoin de : segmentation avancée (topic subscription, conditions complexes), campagnes A/B sur le contenu des push, analytics intégrées (delivery rate, open rate par notification), notifications côté web ET mobile depuis la même infra - FCM est plus complet. La mise en place est plus lourde (config Firebase Console, fichiers GoogleService-Info.plist, intégration native iOS/Android), mais l'outillage est mature. La console Firebase permet aux marketeurs d'envoyer des campagnes sans toucher au code. Coût : gratuit pour des volumes raisonnables, payant au-delà via Firebase Blaze plan.",
         },
         {
           title: "OneSignal : la solution marketing-oriented",
@@ -1390,7 +1390,7 @@ await fetch('https://exp.host/--/api/v2/push/send', {
         {
           title: "Permission utilisateur : le moment critique",
           content:
-            "Demander la permission de push au mauvais moment = refus définitif (l'utilisateur ne reverra jamais le prompt). Best practice : ne JAMAIS demander à l'ouverture initiale de l'app. Demandez quand l'utilisateur a fait au moins 2-3 actions et comprend la valeur (ex: après inscription, après premier achat, après avoir activé une feature où les push aident). Toujours expliquer le bénéfice AVANT de déclencher le prompt système : un écran custom \"On vous prévient quand votre commande arrive — autoriser les notifications ?\" puis le prompt natif. Taux d'acceptation : 30-50% avec cette technique vs 15-25% si on demande direct.",
+            "Demander la permission de push au mauvais moment = refus définitif (l'utilisateur ne reverra jamais le prompt). Best practice : ne JAMAIS demander à l'ouverture initiale de l'app. Demandez quand l'utilisateur a fait au moins 2-3 actions et comprend la valeur (ex: après inscription, après premier achat, après avoir activé une feature où les push aident). Toujours expliquer le bénéfice AVANT de déclencher le prompt système : un écran custom \"On vous prévient quand votre commande arrive - autoriser les notifications ?\" puis le prompt natif. Taux d'acceptation : 30-50% avec cette technique vs 15-25% si on demande direct.",
           code: `// Pattern recommandé : écran intermédiaire
 import * as Notifications from 'expo-notifications'
 
@@ -1419,11 +1419,11 @@ async function requestPermission() {
         {
           title: "Notre recommandation pratique",
           content:
-            "Démarrez avec Expo Push, c'est suffisant pour 80% des besoins et 0 effort d'intégration. Si vous prévoyez des campagnes marketing sophistiquées dès le départ (e-commerce sérieux, app avec gros budget marketing), envisagez OneSignal d'emblée. Si vous êtes déjà dans l'écosystème Firebase pour d'autres raisons (Crashlytics, Analytics), FCM est cohérent. Migration possible plus tard sans casser l'app — le token push n'est qu'une chaîne, le serveur d'envoi peut être changé sans rebuild client. Notre stack par défaut : Expo Push pour 90% des projets, OneSignal pour les e-commerce avec budget marketing.",
+            "Démarrez avec Expo Push, c'est suffisant pour 80% des besoins et 0 effort d'intégration. Si vous prévoyez des campagnes marketing sophistiquées dès le départ (e-commerce sérieux, app avec gros budget marketing), envisagez OneSignal d'emblée. Si vous êtes déjà dans l'écosystème Firebase pour d'autres raisons (Crashlytics, Analytics), FCM est cohérent. Migration possible plus tard sans casser l'app - le token push n'est qu'une chaîne, le serveur d'envoi peut être changé sans rebuild client. Notre stack par défaut : Expo Push pour 90% des projets, OneSignal pour les e-commerce avec budget marketing.",
         },
       ],
       conclusion:
-        "La meilleure notification push, c'est celle qui arrive ET qui apporte de la valeur. Choisissez la solution la plus simple qui couvre votre cas d'usage actuel — vous gagnerez le temps économisé sur du contenu et l'optimisation du timing, plutôt que sur l'infrastructure. Demander permission au bon moment, formuler des messages clairs, mesurer les open rates : c'est là que se joue le ROI des push. Si vous lancez une app mobile et que vous voulez cadrer la stratégie push dès le départ, parlons-en.",
+        "La meilleure notification push, c'est celle qui arrive ET qui apporte de la valeur. Choisissez la solution la plus simple qui couvre votre cas d'usage actuel - vous gagnerez le temps économisé sur du contenu et l'optimisation du timing, plutôt que sur l'infrastructure. Demander permission au bon moment, formuler des messages clairs, mesurer les open rates : c'est là que se joue le ROI des push. Si vous lancez une app mobile et que vous voulez cadrer la stratégie push dès le départ, parlons-en.",
     },
   },
 
@@ -1449,12 +1449,12 @@ async function requestPermission() {
         {
           title: "FID vs INP : la vraie différence",
           content:
-            "FID ne mesurait que le délai avant la PREMIÈRE interaction utilisateur sur la page. C'était une métrique très indulgente : une fois la page chargée et la première interaction OK, FID restait bon même si toutes les interactions suivantes étaient catastrophiques. INP, lui, mesure le PIRE délai entre toute interaction et la prochaine peinture pendant TOUTE la session de l'utilisateur. C'est donc beaucoup plus représentatif du ressenti réel — et beaucoup plus dur à passer. Sur nos audits, on voit régulièrement des sites avec FID < 100ms (excellent) mais INP > 500ms (mauvais) à cause de gros handlers React mal optimisés.",
+            "FID ne mesurait que le délai avant la PREMIÈRE interaction utilisateur sur la page. C'était une métrique très indulgente : une fois la page chargée et la première interaction OK, FID restait bon même si toutes les interactions suivantes étaient catastrophiques. INP, lui, mesure le PIRE délai entre toute interaction et la prochaine peinture pendant TOUTE la session de l'utilisateur. C'est donc beaucoup plus représentatif du ressenti réel - et beaucoup plus dur à passer. Sur nos audits, on voit régulièrement des sites avec FID < 100ms (excellent) mais INP > 500ms (mauvais) à cause de gros handlers React mal optimisés.",
         },
         {
           title: "Les seuils Google et leur impact SEO",
           content:
-            "Bon : INP < 200ms. À améliorer : 200-500ms. Mauvais : > 500ms. Pour info complète, LCP < 2.5s, CLS < 0.1, INP < 200ms sont les trois seuils officiels Google. Si un seul est dans le rouge, votre page perd des points dans le classement Google. L'impact n'est pas binaire (votre site ne disparaît pas), mais sur des requêtes concurrentielles, ces signaux peuvent faire la différence entre la 4ème et la 9ème position — donc entre du trafic et pas de trafic.",
+            "Bon : INP < 200ms. À améliorer : 200-500ms. Mauvais : > 500ms. Pour info complète, LCP < 2.5s, CLS < 0.1, INP < 200ms sont les trois seuils officiels Google. Si un seul est dans le rouge, votre page perd des points dans le classement Google. L'impact n'est pas binaire (votre site ne disparaît pas), mais sur des requêtes concurrentielles, ces signaux peuvent faire la différence entre la 4ème et la 9ème position - donc entre du trafic et pas de trafic.",
         },
         {
           title: "Pourquoi l'INP est si dur à passer",
@@ -1501,12 +1501,12 @@ function processInChunks(items, chunkSize = 50) {
         {
           title: "Mesurer en réel : Lab vs Field data",
           content:
-            "Lighthouse mesure en LAB (conditions contrôlées Chromium headless) — c'est utile mais incomplet. Les vraies données INP qui comptent pour le SEO viennent du FIELD : Chrome User Experience Report (CrUX). Pour y accéder : Google Search Console > Web Vitals (vue agrégée 28 jours), Vercel Analytics (si vous êtes sur Vercel), Speed Insights, ou Real User Monitoring (Sentry Performance, Datadog RUM). Sur les sites à fort trafic, on configure systématiquement Vercel Speed Insights pour avoir le détail par page et identifier les pires offenders.",
+            "Lighthouse mesure en LAB (conditions contrôlées Chromium headless) - c'est utile mais incomplet. Les vraies données INP qui comptent pour le SEO viennent du FIELD : Chrome User Experience Report (CrUX). Pour y accéder : Google Search Console > Web Vitals (vue agrégée 28 jours), Vercel Analytics (si vous êtes sur Vercel), Speed Insights, ou Real User Monitoring (Sentry Performance, Datadog RUM). Sur les sites à fort trafic, on configure systématiquement Vercel Speed Insights pour avoir le détail par page et identifier les pires offenders.",
         },
         {
           title: "L'avenir : nouvelles métriques en préparation",
           content:
-            "Google travaille déjà sur les prochaines métriques Core Web Vitals : possiblement TTFB (Time To First Byte) plus visible, ou une métrique de \"smoothness\" sur les animations de scroll. Notre conseil : ne pas optimiser pour des métriques hypothétiques. Optimiser pour l'expérience utilisateur réelle. Un site qui charge vite, réagit instantanément aux clics, et ne saute pas pendant le chargement — c'est ça qu'on vise. Les métriques Google sont une bonne proxy mais pas le but en soi.",
+            "Google travaille déjà sur les prochaines métriques Core Web Vitals : possiblement TTFB (Time To First Byte) plus visible, ou une métrique de \"smoothness\" sur les animations de scroll. Notre conseil : ne pas optimiser pour des métriques hypothétiques. Optimiser pour l'expérience utilisateur réelle. Un site qui charge vite, réagit instantanément aux clics, et ne saute pas pendant le chargement - c'est ça qu'on vise. Les métriques Google sont une bonne proxy mais pas le but en soi.",
         },
       ],
       conclusion:
@@ -1527,17 +1527,17 @@ function processInChunks(items, chunkSize = 50) {
     tags: ["SEO local", "Rouen", "Normandie", "Google Business Profile", "Schema.org", "Avis Google", "Pack local"],
     content: {
       introduction:
-        "Vous tenez un commerce, un cabinet, un atelier ou une PME à Rouen, au Havre, à Caen ou ailleurs en Normandie. Vos clients potentiels tapent \"votre métier + Rouen\" ou simplement \"votre métier près de moi\" sur Google et leur smartphone. Comment faire pour ressortir dans les premiers résultats — voire mieux, dans le pack local (les 3 résultats avec carte qui apparaissent souvent en haut de la SERP) ? Voici la méthode complète que nous appliquons chez Krealabs pour nos clients normands. Article basé sur 5 ans de pratique SEO local, avec des résultats vérifiables sur les fiches Google de nos clients.",
+        "Vous tenez un commerce, un cabinet, un atelier ou une PME à Rouen, au Havre, à Caen ou ailleurs en Normandie. Vos clients potentiels tapent \"votre métier + Rouen\" ou simplement \"votre métier près de moi\" sur Google et leur smartphone. Comment faire pour ressortir dans les premiers résultats - voire mieux, dans le pack local (les 3 résultats avec carte qui apparaissent souvent en haut de la SERP) ? Voici la méthode complète que nous appliquons chez Krealabs pour nos clients normands. Article basé sur 5 ans de pratique SEO local, avec des résultats vérifiables sur les fiches Google de nos clients.",
       sections: [
         {
           title: "Fiche Google Business Profile : la fondation",
           content:
-            "C'est LA fondation. Sans fiche Google Business optimisée, oubliez le pack local — peu importe la qualité de votre site web. Trois leviers principaux : 1) Catégorie principale précise (ex: \"Restaurant italien\" plutôt que \"Restaurant\"), avec si pertinent 5-10 catégories secondaires. 2) Informations complètes et exactes : adresse, téléphone, horaires (incluant jours fériés), site web. 3) Photos régulières (mensuelles minimum) — Google détecte les fiches \"vivantes\". 4) Posts Google Business hebdomadaires (event, offre, mise à jour). 5) Réponses systématiques aux avis (positifs comme négatifs, dans les 48h). Une fiche optimisée gagne typiquement 2-4 places dans le pack local en 3 mois.",
+            "C'est LA fondation. Sans fiche Google Business optimisée, oubliez le pack local - peu importe la qualité de votre site web. Trois leviers principaux : 1) Catégorie principale précise (ex: \"Restaurant italien\" plutôt que \"Restaurant\"), avec si pertinent 5-10 catégories secondaires. 2) Informations complètes et exactes : adresse, téléphone, horaires (incluant jours fériés), site web. 3) Photos régulières (mensuelles minimum) - Google détecte les fiches \"vivantes\". 4) Posts Google Business hebdomadaires (event, offre, mise à jour). 5) Réponses systématiques aux avis (positifs comme négatifs, dans les 48h). Une fiche optimisée gagne typiquement 2-4 places dans le pack local en 3 mois.",
         },
         {
           title: "Schema.org LocalBusiness sur votre site",
           content:
-            "Sur votre site, ajoutez un balisage JSON-LD de type LocalBusiness (ou plus spécifique : Restaurant, Dentist, ProfessionalService, AutoRepair, etc. — la liste est sur schema.org). Google comprend mieux qui vous êtes, où vous êtes, ce que vous proposez. Inclure obligatoirement : address (avec postalCode et addressRegion), geo (coordinates), telephone, openingHoursSpecification, priceRange, knowsAbout (compétences), areaServed (zones desservies). Pour les multi-établissements, un schéma par établissement avec @id unique.",
+            "Sur votre site, ajoutez un balisage JSON-LD de type LocalBusiness (ou plus spécifique : Restaurant, Dentist, ProfessionalService, AutoRepair, etc. - la liste est sur schema.org). Google comprend mieux qui vous êtes, où vous êtes, ce que vous proposez. Inclure obligatoirement : address (avec postalCode et addressRegion), geo (coordinates), telephone, openingHoursSpecification, priceRange, knowsAbout (compétences), areaServed (zones desservies). Pour les multi-établissements, un schéma par établissement avec @id unique.",
           code: `{
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
@@ -1570,17 +1570,17 @@ function processInChunks(items, chunkSize = 50) {
         {
           title: "Citations locales : la cohérence NAP",
           content:
-            "Plus votre entreprise est mentionnée sur des sites locaux pertinents (annuaires, chambres de commerce, presse locale), plus Google confirme votre légitimité géographique. Le critère clé : la cohérence NAP (Name, Address, Phone) — strictement identique partout. Pas \"SARL Krealabs\" ici et \"Krealabs\" là, pas \"12 r. Jeanne d'Arc\" et \"12 rue Jeanne d'Arc\". Les annuaires à viser pour Rouen et Normandie : Pages Jaunes, Mappy, Bing Places, Apple Maps Connect, Normandinamik, CCI Rouen, annuaires sectoriels (Truspilot pour les services, Doctolib pour les médicaux, TripAdvisor pour les commerces). Compter 10-20 annuaires de qualité, pas 100 annuaires bidons.",
+            "Plus votre entreprise est mentionnée sur des sites locaux pertinents (annuaires, chambres de commerce, presse locale), plus Google confirme votre légitimité géographique. Le critère clé : la cohérence NAP (Name, Address, Phone) - strictement identique partout. Pas \"SARL Krealabs\" ici et \"Krealabs\" là, pas \"12 r. Jeanne d'Arc\" et \"12 rue Jeanne d'Arc\". Les annuaires à viser pour Rouen et Normandie : Pages Jaunes, Mappy, Bing Places, Apple Maps Connect, Normandinamik, CCI Rouen, annuaires sectoriels (Truspilot pour les services, Doctolib pour les médicaux, TripAdvisor pour les commerces). Compter 10-20 annuaires de qualité, pas 100 annuaires bidons.",
         },
         {
           title: "Contenu géolocalisé : pages locales et longue traîne",
           content:
-            "Créez du contenu qui parle explicitement de votre ville et région. Page dédiée \"Métier à Rouen\" (notre exemple : /agence-web-rouen), articles de blog sur des sujets locaux (\"5 entreprises rouennaises qui...\", \"Le marché du XX à Rouen en 2026\"), témoignages clients de la région avec lieu mentionné, FAQ qui mentionnent Rouen/Normandie. Les requêtes longue traîne géolocalisées (\"comment trouver un X à Rouen\", \"prix moyen de X en Normandie\") sont MOINS concurrentielles que les requêtes courtes — c'est là que vous pouvez gagner facilement. Cibler 10-20 mots-clés longue traîne par page, plutôt qu'un mot-clé court trop concurrentiel.",
+            "Créez du contenu qui parle explicitement de votre ville et région. Page dédiée \"Métier à Rouen\" (notre exemple : /agence-web-rouen), articles de blog sur des sujets locaux (\"5 entreprises rouennaises qui...\", \"Le marché du XX à Rouen en 2026\"), témoignages clients de la région avec lieu mentionné, FAQ qui mentionnent Rouen/Normandie. Les requêtes longue traîne géolocalisées (\"comment trouver un X à Rouen\", \"prix moyen de X en Normandie\") sont MOINS concurrentielles que les requêtes courtes - c'est là que vous pouvez gagner facilement. Cibler 10-20 mots-clés longue traîne par page, plutôt qu'un mot-clé court trop concurrentiel.",
         },
         {
           title: "Avis Google : le levier sous-estimé",
           content:
-            "Le nombre d'avis et leur note moyenne pèsent FORTEMENT dans le classement du pack local. Demandez systématiquement à vos clients satisfaits de laisser un avis — pas \"si vous avez 2 minutes\" mais via un lien direct dans un email de fin de mission ou un QR code en boutique. Cible : 30-50 avis minimum, note 4.5+, fréquence régulière (Google détecte les avis groupés suspects). Répondez à TOUS les avis, positifs comme négatifs (les réponses montrent le sérieux). Pour les avis négatifs, restez factuel et propose une suite hors-Google (\"appelez-nous au... pour qu'on règle ça\"). Les avis sont aussi un signal pour les utilisateurs : 78% lisent les avis avant de contacter.",
+            "Le nombre d'avis et leur note moyenne pèsent FORTEMENT dans le classement du pack local. Demandez systématiquement à vos clients satisfaits de laisser un avis - pas \"si vous avez 2 minutes\" mais via un lien direct dans un email de fin de mission ou un QR code en boutique. Cible : 30-50 avis minimum, note 4.5+, fréquence régulière (Google détecte les avis groupés suspects). Répondez à TOUS les avis, positifs comme négatifs (les réponses montrent le sérieux). Pour les avis négatifs, restez factuel et propose une suite hors-Google (\"appelez-nous au... pour qu'on règle ça\"). Les avis sont aussi un signal pour les utilisateurs : 78% lisent les avis avant de contacter.",
         },
         {
           title: "Backlinks locaux : la stratégie",
@@ -1599,7 +1599,7 @@ function processInChunks(items, chunkSize = 50) {
         },
       ],
       conclusion:
-        "Le SEO local est un marathon : 3 à 6 mois pour voir des effets significatifs, 12 mois pour stabiliser. Mais pour une PME qui dépend de sa clientèle locale (Rouen et Normandie), c'est l'investissement marketing le plus rentable — ROI typique 5x à 10x sur un an quand c'est bien fait. Découvrez notre [page dédiée agence web Rouen](/agence-web-rouen) et notre offre [Performance & SEO](/services/performance-seo). Si votre site est sur WordPress, lisez aussi notre [guide d'audit SEO WordPress en 12 points](/blog/audit-seo-wordpress-12-points). Chez Krealabs, on accompagne les entreprises rouennaises et normandes sur ces sujets régulièrement. Premier audit SEO local de votre fiche GMB + site offert.",
+        "Le SEO local est un marathon : 3 à 6 mois pour voir des effets significatifs, 12 mois pour stabiliser. Mais pour une PME qui dépend de sa clientèle locale (Rouen et Normandie), c'est l'investissement marketing le plus rentable - ROI typique 5x à 10x sur un an quand c'est bien fait. Découvrez notre [page dédiée agence web Rouen](/agence-web-rouen) et notre offre [Performance & SEO](/services/performance-seo). Si votre site est sur WordPress, lisez aussi notre [guide d'audit SEO WordPress en 12 points](/blog/audit-seo-wordpress-12-points). Chez Krealabs, on accompagne les entreprises rouennaises et normandes sur ces sujets régulièrement. Premier audit SEO local de votre fiche GMB + site offert.",
     },
   },
   {
@@ -1616,17 +1616,17 @@ function processInChunks(items, chunkSize = 50) {
     tags: ["Schema.org", "JSON-LD", "Rich Snippets", "SEO", "Agence web", "Structured Data"],
     content: {
       introduction:
-        "Schema.org est le vocabulaire commun que Google, Bing, Yandex et tous les moteurs de recherche utilisent pour comprendre votre site. Pour une agence web ou digitale, c'est l'occasion d'afficher des rich snippets (étoiles, FAQ, fil d'Ariane, événements) qui font la différence dans les résultats de recherche — gain CTR mesurable de 10 à 30%. Voici notre guide complet sur les balisages Schema.org qu'on déploie systématiquement chez Krealabs, avec exemples concrets et retours sur ce qui marche vraiment.",
+        "Schema.org est le vocabulaire commun que Google, Bing, Yandex et tous les moteurs de recherche utilisent pour comprendre votre site. Pour une agence web ou digitale, c'est l'occasion d'afficher des rich snippets (étoiles, FAQ, fil d'Ariane, événements) qui font la différence dans les résultats de recherche - gain CTR mesurable de 10 à 30%. Voici notre guide complet sur les balisages Schema.org qu'on déploie systématiquement chez Krealabs, avec exemples concrets et retours sur ce qui marche vraiment.",
       sections: [
         {
-          title: "ProfessionalService — la fondation pour agences",
+          title: "ProfessionalService - la fondation pour agences",
           content:
             "Le type ProfessionalService (sous-classe de LocalBusiness) est idéal pour une agence digitale. Il accepte tous les champs utiles : adresse postale, géolocalisation, services proposés, prix range, horaires, contact, zones desservies. À placer sur la home dans un script JSON-LD <type=\"application/ld+json\">. Pour les variantes spécifiques métier, voir les sous-types : Restaurant, Dentist, AutoRepair, etc. Pour une agence web/digitale, ProfessionalService convient parfaitement. Inclure absolument knowsAbout (vos expertises) et areaServed (zones géographiques desservies).",
         },
         {
-          title: "BreadcrumbList — fil d'Ariane visible dans Google",
+          title: "BreadcrumbList - fil d'Ariane visible dans Google",
           content:
-            "Sur chaque page intérieure, ajoutez un BreadcrumbList pour afficher le chemin de navigation sous le titre dans la SERP Google. Petit effort, vrai impact UX dans les SERP — l'utilisateur voit la hiérarchie de votre site, le contexte de la page. Sur un article de blog, les breadcrumbs montrent \"Accueil > Blog > Catégorie > Titre article\" avec liens cliquables. Mesuré sur nos sites : +5-8% de CTR après mise en place du BreadcrumbList.",
+            "Sur chaque page intérieure, ajoutez un BreadcrumbList pour afficher le chemin de navigation sous le titre dans la SERP Google. Petit effort, vrai impact UX dans les SERP - l'utilisateur voit la hiérarchie de votre site, le contexte de la page. Sur un article de blog, les breadcrumbs montrent \"Accueil > Blog > Catégorie > Titre article\" avec liens cliquables. Mesuré sur nos sites : +5-8% de CTR après mise en place du BreadcrumbList.",
           code: `{
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -1638,7 +1638,7 @@ function processInChunks(items, chunkSize = 50) {
 }`,
         },
         {
-          title: "FAQPage — réponses dans la SERP",
+          title: "FAQPage - réponses dans la SERP",
           content:
             "Sur votre page FAQ ou les pages avec questions fréquentes, ajoutez un balisage FAQPage. Google peut afficher directement les questions/réponses sous votre résultat dans la SERP, ce qui augmente considérablement la visibilité et le CTR. Attention en 2026 : Google a restreint le FAQPage rich snippet aux sites \"officiels\" (gouvernement, santé) sur les requêtes très concurrentielles. Mais pour les requêtes long-tail métier (\"comment fonctionne un X\", \"combien coûte un Y\"), ça marche encore très bien. Mesurer dans Search Console : rapport Performance > comparer CTR avant/après.",
           code: `{
@@ -1654,12 +1654,12 @@ function processInChunks(items, chunkSize = 50) {
 }`,
         },
         {
-          title: "Article — pour articles de blog",
+          title: "Article - pour articles de blog",
           content:
             "Chaque article de blog doit avoir un balisage Article (ou ses sous-types : BlogPosting, NewsArticle, TechArticle). Champs obligatoires : headline, image, author (Person ou Organization), publisher (Organization avec logo), datePublished (ISO 8601), dateModified, mainEntityOfPage. Bonus : wordCount, articleSection, keywords, inLanguage. Cela permet à Google de proposer votre contenu dans Discover, Top Stories, et améliore le snippet (date, auteur affichés). On l'a implémenté sur tous les articles du blog Krealabs.",
         },
         {
-          title: "Service — pour vos pages de services",
+          title: "Service - pour vos pages de services",
           content:
             "Sur chaque page service (ex: /services/wordpress, /services/developpement-web), un Service avec serviceType, provider (votre Organization), areaServed, hasOfferCatalog. Aide Google à comprendre que vous proposez ces services concrets dans ces zones. Combiné avec ProfessionalService sur la home, ça structure clairement votre catalogue d'offres pour Google.",
           code: `{
@@ -1677,19 +1677,19 @@ function processInChunks(items, chunkSize = 50) {
 }`,
         },
         {
-          title: "Person — pour pages équipe et auteurs",
+          title: "Person - pour pages équipe et auteurs",
           content:
-            "Sur votre page équipe (/equipe chez nous), un Person par membre avec name, jobTitle, image, sameAs (liens LinkedIn/GitHub/Twitter), knowsAbout. Sur les articles de blog, l'author dans l'Article schema peut renvoyer vers cette Person. Cela aide Google à construire la \"Knowledge Graph\" autour de votre équipe — les fondateurs et experts deviennent plus visibles dans les recherches nominatives.",
+            "Sur votre page équipe (/equipe chez nous), un Person par membre avec name, jobTitle, image, sameAs (liens LinkedIn/GitHub/Twitter), knowsAbout. Sur les articles de blog, l'author dans l'Article schema peut renvoyer vers cette Person. Cela aide Google à construire la \"Knowledge Graph\" autour de votre équipe - les fondateurs et experts deviennent plus visibles dans les recherches nominatives.",
         },
         {
-          title: "Review et AggregateRating — étoiles dans la SERP",
+          title: "Review et AggregateRating - étoiles dans la SERP",
           content:
-            "Pour les agences avec témoignages clients, vous pouvez baliser les avis avec Review et un AggregateRating global (note moyenne, nombre d'avis). En 2026, Google est strict sur l'authenticité : pas de balisage de notes inventées, l'AggregateRating doit pointer sur une page qui affiche réellement les avis. Si fait correctement, les étoiles apparaissent dans la SERP — gain CTR souvent +15-25%. Important : vous ne pouvez baliser les avis QUE s'ils sont sur votre propre site, pas si vous compilez des avis Google externes.",
+            "Pour les agences avec témoignages clients, vous pouvez baliser les avis avec Review et un AggregateRating global (note moyenne, nombre d'avis). En 2026, Google est strict sur l'authenticité : pas de balisage de notes inventées, l'AggregateRating doit pointer sur une page qui affiche réellement les avis. Si fait correctement, les étoiles apparaissent dans la SERP - gain CTR souvent +15-25%. Important : vous ne pouvez baliser les avis QUE s'ils sont sur votre propre site, pas si vous compilez des avis Google externes.",
         },
         {
           title: "Outils de validation et debugging",
           content:
-            "Toujours valider vos balisages avant déploiement. Outils essentiels : 1) Google Rich Results Test (search.google.com/test/rich-results) — teste si Google va générer un rich snippet pour votre URL. 2) Schema.org Validator (validator.schema.org) — vérifie la conformité technique au standard. 3) Google Search Console > Améliorations — détecte les erreurs sur l'ensemble du site indexé. 4) Nodejs schema-dts pour TypeScript : typage strict des objets Schema, plus jamais de balisage cassé silencieusement.",
+            "Toujours valider vos balisages avant déploiement. Outils essentiels : 1) Google Rich Results Test (search.google.com/test/rich-results) - teste si Google va générer un rich snippet pour votre URL. 2) Schema.org Validator (validator.schema.org) - vérifie la conformité technique au standard. 3) Google Search Console > Améliorations - détecte les erreurs sur l'ensemble du site indexé. 4) Nodejs schema-dts pour TypeScript : typage strict des objets Schema, plus jamais de balisage cassé silencieusement.",
           code: `// schema-dts pour typage strict en TypeScript
 import { Person, Article, WithContext } from 'schema-dts'
 
@@ -1725,12 +1725,12 @@ const articleSchema: WithContext<Article> = {
     tags: ["Lighthouse", "Audit", "Performance", "Core Web Vitals", "SEO", "Bundle analysis"],
     content: {
       introduction:
-        "Lighthouse donne 4 scores : Performance, Accessibility, Best Practices, SEO. Mais un site à 50 et un site à 85 ne se traitent pas du tout pareil — les actions prioritaires changent radicalement. Voici la méthode complète que nous appliquons chez Krealabs pour cadrer un audit Lighthouse, prioriser les actions selon le score initial, et mesurer les progrès. Article basé sur 50+ audits réalisés ces 3 dernières années, sur des sites WordPress, Next.js, et autres.",
+        "Lighthouse donne 4 scores : Performance, Accessibility, Best Practices, SEO. Mais un site à 50 et un site à 85 ne se traitent pas du tout pareil - les actions prioritaires changent radicalement. Voici la méthode complète que nous appliquons chez Krealabs pour cadrer un audit Lighthouse, prioriser les actions selon le score initial, et mesurer les progrès. Article basé sur 50+ audits réalisés ces 3 dernières années, sur des sites WordPress, Next.js, et autres.",
       sections: [
         {
           title: "Le score Lighthouse n'est qu'une vue partielle",
           content:
-            "Avant d'attaquer, un point clé : Lighthouse mesure en conditions LAB (Chromium headless, throttling simulé, machine de référence). Les vraies données qui comptent pour Google SEO viennent du FIELD : Chrome User Experience Report (CrUX), accessible via Search Console > Web Vitals ou PageSpeed Insights. Lighthouse est un excellent outil de diagnostic, mais un score Lighthouse à 100 sur un site lent en réalité ne sert à rien — et un score lab à 70 mais avec CrUX au vert suffit largement. Toujours valider lab + field.",
+            "Avant d'attaquer, un point clé : Lighthouse mesure en conditions LAB (Chromium headless, throttling simulé, machine de référence). Les vraies données qui comptent pour Google SEO viennent du FIELD : Chrome User Experience Report (CrUX), accessible via Search Console > Web Vitals ou PageSpeed Insights. Lighthouse est un excellent outil de diagnostic, mais un score Lighthouse à 100 sur un site lent en réalité ne sert à rien - et un score lab à 70 mais avec CrUX au vert suffit largement. Toujours valider lab + field.",
         },
         {
           title: "Site à 30-50 : urgence performance",
@@ -1783,7 +1783,7 @@ jobs:
         {
           title: "Au-delà du Performance score : Accessibility, Best Practices, SEO",
           content:
-            "Le score Performance est le plus surveillé, mais les 3 autres scores Lighthouse comptent aussi. Accessibility : viser 95+ — contrast ratio AA, alt sur toutes les images, labels sur tous les inputs, hierarchy hX correcte. Best Practices : 90+ — HTTPS obligatoire, pas d'erreurs console en prod, images en bonnes dimensions natives. SEO : 95-100 facile à atteindre — meta description présente, robots.txt OK, structured data valide, mobile-friendly. Sur les nouveaux sites Krealabs, on vise systématiquement 95+ sur les 4 scores en condition lab, et CrUX au vert sur 90+% des pages.",
+            "Le score Performance est le plus surveillé, mais les 3 autres scores Lighthouse comptent aussi. Accessibility : viser 95+ - contrast ratio AA, alt sur toutes les images, labels sur tous les inputs, hierarchy hX correcte. Best Practices : 90+ - HTTPS obligatoire, pas d'erreurs console en prod, images en bonnes dimensions natives. SEO : 95-100 facile à atteindre - meta description présente, robots.txt OK, structured data valide, mobile-friendly. Sur les nouveaux sites Krealabs, on vise systématiquement 95+ sur les 4 scores en condition lab, et CrUX au vert sur 90+% des pages.",
         },
         {
           title: "Outils complémentaires pour aller plus loin",
@@ -1828,7 +1828,7 @@ jobs:
         {
           title: "Ce que l'IA fait mal (ou plutôt : où il faut rester vigilant)",
           content:
-            "Décisions d'architecture : l'IA propose souvent des solutions \"évidentes\" qui marchent mais qui ne sont pas idiomatiques pour votre stack ou qui créent de la dette technique. Équilibrage de la dette technique : l'IA ajoute volontiers du code, rarement elle propose de simplifier ou supprimer. Compréhension fine du contexte métier client : impossible sans long briefing. Sur les API très récentes (Next.js 16, React 19, dernières versions de libs niche), ses connaissances peuvent être en retard de 6-12 mois. Et le pire : l'IA peut HALLUCINER avec confiance — inventer une API qui n'existe pas, citer une doc obsolète, ou produire du code qui compile mais ne fait pas ce qu'on demande. Vigilance obligatoire.",
+            "Décisions d'architecture : l'IA propose souvent des solutions \"évidentes\" qui marchent mais qui ne sont pas idiomatiques pour votre stack ou qui créent de la dette technique. Équilibrage de la dette technique : l'IA ajoute volontiers du code, rarement elle propose de simplifier ou supprimer. Compréhension fine du contexte métier client : impossible sans long briefing. Sur les API très récentes (Next.js 16, React 19, dernières versions de libs niche), ses connaissances peuvent être en retard de 6-12 mois. Et le pire : l'IA peut HALLUCINER avec confiance - inventer une API qui n'existe pas, citer une doc obsolète, ou produire du code qui compile mais ne fait pas ce qu'on demande. Vigilance obligatoire.",
         },
         {
           title: "Comparaison rapide des outils principaux",
@@ -1838,7 +1838,7 @@ jobs:
         {
           title: "Notre workflow Krealabs",
           content:
-            "Pair programming avec Cursor / Claude Code pour les tâches concrètes, JAMAIS pour la planification architecturale (cette décision reste humaine). Reviews humaines systématiques : tout code généré par IA passe en review avant merge, comme du code humain. Tests automatisés non négociables — si l'IA a produit le code, le test garantit qu'il fait ce qu'il prétend faire. Documentation des prompts : on garde une bibliothèque de prompts efficaces (ex: \"refactor this React class to function component using TypeScript strict, preserving all props and lifecycle behavior\") pour cohérence dans l'équipe.",
+            "Pair programming avec Cursor / Claude Code pour les tâches concrètes, JAMAIS pour la planification architecturale (cette décision reste humaine). Reviews humaines systématiques : tout code généré par IA passe en review avant merge, comme du code humain. Tests automatisés non négociables - si l'IA a produit le code, le test garantit qu'il fait ce qu'il prétend faire. Documentation des prompts : on garde une bibliothèque de prompts efficaces (ex: \"refactor this React class to function component using TypeScript strict, preserving all props and lifecycle behavior\") pour cohérence dans l'équipe.",
           code: `# Notre .cursorrules type (instructions persistantes pour Cursor)
 - Stack: Next.js 16, React 19, TypeScript strict, Tailwind 4, Prisma 6
 - Always use Server Components by default, 'use client' only when needed
@@ -1851,26 +1851,26 @@ jobs:
         {
           title: "Impact sur la formation et le recrutement",
           content:
-            "Pour un junior, l'IA peut être un piège : générer du code qu'on ne comprend pas, mais qui marche — donc qu'on merge sans apprendre. Risque : devenir un opérateur d'IA plutôt qu'un développeur. Pour un senior, c'est un accélérateur qui amplifie l'expertise existante. La discipline qu'on impose chez Krealabs : on ne merge une pull request que si on saurait l'écrire soi-même — autrement dit, l'IA peut nous faire gagner du temps mais elle ne peut pas remplacer la compréhension. Sur le recrutement : on s'attend à ce que les candidats sachent utiliser l'IA (c'est devenu une compétence essentielle), MAIS on les teste sur leur capacité à juger ce qu'elle produit (qualité code, sécurité, perf).",
+            "Pour un junior, l'IA peut être un piège : générer du code qu'on ne comprend pas, mais qui marche - donc qu'on merge sans apprendre. Risque : devenir un opérateur d'IA plutôt qu'un développeur. Pour un senior, c'est un accélérateur qui amplifie l'expertise existante. La discipline qu'on impose chez Krealabs : on ne merge une pull request que si on saurait l'écrire soi-même - autrement dit, l'IA peut nous faire gagner du temps mais elle ne peut pas remplacer la compréhension. Sur le recrutement : on s'attend à ce que les candidats sachent utiliser l'IA (c'est devenu une compétence essentielle), MAIS on les teste sur leur capacité à juger ce qu'elle produit (qualité code, sécurité, perf).",
         },
         {
           title: "Pièges à éviter absolument",
           content:
-            "1) Faire confiance aveuglément à l'IA pour le code de production critique (auth, paiement, données médicales). Toujours review en équipe. 2) Coller du code IA sans comprendre — bombes à retardement futures. 3) Demander à l'IA de générer ce qu'on ne saurait pas vérifier (algorithmique avancée, crypto). 4) Utiliser l'IA pour analyser du code propriétaire client sans accord (RGPD, NDA). 5) Faire générer des tests qui valident le code généré par la même IA — c'est circulaire et n'apporte rien. 6) Croire l'IA quand elle invente du code qui ne compile pas mais a l'air convainquant — toujours essayer en local.",
+            "1) Faire confiance aveuglément à l'IA pour le code de production critique (auth, paiement, données médicales). Toujours review en équipe. 2) Coller du code IA sans comprendre - bombes à retardement futures. 3) Demander à l'IA de générer ce qu'on ne saurait pas vérifier (algorithmique avancée, crypto). 4) Utiliser l'IA pour analyser du code propriétaire client sans accord (RGPD, NDA). 5) Faire générer des tests qui valident le code généré par la même IA - c'est circulaire et n'apporte rien. 6) Croire l'IA quand elle invente du code qui ne compile pas mais a l'air convainquant - toujours essayer en local.",
         },
         {
           title: "L'avenir : agents IA autonomes",
           content:
-            "En 2026, on voit émerger des agents plus autonomes : Devin, OpenHands, Claude Agent SDK qui peuvent prendre une tâche complète et l'exécuter de bout en bout (générer code + lancer tests + corriger erreurs + ouvrir PR). C'est puissant pour les tâches répétitives bien cadrées (migrations massives, refactorings cross-codebase, génération de doc). Mais ça nécessite un cadrage humain serré sinon ça dévie. Chez Krealabs, on commence à utiliser ces agents pour des tâches précises comme \"audit cette base de code et lister tous les TODO\" ou \"générer la documentation API\" — mais on reste loin de la full autonomie sur du code de production.",
+            "En 2026, on voit émerger des agents plus autonomes : Devin, OpenHands, Claude Agent SDK qui peuvent prendre une tâche complète et l'exécuter de bout en bout (générer code + lancer tests + corriger erreurs + ouvrir PR). C'est puissant pour les tâches répétitives bien cadrées (migrations massives, refactorings cross-codebase, génération de doc). Mais ça nécessite un cadrage humain serré sinon ça dévie. Chez Krealabs, on commence à utiliser ces agents pour des tâches précises comme \"audit cette base de code et lister tous les TODO\" ou \"générer la documentation API\" - mais on reste loin de la full autonomie sur du code de production.",
         },
         {
           title: "Économie : ce que ça coûte vraiment",
           content:
-            "Budget AI tools mensuel par développeur chez Krealabs en 2026 : Cursor pro 20$, Claude Code 20$, Copilot 10$, API credits Anthropic pour les batches (~30-50$/mois selon usage). Total : ~80-100$/mois/dev. Comparé au gain de productivité (estimé 30-40% sur les tâches éligibles), c'est rentable instantanément. À noter : l'IA augmente aussi la charge cognitive (revoir code généré, vérifier, débugger) — on n'a pas vraiment 30% de bande passante en plus pour faire plus de projets, mais on délivre des projets de meilleure qualité dans le même temps.",
+            "Budget AI tools mensuel par développeur chez Krealabs en 2026 : Cursor pro 20$, Claude Code 20$, Copilot 10$, API credits Anthropic pour les batches (~30-50$/mois selon usage). Total : ~80-100$/mois/dev. Comparé au gain de productivité (estimé 30-40% sur les tâches éligibles), c'est rentable instantanément. À noter : l'IA augmente aussi la charge cognitive (revoir code généré, vérifier, débugger) - on n'a pas vraiment 30% de bande passante en plus pour faire plus de projets, mais on délivre des projets de meilleure qualité dans le même temps.",
         },
       ],
       conclusion:
-        "L'IA accélère les bons développeurs et masque les faiblesses des mauvais. Chez Krealabs, on l'utilise quotidiennement — et on rend toujours du code qu'on comprend, qu'on a testé et qu'on assume. Si vous démarrez un projet en 2026 sans utiliser l'IA, vous perdez du temps. Si vous l'utilisez sans discipline, vous accumulez de la dette technique invisible. L'équilibre se trouve dans le métier : savoir quand utiliser l'outil et quand ne pas s'en servir. Notre conviction : l'IA est un super junior qui ne dort pas. Comme tout junior, à manager. Voir aussi notre [pipeline CI/CD pour PME avec GitHub Actions](/blog/github-actions-pme-cicd-zero) et notre [guide Stripe Billing pour SaaS B2B](/blog/stripe-billing-saas-b2b-guide).",
+        "L'IA accélère les bons développeurs et masque les faiblesses des mauvais. Chez Krealabs, on l'utilise quotidiennement - et on rend toujours du code qu'on comprend, qu'on a testé et qu'on assume. Si vous démarrez un projet en 2026 sans utiliser l'IA, vous perdez du temps. Si vous l'utilisez sans discipline, vous accumulez de la dette technique invisible. L'équilibre se trouve dans le métier : savoir quand utiliser l'outil et quand ne pas s'en servir. Notre conviction : l'IA est un super junior qui ne dort pas. Comme tout junior, à manager. Voir aussi notre [pipeline CI/CD pour PME avec GitHub Actions](/blog/github-actions-pme-cicd-zero) et notre [guide Stripe Billing pour SaaS B2B](/blog/stripe-billing-saas-b2b-guide).",
     },
   },
   {
@@ -1917,7 +1917,7 @@ jobs:
         {
           title: "Build & deploy par environnement",
           content:
-            "Sur push vers main → déploiement en production. Sur push vers develop → déploiement en staging. Sur chaque PR → preview deployment automatique. Si vous êtes sur Vercel, la plateforme gère TOUT cela nativement (preview deployments par PR, prod sur main, alias staging configurable) — pas besoin d'écrire de workflow GitHub Actions pour le déploiement, juste connecter le repo dans le dashboard Vercel. Pour Netlify : pareil. Pour AWS/OVH/serveur custom : il faut écrire le workflow GitHub Actions de déploiement (rsync + ssh, ou Docker push, etc.).",
+            "Sur push vers main → déploiement en production. Sur push vers develop → déploiement en staging. Sur chaque PR → preview deployment automatique. Si vous êtes sur Vercel, la plateforme gère TOUT cela nativement (preview deployments par PR, prod sur main, alias staging configurable) - pas besoin d'écrire de workflow GitHub Actions pour le déploiement, juste connecter le repo dans le dashboard Vercel. Pour Netlify : pareil. Pour AWS/OVH/serveur custom : il faut écrire le workflow GitHub Actions de déploiement (rsync + ssh, ou Docker push, etc.).",
         },
         {
           title: "Cache et performance des workflows",
@@ -1936,7 +1936,7 @@ jobs:
         {
           title: "Sécurité : Dependabot et scans automatiques",
           content:
-            "Activer Dependabot dans GitHub repo settings → security & analysis. Il crée automatiquement des PRs pour mettre à jour les dépendances avec failles de sécurité connues. Configurer dependabot.yml pour grouper les updates par catégorie (eviter 50 PRs séparées). Compléter avec : npm audit en CI (mais attention aux faux positifs), Snyk gratuit pour le scan de vulnérabilités, CodeQL natif GitHub pour l'analyse statique du code. Sur les projets clients, on configure tout ça dès le jour 1 — coût zéro, gain de sécurité massif.",
+            "Activer Dependabot dans GitHub repo settings → security & analysis. Il crée automatiquement des PRs pour mettre à jour les dépendances avec failles de sécurité connues. Configurer dependabot.yml pour grouper les updates par catégorie (eviter 50 PRs séparées). Compléter avec : npm audit en CI (mais attention aux faux positifs), Snyk gratuit pour le scan de vulnérabilités, CodeQL natif GitHub pour l'analyse statique du code. Sur les projets clients, on configure tout ça dès le jour 1 - coût zéro, gain de sécurité massif.",
           code: `# .github/dependabot.yml
 version: 2
 updates:
@@ -1972,7 +1972,7 @@ updates:
         },
       ],
       conclusion:
-        "Un CI/CD minimal mis en place en 30 minutes vaut mieux qu'un CI/CD parfait jamais déployé. Démarrez petit (lint + tests + auto-deploy), étendez au fur et à mesure de vos besoins (security scan, e2e, monitoring). Chez Krealabs, tous nos projets ont CI dès le premier commit. Si vous voulez accompagnement pour mettre en place une CI/CD propre sur un projet existant, c'est une mission qu'on adore — usuellement 1-2 jours pour un setup complet et formé.",
+        "Un CI/CD minimal mis en place en 30 minutes vaut mieux qu'un CI/CD parfait jamais déployé. Démarrez petit (lint + tests + auto-deploy), étendez au fur et à mesure de vos besoins (security scan, e2e, monitoring). Chez Krealabs, tous nos projets ont CI dès le premier commit. Si vous voulez accompagnement pour mettre en place une CI/CD propre sur un projet existant, c'est une mission qu'on adore - usuellement 1-2 jours pour un setup complet et formé.",
     },
   },
   {
@@ -1992,27 +1992,27 @@ updates:
         "À chaque démarrage de projet, la même question revient chez le client : où héberger le site ? Vercel, AWS, un hébergeur français comme OVH ou Scaleway, o2switch pour les WordPress ? La réponse dépend du contexte : type d'app (WordPress vs Next.js), exigences de souveraineté, budget, volume de trafic, équipe DevOps disponible. Voici notre grille de décision chez Krealabs, basée sur les centaines de projets qu'on a vu en production ces dernières années, avec retours d'expérience concrets sur les principaux acteurs.",
       sections: [
         {
-          title: "Vercel — la DX maximale pour Next.js",
+          title: "Vercel - la DX maximale pour Next.js",
           content:
             "Pour un projet Next.js (ou React/Vue/Astro), Vercel est imbattable côté expérience développeur. Deploy en un push Git, preview branches automatiques par PR, edge functions, analytics intégrées (Vercel Analytics + Speed Insights), CDN global. Coût raisonnable pour des projets PME : Pro à 20$/mois/dev avec quotas généreux. En revanche : données hébergées principalement aux US (problème RGPD pour certains clients), prix qui grimpe vite si le trafic explose (overage charges sur la bandwidth), et écosystème un peu fermé. Notre choix par défaut pour les projets Next.js sans contrainte de souveraineté.",
         },
         {
-          title: "o2switch — le meilleur hébergeur WordPress français",
+          title: "o2switch - le meilleur hébergeur WordPress français",
           content:
             "Pour les sites WordPress (notre spécialité), o2switch est notre recommandation #1 en France. Avantages : performance excellente pour WordPress (PHP optimisé, cache LiteSpeed, OPcache, MySQL bien configuré), support technique réactif et compétent (français), hébergement en France (Auvergne) donc RGPD-friendly, prix très raisonnable (~7€/mois pour un site, illimité en sites). Idéal pour PME et associations qui veulent un hébergement sérieux sans casser la tirelire. Kinsta est l'alternative premium (~35$/mois) pour les sites WordPress qui exigent le top niveau (apps WP critiques, gros trafic).",
         },
         {
-          title: "Scaleway et OVH — souveraineté française",
+          title: "Scaleway et OVH - souveraineté française",
           content:
             "Pour un client sensible à la souveraineté des données (administration, santé, finance, défense), un hébergeur français est presque obligatoire en 2026. Scaleway (Iliad/Free) : très bonne offre cloud (Object Storage, Kubernetes, Postgres managé, Functions), datacenters en France, support correct, prix compétitifs. OVHcloud : leader européen, infrastructure massive, plus complexe à utiliser (UI vieillissante mais robuste). Pour héberger une app Next.js sur ces clouds, il faut maîtriser Docker + Kubernetes ou utiliser leurs offres PaaS naissantes. Coût stable, prévisible, mais DX plus rugueuse. Demande de la compétence DevOps pour bien faire.",
         },
         {
-          title: "AWS — la flexibilité maximale pour le scale",
+          title: "AWS - la flexibilité maximale pour le scale",
           content:
             "Pour des besoins complexes (multi-régions, services managés AWS spécifiques, gros volumes 100k+ utilisateurs/jour, intégrations IA via Bedrock), AWS reste la référence. Plus de 200 services managés disponibles, écosystème immense, scalabilité quasi-infinie. Coût difficilement prévisible (toujours des services cachés qui s'accumulent), courbe d'apprentissage importante, vendor lock-in si vous utilisez les services proprios. Pertinent pour des projets à fort potentiel de scale (SaaS B2B avec millions d'événements, e-commerce gros volume, plateformes média). Sur ces projets, on dédie du temps DevOps spécifique.",
         },
         {
-          title: "Cloudflare — l'option émergente puissante",
+          title: "Cloudflare - l'option émergente puissante",
           content:
             "Cloudflare s'impose comme une option crédible en 2026 : Workers (compute edge ultra-rapide), Pages (hébergement static + SSR), R2 (S3 compatible sans frais de bande passante), D1 (SQLite serverless), KV / Queues / Durable Objects. Avantages : performance globale, prix imbattables (R2 sans bandwidth fees révolutionne le stockage), édité par une entreprise solide. Inconvénients : Workers ont des contraintes (50ms CPU max, taille bundle 1MB), compatibilité Next.js encore en évolution (mieux qu'avant mais pas aussi mature que Vercel). Notre conseil : à considérer pour les apps statiques + API edge, à laisser pour les apps full-stack lourdes.",
         },
@@ -2029,7 +2029,7 @@ updates:
         {
           title: "Coûts comparés sur 3 ans (estimation)",
           content:
-            "Pour un site WordPress vitrine PME (~30k visiteurs/mois) : o2switch ~250€/3ans. Kinsta ~1200€/3ans. Pour un site Next.js startup early stage (~100k visiteurs/mois) : Vercel ~720€/3ans (Pro 20$/dev). Scaleway ~600€/3ans (VPS + Postgres managé). AWS variable, souvent 1500-3000€/3ans selon services utilisés. Pour un SaaS B2B (~1M de visiteurs/mois, dashboards, API) : Vercel Enterprise 2000-5000€/an. AWS 3000-8000€/an. Auto-hosted Kubernetes Scaleway/OVH ~1500€/an + temps DevOps. Le coût d'hébergement est rarement la variable décisive en dessous de 10k€/an — c'est le coût total d'opération qui compte.",
+            "Pour un site WordPress vitrine PME (~30k visiteurs/mois) : o2switch ~250€/3ans. Kinsta ~1200€/3ans. Pour un site Next.js startup early stage (~100k visiteurs/mois) : Vercel ~720€/3ans (Pro 20$/dev). Scaleway ~600€/3ans (VPS + Postgres managé). AWS variable, souvent 1500-3000€/3ans selon services utilisés. Pour un SaaS B2B (~1M de visiteurs/mois, dashboards, API) : Vercel Enterprise 2000-5000€/an. AWS 3000-8000€/an. Auto-hosted Kubernetes Scaleway/OVH ~1500€/an + temps DevOps. Le coût d'hébergement est rarement la variable décisive en dessous de 10k€/an - c'est le coût total d'opération qui compte.",
         },
         {
           title: "Et la migration entre hébergeurs ?",
@@ -2038,12 +2038,12 @@ updates:
         },
       ],
       conclusion:
-        "Il n'y a pas de mauvais choix entre Vercel, o2switch, Scaleway, AWS — juste un choix adapté à votre contexte. Le coût d'hébergement est rarement la variable la plus importante (en dessous de 10k€/an) — c'est plutôt le coût d'opération sur 3 ans qu'il faut regarder, la portabilité, et la possibilité d'évoluer sans tout réécrire. Si vous hésitez pour votre projet entre 2-3 options, on peut vous aider à cadrer le bon choix selon votre stack et vos contraintes — premier échange offert chez Krealabs. Pour élargir, voir notre [panorama des hébergeurs français en 2026](/blog/hebergement-francais-2026-panorama).",
+        "Il n'y a pas de mauvais choix entre Vercel, o2switch, Scaleway, AWS - juste un choix adapté à votre contexte. Le coût d'hébergement est rarement la variable la plus importante (en dessous de 10k€/an) - c'est plutôt le coût d'opération sur 3 ans qu'il faut regarder, la portabilité, et la possibilité d'évoluer sans tout réécrire. Si vous hésitez pour votre projet entre 2-3 options, on peut vous aider à cadrer le bon choix selon votre stack et vos contraintes - premier échange offert chez Krealabs. Pour élargir, voir notre [panorama des hébergeurs français en 2026](/blog/hebergement-francais-2026-panorama).",
     },
   },
 
   // ===========================================================================
-  // CLUSTER LOCAL ROUEN (4 articles) — SEO local agence web Rouen / Normandie
+  // CLUSTER LOCAL ROUEN (4 articles) - SEO local agence web Rouen / Normandie
   // ===========================================================================
   {
     slug: "choisir-agence-web-rouen-2026",
@@ -2059,17 +2059,17 @@ updates:
     tags: ["Agence web Rouen", "Choisir agence web", "Normandie", "Sous-traitance", "Maintenance", "SEO local"],
     content: {
       introduction:
-        "Vous tapez « agence web Rouen » et vous tombez sur 30 résultats. Tous promettent la même chose : design moderne, SEO performant, équipe d'experts, technologies de pointe. Comment trier ? Comment savoir si l'agence qui se présente comme « agence digitale rouennaise » est vraiment une équipe locale qui code, ou un commercial qui sous-traite à Madagascar ? À Rouen comme ailleurs, le marché digital concentre des profils très différents : freelances déguisés en agence, revendeurs WordPress qui collent un thème ThemeForest, vraies agences à 8 personnes, studios premium parisiens avec antenne normande. Cet article condense 5 ans d'observations sur le marché normand et donne 7 critères concrets pour faire le tri — peu importe que vous nous choisissiez ou non.",
+        "Vous tapez « agence web Rouen » et vous tombez sur 30 résultats. Tous promettent la même chose : design moderne, SEO performant, équipe d'experts, technologies de pointe. Comment trier ? Comment savoir si l'agence qui se présente comme « agence digitale rouennaise » est vraiment une équipe locale qui code, ou un commercial qui sous-traite à Madagascar ? À Rouen comme ailleurs, le marché digital concentre des profils très différents : freelances déguisés en agence, revendeurs WordPress qui collent un thème ThemeForest, vraies agences à 8 personnes, studios premium parisiens avec antenne normande. Cet article condense 5 ans d'observations sur le marché normand et donne 7 critères concrets pour faire le tri - peu importe que vous nous choisissiez ou non.",
       sections: [
         {
           title: "1. Vérifier qui code vraiment (équipe interne vs sous-traitance)",
           content:
-            "C'est le critère #1, et personne ne le pose. La majorité des agences web à Rouen revendent du travail effectué ailleurs : freelances Upwork, devs en Tunisie, prestataires polonais. Le commercial qui vous reçoit ne code pas. Le « chef de projet » coordonne. Et le code est livré par quelqu'un que vous ne rencontrerez jamais. Posez la question directement : « Qui va coder mon projet et où ? ». Demandez à parler au développeur lead AVANT de signer. Si la réponse est floue, ou si on vous parle de « notre équipe partenaire », c'est de la sous-traitance déguisée. Ce n'est pas illégal — beaucoup de PME se contentent de ça — mais le risque qualité explose : timezone, communication, propriété intellectuelle, maintenance long terme. À Krealabs, vous parlez directement à Maxime, le développeur qui code votre projet. Pas d'intermédiaire, pas de filtre. C'est notre choix éditorial, c'est aussi pourquoi on accepte moins de projets que les agences classiques.",
+            "C'est le critère #1, et personne ne le pose. La majorité des agences web à Rouen revendent du travail effectué ailleurs : freelances Upwork, devs en Tunisie, prestataires polonais. Le commercial qui vous reçoit ne code pas. Le « chef de projet » coordonne. Et le code est livré par quelqu'un que vous ne rencontrerez jamais. Posez la question directement : « Qui va coder mon projet et où ? ». Demandez à parler au développeur lead AVANT de signer. Si la réponse est floue, ou si on vous parle de « notre équipe partenaire », c'est de la sous-traitance déguisée. Ce n'est pas illégal - beaucoup de PME se contentent de ça - mais le risque qualité explose : timezone, communication, propriété intellectuelle, maintenance long terme. À Krealabs, vous parlez directement à Maxime, le développeur qui code votre projet. Pas d'intermédiaire, pas de filtre. C'est notre choix éditorial, c'est aussi pourquoi on accepte moins de projets que les agences classiques.",
         },
         {
           title: "2. Demander à voir le code source d'un projet existant",
           content:
-            "Une agence web sérieuse a des dépôts Git visibles (sur GitHub, GitLab, Bitbucket). Pas tous publics — beaucoup de projets clients sont sous NDA — mais une agence qui prétend coder doit pouvoir vous MONTRER du code, ne serait-ce qu'anonymisé. Demandez : « Pouvez-vous m'envoyer un extrait de code d'un projet récent ? ». Si vous recevez un screenshot Photoshop d'une UI, c'est mauvais signe. Si on vous envoie un repo GitHub avec des commits réguliers et des PRs reviewées, vous avez en face de vous une vraie équipe technique. Pour aller plus loin : demandez le profil GitHub du développeur. Sur le mien ([github.com/makcimerrr](https://github.com/makcimerrr)) vous voyez l'historique réel — contributions, projets open source, langages maîtrisés. C'est imparable comme preuve d'expertise.",
+            "Une agence web sérieuse a des dépôts Git visibles (sur GitHub, GitLab, Bitbucket). Pas tous publics - beaucoup de projets clients sont sous NDA - mais une agence qui prétend coder doit pouvoir vous MONTRER du code, ne serait-ce qu'anonymisé. Demandez : « Pouvez-vous m'envoyer un extrait de code d'un projet récent ? ». Si vous recevez un screenshot Photoshop d'une UI, c'est mauvais signe. Si on vous envoie un repo GitHub avec des commits réguliers et des PRs reviewées, vous avez en face de vous une vraie équipe technique. Pour aller plus loin : demandez le profil GitHub du développeur. Sur le mien ([github.com/makcimerrr](https://github.com/makcimerrr)) vous voyez l'historique réel - contributions, projets open source, langages maîtrisés. C'est imparable comme preuve d'expertise.",
         },
         {
           title: "3. Tester la disponibilité : SLA et délai de réponse",
@@ -2079,12 +2079,12 @@ updates:
         {
           title: "4. Le tarif sans contrat de maintenance n'a aucun sens",
           content:
-            "Un site internet à Rouen vendu 4 000 € sans maintenance, c'est un site qui sera obsolète et hackable en 18 mois. WordPress publie 4-6 mises à jour majeures par an, des dizaines de patchs sécurité, et les plugins évoluent en permanence. Un site Next.js doit suivre les versions du framework (cycle de 6 mois) sous peine d'accumuler une dette technique paralysante. Une agence sérieuse vous PROPOSERA spontanément un forfait maintenance — pas pour vous facturer plus, mais parce qu'elle sait que sans, le projet pourrira. Tarifs marché normands 2026 : 50-150 €/mois pour de la maintenance light (MAJ + backups + monitoring), 200-500 €/mois pour de la maintenance évolutive (incluant 1-3h de dev mineure par mois), 800-2000 €/mois pour des forfaits incluant SEO, contenus, analytics. Si on vous vend un site sans parler maintenance, fuyez : c'est un site jetable.",
+            "Un site internet à Rouen vendu 4 000 € sans maintenance, c'est un site qui sera obsolète et hackable en 18 mois. WordPress publie 4-6 mises à jour majeures par an, des dizaines de patchs sécurité, et les plugins évoluent en permanence. Un site Next.js doit suivre les versions du framework (cycle de 6 mois) sous peine d'accumuler une dette technique paralysante. Une agence sérieuse vous PROPOSERA spontanément un forfait maintenance - pas pour vous facturer plus, mais parce qu'elle sait que sans, le projet pourrira. Tarifs marché normands 2026 : 50-150 €/mois pour de la maintenance light (MAJ + backups + monitoring), 200-500 €/mois pour de la maintenance évolutive (incluant 1-3h de dev mineure par mois), 800-2000 €/mois pour des forfaits incluant SEO, contenus, analytics. Si on vous vend un site sans parler maintenance, fuyez : c'est un site jetable.",
         },
         {
           title: "5. La capacité à dire « non » est un critère qualité",
           content:
-            "Beaucoup d'agences à Rouen disent oui à tout pour signer. « Vous voulez un site WordPress qui fait aussi de la 3D, du machine learning et qui se connecte à votre ERP en temps réel ? Pas de souci. » Six mois plus tard, le projet a explosé en complexité, le budget a doublé, et le résultat est instable. Une agence digitale solide vous CHALLENGE. Elle vous dit : « Non, WordPress n'est pas adapté à ce besoin, partons sur Next.js », « Non, ce plugin Elementor va vous bloquer dans 2 ans, faisons un thème custom », « Non, ce CMS no-code va atteindre ses limites, anticipez maintenant ». À Krealabs, on refuse environ 30% des projets qui nous arrivent. Pas par snobisme — parce qu'on ne veut pas signer un projet qu'on sait condamné. C'est un critère silencieux mais crucial : posez à l'agence la question « Avez-vous déjà refusé un projet ? Pourquoi ? ». Si la réponse est « non, on accepte tout », red flag.",
+            "Beaucoup d'agences à Rouen disent oui à tout pour signer. « Vous voulez un site WordPress qui fait aussi de la 3D, du machine learning et qui se connecte à votre ERP en temps réel ? Pas de souci. » Six mois plus tard, le projet a explosé en complexité, le budget a doublé, et le résultat est instable. Une agence digitale solide vous CHALLENGE. Elle vous dit : « Non, WordPress n'est pas adapté à ce besoin, partons sur Next.js », « Non, ce plugin Elementor va vous bloquer dans 2 ans, faisons un thème custom », « Non, ce CMS no-code va atteindre ses limites, anticipez maintenant ». À Krealabs, on refuse environ 30% des projets qui nous arrivent. Pas par snobisme - parce qu'on ne veut pas signer un projet qu'on sait condamné. C'est un critère silencieux mais crucial : posez à l'agence la question « Avez-vous déjà refusé un projet ? Pourquoi ? ». Si la réponse est « non, on accepte tout », red flag.",
         },
         {
           title: "6. Le SEO ne se sous-traite pas",
@@ -2094,16 +2094,16 @@ updates:
         {
           title: "7. La proximité géographique : vraie valeur, pas marketing",
           content:
-            "Une agence web à Rouen, ce n'est pas juste une adresse postale dans le centre-ville pour gagner sur Google Maps. C'est : pouvoir se rencontrer en présentiel pour les kick-offs (les projets cadrés en visio uniquement ont 3x plus de malentendus), pouvoir intervenir physiquement si nécessaire (chez certains clients, on debug devant leur écran), connaître les acteurs locaux (banques, comptables, juristes, autres prestataires) pour orienter le client. Et surtout : comprendre le tissu économique normand. Une PME du Petit-Quevilly qui cherche à vendre dans Caen, Le Havre et Évreux a des besoins différents d'une startup parisienne qui veut scaler en Europe. La proximité géographique est un asset, à condition que l'agence en fasse vraiment quelque chose — pas juste une mention sur le site. Lisez aussi notre dossier sur les [différences entre une agence rouennaise et une agence parisienne](/blog/agence-digitale-rouen-vs-paris).",
+            "Une agence web à Rouen, ce n'est pas juste une adresse postale dans le centre-ville pour gagner sur Google Maps. C'est : pouvoir se rencontrer en présentiel pour les kick-offs (les projets cadrés en visio uniquement ont 3x plus de malentendus), pouvoir intervenir physiquement si nécessaire (chez certains clients, on debug devant leur écran), connaître les acteurs locaux (banques, comptables, juristes, autres prestataires) pour orienter le client. Et surtout : comprendre le tissu économique normand. Une PME du Petit-Quevilly qui cherche à vendre dans Caen, Le Havre et Évreux a des besoins différents d'une startup parisienne qui veut scaler en Europe. La proximité géographique est un asset, à condition que l'agence en fasse vraiment quelque chose - pas juste une mention sur le site. Lisez aussi notre dossier sur les [différences entre une agence rouennaise et une agence parisienne](/blog/agence-digitale-rouen-vs-paris).",
         },
         {
           title: "Bonus : les questions à poser au premier RDV",
           content:
-            "Récapitulatif des questions concrètes à poser à votre prochaine agence web à Rouen : (1) « Qui va coder le projet ? Puis-je leur parler maintenant ? » — (2) « Pouvez-vous m'envoyer un extrait de code anonymisé d'un projet récent ? » — (3) « Quel est votre SLA de réponse en cas de bug en production ? » — (4) « Que se passe-t-il après la livraison ? Quelle maintenance proposez-vous ? » — (5) « Quel projet avez-vous récemment refusé, et pourquoi ? » — (6) « Comment mesurez-vous le SEO d'un site que vous livrez ? Montrez-moi un cas concret. » — (7) « À combien de kilomètres se trouve votre dernier client ? ». Une agence qui répond précisément aux 7 questions est dans le top 10% du marché normand. Une qui esquive sur 3+ devrait vous inquiéter.",
+            "Récapitulatif des questions concrètes à poser à votre prochaine agence web à Rouen : (1) « Qui va coder le projet ? Puis-je leur parler maintenant ? » - (2) « Pouvez-vous m'envoyer un extrait de code anonymisé d'un projet récent ? » - (3) « Quel est votre SLA de réponse en cas de bug en production ? » - (4) « Que se passe-t-il après la livraison ? Quelle maintenance proposez-vous ? » - (5) « Quel projet avez-vous récemment refusé, et pourquoi ? » - (6) « Comment mesurez-vous le SEO d'un site que vous livrez ? Montrez-moi un cas concret. » - (7) « À combien de kilomètres se trouve votre dernier client ? ». Une agence qui répond précisément aux 7 questions est dans le top 10% du marché normand. Une qui esquive sur 3+ devrait vous inquiéter.",
         },
       ],
       conclusion:
-        "Choisir une agence web à Rouen en 2026, ce n'est pas choisir le moins cher ni le mieux référencé sur Google. C'est choisir une équipe qui code vraiment, qui sait dire non, qui sera là dans 3 ans, et qui connaît le terrain normand. Si vous voulez en discuter pour votre projet — site internet, refonte, application mobile, logiciel sur mesure — [contactez-nous](/contact) ou découvrez [comment nous travaillons](/equipe). Premier échange offert, en présentiel à Rouen ou en visio. Et même si vous ne nous choisissez pas, on vous aide à formuler les bonnes questions à votre prochaine agence.",
+        "Choisir une agence web à Rouen en 2026, ce n'est pas choisir le moins cher ni le mieux référencé sur Google. C'est choisir une équipe qui code vraiment, qui sait dire non, qui sera là dans 3 ans, et qui connaît le terrain normand. Si vous voulez en discuter pour votre projet - site internet, refonte, application mobile, logiciel sur mesure - [contactez-nous](/contact) ou découvrez [comment nous travaillons](/equipe). Premier échange offert, en présentiel à Rouen ou en visio. Et même si vous ne nous choisissez pas, on vous aide à formuler les bonnes questions à votre prochaine agence.",
     },
   },
   {
@@ -2125,7 +2125,7 @@ updates:
         {
           title: "Site vitrine WordPress : 2 500 € à 7 000 €",
           content:
-            "Le projet le plus courant à Rouen : un site vitrine de 6-15 pages avec un formulaire de contact et un blog. La fourchette honnête en 2026 : 2 500 € pour un site avec thème ThemeForest configuré (qualité moyenne, peu de personnalisation, faible SEO), 4 000-5 000 € pour un site avec thème custom basique (typo et identité respectées, SEO acceptable), 6 000-7 000 € pour un site avec thème WordPress 100% sur mesure (zéro page builder, code propre, SEO et Core Web Vitals optimisés). En dessous de 2 500 €, on parle de bricolage. Au-dessus de 8 000 € pour un site vitrine simple, on paie un overhead d'agence. Notre offre [WordPress Krealabs](/services/wordpress) se positionne dans la fourchette 4 000-7 000 € pour la majorité des projets vitrine — voir aussi notre article sur [pourquoi WordPress reste le bon choix en 2026](/blog/pourquoi-wordpress-reste-le-bon-choix-2026).",
+            "Le projet le plus courant à Rouen : un site vitrine de 6-15 pages avec un formulaire de contact et un blog. La fourchette honnête en 2026 : 2 500 € pour un site avec thème ThemeForest configuré (qualité moyenne, peu de personnalisation, faible SEO), 4 000-5 000 € pour un site avec thème custom basique (typo et identité respectées, SEO acceptable), 6 000-7 000 € pour un site avec thème WordPress 100% sur mesure (zéro page builder, code propre, SEO et Core Web Vitals optimisés). En dessous de 2 500 €, on parle de bricolage. Au-dessus de 8 000 € pour un site vitrine simple, on paie un overhead d'agence. Notre offre [WordPress Krealabs](/services/wordpress) se positionne dans la fourchette 4 000-7 000 € pour la majorité des projets vitrine - voir aussi notre article sur [pourquoi WordPress reste le bon choix en 2026](/blog/pourquoi-wordpress-reste-le-bon-choix-2026).",
         },
         {
           title: "Site e-commerce : 8 000 € à 25 000 €",
@@ -2135,7 +2135,7 @@ updates:
         {
           title: "Application SaaS / logiciel métier : 25 000 € à 150 000 €+",
           content:
-            "Quand une PME normande passe du « site vitrine » au « j'ai besoin d'un outil métier custom », le budget change d'échelle. Un MVP SaaS B2B (login, dashboard, 2-3 fonctionnalités centrales) coûte typiquement 25 000-50 000 € à Rouen — en stack moderne (Next.js + Postgres + Stripe). Un logiciel métier complet (multi-utilisateurs, rôles, intégrations ERP/CRM, mobile responsive) entre 60 000 et 150 000 €. Une plateforme complexe (marketplace, multi-tenant, temps réel) au-delà de 150 000 € souvent. Le coût d'un logiciel sur mesure se mesure en jours-homme : compter 600-900 €/j à Rouen, 800-1 200 €/j à Paris. Pour 80 jours de dev (un MVP solide), on est à 50-70 000 €. Voir notre offre [développement web sur mesure](/services/developpement-web).",
+            "Quand une PME normande passe du « site vitrine » au « j'ai besoin d'un outil métier custom », le budget change d'échelle. Un MVP SaaS B2B (login, dashboard, 2-3 fonctionnalités centrales) coûte typiquement 25 000-50 000 € à Rouen - en stack moderne (Next.js + Postgres + Stripe). Un logiciel métier complet (multi-utilisateurs, rôles, intégrations ERP/CRM, mobile responsive) entre 60 000 et 150 000 €. Une plateforme complexe (marketplace, multi-tenant, temps réel) au-delà de 150 000 € souvent. Le coût d'un logiciel sur mesure se mesure en jours-homme : compter 600-900 €/j à Rouen, 800-1 200 €/j à Paris. Pour 80 jours de dev (un MVP solide), on est à 50-70 000 €. Voir notre offre [développement web sur mesure](/services/developpement-web).",
         },
         {
           title: "Application mobile native (iOS + Android) : 30 000 € à 100 000 €",
@@ -2150,21 +2150,21 @@ updates:
         {
           title: "Ce qui fait réellement varier le prix",
           content:
-            "À fonctionnalités égales, les écarts de prix entre agences à Rouen viennent de : (1) Le niveau de personnalisation graphique — un thème ThemeForest customisé prend 3 jours, un design Figma puis intégration custom prend 12 jours. (2) Le code custom vs page builder — Elementor permet de monter un site en 2 jours ; un thème WordPress en PHP/HTML/CSS prend 7-10 jours et offre une perf 3-5x supérieure. (3) Le SEO embarqué — un Yoast configuré, c'est 1h ; une structure complète (schema.org, Core Web Vitals, contenu optimisé), c'est 5-8 jours. (4) La rédaction des contenus — laissée au client ou prise en charge par l'agence (compter +1 000 à +3 000 €). (5) Les intégrations tierces — chaque CRM, ERP, ou outil métier ajoute 2-5 jours. (6) Le niveau de testing et la maintenance post-livraison.",
+            "À fonctionnalités égales, les écarts de prix entre agences à Rouen viennent de : (1) Le niveau de personnalisation graphique - un thème ThemeForest customisé prend 3 jours, un design Figma puis intégration custom prend 12 jours. (2) Le code custom vs page builder - Elementor permet de monter un site en 2 jours ; un thème WordPress en PHP/HTML/CSS prend 7-10 jours et offre une perf 3-5x supérieure. (3) Le SEO embarqué - un Yoast configuré, c'est 1h ; une structure complète (schema.org, Core Web Vitals, contenu optimisé), c'est 5-8 jours. (4) La rédaction des contenus - laissée au client ou prise en charge par l'agence (compter +1 000 à +3 000 €). (5) Les intégrations tierces - chaque CRM, ERP, ou outil métier ajoute 2-5 jours. (6) Le niveau de testing et la maintenance post-livraison.",
         },
         {
           title: "Les coûts cachés qu'on ne vous dit jamais",
           content:
-            "Au-delà du devis initial, comptez : Hébergement (5-30 €/mois pour un site WordPress, 20-200 €/mois pour un Next.js / app — voir [Vercel vs OVH](/blog/vercel-vs-ovh-hebergement-2026)). Nom de domaine (12-20 €/an). Certificat SSL (souvent gratuit avec Let's Encrypt, mais payant chez certains hébergeurs : 80-200 €/an). Photos et illustrations (banques d'images Adobe Stock / Shutterstock : 30-200 €/mois ou packs). Plugins premium (ACF Pro 79$/an, Yoast Premium 99$/an, etc.). Maintenance ([forfait Krealabs](/services/wordpress) : 80-300 €/mois selon le périmètre). Rédaction de contenu si vous n'avez pas le temps (300-800 € par article rédigé professionnellement). Photographie pro pour vos visuels (700-2 500 € par shooting). Au total, sur les 3 premières années, prévoyez +30 à +50% du coût initial pour l'opérationnel.",
+            "Au-delà du devis initial, comptez : Hébergement (5-30 €/mois pour un site WordPress, 20-200 €/mois pour un Next.js / app - voir [Vercel vs OVH](/blog/vercel-vs-ovh-hebergement-2026)). Nom de domaine (12-20 €/an). Certificat SSL (souvent gratuit avec Let's Encrypt, mais payant chez certains hébergeurs : 80-200 €/an). Photos et illustrations (banques d'images Adobe Stock / Shutterstock : 30-200 €/mois ou packs). Plugins premium (ACF Pro 79$/an, Yoast Premium 99$/an, etc.). Maintenance ([forfait Krealabs](/services/wordpress) : 80-300 €/mois selon le périmètre). Rédaction de contenu si vous n'avez pas le temps (300-800 € par article rédigé professionnellement). Photographie pro pour vos visuels (700-2 500 € par shooting). Au total, sur les 3 premières années, prévoyez +30 à +50% du coût initial pour l'opérationnel.",
         },
         {
           title: "Maintenance annuelle : 600 € à 3 600 €/an",
           content:
-            "C'est le poste que toutes les PME normandes sous-estiment. La maintenance d'un site internet à Rouen coûte en 2026 : (a) Maintenance light : 50-100 €/mois — MAJ WordPress + plugins, backups quotidiens, monitoring uptime, support email avec SLA 48h. Pour un site vitrine peu actif. (b) Maintenance évolutive : 200-400 €/mois — Idem + 1-3h de dev mineure incluses chaque mois pour ajustements, optimisations, créations de pages. Pour PME en croissance. (c) Maintenance premium : 600-1 200 €/mois — Idem + SEO continu (suivi positions, optimisations sémantiques), Analytics mensuels avec recommandations, support prioritaire SLA 4h. Pour entreprises dont le site est un canal d'acquisition critique. Voir notre offre [Performance & SEO Krealabs](/services/performance-seo).",
+            "C'est le poste que toutes les PME normandes sous-estiment. La maintenance d'un site internet à Rouen coûte en 2026 : (a) Maintenance light : 50-100 €/mois - MAJ WordPress + plugins, backups quotidiens, monitoring uptime, support email avec SLA 48h. Pour un site vitrine peu actif. (b) Maintenance évolutive : 200-400 €/mois - Idem + 1-3h de dev mineure incluses chaque mois pour ajustements, optimisations, créations de pages. Pour PME en croissance. (c) Maintenance premium : 600-1 200 €/mois - Idem + SEO continu (suivi positions, optimisations sémantiques), Analytics mensuels avec recommandations, support prioritaire SLA 4h. Pour entreprises dont le site est un canal d'acquisition critique. Voir notre offre [Performance & SEO Krealabs](/services/performance-seo).",
         },
       ],
       conclusion:
-        "Le vrai prix d'un site internet à Rouen en 2026 dépend autant de ce qu'on met dedans que de ce qu'on continue à investir après. Un site à 4 000 € sans maintenance vaut moins qu'un site à 3 000 € avec un suivi serré. Avant de demander un devis, posez-vous d'abord : quel ROI ce site doit-il générer ? Quelle est la concurrence ? Quelle est ma capacité à le faire vivre ? Pour un cadrage budgétaire honnête sur votre projet, [contactez-nous](/contact) — on peut faire un échange gratuit pour estimer une fourchette réaliste sans vous engager. Lisez aussi nos [7 critères pour choisir une agence web à Rouen](/blog/choisir-agence-web-rouen-2026).",
+        "Le vrai prix d'un site internet à Rouen en 2026 dépend autant de ce qu'on met dedans que de ce qu'on continue à investir après. Un site à 4 000 € sans maintenance vaut moins qu'un site à 3 000 € avec un suivi serré. Avant de demander un devis, posez-vous d'abord : quel ROI ce site doit-il générer ? Quelle est la concurrence ? Quelle est ma capacité à le faire vivre ? Pour un cadrage budgétaire honnête sur votre projet, [contactez-nous](/contact) - on peut faire un échange gratuit pour estimer une fourchette réaliste sans vous engager. Lisez aussi nos [7 critères pour choisir une agence web à Rouen](/blog/choisir-agence-web-rouen-2026).",
     },
   },
   {
@@ -2181,42 +2181,42 @@ updates:
     tags: ["Agence digitale Rouen", "Agence parisienne", "PME normandie", "TJM", "Tarifs agence web"],
     content: {
       introduction:
-        "Vous êtes une PME normande — basée à Rouen, au Havre, à Évreux, à Caen — et vous cherchez une agence web pour refondre votre site, lancer une app mobile ou développer un logiciel métier. Premier réflexe quasi-systématique : contacter 2-3 agences parisiennes recommandées par votre réseau ou trouvées sur Google. C'est légitime — Paris concentre 60% de l'écosystème digital français. Mais après 2-3 RDV, beaucoup de dirigeants reviennent vers du local. Pourquoi ? Cet article compare objectivement « agence digitale à Paris » vs « agence web à Rouen » sur 8 axes concrets, avec des chiffres et des cas réels du marché normand. Spoiler : il y a de bonnes raisons d'aller à Paris dans certains cas, et de bonnes raisons de rester en Normandie dans d'autres.",
+        "Vous êtes une PME normande - basée à Rouen, au Havre, à Évreux, à Caen - et vous cherchez une agence web pour refondre votre site, lancer une app mobile ou développer un logiciel métier. Premier réflexe quasi-systématique : contacter 2-3 agences parisiennes recommandées par votre réseau ou trouvées sur Google. C'est légitime - Paris concentre 60% de l'écosystème digital français. Mais après 2-3 RDV, beaucoup de dirigeants reviennent vers du local. Pourquoi ? Cet article compare objectivement « agence digitale à Paris » vs « agence web à Rouen » sur 8 axes concrets, avec des chiffres et des cas réels du marché normand. Spoiler : il y a de bonnes raisons d'aller à Paris dans certains cas, et de bonnes raisons de rester en Normandie dans d'autres.",
       sections: [
         {
           title: "1. Le coût horaire : 600 €/j à Rouen vs 800-1 200 €/j à Paris",
           content:
-            "C'est l'écart le plus visible. Le TJM (taux journalier moyen) d'un développeur senior à Rouen tourne autour de 550-700 € en 2026. Le même profil à Paris facture 800-1 200 €. Sur un projet de 60 jours-homme, l'écart total est de 12 000 à 30 000 €. Pour une PME normande qui dispose d'un budget digital de 50 000 €, le rapport qualité/prix est nettement en faveur de Rouen — à expertise technique égale. Attention : il ne faut pas comparer un dev senior parisien à un dev junior rouennais. Mais à profils équivalents (ingénieur diplômé, 5-10 ans d'XP, stack moderne), le différentiel est mécanique : Paris a un coût de vie 35% supérieur, les agences doivent répercuter. À Krealabs, nos prix sont calibrés sur le marché normand, pas parisien.",
+            "C'est l'écart le plus visible. Le TJM (taux journalier moyen) d'un développeur senior à Rouen tourne autour de 550-700 € en 2026. Le même profil à Paris facture 800-1 200 €. Sur un projet de 60 jours-homme, l'écart total est de 12 000 à 30 000 €. Pour une PME normande qui dispose d'un budget digital de 50 000 €, le rapport qualité/prix est nettement en faveur de Rouen - à expertise technique égale. Attention : il ne faut pas comparer un dev senior parisien à un dev junior rouennais. Mais à profils équivalents (ingénieur diplômé, 5-10 ans d'XP, stack moderne), le différentiel est mécanique : Paris a un coût de vie 35% supérieur, les agences doivent répercuter. À Krealabs, nos prix sont calibrés sur le marché normand, pas parisien.",
         },
         {
           title: "2. Présence terrain et déplacements gratuits",
           content:
-            "Une agence digitale à Rouen peut se déplacer chez vous dans la journée pour : un kick-off projet, un workshop UX, un point d'avancement, un debug en présence de votre équipe. Compter 0 € de coût de déplacement pour les sites dans Rouen Métropole, 50-150 € si on doit se rendre à Caen, Évreux ou Le Havre. Une agence parisienne facture le déplacement (compter 500-800 € le AR Paris-Rouen en TGV + temps de trajet) ou le refuse, vous obligeant à monter à Paris. Sur 12 mois de projet, ça représente 6-15 déplacements potentiels. À Krealabs, on inclut systématiquement 2-3 réunions en présentiel par projet à Rouen, et plus si nécessaire — pas de surfacturation. C'est ce qui rend la collaboration vraiment fluide sur des projets >3 mois.",
+            "Une agence digitale à Rouen peut se déplacer chez vous dans la journée pour : un kick-off projet, un workshop UX, un point d'avancement, un debug en présence de votre équipe. Compter 0 € de coût de déplacement pour les sites dans Rouen Métropole, 50-150 € si on doit se rendre à Caen, Évreux ou Le Havre. Une agence parisienne facture le déplacement (compter 500-800 € le AR Paris-Rouen en TGV + temps de trajet) ou le refuse, vous obligeant à monter à Paris. Sur 12 mois de projet, ça représente 6-15 déplacements potentiels. À Krealabs, on inclut systématiquement 2-3 réunions en présentiel par projet à Rouen, et plus si nécessaire - pas de surfacturation. C'est ce qui rend la collaboration vraiment fluide sur des projets >3 mois.",
         },
         {
           title: "3. Compréhension du marché normand et du tissu PME",
           content:
-            "Une agence web rouennaise connaît votre écosystème : la CCI Rouen Métropole, FrenchTech Normandie, l'UNILASALLE, le Pôle Métropolitain Rouen-Seine-Eure, les zones d'activité (Petit-Quevilly, Saint-Étienne-du-Rouvray, Madrillet). Elle a souvent travaillé pour des entreprises de votre secteur en local — agroalimentaire normand, automobile (Renault Cléon), pharma (Sanofi), tourisme normand, services aux particuliers. Cette connaissance terrain rend les cadrages 2-3x plus rapides. Une agence parisienne va devoir « apprendre » votre marché — facturé. Et elle restera plus distante des codes culturels normands, ce qui transparaît parfois dans la communication finale. Lire aussi notre article sur le [SEO local pour PME normandes](/blog/seo-local-rouen-guide-pme).",
+            "Une agence web rouennaise connaît votre écosystème : la CCI Rouen Métropole, FrenchTech Normandie, l'UNILASALLE, le Pôle Métropolitain Rouen-Seine-Eure, les zones d'activité (Petit-Quevilly, Saint-Étienne-du-Rouvray, Madrillet). Elle a souvent travaillé pour des entreprises de votre secteur en local - agroalimentaire normand, automobile (Renault Cléon), pharma (Sanofi), tourisme normand, services aux particuliers. Cette connaissance terrain rend les cadrages 2-3x plus rapides. Une agence parisienne va devoir « apprendre » votre marché - facturé. Et elle restera plus distante des codes culturels normands, ce qui transparaît parfois dans la communication finale. Lire aussi notre article sur le [SEO local pour PME normandes](/blog/seo-local-rouen-guide-pme).",
         },
         {
           title: "4. Réactivité et joignabilité",
           content:
-            "Une agence parisienne avec 30 clients actifs gère les demandes en mode ticket. Vous envoyez un email, vous attendez 48-72h. Une agence rouennaise à taille humaine (5-10 personnes ou moins) répond généralement en quelques heures. À Krealabs, vous avez un développeur joignable directement sur WhatsApp pro, email, ou Slack partagé. Réponse moyenne en heures ouvrées : sous 2h. Cette différence se mesure concrètement quand votre site tombe à 16h un vendredi — l'agence parisienne traite ça lundi 10h, l'agence rouennaise vous appelle dans l'heure. Le différentiel de réactivité explose en cas d'incident production. Important pour des sites qui génèrent du CA — chaque heure de downtime coûte du chiffre.",
+            "Une agence parisienne avec 30 clients actifs gère les demandes en mode ticket. Vous envoyez un email, vous attendez 48-72h. Une agence rouennaise à taille humaine (5-10 personnes ou moins) répond généralement en quelques heures. À Krealabs, vous avez un développeur joignable directement sur WhatsApp pro, email, ou Slack partagé. Réponse moyenne en heures ouvrées : sous 2h. Cette différence se mesure concrètement quand votre site tombe à 16h un vendredi - l'agence parisienne traite ça lundi 10h, l'agence rouennaise vous appelle dans l'heure. Le différentiel de réactivité explose en cas d'incident production. Important pour des sites qui génèrent du CA - chaque heure de downtime coûte du chiffre.",
         },
         {
           title: "5. Le réseau local, levier SEO sous-estimé",
           content:
-            "Pour ressortir sur « agence web Rouen », « plombier Rouen », « cabinet comptable Rouen » dans Google, le SEO local pèse énormément — backlinks depuis des sites locaux (CCI, presse locale, annuaires régionaux), citations cohérentes, fiche Google Business Profile optimisée. Une agence rouennaise a ce réseau préinstallé : Paris-Normandie, Tendance Ouest, FrenchWeb Normandie, annuaires CCI, partenariats avec autres prestataires locaux. Elle peut souvent obtenir un backlink local en passant un coup de fil — un avantage qu'aucune agence parisienne ne peut répliquer. Pour un site qui doit ressortir géographiquement sur Rouen, c'est un asset majeur. Voir notre [guide complet SEO local Normandie](/blog/seo-local-rouen-guide-pme).",
+            "Pour ressortir sur « agence web Rouen », « plombier Rouen », « cabinet comptable Rouen » dans Google, le SEO local pèse énormément - backlinks depuis des sites locaux (CCI, presse locale, annuaires régionaux), citations cohérentes, fiche Google Business Profile optimisée. Une agence rouennaise a ce réseau préinstallé : Paris-Normandie, Tendance Ouest, FrenchWeb Normandie, annuaires CCI, partenariats avec autres prestataires locaux. Elle peut souvent obtenir un backlink local en passant un coup de fil - un avantage qu'aucune agence parisienne ne peut répliquer. Pour un site qui doit ressortir géographiquement sur Rouen, c'est un asset majeur. Voir notre [guide complet SEO local Normandie](/blog/seo-local-rouen-guide-pme).",
         },
         {
           title: "6. Les vrais cas où Paris est meilleur",
           content:
-            "Honnêteté : Paris reste pertinente dans 3 cas. (a) Vous lancez une startup en levée de fonds avec ambition européenne — les agences premium parisiennes (BAM, Marmelab, Premier Octet) ont l'expérience scale-up et l'image qui rassure les investisseurs. (b) Votre projet exige une compétence ultra-spécialisée rare en région (Web3, ML/IA, formal verification crypto, infra fintech). À Rouen, ces profils sont rares ; à Paris, on les trouve plus facilement. (c) Vous avez un volume de projets à 6 chiffres récurrents et vous voulez une agence avec 30+ personnes pour pouvoir absorber la charge en parallèle. Une équipe à 2 ou 5 personnes en région ne couvre pas. Pour 85% des PME normandes (CA <10M€), aucun de ces 3 cas ne s'applique : Rouen est le bon choix.",
+            "Honnêteté : Paris reste pertinente dans 3 cas. (a) Vous lancez une startup en levée de fonds avec ambition européenne - les agences premium parisiennes (BAM, Marmelab, Premier Octet) ont l'expérience scale-up et l'image qui rassure les investisseurs. (b) Votre projet exige une compétence ultra-spécialisée rare en région (Web3, ML/IA, formal verification crypto, infra fintech). À Rouen, ces profils sont rares ; à Paris, on les trouve plus facilement. (c) Vous avez un volume de projets à 6 chiffres récurrents et vous voulez une agence avec 30+ personnes pour pouvoir absorber la charge en parallèle. Une équipe à 2 ou 5 personnes en région ne couvre pas. Pour 85% des PME normandes (CA <10M€), aucun de ces 3 cas ne s'applique : Rouen est le bon choix.",
         },
         {
           title: "7. La fidélisation client : 3x meilleure en région",
           content:
-            "Statistique observée sur notre portefeuille et celui de confrères : les clients d'agences parisiennes changent de prestataire tous les 2-3 ans en moyenne (turn-over commercial fort, perte du contact, augmentation des tarifs). Les clients d'agences rouennaises restent en moyenne 5-7 ans avec la même agence quand la relation est bonne. La proximité géographique et humaine crée une relation différente — vous croisez votre dev au resto, à la conférence locale, à l'événement CCI. Cette continuité réduit drastiquement les coûts de transition (chaque changement d'agence coûte 10-30 000 € en réapprentissage du contexte). Pour une PME qui pense long terme, c'est un avantage économique majeur.",
+            "Statistique observée sur notre portefeuille et celui de confrères : les clients d'agences parisiennes changent de prestataire tous les 2-3 ans en moyenne (turn-over commercial fort, perte du contact, augmentation des tarifs). Les clients d'agences rouennaises restent en moyenne 5-7 ans avec la même agence quand la relation est bonne. La proximité géographique et humaine crée une relation différente - vous croisez votre dev au resto, à la conférence locale, à l'événement CCI. Cette continuité réduit drastiquement les coûts de transition (chaque changement d'agence coûte 10-30 000 € en réapprentissage du contexte). Pour une PME qui pense long terme, c'est un avantage économique majeur.",
         },
         {
           title: "8. Penser local, livrer global : la vraie posture",
@@ -2225,7 +2225,7 @@ updates:
         },
       ],
       conclusion:
-        "Sortir du réflexe « pour faire bien, il faut Paris » est probablement le meilleur arbitrage qu'une PME normande peut faire en 2026. Pour la grande majorité des projets web (sites vitrine, e-commerce, refonte WordPress, applications mobile, logiciels métier), une agence digitale à Rouen offre 30-40% d'économies, 3x plus de proximité, et un niveau technique équivalent. Pour discuter de votre projet — site, app, logiciel — [prenez RDV avec nous](/contact) ou découvrez [comment on travaille](/equipe). Premier échange offert, en présentiel à Rouen ou en visio.",
+        "Sortir du réflexe « pour faire bien, il faut Paris » est probablement le meilleur arbitrage qu'une PME normande peut faire en 2026. Pour la grande majorité des projets web (sites vitrine, e-commerce, refonte WordPress, applications mobile, logiciels métier), une agence digitale à Rouen offre 30-40% d'économies, 3x plus de proximité, et un niveau technique équivalent. Pour discuter de votre projet - site, app, logiciel - [prenez RDV avec nous](/contact) ou découvrez [comment on travaille](/equipe). Premier échange offert, en présentiel à Rouen ou en visio.",
     },
   },
   {
@@ -2242,7 +2242,7 @@ updates:
     tags: ["Digitalisation PME", "Transformation digitale Normandie", "Outils PME", "Stratégie digitale Rouen"],
     content: {
       introduction:
-        "Vous dirigez une PME en Normandie — peut-être à Rouen, au Havre, à Caen ou à Évreux. Votre site web tourne, votre fichier client est dans un Excel, votre prise de RDV se fait par téléphone, et votre dernière newsletter date d'il y a 8 mois. Vous savez qu'il faut « se digitaliser », mais par où commencer ? Cet article liste 10 leviers concrets, testés sur les PME normandes que nous accompagnons chez Krealabs, avec pour chaque levier : l'objectif, le coût estimé, le ROI typique, et la difficulté de mise en œuvre. Inspiré de cas réels — pas de la théorie marketing. À implémenter dans cet ordre, du plus impactant au plus subtil.",
+        "Vous dirigez une PME en Normandie - peut-être à Rouen, au Havre, à Caen ou à Évreux. Votre site web tourne, votre fichier client est dans un Excel, votre prise de RDV se fait par téléphone, et votre dernière newsletter date d'il y a 8 mois. Vous savez qu'il faut « se digitaliser », mais par où commencer ? Cet article liste 10 leviers concrets, testés sur les PME normandes que nous accompagnons chez Krealabs, avec pour chaque levier : l'objectif, le coût estimé, le ROI typique, et la difficulté de mise en œuvre. Inspiré de cas réels - pas de la théorie marketing. À implémenter dans cet ordre, du plus impactant au plus subtil.",
       sections: [
         {
           title: "1. Auditer votre stack actuelle (1 jour, gratuit)",
@@ -2257,7 +2257,7 @@ updates:
         {
           title: "3. Activer et optimiser Google Business Profile (3 jours, gratuit)",
           content:
-            "C'est probablement le levier digital au meilleur ROI absolu — et 60% des PME normandes ne l'exploitent pas. Créer ou réclamer votre fiche Google Business Profile (ex Google My Business), la remplir intégralement (catégories précises, horaires, photos pro, services, posts hebdomadaires), demander 10-20 avis clients à 5 étoiles. Résultat : apparition dans le pack local Google (les 3 résultats avec carte affichés en tête de SERP) sur les requêtes « votre métier + Rouen / Le Havre / Caen ». Notre [guide complet SEO local Rouen](/blog/seo-local-rouen-guide-pme) détaille la méthode pas à pas. Une fiche bien optimisée gagne 2-4 places en 3 mois et génère 30-100 appels/mois pour une PME locale.",
+            "C'est probablement le levier digital au meilleur ROI absolu - et 60% des PME normandes ne l'exploitent pas. Créer ou réclamer votre fiche Google Business Profile (ex Google My Business), la remplir intégralement (catégories précises, horaires, photos pro, services, posts hebdomadaires), demander 10-20 avis clients à 5 étoiles. Résultat : apparition dans le pack local Google (les 3 résultats avec carte affichés en tête de SERP) sur les requêtes « votre métier + Rouen / Le Havre / Caen ». Notre [guide complet SEO local Rouen](/blog/seo-local-rouen-guide-pme) détaille la méthode pas à pas. Une fiche bien optimisée gagne 2-4 places en 3 mois et génère 30-100 appels/mois pour une PME locale.",
         },
         {
           title: "4. Automatiser la prise de RDV (1k €, 4h installation)",
@@ -2277,12 +2277,12 @@ updates:
         {
           title: "7. Investir dans le contenu : blog + LinkedIn (2 articles/mois)",
           content:
-            "Le contenu reste en 2026 le seul levier marketing qui composé sur la durée. Une PME normande qui publie 2 articles/mois sur son blog pendant 24 mois aura : +80-300% de trafic organique vs aucun blog, une autorité SEO bâtie sur ses mots-clés métier, des leads entrants quasi-gratuits. Format gagnant pour une PME : articles de 1 200-2 000 mots, ciblant des intentions locales (« meilleur restaurant Rouen », « comment choisir un comptable à Rouen », « guide pour entrepreneurs normands »). En parallèle : poster 2-3 fois/semaine sur LinkedIn avec votre prénom (pas la page entreprise). C'est ce que nous faisons sur le [blog Krealabs](/blog) — 30+ articles publiés en 18 mois. ROI mesurable au bout de 6-9 mois sur les positions Google.",
+            "Le contenu reste en 2026 le seul levier marketing qui composé sur la durée. Une PME normande qui publie 2 articles/mois sur son blog pendant 24 mois aura : +80-300% de trafic organique vs aucun blog, une autorité SEO bâtie sur ses mots-clés métier, des leads entrants quasi-gratuits. Format gagnant pour une PME : articles de 1 200-2 000 mots, ciblant des intentions locales (« meilleur restaurant Rouen », « comment choisir un comptable à Rouen », « guide pour entrepreneurs normands »). En parallèle : poster 2-3 fois/semaine sur LinkedIn avec votre prénom (pas la page entreprise). C'est ce que nous faisons sur le [blog Krealabs](/blog) - 30+ articles publiés en 18 mois. ROI mesurable au bout de 6-9 mois sur les positions Google.",
         },
         {
           title: "8. Mesurer ce qui compte (gratuit ou ~200 €/mois)",
           content:
-            "Une PME qui ne mesure pas son digital pilote dans le noir. Outils incontournables en 2026 : Google Search Console (gratuit, indispensable pour le SEO — où vous êtes positionné, sur quoi, quels clics), Google Analytics 4 (gratuit, mais lourd à configurer), Vercel Web Analytics (légère, RGPD-compliant, 10 $/mois) ou Plausible (10 $/mois) pour le tracking respectueux de la vie privée, Hotjar (32-99 $/mois) pour les heatmaps et enregistrements de session. Reporting type pour une PME : un dashboard mensuel avec 6-8 KPIs (sessions, conversion form contact, top pages, top sources, position moyenne sur 5 mots-clés cibles, taux de rebond). 1h/mois suffit pour piloter. Sans mesure, impossible d'optimiser.",
+            "Une PME qui ne mesure pas son digital pilote dans le noir. Outils incontournables en 2026 : Google Search Console (gratuit, indispensable pour le SEO - où vous êtes positionné, sur quoi, quels clics), Google Analytics 4 (gratuit, mais lourd à configurer), Vercel Web Analytics (légère, RGPD-compliant, 10 $/mois) ou Plausible (10 $/mois) pour le tracking respectueux de la vie privée, Hotjar (32-99 $/mois) pour les heatmaps et enregistrements de session. Reporting type pour une PME : un dashboard mensuel avec 6-8 KPIs (sessions, conversion form contact, top pages, top sources, position moyenne sur 5 mots-clés cibles, taux de rebond). 1h/mois suffit pour piloter. Sans mesure, impossible d'optimiser.",
         },
         {
           title: "9. Sécuriser la stack : RGPD, backups, 2FA (1-2k €)",
@@ -2292,16 +2292,16 @@ updates:
         {
           title: "10. Anticiper l'IA : la vague qui arrive dans 24 mois",
           content:
-            "Les PME normandes qui auront intégré l'IA dans leurs process en 2027 auront 2-3 ans d'avance opérationnelle. À tester dès aujourd'hui : ChatGPT/Claude pour les premiers brouillons de communication, GitHub Copilot pour le code (gain de 30-50% de productivité dev), Notion AI / Gemini pour l'organisation de connaissances, Whisper pour la transcription automatique des réunions. Coût initial : ~50-200 €/mois par utilisateur. Formation équipe : 1-2 jours. Au-delà des outils grand public, des intégrations sur mesure (chatbot client, automatisation de devis, rédaction newsletter assistée IA) deviennent abordables pour les PME — c'est ce qu'on commence à intégrer sur certains projets Krealabs. Voir notre article sur [l'IA dans une agence digitale](/blog/ai-coding-claude-cursor-agence).",
+            "Les PME normandes qui auront intégré l'IA dans leurs process en 2027 auront 2-3 ans d'avance opérationnelle. À tester dès aujourd'hui : ChatGPT/Claude pour les premiers brouillons de communication, GitHub Copilot pour le code (gain de 30-50% de productivité dev), Notion AI / Gemini pour l'organisation de connaissances, Whisper pour la transcription automatique des réunions. Coût initial : ~50-200 €/mois par utilisateur. Formation équipe : 1-2 jours. Au-delà des outils grand public, des intégrations sur mesure (chatbot client, automatisation de devis, rédaction newsletter assistée IA) deviennent abordables pour les PME - c'est ce qu'on commence à intégrer sur certains projets Krealabs. Voir notre article sur [l'IA dans une agence digitale](/blog/ai-coding-claude-cursor-agence).",
         },
       ],
       conclusion:
-        "Digitaliser une PME normande en 2026 n'a rien d'un grand chantier impressionnant : c'est une suite de petits leviers, activés dans le bon ordre, qui composent sur 18-24 mois. Commencer par l'audit (gratuit) et Google Business Profile (gratuit, ROI immédiat), puis monter en gamme vers la refonte SEO, le CRM, le contenu. Évitez le piège du « tout en même temps » — choisissez 2-3 leviers par trimestre. Pour cadrer ensemble une stratégie de digitalisation adaptée à votre PME, [contactez Krealabs](/contact) ou découvrez nos [services](/services). Voir aussi nos [cas clients de PME normandes digitalisées](/blog/pme-normandes-digital-2026-cas-clients). Premier échange offert, en présentiel à Rouen ou en visio.",
+        "Digitaliser une PME normande en 2026 n'a rien d'un grand chantier impressionnant : c'est une suite de petits leviers, activés dans le bon ordre, qui composent sur 18-24 mois. Commencer par l'audit (gratuit) et Google Business Profile (gratuit, ROI immédiat), puis monter en gamme vers la refonte SEO, le CRM, le contenu. Évitez le piège du « tout en même temps » - choisissez 2-3 leviers par trimestre. Pour cadrer ensemble une stratégie de digitalisation adaptée à votre PME, [contactez Krealabs](/contact) ou découvrez nos [services](/services). Voir aussi nos [cas clients de PME normandes digitalisées](/blog/pme-normandes-digital-2026-cas-clients). Premier échange offert, en présentiel à Rouen ou en visio.",
     },
   },
 
   // ===========================================================================
-  // CALENDRIER ÉDITORIAL 2026 — Articles à publication différée (juin-novembre)
+  // CALENDRIER ÉDITORIAL 2026 - Articles à publication différée (juin-novembre)
   // Le filtre getPublishedPosts() rend ces articles invisibles jusqu'à leur date.
   // Rythme : 2 articles/mois (le 1er et le 15).
   // ===========================================================================
@@ -2325,7 +2325,7 @@ updates:
         {
           title: "1. Audit initial : qu'est-ce qu'on refait, qu'est-ce qu'on garde ?",
           content:
-            "Avant toute ligne de code, on fait un audit complet du site existant. Trois dimensions : (1) Technique — version WP, plugins installés (souvent 25-50 sur un vieux site, dont 60% inutiles ou doublons), thème, hébergement, performances (Lighthouse, GTmetrix). (2) Contenu — quelles pages génèrent du trafic SEO, quelles requêtes elles classent, quelles URLs sont indexées vs orphelines (via Google Search Console). (3) Stratégique — quels parcours utilisateurs convertissent, quel positionnement éditorial, quelle voix. Cet audit dure 3-5 jours, livré sous forme d'un rapport PDF. C'est ce qui détermine ensuite si on fait une \"refonte légère\" (4-7k €) ou \"profonde\" (8-15k €).",
+            "Avant toute ligne de code, on fait un audit complet du site existant. Trois dimensions : (1) Technique - version WP, plugins installés (souvent 25-50 sur un vieux site, dont 60% inutiles ou doublons), thème, hébergement, performances (Lighthouse, GTmetrix). (2) Contenu - quelles pages génèrent du trafic SEO, quelles requêtes elles classent, quelles URLs sont indexées vs orphelines (via Google Search Console). (3) Stratégique - quels parcours utilisateurs convertissent, quel positionnement éditorial, quelle voix. Cet audit dure 3-5 jours, livré sous forme d'un rapport PDF. C'est ce qui détermine ensuite si on fait une \"refonte légère\" (4-7k €) ou \"profonde\" (8-15k €).",
         },
         {
           title: "2. Cartographie des URLs et plan de redirection 301",
@@ -2340,7 +2340,7 @@ updates:
         {
           title: "4. Maquettes Figma : la phase qu'on ne peut pas brûler",
           content:
-            "Cette étape paraît cosmétique. Elle ne l'est pas. C'est ici qu'on cadre 80% des décisions structurelles : nombre de pages, contenu type par page, micro-interactions, design system. On livre toutes les pages clés en haute-fidélité (HF) sur Figma, validées en 2-3 cycles avec le client avant que le dev démarre. Brûler cette phase = corrections coûteuses pendant le dev. On ne démarre pas le code tant que les maquettes ne sont pas validées à 100%. Pour les refontes d'envergure : 8-15 jours de design. Pour les refontes plus légères : 3-5 jours. À noter : on n'utilise jamais de templates Figma achetés — l'identité visuelle est custom à chaque projet.",
+            "Cette étape paraît cosmétique. Elle ne l'est pas. C'est ici qu'on cadre 80% des décisions structurelles : nombre de pages, contenu type par page, micro-interactions, design system. On livre toutes les pages clés en haute-fidélité (HF) sur Figma, validées en 2-3 cycles avec le client avant que le dev démarre. Brûler cette phase = corrections coûteuses pendant le dev. On ne démarre pas le code tant que les maquettes ne sont pas validées à 100%. Pour les refontes d'envergure : 8-15 jours de design. Pour les refontes plus légères : 3-5 jours. À noter : on n'utilise jamais de templates Figma achetés - l'identité visuelle est custom à chaque projet.",
         },
         {
           title: "5. Développement : sprints + démos hebdomadaires",
@@ -2355,7 +2355,7 @@ updates:
         {
           title: "7. Maintenance post-livraison : penser long terme",
           content:
-            "Un site WordPress livré sans maintenance dure 18-24 mois avant de tomber en obsolescence : plugins non mis à jour, faille sécurité, version PHP qui passe en EOL. Sur tous nos projets Krealabs, on propose un forfait maintenance dès la livraison : (a) Light 80-150 €/mois — MAJ WP/plugins, backups, monitoring uptime. (b) Évolutive 200-400 €/mois — Idem + 1-3h de dev mineure incluses chaque mois. (c) Premium 600-1200 €/mois — Idem + SEO continu, analytics mensuels, support SLA 4h. Sans maintenance, votre investissement de refonte (4-15k €) perd 30% de sa valeur par an. Avec, il vit confortablement 5-7 ans.",
+            "Un site WordPress livré sans maintenance dure 18-24 mois avant de tomber en obsolescence : plugins non mis à jour, faille sécurité, version PHP qui passe en EOL. Sur tous nos projets Krealabs, on propose un forfait maintenance dès la livraison : (a) Light 80-150 €/mois - MAJ WP/plugins, backups, monitoring uptime. (b) Évolutive 200-400 €/mois - Idem + 1-3h de dev mineure incluses chaque mois. (c) Premium 600-1200 €/mois - Idem + SEO continu, analytics mensuels, support SLA 4h. Sans maintenance, votre investissement de refonte (4-15k €) perd 30% de sa valeur par an. Avec, il vit confortablement 5-7 ans.",
         },
         {
           title: "Récapitulatif : combien de temps et combien ça coûte",
@@ -2364,7 +2364,7 @@ updates:
         },
       ],
       conclusion:
-        "Une refonte WordPress sérieuse à Rouen en 2026 n'est plus un projet \"on refait le site et c'est bon\" — c'est un investissement long terme qui doit suivre une méthode rigoureuse. Audit, redirections, design custom, dev sans page builder, migration propre, maintenance évolutive : c'est cette chaîne complète qui fait la différence entre un site qui dure 18 mois et un site qui dure 5-7 ans. À Krealabs, nous refusons les projets où le budget ne permet pas cette méthode (un client mécontent qui revient 8 mois après est plus coûteux qu'un client qu'on refuse poliment). Pour discuter de votre refonte, [prenez rendez-vous](/contact) — premier échange offert. Voir aussi nos [services WordPress](/services/wordpress) et [SEO local Rouen](/blog/seo-local-rouen-guide-pme).",
+        "Une refonte WordPress sérieuse à Rouen en 2026 n'est plus un projet \"on refait le site et c'est bon\" - c'est un investissement long terme qui doit suivre une méthode rigoureuse. Audit, redirections, design custom, dev sans page builder, migration propre, maintenance évolutive : c'est cette chaîne complète qui fait la différence entre un site qui dure 18 mois et un site qui dure 5-7 ans. À Krealabs, nous refusons les projets où le budget ne permet pas cette méthode (un client mécontent qui revient 8 mois après est plus coûteux qu'un client qu'on refuse poliment). Pour discuter de votre refonte, [prenez rendez-vous](/contact) - premier échange offert. Voir aussi nos [services WordPress](/services/wordpress) et [SEO local Rouen](/blog/seo-local-rouen-guide-pme).",
     },
   },
 
@@ -2407,7 +2407,7 @@ updates:
         {
           title: "Les frictions : debug RSC + écosystème qui rattrape",
           content:
-            "Tout n'est pas rose. (1) Le debug des Server Components est plus dur : pas de DevTools React côté serveur, console.log dans le terminal Next.js, pas dans le browser. Demande une discipline particulière. (2) L'écosystème React (libraries tierces) met du temps à supporter RSC. Beaucoup de bibliothèques (charts, animations, formulaires complexes) sont encore Client-Component-only. (3) Le tooling TypeScript autour des Server Actions a quelques rough edges (types des arguments / retour à expliciter manuellement). (4) Les patterns émergents (data fetching, mutations, caching) ne sont pas encore standardisés — chaque projet réinvente un peu sa stack.",
+            "Tout n'est pas rose. (1) Le debug des Server Components est plus dur : pas de DevTools React côté serveur, console.log dans le terminal Next.js, pas dans le browser. Demande une discipline particulière. (2) L'écosystème React (libraries tierces) met du temps à supporter RSC. Beaucoup de bibliothèques (charts, animations, formulaires complexes) sont encore Client-Component-only. (3) Le tooling TypeScript autour des Server Actions a quelques rough edges (types des arguments / retour à expliciter manuellement). (4) Les patterns émergents (data fetching, mutations, caching) ne sont pas encore standardisés - chaque projet réinvente un peu sa stack.",
         },
         {
           title: "Migration depuis React 18 : combien ça coûte ?",
@@ -2417,7 +2417,7 @@ updates:
         {
           title: "Verdict après 1 an et demi",
           content:
-            "React 19 est, à notre avis, la version la plus importante depuis 16.8 (introduction des hooks). Les Server Components changent la façon dont on architecture les apps. Pour un projet neuf en 2026 : démarrer directement React 19 + Next.js App Router est le choix par défaut. Pour les projets existants en bonne santé : pas urgent, migrer quand le besoin se présente. Toutes nos nouvelles missions clientes Krealabs depuis mi-2025 sont en React 19 — pas un seul retour en arrière, et les Lighthouse parlent d'eux-mêmes (95+ sur 90% des pages).",
+            "React 19 est, à notre avis, la version la plus importante depuis 16.8 (introduction des hooks). Les Server Components changent la façon dont on architecture les apps. Pour un projet neuf en 2026 : démarrer directement React 19 + Next.js App Router est le choix par défaut. Pour les projets existants en bonne santé : pas urgent, migrer quand le besoin se présente. Toutes nos nouvelles missions clientes Krealabs depuis mi-2025 sont en React 19 - pas un seul retour en arrière, et les Lighthouse parlent d'eux-mêmes (95+ sur 90% des pages).",
         },
       ],
       conclusion:
@@ -2442,34 +2442,34 @@ updates:
         "« Vous me livrez ça en combien de temps ? » C'est la question 2 après le prix dans tous les premiers RDV. La réponse honnête est : ça dépend, mais pas autant qu'on le dit. Un site WordPress vitrine sérieux se livre en 4-6 semaines. Un site complexe avec WooCommerce et intégrations en 8-12 semaines. Tout ce qui est promis à 2-3 semaines avec qualité, c'est du marketing. Cet article décrit le vrai planning semaine par semaine de nos projets WordPress chez Krealabs, pour que vous puissiez calibrer vos attentes.",
       sections: [
         {
-          title: "Semaine 1 — Cadrage & briefs",
+          title: "Semaine 1 - Cadrage & briefs",
           content:
             "Avant de coder une ligne, on cadre. Réunion de kick-off (1-2h), brief détaillé du client sur sa cible, ses objectifs, sa concurrence. Définition du scope précis : nombre de pages, fonctionnalités, contenus à intégrer, intégrations tierces. Validation du périmètre, des deliverables et du planning. Compte aussi : récupération des accès (hébergement actuel, nom de domaine, comptes Google, etc.) et démarrage du collecte de contenus (textes, photos). Si les contenus ne sont pas prêts à la fin de semaine 1, ça décale tout. C'est le piège #1 sur les projets clients : le contenu qui traîne.",
         },
         {
-          title: "Semaines 2-3 — Maquettes Figma haute-fidélité",
+          title: "Semaines 2-3 - Maquettes Figma haute-fidélité",
           content:
-            "Phase design. On livre une première salve de maquettes (homepage + 2-3 pages clés) en haute-fidélité Figma. Validation client en 24-48h, retours, ajustements. Deuxième salve : pages secondaires (services, contact, mentions légales, etc.). Validation. Cycle de retouches : 2-3 rounds maximum, sinon on dérive. À la fin de la semaine 3, les maquettes sont validées à 100% — pas un détail ne bouge ensuite. C'est la condition pour démarrer le dev. Brûler cette phase = corrections coûteuses pendant le dev (multiplie le coût total par 1.3-1.5x).",
+            "Phase design. On livre une première salve de maquettes (homepage + 2-3 pages clés) en haute-fidélité Figma. Validation client en 24-48h, retours, ajustements. Deuxième salve : pages secondaires (services, contact, mentions légales, etc.). Validation. Cycle de retouches : 2-3 rounds maximum, sinon on dérive. À la fin de la semaine 3, les maquettes sont validées à 100% - pas un détail ne bouge ensuite. C'est la condition pour démarrer le dev. Brûler cette phase = corrections coûteuses pendant le dev (multiplie le coût total par 1.3-1.5x).",
         },
         {
-          title: "Semaines 4-5 — Développement thème WordPress",
+          title: "Semaines 4-5 - Développement thème WordPress",
           content:
             "Création d'un thème WordPress custom from scratch. PHP, HTML, Tailwind CSS, JS minimal. Setup ACF Pro pour les custom post types et les blocs flexibles. Intégration des pages au pixel près selon les maquettes Figma. À la fin de semaine 4 : structure complète + intégration desktop des pages clés. Semaine 5 : responsive mobile/tablet, animations légères, intégration des contenus du client. Démo client mi-parcours pour valider l'orientation. Toute correction graphique demandée hors maquettes initiales = ticket additionnel (sinon dérive infinie).",
         },
         {
-          title: "Semaine 6 — Optimisations, SEO, tests",
+          title: "Semaine 6 - Optimisations, SEO, tests",
           content:
             "Phase finition technique. Optimisation Core Web Vitals (objectif Lighthouse 90+ sur toutes les pages clés), compression images (AVIF/WebP), lazy loading, audit accessibilité (contraste, ARIA, navigation clavier). Configuration SEO on-page : balises title/meta, schema.org Article et Organization, sitemap.xml, robots.txt. Tests cross-browser (Chrome, Safari, Firefox, Edge). Tests responsive (mobile / tablet / desktop / wide). Tests des formulaires avec envoi réel d'emails. Préparation du staging final pour validation client.",
         },
         {
-          title: "Semaine 7 — Migration & mise en ligne",
+          title: "Semaine 7 - Migration & mise en ligne",
           content:
             "Si c'est une refonte d'un site existant : plan de redirection 301 importé, ancien site backup, migration DNS, configuration SSL, et redirections 301 testées. Si c'est une création from scratch : configuration domaine, hébergement, SSL Let's Encrypt automatique. Formation du client à l'admin WordPress (1-2h en visio) : comment créer une page, modifier des contenus, ajouter un article de blog. Documentation écrite. Mise en ligne validée par le client. Monitoring 7 jours pour détecter les régressions SEO ou les bugs prod.",
         },
         {
           title: "Les facteurs qui décalent le planning",
           content:
-            "Sur 50+ projets, voici les causes #1 de décalage (par ordre de fréquence) : (1) Contenus du client en retard — pas de textes/photos = pas de mise en ligne. Mitigation : on collecte au plus tôt et on documente clairement les manques. (2) Retours sur les maquettes étirés dans le temps — le client repousse les validations à \"plus tard\". Solution : deadline de validation max 5 jours ouvrés. (3) Scope creep — \"juste une petite fonctionnalité en plus\". On le facture comme un change request, jamais en silence. (4) Intégrations tierces qui buggent (CRM, ERP, paiement) — on prend une marge de 1 semaine sur tout projet avec intégration externe. (5) Indisponibilité du décisionnaire — on bloque les RDV de validation à l'avance dans son agenda.",
+            "Sur 50+ projets, voici les causes #1 de décalage (par ordre de fréquence) : (1) Contenus du client en retard - pas de textes/photos = pas de mise en ligne. Mitigation : on collecte au plus tôt et on documente clairement les manques. (2) Retours sur les maquettes étirés dans le temps - le client repousse les validations à \"plus tard\". Solution : deadline de validation max 5 jours ouvrés. (3) Scope creep - \"juste une petite fonctionnalité en plus\". On le facture comme un change request, jamais en silence. (4) Intégrations tierces qui buggent (CRM, ERP, paiement) - on prend une marge de 1 semaine sur tout projet avec intégration externe. (5) Indisponibilité du décisionnaire - on bloque les RDV de validation à l'avance dans son agenda.",
         },
         {
           title: "Délais types par typologie de projet",
@@ -2496,7 +2496,7 @@ updates:
     tags: ["Stripe Billing", "SaaS B2B", "Abonnements", "Paiement en ligne", "Stripe", "Facturation"],
     content: {
       introduction:
-        "Si vous lancez un SaaS B2B en 2026, vous allez utiliser Stripe Billing. C'est devenu le standard de fait pour la facturation récurrente : Notion, Linear, Vercel, Resend, Plausible — tous l'utilisent. Cet article couvre tout ce qu'il faut savoir pour intégrer proprement Stripe Billing dans votre SaaS, après plusieurs intégrations clients chez Krealabs. Code, webhooks, gestion des cas limites, dunning, factures conformes. Long et technique mais c'est pour ne plus chercher 20 articles sur Stack Overflow.",
+        "Si vous lancez un SaaS B2B en 2026, vous allez utiliser Stripe Billing. C'est devenu le standard de fait pour la facturation récurrente : Notion, Linear, Vercel, Resend, Plausible - tous l'utilisent. Cet article couvre tout ce qu'il faut savoir pour intégrer proprement Stripe Billing dans votre SaaS, après plusieurs intégrations clients chez Krealabs. Code, webhooks, gestion des cas limites, dunning, factures conformes. Long et technique mais c'est pour ne plus chercher 20 articles sur Stack Overflow.",
       sections: [
         {
           title: "Stripe Billing : qu'est-ce qu'on obtient (et ne pas)",
@@ -2534,7 +2534,7 @@ return Response.redirect(session.url, 303);`,
         {
           title: "Webhooks : la partie qu'on ne peut pas brûler",
           content:
-            "Stripe envoie des webhooks à votre app pour chaque événement (`customer.subscription.created`, `invoice.payment_failed`, `subscription.deleted`...). Sans webhook handler, votre base de données ne sait pas qu'un user a payé, annulé, ou été dunné. Les événements critiques à gérer : `checkout.session.completed` (création abonnement post-paiement), `invoice.payment_succeeded` (renouvellement OK, prolonger l'accès), `invoice.payment_failed` (paiement échoué, downgrade graceful), `customer.subscription.deleted` (annulation, supprimer accès). Sécuriser le webhook avec la signature HMAC envoyée par Stripe — sinon n'importe qui peut spoofer.",
+            "Stripe envoie des webhooks à votre app pour chaque événement (`customer.subscription.created`, `invoice.payment_failed`, `subscription.deleted`...). Sans webhook handler, votre base de données ne sait pas qu'un user a payé, annulé, ou été dunné. Les événements critiques à gérer : `checkout.session.completed` (création abonnement post-paiement), `invoice.payment_succeeded` (renouvellement OK, prolonger l'accès), `invoice.payment_failed` (paiement échoué, downgrade graceful), `customer.subscription.deleted` (annulation, supprimer accès). Sécuriser le webhook avec la signature HMAC envoyée par Stripe - sinon n'importe qui peut spoofer.",
           code: `// Validation signature webhook (Next.js Route Handler)
 export async function POST(req: Request) {
   const sig = req.headers.get('stripe-signature')!;
@@ -2565,7 +2565,7 @@ export async function POST(req: Request) {
         {
           title: "Customer Portal : ne réinventez pas ce qui existe",
           content:
-            "Stripe propose un Customer Portal hébergé : page où vos clients gèrent leur abonnement (changer de plan, mettre à jour CB, télécharger factures, annuler). Vous n'avez QUE besoin de leur fournir un lien — Stripe gère tout, conformément aux régulations (RGPD, droit consommateur, conformité FR). Notre recommandation : 100% des SaaS Krealabs utilisent le Customer Portal au lieu de coder une UI custom. Configurer dans Dashboard Stripe : quels plans sont upgradeables, autoriser ou non l'annulation immédiate, mentions légales custom.",
+            "Stripe propose un Customer Portal hébergé : page où vos clients gèrent leur abonnement (changer de plan, mettre à jour CB, télécharger factures, annuler). Vous n'avez QUE besoin de leur fournir un lien - Stripe gère tout, conformément aux régulations (RGPD, droit consommateur, conformité FR). Notre recommandation : 100% des SaaS Krealabs utilisent le Customer Portal au lieu de coder une UI custom. Configurer dans Dashboard Stripe : quels plans sont upgradeables, autoriser ou non l'annulation immédiate, mentions légales custom.",
           code: `// Génère un lien Customer Portal pour un user connecté
 const session = await stripe.billingPortal.sessions.create({
   customer: user.stripeCustomerId,
@@ -2576,11 +2576,11 @@ return Response.redirect(session.url);`,
         {
           title: "Conformité FR : TVA, factures, mentions légales",
           content:
-            "Pour un SaaS facturant en France ou EU : (1) Activer **Stripe Tax** (0.5% sur les transactions taxées) qui calcule TVA automatiquement selon pays + type client (B2C, B2B avec VAT EU). Sans Stripe Tax, vous devez gérer la TVA manuellement — déconseillé au-delà de 50 clients. (2) Factures Stripe ont mentions légales auto-générées : votre raison sociale, SIRET, TVA intracom + celles du client. Activer dans Settings > Tax. (3) Pour B2B EU : `tax_id_data` sur le Customer pour qu'il rentre son VAT, Stripe applique le mécanisme d'autoliquidation automatiquement.",
+            "Pour un SaaS facturant en France ou EU : (1) Activer **Stripe Tax** (0.5% sur les transactions taxées) qui calcule TVA automatiquement selon pays + type client (B2C, B2B avec VAT EU). Sans Stripe Tax, vous devez gérer la TVA manuellement - déconseillé au-delà de 50 clients. (2) Factures Stripe ont mentions légales auto-générées : votre raison sociale, SIRET, TVA intracom + celles du client. Activer dans Settings > Tax. (3) Pour B2B EU : `tax_id_data` sur le Customer pour qu'il rentre son VAT, Stripe applique le mécanisme d'autoliquidation automatiquement.",
         },
       ],
       conclusion:
-        "Stripe Billing est devenu indispensable pour un SaaS B2B sérieux. Compter 3-5 jours de dev pour une intégration MVP propre (checkout + webhooks + Customer Portal + Stripe Tax), 1-2 semaines pour une intégration premium avec custom invoicing, multi-currency, et metering. Sur les SaaS Krealabs, c'est la première brique qu'on met en place après l'auth — sans monétisation, pas de SaaS. Pour intégrer Stripe Billing sur votre projet, [contactez-nous](/contact). Voir aussi notre [comparateur Stripe vs PayPal](/comparateur/stripe-vs-paypal), notre [lexique sur Stripe](/lexique/stripe), et nos [services développement web](/services/developpement-web).",
+        "Stripe Billing est devenu indispensable pour un SaaS B2B sérieux. Compter 3-5 jours de dev pour une intégration MVP propre (checkout + webhooks + Customer Portal + Stripe Tax), 1-2 semaines pour une intégration premium avec custom invoicing, multi-currency, et metering. Sur les SaaS Krealabs, c'est la première brique qu'on met en place après l'auth - sans monétisation, pas de SaaS. Pour intégrer Stripe Billing sur votre projet, [contactez-nous](/contact). Voir aussi notre [comparateur Stripe vs PayPal](/comparateur/stripe-vs-paypal), notre [lexique sur Stripe](/lexique/stripe), et nos [services développement web](/services/developpement-web).",
     },
   },
 
@@ -2601,54 +2601,54 @@ return Response.redirect(session.url);`,
         "L'été 2026 est un moment propice pour faire le bilan des projets digitaux PME en Normandie. Cet article présente 10 retours d'expérience anonymisés (NDA oblige) issus de notre portefeuille Krealabs ou de confrères locaux, couvrant Rouen, Le Havre, Caen et Évreux. Chaque cas inclut le contexte initial, les chantiers digitaux engagés, et les résultats mesurés. Objectif : montrer aux dirigeants de PME normandes ce qui marche concrètement en 2026, hors blabla marketing.",
       sections: [
         {
-          title: "Cas 1 — Cabinet d'avocats à Rouen (15 collaborateurs)",
+          title: "Cas 1 - Cabinet d'avocats à Rouen (15 collaborateurs)",
           content:
             "**Contexte :** Site WordPress 2018, plus mis à jour depuis 4 ans, conforme ni Yoast SEO ni au RIN actuel. Aucune génération de leads digital, tout passe par bouche-à-oreille. **Chantier :** refonte complète en 6 semaines, thème custom avec ACF, pages dédiées par spécialité (droit du travail, droit des affaires, etc.). Schema LegalService. **Résultat :** 6 mois après, 14 nouveaux clients sont arrivés via le site (vs 0 auparavant). Conversion 2.3% sur la page contact. CTR Google +85% sur les requêtes \"avocat droit du travail Rouen\".",
         },
         {
-          title: "Cas 2 — Boulangerie premium au Havre (3 boutiques)",
+          title: "Cas 2 - Boulangerie premium au Havre (3 boutiques)",
           content:
             "**Contexte :** Pas de site, présence Instagram seulement. Le dirigeant voulait ouvrir une 4e boutique et avait besoin d'un site pour rassurer banques et investisseurs sur la \"professionnalisation\". **Chantier :** site vitrine WordPress en 4 semaines, fiche Google Business optimisée pour chaque boutique, photos pro, intégration Instagram en galerie. **Résultat :** la banque a validé le prêt expansion (le site a pesé dans la décision selon le banquier), +30% de followers Instagram via les liens croisés, file d'attente le samedi matin doublée en 6 mois.",
         },
         {
-          title: "Cas 3 — Atelier mécanique à Évreux (8 employés)",
+          title: "Cas 3 - Atelier mécanique à Évreux (8 employés)",
           content:
             "**Contexte :** Garage spécialisé véhicules anciens et de prestige, clientèle vieillissante, pas de relève dans la clientèle 30-50 ans. **Chantier :** site WordPress avec catalogue véhicules en stock, formulaire de pré-devis (type véhicule + symptôme + urgence), SEO local sur \"garage Évreux\" et requêtes spécialisées (\"révision Porsche Évreux\"). **Résultat :** +400% de demandes de devis en 8 mois, dont 60% de la nouvelle cible 30-50 ans. Le dirigeant a embauché un mécanicien supplémentaire en avril 2026.",
         },
         {
-          title: "Cas 4 — Conserverie artisanale en Calvados (12 employés)",
+          title: "Cas 4 - Conserverie artisanale en Calvados (12 employés)",
           content:
             "**Contexte :** Produits du terroir (rillettes, terrines, conserves), vente sur les marchés et 2 magasins. Aucun e-commerce. Demande croissante de touristes pour expédier. **Chantier :** site e-commerce WooCommerce en 8 semaines, intégration Stripe + Mondial Relay + Colissimo, photos produits pro. **Résultat :** premier mois : 800 € de CA en ligne. 6 mois plus tard : 8 500 €/mois de CA e-commerce, devenu le 3e canal de vente après les marchés et le magasin de Caen. Investissement initial rentabilisé en 9 mois.",
         },
         {
-          title: "Cas 5 — Cabinet comptable à Rouen (6 experts-comptables)",
+          title: "Cas 5 - Cabinet comptable à Rouen (6 experts-comptables)",
           content:
             "**Contexte :** Site WordPress 2020 honnête mais sans portail client, échanges de documents par email (risque RGPD), surcharge administrative. **Chantier :** ajout d'un espace client custom avec login, upload sécurisé de documents (HDS), accès historique bilans/factures. **Résultat :** -40% de temps passé sur les échanges email basiques, satisfaction client en hausse mesurée (NPS +18 points), gain de productivité utilisé pour prendre 3 nouveaux clients sans embaucher.",
         },
         {
-          title: "Cas 6 — Startup tech à Rouen (lancement MVP)",
+          title: "Cas 6 - Startup tech à Rouen (lancement MVP)",
           content:
             "**Contexte :** 2 fondateurs sortis d'école d'ingé, idée de SaaS B2B (gestion d'événements pour collectivités), pas de tech maison. **Chantier :** MVP en 10 semaines (Next.js + Postgres Neon + Stripe Billing + NextAuth), 6 fonctionnalités clés. **Résultat :** 12 collectivités normandes ont signé un contrat dans les 6 mois post-lancement (5 villes, 4 communautés de communes, 3 conseils départementaux régionaux). Levée de fonds (seed) en cours d'écriture grâce aux premières metrics. La startup tourne en autonomie depuis (Krealabs intervient en mode maintenance évolutive).",
         },
         {
-          title: "Cas 7 — Magasin de meubles à Caen (4 boutiques)",
+          title: "Cas 7 - Magasin de meubles à Caen (4 boutiques)",
           content:
             "**Contexte :** Réseau 4 magasins en Calvados et Manche, site corporate vieux et sans intérêt commercial. **Chantier :** refonte avec catalogue produits synchronisé au logiciel de gestion interne (sync stock toutes les 4h), fiche par magasin avec horaires + Google Maps, devis en ligne. **Résultat :** +35% de visites magasin attribuables au site (mesuré via codes promo en ligne valables uniquement en magasin), 1 200 demandes de devis en 6 mois (vs 100 auparavant), reconversion d'un employé vers la gestion du site/SEO en interne.",
         },
         {
-          title: "Cas 8 — Cabinet médical pluridisciplinaire à Évreux",
+          title: "Cas 8 - Cabinet médical pluridisciplinaire à Évreux",
           content:
             "**Contexte :** 4 médecins associés, secrétariat débordé par les appels téléphoniques pour RDV, perte de patients qui ne réussissaient pas à joindre. **Chantier :** site WordPress conforme CNOM avec module Doctolib intégré, page par praticien, page \"téléconsultation\" pour les nouveaux services. **Résultat :** -60% d'appels au secrétariat (RDV pris directement en ligne), capacité à prendre 2 nouveaux médecins associés sans surcharger le secrétariat.",
         },
         {
-          title: "Cas 9 — Hôtel-restaurant Côte d'Albâtre",
+          title: "Cas 9 - Hôtel-restaurant Côte d'Albâtre",
           content:
             "**Contexte :** Hôtel 3* à Fécamp, ~80% de réservations via Booking.com (commission 18%). Site obsolète, pas de moteur de réservation direct. **Chantier :** refonte Next.js + intégration Mews PMS + Stripe pour les réservations directes, multilingue FR/EN/DE, photos pro + visites 360°. **Résultat :** 6 mois plus tard, 35% des réservations passent en direct (vs 0%). Économie Booking estimée : 32 000 €/an. Investissement initial rentabilisé en 14 mois.",
         },
         {
-          title: "Cas 10 — Coopérative agricole en Eure",
+          title: "Cas 10 - Coopérative agricole en Eure",
           content:
-            "**Contexte :** Coopérative regroupant 80 agriculteurs locaux, vente B2B en gros + une boutique. Pas de digital. **Chantier :** plateforme custom Next.js pour les commandes B2B des restaurateurs/épiceries (login agriculteurs et clients pro, catalogue saisonnier, paniers, commandes hebdomadaires récurrentes). **Résultat :** +45 clients restaurateurs en 12 mois, +180k € de CA additionnel, simplification radicale du process commande (avant : tableau Excel partagé par email — maintenant : interface dédiée).",
+            "**Contexte :** Coopérative regroupant 80 agriculteurs locaux, vente B2B en gros + une boutique. Pas de digital. **Chantier :** plateforme custom Next.js pour les commandes B2B des restaurateurs/épiceries (login agriculteurs et clients pro, catalogue saisonnier, paniers, commandes hebdomadaires récurrentes). **Résultat :** +45 clients restaurateurs en 12 mois, +180k € de CA additionnel, simplification radicale du process commande (avant : tableau Excel partagé par email - maintenant : interface dédiée).",
         },
       ],
       conclusion:
@@ -2680,7 +2680,7 @@ return Response.redirect(session.url);`,
         {
           title: "Firebase Cloud Messaging (FCM) : le poids lourd Google",
           content:
-            "Firebase Cloud Messaging est le service notifications de Google. **Pricing :** 100% gratuit, même à très grande échelle. **Forces :** illimité gratuit, intégration native Android (c'est l'infra qui propulse les push iOS et Android sous le capot — même OneSignal utilise FCM en backend pour Android), SDK robuste maintenu par Google. **Faiblesses :** dashboard FCM minimaliste (pas de segmentation, pas d'A/B test, pas d'analytics avancées — il faut construire votre propre couche au-dessus), setup iOS plus complexe (configuration Apple Developer + APNs), pas de support email/SMS intégré. **Idéal pour :** projets matures avec une équipe tech qui veut son propre outil de gestion notifications par-dessus FCM gratuit.",
+            "Firebase Cloud Messaging est le service notifications de Google. **Pricing :** 100% gratuit, même à très grande échelle. **Forces :** illimité gratuit, intégration native Android (c'est l'infra qui propulse les push iOS et Android sous le capot - même OneSignal utilise FCM en backend pour Android), SDK robuste maintenu par Google. **Faiblesses :** dashboard FCM minimaliste (pas de segmentation, pas d'A/B test, pas d'analytics avancées - il faut construire votre propre couche au-dessus), setup iOS plus complexe (configuration Apple Developer + APNs), pas de support email/SMS intégré. **Idéal pour :** projets matures avec une équipe tech qui veut son propre outil de gestion notifications par-dessus FCM gratuit.",
         },
         {
           title: "Expo Notifications : l'ergonomique pour Expo-first",
@@ -2727,16 +2727,16 @@ await fetch('https://exp.host/--/api/v2/push/send', {
         {
           title: "Pièges classiques (les 5 erreurs qu'on voit le plus)",
           content:
-            "(1) **Oublier de demander la permission au bon moment** : ne demandez pas la permission au launch de l'app — l'utilisateur dit non par réflexe. Attendez un moment contextuel (après une action concluante, comme un premier achat). (2) **Ne pas gérer le token refresh** : les tokens push expirent ou changent. Stocker le token côté backend mais aussi vérifier sa validité régulièrement. (3) **Envoyer trop de notifications** : opt-out = utilisateur perdu. Limiter à 2-3 notifs/semaine max sauf push transactionnel. (4) **Pas de deep linking** : tap sur la notif doit ouvrir le bon écran de l'app, pas la home. (5) **Pas de fallback email** : si l'utilisateur a désactivé les push, envoyer par email pour les notifs critiques.",
+            "(1) **Oublier de demander la permission au bon moment** : ne demandez pas la permission au launch de l'app - l'utilisateur dit non par réflexe. Attendez un moment contextuel (après une action concluante, comme un premier achat). (2) **Ne pas gérer le token refresh** : les tokens push expirent ou changent. Stocker le token côté backend mais aussi vérifier sa validité régulièrement. (3) **Envoyer trop de notifications** : opt-out = utilisateur perdu. Limiter à 2-3 notifs/semaine max sauf push transactionnel. (4) **Pas de deep linking** : tap sur la notif doit ouvrir le bon écran de l'app, pas la home. (5) **Pas de fallback email** : si l'utilisateur a désactivé les push, envoyer par email pour les notifs critiques.",
         },
         {
           title: "Notre recommandation Krealabs",
           content:
-            "Pour 80% des projets clients Krealabs : **Expo Notifications** sur MVP/early-stage, migration vers **FCM** quand on dépasse 50k utilisateurs ou quand le besoin de segmentation arrive. **OneSignal** réservé aux clients qui veulent le confort dashboard et acceptent le surcoût (~50-200 €/mois). Pour les cas industriels (banques, télcos, retail à grande échelle avec millions d'utilisateurs), on monte des solutions custom sur FCM + outils internes — mais ces projets sont rares en agence à taille humaine.",
+            "Pour 80% des projets clients Krealabs : **Expo Notifications** sur MVP/early-stage, migration vers **FCM** quand on dépasse 50k utilisateurs ou quand le besoin de segmentation arrive. **OneSignal** réservé aux clients qui veulent le confort dashboard et acceptent le surcoût (~50-200 €/mois). Pour les cas industriels (banques, télcos, retail à grande échelle avec millions d'utilisateurs), on monte des solutions custom sur FCM + outils internes - mais ces projets sont rares en agence à taille humaine.",
         },
       ],
       conclusion:
-        "Les notifications push restent un canal de retention essentiel en 2026 — bien utilisées (peu, contextuelles, valeur ajoutée), elles boostent la rétention 7j de +20-40%. Mal utilisées (spam), elles font fuir 50% des utilisateurs. Choisir le bon outil (Expo / FCM / OneSignal) selon votre échelle et votre équipe. Pour intégrer des notifications push sur votre app React Native, [contactez Krealabs](/contact). Voir aussi notre [comparateur React Native vs Flutter](/comparateur/react-native-vs-flutter), notre [stack React Native](/technologies/react-native), notre [premier guide notifications push Expo + Firebase](/blog/notifications-push-expo-firebase), et nos [services applications mobiles](/services/applications-mobile).",
+        "Les notifications push restent un canal de retention essentiel en 2026 - bien utilisées (peu, contextuelles, valeur ajoutée), elles boostent la rétention 7j de +20-40%. Mal utilisées (spam), elles font fuir 50% des utilisateurs. Choisir le bon outil (Expo / FCM / OneSignal) selon votre échelle et votre équipe. Pour intégrer des notifications push sur votre app React Native, [contactez Krealabs](/contact). Voir aussi notre [comparateur React Native vs Flutter](/comparateur/react-native-vs-flutter), notre [stack React Native](/technologies/react-native), notre [premier guide notifications push Expo + Firebase](/blog/notifications-push-expo-firebase), et nos [services applications mobiles](/services/applications-mobile).",
     },
   },
 
@@ -2764,7 +2764,7 @@ await fetch('https://exp.host/--/api/v2/push/send', {
         {
           title: "Performance : les 5 leviers à activer en priorité",
           content:
-            "(1) **Images en AVIF/WebP** avec lazy loading natif. Next.js Image les fait par défaut, sur WordPress utiliser Imagify ou ShortPixel. (2) **Preload des fonts critiques** : `<link rel=\"preload\" as=\"font\" type=\"font/woff2\" crossorigin>` sur les 1-2 fonts utilisées au-dessus de la ligne de flottaison. (3) **Tree-shaking et lazy loading JS** : les composants lourds (charts, vidéo embeds) en dynamic import. (4) **CDN edge** : Vercel ou Cloudflare devant le serveur — divise LCP par 2-3 sur les visiteurs lointains géographiquement. (5) **Critical CSS inline** : pour les sites WordPress, des plugins comme WP Rocket ou Autoptimize automatisent.",
+            "(1) **Images en AVIF/WebP** avec lazy loading natif. Next.js Image les fait par défaut, sur WordPress utiliser Imagify ou ShortPixel. (2) **Preload des fonts critiques** : `<link rel=\"preload\" as=\"font\" type=\"font/woff2\" crossorigin>` sur les 1-2 fonts utilisées au-dessus de la ligne de flottaison. (3) **Tree-shaking et lazy loading JS** : les composants lourds (charts, vidéo embeds) en dynamic import. (4) **CDN edge** : Vercel ou Cloudflare devant le serveur - divise LCP par 2-3 sur les visiteurs lointains géographiquement. (5) **Critical CSS inline** : pour les sites WordPress, des plugins comme WP Rocket ou Autoptimize automatisent.",
         },
         {
           title: "LCP < 2.5s : la métrique-reine",
@@ -2798,7 +2798,7 @@ await fetch('https://exp.host/--/api/v2/push/send', {
         },
       ],
       conclusion:
-        "Atteindre 90-100 sur les 4 axes Lighthouse n'est pas réservé aux experts. Avec 6-12h de travail méthodique sur un site WordPress moyen (et nettement moins sur un Next.js récent), vous passez d'un Lighthouse 50-70 à 95+. L'impact mesurable : +5-15% de trafic SEO en 2-4 mois, +5-10% de conversion. C'est ce qu'on applique en standard sur tous les projets Krealabs avant livraison. Pour auditer votre site existant, [contactez-nous](/contact) — premier diagnostic offert. Voir aussi notre [article sur Core Web Vitals 2026](/blog/core-web-vitals-2026-inp), notre [méthode d'audit Lighthouse](/blog/audit-lighthouse-methode-agence), et nos [services Performance & SEO](/services/performance-seo).",
+        "Atteindre 90-100 sur les 4 axes Lighthouse n'est pas réservé aux experts. Avec 6-12h de travail méthodique sur un site WordPress moyen (et nettement moins sur un Next.js récent), vous passez d'un Lighthouse 50-70 à 95+. L'impact mesurable : +5-15% de trafic SEO en 2-4 mois, +5-10% de conversion. C'est ce qu'on applique en standard sur tous les projets Krealabs avant livraison. Pour auditer votre site existant, [contactez-nous](/contact) - premier diagnostic offert. Voir aussi notre [article sur Core Web Vitals 2026](/blog/core-web-vitals-2026-inp), notre [méthode d'audit Lighthouse](/blog/audit-lighthouse-methode-agence), et nos [services Performance & SEO](/services/performance-seo).",
     },
   },
 
@@ -2998,7 +2998,7 @@ const config = {
         {
           title: "Pourquoi WooCommerce pour le B2B en France",
           content:
-            "Trois raisons agence : (1) **Écosystème FR mature** : extensions natives pour Sage, EBP, Cegid, Divalto, MyUnisoft (vs Shopify où c'est principalement US). (2) **Tarifs sur mesure** : extensions B2B for WooCommerce, Wholesale Suite, ou code custom permettent des tarifs par client, par groupe, par volume — impossibles à reproduire simplement sur Shopify. (3) **Pas de frais de transaction** : 0% chez WooCommerce vs 0.5-2% sur Shopify Plus. Sur des paniers B2B moyens à 800-3000 €, l'écart devient massif sur l'année.",
+            "Trois raisons agence : (1) **Écosystème FR mature** : extensions natives pour Sage, EBP, Cegid, Divalto, MyUnisoft (vs Shopify où c'est principalement US). (2) **Tarifs sur mesure** : extensions B2B for WooCommerce, Wholesale Suite, ou code custom permettent des tarifs par client, par groupe, par volume - impossibles à reproduire simplement sur Shopify. (3) **Pas de frais de transaction** : 0% chez WooCommerce vs 0.5-2% sur Shopify Plus. Sur des paniers B2B moyens à 800-3000 €, l'écart devient massif sur l'année.",
         },
         {
           title: "Extensions WooCommerce B2B incontournables",
@@ -3013,7 +3013,7 @@ const config = {
         {
           title: "Devis vs commande directe : workflow B2B classique",
           content:
-            "Dans le B2B classique, le client ajoute des produits au panier MAIS n'achète pas directement — il demande un devis. Le commercial valide le devis (parfois avec négociation de remise), envoie un PDF, le client valide, puis paiement à 30j sur facture. Workflow technique : (1) bouton \"Ajouter au panier\" → \"Demander un devis\", (2) panier → \"Soumettre la demande\", (3) email automatique au commercial avec PDF du devis pré-rempli, (4) le commercial édite, valide, renvoie au client, (5) le client clique \"Accepter\" depuis l'email → bon de commande, (6) génération facture à expédition. Tout ça avec B2BKing en standard ou code custom.",
+            "Dans le B2B classique, le client ajoute des produits au panier MAIS n'achète pas directement - il demande un devis. Le commercial valide le devis (parfois avec négociation de remise), envoie un PDF, le client valide, puis paiement à 30j sur facture. Workflow technique : (1) bouton \"Ajouter au panier\" → \"Demander un devis\", (2) panier → \"Soumettre la demande\", (3) email automatique au commercial avec PDF du devis pré-rempli, (4) le commercial édite, valide, renvoie au client, (5) le client clique \"Accepter\" depuis l'email → bon de commande, (6) génération facture à expédition. Tout ça avec B2BKing en standard ou code custom.",
         },
         {
           title: "Intégration ERP : Sage, EBP, Cegid",
@@ -3080,7 +3080,7 @@ const config = {
         {
           title: "Vercel (US, EU regions) : le DX champion",
           content:
-            "**Pricing :** Hobby gratuit, Pro 20 $/mois/utilisateur, Enterprise sur devis. **Forces :** DX inégalée pour Next.js, edge runtime mondial, preview deployments par PR, Vercel Postgres / KV / Blob intégrés, Speed Insights. Régions EU disponibles (mais le control plane reste US — sensibilité RGPD à analyser). **Faiblesses :** entreprise US (impact Cloud Act US, à arbitrer selon votre cas), coût qui peut grimper sur les gros sites (bandwidth). **Idéal pour :** projets Next.js avec besoin de DX premium, sites internationaux. Voir [notre comparateur Vercel vs Netlify](/comparateur/vercel-vs-netlify).",
+            "**Pricing :** Hobby gratuit, Pro 20 $/mois/utilisateur, Enterprise sur devis. **Forces :** DX inégalée pour Next.js, edge runtime mondial, preview deployments par PR, Vercel Postgres / KV / Blob intégrés, Speed Insights. Régions EU disponibles (mais le control plane reste US - sensibilité RGPD à analyser). **Faiblesses :** entreprise US (impact Cloud Act US, à arbitrer selon votre cas), coût qui peut grimper sur les gros sites (bandwidth). **Idéal pour :** projets Next.js avec besoin de DX premium, sites internationaux. Voir [notre comparateur Vercel vs Netlify](/comparateur/vercel-vs-netlify).",
         },
         {
           title: "Kinsta : le WordPress premium",
@@ -3137,7 +3137,7 @@ const config = {
         {
           title: "Schema.org enrichi : Article, FAQPage, HowTo",
           content:
-            "Les LLMs lisent les schemas. Trois schemas particulièrement utiles pour la citation : (1) **Article** schema avec author identifiable (E-E-A-T) — voir [notre lexique E-E-A-T](/lexique/e-e-a-t). (2) **FAQPage** schema sur les FAQ : chaque Q&A devient une réponse citable directement. (3) **HowTo** schema sur les guides procéduraux : Perplexity et Claude Sonar citent fréquemment les guides HowTo avec leurs étapes structurées. Investissement : 1 jour de dev pour mettre en place les schemas sur les 10 pages-clés d'un site PME. Impact mesurable : +30-80% de citations IA en 3 mois.",
+            "Les LLMs lisent les schemas. Trois schemas particulièrement utiles pour la citation : (1) **Article** schema avec author identifiable (E-E-A-T) - voir [notre lexique E-E-A-T](/lexique/e-e-a-t). (2) **FAQPage** schema sur les FAQ : chaque Q&A devient une réponse citable directement. (3) **HowTo** schema sur les guides procéduraux : Perplexity et Claude Sonar citent fréquemment les guides HowTo avec leurs étapes structurées. Investissement : 1 jour de dev pour mettre en place les schemas sur les 10 pages-clés d'un site PME. Impact mesurable : +30-80% de citations IA en 3 mois.",
         },
         {
           title: "Citations externes : la nouvelle métrique d'autorité",
@@ -3152,11 +3152,11 @@ const config = {
         {
           title: "Méthode Krealabs : 5 étapes pour s'adapter",
           content:
-            "(1) **Audit AI search** sur 10-20 requêtes cibles : taper sur ChatGPT/Perplexity/Claude, noter présence ou absence. (2) **Mise en place llms.txt** structuré (30 min). (3) **Enrichissement schemas** (Article + FAQPage + HowTo) sur les pages-clés (1 jour). (4) **Restructuration des articles** pour favoriser la citation (Q&A, listes, chiffres précis) — sur les 10-20 articles les plus stratégiques (1-2 semaines). (5) **Suivi mensuel** des citations + ajustements. Budget total : 3 000-8 000 € pour une PME, ROI mesurable en 4-6 mois. C'est ce qu'on propose en service [Performance & SEO](/services/performance-seo).",
+            "(1) **Audit AI search** sur 10-20 requêtes cibles : taper sur ChatGPT/Perplexity/Claude, noter présence ou absence. (2) **Mise en place llms.txt** structuré (30 min). (3) **Enrichissement schemas** (Article + FAQPage + HowTo) sur les pages-clés (1 jour). (4) **Restructuration des articles** pour favoriser la citation (Q&A, listes, chiffres précis) - sur les 10-20 articles les plus stratégiques (1-2 semaines). (5) **Suivi mensuel** des citations + ajustements. Budget total : 3 000-8 000 € pour une PME, ROI mesurable en 4-6 mois. C'est ce qu'on propose en service [Performance & SEO](/services/performance-seo).",
         },
       ],
       conclusion:
-        "L'AI search n'est plus un buzzword 2024 — c'est 20% des recherches en 2026 et ça continue de monter. Les agences qui n'adaptent pas leur méthode SEO seront pénalisées en 2027-2028. Les leviers (llms.txt, schemas, structure de contenu) sont accessibles à toute PME pour quelques milliers d'euros. Le terrain n'est pas encore saturé : c'est le moment d'y être avant la concurrence. Pour cadrer une stratégie AI search adaptée à votre projet, [contactez Krealabs](/contact). Voir aussi notre [lexique schema.org](/lexique/schema-org), notre [llms.txt](/llms.txt), et notre [guide SEO local Rouen](/blog/seo-local-rouen-guide-pme).",
+        "L'AI search n'est plus un buzzword 2024 - c'est 20% des recherches en 2026 et ça continue de monter. Les agences qui n'adaptent pas leur méthode SEO seront pénalisées en 2027-2028. Les leviers (llms.txt, schemas, structure de contenu) sont accessibles à toute PME pour quelques milliers d'euros. Le terrain n'est pas encore saturé : c'est le moment d'y être avant la concurrence. Pour cadrer une stratégie AI search adaptée à votre projet, [contactez Krealabs](/contact). Voir aussi notre [lexique schema.org](/lexique/schema-org), notre [llms.txt](/llms.txt), et notre [guide SEO local Rouen](/blog/seo-local-rouen-guide-pme).",
     },
   },
 
@@ -3201,7 +3201,7 @@ router.push({ pathname: '/product/[id]', params: { id: '42' } });
           title: "Layouts emboîtés : on peut faire du compliqué simplement",
           content:
             "Expo Router supporte les **layouts** via `_layout.tsx` à chaque niveau du dossier `app/`. Cas d'usage typique : un layout root avec auth provider + theme provider, un layout `(tabs)` pour la bottom bar tabs, un layout `(modal)` pour les écrans en modal. Le tout s'imbrique naturellement, sans gérer manuellement les stacks. Sur les apps Krealabs : un seul `_layout.tsx` racine + 2-3 layouts intermédiaires suffisent à modéliser 90% des UX mobiles standards.",
-          code: `// app/_layout.tsx — Stack racine
+          code: `// app/_layout.tsx - Stack racine
 import { Stack } from 'expo-router';
 export default function RootLayout() {
   return <Stack>
@@ -3210,7 +3210,7 @@ export default function RootLayout() {
   </Stack>;
 }
 
-// app/(tabs)/_layout.tsx — Bottom Tabs
+// app/(tabs)/_layout.tsx - Bottom Tabs
 import { Tabs } from 'expo-router';
 export default function TabsLayout() {
   return <Tabs>

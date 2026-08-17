@@ -11,7 +11,7 @@ const withBundleAnalyzer = bundleAnalyzer({
 
 // Politique CSP. Par défaut envoyée en `Content-Security-Policy-Report-Only`
 // (observation, aucun blocage). Pour passer en mode bloquant, setter la var
-// d'env `CSP_ENFORCE=true` sur Vercel — pas besoin de redeploy de code.
+// d'env `CSP_ENFORCE=true` sur Vercel - pas besoin de redeploy de code.
 //
 // Avant d'enforcer :
 //   1. Vérifier que les reports CSP sont silencieux (DevTools console + reports envoyés)

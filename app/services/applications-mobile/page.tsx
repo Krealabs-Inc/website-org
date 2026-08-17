@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Applications mobiles à Rouen — React Native iOS & Android",
+  title: "Applications mobiles à Rouen - React Native iOS & Android",
   description:
     "Développement d'applications mobiles iOS et Android à Rouen. Apps cross-platform en React Native. Une base de code, deux App Stores. Publication, OTA, notifications push.",
   alternates: { canonical: "https://krealabs.fr/services/applications-mobile" },
@@ -169,7 +169,7 @@ const FAQ = [
   {
     question: "Quels délais entre signature et publication App Store / Play Store ?",
     answer:
-      "MVP : 12-16 semaines (dev 8-10 + tests TestFlight 2-3 + validation Apple 1-2 semaines, Google quelques jours). App complète : 20-26 semaines. Le goulot d'étranglement est souvent la validation Apple (App Review) — nous préparons la fiche App Store en amont pour minimiser les rejets.",
+      "MVP : 12-16 semaines (dev 8-10 + tests TestFlight 2-3 + validation Apple 1-2 semaines, Google quelques jours). App complète : 20-26 semaines. Le goulot d'étranglement est souvent la validation Apple (App Review) - nous préparons la fiche App Store en amont pour minimiser les rejets.",
   },
   {
     question: "Comment se passent les mises à jour après publication ?",
@@ -212,7 +212,7 @@ const FEATURES = [
   {
     icon: RefreshCw,
     title: "Mises à jour OTA",
-    description: "Patches déployés en over-the-air via EAS Update — pas de re-soumission au store pour les corrections.",
+    description: "Patches déployés en over-the-air via EAS Update - pas de re-soumission au store pour les corrections.",
   },
 ];
 

@@ -83,12 +83,12 @@ export async function generateMetadata({
   const isThin = posts.length < MIN_ARTICLES_PER_TAG;
 
   return {
-    title: `${tag} — Articles Krealabs (${posts.length})`,
+    title: `${tag} - Articles Krealabs (${posts.length})`,
     description: `${posts.length} article${posts.length > 1 ? "s" : ""} sur "${tag}" écrits par l'équipe Krealabs, agence digitale à Rouen.`,
     alternates: { canonical: `${BASE_URL}/blog/tag/${slug}` },
     robots: isThin ? { index: false, follow: true } : undefined,
     openGraph: {
-      title: `${tag} — Articles Krealabs`,
+      title: `${tag} - Articles Krealabs`,
       url: `${BASE_URL}/blog/tag/${slug}`,
       type: "website",
     },

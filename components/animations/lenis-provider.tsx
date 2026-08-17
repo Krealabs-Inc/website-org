@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 
 /**
  * Smooth scroll global via Lenis (desktop uniquement).
- * Sur mobile / touch device : Lenis n'est pas monté du tout — on garde
+ * Sur mobile / touch device : Lenis n'est pas monté du tout - on garde
  * le scroll natif (plus fluide, moins consommateur de batterie).
  * Respecte automatiquement prefers-reduced-motion.
  */

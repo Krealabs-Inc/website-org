@@ -24,7 +24,7 @@ export function ShareButton({ url, title, description }: ShareButtonProps) {
       try {
         await navigator.share({ title, text: description, url });
       } catch (err: unknown) {
-        // User cancelled — no-op
+        // User cancelled - no-op
         if (err instanceof Error && err.name !== "AbortError") {
           toast.error("Partage impossible");
         }

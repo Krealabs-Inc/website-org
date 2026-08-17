@@ -14,7 +14,7 @@ interface ParticlesBgProps {
 }
 
 /**
- * Particules subtiles en arrière-plan — DOM-based (pas de canvas).
+ * Particules subtiles en arrière-plan - DOM-based (pas de canvas).
  * Position aléatoire stable (seed via index), float vertical lent.
  * Pas d'animation si prefers-reduced-motion (CSS media query).
  */

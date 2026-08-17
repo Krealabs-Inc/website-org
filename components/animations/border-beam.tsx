@@ -13,7 +13,7 @@ interface BorderBeamProps {
 }
 
 /**
- * Border beam — faisceau lumineux qui tourne le long de la bordure.
+ * Border beam - faisceau lumineux qui tourne le long de la bordure.
  * Utilise offset-path (rect rounded) pour suivre le contour parfaitement.
  * S'applique à un parent en position relative.
  */

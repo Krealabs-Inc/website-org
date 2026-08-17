@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Technologies — Stack technique Krealabs",
+  title: "Technologies - Stack technique Krealabs",
   description:
     "Les technologies que nous utilisons chez Krealabs : Next.js, React, React Native, TypeScript. Stack moderne pour des projets web et mobile maintenables et performants.",
   alternates: { canonical: "https://krealabs.fr/technologies" },
@@ -73,7 +73,7 @@ export default function TechnologiesPage() {
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
               WordPress reste notre spécialité (et la majorité des projets que
               nous livrons), mais on s'adapte : Next.js, React Native,
-              TypeScript, Python, Node.js — on choisit la techno selon le
+              TypeScript, Python, Node.js - on choisit la techno selon le
               projet, pas selon une chapelle.
             </p>
             <div className="mt-10">

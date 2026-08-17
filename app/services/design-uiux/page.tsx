@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Design UI/UX à Rouen — Interfaces & design system",
+  title: "Design UI/UX à Rouen - Interfaces & design system",
   description:
     "Design UI/UX à Rouen : wireframes, maquettes Figma, design system, prototypage. Interfaces accessibles, mémorables, pensées pour convertir. Agence digitale Normandie.",
   alternates: { canonical: "https://krealabs.fr/services/design-uiux" },
@@ -60,7 +60,7 @@ export default function DesignUiUxPage() {
             Du <em>brief</em> au design system.
           </>
         }
-        intro="Un design rigoureux, documenté, réutilisable — pas une simple maquette qu'il faudra interpréter."
+        intro="Un design rigoureux, documenté, réutilisable - pas une simple maquette qu'il faudra interpréter."
         features={FEATURES}
       />
 
@@ -147,12 +147,12 @@ const FAQ = [
   {
     question: "Combien de maquettes au total ?",
     answer:
-      "Site vitrine 6-10 pages : 8-15 écrans Figma (desktop + mobile + variantes principales). App mobile MVP : 15-25 écrans. SaaS / plateforme : 25-50 écrans. Toujours en haute fidélité (HF) — on saute les wireframes basse fidélité pour les projets de petite/moyenne envergure, car on perd plus de temps à les valider qu'on n'en gagne sur les HF.",
+      "Site vitrine 6-10 pages : 8-15 écrans Figma (desktop + mobile + variantes principales). App mobile MVP : 15-25 écrans. SaaS / plateforme : 25-50 écrans. Toujours en haute fidélité (HF) - on saute les wireframes basse fidélité pour les projets de petite/moyenne envergure, car on perd plus de temps à les valider qu'on n'en gagne sur les HF.",
   },
   {
     question: "Quels délais sur la phase design ?",
     answer:
-      "Site vitrine : 2-3 semaines de design avant le démarrage du dev. App mobile MVP : 3-4 semaines. SaaS / plateforme : 4-6 semaines. Ces durées incluent 2-3 cycles de validation avec vous. On bloque le démarrage du dev tant que les maquettes ne sont pas validées — éviter le \"on corrige en cours de dev\" qui explose les budgets.",
+      "Site vitrine : 2-3 semaines de design avant le démarrage du dev. App mobile MVP : 3-4 semaines. SaaS / plateforme : 4-6 semaines. Ces durées incluent 2-3 cycles de validation avec vous. On bloque le démarrage du dev tant que les maquettes ne sont pas validées - éviter le \"on corrige en cours de dev\" qui explose les budgets.",
   },
   {
     question: "Travaillez-vous avec mes maquettes existantes (Figma, XD, Sketch) ?",
@@ -162,7 +162,7 @@ const FAQ = [
   {
     question: "Que se passe-t-il après validation des maquettes ?",
     answer:
-      "On démarre l'intégration. Toutes nos integrations sont pixel-perfect par défaut — si votre maquette Figma indique 24px de marge, le site aura 24px. On utilise Tailwind avec design tokens (couleurs, spacings, typo extraits de Figma) pour garantir la cohérence. Vérification finale ensemble avant mise en ligne.",
+      "On démarre l'intégration. Toutes nos integrations sont pixel-perfect par défaut - si votre maquette Figma indique 24px de marge, le site aura 24px. On utilise Tailwind avec design tokens (couleurs, spacings, typo extraits de Figma) pour garantir la cohérence. Vérification finale ensemble avant mise en ligne.",
   },
   {
     question: "Concevez-vous des design systems complets ?",

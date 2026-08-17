@@ -1,4 +1,4 @@
-# Configuration emails — Resend (envoi) + ProtonMail (réception)
+# Configuration emails - Resend (envoi) + ProtonMail (réception)
 
 ## Architecture choisie
 
@@ -10,7 +10,7 @@ Visiteur soumet formulaire
          │ Save form to Prisma DB
          │
          ▼ Resend SDK (HTTPS)
- Resend (send.krealabs.fr — SPF + DKIM vérifiés)
+ Resend (send.krealabs.fr - SPF + DKIM vérifiés)
          │
          ├──→ Email admin → contact@krealabs.fr
          │       From: Krealabs <noreply@send.krealabs.fr>
@@ -83,7 +83,7 @@ fonts Inter + Space Grotesk) :
 | `waitlist-notification-template.tsx`  | Notif admin : nouvelle inscription       |
 | `waitlist-confirmation-template.tsx`  | Bienvenue visiteur : sur la waitlist     |
 
-Les templates sont des composants React standard — modifiables comme
+Les templates sont des composants React standard - modifiables comme
 n'importe quel composant du site. Resend les rend en HTML côté serveur
 au moment de l'envoi.
 
@@ -117,16 +117,16 @@ Comportement :
 - **Auto-reply visiteur** est best-effort → log mais ne fait pas échouer
 
 Routes :
-- `app/api/contact/route.ts` — formulaire de contact
-- `app/api/waitlist/route.ts` — inscription waitlist
+- `app/api/contact/route.ts` - formulaire de contact
+- `app/api/waitlist/route.ts` - inscription waitlist
 
 ---
 
 ## Limitations Resend free tier
 
-- **3000 emails / mois** — largement suffisant pour le contact form
-- **100 emails / jour** — idem
-- **1 domaine vérifié** — `send.krealabs.fr` (suffit)
+- **3000 emails / mois** - largement suffisant pour le contact form
+- **100 emails / jour** - idem
+- **1 domaine vérifié** - `send.krealabs.fr` (suffit)
 - Pour des newsletters bulk plus tard → passer en plan payant ou
   brancher Resend Audiences/Broadcast
 
@@ -157,5 +157,5 @@ Pour passer de `noreply@send.krealabs.fr` à autre chose :
 EMAIL_FROM=Maxime de Krealabs <maxime@send.krealabs.fr>
 ```
 
-Tout email avant le `@` est accepté (pas besoin de créer une boîte —
+Tout email avant le `@` est accepté (pas besoin de créer une boîte -
 Resend envoie depuis n'importe quel local-part du domaine vérifié).

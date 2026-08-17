@@ -7,7 +7,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
-  title: "Désinscription newsletter — Krealabs",
+  title: "Désinscription newsletter - Krealabs",
   description: "Confirmation de désinscription de la newsletter Krealabs.",
   robots: { index: false, follow: true },
 };
@@ -43,7 +43,7 @@ export default async function NewsletterUnsubscribePage({
       title: "Erreur côté serveur",
       message:
         "Notre serveur n'a pas pu traiter votre désinscription. Réessayez dans quelques minutes ou écrivez-nous.",
-      sub: "Si ça persiste, contactez-nous directement à contact@krealabs.fr — on vous retire à la main.",
+      sub: "Si ça persiste, contactez-nous directement à contact@krealabs.fr - on vous retire à la main.",
     },
   } as const;
 

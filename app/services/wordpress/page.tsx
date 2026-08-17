@@ -25,12 +25,12 @@ import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 import { ServiceSchema } from "@/components/seo/service-schema";
 
 export const metadata: Metadata = {
-  title: "Agence WordPress à Rouen — Création, refonte, WooCommerce, SEO",
+  title: "Agence WordPress à Rouen - Création, refonte, WooCommerce, SEO",
   description:
     "Agence WordPress à Rouen et en Normandie. Création sur mesure, refonte, WooCommerce, SEO, maintenance et sécurité WordPress. Thèmes custom, plugins développés sur mesure, pas de page builders.",
   alternates: { canonical: "https://krealabs.fr/services/wordpress" },
   openGraph: {
-    title: "Agence WordPress à Rouen — Krealabs",
+    title: "Agence WordPress à Rouen - Krealabs",
     description:
       "Spécialistes WordPress en Normandie : création sur mesure, WooCommerce, refonte, SEO, maintenance. Du thème custom au headless WordPress.",
     url: "https://krealabs.fr/services/wordpress",
@@ -67,7 +67,7 @@ export default function WordpressPage() {
             depuis la cr&#233;ation jusqu'au headless.
           </>
         }
-        description="WordPress est notre spécialité historique. Création sur mesure, refonte, WooCommerce, SEO, maintenance et sécurité. Thèmes custom, plugins développés à la main — pas de page builders, pas de templates génériques."
+        description="WordPress est notre spécialité historique. Création sur mesure, refonte, WooCommerce, SEO, maintenance et sécurité. Thèmes custom, plugins développés à la main - pas de page builders, pas de templates génériques."
         primaryCta={{ label: "Discuter de mon projet WordPress", href: "/contact?type=devis" }}
       />
 
@@ -204,7 +204,7 @@ export default function WordpressPage() {
         </Container>
       </section>
 
-      {/* FAQ WORDPRESS — avec FAQPage schema */}
+      {/* FAQ WORDPRESS - avec FAQPage schema */}
       <ServiceFAQ
         title={
           <>
@@ -236,7 +236,7 @@ export default function WordpressPage() {
             Un projet <em>WordPress</em> à lancer ?
           </>
         }
-        description="Que ce soit un site vitrine, une boutique WooCommerce, une refonte ou une migration — discutons-en. Le premier échange est offert."
+        description="Que ce soit un site vitrine, une boutique WooCommerce, une refonte ou une migration - discutons-en. Le premier échange est offert."
         primaryLabel="Démarrer mon projet WordPress"
       />
     </main>
@@ -363,7 +363,7 @@ const SECTEURS = [
 const FAQ = [
   {
     q: "Pourquoi pas Elementor, Divi ou un page builder ?",
-    a: "Les page builders ajoutent du code superflu (bloat) qui ralentit le site, complique la maintenance et nuit au SEO. Pour les projets exigeants, un thème custom est toujours plus performant, plus léger et plus durable. Pour des sites très simples sans contraintes, un page builder peut suffire — mais c'est rarement notre choix.",
+    a: "Les page builders ajoutent du code superflu (bloat) qui ralentit le site, complique la maintenance et nuit au SEO. Pour les projets exigeants, un thème custom est toujours plus performant, plus léger et plus durable. Pour des sites très simples sans contraintes, un page builder peut suffire - mais c'est rarement notre choix.",
   },
   {
     q: "Combien coûte un site WordPress sur mesure ?",

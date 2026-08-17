@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: city.description,
   alternates: { canonical: `https://krealabs.fr${city.path}` },
   openGraph: {
-    title: `${city.title} — Krealabs`,
+    title: `${city.title} - Krealabs`,
     description: city.description,
     url: `https://krealabs.fr${city.path}`,
     type: "website",
@@ -18,13 +18,13 @@ export const metadata: Metadata = {
 };
 
 // LocalBusiness "branch" schema spécifique à la page HQ Rouen.
-// Référence l'org canonique (#organization) via branchOf — pas de duplication
+// Référence l'org canonique (#organization) via branchOf - pas de duplication
 // de l'adresse, juste l'ancrage que cette page = le landing local Rouen.
 const rouenBranchSchema = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "@id": "https://krealabs.fr/agence-web-rouen/#localbusiness",
-  name: "Krealabs — Agence web à Rouen",
+  name: "Krealabs - Agence web à Rouen",
   url: "https://krealabs.fr/agence-web-rouen",
   branchOf: { "@id": "https://krealabs.fr/#organization" },
   address: {

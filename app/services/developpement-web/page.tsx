@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Développement web à Rouen — Sites & applications",
+  title: "Développement web à Rouen - Sites & applications",
   description:
     "Création de sites internet, plateformes SaaS et applications métier sur mesure à Rouen. Stack moderne Next.js, React, TypeScript. Architecture scalable, performance native.",
   alternates: { canonical: "https://krealabs.fr/services/developpement-web" },
@@ -56,7 +56,7 @@ export default function DeveloppementWebPage() {
             propres et performants.
           </>
         }
-        description="Sites vitrines, plateformes SaaS, applications métier sur mesure. Nous concevons et développons des outils digitaux qui durent — propre code, architecture pensée, performance native."
+        description="Sites vitrines, plateformes SaaS, applications métier sur mesure. Nous concevons et développons des outils digitaux qui durent - propre code, architecture pensée, performance native."
       />
 
       <ServiceFeatures
@@ -82,7 +82,7 @@ export default function DeveloppementWebPage() {
               </h2>
               <p className="text-body text-[var(--muted-foreground)]">
                 Chaque projet suit ces 4 étapes. Les démos régulières vous
-                permettent de réagir tôt — pas de mauvaise surprise à la
+                permettent de réagir tôt - pas de mauvaise surprise à la
                 livraison.
               </p>
             </div>
@@ -176,17 +176,17 @@ const FAQ = [
   {
     question: "Que se passe-t-il quand le projet évolue après livraison ?",
     answer:
-      "Trois options : (1) Forfait évolutif mensuel pour ~5-15h de dev/mois selon vos besoins. (2) Régie ponctuelle pour les évolutions plus lourdes (refonte section, ajout feature majeure). (3) Vous reprenez la main avec votre équipe interne — le code est propre, documenté, vous appartient. Pas de lock-in.",
+      "Trois options : (1) Forfait évolutif mensuel pour ~5-15h de dev/mois selon vos besoins. (2) Régie ponctuelle pour les évolutions plus lourdes (refonte section, ajout feature majeure). (3) Vous reprenez la main avec votre équipe interne - le code est propre, documenté, vous appartient. Pas de lock-in.",
   },
   {
     question: "Comment garantissez-vous la qualité du code ?",
     answer:
-      "TypeScript strict, tests unitaires sur la logique critique, code review systématique entre nous deux, CI/CD automatisé (lint + tests + déploiement), monitoring production (Sentry, Vercel Analytics). Vous avez accès au dépôt Git dès le jour 1 — tout est transparent.",
+      "TypeScript strict, tests unitaires sur la logique critique, code review systématique entre nous deux, CI/CD automatisé (lint + tests + déploiement), monitoring production (Sentry, Vercel Analytics). Vous avez accès au dépôt Git dès le jour 1 - tout est transparent.",
   },
   {
     question: "Travaillez-vous avec ma stack actuelle si je veux étendre l'existant ?",
     answer:
-      "Oui, fréquemment. On audite votre code, on s'aligne sur vos conventions, et on intègre nos développements dans votre repo. Nous sommes à l'aise avec React, Next.js, Vue, Nuxt, Node.js, Python (Django, FastAPI), PHP (Laravel, Symfony). Si la stack est trop ancienne et bloque la productivité, on vous le dit — et on propose un plan de modernisation incrémental.",
+      "Oui, fréquemment. On audite votre code, on s'aligne sur vos conventions, et on intègre nos développements dans votre repo. Nous sommes à l'aise avec React, Next.js, Vue, Nuxt, Node.js, Python (Django, FastAPI), PHP (Laravel, Symfony). Si la stack est trop ancienne et bloque la productivité, on vous le dit - et on propose un plan de modernisation incrémental.",
   },
 ];
 
@@ -219,7 +219,7 @@ const FEATURES = [
   {
     icon: RefreshCw,
     title: "Refonte de site",
-    description: "Migration d'un site Wix, Squarespace, Webflow ou ancien CMS vers la stack adaptée à votre projet — WordPress moderne ou stack JavaScript selon le besoin. SEO préservé.",
+    description: "Migration d'un site Wix, Squarespace, Webflow ou ancien CMS vers la stack adaptée à votre projet - WordPress moderne ou stack JavaScript selon le besoin. SEO préservé.",
   },
 ];
 

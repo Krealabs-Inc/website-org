@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: city.description,
   alternates: { canonical: `https://krealabs.fr${city.path}` },
   openGraph: {
-    title: `${city.title} — Krealabs`,
+    title: `${city.title} - Krealabs`,
     description: city.description,
     url: `https://krealabs.fr${city.path}`,
     type: "website",

@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
     // pas de colonne dédiée pour éviter une migration Prisma.
     const finalMessage =
       callbackRequested === "yes"
-        ? `[DEMANDE DE RAPPEL sous 1h ouvrée${phone ? ` — Tél : ${phone}` : " — numéro non fourni"}]\n\n${message}`
+        ? `[DEMANDE DE RAPPEL sous 1h ouvrée${phone ? ` - Tél : ${phone}` : " - numéro non fourni"}]\n\n${message}`
         : message;
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

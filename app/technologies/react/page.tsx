@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "React à Rouen — Bibliothèque UI moderne",
+  title: "React à Rouen - Bibliothèque UI moderne",
   description:
     "Développement React à Rouen. Composants réutilisables, écosystème mature, standard de l'industrie. Base de nos applications web et mobiles.",
   alternates: { canonical: "https://krealabs.fr/technologies/react" },

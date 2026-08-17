@@ -97,7 +97,7 @@ export default function DesignSystemPage() {
 
           <div className="space-y-12">
             <div>
-              <p className="text-eyebrow mb-4">Variantes — taille md (default, 40px)</p>
+              <p className="text-eyebrow mb-4">Variantes - taille md (default, 40px)</p>
               <div className="flex flex-wrap items-center gap-3">
                 <Button>Primary</Button>
                 <Button variant="secondary">Secondary</Button>
@@ -109,7 +109,7 @@ export default function DesignSystemPage() {
             </div>
 
             <div>
-              <p className="text-eyebrow mb-4">Variantes — taille lg (48px)</p>
+              <p className="text-eyebrow mb-4">Variantes - taille lg (48px)</p>
               <div className="flex flex-wrap items-center gap-3">
                 <Button size="lg">Démarrer un projet <ArrowRight /></Button>
                 <Button size="lg" variant="secondary">Nos services</Button>

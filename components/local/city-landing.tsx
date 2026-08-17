@@ -45,7 +45,7 @@ export function CityLanding({ city }: { city: CityData }) {
   };
 
   // FAQPage : uniquement si la ville a une FAQ. Le contenu du schema doit
-  // correspondre au contenu visible (section FAQ ci-dessous) — policy Google.
+  // correspondre au contenu visible (section FAQ ci-dessous) - policy Google.
   const faqSchema =
     faq.length > 0
       ? {
@@ -254,7 +254,7 @@ export function CityLanding({ city }: { city: CityData }) {
               <p className="text-eyebrow mb-2">Zone d&apos;intervention</p>
               <p className="text-h4 mb-1">Toute la {city.region}</p>
               <p className="text-body-sm text-[var(--muted-foreground)]">
-                Rouen, Le Havre, Caen, Évreux, Dieppe — et France entière à
+                Rouen, Le Havre, Caen, Évreux, Dieppe - et France entière à
                 distance.
               </p>
             </div>
@@ -312,7 +312,7 @@ export function CityLanding({ city }: { city: CityData }) {
             Démarrons votre projet <em>local</em>.
           </>
         }
-        description={`Vous êtes basés ${city.cityArticle} ou en ${city.region} ? Premier rendez-vous offert pour discuter de votre projet — en présentiel ou en visio, comme vous préférez.`}
+        description={`Vous êtes basés ${city.cityArticle} ou en ${city.region} ? Premier rendez-vous offert pour discuter de votre projet - en présentiel ou en visio, comme vous préférez.`}
         primaryLabel="Prendre rendez-vous"
       />
     </main>
@@ -336,7 +336,7 @@ function buildReasons(city: CityData) {
     },
     {
       title: "Un SEO local optimisé",
-      description: `Schema LocalBusiness, fiche Google Business, citations locales sur les annuaires ${city.adjectivePlural} — votre visibilité ${city.cityArticle} et en ${city.region} est notre métier.`,
+      description: `Schema LocalBusiness, fiche Google Business, citations locales sur les annuaires ${city.adjectivePlural} - votre visibilité ${city.cityArticle} et en ${city.region} est notre métier.`,
     },
   ];
 }
