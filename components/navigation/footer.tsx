@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -183,6 +183,26 @@ export function Footer() {
                 mobiles et logiciels sur mesure pour les entreprises de
                 Normandie.
               </p>
+
+              {/* Offre verticale — sous-domaine dédié */}
+              <a
+                href="https://kreia.krealabs.fr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] p-4 hover:border-[var(--border-strong)] transition-colors"
+              >
+                <span className="text-caption text-[var(--accent)]">
+                  Offre dédiée
+                </span>
+                <span className="mt-2 flex items-center gap-2 text-h4 text-[var(--foreground)]">
+                  KréIA
+                  <ArrowUpRight className="size-4 text-[var(--muted-foreground)] group-hover:text-[var(--foreground)] transition-colors" />
+                </span>
+                <span className="mt-1 block text-body-sm text-[var(--muted-foreground)]">
+                  IA locale pour cabinets d&apos;expertise comptable et
+                  d&apos;avocats, installée sur leur propre serveur.
+                </span>
+              </a>
 
               {/* Address - SEO local */}
               <address className="not-italic space-y-3">

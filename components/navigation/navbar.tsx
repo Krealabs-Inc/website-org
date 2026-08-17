@@ -11,6 +11,13 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { cn } from "@/lib/utils";
 
+/**
+ * Offre verticale hébergée sur un sous-domaine : les cabinets soumis au secret
+ * professionnel n'ont pas les mêmes questions qu'un client d'agence, et ne
+ * doivent pas atterrir sur une page de services généralistes.
+ */
+const KREIA_URL = "https://kreia.krealabs.fr";
+
 const navItems = [
   { name: "Services", href: "/services" },
   { name: "Expertise", href: "/expertise" },
@@ -89,6 +96,16 @@ export function Navbar() {
 
             {/* Right cluster */}
             <div className="hidden md:flex items-center gap-2">
+              <a
+                href={KREIA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1.5 text-[0.9rem] font-medium rounded-[var(--radius)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                title="IA locale pour cabinets d'expertise comptable et d'avocats"
+              >
+                KréIA
+                <span className="sr-only"> (nouvel onglet)</span>
+              </a>
               <ThemeToggle />
               <Button size="md" asChild>
                 <Link href="/contact">
@@ -147,6 +164,21 @@ export function Navbar() {
                 <ArrowUpRight className="size-5 text-[var(--subtle-foreground)]" />
               </Link>
             ))}
+            <a
+              href={KREIA_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between py-4 border-b border-[var(--border)] text-h3 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+            >
+              <span>
+                KréIA
+                <span className="block text-body-sm text-[var(--muted-foreground)] font-normal">
+                  IA locale pour cabinets d&apos;expertise comptable et
+                  d&apos;avocats
+                </span>
+              </span>
+              <ArrowUpRight className="size-5 text-[var(--subtle-foreground)]" />
+            </a>
             <div className="pt-6">
               <Button size="lg" className="w-full" asChild>
                 <Link href="/contact">
