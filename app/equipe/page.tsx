@@ -33,6 +33,7 @@ export const metadata: Metadata = {
 
 export default function EquipePage() {
   const baseUrl = "https://krealabs.fr";
+  const hasPending = UPCOMING_TEAM.length > 0;
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       <PersonSchema
@@ -72,18 +73,27 @@ export default function EquipePage() {
       {/* TEAM CARDS */}
       <section className="border-t border-[var(--border)]">
         <Container>
-          <div className="grid grid-cols-1 max-w-3xl mx-auto gap-px bg-[var(--border)] border-x border-b border-[var(--border)]">
+          {/* Deux natures de contenu, deux traitements : les profils publiés
+              gardent une colonne large et lisible, les fondateurs encore non
+              annoncés forment un rail étroit à côté. La largeur encode donc
+              ce qui est réellement publié, au lieu d'empiler trois blocs
+              identiques dont deux sont vides. */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 max-w-6xl mx-auto gap-px bg-[var(--border)] border-x border-b border-[var(--border)]">
+            <div
+              className={
+                hasPending
+                  ? "grid grid-cols-1 gap-px bg-[var(--border)] lg:col-span-8"
+                  : "grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] lg:col-span-12"
+              }
+            >
             {TEAM.map((member, i) => (
-              <MotionReveal key={member.name} delay={i * 0.1}>
+              <MotionReveal key={member.name} delay={i * 0.1} className="h-full">
                 <article
                   className="group/team relative bg-[var(--background)] p-8 md:p-12 flex flex-col gap-8 hover:bg-[var(--surface)]/40 transition-colors duration-300 overflow-hidden h-full"
                 >
                 <header className="flex items-start gap-6 relative z-10">
                   <Avatar member={member} />
                   <div className="flex-1 min-w-0">
-                    <p className="text-caption mb-2">
-                      Membre {String(i + 1).padStart(2, "0")}
-                    </p>
                     <h2 className="text-h2 mb-1">{member.name}</h2>
                     <p className="text-body text-[var(--accent)] font-medium">
                       {member.role}
@@ -164,15 +174,21 @@ export default function EquipePage() {
                 </article>
               </MotionReveal>
             ))}
+            </div>
 
-            {UPCOMING_TEAM.map((member, i) => (
-              <MotionReveal
-                key={`upcoming-${i}`}
-                delay={(TEAM.length + i) * 0.1}
-              >
-                <UpcomingCard member={member} index={TEAM.length + i} />
-              </MotionReveal>
-            ))}
+            {hasPending && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 lg:col-span-4 gap-px bg-[var(--border)]">
+                {UPCOMING_TEAM.map((member, i) => (
+                  <MotionReveal
+                    key={`upcoming-${i}`}
+                    delay={(TEAM.length + i) * 0.1}
+                    className="h-full"
+                  >
+                    <UpcomingCard member={member} />
+                  </MotionReveal>
+                ))}
+              </div>
+            )}
           </div>
         </Container>
       </section>
@@ -249,68 +265,30 @@ function Avatar({ member }: { member: TeamMember }) {
 }
 
 /**
- * Carte d'un fondateur dont le profil n'est pas encore publié.
- * Aucun lien, aucun schema Person : uniquement un état « SOON ».
+ * Fondateur dont le profil n'est pas encore publié : pas de lien, pas de
+ * schema Person, et surtout pas de fausses lignes d'info. Le pointillé et
+ * le texte en retrait suffisent à dire que la place est prise mais que le
+ * contenu n'est pas là.
  */
-function UpcomingCard({
-  member,
-  index,
-}: {
-  member: UpcomingMember;
-  index: number;
-}) {
+function UpcomingCard({ member }: { member: UpcomingMember }) {
   return (
-    <article className="relative bg-[var(--background)] p-8 md:p-12 flex flex-col gap-8 h-full">
-      <header className="flex items-start gap-6">
-        <div className="size-20 md:size-24 shrink-0 rounded-[var(--radius)] border border-dashed border-[var(--border-strong)] bg-[var(--surface)] flex items-center justify-center">
-          <span className="text-h2 font-semibold text-[var(--subtle-foreground)]">
-            {member.initials}
-          </span>
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="text-caption mb-2">
-            Membre {String(index + 1).padStart(2, "0")}
-          </p>
-          <div className="flex flex-wrap items-center gap-3 mb-1">
-            <h2 className="text-h2 text-[var(--muted-foreground)]">
-              {member.name}
-            </h2>
-            <Badge variant="outline">Bientôt</Badge>
-          </div>
-          <p className="text-body text-[var(--accent)] font-medium">
-            {member.role}
-          </p>
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mt-2 text-body-sm text-[var(--subtle-foreground)]">
-            <span className="inline-flex items-center gap-1.5">
-              <MapPin className="size-3.5" />
-              SOON
-            </span>
-            <span aria-hidden className="text-[var(--subtle-foreground)]">·</span>
-            <span className="inline-flex items-center gap-1.5">
-              <Briefcase className="size-3.5" />
-              SOON
-            </span>
-          </div>
-        </div>
-      </header>
-
-      <p className="text-body text-[var(--muted-foreground)]">{member.teaser}</p>
-
-      <div>
-        <p className="text-eyebrow mb-3">Spécialités</p>
-        <Badge variant="secondary">SOON</Badge>
+    <article className="relative bg-[var(--background)] p-8 md:p-10 flex flex-col justify-center gap-5 h-full">
+      <div className="size-14 rounded-[var(--radius)] border border-dashed border-[var(--border-strong)] flex items-center justify-center">
+        <span className="text-h4 text-[var(--subtle-foreground)]">
+          {member.initials}
+        </span>
       </div>
 
       <div>
-        <p className="text-eyebrow mb-3">Stack quotidienne</p>
-        <Badge variant="outline">SOON</Badge>
-      </div>
-
-      <div className="pt-6 border-t border-[var(--border)]">
-        <p className="text-body-sm text-[var(--subtle-foreground)]">
-          Profil détaillé à venir.
+        <h2 className="text-h3 text-[var(--muted-foreground)]">{member.name}</h2>
+        <p className="text-body-sm text-[var(--accent)] font-medium mt-1">
+          {member.role}
         </p>
       </div>
+
+      <p className="text-body-sm text-[var(--subtle-foreground)]">
+        {member.teaser}
+      </p>
     </article>
   );
 }

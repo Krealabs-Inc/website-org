@@ -114,14 +114,12 @@ export const UPCOMING_TEAM: UpcomingMember[] = [
     name: "SOON",
     role: "Fondateur",
     initials: "?",
-    teaser:
-      "Profil en cours de préparation. Nom, rôle détaillé et parcours seront publiés ici prochainement.",
+    teaser: "Nom et parcours publiés prochainement.",
   },
   {
     name: "SOON",
     role: "Fondateur",
     initials: "?",
-    teaser:
-      "Profil en cours de préparation. Nom, rôle détaillé et parcours seront publiés ici prochainement.",
+    teaser: "Nom et parcours publiés prochainement.",
   },
 ];
