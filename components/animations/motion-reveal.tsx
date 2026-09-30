@@ -55,7 +55,7 @@ export function MotionReveal({
       className={cn(className)}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-80px 0px" }}
       variants={buildVariants(direction, distance)}
       transition={{
         duration: 0.5,

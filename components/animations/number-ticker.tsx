@@ -30,7 +30,7 @@ export function NumberTicker({
   className,
 }: NumberTickerProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-80px 0px" });
   const reduced = useReducedMotion();
   const [current, setCurrent] = useState(reduced ? value : 0);
 
