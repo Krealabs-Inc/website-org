@@ -22,6 +22,13 @@ export const metadata: Metadata = {
   description:
     "Krealabs, c'est un collectif de trois associés basé à Rouen. Une agence à taille humaine, joignable directement, qui code vos projets de A à Z.",
   alternates: { canonical: "https://krealabs.fr/equipe" },
+  openGraph: {
+    title: "L'équipe : les associés derrière Krealabs (Rouen)",
+    description:
+      "Krealabs, c'est un collectif de trois associés basé à Rouen. Une agence à taille humaine, joignable directement, qui code vos projets de A à Z.",
+    url: "https://krealabs.fr/equipe",
+    type: "website",
+  },
 };
 
 // TEAM data déplacée dans lib/team.ts (réutilisée par /equipe/[slug]

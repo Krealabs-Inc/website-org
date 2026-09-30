@@ -8,6 +8,13 @@ export const metadata: Metadata = {
     "Informations légales relatives à l'édition du site krealabs.fr : éditeur, hébergeur, propriété intellectuelle, contact.",
   alternates: { canonical: "https://krealabs.fr/legal/mentions-legales" },
   robots: { index: true, follow: true },
+  openGraph: {
+    title: "Mentions légales - Krealabs",
+    description:
+      "Informations légales relatives à l'édition du site krealabs.fr : éditeur, hébergeur, propriété intellectuelle, contact.",
+    url: "https://krealabs.fr/legal/mentions-legales",
+    type: "website",
+  },
 };
 
 export default function MentionsLegalesPage() {

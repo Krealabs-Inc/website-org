@@ -31,6 +31,13 @@ export const metadata: Metadata = {
   description:
     "Méthodes, savoir-faire et stack technique de l'agence Krealabs à Rouen. Architecture, sécurité, performance, CI/CD, accessibilité - l'ensemble de nos compétences pour réussir vos projets web et mobile.",
   alternates: { canonical: "https://krealabs.fr/expertise" },
+  openGraph: {
+    title: "Expertise - Savoir-faire & technologies - Krealabs",
+    description:
+      "Méthodes, savoir-faire et stack technique de l'agence Krealabs à Rouen. Architecture, sécurité, performance, CI/CD, accessibilité - l'ensemble de nos compétences pour réussir vos projets web et mobile.",
+    url: "https://krealabs.fr/expertise",
+    type: "website",
+  },
 };
 
 export default function ExpertisePage() {

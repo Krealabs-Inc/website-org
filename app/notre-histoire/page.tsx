@@ -7,6 +7,13 @@ export const metadata: Metadata = {
   description:
     "Découvrez Krealabs, agence digitale fondée à Rouen en 2020. Notre parcours, nos valeurs, notre méthode artisanale au service des entreprises de Normandie.",
   alternates: { canonical: "https://krealabs.fr/notre-histoire" },
+  openGraph: {
+    title: "Notre histoire - Agence web à Rouen depuis 2020 - Krealabs",
+    description:
+      "Découvrez Krealabs, agence digitale fondée à Rouen en 2020. Notre parcours, nos valeurs, notre méthode artisanale au service des entreprises de Normandie.",
+    url: "https://krealabs.fr/notre-histoire",
+    type: "website",
+  },
 };
 
 import { Button } from "@/components/ui/button";

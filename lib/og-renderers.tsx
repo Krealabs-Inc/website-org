@@ -4,6 +4,7 @@
  * + halo radial + grid décoratif.
  */
 
+import { Children, Fragment, isValidElement } from "react";
 import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import { join } from "path";
@@ -146,7 +147,12 @@ function Shell({
             marginTop: "40px",
           }}
         >
-          {footer}
+          {/* Satori rend un fragment comme un seul bloc inline : on déplie
+              ses enfants pour que space-between écarte bien les deux côtés. */}
+          {isValidElement<{ children?: React.ReactNode }>(footer) &&
+          footer.type === Fragment
+            ? Children.toArray(footer.props.children)
+            : footer}
         </div>
       )}
     </div>
@@ -431,6 +437,70 @@ export async function renderCalculatorOg(): Promise<ImageResponse> {
         <>
           <span>Krealabs · Fourchette indicative basée sur le marché normand 2026</span>
           <span>krealabs.fr/calculateur</span>
+        </>
+      ),
+    }),
+    { ...OG_SIZE, fonts: await loadFonts() },
+  );
+}
+
+/**
+ * Carte générique pour les pages éditoriales (services, technologies,
+ * équipe, légal…) : reprend le h1 de la page, la première ligne en blanc,
+ * la seconde en accent, comme l'<em> du titre à l'écran.
+ */
+export async function renderPageOg({
+  badge,
+  lines,
+  subtitle,
+  path,
+}: {
+  badge: string;
+  lines: [string] | [string, string];
+  subtitle: string;
+  path: string;
+}): Promise<ImageResponse> {
+  const longest = Math.max(...lines.map((l) => l.length));
+  const fontSize = longest > 30 ? 64 : longest > 22 ? 76 : 88;
+
+  return new ImageResponse(
+    Shell({
+      badge,
+      children: (
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          {lines.map((line, i) => (
+            <div
+              key={line}
+              style={{
+                fontSize,
+                fontWeight: 700,
+                lineHeight: 1.04,
+                letterSpacing: "-0.035em",
+                color: i === 1 ? ACCENT : FG,
+                display: "flex",
+              }}
+            >
+              {line}
+            </div>
+          ))}
+          <div
+            style={{
+              marginTop: 28,
+              fontSize: 28,
+              fontWeight: 600,
+              color: "rgba(250,250,250,0.6)",
+              letterSpacing: "-0.01em",
+              display: "flex",
+            }}
+          >
+            {subtitle}
+          </div>
+        </div>
+      ),
+      footer: (
+        <>
+          <span>Krealabs · Agence web à Rouen</span>
+          <span>{`krealabs.fr${path}`}</span>
         </>
       ),
     }),

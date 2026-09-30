@@ -8,6 +8,13 @@ export const metadata: Metadata = {
     "Conditions générales de vente des prestations de Krealabs : devis, paiement, délais, propriété intellectuelle, responsabilités.",
   alternates: { canonical: "https://krealabs.fr/legal/cgv" },
   robots: { index: true, follow: true },
+  openGraph: {
+    title: "Conditions générales de vente - Krealabs",
+    description:
+      "Conditions générales de vente des prestations de Krealabs : devis, paiement, délais, propriété intellectuelle, responsabilités.",
+    url: "https://krealabs.fr/legal/cgv",
+    type: "website",
+  },
 };
 
 export default function CGVPage() {

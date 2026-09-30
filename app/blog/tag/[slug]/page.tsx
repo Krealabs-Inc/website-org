@@ -89,6 +89,7 @@ export async function generateMetadata({
     robots: isThin ? { index: false, follow: true } : undefined,
     openGraph: {
       title: `${tag} - Articles Krealabs`,
+      description: `${posts.length} article${posts.length > 1 ? "s" : ""} sur "${tag}" écrits par l'équipe Krealabs, agence digitale à Rouen.`,
       url: `${BASE_URL}/blog/tag/${slug}`,
       type: "website",
     },

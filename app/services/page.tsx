@@ -20,6 +20,13 @@ export const metadata: Metadata = {
   description:
     "Agence web à Rouen : WordPress, développement web custom, applications mobiles, design UI/UX, performance & SEO. Cinq expertises, une seule équipe pour vos projets digitaux en Normandie.",
   alternates: { canonical: "https://krealabs.fr/services" },
+  openGraph: {
+    title: "Nos services - Krealabs",
+    description:
+      "Agence web à Rouen : WordPress, développement web custom, applications mobiles, design UI/UX, performance & SEO. Cinq expertises, une seule équipe pour vos projets digitaux en Normandie.",
+    url: "https://krealabs.fr/services",
+    type: "website",
+  },
 };
 
 export default function ServicesIndexPage() {

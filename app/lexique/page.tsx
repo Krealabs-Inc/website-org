@@ -13,6 +13,13 @@ export const metadata: Metadata = {
   description:
     "Lexique technique web : headless WordPress, Core Web Vitals, schema.org, SEO local, Next.js, TypeScript, Lighthouse, E-E-A-T... Définitions claires par une agence web à Rouen.",
   alternates: { canonical: "https://krealabs.fr/lexique" },
+  openGraph: {
+    title: "Lexique du web - Définitions techniques - Krealabs",
+    description:
+      "Lexique technique web : headless WordPress, Core Web Vitals, schema.org, SEO local, Next.js, TypeScript, Lighthouse, E-E-A-T... Définitions claires par une agence web à Rouen.",
+    url: "https://krealabs.fr/lexique",
+    type: "website",
+  },
 };
 
 const CATEGORIES = ["WordPress", "Web", "Mobile", "SEO", "Infrastructure"];

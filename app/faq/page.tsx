@@ -15,6 +15,13 @@ export const metadata: Metadata = {
   description:
     "Réponses aux questions fréquentes sur nos services de développement web et mobile à Rouen. Délais, technologies, méthode, maintenance, SEO.",
   alternates: { canonical: "https://krealabs.fr/faq" },
+  openGraph: {
+    title: "FAQ - Questions fréquentes - Krealabs",
+    description:
+      "Réponses aux questions fréquentes sur nos services de développement web et mobile à Rouen. Délais, technologies, méthode, maintenance, SEO.",
+    url: "https://krealabs.fr/faq",
+    type: "website",
+  },
 };
 
 const FAQ_GROUPS: { title: string; items: { question: string; answer: string }[] }[] = [

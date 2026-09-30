@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   description:
     "Journal des évolutions du site et de l'agence Krealabs depuis la création en 2020. Versions majeures, nouveautés et étapes au fil du temps.",
   alternates: { canonical: "https://krealabs.fr/changelog" },
+  openGraph: {
+    title: "Changelog - Journal des versions - Krealabs",
+    description:
+      "Journal des évolutions du site et de l'agence Krealabs depuis la création en 2020. Versions majeures, nouveautés et étapes au fil du temps.",
+    url: "https://krealabs.fr/changelog",
+    type: "website",
+  },
 };
 
 type EntryType = "major" | "feature" | "fix";

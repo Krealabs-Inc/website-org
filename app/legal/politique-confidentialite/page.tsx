@@ -10,6 +10,13 @@ export const metadata: Metadata = {
     canonical: "https://krealabs.fr/legal/politique-confidentialite",
   },
   robots: { index: true, follow: true },
+  openGraph: {
+    title: "Politique de confidentialité - Krealabs",
+    description:
+      "Comment Krealabs collecte, utilise et protège vos données personnelles. Vos droits RGPD et les moyens de les exercer.",
+    url: "https://krealabs.fr/legal/politique-confidentialite",
+    type: "website",
+  },
 };
 
 export default function PolitiqueConfidentialitePage() {

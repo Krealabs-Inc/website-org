@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   description:
     "Trois cas clients réels : UniLaSalle Rouen (réseau social interne WordPress), Main Verte (migration SoLocal vers self-hosted), Meli Melo (e-commerce Next.js + Stripe). Contexte, choix technique, résultat.",
   alternates: { canonical: "https://krealabs.fr/clients" },
+  openGraph: {
+    title: "Travaux & références - Cas clients - Krealabs",
+    description:
+      "Trois cas clients réels : UniLaSalle Rouen (réseau social interne WordPress), Main Verte (migration SoLocal vers self-hosted), Meli Melo (e-commerce Next.js + Stripe). Contexte, choix technique, résultat.",
+    url: "https://krealabs.fr/clients",
+    type: "website",
+  },
 };
 
 import { Container } from "@/components/ui/container";

@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     url: 'https://krealabs.fr/contact',
   },
   twitter: {
-    card: 'summary',
+    card: 'summary_large_image',
     title: 'Contactez-nous pour votre projet - Krealabs',
     description: 'Devis gratuit sous 48h pour votre projet web ou mobile.',
   },

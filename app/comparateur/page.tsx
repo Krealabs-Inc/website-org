@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   description:
     "Comparateurs neutres : WordPress vs Webflow, WooCommerce vs Shopify, Next.js vs WordPress, React Native vs Flutter. Le bilan d'une agence web à Rouen.",
   alternates: { canonical: "https://krealabs.fr/comparateur" },
+  openGraph: {
+    title: "Comparateurs techniques - Choisir entre 2 stacks - Krealabs",
+    description:
+      "Comparateurs neutres : WordPress vs Webflow, WooCommerce vs Shopify, Next.js vs WordPress, React Native vs Flutter. Le bilan d'une agence web à Rouen.",
+    url: "https://krealabs.fr/comparateur",
+    type: "website",
+  },
 };
 
 export default function ComparatorIndexPage() {

@@ -7,6 +7,13 @@ export const metadata: Metadata = {
   description:
     "Les technologies que nous utilisons chez Krealabs : Next.js, React, React Native, TypeScript. Stack moderne pour des projets web et mobile maintenables et performants.",
   alternates: { canonical: "https://krealabs.fr/technologies" },
+  openGraph: {
+    title: "Technologies - Stack technique Krealabs",
+    description:
+      "Les technologies que nous utilisons chez Krealabs : Next.js, React, React Native, TypeScript. Stack moderne pour des projets web et mobile maintenables et performants.",
+    url: "https://krealabs.fr/technologies",
+    type: "website",
+  },
 };
 
 import { Button } from "@/components/ui/button";

@@ -93,10 +93,10 @@ export const metadata: Metadata = {
     siteName: 'Krealabs',
   },
 
+  // Pas de title/description ici : chaque page porte les siens en
+  // openGraph, et X les reprend quand twitter:title est absent.
   twitter: {
     card: 'summary_large_image',
-    title: 'Krealabs - Agence web à Rouen',
-    description: 'Sites internet, applications mobiles et logiciels sur mesure en Normandie.',
     creator: '@krealabs_',
     site: '@krealabs_',
   },
