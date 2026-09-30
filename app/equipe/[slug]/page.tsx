@@ -116,10 +116,10 @@ export default async function AuthorPage({ params }: PageProps) {
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-5xl">
             <div className="lg:col-span-4">
-              {image ? (
+              {member.photo ? (
                 <div className="relative aspect-square w-full rounded-[var(--radius)] overflow-hidden border border-[var(--border)] bg-[var(--surface)]">
                   <Image
-                    src={image}
+                    src={member.photo}
                     alt={member.name}
                     fill
                     priority

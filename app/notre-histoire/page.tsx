@@ -14,6 +14,7 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
+import { TEAM } from "@/lib/team";
 
 const TIMELINE = [
   {
@@ -57,16 +58,6 @@ const TIMELINE = [
     title: "Refonte du site Krealabs",
     description:
       "Refonte totale de notre propre site : design system v2, blog enrichi, pages locales (Rouen, Le Havre, Caen, Évreux, Dieppe…), lexique technique, comparateurs, calculateur de devis. La vitrine reflète enfin la rigueur des projets clients.",
-  },
-];
-
-const TEAM_PREVIEW = [
-  {
-    name: "Maxime Dubois",
-    initials: "MD",
-    role: "Fondateur · Développeur full-stack",
-    shortBio:
-      "10 ans d'expérience web. Pilote l'architecture technique, le développement et la relation client sur les projets Krealabs, de la conception au déploiement.",
   },
 ];
 
@@ -173,7 +164,7 @@ export default function NotreHistoirePage() {
             <div className="max-w-2xl">
               <Eyebrow number="02" className="mb-6">L'équipe</Eyebrow>
               <h2 className="text-h1">
-                Le <em>développeur</em> derrière chaque projet.
+                Les <em>développeurs</em> derrière chaque projet.
               </h2>
             </div>
             <p className="text-body text-[var(--muted-foreground)] max-w-md">
@@ -182,8 +173,8 @@ export default function NotreHistoirePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 max-w-2xl gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
-            {TEAM_PREVIEW.map((m) => (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            {TEAM.map((m) => (
               <div key={m.name} className="bg-[var(--background)] p-8 md:p-10">
                 <div className="flex items-start gap-5 mb-5">
                   <div className="size-14 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--accent-subtle)] flex items-center justify-center">
@@ -194,7 +185,7 @@ export default function NotreHistoirePage() {
                     <p className="text-body-sm text-[var(--accent)] font-medium">{m.role}</p>
                   </div>
                 </div>
-                <p className="text-body text-[var(--muted-foreground)]">{m.shortBio}</p>
+                <p className="text-body text-[var(--muted-foreground)]">{m.bio}</p>
               </div>
             ))}
           </div>

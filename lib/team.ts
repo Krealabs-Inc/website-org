@@ -84,6 +84,70 @@ export const TEAM: TeamMember[] = [
     metaDescription:
       "Maxime Dubois, fondateur et développeur full-stack de Krealabs à Rouen. 10+ ans en développement web, expert Next.js, React, TypeScript et architecture frontend moderne.",
   },
+  {
+    slug: "thibaud-masurel",
+    name: "Thibaud Masurel",
+    role: "Associé · Développeur back-end",
+    initials: "TM",
+    bio: "Associé chez Krealabs. Ancien éducateur sportif reconverti dans le développement, formé à Zone01 Rouen. J'aime le back-end et l'algorithmique : API, modèles de données, logique métier et performances.",
+    longBio:
+      "Thibaud Masurel est associé et développeur chez Krealabs, à Rouen. Après plusieurs années comme éducateur sportif (BPJEPS APT, formation Sport Santé au CREPS de Nantes, BAFD), il se reconvertit dans le développement web et rejoint en 2025 la formation Zone01 Rouen, centrée sur Go et l'algorithmique. Il y développe des applications web en Go (serveur HTTP, templates, consommation d'API REST), un algorithme de recherche de chemin optimal sur graphe (Lem-in), un moteur de jeu 2D en JavaScript vanilla et TeamUp Hub, une plateforme de gestion pour associations sportives en React, Node.js et Prisma. Chez Krealabs, il intervient surtout côté serveur : API, bases de données, logique métier et performances.",
+    location: "Rouen, Normandie",
+    yearsExperience: "1+",
+    loves: "Optimiser un algorithme jusqu'à ce qu'il devienne simple et rapide.",
+    photo: "/team/thibaud.jpg",
+    github: "https://github.com/ThMasurel",
+    linkedin: "https://www.linkedin.com/in/thibaud-masurel-90b960380/",
+    specialties: ["Back-end", "Go", "Algorithmique"],
+    stack: ["Go", "JavaScript", "React", "Node.js", "Prisma", "Docker"],
+    knowsAbout: [
+      "Développement web",
+      "Go",
+      "JavaScript",
+      "React",
+      "Node.js",
+      "API REST",
+      "SQL",
+      "Prisma",
+      "Docker",
+      "Tailwind CSS",
+      "Algorithmique",
+      "Théorie des graphes",
+    ],
+    metaTitle: "Thibaud Masurel - Associé & développeur back-end Krealabs (Rouen)",
+    metaDescription:
+      "Thibaud Masurel, associé et développeur back-end chez Krealabs à Rouen. Formé à Zone01, spécialisé en Go, API REST et algorithmique.",
+  },
+  {
+    slug: "paul-bouqueret",
+    name: "Paul Bouqueret",
+    role: "Associé · Développeur web",
+    initials: "PB",
+    bio: "Associé chez Krealabs. Formé au développement web à Zone01 Rouen Normandie, je travaille sur toute la chaîne d'un projet, du serveur en Go à l'interface, avec un goût particulier pour les fonctionnalités temps réel.",
+    longBio:
+      "Paul Bouqueret est associé et développeur chez Krealabs, à Rouen. Il s'est formé au développement web à Zone01 Rouen Normandie, une formation intensive par projets centrée sur Go, JavaScript et l'algorithmique. Il y a notamment conçu, avec Thibaud Masurel, un forum temps réel en single page application : back-end Go, API REST et WebSockets, base SQLite sans ORM, sessions sécurisées par cookies HttpOnly et mots de passe hachés avec bcrypt, front-end en JavaScript vanilla. Chez Krealabs, il participe au développement des projets clients, côté serveur comme côté interface.",
+    location: "Rouen, Normandie",
+    yearsExperience: "1+",
+    loves: "Voir une application réagir en direct, sans rechargement.",
+    linkedin: "https://www.linkedin.com/in/paulbouqueret/",
+    github: "https://github.com/pbouqueret",
+    specialties: ["Full-stack", "Go", "Temps réel"],
+    stack: ["Go", "JavaScript", "SQLite", "WebSockets", "HTML/CSS", "Git"],
+    knowsAbout: [
+      "Développement web",
+      "Go",
+      "JavaScript",
+      "API REST",
+      "WebSockets",
+      "SQLite",
+      "SQL",
+      "Sécurité web",
+      "Single Page Application",
+    ],
+    metaTitle: "Paul Bouqueret - Associé & développeur web Krealabs (Rouen)",
+    metaDescription:
+      "Paul Bouqueret, associé et développeur web chez Krealabs à Rouen. Formé à Zone01, spécialisé en Go, JavaScript, API REST et applications temps réel.",
+  },
 ];
 
 export const TEAM_SLUGS = TEAM.map((m) => m.slug);
@@ -109,17 +173,4 @@ export interface UpcomingMember {
   teaser: string;
 }
 
-export const UPCOMING_TEAM: UpcomingMember[] = [
-  {
-    name: "SOON",
-    role: "Fondateur",
-    initials: "?",
-    teaser: "Nom et parcours publiés prochainement.",
-  },
-  {
-    name: "SOON",
-    role: "Fondateur",
-    initials: "?",
-    teaser: "Nom et parcours publiés prochainement.",
-  },
-];
+export const UPCOMING_TEAM: UpcomingMember[] = [];

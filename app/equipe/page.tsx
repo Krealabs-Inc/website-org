@@ -18,9 +18,9 @@ import {
 } from "@/lib/team";
 
 export const metadata: Metadata = {
-  title: "L'équipe : les fondateurs derrière Krealabs (Rouen)",
+  title: "L'équipe : les associés derrière Krealabs (Rouen)",
   description:
-    "Krealabs, c'est un collectif de trois fondateurs basé à Rouen. Une agence à taille humaine, joignable directement, qui code vos projets de A à Z.",
+    "Krealabs, c'est un collectif de trois associés basé à Rouen. Une agence à taille humaine, joignable directement, qui code vos projets de A à Z.",
   alternates: { canonical: "https://krealabs.fr/equipe" },
 };
 
@@ -57,12 +57,12 @@ export default function EquipePage() {
           <MotionReveal className="max-w-4xl">
             <Eyebrow dot className="mb-8">L'équipe Krealabs</Eyebrow>
             <h1 className="text-display">
-              Trois <em>fondateurs</em>,
+              Trois <em>associés</em>,
               <br />
               zéro intermédiaire.
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Krealabs, c'est un collectif de trois fondateurs basé à Rouen, qui
+              Krealabs, c'est un collectif de trois associés basé à Rouen, qui
               code lui-même vos projets. Pas de chef de projet intermédiaire, pas
               de sous-traitance. Vous parlez directement à ceux qui construisent.
             </p>
@@ -83,7 +83,7 @@ export default function EquipePage() {
               className={
                 hasPending
                   ? "grid grid-cols-1 gap-px bg-[var(--border)] lg:col-span-8"
-                  : "grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] lg:col-span-12"
+                  : "grid grid-cols-1 lg:grid-cols-3 gap-px bg-[var(--border)] lg:col-span-12"
               }
             >
             {TEAM.map((member, i) => (
