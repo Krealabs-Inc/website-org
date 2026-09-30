@@ -34,7 +34,13 @@ const buildVariants = (direction: NonNullable<MotionRevealProps["direction"]>, d
 
 /**
  * Wrapper Motion qui révèle son contenu au scroll (once: true).
- * Respecte prefers-reduced-motion : si activé, render direct sans animation.
+ * Respecte prefers-reduced-motion : le contenu apparaît d'un coup, sans
+ * fondu ni déplacement.
+ *
+ * On rend toujours le même arbre : useReducedMotion vaut null au rendu
+ * serveur et true au client, et React ne corrige pas les attributs qui
+ * diffèrent à l'hydratation. Un <div> nu côté client laissait donc le
+ * style opacity:0 du rendu serveur, et le contenu restait invisible.
  */
 export function MotionReveal({
   children,
@@ -46,10 +52,6 @@ export function MotionReveal({
 }: MotionRevealProps) {
   const reduced = useReducedMotion();
 
-  if (reduced) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
     <motion.div
       className={cn(className)}
@@ -57,12 +59,16 @@ export function MotionReveal({
       whileInView="visible"
       viewport={{ once: true, margin: "-80px 0px" }}
       variants={buildVariants(direction, distance)}
-      transition={{
-        duration: 0.5,
-        delay,
-        ease: [0.22, 1, 0.36, 1],
-        staggerChildren: stagger ? 0.08 : 0,
-      }}
+      transition={
+        reduced
+          ? { duration: 0 }
+          : {
+              duration: 0.5,
+              delay,
+              ease: [0.22, 1, 0.36, 1],
+              staggerChildren: stagger ? 0.08 : 0,
+            }
+      }
     >
       {children}
     </motion.div>
@@ -82,16 +88,18 @@ export function MotionRevealItem({
 }) {
   const reduced = useReducedMotion();
 
-  if (reduced) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
     <motion.div
       className={className}
       variants={{
         hidden: { opacity: 0, y: 12 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } },
+        visible: {
+          opacity: 1,
+          y: 0,
+          transition: reduced
+            ? { duration: 0 }
+            : { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+        },
       }}
     >
       {children}

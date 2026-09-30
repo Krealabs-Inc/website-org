@@ -30,10 +30,8 @@ export function WordRotator({ words, interval = 2500, className }: WordRotatorPr
     return () => clearInterval(id);
   }, [words.length, interval, reduced]);
 
-  if (reduced) {
-    return <span className={className}>{words[0]}</span>;
-  }
-
+  // Pas de rendu alternatif si reduced : l'arbre doit rester identique à
+  // celui du serveur. L'intervalle ne démarre pas, le premier mot reste.
   return (
     <span
       className={cn(

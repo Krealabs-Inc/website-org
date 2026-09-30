@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useInView } from "motion/react";
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
@@ -34,9 +34,10 @@ export function TextHighlighter({
 }: TextHighlighterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
-  const reduced = useReducedMotion();
-
-  const drawn = reduced || inView;
+  // Pas de useReducedMotion ici : il vaut null au rendu serveur et true au
+  // client, et React ne corrige pas un style qui diffère à l'hydratation.
+  // globals.css coupe déjà les transitions sous prefers-reduced-motion.
+  const drawn = inView;
 
   return (
     <span ref={ref} className={cn("relative inline-block", className)}>
@@ -57,9 +58,7 @@ export function TextHighlighter({
           style={{
             strokeDasharray: 120,
             strokeDashoffset: drawn ? 0 : 120,
-            transition: reduced
-              ? "none"
-              : `stroke-dashoffset ${duration}s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
+            transition: `stroke-dashoffset ${duration}s cubic-bezier(0.22,1,0.36,1) ${delay}s`,
           }}
         />
       </svg>

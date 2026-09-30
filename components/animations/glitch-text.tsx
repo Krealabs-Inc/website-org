@@ -30,10 +30,8 @@ export function GlitchText({ text, interval = 3000, className }: GlitchTextProps
     return () => clearInterval(id);
   }, [interval, reduced]);
 
-  if (reduced) {
-    return <span className={className}>{text}</span>;
-  }
-
+  // Pas de rendu alternatif si reduced : l'arbre doit rester identique à
+  // celui du serveur. L'effet ne déclenche simplement jamais le glitch.
   return (
     <span className={cn("relative inline-block", className)}>
       <span className={cn("relative z-10", glitching && "motion-safe:animate-glitch-flicker")}>
