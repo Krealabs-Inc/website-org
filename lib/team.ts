@@ -48,11 +48,11 @@ export const TEAM: TeamMember[] = [
     name: "Maxime Dubois",
     role: "Fondateur · Développeur full-stack",
     initials: "MD",
-    bio: "Fondateur de Krealabs. Passionné de développement web depuis 10+ ans, j'aime concevoir des produits digitaux à la fois performants, accessibles et beaux. Mon rôle : architecture technique, développement, suivi des projets et relation client.",
+    bio: "Fondateur de Krealabs. Passionné de développement web depuis 7+ ans, j'aime concevoir des produits digitaux à la fois performants, accessibles et beaux. Mon rôle : architecture technique, développement, suivi des projets et relation client.",
     longBio:
-      "Maxime Dubois est le fondateur et développeur de Krealabs, agence digitale basée à Rouen. Avec plus de 10 ans d'expérience en développement web, il pilote l'architecture technique des projets, le développement et la relation client, de la conception au déploiement. Diplômé en informatique, il s'est spécialisé sur la stack React / Next.js après plusieurs années sur des projets WordPress et PHP. Il intervient sur l'ensemble de la chaîne : front-end, back-end, API, bases de données, infrastructure (Vercel, Neon, hébergement), performances (Core Web Vitals, optimisation Lighthouse) et accessibilité. Maxime contribue à plusieurs projets open source sur GitHub et écrit régulièrement sur le blog Krealabs autour du SEO, du développement et de l'architecture frontend moderne.",
+      "Maxime Dubois est le fondateur et développeur de Krealabs, agence digitale basée à Rouen. Avec plus de 7 ans d'expérience en développement web, il pilote l'architecture technique des projets, le développement et la relation client, de la conception au déploiement. Diplômé en informatique, il s'est spécialisé sur la stack React / Next.js après plusieurs années sur des projets WordPress et PHP. Il intervient sur l'ensemble de la chaîne : front-end, back-end, API, bases de données, infrastructure (Vercel, Neon, hébergement), performances (Core Web Vitals, optimisation Lighthouse) et accessibilité. Maxime contribue à plusieurs projets open source sur GitHub et écrit régulièrement sur le blog Krealabs autour du SEO, du développement et de l'architecture frontend moderne.",
     location: "Rouen, Normandie",
-    yearsExperience: "10+",
+    yearsExperience: "7+",
     loves: "Concevoir des interfaces où chaque détail compte.",
     photo: "/team/maxime.webp",
     github: "https://github.com/makcimerrr",
@@ -82,7 +82,7 @@ export const TEAM: TeamMember[] = [
     ],
     metaTitle: "Maxime Dubois - Fondateur & développeur Krealabs (Rouen)",
     metaDescription:
-      "Maxime Dubois, fondateur et développeur full-stack de Krealabs à Rouen. 10+ ans en développement web, expert Next.js, React, TypeScript et architecture frontend moderne.",
+      "Maxime Dubois, fondateur et développeur full-stack de Krealabs à Rouen. 7+ ans en développement web, expert Next.js, React, TypeScript et architecture frontend moderne.",
   },
   {
     slug: "thibaud-masurel",
@@ -93,7 +93,7 @@ export const TEAM: TeamMember[] = [
     longBio:
       "Thibaud Masurel est associé et développeur chez Krealabs, à Rouen. Après plusieurs années comme éducateur sportif (BPJEPS APT, formation Sport Santé au CREPS de Nantes, BAFD), il se reconvertit dans le développement web et rejoint en 2025 la formation Zone01 Rouen, centrée sur Go et l'algorithmique. Il y développe des applications web en Go (serveur HTTP, templates, consommation d'API REST), un algorithme de recherche de chemin optimal sur graphe (Lem-in), un moteur de jeu 2D en JavaScript vanilla et TeamUp Hub, une plateforme de gestion pour associations sportives en React, Node.js et Prisma. Chez Krealabs, il intervient surtout côté serveur : API, bases de données, logique métier et performances.",
     location: "Rouen, Normandie",
-    yearsExperience: "1+",
+    yearsExperience: "3+",
     loves: "Optimiser un algorithme jusqu'à ce qu'il devienne simple et rapide.",
     photo: "/team/thibaud.jpg",
     github: "https://github.com/ThMasurel",
@@ -127,8 +127,9 @@ export const TEAM: TeamMember[] = [
     longBio:
       "Paul Bouqueret est associé et développeur chez Krealabs, à Rouen. Il s'est formé au développement web à Zone01 Rouen Normandie, une formation intensive par projets centrée sur Go, JavaScript et l'algorithmique. Il y a notamment conçu, avec Thibaud Masurel, un forum temps réel en single page application : back-end Go, API REST et WebSockets, base SQLite sans ORM, sessions sécurisées par cookies HttpOnly et mots de passe hachés avec bcrypt, front-end en JavaScript vanilla. Chez Krealabs, il participe au développement des projets clients, côté serveur comme côté interface.",
     location: "Rouen, Normandie",
-    yearsExperience: "1+",
+    yearsExperience: "3+",
     loves: "Voir une application réagir en direct, sans rechargement.",
+    photo: "/team/paul.jpg",
     linkedin: "https://www.linkedin.com/in/paulbouqueret/",
     github: "https://github.com/pbouqueret",
     specialties: ["Full-stack", "Go", "Temps réel"],
