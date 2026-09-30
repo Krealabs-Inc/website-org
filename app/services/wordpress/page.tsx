@@ -245,7 +245,7 @@ export default function WordpressPage() {
 
 const STATS = [
   { value: "100+", label: "Projets web livrés" },
-  { value: "10+ ans", label: "Expérience WordPress" },
+  { value: "7+ ans", label: "Expérience WordPress" },
   { value: "WooCommerce", label: "Expert e-commerce" },
   { value: "< 2s", label: "Temps de chargement" },
 ];

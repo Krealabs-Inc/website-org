@@ -121,7 +121,7 @@ export const blogPosts: BlogPost[] = [
     tags: ["Headless WordPress", "Next.js", "WPGraphQL", "Architecture", "WordPress"],
     content: {
       introduction:
-        "Le headless WordPress est partout dans les discussions techniques de 2026 : on garde WordPress comme back-office d'édition, et on remplace son thème par un frontend Next.js. La promesse est séduisante - performances natives, score Lighthouse au plafond, liberté totale de développement. La réalité est plus nuancée. Chez Krealabs, on a une position rare : on développe des thèmes WordPress sur mesure depuis plus de 10 ans ET des applications Next.js en production. On voit donc les deux côtés sans dogmatisme. Ce guide vous dit exactement quand le headless vaut le coup, quand c'est une régression coûteuse, et comment on l'implémente quand c'est justifié.",
+        "Le headless WordPress est partout dans les discussions techniques de 2026 : on garde WordPress comme back-office d'édition, et on remplace son thème par un frontend Next.js. La promesse est séduisante - performances natives, score Lighthouse au plafond, liberté totale de développement. La réalité est plus nuancée. Chez Krealabs, on a une position rare : on développe des thèmes WordPress sur mesure depuis plus de 7 ans ET des applications Next.js en production. On voit donc les deux côtés sans dogmatisme. Ce guide vous dit exactement quand le headless vaut le coup, quand c'est une régression coûteuse, et comment on l'implémente quand c'est justifié.",
       sections: [
         {
           title: "Qu'est-ce que le headless WordPress, concrètement",
@@ -198,7 +198,7 @@ async function getPost(slug: string) {
     tags: ["WordPress", "CMS", "Stratégie", "Choix techno", "PME"],
     content: {
       introduction:
-        "Si vous suivez la presse tech, vous avez peut-être lu que WordPress était dépassé, lent, ou que tout le monde passait à Next.js. La réalité est différente : en 2026, WordPress propulse toujours 43% des sites web mondiaux, et la majorité de nos clients chez Krealabs sont sur cette stack. Pas par défaut, par choix. Voici, sans langue de bois, pourquoi WordPress reste pertinent pour la plupart des PME, où il échoue, et comment éviter les pièges classiques. Cet article est notre position d'agence après plus de 10 ans à livrer des projets WordPress de qualité.",
+        "Si vous suivez la presse tech, vous avez peut-être lu que WordPress était dépassé, lent, ou que tout le monde passait à Next.js. La réalité est différente : en 2026, WordPress propulse toujours 43% des sites web mondiaux, et la majorité de nos clients chez Krealabs sont sur cette stack. Pas par défaut, par choix. Voici, sans langue de bois, pourquoi WordPress reste pertinent pour la plupart des PME, où il échoue, et comment éviter les pièges classiques. Cet article est notre position d'agence après plus de 7 ans à livrer des projets WordPress de qualité.",
       sections: [
         {
           title: "WordPress en chiffres en 2026",
@@ -350,7 +350,7 @@ RedirectMatch 301 ^/blog/category/([a-z-]+)$ https://exemple.fr/blog/?categorie=
     slug: "woocommerce-vs-shopify-pme",
     title: "WooCommerce vs Shopify : que choisir pour une PME ?",
     excerpt:
-      "Le choix entre WooCommerce et Shopify divise. Pour qui choisir quoi ? Comparatif équilibré sur les coûts réels, la personnalisation, le SEO, le scaling, après 10 ans de projets e-commerce.",
+      "Le choix entre WooCommerce et Shopify divise. Pour qui choisir quoi ? Comparatif équilibré sur les coûts réels, la personnalisation, le SEO, le scaling, après plus de 7 ans de projets e-commerce.",
     category: "WordPress",
     date: "7 mai 2026",
     readTime: "15 min",
@@ -360,7 +360,7 @@ RedirectMatch 301 ^/blog/category/([a-z-]+)$ https://exemple.fr/blog/?categorie=
     tags: ["WooCommerce", "Shopify", "E-commerce", "Comparatif", "WordPress"],
     content: {
       introduction:
-        "Vous lancez ou refondez une boutique en ligne. Entre WooCommerce (WordPress) et Shopify, le débat fait rage sur Reddit, dans les groupes Facebook e-commerce, et sur les blogs spécialisés. La vérité ? Aucune des deux solutions n'est universellement supérieure. Chacune a son terrain de jeu. Voici notre lecture détaillée après 10 ans à voir les deux en production chez nos clients normands et au-delà. L'objectif de cet article : vous aider à choisir sereinement selon votre contexte spécifique, sans dogmatisme.",
+        "Vous lancez ou refondez une boutique en ligne. Entre WooCommerce (WordPress) et Shopify, le débat fait rage sur Reddit, dans les groupes Facebook e-commerce, et sur les blogs spécialisés. La vérité ? Aucune des deux solutions n'est universellement supérieure. Chacune a son terrain de jeu. Voici notre lecture détaillée après plus de 7 ans à voir les deux en production chez nos clients normands et au-delà. L'objectif de cet article : vous aider à choisir sereinement selon votre contexte spécifique, sans dogmatisme.",
       sections: [
         {
           title: "Le verdict rapide selon votre profil",
@@ -422,7 +422,7 @@ add_filter('woocommerce_get_price_html', function($price, $product) {
         },
       ],
       conclusion:
-        "Il n'y a pas de mauvais outil entre WooCommerce et Shopify - il y a juste des bons et des mauvais alignements avec votre projet. Si vous hésitez encore, écrivez-nous : on fait un état des lieux gratuit de votre contexte (catalogue, budget, équipe, objectifs SEO) et on vous oriente vers la bonne solution même si ce n'est pas la nôtre. Chez Krealabs, on développe et maintient des boutiques WooCommerce depuis 2014, et on a aussi piloté des migrations Shopify → WooCommerce et inversement. L'expertise se mesure à savoir dire « non, ce n'est pas pour vous » quand c'est le cas.",
+        "Il n'y a pas de mauvais outil entre WooCommerce et Shopify - il y a juste des bons et des mauvais alignements avec votre projet. Si vous hésitez encore, écrivez-nous : on fait un état des lieux gratuit de votre contexte (catalogue, budget, équipe, objectifs SEO) et on vous oriente vers la bonne solution même si ce n'est pas la nôtre. Chez Krealabs, on développe et maintient des boutiques WooCommerce depuis plus de 7 ans, et on a aussi piloté des migrations Shopify → WooCommerce et inversement. L'expertise se mesure à savoir dire « non, ce n'est pas pour vous » quand c'est le cas.",
     },
   },
   {

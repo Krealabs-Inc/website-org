@@ -134,7 +134,7 @@ export default function HomePage() {
                   c'est notre métier.
                 </h2>
                 <p className="text-body-lg text-[var(--muted-foreground)] mb-8 max-w-xl">
-                  Depuis plus de 10 ans, nous développons des sites WordPress
+                  Depuis plus de 7 ans, nous développons des sites WordPress
                   sur mesure : thèmes custom, WooCommerce, refontes, SEO,
                   maintenance, sécurité. La plupart de nos clients sont sur
                   WordPress - et ça nous va parfaitement.
