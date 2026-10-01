@@ -73,53 +73,67 @@ export function CookieConsent() {
       {visible && (
         <motion.div
           role="dialog"
-          aria-labelledby="cookie-consent-title"
-          aria-describedby="cookie-consent-description"
+          aria-label="Cookies et vie privée"
           initial={{ y: 60, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 60, opacity: 0 }}
           transition={{ type: "spring", stiffness: 260, damping: 28 }}
           className={[
-            // Mobile : full-width pinned bottom, safe-area iOS, pas de marges
-            "fixed inset-x-0 bottom-0 z-[80]",
-            "pb-[max(env(safe-area-inset-bottom),0px)]",
+            // Mobile : petite carte flottante, marges latérales, au-dessus
+            // de la barre iOS. Elle couvrait 30% de l'écran en pleine largeur.
+            "fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-[80]",
             // Desktop : card flottante en bas-droite
-            "md:inset-x-auto md:bottom-6 md:right-6 md:max-w-md md:pb-0",
+            "md:inset-x-auto md:bottom-6 md:right-6 md:max-w-md",
           ].join(" ")}
         >
           <div
             className={[
-              "relative border bg-[var(--surface)]/95 backdrop-blur-lg shadow-2xl",
-              // Mobile : coins arrondis seulement en haut, full width
-              "border-t border-[var(--border)] rounded-t-2xl",
-              // Desktop : carré classique
-              "md:border md:rounded-[var(--radius-lg)]",
+              "relative border border-[var(--border)] rounded-[var(--radius-lg)] shadow-2xl",
+              // Fond opaque sur mobile : un backdrop-blur fixe se recalcule à
+              // chaque frame de scroll sur téléphone.
+              "bg-[var(--surface)] md:bg-[var(--surface)]/95 md:backdrop-blur-lg",
             ].join(" ")}
           >
-            {/* Close X - desktop uniquement (sur mobile, les boutons font le job) */}
+            {/* Close X - desktop uniquement */}
             <button
               onClick={() => decide("rejected")}
               aria-label="Fermer"
-              className="absolute top-3 right-3 size-8 rounded-full hover:bg-[var(--surface-hover)] flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors hidden md:flex"
+              className="absolute top-3 right-3 size-8 rounded-full hover:bg-[var(--surface-hover)] items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors hidden md:flex"
             >
               <X className="size-4" />
             </button>
 
-            <div className="px-5 pt-5 pb-4 md:p-6">
+            {/* Mobile : une phrase + OK sur une seule rangée */}
+            <div className="flex items-center gap-3 py-3 pl-4 pr-3 md:hidden">
+              <p
+                className="flex-1 text-body-sm text-[var(--muted-foreground)] leading-snug"
+              >
+                <span className="text-[var(--foreground)] font-medium">
+                  Audience mesurée sans cookie,
+                </span>{" "}
+                aucun traceur.{" "}
+                <Link
+                  href="/legal/politique-confidentialite"
+                  className="underline underline-offset-2 hover:text-[var(--foreground)] whitespace-nowrap"
+                >
+                  En savoir plus
+                </Link>
+              </p>
+              <Button onClick={() => decide("accepted")} className="h-11 px-5 shrink-0">
+                OK
+              </Button>
+            </div>
+
+            <div className="hidden md:block p-6">
               {/* Icône + titre */}
               <div className="flex items-center gap-3 mb-3">
                 <div className="inline-flex size-9 items-center justify-center rounded-full bg-[var(--accent-subtle)] text-[var(--accent)] shrink-0">
                   <ShieldCheck className="size-4" strokeWidth={2} />
                 </div>
-                <h2 id="cookie-consent-title" className="text-h4">
-                  Cookies &amp; vie privée
-                </h2>
+                <h2 className="text-h4">Cookies &amp; vie privée</h2>
               </div>
 
-              <p
-                id="cookie-consent-description"
-                className="text-body-sm text-[var(--muted-foreground)] mb-5 leading-relaxed"
-              >
+              <p className="text-body-sm text-[var(--muted-foreground)] mb-5 leading-relaxed">
                 Mesure d&apos;audience anonyme (Vercel Analytics,{" "}
                 <strong className="text-[var(--foreground)] font-medium">
                   sans cookie
@@ -134,19 +148,15 @@ export function CookieConsent() {
                 .
               </p>
 
-              {/* Boutons : full-width mobile (chacun min-h 44px), row desktop */}
-              <div className="flex flex-col-reverse sm:flex-row gap-2">
+              <div className="flex gap-2">
                 <Button
                   onClick={() => decide("rejected")}
                   variant="outline"
-                  className="flex-1 !h-11"
+                  className="flex-1 h-11"
                 >
                   Préférences strictes
                 </Button>
-                <Button
-                  onClick={() => decide("accepted")}
-                  className="flex-1 !h-11"
-                >
+                <Button onClick={() => decide("accepted")} className="flex-1 h-11">
                   J&apos;ai compris
                 </Button>
               </div>
