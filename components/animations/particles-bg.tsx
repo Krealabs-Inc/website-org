@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useRef } from "react";
+import { useInView } from "motion/react";
 
 interface ParticlesBgProps {
   /** Nombre de particules (défaut 24) */
@@ -46,10 +47,20 @@ export function ParticlesBg({
     });
   }, [count, minSize, maxSize]);
 
+  // Hors écran, les particules passent en pause (cf. [data-offscreen]
+  // dans globals.css) au lieu de tourner sous le reste de la page.
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { margin: "200px 0px" });
+
   return (
     // Hidden sur mobile : les 30 particules consomment trop de DOM/CPU
     // sans apporter de valeur visuelle sur petit écran.
-    <div aria-hidden className="hidden md:block pointer-events-none absolute inset-0 overflow-hidden">
+    <div
+      ref={ref}
+      aria-hidden
+      data-offscreen={inView ? undefined : ""}
+      className="hidden md:block pointer-events-none absolute inset-0 overflow-hidden"
+    >
       {particles.map((p, i) => (
         <span
           key={i}

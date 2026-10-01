@@ -141,10 +141,13 @@ export function Navbar() {
         aria-hidden={!isMobileMenuOpen}
         className={cn(
           "fixed inset-0 z-40 md:hidden bg-[var(--background)]/95 backdrop-blur-xl pt-20",
-          "transition-opacity duration-200 ease-out",
+          "transition-[opacity,visibility] duration-200 ease-out",
+          // invisible et pas seulement opacity-0 : fermé, le backdrop-blur
+          // plein écran restait calculé à chaque frame de scroll, et ses
+          // liens restaient atteignables au clavier.
           isMobileMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none",
+            ? "visible opacity-100 pointer-events-auto"
+            : "invisible opacity-0 pointer-events-none",
         )}
       >
         <Container>

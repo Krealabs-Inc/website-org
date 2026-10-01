@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Github, Linkedin, Mail, MapPin, Phone } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
@@ -72,13 +72,20 @@ export function Footer() {
   const wordmarkScale = useTransform(scrollYProgress, [0, 1], [0.82, 1]);
   const wordmarkOpacity = useTransform(scrollYProgress, [0, 0.45], [0, 1]);
 
+  // Le footer est fixed derrière toute la page sur desktop : sans pause,
+  // l'aurora et les étoiles s'animent pendant tout le scroll alors qu'on
+  // ne les voit qu'en bas de page.
+  const inView = useInView(wrapperRef, { margin: "200px 0px" });
+
   return (
     <div
       ref={wrapperRef}
       className="relative w-full md:h-screen md:min-h-[760px]"
       style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
     >
-      <footer className="relative md:fixed md:bottom-0 md:left-0 md:right-0 flex w-full flex-col overflow-hidden border-t border-[var(--border)] bg-[var(--background)] md:h-screen md:min-h-[760px]">
+      <footer
+        data-offscreen={inView ? undefined : ""}
+        className="relative md:fixed md:bottom-0 md:left-0 md:right-0 flex w-full flex-col overflow-hidden border-t border-[var(--border)] bg-[var(--background)] md:h-screen md:min-h-[760px]">
         {/* Aurora breathing glow - desktop only (perf mobile) */}
         <div
           aria-hidden
