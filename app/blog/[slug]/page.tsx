@@ -283,7 +283,7 @@ export default async function BlogPostPage({
         <Container size="narrow">
           {/* Introduction */}
           <p className="text-body-lg text-[var(--foreground)]/90 leading-relaxed mb-12">
-            {post.content.introduction}
+            <MarkdownText>{post.content.introduction}</MarkdownText>
           </p>
 
           {/* Sections */}
@@ -296,7 +296,7 @@ export default async function BlogPostPage({
                 {section.title}
               </h2>
               <p className="text-body-lg text-[var(--muted-foreground)] leading-relaxed">
-                {section.content}
+                <MarkdownText>{section.content}</MarkdownText>
               </p>
               {section.code && (
                 <pre className="mt-6 overflow-x-auto rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] p-5">
@@ -308,7 +308,7 @@ export default async function BlogPostPage({
             </section>
           ))}
 
-          {/* Conclusion - supporte les liens markdown [texte](/url) */}
+          {/* Conclusion */}
           <div className="mt-16 p-8 rounded-[var(--radius)] border-l-4 border-[var(--accent)] bg-[var(--accent-subtle)]/30">
             <Eyebrow className="mb-4">En résumé</Eyebrow>
             <p className="text-body-lg text-[var(--foreground)]/90 leading-relaxed">
