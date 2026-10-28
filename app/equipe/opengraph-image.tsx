@@ -8,7 +8,7 @@ export const contentType = OG_CONTENT_TYPE;
 export default async function Image() {
   return renderPageOg({
     badge: "L'équipe",
-    lines: ["Trois associés,", "zéro intermédiaire."],
+    lines: ["Quatre associés,", "zéro intermédiaire."],
     subtitle: "Ceux qui codent vos projets, joignables directement",
     path: "/equipe",
   });

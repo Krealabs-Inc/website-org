@@ -9,7 +9,7 @@ Pour le full-text des articles : https://krealabs.fr/llms-full.txt
 ## À propos
 
 - [À propos de Krealabs](https://krealabs.fr/notre-histoire): Histoire, valeurs, méthode artisanale.
-- [L'équipe](https://krealabs.fr/equipe): Maxime Dubois et Romain Clatot, co-fondateurs développeurs.
+- [L'équipe](https://krealabs.fr/equipe): Maxime Dubois (fondateur, full-stack), Thibaud Masurel (back-end), Paul Bouqueret (développement web) et Romain Savary (IA et cybersécurité), les quatre associés.
 - [Expertise et savoir-faire](https://krealabs.fr/expertise): Domaines techniques et secteurs accompagnés.
 - [Travaux clients (anonymisés)](https://krealabs.fr/clients): Études de cas SaaS, e-commerce, mobile.
 - [FAQ](https://krealabs.fr/faq): Délais, méthode, tarifs, technologies.

@@ -149,6 +149,40 @@ export const TEAM: TeamMember[] = [
     metaDescription:
       "Paul Bouqueret, associé et développeur web chez Krealabs à Rouen. Formé à Zone01, spécialisé en Go, JavaScript, API REST et applications temps réel.",
   },
+  {
+    slug: "romain-savary",
+    name: "Romain Savary",
+    role: "Associé · Expert IA & cybersécurité",
+    initials: "RS",
+    bio: "Associé chez Krealabs. Après dix ans à manager des équipes dans la distribution, je me suis reconverti dans le développement à Zone01 Normandie. Je m'occupe de l'intégration de l'IA dans les projets et de leur sécurité, des API jusqu'aux données.",
+    longBio:
+      "Romain Savary est associé chez Krealabs, à Rouen, où il prend en charge l'intelligence artificielle et la cybersécurité des projets. Il a d'abord passé une dizaine d'années dans le management opérationnel de la grande distribution, à piloter des équipes et des budgets, et il est diplômé d'un Bac+5 en management. Il se reconvertit ensuite dans le développement et obtient la certification Concepteur Développeur d'Applications (Bac+3) à Zone01 Normandie. Il y conçoit notamment Pulse, un réseau social temps réel avec un back-end Go (API REST et WebSockets), une authentification JWT, une base PostgreSQL et une intégration continue sous Docker et GitHub Actions. Chez Krealabs, il intègre des fonctionnalités d'IA dans les applications de nos clients et veille à leur sécurité : authentification, protection des API, bonnes pratiques OWASP, gestion des données sensibles. Son parcours de manager l'aide aussi à faire le lien entre les enjeux métier d'une PME et les choix techniques.",
+    location: "Rouen, Normandie",
+    yearsExperience: "3+",
+    loves: "Rendre une application plus intelligente sans la rendre moins sûre.",
+    github: "https://github.com/MrFruchard",
+    linkedin: "https://www.linkedin.com/in/romain-savary1/",
+    specialties: ["IA", "Cybersécurité", "Back-end"],
+    stack: ["Go", "TypeScript", "Next.js", "PostgreSQL", "Docker", "GitHub Actions"],
+    knowsAbout: [
+      "Intelligence artificielle",
+      "Intégration IA",
+      "Cybersécurité",
+      "Sécurité applicative",
+      "OWASP",
+      "Authentification JWT",
+      "Go",
+      "TypeScript",
+      "Next.js",
+      "PostgreSQL",
+      "Docker",
+      "WebSockets",
+      "Gestion de projet",
+    ],
+    metaTitle: "Romain Savary - Associé & expert IA et cybersécurité Krealabs (Rouen)",
+    metaDescription:
+      "Romain Savary, associé chez Krealabs à Rouen, expert IA et cybersécurité. Formé à Zone01 Normandie, il sécurise et intègre l'IA dans les applications web des PME.",
+  },
 ];
 
 export const TEAM_SLUGS = TEAM.map((m) => m.slug);

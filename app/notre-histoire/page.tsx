@@ -180,7 +180,7 @@ export default function NotreHistoirePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
             {TEAM.map((m) => (
               <div key={m.name} className="bg-[var(--background)] p-8 md:p-10">
                 <div className="flex items-start gap-5 mb-5">
