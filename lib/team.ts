@@ -160,6 +160,7 @@ export const TEAM: TeamMember[] = [
     location: "Rouen, Normandie",
     yearsExperience: "3+",
     loves: "Rendre une application plus intelligente sans la rendre moins sûre.",
+    photo: "/team/romain.jpg",
     github: "https://github.com/MrFruchard",
     linkedin: "https://www.linkedin.com/in/romain-savary1/",
     specialties: ["IA", "Cybersécurité", "Back-end"],
