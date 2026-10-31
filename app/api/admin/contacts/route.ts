@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { isAdminAuthenticated, getAdminAuthError } from '@/lib/admin-auth';
-import type { WaitlistContact, ContactForm } from '@prisma/client';
+import type { WaitlistContact, ContactForm } from '@/lib/generated/prisma/client';
 
 export async function GET(request: NextRequest) {
   // Check authentication

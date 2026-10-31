@@ -14,7 +14,7 @@ import { cookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import bcrypt from 'bcryptjs'
 import { prisma } from '@/lib/prisma'
-import { AdminRole } from '@prisma/client'
+import { AdminRole } from '@/lib/generated/prisma/client'
 
 // ========================================
 // CONFIGURATION
