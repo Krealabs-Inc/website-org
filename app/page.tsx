@@ -105,7 +105,7 @@ export default function HomePage() {
                 <p className="text-body-lg text-[var(--muted-foreground)] mb-8 max-w-xl">
                   Textes, photos, actualités, produits : vous mettez votre site
                   à jour en quelques clics, et il reste rapide, sécurisé et bien
-                  référencé. Depuis plus de 7 ans, c’est ce que nous livrons à
+                  référencé. Depuis 2020, c’est ce que nous livrons à
                   la plupart de nos clients, à Rouen et en Normandie.
                 </p>
                 <ul className="space-y-3 mb-10">

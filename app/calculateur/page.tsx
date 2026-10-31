@@ -67,7 +67,7 @@ export default function CalculateurPage() {
             </h2>
             <p className="text-body text-[var(--muted-foreground)] mb-4 leading-relaxed">
               La fourchette de base par type de projet est dérivée des devis
-              réels qu&apos;on a chiffrés sur 7 ans à Rouen. Les options
+              réels qu&apos;on a chiffrés depuis 2020 à Rouen. Les options
               additionnelles (paiement Stripe, comptes utilisateur,
               intégrations…) sont valorisées au prix marché normand : environ
               600-800 €/jour de dev senior, avec une fourchette qui reflète la
