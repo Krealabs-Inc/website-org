@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ArrowRight, CheckCircle2, Loader2 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 type Status = "idle" | "loading" | "success" | "error" | "already";
 
@@ -68,7 +69,7 @@ export function NewsletterSignup({
     return (
       <div
         className={cn(
-          "rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-8 md:p-10",
+          "home-contact-note p-8 md:p-10",
           className,
         )}
       >
@@ -132,7 +133,7 @@ function NewsletterForm({
 }) {
   if (isSuccess) {
     return (
-      <div className="flex items-start gap-3 rounded-[var(--radius)] border border-[var(--accent)]/30 bg-[var(--accent-subtle)] p-4">
+      <div className="compact-note flex items-start gap-3">
         <CheckCircle2 className="size-5 text-[var(--accent)] mt-0.5 shrink-0" />
         <div>
           <p className="text-body-sm font-medium text-[var(--foreground)]">
@@ -163,15 +164,12 @@ function NewsletterForm({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           disabled={isLoading}
-          className="flex-1 px-4 py-3 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--background)] text-body text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 transition-colors disabled:opacity-60"
+          className="min-w-0 flex-1 px-5 py-3 rounded-full border border-[var(--border)] bg-[var(--background)] text-body text-[var(--foreground)] placeholder:text-[var(--muted-foreground)] focus:outline-none focus:border-[var(--accent)] focus:ring-2 focus:ring-[var(--accent)]/30 transition-colors disabled:opacity-60"
         />
-        <button
+        <Button
           type="submit"
+          size="lg"
           disabled={isLoading || !email}
-          className={cn(
-            "inline-flex items-center justify-center gap-2 px-5 py-3 rounded-[var(--radius)] font-medium text-body-sm transition-colors disabled:opacity-60 disabled:cursor-not-allowed",
-            "bg-[var(--accent)] text-[#0a0a0a] hover:bg-[var(--accent)]/90",
-          )}
         >
           {isLoading ? (
             <Loader2 className="size-4 animate-spin" />
@@ -181,7 +179,7 @@ function NewsletterForm({
               <ArrowRight className="size-4" />
             </>
           )}
-        </button>
+        </Button>
       </div>
       {!compact && (
         <p className="text-caption">

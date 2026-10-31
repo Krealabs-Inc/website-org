@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     template: '%s · Krealabs',
   },
 
-  description: 'Agence web à Rouen en Normandie. Création de sites internet, applications mobiles et logiciels sur mesure. Experts React, Next.js, React Native, TypeScript. Devis gratuit sous 24h.',
+  description: 'Agence web à Rouen : vos clients vous trouvent, vos équipes gagnent du temps. Sites internet, applications mobiles et logiciels sur mesure, développement web en Normandie. Devis gratuit sous 24h.',
 
 
   authors: [{ name: 'Krealabs', url: 'https://krealabs.fr' }],
@@ -89,7 +89,7 @@ export const metadata: Metadata = {
     locale: 'fr_FR',
     url: 'https://krealabs.fr',
     title: 'Krealabs - Agence web à Rouen',
-    description: 'Sites internet, applications mobiles et logiciels sur mesure. Agence basée à Rouen, intervention France entière.',
+    description: 'Un site qui vous amène des clients, des outils qui vous font gagner du temps. Agence web à Rouen, partout en France.',
     siteName: 'Krealabs',
   },
 

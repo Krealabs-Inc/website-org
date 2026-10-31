@@ -9,12 +9,13 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Design UI/UX à Rouen - Interfaces & design system",
+  title: "Design UI/UX à Rouen - Des interfaces qui font agir vos visiteurs",
   description:
-    "Design UI/UX à Rouen : wireframes, maquettes Figma, design system, prototypage. Interfaces accessibles, mémorables, pensées pour convertir. Agence digitale Normandie.",
+    "Vos visiteurs comprennent et passent à l'action. Design UI/UX par une agence web à Rouen : maquettes Figma, design system, prototypage, accessibilité. Normandie et toute la France.",
   alternates: { canonical: "https://krealabs.fr/services/design-uiux" },
 };
 
+import { ProjectSelection } from "@/components/projects/project-selection";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
@@ -22,7 +23,6 @@ import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
-import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 
 export default function DesignUiUxPage() {
   return (
@@ -43,24 +43,31 @@ export default function DesignUiUxPage() {
       />
       <ServiceHero
         number="03"
-        eyebrow="Service · Design"
+        eyebrow="Design UI/UX"
         title={
           <>
-            Des <em>interfaces</em> qui se distinguent.
+            Vos visiteurs comprennent et <em>passent à l’action</em>.
           </>
         }
-        description="Wireframes, maquettes haute fidélité, design system, prototypage interactif. Nous concevons des interfaces accessibles, mémorables et pensées pour convertir."
+        description="Des écrans clairs, des parcours évidents, une interface qui vous ressemble : vos visiteurs trouvent ce qu'ils cherchent et vous contactent. Maquettes, design system et prototypes, accessibles à tous."
+      />
+
+      <ProjectSelection
+        slugs={["pas-de-serie", "mbe-bihorel"]}
+        eyebrow="Deux identités, deux expressions"
+        title={<>Une interface doit aussi<br /><em>vous ressembler.</em></>}
       />
 
       <ServiceFeatures
+        layout="list"
         number="01"
-        eyebrow="Ce que nous livrons"
+        eyebrow="Ce que vous obtenez"
         title={
           <>
             Du <em>brief</em> au design system.
           </>
         }
-        intro="Un design rigoureux, documenté, réutilisable - pas une simple maquette qu'il faudra interpréter."
+        intro="Vous recevez un design documenté et réutilisable, pas une simple maquette qu'il faudra interpréter."
         features={FEATURES}
       />
 
@@ -70,17 +77,17 @@ export default function DesignUiUxPage() {
             <div className="lg:col-span-5">
               <Eyebrow number="02" className="mb-6">Méthode</Eyebrow>
               <h2 className="text-h1 mb-6">
-                Un <em>parcours</em> en quatre temps.
+                Vous validez <em>chaque étape</em>.
               </h2>
               <p className="text-body text-[var(--muted-foreground)]">
-                Du discovery au design system. Chaque étape est validée
-                explicitement avant de passer à la suivante.
+                De l’atelier de cadrage au design system, rien ne passe à
+                l’étape suivante sans votre accord.
               </p>
             </div>
-            <ol className="lg:col-span-7 space-y-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <ol className="lg:col-span-7 space-y-3">
               {STEPS.map((step, i) => (
-                <li key={step.title} className="bg-[var(--background)] p-8 grid grid-cols-[auto_1fr] gap-8 items-start">
-                  <span className="text-eyebrow text-[var(--accent)] pt-1.5">{String(i + 1).padStart(2, "0")}</span>
+                <li key={step.title} className="editorial-step">
+                  <span className="editorial-ordinal">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className="text-h3 mb-2">{step.title}</h3>
                     <p className="text-body-sm text-[var(--muted-foreground)]">{step.description}</p>
@@ -97,12 +104,12 @@ export default function DesignUiUxPage() {
           <div className="max-w-3xl mb-16">
             <Eyebrow number="03" className="mb-6">Outils</Eyebrow>
             <h2 className="text-h1">
-              Notre <em>boîte à outils</em>.
+              Testé <em>avant d’être codé</em>.
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
             {TOOLS.map((t) => (
-              <div key={t.name} className="p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]">
+              <div key={t.name} className="compact-note">
                 <p className="text-caption mb-3">{t.kind}</p>
                 <p className="text-h4 mb-2">{t.name}</p>
                 <p className="text-body-sm text-[var(--muted-foreground)]">{t.tagline}</p>
@@ -115,22 +122,17 @@ export default function DesignUiUxPage() {
       <ServiceFAQ
         title={
           <>
-            Vos questions sur <em>design UI/UX</em>.
+            Vos questions sur le <em>design UI/UX</em>.
           </>
         }
         items={FAQ}
       />
 
-      <section className="section-y border-t border-[var(--border)]">
-        <Container size="narrow">
-          <NewsletterSignup variant="card" source="services-design" />
-        </Container>
-      </section>
 
       <ServiceCta
         title={
           <>
-            Un projet à <em>maquetter</em> ?
+            Et si vos visiteurs <em>passaient à l’action</em> ?
           </>
         }
       />
@@ -142,17 +144,17 @@ const FAQ = [
   {
     question: "Travaillez-vous avec un designer dédié ou un dev qui fait du design ?",
     answer:
-      "Les deux. Pour les projets exigeants en identité graphique, nous collaborons avec un designer UI/UX indépendant à Rouen avec qui nous travaillons depuis plusieurs années. Pour les projets où l'UX prime sur l'esthétique pure (SaaS B2B, outils métier), nous gérons en interne avec une approche utility-first (Tailwind, design systems). Vous nous dites ce dont vous avez besoin, on calibre la bonne équipe.",
+      "Les deux, selon votre projet. Si votre identité graphique est centrale, un designer UI/UX indépendant de Rouen, partenaire de longue date, rejoint le projet. Si l'efficacité prime (SaaS B2B, outils métier), le design est fait en interne avec une approche utility-first (Tailwind, design systems). Vous nous dites ce dont vous avez besoin, on constitue la bonne équipe.",
   },
   {
     question: "Combien de maquettes au total ?",
     answer:
-      "Site vitrine 6-10 pages : 8-15 écrans Figma (desktop + mobile + variantes principales). App mobile MVP : 15-25 écrans. SaaS / plateforme : 25-50 écrans. Toujours en haute fidélité (HF) - on saute les wireframes basse fidélité pour les projets de petite/moyenne envergure, car on perd plus de temps à les valider qu'on n'en gagne sur les HF.",
+      "Site vitrine 6-10 pages : 8-15 écrans Figma (desktop + mobile + variantes principales). App mobile MVP : 15-25 écrans. SaaS / plateforme : 25-50 écrans. Toujours en haute fidélité : pour un projet de taille moyenne, vous validez directement des écrans finalisés, plus rapides à juger que des wireframes.",
   },
   {
     question: "Quels délais sur la phase design ?",
     answer:
-      "Site vitrine : 2-3 semaines de design avant le démarrage du dev. App mobile MVP : 3-4 semaines. SaaS / plateforme : 4-6 semaines. Ces durées incluent 2-3 cycles de validation avec vous. On bloque le démarrage du dev tant que les maquettes ne sont pas validées - éviter le \"on corrige en cours de dev\" qui explose les budgets.",
+      "Site vitrine : 2-3 semaines de design avant le démarrage du dev. App mobile MVP : 3-4 semaines. SaaS / plateforme : 4-6 semaines. Ces durées incluent 2-3 cycles de validation avec vous. Le développement ne démarre qu'une fois vos maquettes validées : c'est ce qui évite les corrections en cours de route qui font exploser les budgets.",
   },
   {
     question: "Travaillez-vous avec mes maquettes existantes (Figma, XD, Sketch) ?",
@@ -162,7 +164,7 @@ const FAQ = [
   {
     question: "Que se passe-t-il après validation des maquettes ?",
     answer:
-      "On démarre l'intégration. Toutes nos integrations sont pixel-perfect par défaut - si votre maquette Figma indique 24px de marge, le site aura 24px. On utilise Tailwind avec design tokens (couleurs, spacings, typo extraits de Figma) pour garantir la cohérence. Vérification finale ensemble avant mise en ligne.",
+      "L'intégration démarre. Votre site reprend la maquette au pixel près : si elle indique 24px de marge, le site aura 24px. Couleurs, espacements et typographies sont extraits de Figma (Tailwind et design tokens) pour garantir la cohérence. Vous vérifiez le résultat avec nous avant la mise en ligne.",
   },
   {
     question: "Concevez-vous des design systems complets ?",
@@ -175,32 +177,32 @@ const FEATURES = [
   {
     icon: Eye,
     title: "Audit UX",
-    description: "Analyse de votre site/app existant : parcours, friction, heatmaps, recommandations chiffrées.",
+    description: "Vous savez où vos visiteurs décrochent et quoi corriger en priorité : parcours, frictions, heatmaps, recommandations chiffrées.",
   },
   {
     icon: PenTool,
     title: "Wireframes",
-    description: "Squelettes basse fidélité de chaque écran. On valide la structure avant la déco.",
+    description: "Vous validez la structure de chaque écran avant de parler couleurs.",
   },
   {
     icon: Figma,
     title: "Maquettes haute fidélité",
-    description: "Designs finalisés sur Figma : typographie, couleurs, espacements, états, mobile et desktop.",
+    description: "Vous voyez votre site tel qu'il sera, sur mobile comme sur ordinateur, avant le développement.",
   },
   {
     icon: Layers,
     title: "Design system",
-    description: "Bibliothèque de composants documentée, variantes, tokens. Réutilisable pour les évolutions futures.",
+    description: "Vos futures pages restent cohérentes : composants documentés, variantes et tokens réutilisables.",
   },
   {
     icon: TestTube2,
     title: "Prototypage interactif",
-    description: "Prototype navigable Figma pour tester les flows avant le développement. Économie de temps massive.",
+    description: "Vous testez les parcours en conditions réelles avant le développement, sans allers-retours coûteux.",
   },
   {
     icon: Accessibility,
     title: "Accessibilité WCAG",
-    description: "Contrastes, navigation clavier, lecteurs d'écran. Conformité AA dès la phase design.",
+    description: "Tous vos visiteurs peuvent utiliser votre site : contrastes, navigation clavier, lecteurs d'écran, conformité AA dès le design.",
   },
 ];
 
@@ -224,8 +226,8 @@ const STEPS = [
 ];
 
 const TOOLS = [
-  { kind: "Design", name: "Figma", tagline: "Outil principal, collaboration temps réel" },
-  { kind: "Prototyping", name: "Figma Prototype", tagline: "Navigation, animations, interactions" },
-  { kind: "Recherche", name: "Maze / Lookback", tagline: "Tests utilisateurs distants, validés" },
-  { kind: "Inspiration", name: "Mobbin / Refero", tagline: "Veille UI/UX continue" },
+  { kind: "Design", name: "Figma", tagline: "Vous suivez le design en temps réel" },
+  { kind: "Prototyping", name: "Figma Prototype", tagline: "Vous cliquez dans votre futur site" },
+  { kind: "Recherche", name: "Maze / Lookback", tagline: "Testé par de vrais utilisateurs" },
+  { kind: "Inspiration", name: "Mobbin / Refero", tagline: "Les meilleures pratiques du moment" },
 ];

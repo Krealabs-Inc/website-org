@@ -74,14 +74,10 @@ export default function ReactPage() {
               Là où React <em>excelle</em>.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {USE_CASES.map((u) => {
-              const Icon = u.icon;
               return (
-                <div key={u.title} className="bg-[var(--background)] p-8">
-                  <div className="size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mb-6">
-                    <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-                  </div>
+                <div key={u.title} className="editorial-note">
                   <h3 className="text-h4 mb-2">{u.title}</h3>
                   <p className="text-body-sm text-[var(--muted-foreground)]">{u.description}</p>
                 </div>

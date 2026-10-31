@@ -34,13 +34,13 @@ export function ServiceFAQ({ title, eyebrow = "Questions fréquentes", items }: 
             <Eyebrow className="mb-6 justify-center">{eyebrow}</Eyebrow>
             <h2 className="text-h1">{title ?? "Questions fréquentes"}</h2>
           </div>
-          <div className="space-y-4">
+          <div className="border-t border-[var(--border-strong)]">
             {items.map((item) => (
               <details
                 key={item.question}
-                className="group rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] open:border-[var(--border-strong)] transition-colors"
+                className="editorial-question group"
               >
-                <summary className="cursor-pointer list-none px-6 py-5 flex items-center justify-between gap-4">
+                <summary className="cursor-pointer list-none px-1 py-6 flex items-center justify-between gap-4">
                   <span className="text-h4">{item.question}</span>
                   <span
                     aria-hidden
@@ -49,7 +49,7 @@ export function ServiceFAQ({ title, eyebrow = "Questions fréquentes", items }: 
                     +
                   </span>
                 </summary>
-                <p className="px-6 pb-6 text-body text-[var(--muted-foreground)] whitespace-pre-line">
+                <p className="px-1 pb-7 text-body text-[var(--muted-foreground)] whitespace-pre-line">
                   {item.answer}
                 </p>
               </details>

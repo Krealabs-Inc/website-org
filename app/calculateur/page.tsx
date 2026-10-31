@@ -8,7 +8,7 @@ import { QuoteCalculator } from "@/components/calculator/quote-calculator";
 export const metadata: Metadata = {
   title: "Calculateur de devis - Estimer le prix de votre projet web",
   description:
-    "Calculateur gratuit : fourchette de prix réaliste pour un site web, e-commerce, SaaS ou application mobile. Marché normand 2026, basé sur les vrais coûts d'agence.",
+    "Estimez gratuitement le prix de votre site web, e-commerce, SaaS ou application mobile en 60 secondes. Une fourchette réaliste, basée sur les tarifs d'une agence web à Rouen et le marché normand 2026.",
   alternates: { canonical: "https://krealabs.fr/calculateur" },
   openGraph: {
     title: "Calculateur de devis web - Krealabs",
@@ -61,13 +61,13 @@ export default function CalculateurPage() {
       <section className="section-y border-t border-[var(--border)]">
         <Container size="narrow">
           <div className="max-w-3xl">
-            <Eyebrow className="mb-6">Comment on calcule ça ?</Eyebrow>
+            <Eyebrow className="mb-6">D’où vient votre estimation ?</Eyebrow>
             <h2 className="text-h1 mb-8">
-              Transparence <em>totale</em>.
+              Une estimation <em>que vous pouvez vérifier</em>.
             </h2>
             <p className="text-body text-[var(--muted-foreground)] mb-4 leading-relaxed">
               La fourchette de base par type de projet est dérivée des devis
-              réels qu&apos;on a chiffrés sur 5 ans à Rouen. Les options
+              réels qu&apos;on a chiffrés sur 7 ans à Rouen. Les options
               additionnelles (paiement Stripe, comptes utilisateur,
               intégrations…) sont valorisées au prix marché normand : environ
               600-800 €/jour de dev senior, avec une fourchette qui reflète la
@@ -83,10 +83,10 @@ export default function CalculateurPage() {
               <strong className="text-[var(--foreground)]">
                 Cette estimation n&apos;est pas un devis.
               </strong>{" "}
-              Pour un chiffrage précis, on a besoin d&apos;un cadrage (besoins
-              exacts, contraintes, intégrations spécifiques). C&apos;est ce
-              qu&apos;on fait en premier RDV - gratuit. Pour en savoir plus sur
-              nos tarifs, lire notre{" "}
+              Pour un chiffrage précis, votre projet doit d&apos;abord être
+              cadré (besoins exacts, contraintes, intégrations spécifiques) :
+              c&apos;est l&apos;objet du premier rendez-vous, gratuit. Pour
+              aller plus loin sur les tarifs, lisez l&apos;
               <a
                 href="/blog/prix-site-internet-rouen-2026"
                 className="underline underline-offset-2 hover:text-[var(--foreground)]"
@@ -102,11 +102,11 @@ export default function CalculateurPage() {
       <ServiceCta
         title={
           <>
-            On <em>cadre</em> votre projet ?
+            Passez de l&apos;estimation au <em>devis précis</em>.
           </>
         }
-        description="Premier RDV offert pour transformer votre estimation en devis précis. En présentiel à Rouen ou en visio."
-        primaryLabel="Prendre rendez-vous"
+        description="Votre premier rendez-vous est offert, à Rouen ou en visio : vous passez de la fourchette à un prix ferme."
+        primaryLabel="Réserver mon rendez-vous offert"
       />
     </main>
   );

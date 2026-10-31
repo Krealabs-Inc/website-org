@@ -9,9 +9,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Applications mobiles à Rouen - React Native iOS & Android",
+  title: "Application mobile à Rouen - iOS & Android en React Native",
   description:
-    "Développement d'applications mobiles iOS et Android à Rouen. Apps cross-platform en React Native. Une base de code, deux App Stores. Publication, OTA, notifications push.",
+    "Vos clients vous ont dans leur poche : une application iOS et Android pour le budget d'une seule. Développement mobile React Native par une agence web à Rouen, en Normandie.",
   alternates: { canonical: "https://krealabs.fr/services/applications-mobile" },
 };
 
@@ -23,7 +23,6 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
-import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 
 export default function ApplicationsMobilePage() {
   return (
@@ -44,15 +43,15 @@ export default function ApplicationsMobilePage() {
       />
       <ServiceHero
         number="02"
-        eyebrow="Service · Mobile"
+        eyebrow="Application mobile · iOS & Android"
         title={
           <>
-            Applications mobiles iOS & Android,
+            Vos clients vous ont
             <br />
-            <em>une seule équipe</em>.
+            <em>dans leur poche</em>.
           </>
         }
-        description="Apps cross-platform en React Native. Une base de code, deux App Stores, une expérience native. Idéal pour réduire les coûts sans sacrifier la qualité."
+        description="Une application sur iOS et Android pour le budget d'une seule : une base de code React Native, deux App Stores, une expérience native. Vous réduisez vos coûts sans rogner sur la qualité."
       />
 
       <ServiceFeatures
@@ -63,7 +62,7 @@ export default function ApplicationsMobilePage() {
             Une app <em>complète</em>, prête à publier.
           </>
         }
-        intro="Du prototype au déploiement sur les stores, nous gérons l'ensemble du cycle de vie de votre application mobile."
+        intro="Du prototype à la publication sur les stores, vous avez un seul interlocuteur pour toute la vie de votre application."
         features={FEATURES}
       />
 
@@ -73,17 +72,17 @@ export default function ApplicationsMobilePage() {
             <div className="lg:col-span-5">
               <Eyebrow number="02" className="mb-6">Méthode</Eyebrow>
               <h2 className="text-h1 mb-6">
-                Du <em>prototype</em> au store.
+                Vous testez votre app <em>avant</em> qu’elle existe.
               </h2>
               <p className="text-body text-[var(--muted-foreground)]">
-                Nous démarrons toujours par un prototype navigable. Vous testez
-                l'expérience avant qu'on développe la logique métier.
+                Tout commence par un prototype navigable : vous testez
+                l’expérience sur votre téléphone avant la moindre ligne de code.
               </p>
             </div>
-            <ol className="lg:col-span-7 space-y-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <ol className="lg:col-span-7 space-y-3">
               {STEPS.map((step, i) => (
-                <li key={step.title} className="bg-[var(--background)] p-8 grid grid-cols-[auto_1fr] gap-8 items-start">
-                  <span className="text-eyebrow text-[var(--accent)] pt-1.5">{String(i + 1).padStart(2, "0")}</span>
+                <li key={step.title} className="editorial-step">
+                  <span className="editorial-ordinal">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className="text-h3 mb-2">{step.title}</h3>
                     <p className="text-body-sm text-[var(--muted-foreground)]">{step.description}</p>
@@ -100,12 +99,12 @@ export default function ApplicationsMobilePage() {
           <div className="max-w-3xl mb-16">
             <Eyebrow number="03" className="mb-6">Stack technique</Eyebrow>
             <h2 className="text-h1">
-              Les outils <em>natifs</em> de demain.
+              Ce qui fait tourner <em>votre app</em>.
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
             {TECH.map((t) => (
-              <div key={t.name} className="p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]">
+              <div key={t.name} className="compact-note">
                 <p className="text-caption mb-3">{t.kind}</p>
                 <p className="text-h4 mb-2">{t.name}</p>
                 <p className="text-body-sm text-[var(--muted-foreground)]">{t.tagline}</p>
@@ -124,11 +123,6 @@ export default function ApplicationsMobilePage() {
         items={FAQ}
       />
 
-      <section className="section-y border-t border-[var(--border)]">
-        <Container size="narrow">
-          <NewsletterSignup variant="card" source="services-mobile" />
-        </Container>
-      </section>
 
       <ServiceResources
         articles={[
@@ -142,7 +136,7 @@ export default function ApplicationsMobilePage() {
       <ServiceCta
         title={
           <>
-            Une app à <em>concevoir</em> ?
+            Et si vos clients vous <em>avaient en poche</em> ?
           </>
         }
       />
@@ -159,7 +153,7 @@ const FAQ = [
   {
     question: "React Native ou natif (Swift / Kotlin) ?",
     answer:
-      "React Native pour 90% des apps : performance proche du natif, 1 base de code, time-to-market réduit de 30-40%. Natif (Swift/Kotlin) si vous avez besoin de fonctionnalités très spécifiques (AR, ML embarqué, traitement vidéo lourd, intégrations OS profondes). À Krealabs nous codons en React Native + Expo pour la majorité de nos clients normands.",
+      "React Native pour 90% des apps : performance proche du natif, 1 base de code, time-to-market réduit de 30-40%. Natif (Swift/Kotlin) si vous avez besoin de fonctionnalités très spécifiques (AR, ML embarqué, traitement vidéo lourd, intégrations OS profondes). C'est le choix retenu pour la plupart des projets que nous accompagnons en Normandie.",
   },
   {
     question: "Combien coûte une application mobile à Rouen ?",
@@ -179,7 +173,7 @@ const FAQ = [
   {
     question: "Avez-vous déjà publié des apps sur les stores ?",
     answer:
-      "Oui, plusieurs apps Krealabs sont actuellement en production sur l'App Store et Google Play. Nous gérons tout le pipeline : compte développeur, fastlane, signing iOS, app icon multi-tailles, screenshots App Store, fiches descriptives ASO. Vous restez propriétaire des comptes développeurs, on les configure ensemble.",
+      "Oui, plusieurs apps Krealabs sont en production sur l'App Store et Google Play. Côté technique, vous n'avez rien à gérer : compte développeur, fastlane, signature iOS, icônes, captures d'écran, fiches ASO. Vous restez propriétaire de vos comptes développeur, configurés ensemble.",
   },
 ];
 
@@ -187,57 +181,57 @@ const FEATURES = [
   {
     icon: Smartphone,
     title: "App native iOS & Android",
-    description: "Une seule base de code React Native, deux apps installables. Performance native, pas un wrapper web.",
+    description: "Vos utilisateurs installent une vraie app sur iPhone et Android, pas un site déguisé. Une seule base de code React Native.",
   },
   {
     icon: Bell,
     title: "Notifications push",
-    description: "Notifications ciblées via Expo Push ou Firebase. Segmentation, scheduling, deep linking.",
+    description: "Vous relancez vos utilisateurs au bon moment, avec le bon message : Expo Push ou Firebase, segmentation, liens profonds.",
   },
   {
     icon: CloudOff,
     title: "Mode offline",
-    description: "Synchronisation différée, cache local, file d'attente pour les requêtes. L'app fonctionne sans réseau.",
+    description: "Votre app fonctionne même sans réseau, et se synchronise dès que la connexion revient.",
   },
   {
     icon: Lock,
     title: "Authentification",
-    description: "Login email/password, social login, biométrie Touch ID / Face ID, persistance sécurisée.",
+    description: "Vos utilisateurs se connectent en un geste : email, Google ou Apple, Face ID ou Touch ID, en toute sécurité.",
   },
   {
     icon: AppWindow,
     title: "Publication App Store",
-    description: "Soumission Apple App Store et Google Play, gestion des comptes développeur, suivi des reviews.",
+    description: "Votre app arrive sur l'App Store et Google Play sans que vous ayez à gérer les règles des stores.",
   },
   {
     icon: RefreshCw,
     title: "Mises à jour OTA",
-    description: "Patches déployés en over-the-air via EAS Update - pas de re-soumission au store pour les corrections.",
+    description: "Vos corrections arrivent chez vos utilisateurs sans repasser par la validation des stores (EAS Update).",
   },
 ];
 
 const STEPS = [
   {
     title: "Cadrage produit",
-    description: "Définition des écrans clés, parcours utilisateur, scope de la V1. Brief écrit validé ensemble.",
+    description: "Les écrans clés, les parcours et le contenu de votre V1, définis avec vous. Brief écrit validé ensemble.",
   },
   {
     title: "Prototype Figma",
-    description: "Maquettes haute fidélité, prototype navigable. Validation UX avant le moindre code.",
+    description: "Vous validez les maquettes et le prototype navigable avant le moindre code.",
   },
   {
     title: "Développement React Native",
-    description: "Sprints de 2 semaines, builds TestFlight et Play Internal Testing à chaque sprint.",
+    description: "Toutes les 2 semaines, une nouvelle version de test sur votre téléphone (TestFlight, Play Internal Testing).",
   },
   {
     title: "Publication & suivi",
-    description: "Soumission aux stores, gestion des reviews, mises à jour OTA, monitoring crashes Sentry.",
+    description: "Soumission aux stores, réponses aux reviews, mises à jour OTA, suivi des plantages.",
   },
 ];
 
 const TECH = [
-  { kind: "Framework", name: "React Native", tagline: "Cross-platform iOS & Android" },
-  { kind: "Build", name: "Expo / EAS", tagline: "Build cloud, OTA updates" },
-  { kind: "Langage", name: "TypeScript", tagline: "Typage strict, refactoring serein" },
-  { kind: "Backend", name: "Supabase / API", tagline: "Auth, base de données, fichiers" },
+  { kind: "Framework", name: "React Native", tagline: "Une app pour iOS et Android" },
+  { kind: "Build", name: "Expo / EAS", tagline: "Vos mises à jour sans attendre les stores" },
+  { kind: "Langage", name: "TypeScript", tagline: "Moins de bugs, des évolutions sereines" },
+  { kind: "Backend", name: "Supabase / API", tagline: "Comptes, données et fichiers sécurisés" },
 ];

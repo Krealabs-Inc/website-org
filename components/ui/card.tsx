@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 
 /**
  * Card - Krealabs DS v2
- * Surface + bordure 1px, radius unique, transitions hover subtiles.
+ * Surface à coins de 20 px et bordure intérieure discrète.
  */
 
 const Card = React.forwardRef<
@@ -14,7 +14,7 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] text-[var(--foreground)]",
+      "studio-panel text-[var(--foreground)]",
       "transition-colors duration-200",
       className,
     )}

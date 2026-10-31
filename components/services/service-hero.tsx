@@ -20,8 +20,8 @@ export function ServiceHero({
   number,
   title,
   description,
-  primaryCta = { label: "Démarrer un projet", href: "/contact" },
-  secondaryCta = { label: "Tous les services", href: "/services" },
+  primaryCta = { label: "Parler de mon projet", href: "/contact" },
+  secondaryCta = { label: "Voir toutes les solutions", href: "/services" },
 }: ServiceHeroProps) {
   return (
     <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">

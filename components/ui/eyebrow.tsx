@@ -10,7 +10,7 @@ interface EyebrowProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 /**
- * Eyebrow - petite étiquette mono uppercase au-dessus d'un h2/h3.
+ * Eyebrow - étiquette sobre et lisible au-dessus d’un h2/h3.
  * Pattern signature : "01 / SERVICES" ou "● AGENCE ROUEN".
  */
 export const Eyebrow = React.forwardRef<HTMLSpanElement, EyebrowProps>(
@@ -26,8 +26,8 @@ export const Eyebrow = React.forwardRef<HTMLSpanElement, EyebrowProps>(
         )}
         {number && (
           <>
-            <span className="text-[var(--subtle-foreground)]">{number}</span>
-            <span aria-hidden className="text-[var(--subtle-foreground)]">
+            <span className="text-[var(--muted-foreground)]">{number}</span>
+            <span aria-hidden className="text-[var(--muted-foreground)]">
               /
             </span>
           </>

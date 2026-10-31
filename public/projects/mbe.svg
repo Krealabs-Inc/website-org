@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <rect width="1600" height="1000" fill="#121212"/>
+  <rect x="0" width="20" height="1000" fill="#e30613"/>
+  <g font-family="Arial, Helvetica, sans-serif" fill="#f6efe4">
+    <text x="100" y="140" font-size="92" font-weight="800" letter-spacing="-6">MBE<tspan fill="#e30613">.</tspan></text>
+    <text x="103" y="188" font-size="24" letter-spacing="4">BIHOREL · ROUEN NORD</text>
+    <text x="100" y="385" font-size="100" font-weight="700" letter-spacing="-5">On emballe.</text>
+    <text x="100" y="500" font-size="100" font-weight="700" letter-spacing="-5">On expédie.</text>
+    <text x="103" y="565" font-size="28" fill="#c89b62">Un concept interactif, du comptoir au bout du monde.</text>
+  </g>
+  <g transform="translate(1070 295) rotate(8 180 210)">
+    <rect width="360" height="440" rx="5" fill="#c89b62"/>
+    <path d="M148 0h64v440h-64z" fill="#e7cfa7"/>
+    <rect x="38" y="117" width="284" height="205" fill="#f6efe4"/>
+    <g fill="#121212" font-family="Arial, Helvetica, sans-serif">
+      <text x="60" y="158" font-size="24" font-weight="700">BIHOREL → MONDE</text>
+      <text x="60" y="192" font-size="16">CONCEPT KRÉALABS</text>
+      <path d="M60 218h5v60h-5zm10 0h8v60h-8zm14 0h3v60h-3zm9 0h9v60h-9zm15 0h4v60h-4zm10 0h7v60h-7zm13 0h3v60h-3zm9 0h10v60h-10zm16 0h5v60h-5zm11 0h3v60h-3zm9 0h8v60h-8zm14 0h4v60h-4zm10 0h9v60h-9zm15 0h3v60h-3zm9 0h8v60h-8zm14 0h4v60h-4zm10 0h7v60h-7zm13 0h3v60h-3zm9 0h9v60h-9zm15 0h5v60h-5z"/>
+    </g>
+  </g>
+  <path d="M100 805h1400" stroke="#f6efe4" stroke-opacity=".2"/>
+  <g font-family="Arial, Helvetica, sans-serif" font-size="23" fill="#f6efe4">
+    <text x="103" y="870">CONCEPT DE REFONTE · NON CONTRACTUEL</text>
+    <text x="103" y="915" fill="#a79d91">mbe.krealabs.fr</text>
+  </g>
+</svg>

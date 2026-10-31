@@ -16,14 +16,14 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
 
 export const metadata: Metadata = {
-  title: "Nos services",
+  title: "Services web à Rouen : sites, apps, SEO",
   description:
-    "Agence web à Rouen : WordPress, développement web custom, applications mobiles, design UI/UX, performance & SEO. Cinq expertises, une seule équipe pour vos projets digitaux en Normandie.",
+    "Agence web à Rouen : un site que vous gérez vous-même, des outils qui vous font gagner du temps, une place dans Google. Développement web en Normandie, un seul interlocuteur du devis à la mise en ligne.",
   alternates: { canonical: "https://krealabs.fr/services" },
   openGraph: {
-    title: "Nos services - Krealabs",
+    title: "Ce qu’on peut faire pour vous - Krealabs, agence web Rouen",
     description:
-      "Agence web à Rouen : WordPress, développement web custom, applications mobiles, design UI/UX, performance & SEO. Cinq expertises, une seule équipe pour vos projets digitaux en Normandie.",
+      "Agence web à Rouen : un site que vous gérez vous-même, des outils qui vous font gagner du temps, une place dans Google. Développement web en Normandie, un seul interlocuteur.",
     url: "https://krealabs.fr/services",
     type: "website",
   },
@@ -38,21 +38,21 @@ export default function ServicesIndexPage() {
 
         <Container className="relative">
           <div className="max-w-4xl">
-            <Eyebrow dot className="mb-8">Services · Krealabs Rouen</Eyebrow>
+            <Eyebrow dot className="mb-8">Services · Agence web Rouen</Eyebrow>
             <h1 className="text-display">
-              Cinq <em>expertises</em>,
+              Un seul <em>interlocuteur</em>,
               <br />
-              un seul interlocuteur.
+              du devis à la mise en ligne.
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Du design à la mise en production, nous couvrons l'ensemble de la
-              chaîne digitale. Pas de sous-traitance, pas d'intermédiaires :
-              l'équipe que vous rencontrez est celle qui code votre projet.
+              Site, application, design ou référencement : vous n’avez pas à
+              coordonner plusieurs prestataires. Les personnes que vous
+              rencontrez sont celles qui construisent votre projet.
             </p>
             <div className="mt-10">
               <Button size="lg" asChild>
                 <Link href="/contact">
-                  Démarrer un projet
+                  Parler de mon projet
                   <ArrowRight />
                 </Link>
               </Button>
@@ -64,9 +64,9 @@ export default function ServicesIndexPage() {
       {/* SERVICES GRID */}
       <section className="border-t border-[var(--border)]">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border-x border-b border-[var(--border)]">
-            {SERVICES.map((s) => (
-              <ServiceCard key={s.title} {...s} />
+          <div className="service-directory">
+            {SERVICES.map((s, index) => (
+              <ServiceCard key={s.title} {...s} index={index} />
             ))}
           </div>
         </Container>
@@ -76,20 +76,20 @@ export default function ServicesIndexPage() {
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <div className="max-w-3xl mx-auto text-center">
-            <Eyebrow className="mb-6 justify-center">Notre engagement</Eyebrow>
+            <Eyebrow className="mb-6 justify-center">Ce que vous pouvez attendre</Eyebrow>
             <h2 className="text-h1 mb-6">
-              Un <em>cadre clair</em>, des livrables précis.
+              Un <em>cadre clair</em>, aucune surprise.
             </h2>
             <p className="text-body-lg text-[var(--muted-foreground)]">
-              Tous nos projets suivent la même méthodologie : cadrage, design,
-              développement itératif, mise en ligne, suivi. Vous savez à tout
-              moment où nous en sommes - et combien il reste à faire.
+              Cadrage, design, développement, mise en ligne, suivi : votre
+              projet suit des étapes claires. Vous savez à tout moment où il en
+              est, et ce qu’il reste à faire.
             </p>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-5">
             {COMMITMENTS.map((c) => (
-              <div key={c.title} className="bg-[var(--background)] p-8">
+              <div key={c.title} className="editorial-note">
                 <p className="text-eyebrow text-[var(--accent)] mb-4">
                   {c.label}
                 </p>
@@ -120,10 +120,10 @@ export default function ServicesIndexPage() {
 const SERVICES = [
   {
     icon: Wrench,
-    eyebrow: "Spécialité · WordPress",
-    title: "Sites WordPress sur mesure",
+    eyebrow: "Site WordPress",
+    title: "Vous gérez votre site vous-même",
     description:
-      "Notre métier historique : création WordPress sur mesure, WooCommerce, refonte, SEO, maintenance, sécurité. Thèmes custom (pas de page builders), plugins développés à la main.",
+      "Un site conçu pour votre activité, une boutique WooCommerce, une refonte qui garde votre place dans Google, puis la maintenance pour que vous n'y pensiez plus. Notre métier historique : thèmes sur mesure, sans page builder.",
     points: [
       "Thème custom + ACF Pro",
       "WooCommerce e-commerce",
@@ -133,10 +133,10 @@ const SERVICES = [
   },
   {
     icon: Code2,
-    eyebrow: "Sur mesure · Polyvalent",
-    title: "Développement web custom",
+    eyebrow: "Sites & outils sur mesure",
+    title: "Vos process tournent sans tableurs",
     description:
-      "Quand WordPress ne suffit pas : Next.js, React, Python, Node.js. Plateformes SaaS, apps métier, API. La techno s'adapte au projet.",
+      "Espace client, outil métier, plateforme SaaS : un outil construit autour de votre façon de travailler, qui supprime la ressaisie. Next.js, React, Python, Node.js : la technologie s'adapte à votre besoin.",
     points: [
       "Next.js · TypeScript · Python",
       "Architectures scalables",
@@ -146,10 +146,10 @@ const SERVICES = [
   },
   {
     icon: Smartphone,
-    eyebrow: "iOS & Android",
-    title: "Applications mobiles",
+    eyebrow: "Applications mobiles · iOS & Android",
+    title: "Vos clients vous ont dans leur poche",
     description:
-      "Apps cross-platform en React Native. Une seule base de code, deux App Stores. Expérience native, déploiement maîtrisé.",
+      "Une application sur iOS et Android pour le budget d'une seule : une base de code React Native, deux App Stores, une expérience native.",
     points: [
       "React Native · Expo",
       "Publication App Store & Play Store",
@@ -159,10 +159,10 @@ const SERVICES = [
   },
   {
     icon: Sparkles,
-    eyebrow: "Interfaces & design",
-    title: "Design UI/UX",
+    eyebrow: "Design UI/UX",
+    title: "Vos visiteurs passent à l'action",
     description:
-      "Wireframes, maquettes Figma, design system, prototypes interactifs. Des interfaces accessibles, mémorables, pensées pour convertir.",
+      "Des écrans clairs et des parcours évidents : vos visiteurs trouvent ce qu'ils cherchent et vous contactent. Maquettes Figma, design system, accessibilité.",
     points: [
       "Figma · Design systems",
       "Accessibilité WCAG",
@@ -172,10 +172,10 @@ const SERVICES = [
   },
   {
     icon: Gauge,
-    eyebrow: "Visibilité & vitesse",
-    title: "Performance & SEO",
+    eyebrow: "Performance & SEO",
+    title: "Vos clients vous trouvent sur Google",
     description:
-      "Audit Core Web Vitals, optimisation Lighthouse, SEO local Rouen. Tout pour grimper dans Google et offrir une expérience instantanée.",
+      "Vous apparaissez quand vos clients cherchent votre métier à Rouen, et votre site s'affiche instantanément. Audit Core Web Vitals, SEO local et technique.",
     points: [
       "Core Web Vitals < 2s",
       "SEO local & technique",
@@ -185,38 +185,21 @@ const SERVICES = [
   },
 ];
 
-function ServiceCard({
-  icon: Icon,
-  eyebrow,
-  title,
-  description,
-  points,
-  href,
-}: (typeof SERVICES)[number]) {
+function ServiceCard({ eyebrow, title, description, points, href, index }: (typeof SERVICES)[number] & { index: number }) {
   return (
-    <Link
-      href={href}
-      className="group relative bg-[var(--background)] hover:bg-[var(--surface)] p-8 md:p-12 transition-colors duration-200"
-    >
-      <div className="flex items-start justify-between mb-12">
-        <div className="size-14 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center">
-          <Icon className="size-6 text-[var(--accent)]" strokeWidth={1.5} />
-        </div>
-        <ArrowUpRight className="size-6 text-[var(--subtle-foreground)] group-hover:text-[var(--accent)] group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
+    <Link href={href} className="directory-entry group">
+      <span className="editorial-ordinal" aria-hidden>{String(index + 1).padStart(2, "0")}</span>
+      <div>
+        <p className="text-eyebrow mb-4">{eyebrow}</p>
+        <h2 className="text-h2">{title}</h2>
       </div>
-      <p className="text-eyebrow mb-3">{eyebrow}</p>
-      <h2 className="text-h2 mb-4">{title}</h2>
-      <p className="text-body text-[var(--muted-foreground)] max-w-md mb-8">
-        {description}
-      </p>
-      <ul className="space-y-2">
-        {points.map((p) => (
-          <li key={p} className="flex items-center gap-2 text-body-sm">
-            <span className="size-1 rounded-full bg-[var(--accent)] shrink-0" />
-            <span className="text-[var(--muted-foreground)]">{p}</span>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <p className="text-body text-[var(--muted-foreground)] mb-5">{description}</p>
+        <ul className="flex flex-wrap gap-x-5 gap-y-2">
+          {points.map((point) => <li key={point} className="text-caption">{point}</li>)}
+        </ul>
+      </div>
+      <ArrowUpRight className="directory-arrow size-5" aria-hidden />
     </Link>
   );
 }
@@ -224,20 +207,20 @@ function ServiceCard({
 const COMMITMENTS = [
   {
     label: "Transparence",
-    title: "Code source partagé",
+    title: "Le code vous appartient",
     description:
-      "Vous avez accès au dépôt Git dès le jour 1. Aucune dépendance ni rétention.",
+      "Vous avez accès au dépôt Git dès le premier jour. Aucune dépendance envers nous.",
   },
   {
     label: "Proximité",
-    title: "Une équipe accessible",
+    title: "Vous parlez à ceux qui codent",
     description:
-      "Basés à Rouen, joignables directement. Pas de chef de projet intermédiaire.",
+      "À Rouen et joignables directement, sans chef de projet intermédiaire.",
   },
   {
     label: "Pérennité",
-    title: "Pensé pour durer",
+    title: "Un site qui dure",
     description:
-      "Code maintenable, documentation à jour, formation à votre équipe si besoin.",
+      "Code maintenable, documentation à jour et formation de votre équipe si besoin.",
   },
 ];
