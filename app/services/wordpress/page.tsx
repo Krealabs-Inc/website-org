@@ -13,26 +13,26 @@ import {
   Briefcase,
 } from "lucide-react";
 
+import { ProjectSelection } from "@/components/projects/project-selection";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Badge } from "@/components/ui/badge";
+
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
-import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 import { ServiceSchema } from "@/components/seo/service-schema";
 
 export const metadata: Metadata = {
   title: "Agence WordPress à Rouen - Création, refonte, WooCommerce, SEO",
   description:
-    "Agence WordPress à Rouen et en Normandie. Création sur mesure, refonte, WooCommerce, SEO, maintenance et sécurité WordPress. Thèmes custom, plugins développés sur mesure, pas de page builders.",
+    "Agence WordPress à Rouen : vous modifiez vos contenus vous-même, votre site reste rapide et sécurisé. Création sur mesure, refonte, WooCommerce, SEO et maintenance en Normandie, sans page builder.",
   alternates: { canonical: "https://krealabs.fr/services/wordpress" },
   openGraph: {
     title: "Agence WordPress à Rouen - Krealabs",
     description:
-      "Spécialistes WordPress en Normandie : création sur mesure, WooCommerce, refonte, SEO, maintenance. Du thème custom au headless WordPress.",
+      "Vous gérez votre site WordPress vous-même, on s'occupe du reste : création sur mesure, WooCommerce, refonte, SEO, maintenance. Agence web à Rouen, en Normandie.",
     url: "https://krealabs.fr/services/wordpress",
     type: "website",
   },
@@ -59,43 +59,33 @@ export default function WordpressPage() {
       />
       <ServiceHero
         number="01"
-        eyebrow="Spécialité · WordPress"
+        eyebrow="Site WordPress sur mesure"
         title={
           <>
-            Agence <em>WordPress</em> à Rouen,
+            Votre site <em>WordPress</em>,
             <br />
-            depuis la cr&#233;ation jusqu'au headless.
+            simple à faire vivre.
           </>
         }
-        description="WordPress est notre spécialité historique. Création sur mesure, refonte, WooCommerce, SEO, maintenance et sécurité. Thèmes custom, plugins développés à la main - pas de page builders, pas de templates génériques."
-        primaryCta={{ label: "Discuter de mon projet WordPress", href: "/contact?type=devis" }}
+        description="Un site à votre image, des contenus que vous mettez à jour vous-même, et une équipe joignable dès que vous en avez besoin. À Rouen et partout en France."
+        primaryCta={{ label: "Parler de mon projet WordPress", href: "/contact?type=devis" }}
       />
 
-      {/* Stats WordPress */}
-      <section className="border-t border-[var(--border)] bg-[var(--surface)]/40">
-        <Container>
-          <div className="py-12 grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center">
-            {STATS.map((s) => (
-              <div key={s.label}>
-                <p className="text-h2 font-semibold tracking-[-0.03em] text-[var(--accent)]">
-                  {s.value}
-                </p>
-                <p className="text-caption mt-1">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
+      <ProjectSelection
+        slugs={["iliass", "main-verte"]}
+        eyebrow="Réalisations WordPress"
+        title={<>Un même outil.<br />Des besoins <em>très différents.</em></>}
+      />
 
       <ServiceFeatures
         number="01"
-        eyebrow="Notre offre WordPress"
+        eyebrow="Ce que vous obtenez"
         title={
           <>
-            Du <em>thème custom</em> au <em>headless</em>.
+            Un site pour votre activité.<br />Une gestion <em>à votre portée.</em>
           </>
         }
-        intro="Six prestations qui couvrent l'ensemble du cycle de vie d'un projet WordPress, de l'idée à la maintenance long terme."
+        intro="De l'idée à la maintenance, vous avez un seul interlocuteur pour toute la vie de votre site."
         features={FEATURES}
       />
 
@@ -106,27 +96,26 @@ export default function WordpressPage() {
             <div className="lg:col-span-5">
               <Eyebrow number="02" className="mb-6">Méthode</Eyebrow>
               <h2 className="text-h1 mb-6">
-                Pas de <em>page builder</em>, du vrai WordPress.
+                Un site rapide, que vous <em>maîtrisez</em>.
               </h2>
               <p className="text-body text-[var(--muted-foreground)] mb-6">
-                Nous développons des thèmes sur mesure (PHP, HTML, CSS) avec
-                ACF Pro pour les contenus dynamiques. Pas d'Elementor, pas de
-                Divi, pas de bloat. Des sites rapides, légers, faciles à
-                maintenir.
+                Votre site repose sur un thème sur mesure (PHP, HTML, CSS), avec
+                ACF Pro pour vos contenus. Sans Elementor ni Divi, il reste
+                rapide, léger et simple à maintenir.
               </p>
               <p className="text-body text-[var(--muted-foreground)]">
-                Quand le projet le justifie, on passe en{" "}
+                Si votre projet le justifie, il peut passer en{" "}
                 <strong className="text-[var(--foreground)] font-medium">
                   headless WordPress
                 </strong>{" "}
-                : WP comme back-office CMS, Next.js en front pour la
-                performance et l'expérience utilisateur.
+                : vous gardez l’administration WordPress, et Next.js affiche
+                vos pages plus vite à vos visiteurs.
               </p>
             </div>
-            <ol className="lg:col-span-7 space-y-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <ol className="lg:col-span-7 space-y-3">
               {STEPS.map((step, i) => (
-                <li key={step.title} className="bg-[var(--background)] p-8 grid grid-cols-[auto_1fr] gap-8 items-start">
-                  <span className="text-eyebrow text-[var(--accent)] pt-1.5">
+                <li key={step.title} className="editorial-step">
+                  <span className="editorial-ordinal">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
@@ -149,15 +138,15 @@ export default function WordpressPage() {
               Les outils qui font la <em>différence</em>.
             </h2>
             <p className="text-body text-[var(--muted-foreground)] mt-6">
-              Une sélection rigoureuse d'extensions et d'outils que nous
-              utilisons quotidiennement sur les projets WordPress sérieux.
+              Des extensions éprouvées au quotidien, choisies pour que votre
+              site reste rapide, sûr et sauvegardé.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
             {WP_STACK.map((tool) => (
               <div
                 key={tool.name}
-                className="p-5 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]"
+                className="compact-note"
               >
                 <p className="text-caption mb-1.5">{tool.kind}</p>
                 <p className="text-body font-semibold">{tool.name}</p>
@@ -177,22 +166,17 @@ export default function WordpressPage() {
           <div className="max-w-3xl mb-16">
             <Eyebrow number="04" className="mb-6">Secteurs accompagnés</Eyebrow>
             <h2 className="text-h1">
-              WordPress, c'est pour <em>tout le monde</em>.
+              Votre secteur, <em>vos besoins</em>.
             </h2>
             <p className="text-body text-[var(--muted-foreground)] mt-6">
-              Du site vitrine au site e-commerce de PME, en passant par les
-              plateformes média et les sites institutionnels. WordPress
-              s'adapte à pratiquement tous les besoins.
+              Site vitrine, boutique de PME, média ou site institutionnel :
+              WordPress s’adapte à votre activité.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {SECTEURS.map((s) => {
-              const Icon = s.icon;
               return (
-                <div key={s.title} className="bg-[var(--background)] p-8">
-                  <div className="size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mb-6">
-                    <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-                  </div>
+                <div key={s.title} className="editorial-note">
                   <h3 className="text-h4 mb-2">{s.title}</h3>
                   <p className="text-body-sm text-[var(--muted-foreground)]">
                     {s.description}
@@ -208,17 +192,12 @@ export default function WordpressPage() {
       <ServiceFAQ
         title={
           <>
-            Tout savoir sur nos projets <em>WordPress</em>.
+            Vos questions sur <em>WordPress</em>.
           </>
         }
         items={FAQ.map((item) => ({ question: item.q, answer: item.a }))}
       />
 
-      <section className="section-y border-t border-[var(--border)]">
-        <Container size="narrow">
-          <NewsletterSignup variant="card" source="services-wordpress" />
-        </Container>
-      </section>
 
       <ServiceResources
         articles={[
@@ -237,55 +216,50 @@ export default function WordpressPage() {
           </>
         }
         description="Que ce soit un site vitrine, une boutique WooCommerce, une refonte ou une migration - discutons-en. Le premier échange est offert."
-        primaryLabel="Démarrer mon projet WordPress"
+        primaryLabel="Parler de mon projet WordPress"
       />
     </main>
   );
 }
 
-const STATS = [
-  { value: "100+", label: "Projets web livrés" },
-  { value: "7+ ans", label: "Expérience WordPress" },
-  { value: "WooCommerce", label: "Expert e-commerce" },
-  { value: "< 2s", label: "Temps de chargement" },
-];
+
 
 const FEATURES = [
   {
     icon: Wrench,
     title: "Création WordPress sur mesure",
     description:
-      "Thème développé à la main (PHP custom + ACF Pro), pas de page builders. Site rapide, léger, conforme à vos besoins exacts.",
+      "Un site rapide et léger, taillé pour vos besoins exacts : thème développé à la main (PHP + ACF Pro), sans page builder.",
   },
   {
     icon: RefreshCw,
     title: "Refonte & migration",
     description:
-      "Refonte d'un WordPress existant ou migration depuis Wix, Squarespace, Webflow, Joomla. SEO préservé, redirections 301 propres.",
+      "Vous changez de site sans perdre vos positions Google : refonte d'un WordPress existant ou migration depuis Wix, Squarespace, Webflow, Joomla.",
   },
   {
     icon: ShoppingBag,
     title: "WooCommerce e-commerce",
     description:
-      "Boutiques en ligne WooCommerce sur mesure : paiements, stock, livraison, automatisations. De la TPE à 10k+ produits.",
+      "Vous vendez en ligne, de la TPE à plus de 10 000 produits : paiements, stock, livraison, automatisations.",
   },
   {
     icon: Search,
     title: "SEO WordPress",
     description:
-      "Audit complet, optimisation Yoast / RankMath, structure, schema.org, Core Web Vitals. Pour ressortir vraiment dans Google.",
+      "Vous ressortez vraiment dans Google : audit, Yoast / RankMath, structure, schema.org, Core Web Vitals.",
   },
   {
     icon: ShieldCheck,
     title: "Maintenance & sécurité",
     description:
-      "Forfaits mensuels : mises à jour, backups, monitoring, durcissement sécurité, support technique. Tranquillité long terme.",
+      "Vous n'y pensez plus : mises à jour, sauvegardes, surveillance, sécurité et support, au forfait mensuel.",
   },
   {
     icon: Boxes,
     title: "Plugins & thèmes custom",
     description:
-      "Développement de plugins et thèmes WordPress sur mesure pour vos besoins métier spécifiques. Code propre, documenté, maintenable.",
+      "Votre site fait exactement ce dont votre métier a besoin : plugins et thèmes sur mesure, documentés et maintenables.",
   },
 ];
 
@@ -298,17 +272,17 @@ const STEPS = [
   {
     title: "Maquettes & contenus",
     description:
-      "Maquettes Figma haute fidélité. Structure éditoriale, taxonomies, custom post types, champs ACF. Tout est cadré avant le code.",
+      "Vous validez les maquettes Figma et la structure de vos contenus (types de contenus, champs ACF) avant le code.",
   },
   {
     title: "Développement thème custom",
     description:
-      "Thème WordPress sur mesure (PHP/HTML/CSS), intégration ACF Pro, plugins choisis et configurés. Pas de bloat.",
+      "Thème sur mesure (PHP/HTML/CSS), ACF Pro, extensions choisies et configurées. Rien de superflu.",
   },
   {
     title: "Mise en ligne & formation",
     description:
-      "Déploiement, sécurisation, configuration cache/CDN. Formation à l'admin WP. Documentation. Maintenance si forfait souscrit.",
+      "Mise en ligne, sécurisation, cache et CDN. Formation pour que vous soyez autonome, documentation, maintenance si vous la souscrivez.",
   },
 ];
 
@@ -363,15 +337,15 @@ const SECTEURS = [
 const FAQ = [
   {
     q: "Pourquoi pas Elementor, Divi ou un page builder ?",
-    a: "Les page builders ajoutent du code superflu (bloat) qui ralentit le site, complique la maintenance et nuit au SEO. Pour les projets exigeants, un thème custom est toujours plus performant, plus léger et plus durable. Pour des sites très simples sans contraintes, un page builder peut suffire - mais c'est rarement notre choix.",
+    a: "Les page builders ajoutent du code superflu (bloat) qui ralentit le site, complique la maintenance et nuit au SEO. Pour les projets exigeants, un thème custom est toujours plus performant, plus léger et plus durable. Pour un site très simple, un page builder peut suffire, mais vous le paierez en vitesse et en maintenance dès que le site grandira.",
   },
   {
     q: "Combien coûte un site WordPress sur mesure ?",
-    a: "Cela dépend totalement du projet : vitrine simple (4-6k €), site complexe avec custom post types (8-15k €), WooCommerce (10-20k €), grand projet avec headless (20k+). Nous fournissons systématiquement un devis détaillé après un premier échange gratuit.",
+    a: "Cela dépend totalement du projet : vitrine simple (4-6k €), site complexe avec custom post types (8-15k €), WooCommerce (10-20k €), grand projet avec headless (20k+). Vous recevez toujours un devis détaillé après un premier échange gratuit.",
   },
   {
     q: "Faites-vous de la migration depuis Wix/Squarespace/Webflow ?",
-    a: "Oui, c'est même un classique. Nous migrons régulièrement des sites Wix, Squarespace, Webflow ou vieux WordPress vers une stack WP propre, en préservant le SEO (redirections 301, structure URL, métadonnées). Sans perte de positionnement Google.",
+    a: "Oui, c'est même un classique : Wix, Squarespace, Webflow ou vieux WordPress vers un WordPress propre. Votre référencement est préservé (redirections 301, structure des URL, métadonnées), sans perte de positionnement Google.",
   },
   {
     q: "Le \"headless WordPress\", c'est quoi ?",
@@ -383,6 +357,6 @@ const FAQ = [
   },
   {
     q: "Travaillez-vous avec des hébergements existants ?",
-    a: "Oui. Nous nous adaptons à votre hébergement actuel (OVH, o2switch, Hostinger, AWS, ou autre). Si vous voulez changer, nous recommandons o2switch (FR, RGPD, performant) ou Kinsta (premium WordPress) selon votre profil de site.",
+    a: "Oui, votre hébergement actuel convient (OVH, o2switch, Hostinger, AWS ou autre). Si vous voulez changer, on vous conseillera o2switch (FR, RGPD, performant) ou Kinsta (premium WordPress) selon votre site.",
   },
 ];

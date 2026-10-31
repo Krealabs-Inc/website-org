@@ -1,18 +1,18 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact - Devis Gratuit',
-  description: 'Contactez Krealabs pour votre projet web ou mobile. Devis gratuit sous 48h. Agence à Rouen spécialisée React, Next.js et React Native. Réponse rapide garantie.',
+  title: 'Votre devis gratuit sous 24h - Agence web Rouen',
+  description: 'Votre site, votre application ou votre logiciel : décrivez votre projet, on vous répond sous 24h ouvrées. Agence web à Rouen, développement web en Normandie. Devis gratuit, sans engagement.',
   openGraph: {
-    title: 'Contactez-nous pour votre projet - Krealabs',
-    description: 'Devis gratuit sous 48h pour votre projet web ou mobile. Agence à Rouen.',
+    title: 'Recevez votre devis gratuit - Krealabs, agence web Rouen',
+    description: 'Un premier retour sous 24h ouvrées pour votre projet web ou mobile. Agence web à Rouen.',
     type: 'website',
     url: 'https://krealabs.fr/contact',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Contactez-nous pour votre projet - Krealabs',
-    description: 'Devis gratuit sous 48h pour votre projet web ou mobile.',
+    title: 'Recevez votre devis gratuit - Krealabs, agence web Rouen',
+    description: 'Un premier retour sous 24h ouvrées pour votre projet web ou mobile.',
   },
   alternates: {
     canonical: 'https://krealabs.fr/contact',

@@ -40,12 +40,12 @@ export function ServiceResources({
       <Container>
         <Eyebrow className="mb-6">{eyebrow}</Eyebrow>
         <h2 className="text-h1 mb-10">{title}</h2>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {articles.map((a) => (
-            <li key={a.href} className="bg-[var(--background)]">
+            <li key={a.href}>
               <Link
                 href={a.href}
-                className="group flex items-start justify-between gap-4 p-6 hover:bg-[var(--surface-hover)] transition-colors h-full"
+                className="compact-note editorial-note-link group flex items-start justify-between gap-4 transition-colors h-full"
               >
                 <div className="min-w-0">
                   {a.kicker && (

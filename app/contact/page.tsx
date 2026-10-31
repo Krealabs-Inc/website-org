@@ -4,24 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
-import {
-  Mail,
-  MapPin,
-  Clock,
-  ArrowRight,
-  Check,
-  FileText,
-  MessageSquare,
-  Briefcase,
-  Globe,
-  Smartphone,
-  Cpu,
-  Search,
-  Shield,
-  ListChecks,
-  Route,
-  Phone,
-} from "lucide-react";
+import { Mail, MapPin, Clock, ArrowRight, Check, FileText, MessageSquare, Briefcase, Globe, Smartphone, Cpu, Search, Shield, Phone } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -99,7 +82,7 @@ function ContactPageInner() {
 
       setStatus("success");
       toast.success("Message envoyé", {
-        description: "Nous revenons vers vous sous 24h ouvrées.",
+        description: "On vous répond sous 24h ouvrées.",
       });
       // Petit confetti aux couleurs Krealabs pour célébrer
       if (typeof window !== "undefined" && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -153,32 +136,29 @@ function ContactPageInner() {
       <Container>
         {/* Header */}
         <header className="mb-16 max-w-4xl">
-          <Eyebrow dot className="mb-6">Parlons de votre projet</Eyebrow>
+          <Eyebrow dot className="mb-6">Votre devis gratuit</Eyebrow>
           <h1 className="text-display">
-            <em>Décrivez-nous</em> votre besoin.
+            Un premier retour <em>concret</em>, sous 24h.
           </h1>
           <p className="text-body-lg text-[var(--muted-foreground)] mt-6 max-w-2xl">
             Site vitrine, application mobile, logiciel métier ou refonte SEO :
-            partagez-nous votre contexte. Nous revenons vers vous sous 24h
-            ouvrées avec un premier retour concret.
+            décrivez votre situation en quelques lignes, vous recevez sous 24h
+            ouvrées un avis honnête sur la faisabilité de votre projet.
           </p>
         </header>
 
         {/* ============== EXPECTATIONS BLOCK (brief checklist + ladder + reassurance) ============== */}
         <section className="mb-16 border-y border-[var(--border)] py-12 md:py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {/* LEFT - Brief checklist */}
-            <div className="bg-[var(--background)] p-8 md:p-10">
+            <div className="editorial-note">
               <div className="flex items-center gap-3 mb-6">
-                <div className="size-9 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center">
-                  <ListChecks className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-                </div>
                 <h2 className="text-h4">
-                  Ce qu&apos;il faut nous <em>dire</em>
+                  Ce qui vous fera <em>gagner du temps</em>
                 </h2>
               </div>
               <p className="text-body-sm text-[var(--muted-foreground)] mb-6">
-                Plus le brief est précis, plus notre premier retour est utile.
+                Plus votre brief est précis, plus le premier retour que vous recevez est utile.
                 Pas besoin de tout savoir - partagez ce que vous avez :
               </p>
               <ul className="space-y-3 text-body-sm">
@@ -238,11 +218,8 @@ function ContactPageInner() {
             </div>
 
             {/* RIGHT - Process ladder */}
-            <div className="bg-[var(--background)] p-8 md:p-10">
+            <div className="editorial-note">
               <div className="flex items-center gap-3 mb-6">
-                <div className="size-9 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center">
-                  <Route className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-                </div>
                 <h2 className="text-h4">
                   Ce qui se <em>passe</em> ensuite
                 </h2>
@@ -276,9 +253,9 @@ function ContactPageInner() {
                       RDV de cadrage gratuit (30-45 min)
                     </p>
                     <p className="text-body-sm text-[var(--muted-foreground)]">
-                      Visio ou présentiel à Rouen. On creuse le besoin, on
-                      challenge votre approche si nécessaire, on dégrossit le
-                      périmètre et le planning.
+                      Visio ou présentiel à Rouen. Vous repartez avec un besoin
+                      clarifié, une approche challengée si nécessaire, et une
+                      première idée du périmètre et du planning.
                     </p>
                   </div>
                 </li>
@@ -306,7 +283,7 @@ function ContactPageInner() {
             <ReassuranceCard
               icon={Shield}
               title="NDA sur demande"
-              detail="Nous signons votre accord de confidentialité avant tout échange détaillé si votre projet l'exige."
+              detail="Votre accord de confidentialité est signé avant tout échange détaillé si votre projet l'exige."
             />
             <ReassuranceCard
               icon={Check}
@@ -347,7 +324,7 @@ function ContactPageInner() {
             {/* Map embed pointant sur le GBP Krealabs (Knowledge Graph
                 /g/11vxv18qcr). Iframe lazy-loaded, pas d'API key requise.
                 CSP: maps.google.com whitelisté dans frame-src. */}
-            <div className="rounded-[var(--radius)] border border-[var(--border)] overflow-hidden bg-[var(--surface)]">
+            <div className="studio-panel overflow-hidden">
               <iframe
                 title="Krealabs sur Google Maps"
                 src="https://maps.google.com/maps?q=Kr%C3%A9alabs+Rouen&t=&z=14&ie=UTF8&iwloc=&output=embed"
@@ -375,11 +352,11 @@ function ContactPageInner() {
               detail="Du lundi au vendredi"
             />
 
-            <div className="p-6 rounded-[var(--radius)] border border-[var(--accent-subtle)] bg-[var(--accent-subtle)]/40">
+            <div className="p-6 rounded-[20px] border border-[var(--accent-subtle)] bg-[var(--accent-subtle)]/40">
               <p className="text-eyebrow text-[var(--accent)] mb-3">Bon à savoir</p>
               <p className="text-body-sm text-[var(--foreground)]">
                 Le premier échange est <strong className="font-medium">gratuit et sans engagement</strong>.
-                Nous prenons le temps de comprendre votre projet avant tout devis.
+                Votre devis est établi une fois votre projet bien compris, jamais à l’aveugle.
               </p>
             </div>
           </aside>
@@ -387,32 +364,26 @@ function ContactPageInner() {
           {/* ============== RIGHT : Form ============== */}
           <form
             onSubmit={handleSubmit}
-            className="lg:col-span-8 space-y-12 p-8 md:p-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]"
+            className="lg:col-span-8 space-y-10 p-5 sm:p-8 md:p-10 studio-panel"
           >
             {/* Section: Type de demande */}
             <Section number="01" title="Type de demande">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                 {REQUEST_TYPES.map((t) => {
                   const active = formData.requestType === t.id;
-                  const Icon = t.icon;
                   return (
                     <button
                       key={t.id}
                       type="button"
                       onClick={() => update("requestType", t.id)}
+                      aria-pressed={active}
                       className={cn(
-                        "flex flex-col gap-2 items-start p-4 rounded-[var(--radius)] border text-left transition-colors",
+                        "flex flex-col gap-3 items-start p-5 rounded-2xl border text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]",
                         active
                           ? "border-[var(--accent)] bg-[var(--accent-subtle)]"
                           : "border-[var(--border)] bg-[var(--background)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)]",
                       )}
                     >
-                      <Icon
-                        className={cn(
-                          "size-4",
-                          active ? "text-[var(--accent)]" : "text-[var(--muted-foreground)]",
-                        )}
-                      />
                       <span className="text-body-sm font-medium">{t.label}</span>
                     </button>
                   );
@@ -484,7 +455,7 @@ function ContactPageInner() {
                     </span>
                   </label>
                   {formData.callbackRequested === "yes" && (
-                    <div className="flex items-start gap-2 px-3 py-2.5 rounded-[var(--radius)] border border-[var(--accent-subtle)] bg-[var(--accent-subtle)]/40">
+                    <div className="flex items-start gap-2 px-3 py-2.5 rounded-[20px] border border-[var(--accent-subtle)] bg-[var(--accent-subtle)]/40">
                       <Phone className="size-3.5 shrink-0 mt-0.5 text-[var(--accent)]" strokeWidth={1.75} />
                       <p className="text-caption text-[var(--foreground)]">
                         On vous rappelle sous{" "}
@@ -510,7 +481,6 @@ function ContactPageInner() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
                   {PROJECT_TYPES.map((p) => {
                     const active = formData.pricingOption === p.id;
-                    const Icon = p.icon;
                     return (
                       <button
                         key={p.id}
@@ -518,19 +488,14 @@ function ContactPageInner() {
                         onClick={() =>
                           update("pricingOption", active ? "" : p.id)
                         }
+                        aria-pressed={active}
                         className={cn(
-                          "flex flex-col gap-2 items-start p-4 rounded-[var(--radius)] border text-left transition-colors",
+                          "flex flex-col gap-3 items-start p-5 rounded-2xl border text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--accent)]",
                           active
                             ? "border-[var(--accent)] bg-[var(--accent-subtle)]"
                             : "border-[var(--border)] bg-[var(--background)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)]",
                         )}
                       >
-                        <Icon
-                          className={cn(
-                            "size-4",
-                            active ? "text-[var(--accent)]" : "text-[var(--muted-foreground)]",
-                          )}
-                        />
                         <span className="text-body-sm font-medium">{p.label}</span>
                       </button>
                     );
@@ -559,7 +524,7 @@ function ContactPageInner() {
             {/* Submit */}
             <div className="pt-6 border-t border-[var(--border)] flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
               <p className="text-caption">
-                En envoyant ce formulaire, vous acceptez d'être contacté par
+                En envoyant ce formulaire, vous acceptez d’être contacté par
                 Krealabs.
               </p>
               <Button
@@ -570,7 +535,7 @@ function ContactPageInner() {
                 {status === "loading" && "Envoi en cours…"}
                 {status === "idle" && (
                   <>
-                    Envoyer la demande
+                    {formData.requestType === "devis" ? "Recevoir mon devis" : "Envoyer ma question"}
                     <ArrowRight />
                   </>
                 )}
@@ -642,7 +607,6 @@ function Field({
 }
 
 function ReassuranceCard({
-  icon: Icon,
   title,
   detail,
 }: {
@@ -651,10 +615,7 @@ function ReassuranceCard({
   detail: string;
 }) {
   return (
-    <div className="flex gap-4 p-5 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]">
-      <div className="size-8 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--background)] flex items-center justify-center">
-        <Icon className="size-3.5 text-[var(--accent)]" strokeWidth={1.75} />
-      </div>
+    <div className="contact-reassurance">
       <div>
         <p className="text-body-sm font-medium mb-1">{title}</p>
         <p className="text-body-sm text-[var(--muted-foreground)] leading-relaxed">
@@ -666,7 +627,6 @@ function ReassuranceCard({
 }
 
 function InfoCard({
-  icon: Icon,
   eyebrow,
   value,
   detail,
@@ -684,14 +644,11 @@ function InfoCard({
     <Wrapper
       {...(wrapperProps as object)}
       className={cn(
-        "block p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]",
+        "block compact-note",
         href && "hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] transition-colors",
       )}
     >
       <div className="flex items-start gap-4">
-        <div className="size-10 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--background)] flex items-center justify-center">
-          <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-        </div>
         <div className="space-y-1 min-w-0">
           <p className="text-eyebrow">{eyebrow}</p>
           <p className="text-body font-medium truncate">{value}</p>

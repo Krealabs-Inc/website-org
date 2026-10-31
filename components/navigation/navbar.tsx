@@ -19,6 +19,7 @@ import { cn } from "@/lib/utils";
 const KREIA_URL = "https://kreia.krealabs.fr";
 
 const navItems = [
+  { name: "Réalisations", href: "/clients" },
   { name: "Services", href: "/services" },
   { name: "Expertise", href: "/expertise" },
   { name: "Équipe", href: "/equipe" },
@@ -72,7 +73,7 @@ export function Navbar() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden md:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-1">
               {navItems.map((item) => {
                 const active =
                   pathname === item.href ||
@@ -82,9 +83,9 @@ export function Navbar() {
                     key={item.name}
                     href={item.href}
                     className={cn(
-                      "px-3 py-1.5 text-[0.9rem] font-medium rounded-[var(--radius)] transition-colors",
+                      "px-3 py-2 text-[0.9rem] font-medium rounded-full transition-colors",
                       active
-                        ? "text-[var(--foreground)] bg-[var(--surface)]"
+                        ? "text-[var(--accent)] bg-[var(--accent-subtle)]"
                         : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]",
                     )}
                   >
@@ -95,7 +96,7 @@ export function Navbar() {
             </nav>
 
             {/* Right cluster */}
-            <div className="hidden md:flex items-center gap-2">
+            <div className="hidden lg:flex items-center gap-2">
               <a
                 href={KREIA_URL}
                 target="_blank"
@@ -116,7 +117,7 @@ export function Navbar() {
             </div>
 
             {/* Mobile cluster */}
-            <div className="flex md:hidden items-center gap-2">
+            <div className="flex lg:hidden items-center gap-2">
               <ThemeToggle />
               <button
                 onClick={() => setIsMobileMenuOpen((v) => !v)}
@@ -140,7 +141,7 @@ export function Navbar() {
         id="mobile-menu"
         aria-hidden={!isMobileMenuOpen}
         className={cn(
-          "fixed inset-0 z-40 md:hidden bg-[var(--background)]/95 backdrop-blur-xl pt-20",
+          "fixed inset-0 z-40 lg:hidden bg-[var(--background)]/95 backdrop-blur-xl pt-20",
           "transition-[opacity,visibility] duration-200 ease-out",
           // invisible et pas seulement opacity-0 : fermé, le backdrop-blur
           // plein écran restait calculé à chaque frame de scroll, et ses

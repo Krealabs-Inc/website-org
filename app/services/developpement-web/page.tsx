@@ -1,24 +1,14 @@
 import { Metadata } from "next";
-import {
-  Globe,
-  Database,
-  ShoppingCart,
-  Server,
-  Search,
-  RefreshCw,
-  Zap,
-  Code2,
-  GitBranch,
-  Cloud,
-} from "lucide-react";
+import { Globe, Database, ShoppingCart, Server, Search, RefreshCw } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Développement web à Rouen - Sites & applications",
+  title: "Développement web Rouen, Normandie - Sites & outils sur mesure",
   description:
-    "Création de sites internet, plateformes SaaS et applications métier sur mesure à Rouen. Stack moderne Next.js, React, TypeScript. Architecture scalable, performance native.",
+    "Développement web en Normandie : un site qui vous amène des clients, des outils métier sans tableurs ni ressaisie. Agence web à Rouen : sites vitrines, SaaS et applications sur mesure.",
   alternates: { canonical: "https://krealabs.fr/services/developpement-web" },
 };
 
+import { ProjectSelection } from "@/components/projects/project-selection";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
@@ -27,7 +17,6 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
-import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 
 export default function DeveloppementWebPage() {
   return (
@@ -48,26 +37,26 @@ export default function DeveloppementWebPage() {
       />
       <ServiceHero
         number="01"
-        eyebrow="Service · Développement"
+        eyebrow="Développement web sur mesure"
         title={
           <>
-            Sites & applications <em>web</em>,
+            Vos process tournent
             <br />
-            propres et performants.
+            sans <em>tableurs</em> ni ressaisie.
           </>
         }
-        description="Sites vitrines, plateformes SaaS, applications métier sur mesure. Nous concevons et développons des outils digitaux qui durent - propre code, architecture pensée, performance native."
+        description="Un site vitrine qui vous amène des demandes, une application métier qui automatise vos tâches, une plateforme pour vos clients : un outil construit autour de votre façon de travailler, rapide et fait pour durer."
       />
 
       <ServiceFeatures
         number="01"
-        eyebrow="Ce que nous construisons"
+        eyebrow="Ce que vous obtenez"
         title={
           <>
-            Du site vitrine à l'<em>application métier</em>.
+            Du site vitrine à l’<em>application métier</em>.
           </>
         }
-        intro="Notre périmètre couvre l'ensemble des projets web modernes, du marketing au logiciel interne."
+        intro="Que vous ayez besoin de vous faire connaître ou d'outiller vos équipes, vous trouvez la réponse ici, du site marketing au logiciel interne."
         features={FEATURES}
       />
 
@@ -78,18 +67,17 @@ export default function DeveloppementWebPage() {
             <div className="lg:col-span-5">
               <Eyebrow number="02" className="mb-6">Méthode</Eyebrow>
               <h2 className="text-h1 mb-6">
-                Un <em>processus rodé</em>, sans surprise.
+                Vous voyez votre projet <em>avancer</em>.
               </h2>
               <p className="text-body text-[var(--muted-foreground)]">
-                Chaque projet suit ces 4 étapes. Les démos régulières vous
-                permettent de réagir tôt - pas de mauvaise surprise à la
-                livraison.
+                Quatre étapes et des démos régulières : vous réagissez tôt, et
+                rien ne vous surprend à la livraison.
               </p>
             </div>
-            <ol className="lg:col-span-7 space-y-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <ol className="lg:col-span-7 space-y-3">
               {STEPS.map((step, i) => (
-                <li key={step.title} className="bg-[var(--background)] p-8 grid grid-cols-[auto_1fr] gap-8 items-start">
-                  <span className="text-eyebrow text-[var(--accent)] pt-1.5">{String(i + 1).padStart(2, "0")}</span>
+                <li key={step.title} className="editorial-step">
+                  <span className="editorial-ordinal">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className="text-h3 mb-2">{step.title}</h3>
                     <p className="text-body-sm text-[var(--muted-foreground)]">{step.description}</p>
@@ -107,12 +95,12 @@ export default function DeveloppementWebPage() {
           <div className="max-w-3xl mb-16">
             <Eyebrow number="03" className="mb-6">Stack technique</Eyebrow>
             <h2 className="text-h1">
-              Les outils sur lesquels nous <em>misons</em>.
+              Des outils éprouvés, pour un site <em>qui dure</em>.
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
             {TECH.map((t) => (
-              <div key={t.name} className="p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]">
+              <div key={t.name} className="compact-note">
                 <p className="text-caption mb-3">{t.kind}</p>
                 <p className="text-h4 mb-2">{t.name}</p>
                 <p className="text-body-sm text-[var(--muted-foreground)]">{t.tagline}</p>
@@ -121,6 +109,12 @@ export default function DeveloppementWebPage() {
           </div>
         </Container>
       </section>
+
+      <ProjectSelection
+        slugs={["iliass", "meli-melo"]}
+        eyebrow="Réalisations"
+        title={<>Ce qu’on a livré pour<br /><em>ILIASS et Méli-Mélo.</em></>}
+      />
 
       <ServiceFAQ
         title={
@@ -131,11 +125,6 @@ export default function DeveloppementWebPage() {
         items={FAQ}
       />
 
-      <section className="section-y border-t border-[var(--border)]">
-        <Container size="narrow">
-          <NewsletterSignup variant="card" source="services-dev-web" />
-        </Container>
-      </section>
 
       <ServiceResources
         articles={[
@@ -149,7 +138,7 @@ export default function DeveloppementWebPage() {
       <ServiceCta
         title={
           <>
-            Un site web à <em>concevoir</em> ?
+            Et si on supprimait <em>vos tableurs</em> ?
           </>
         }
       />
@@ -161,12 +150,12 @@ const FAQ = [
   {
     question: "Quand choisir Next.js plutôt que WordPress ?",
     answer:
-      "WordPress excelle pour les sites de contenu (vitrines, blogs, e-commerce simple) où les rédacteurs doivent éditer en autonomie. Next.js est le bon choix dès qu'on parle de SaaS, dashboards, applications métier, sites à très fort trafic, ou expériences UX sur mesure. Notre règle : si l'admin doit publier du contenu plusieurs fois par semaine sans nous solliciter → WordPress. Si l'app est l'outil métier → Next.js.",
+      "WordPress excelle pour les sites de contenu (vitrines, blogs, e-commerce simple) où les rédacteurs doivent éditer en autonomie. Next.js est le bon choix dès qu'on parle de SaaS, dashboards, applications métier, sites à très fort trafic, ou expériences UX sur mesure. En pratique : si vous publiez du contenu plusieurs fois par semaine en autonomie → WordPress. Si l'application est votre outil métier → Next.js.",
   },
   {
     question: "Combien coûte un développement web sur mesure à Rouen ?",
     answer:
-      "Pour un site Next.js / React custom : 8 000-25 000 € pour un site institutionnel premium, 25 000-60 000 € pour un MVP SaaS, 60 000-150 000 € pour une plateforme complète. Nos TJM se situent autour de 600-700 €/jour à Rouen (vs 800-1 200 € en agence parisienne équivalente). Premier devis détaillé après cadrage gratuit.",
+      "Pour un site Next.js / React custom : 8 000-25 000 € pour un site institutionnel premium, 25 000-60 000 € pour un MVP SaaS, 60 000-150 000 € pour une plateforme complète. Le TJM se situe autour de 600-700 €/jour à Rouen (contre 800-1 200 € en agence parisienne équivalente). Vous recevez un devis détaillé après un cadrage gratuit.",
   },
   {
     question: "Quels sont vos délais sur une plateforme custom ?",
@@ -181,12 +170,12 @@ const FAQ = [
   {
     question: "Comment garantissez-vous la qualité du code ?",
     answer:
-      "TypeScript strict, tests unitaires sur la logique critique, code review systématique entre nous deux, CI/CD automatisé (lint + tests + déploiement), monitoring production (Sentry, Vercel Analytics). Vous avez accès au dépôt Git dès le jour 1 - tout est transparent.",
+      "Votre code est vérifié à chaque étape : TypeScript strict, tests unitaires sur la logique critique, relecture de code systématique, CI/CD automatisé (lint + tests + déploiement), surveillance en production (Sentry, Vercel Analytics). Vous avez accès au dépôt Git dès le premier jour.",
   },
   {
     question: "Travaillez-vous avec ma stack actuelle si je veux étendre l'existant ?",
     answer:
-      "Oui, fréquemment. On audite votre code, on s'aligne sur vos conventions, et on intègre nos développements dans votre repo. Nous sommes à l'aise avec React, Next.js, Vue, Nuxt, Node.js, Python (Django, FastAPI), PHP (Laravel, Symfony). Si la stack est trop ancienne et bloque la productivité, on vous le dit - et on propose un plan de modernisation incrémental.",
+      "Oui, fréquemment. On audite votre code, on respecte vos conventions, et les nouveaux développements arrivent directement dans votre dépôt. React, Next.js, Vue, Nuxt, Node.js, Python (Django, FastAPI), PHP (Laravel, Symfony) : votre stack a de bonnes chances d'être déjà familière. Si elle est trop ancienne et vous freine, on vous le dit, avec un plan de modernisation progressif.",
   },
 ];
 
@@ -194,32 +183,32 @@ const FEATURES = [
   {
     icon: Globe,
     title: "Site vitrine moderne",
-    description: "Site institutionnel ou one-page pour PME, indépendants, professions libérales. Optimisé SEO local.",
+    description: "Vos prospects vous trouvent et vous contactent. Pour PME, indépendants et professions libérales, optimisé pour le SEO local.",
   },
   {
     icon: Database,
     title: "Application web métier",
-    description: "Outil interne, plateforme SaaS, intranet. Conçu autour de vos vrais besoins, pas d'un template.",
+    description: "Vos équipes travaillent dans un seul outil, conçu autour de vos vrais besoins : outil interne, plateforme SaaS, intranet.",
   },
   {
     icon: ShoppingCart,
     title: "E-commerce sur mesure",
-    description: "Boutique en ligne avec moyens de paiement, gestion stocks, suivi commandes. Headless ou intégré.",
+    description: "Vous vendez en ligne avec vos moyens de paiement, votre stock et le suivi de vos commandes. Headless ou intégré.",
   },
   {
     icon: Server,
     title: "API & backend",
-    description: "API REST ou GraphQL, base PostgreSQL, authentification. Documentation OpenAPI fournie.",
+    description: "Vos outils se parlent enfin : API REST ou GraphQL, base PostgreSQL, authentification, documentation OpenAPI fournie.",
   },
   {
     icon: Search,
     title: "SEO technique",
-    description: "Schema.org, sitemap dynamique, métadonnées, Core Web Vitals. Pensé dès le développement.",
+    description: "Votre site part avec de bonnes bases pour Google : Schema.org, sitemap, métadonnées, Core Web Vitals, pensés dès le développement.",
   },
   {
     icon: RefreshCw,
     title: "Refonte de site",
-    description: "Migration d'un site Wix, Squarespace, Webflow ou ancien CMS vers la stack adaptée à votre projet - WordPress moderne ou stack JavaScript selon le besoin. SEO préservé.",
+    description: "Vous quittez Wix, Squarespace, Webflow ou un ancien CMS sans perdre votre référencement, vers WordPress ou une stack JavaScript selon votre besoin.",
   },
 ];
 
@@ -234,17 +223,17 @@ const STEPS = [
   },
   {
     title: "Développement",
-    description: "Sprints de 1 à 2 semaines, démo à chaque fin de sprint. Accès au dépôt Git dès le jour 1.",
+    description: "Une démo toutes les 1 à 2 semaines et l'accès au dépôt Git dès le premier jour.",
   },
   {
     title: "Mise en ligne & suivi",
-    description: "Déploiement, formation, monitoring. Nous restons disponibles pour les évolutions futures.",
+    description: "Mise en ligne, formation de votre équipe, surveillance. On reste joignable pour vos évolutions.",
   },
 ];
 
 const TECH = [
-  { kind: "Framework", name: "Next.js", tagline: "React production-grade, App Router" },
-  { kind: "Langage", name: "TypeScript", tagline: "Typage strict, code maintenable" },
-  { kind: "Style", name: "Tailwind CSS", tagline: "Design system rapide, cohérent" },
-  { kind: "Données", name: "Prisma + Postgres", tagline: "ORM typé, base relationnelle robuste" },
+  { kind: "Framework", name: "Next.js", tagline: "Des pages rapides et bien référencées" },
+  { kind: "Langage", name: "TypeScript", tagline: "Moins de bugs, des évolutions sereines" },
+  { kind: "Style", name: "Tailwind CSS", tagline: "Un design cohérent sur chaque page" },
+  { kind: "Données", name: "Prisma + Postgres", tagline: "Vos données bien rangées et fiables" },
 ];

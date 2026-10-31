@@ -1,14 +1,5 @@
 import Link from "next/link";
-import {
-  ArrowRight,
-  MapPin,
-  Building2,
-  Users,
-  Code2,
-  Smartphone,
-  Search,
-  CheckCircle2,
-} from "lucide-react";
+import { ArrowRight, MapPin, Building2, Code2, Smartphone, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -115,14 +106,14 @@ export function CityLanding({ city }: { city: CityData }) {
             </div>
           </div>
 
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="mt-20 home-metrics">
             {[
               { value: "1", label: "Interlocuteur unique" },
               { value: `${city.distanceFromRouen} km`, label: city.distanceFromRouen === 0 ? "Centre-ville" : "De notre QG Rouen" },
               { value: "< 24h", label: "Délai de réponse" },
               { value: "5 ans", label: "D'expérience locale" },
             ].map((s) => (
-              <div key={s.label} className="bg-[var(--background)] px-6 py-8 flex flex-col gap-1">
+              <div key={s.label} className="home-metric flex flex-col gap-1">
                 <p className="text-h3 font-medium tracking-[-0.025em]">{s.value}</p>
                 <p className="text-caption">{s.label}</p>
               </div>
@@ -150,10 +141,9 @@ export function CityLanding({ city }: { city: CityData }) {
               </p>
             </div>
 
-            <div className="lg:col-span-7 space-y-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <div className="lg:col-span-7 space-y-4">
               {REASONS.map((r) => (
-                <div key={r.title} className="bg-[var(--background)] p-8 grid grid-cols-[auto_1fr] gap-6 items-start">
-                  <CheckCircle2 className="size-5 text-[var(--accent)] mt-1 shrink-0" />
+                <div key={r.title} className="editorial-note">
                   <div>
                     <h3 className="text-h4 mb-2">{r.title}</h3>
                     <p className="text-body-sm text-[var(--muted-foreground)]">
@@ -176,18 +166,14 @@ export function CityLanding({ city }: { city: CityData }) {
               Ce que nous <em>construisons</em> pour vous.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {LOCAL_SERVICES.map((s) => {
-              const Icon = s.icon;
               return (
                 <Link
                   key={s.title}
                   href={s.href}
-                  className="group bg-[var(--background)] hover:bg-[var(--surface)] p-8 md:p-10 transition-colors"
+                  className="editorial-note editorial-note-link group"
                 >
-                  <div className="size-12 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mb-6">
-                    <Icon className="size-5 text-[var(--accent)]" strokeWidth={1.75} />
-                  </div>
                   <h3 className="text-h3 mb-3">{s.title}</h3>
                   <p className="text-body text-[var(--muted-foreground)] mb-4">
                     {s.description}
@@ -221,7 +207,7 @@ export function CityLanding({ city }: { city: CityData }) {
             {city.topSectors.map((sector) => (
               <div
                 key={sector}
-                className="p-5 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] text-center"
+                className="compact-note"
               >
                 <p className="text-body-sm font-medium">{sector}</p>
               </div>
@@ -233,11 +219,8 @@ export function CityLanding({ city }: { city: CityData }) {
       {/* INFOS PRATIQUES */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
-            <div className="bg-[var(--background)] p-8">
-              <div className="size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mb-4">
-                <MapPin className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div className="editorial-note">
               <p className="text-eyebrow mb-2">Localisation</p>
               <p className="text-h4 mb-1">
                 {city.name} {city.postalCode}
@@ -247,10 +230,7 @@ export function CityLanding({ city }: { city: CityData }) {
               </p>
             </div>
 
-            <div className="bg-[var(--background)] p-8">
-              <div className="size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mb-4">
-                <Users className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-              </div>
+            <div className="editorial-note">
               <p className="text-eyebrow mb-2">Zone d&apos;intervention</p>
               <p className="text-h4 mb-1">Toute la {city.region}</p>
               <p className="text-body-sm text-[var(--muted-foreground)]">
@@ -259,10 +239,7 @@ export function CityLanding({ city }: { city: CityData }) {
               </p>
             </div>
 
-            <div className="bg-[var(--background)] p-8">
-              <div className="size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mb-4">
-                <Building2 className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-              </div>
+            <div className="editorial-note">
               <p className="text-eyebrow mb-2">CCI référente</p>
               <p className="text-h4 mb-1">{city.cciName}</p>
               <p className="text-body-sm text-[var(--muted-foreground)]">

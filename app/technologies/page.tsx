@@ -97,12 +97,12 @@ export default function TechnologiesPage() {
 
       <section className="border-t border-[var(--border)]">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border-x border-b border-[var(--border)]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 py-8">
             {TECHNOLOGIES.map((t) => (
               <Link
                 key={t.name}
                 href={t.href}
-                className="group relative bg-[var(--background)] hover:bg-[var(--surface)] p-8 md:p-12 transition-colors duration-200"
+                className="editorial-note editorial-note-link group relative"
               >
                 <div className="flex items-start justify-between mb-12">
                   <span className="text-caption">{t.kind}</span>

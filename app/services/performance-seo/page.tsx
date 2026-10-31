@@ -9,9 +9,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Performance & SEO à Rouen - Core Web Vitals, référencement local",
+  title: "SEO local Rouen : vos clients vous trouvent sur Google",
   description:
-    "Audit SEO, optimisation Core Web Vitals, référencement local Rouen. Améliorez votre visibilité Google et la vitesse de votre site. Agence SEO à Rouen.",
+    "Vous apparaissez quand vos clients cherchent votre métier à Rouen. Audit SEO, référencement local et Core Web Vitals par une agence web à Rouen, en Normandie. Résultats mesurés avant/après.",
   alternates: { canonical: "https://krealabs.fr/services/performance-seo" },
 };
 
@@ -23,7 +23,6 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
-import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 
 export default function PerformanceSeoPage() {
   return (
@@ -44,20 +43,20 @@ export default function PerformanceSeoPage() {
       />
       <ServiceHero
         number="04"
-        eyebrow="Service · Performance & SEO"
+        eyebrow="Performance & SEO local"
         title={
           <>
-            Performance, SEO local <em>Rouen</em>,
+            Vos clients vous trouvent
             <br />
-            Core Web Vitals.
+            sur Google, à <em>Rouen</em>.
           </>
         }
-        description="Audit technique, optimisation Core Web Vitals, SEO local pour entreprises de Rouen et Normandie. Tout pour grimper dans Google et offrir une expérience instantanée à vos visiteurs."
+        description="Vous apparaissez quand vos clients cherchent votre métier, et votre site s'affiche instantanément. Audit technique, Core Web Vitals et SEO local pour les entreprises de Rouen et de Normandie."
       />
 
       <ServiceFeatures
         number="01"
-        eyebrow="Ce que nous mesurons"
+        eyebrow="Ce qui change pour vous"
         title={
           <>
             Six leviers, un seul <em>objectif</em>.
@@ -73,18 +72,17 @@ export default function PerformanceSeoPage() {
             <div className="lg:col-span-5">
               <Eyebrow number="02" className="mb-6">Méthode</Eyebrow>
               <h2 className="text-h1 mb-6">
-                Audit, plan d'action, <em>résultats</em>.
+                Audit, plan d’action, <em>résultats</em>.
               </h2>
               <p className="text-body text-[var(--muted-foreground)]">
-                Pas de prestation au noir. Nous expliquons chaque
-                recommandation, vous validez, nous implémentons. Toujours
-                mesurable.
+                Aucune boîte noire : chaque recommandation vous est expliquée,
+                vous décidez, on l’applique. Et tout est mesuré.
               </p>
             </div>
-            <ol className="lg:col-span-7 space-y-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <ol className="lg:col-span-7 space-y-3">
               {STEPS.map((step, i) => (
-                <li key={step.title} className="bg-[var(--background)] p-8 grid grid-cols-[auto_1fr] gap-8 items-start">
-                  <span className="text-eyebrow text-[var(--accent)] pt-1.5">{String(i + 1).padStart(2, "0")}</span>
+                <li key={step.title} className="editorial-step">
+                  <span className="editorial-ordinal">{String(i + 1).padStart(2, "0")}</span>
                   <div>
                     <h3 className="text-h3 mb-2">{step.title}</h3>
                     <p className="text-body-sm text-[var(--muted-foreground)]">{step.description}</p>
@@ -101,12 +99,12 @@ export default function PerformanceSeoPage() {
           <div className="max-w-3xl mb-16">
             <Eyebrow number="03" className="mb-6">Outils</Eyebrow>
             <h2 className="text-h1">
-              Les <em>instruments</em> qu'on utilise.
+              Des mesures <em>vérifiables</em>, pas des promesses.
             </h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
             {TOOLS.map((t) => (
-              <div key={t.name} className="p-6 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]">
+              <div key={t.name} className="compact-note">
                 <p className="text-caption mb-3">{t.kind}</p>
                 <p className="text-h4 mb-2">{t.name}</p>
                 <p className="text-body-sm text-[var(--muted-foreground)]">{t.tagline}</p>
@@ -125,11 +123,6 @@ export default function PerformanceSeoPage() {
         items={FAQ}
       />
 
-      <section className="section-y border-t border-[var(--border)]">
-        <Container size="narrow">
-          <NewsletterSignup variant="card" source="services-seo" />
-        </Container>
-      </section>
 
       <ServiceResources
         articles={[
@@ -144,7 +137,7 @@ export default function PerformanceSeoPage() {
       <ServiceCta
         title={
           <>
-            Besoin d&apos;un <em>audit SEO</em> ?
+            Vos clients vous <em>cherchent</em>. Ils vous trouvent ?
           </>
         }
       />
@@ -176,12 +169,12 @@ const FAQ = [
   {
     question: "Travaillez-vous avec mon agence SEO existante ?",
     answer:
-      "Oui régulièrement. Beaucoup d'entreprises ont déjà une agence SEO pour le contenu/netlinking et nous engagent pour le SEO technique (perf, structure, schema). Cette répartition fonctionne bien : on s'occupe du code, ils s'occupent du content + outreach. On synchronise via des points trimestriels.",
+      "Oui, régulièrement. Si votre agence SEO gère déjà le contenu et les liens, vous pouvez nous confier la partie technique (performance, structure, schema). Chacun son terrain, et un point commun chaque trimestre pour avancer dans la même direction.",
   },
   {
     question: "Quels outils utilisez-vous ?",
     answer:
-      "Audit technique : Lighthouse, PageSpeed Insights, Screaming Frog, Sitebulb. Monitoring : Search Console (gratuit), Vercel Analytics, Plausible. Sémantique : Ahrefs ou Semrush selon le projet. AI : Claude / GPT pour la rédaction assistée. Nous ne sommes pas équipés d'outils SEO marketing lourds (Ahrefs Premium 500$/mois) - pour ça, on collabore avec votre agence de référencement.",
+      "Audit technique : Lighthouse, PageSpeed Insights, Screaming Frog, Sitebulb. Monitoring : Search Console (gratuit), Vercel Analytics, Plausible. Sémantique : Ahrefs ou Semrush selon le projet. AI : Claude / GPT pour la rédaction assistée. Pour le netlinking et la veille concurrentielle intensive, on travaille main dans la main avec votre agence de référencement : vous profitez du meilleur des deux.",
   },
 ];
 
@@ -189,32 +182,32 @@ const FEATURES = [
   {
     icon: Gauge,
     title: "Core Web Vitals",
-    description: "LCP, INP, CLS optimisés. Objectif < 2s en LCP, sous le seuil Google sur tous les terminaux.",
+    description: "Objectif : votre site affiché en moins de 2 secondes sur tous les écrans, sous les seuils de Google (LCP, INP, CLS).",
   },
   {
     icon: Search,
     title: "SEO technique",
-    description: "Schema.org, sitemap dynamique, robots.txt, canonicals, balises meta. Les fondations propres.",
+    description: "Google comprend et indexe correctement vos pages : Schema.org, sitemap, robots.txt, canonicals, balises.",
   },
   {
     icon: MapPin,
     title: "SEO local Rouen",
-    description: "Schema LocalBusiness, fiche Google Business Profile, citations locales. Visibilité Normandie.",
+    description: "Vous ressortez dans les recherches locales et sur la carte : fiche Google Business Profile, Schema LocalBusiness, citations locales.",
   },
   {
     icon: FileSearch,
     title: "Recherche de mots-clés",
-    description: "Identification des requêtes à fort potentiel pour votre secteur. Volume, concurrence, intention.",
+    description: "Vous savez ce que vos clients tapent vraiment dans Google : volume, concurrence et intention des requêtes de votre secteur.",
   },
   {
     icon: TrendingUp,
     title: "Optimisation des contenus",
-    description: "Titres, balises, structure des pages, maillage interne. Réécriture si nécessaire.",
+    description: "Vos pages répondent aux questions de vos clients : titres, structure, maillage interne, réécriture si besoin.",
   },
   {
     icon: LineChart,
     title: "Suivi & reporting",
-    description: "Tableau de bord mensuel : positions, trafic organique, conversions. Vous voyez où va l'argent.",
+    description: "Vous voyez chaque mois ce que votre investissement rapporte : positions, trafic organique, conversions.",
   },
 ];
 

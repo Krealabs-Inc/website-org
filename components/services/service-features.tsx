@@ -17,6 +17,7 @@ interface ServiceFeaturesProps {
   features: FeatureItem[];
   /** 2 ou 3 colonnes sur desktop */
   columns?: 2 | 3;
+  layout?: "columns" | "list";
 }
 
 export function ServiceFeatures({
@@ -26,8 +27,9 @@ export function ServiceFeatures({
   intro,
   features,
   columns = 3,
+  layout = "columns",
 }: ServiceFeaturesProps) {
-  const colClass = columns === 2 ? "md:grid-cols-2" : "md:grid-cols-3";
+  const colClass = columns === 2 ? "lg:grid-cols-2" : "lg:grid-cols-3";
   return (
     <section className="section-y border-t border-[var(--border)]">
       <Container>
@@ -43,21 +45,16 @@ export function ServiceFeatures({
           )}
         </div>
 
-        <div className={`grid grid-cols-1 ${colClass} gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden`}>
-          {features.map((f) => {
-            const Icon = f.icon;
-            return (
-              <div key={f.title} className="bg-[var(--background)] p-8">
-                <div className="size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mb-6">
-                  <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-                </div>
-                <h3 className="text-h4 mb-2">{f.title}</h3>
-                <p className="text-body-sm text-[var(--muted-foreground)]">
-                  {f.description}
-                </p>
+        <div className={layout === "list" ? "service-feature-list" : `grid grid-cols-1 ${colClass} gap-x-10 gap-y-0`}>
+          {features.map((feature, index) => (
+            <article key={feature.title} className="editorial-entry">
+              <span className="editorial-ordinal" aria-hidden>{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h3 className="text-h4 mb-3">{feature.title}</h3>
+                <p className="text-body-sm text-[var(--muted-foreground)]">{feature.description}</p>
               </div>
-            );
-          })}
+            </article>
+          ))}
         </div>
       </Container>
     </section>

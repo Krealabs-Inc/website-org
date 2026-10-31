@@ -140,12 +140,12 @@ export default function FaqPage() {
                 <Eyebrow number={String(gi + 1).padStart(2, "0")} className="mb-6">
                   {group.title}
                 </Eyebrow>
-                <Accordion type="single" collapsible className="space-y-2">
+                <Accordion type="single" collapsible className="border-t border-[var(--border-strong)]">
                   {group.items.map((item, i) => (
                     <AccordionItem
                       key={`${gi}-${i}`}
                       value={`item-${gi}-${i}`}
-                      className="border border-[var(--border)] rounded-[var(--radius)] bg-[var(--surface)] px-6 data-[state=open]:border-[var(--border-strong)]"
+                      className="editorial-question px-1"
                     >
                       <AccordionTrigger className="text-left text-h4 hover:no-underline py-5">
                         {item.question}

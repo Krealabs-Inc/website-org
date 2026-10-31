@@ -1,22 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import {
-  ArrowRight,
-  Code2,
-  Database,
-  ShieldCheck,
-  Cloud,
-  GitBranch,
-  Workflow,
-  TestTube2,
-  Layers,
-  Rocket,
-  Lock,
-  Microscope,
-  Boxes,
-  Cpu,
-  Wrench,
-} from "lucide-react";
+import { ArrowRight, ShieldCheck, GitBranch, TestTube2, Layers, Rocket, Microscope } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -93,14 +77,10 @@ export default function ExpertisePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {COMPETENCES.map((c) => {
-              const Icon = c.icon;
               return (
-                <article key={c.title} className="bg-[var(--background)] p-8">
-                  <div className="size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mb-6">
-                    <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-                  </div>
+                <article key={c.title} className="editorial-note">
                   <h3 className="text-h4 mb-2">{c.title}</h3>
                   <p className="text-body-sm text-[var(--muted-foreground)] mb-5">
                     {c.description}
@@ -142,11 +122,11 @@ export default function ExpertisePage() {
                   <h3 className="text-h3">{cat.title}</h3>
                   <span className="text-caption">{cat.items.length} outils</span>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
                   {cat.items.map((item) => (
                     <div
                       key={item.name}
-                      className="p-5 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)]"
+                      className="compact-note"
                     >
                       <p className="text-caption mb-1.5">{item.kind}</p>
                       <p className="text-body font-semibold">{item.name}</p>
@@ -178,10 +158,10 @@ export default function ExpertisePage() {
               </p>
             </div>
 
-            <ol className="lg:col-span-7 space-y-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <ol className="lg:col-span-7 space-y-3">
               {METHODE.map((m, i) => (
-                <li key={m.title} className="bg-[var(--background)] p-8 grid grid-cols-[auto_1fr] gap-8 items-start">
-                  <span className="text-eyebrow text-[var(--accent)] pt-1.5">
+                <li key={m.title} className="editorial-step">
+                  <span className="editorial-ordinal">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>

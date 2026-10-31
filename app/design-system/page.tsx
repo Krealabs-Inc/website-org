@@ -25,9 +25,8 @@ export default function DesignSystemPage() {
             Le langage <em>visuel</em> de Krealabs.
           </h1>
           <p className="text-body-lg text-[var(--muted-foreground)] mt-6 max-w-2xl">
-            Un système cohérent, restreint, intentionnel. Une seule échelle de
-            radius. Une seule couleur d'accent. Trois fontes au caractère
-            distinct.
+            Des boutons capsule, des cartes à coins de 20 px et une seule
+            couleur d’accent. Trois fontes au caractère distinct.
           </p>
         </header>
 

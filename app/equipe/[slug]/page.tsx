@@ -275,12 +275,12 @@ export default async function AuthorPage({ params }: PageProps) {
                 {authoredPosts.length} article{authoredPosts.length > 1 ? "s" : ""} sur le blog Krealabs.
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-0">
               {authoredPosts.slice(0, 9).map((post) => (
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group bg-[var(--background)] hover:bg-[var(--surface)] p-6 transition-colors flex flex-col"
+                  className="editorial-note editorial-note-link group flex flex-col"
                 >
                   <p className="text-caption mb-3">
                     {post.category} · {post.readTime}
@@ -316,7 +316,7 @@ export default async function AuthorPage({ params }: PageProps) {
                 Le reste de l&apos;équipe Krealabs.
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {otherMembers.map((other) => (
                 <Link
                   key={other.slug}

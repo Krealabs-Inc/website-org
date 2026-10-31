@@ -27,9 +27,10 @@ const nav = {
     { name: "Notre histoire", href: "/notre-histoire" },
     { name: "L'équipe", href: "/equipe" },
     { name: "Expertise & savoir-faire", href: "/expertise" },
-    { name: "Travaux clients", href: "/clients" },
+    { name: "Réalisations", href: "/clients" },
     { name: "Blog & expertise", href: "/blog" },
     { name: "FAQ", href: "/faq" },
+    { name: "Recrutement", href: "/recrutement" },
     { name: "Contact", href: "/contact" },
   ],
   legal: [
@@ -196,7 +197,7 @@ export function Footer() {
                 href="https://kreia.krealabs.fr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] p-4 hover:border-[var(--border-strong)] transition-colors"
+                className="group block compact-note hover:border-[var(--border-strong)] transition-colors"
               >
                 <span className="text-caption text-[var(--accent)]">
                   Offre dédiée
@@ -247,7 +248,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.name}
-                    className="size-9 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
+                    className="size-9 studio-panel hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] flex items-center justify-center text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
                   >
                     <s.icon className="size-4" />
                   </a>

@@ -81,7 +81,7 @@ export default function BlogPage() {
               <Eyebrow number="01" className="mb-6">Article à la une</Eyebrow>
               <Link
                 href={`/blog/${featured.slug}`}
-                className="group block rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] overflow-hidden hover:bg-[var(--surface-hover)] transition-colors"
+                className="group block studio-panel overflow-hidden hover:bg-[var(--surface-hover)] transition-colors"
               >
                 <div className="grid md:grid-cols-2 gap-0">
                   <div className="relative aspect-[4/3] md:aspect-auto overflow-hidden bg-[var(--background)]">
@@ -146,7 +146,7 @@ export default function BlogPage() {
                 <Link
                   key={post.slug}
                   href={`/blog/${post.slug}`}
-                  className="group flex flex-col rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] overflow-hidden hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] transition-colors"
+                  className="group flex flex-col studio-panel overflow-hidden hover:bg-[var(--surface-hover)] hover:border-[var(--border-strong)] transition-colors"
                 >
                   {post.image && (
                     <div className="relative aspect-[16/10] overflow-hidden bg-[var(--background)]">

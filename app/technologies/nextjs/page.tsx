@@ -25,8 +25,8 @@ import { ServiceFeatures } from "@/components/services/service-features";
 import { ServiceCta } from "@/components/services/service-cta";
 
 const FEATURES = [
-  { icon: Search, title: "SEO natif", description: "Rendu serveur, métadonnées dynamiques, sitemap auto. Google adore." },
-  { icon: Gauge, title: "Performance extrême", description: "Code splitting, lazy loading, image optimization. Sites instantanés." },
+  { icon: Search, title: "SEO natif", description: "Rendu serveur, métadonnées dynamiques, sitemap auto. Des contenus accessibles aux moteurs de recherche." },
+  { icon: Gauge, title: "Performance extrême", description: "Code splitting, lazy loading, image optimization. Chargement des ressources adapté aux pages." },
   { icon: Rocket, title: "Déploiement simple", description: "Vercel en un clic, ou Docker / AWS / OVH selon vos contraintes." },
   { icon: Globe, title: "CDN global", description: "Pages distribuées dans le monde, latence minimale partout." },
   { icon: Server, title: "Server Components", description: "Logique serveur dans le composant. Moins de JS côté client." },
@@ -34,7 +34,7 @@ const FEATURES = [
 ];
 
 const USE_CASES = [
-  { icon: Newspaper, title: "Sites éditoriaux & vitrines", description: "Sites institutionnels, blogs, magazines. SEO parfait par défaut." },
+  { icon: Newspaper, title: "Sites éditoriaux & vitrines", description: "Sites institutionnels, blogs, magazines. Une base adaptée à une stratégie de référencement." },
   { icon: ShoppingCart, title: "E-commerce performant", description: "Boutiques rapides avec checkout fluide, intégrations Stripe/Mollie." },
   { icon: Briefcase, title: "Plateformes SaaS", description: "Applications full-stack avec auth, base de données et API intégrées." },
 ];
@@ -52,7 +52,7 @@ export default function NextjsPage() {
             React de production.
           </>
         }
-        description="Le framework React le plus mature et le plus performant en 2025. Server Components, App Router, optimisations automatiques. Notre choix par défaut pour les sites web modernes."
+        description="Un socle technique pour les sites et applications qui ont besoin de fonctionnalités sur mesure. Nous l’utilisons quand le projet demande davantage qu’un site de présentation."
       />
 
       <ServiceFeatures
@@ -75,14 +75,10 @@ export default function NextjsPage() {
               Idéal pour ces <em>projets</em>.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {USE_CASES.map((u) => {
-              const Icon = u.icon;
               return (
-                <div key={u.title} className="bg-[var(--background)] p-8">
-                  <div className="size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center mb-6">
-                    <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-                  </div>
+                <div key={u.title} className="editorial-note">
                   <h3 className="text-h4 mb-2">{u.title}</h3>
                   <p className="text-body-sm text-[var(--muted-foreground)]">{u.description}</p>
                 </div>

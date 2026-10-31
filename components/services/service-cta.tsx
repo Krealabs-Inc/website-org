@@ -10,32 +10,35 @@ interface ServiceCtaProps {
   title: React.ReactNode;
   description?: string;
   primaryLabel?: string;
+  eyebrow?: string;
+  secondaryLabel?: string | null;
 }
 
 export function ServiceCta({
   title,
-  description = "Le premier échange est gratuit et sans engagement. Décrivez-nous votre projet, nous revenons vers vous sous 24h.",
-  primaryLabel = "Démarrer un projet",
+  description = "Le premier échange est gratuit et sans engagement. Décrivez votre projet, on vous répond sous 24h.",
+  primaryLabel = "Parler de mon projet",
+  eyebrow = "Votre projet",
+  secondaryLabel = "Voir ce qu’on peut faire pour vous",
 }: ServiceCtaProps) {
   return (
-    <section className="section-y border-t border-[var(--border)]">
+    <section id="parlons-projet" className="contact-invitation">
       <Container>
-        <div className="text-center max-w-3xl mx-auto">
-          <Eyebrow className="mb-8 justify-center">Passons à l'action</Eyebrow>
-          <h2 className="text-display">{title}</h2>
-          <p className="text-body-lg text-[var(--muted-foreground)] mt-8 mb-10">
-            {description}
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <Button size="lg" asChild>
-              <Link href="/contact">
-                {primaryLabel}
-                <ArrowRight />
-              </Link>
+        <div className="contact-invitation-panel">
+          <div className="contact-invitation-copy">
+            <Eyebrow className="mb-5">{eyebrow}</Eyebrow>
+            <h2 className="contact-invitation-title">{title}</h2>
+            <p className="text-body text-[var(--muted-foreground)] mt-5 max-w-xl">{description}</p>
+          </div>
+          <div className="contact-invitation-actions">
+            <Button size="lg" asChild className="w-full whitespace-normal text-center">
+              <Link href="/contact">{primaryLabel}<ArrowRight aria-hidden /></Link>
             </Button>
-            <Button size="lg" variant="outline" asChild>
-              <Link href="/services">Voir tous les services</Link>
-            </Button>
+            {secondaryLabel && (
+              <Button size="lg" variant="outline" asChild className="w-full whitespace-normal text-center">
+                <Link href="/services">{secondaryLabel}</Link>
+              </Button>
+            )}
           </div>
         </div>
       </Container>

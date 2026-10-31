@@ -145,12 +145,9 @@ export default function NotreHistoirePage() {
             <ol className="lg:col-span-8 relative">
               <div className="absolute left-[1.125rem] top-2 bottom-2 w-px bg-[var(--border)]" aria-hidden />
               {TIMELINE.map((step) => {
-                const Icon = step.icon;
                 return (
                   <li key={step.year} className="relative pl-14 pb-12 last:pb-0">
-                    <span className="absolute left-0 top-0 size-10 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--surface)] flex items-center justify-center">
-                      <Icon className="size-4 text-[var(--accent)]" strokeWidth={1.75} />
-                    </span>
+                    <span className="history-marker" aria-hidden />
                     <p className="text-eyebrow text-[var(--accent)] mb-2">{step.year}</p>
                     <h3 className="text-h3 mb-2">{step.title}</h3>
                     <p className="text-body text-[var(--muted-foreground)] max-w-2xl">
@@ -180,9 +177,9 @@ export default function NotreHistoirePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {TEAM.map((m) => (
-              <div key={m.name} className="bg-[var(--background)] p-8 md:p-10">
+              <div key={m.name} className="editorial-note md:p-10">
                 <div className="flex items-start gap-5 mb-5">
                   <div className="size-14 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--accent-subtle)] flex items-center justify-center">
                     <span className="text-h4 font-semibold text-[var(--accent)]">{m.initials}</span>
@@ -225,9 +222,9 @@ export default function NotreHistoirePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             {VALUES.map((v) => (
-              <div key={v.title} className="bg-[var(--background)] p-8 md:p-10">
+              <div key={v.title} className="editorial-note md:p-10">
                 <p className="text-eyebrow text-[var(--accent)] mb-4">{v.label}</p>
                 <h3 className="text-h3 mb-3">{v.title}</h3>
                 <p className="text-body text-[var(--muted-foreground)] max-w-md">
