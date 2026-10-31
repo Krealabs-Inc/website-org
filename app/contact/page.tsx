@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import confetti from "canvas-confetti";
@@ -26,10 +26,23 @@ const PROJECT_TYPES = [
   { id: "refonte-seo", label: "Refonte / SEO", icon: Search },
 ] as const;
 
-function ContactPageInner() {
+// Reading the URL forces client-side rendering up to the nearest Suspense
+// boundary. Keeping it in this tiny component lets the rest of the page be
+// prerendered, so crawlers see the real content instead of a fallback.
+function RequestTypeFromUrl({ onType }: { onType: (type: string) => void }) {
   const searchParams = useSearchParams();
-  const initialType = searchParams.get("type") === "partenariat" ? "partenariat" : "devis";
 
+  useEffect(() => {
+    const t = searchParams.get("type");
+    if (t === "partenariat" || t === "contact" || t === "devis") {
+      onType(t);
+    }
+  }, [searchParams, onType]);
+
+  return null;
+}
+
+export default function ContactPage() {
   const [formData, setFormData] = useState<{
     requestType: string;
     name: string;
@@ -40,7 +53,7 @@ function ContactPageInner() {
     message: string;
     callbackRequested: "" | "yes";
   }>({
-    requestType: initialType,
+    requestType: "devis",
     name: "",
     email: "",
     phone: "",
@@ -51,12 +64,10 @@ function ContactPageInner() {
   });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-  useEffect(() => {
-    const t = searchParams.get("type");
-    if (t === "partenariat" || t === "contact" || t === "devis") {
-      setFormData((d) => ({ ...d, requestType: t }));
-    }
-  }, [searchParams]);
+  const applyUrlType = useCallback(
+    (requestType: string) => setFormData((d) => ({ ...d, requestType })),
+    [],
+  );
 
   const update = <K extends keyof typeof formData>(key: K, value: (typeof formData)[K]) =>
     setFormData((d) => ({ ...d, [key]: value }));
@@ -133,6 +144,9 @@ function ContactPageInner() {
 
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)] pt-32 pb-32">
+      <Suspense fallback={null}>
+        <RequestTypeFromUrl onType={applyUrlType} />
+      </Suspense>
       <Container>
         {/* Header */}
         <header className="mb-16 max-w-4xl">
@@ -552,14 +566,6 @@ function ContactPageInner() {
         </div>
       </Container>
     </main>
-  );
-}
-
-export default function ContactPage() {
-  return (
-    <Suspense fallback={<div className="pt-32"><Container><p className="text-body text-[var(--muted-foreground)]">Chargement…</p></Container></div>}>
-      <ContactPageInner />
-    </Suspense>
   );
 }
 
