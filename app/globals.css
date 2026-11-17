@@ -1370,6 +1370,26 @@ fieldset:disabled .calc-option { cursor: default; opacity: 0.5; }
 @keyframes drn-flow { to { background-position: 24px 0; } }
 @keyframes drn-pop { 0%, 30% { opacity: 0.4; transform: scale(0.96); } 45%, 85% { opacity: 1; transform: none; } 100% { opacity: 0.4; transform: scale(0.96); } }
 
+/* ===== KréIA link (navbar): a pill with a slowly turning light on its border ===== */
+@property --kreia-angle { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+.kreia-pill { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px 7px 11px; border: 1px solid transparent; border-radius: 99px; font-size: 0.9rem; font-weight: 600; color: var(--foreground);
+  background: linear-gradient(var(--background), var(--background)) padding-box, conic-gradient(from var(--kreia-angle), var(--border-strong) 0deg, var(--accent) 60deg, #c7ccff 90deg, var(--accent) 120deg, var(--border-strong) 180deg, var(--border-strong) 360deg) border-box;
+  transition: box-shadow 200ms ease-out, transform 160ms ease-out; }
+.kreia-pill:hover { box-shadow: 0 0 0 4px var(--accent-subtle), 0 8px 24px -10px var(--accent); }
+.kreia-pill:active { transform: scale(0.97); }
+.kreia-pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.kreia-spark { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 8px 1px var(--accent); }
+.kreia-tag { padding: 2px 7px; border-radius: 99px; background: var(--accent-subtle); color: var(--accent); font-family: var(--font-geist-mono), monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.02em; }
+.kreia-arrow { color: var(--muted-foreground); transition: transform 160ms ease-out, color 160ms ease-out; }
+.kreia-pill:hover .kreia-arrow { color: var(--accent); transform: translate(2px, -2px); }
+@media (prefers-reduced-motion: no-preference) {
+  .kreia-pill { animation: kreia-turn 6s linear infinite; }
+  .kreia-spark { animation: kreia-pulse 2.4s ease-in-out infinite; }
+}
+@keyframes kreia-turn { to { --kreia-angle: 360deg; } }
+@keyframes kreia-pulse { 50% { opacity: 0.45; box-shadow: 0 0 2px 0 var(--accent); } }
+.kreia-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; padding: 18px; border: 1px solid var(--accent); border-radius: 18px; background: var(--accent-subtle); font-size: 1.25rem; font-weight: 600; color: var(--foreground); }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {

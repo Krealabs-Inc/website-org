@@ -113,10 +113,13 @@ export function Navbar() {
                 href={KREIA_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-3 py-1.5 text-[0.9rem] font-medium rounded-[var(--radius)] text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors"
-                title="IA locale pour cabinets d'expertise comptable et d'avocats"
+                className="kreia-pill"
+                title="IA locale pour cabinets d’expertise comptable et d’avocats"
               >
+                <span className="kreia-spark" aria-hidden />
                 KréIA
+                <span className="kreia-tag">IA locale</span>
+                <ArrowUpRight className="kreia-arrow size-3.5" aria-hidden />
                 <span className="sr-only"> (nouvel onglet)</span>
               </a>
               <ThemeToggle />
@@ -184,16 +187,20 @@ export function Navbar() {
               href={KREIA_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between py-4 border-b border-[var(--border)] text-h3 text-[var(--foreground)] hover:text-[var(--accent)] transition-colors"
+              className="kreia-card"
             >
               <span>
-                KréIA
+                <span className="inline-flex items-center gap-2">
+                  <span className="kreia-spark" aria-hidden />
+                  KréIA
+                </span>
                 <span className="block text-body-sm text-[var(--muted-foreground)] font-normal">
                   IA locale pour cabinets d&apos;expertise comptable et
                   d&apos;avocats
                 </span>
               </span>
-              <ArrowUpRight className="size-5 text-[var(--subtle-foreground)]" />
+              <ArrowUpRight className="size-5 text-[var(--accent)]" />
+              <span className="sr-only"> (nouvel onglet)</span>
             </a>
             <div className="pt-6">
               <Button size="lg" className="w-full" asChild>
