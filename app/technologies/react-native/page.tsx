@@ -11,6 +11,9 @@ import {
   HeartPulse,
 } from "lucide-react";
 
+import { TechPage } from "@/components/tech/tech-page";
+import { ReactNativeDemo } from "@/components/tech/demos";
+
 export const metadata: Metadata = {
   title: "React Native à Rouen - Apps iOS & Android cross-platform",
   description:
@@ -18,11 +21,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://krealabs.fr/technologies/react-native" },
 };
 
-import { Container } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceHero } from "@/components/services/service-hero";
-import { ServiceFeatures } from "@/components/services/service-features";
-import { ServiceCta } from "@/components/services/service-cta";
 
 const FEATURES = [
   { icon: Smartphone, title: "iOS & Android", description: "Une seule base de code, deux apps installables sur les stores." },
@@ -41,59 +39,24 @@ const USE_CASES = [
 
 export default function ReactNativePage() {
   return (
-    <main className="bg-[var(--background)] text-[var(--foreground)]">
-      <ServiceHero
-        number="03"
-        eyebrow="Technologie · Mobile"
-        title={
-          <>
+    <TechPage
+      number="03"
+      kind="Technologie · Mobile"
+      title={<>
             <em>React Native</em> : iOS & Android,
             <br />
             une seule équipe.
-          </>
-        }
-        description="Le framework cross-platform le plus mature pour développer des applications mobiles natives. Une base de code, deux App Stores, l'expérience utilisateur fidèle à chaque plateforme."
-      />
-
-      <ServiceFeatures
-        number="01"
-        eyebrow="Pourquoi React Native"
-        title={
-          <>
+          </>}
+      description="Le framework cross-platform le plus mature pour développer des applications mobiles natives. Une base de code, deux App Stores, l’expérience utilisateur fidèle à chaque plateforme."
+      demo={<ReactNativeDemo />}
+      whyTitle={<>
             Six atouts <em>décisifs</em>.
-          </>
-        }
-        features={FEATURES}
-      />
-
-      <section className="section-y border-t border-[var(--border)]">
-        <Container>
-          <div className="max-w-3xl mb-16">
-            <Eyebrow number="02" className="mb-6">Cas d'usage</Eyebrow>
-            <h2 className="text-h1">
-              Trois <em>terrains</em> de prédilection.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {USE_CASES.map((u) => {
-              return (
-                <div key={u.title} className="editorial-note">
-                  <h3 className="text-h4 mb-2">{u.title}</h3>
-                  <p className="text-body-sm text-[var(--muted-foreground)]">{u.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
-
-      <ServiceCta
-        title={
-          <>
+          </>}
+      reasons={FEATURES.map(({ title, description }) => ({ title, description }))}
+      uses={USE_CASES.map(({ title, description }) => ({ title, description }))}
+      ctaTitle={<>
             Une app <em>mobile</em> à concevoir ?
-          </>
-        }
-      />
-    </main>
+          </>}
+    />
   );
 }

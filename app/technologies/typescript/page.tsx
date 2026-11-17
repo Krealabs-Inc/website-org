@@ -11,6 +11,9 @@ import {
   Layers,
 } from "lucide-react";
 
+import { TechPage } from "@/components/tech/tech-page";
+import { TypeScriptDemo } from "@/components/tech/demos";
+
 export const metadata: Metadata = {
   title: "TypeScript à Rouen - Langage typé pour code maintenable",
   description:
@@ -18,11 +21,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://krealabs.fr/technologies/typescript" },
 };
 
-import { Container } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceHero } from "@/components/services/service-hero";
-import { ServiceFeatures } from "@/components/services/service-features";
-import { ServiceCta } from "@/components/services/service-cta";
 
 const FEATURES = [
   { icon: ShieldCheck, title: "Typage strict", description: "Les erreurs sont attrapées à la compilation, pas en production." },
@@ -41,59 +39,24 @@ const USE_CASES = [
 
 export default function TypescriptPage() {
   return (
-    <main className="bg-[var(--background)] text-[var(--foreground)]">
-      <ServiceHero
-        number="04"
-        eyebrow="Technologie · Langage"
-        title={
-          <>
+    <TechPage
+      number="04"
+      kind="Technologie · Langage"
+      title={<>
             <em>TypeScript</em> : du code
             <br />
             qui se laisse refactorer.
-          </>
-        }
-        description="Le typage statique au-dessus de JavaScript. Moins de bugs en production, refactoring serein, autocomplétion partout. La fondation de tous nos projets Krealabs."
-      />
-
-      <ServiceFeatures
-        number="01"
-        eyebrow="Pourquoi TypeScript"
-        title={
-          <>
+          </>}
+      description="Le typage statique au-dessus de JavaScript. Moins de bugs en production, refactoring serein, autocomplétion partout. La fondation de tous nos projets Krealabs."
+      demo={<TypeScriptDemo />}
+      whyTitle={<>
             Six bénéfices <em>concrets</em>.
-          </>
-        }
-        features={FEATURES}
-      />
-
-      <section className="section-y border-t border-[var(--border)]">
-        <Container>
-          <div className="max-w-3xl mb-16">
-            <Eyebrow number="02" className="mb-6">Cas d'usage</Eyebrow>
-            <h2 className="text-h1">
-              Là où TypeScript <em>brille</em>.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {USE_CASES.map((u) => {
-              return (
-                <div key={u.title} className="editorial-note">
-                  <h3 className="text-h4 mb-2">{u.title}</h3>
-                  <p className="text-body-sm text-[var(--muted-foreground)]">{u.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
-
-      <ServiceCta
-        title={
-          <>
+          </>}
+      reasons={FEATURES.map(({ title, description }) => ({ title, description }))}
+      uses={USE_CASES.map(({ title, description }) => ({ title, description }))}
+      ctaTitle={<>
             Un projet <em>TypeScript</em> à démarrer ?
-          </>
-        }
-      />
-    </main>
+          </>}
+    />
   );
 }

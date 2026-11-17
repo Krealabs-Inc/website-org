@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
+import { TechMap } from "@/components/tech/tech-map";
 
 const TECHNOLOGIES = [
   {
@@ -79,7 +80,7 @@ export default function TechnologiesPage() {
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
               WordPress reste notre spécialité (et la majorité des projets que
-              nous livrons), mais on s'adapte : Next.js, React Native,
+              nous livrons), mais on s’adapte : Next.js, React Native,
               TypeScript, Python, Node.js - on choisit la techno selon le
               projet, pas selon une chapelle.
             </p>
@@ -95,34 +96,29 @@ export default function TechnologiesPage() {
         </Container>
       </section>
 
+      {/* SIGNATURE: how the tools connect */}
+      <section className="border-t border-[var(--border)] py-16 hidden md:block">
+        <Container>
+          <p className="text-caption mb-6">Survolez un outil pour voir avec quoi il travaille.</p>
+          <TechMap />
+        </Container>
+      </section>
+
+      {/* The tools, one row each */}
       <section className="border-t border-[var(--border)]">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 py-8">
+          <ul className="tech-rows">
             {TECHNOLOGIES.map((t) => (
-              <Link
-                key={t.name}
-                href={t.href}
-                className="editorial-note editorial-note-link group relative"
-              >
-                <div className="flex items-start justify-between mb-12">
+              <li key={t.name}>
+                <Link href={t.href} className="tech-row group">
                   <span className="text-caption">{t.kind}</span>
-                  <ArrowUpRight className="size-6 text-[var(--subtle-foreground)] group-hover:text-[var(--accent)] group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" />
-                </div>
-                <h2 className="text-h1 mb-4">{t.name}</h2>
-                <p className="text-body text-[var(--muted-foreground)] max-w-md mb-8">
-                  {t.description}
-                </p>
-                <ul className="space-y-2">
-                  {t.points.map((p) => (
-                    <li key={p} className="flex items-center gap-2 text-body-sm">
-                      <span className="size-1 rounded-full bg-[var(--accent)] shrink-0" />
-                      <span className="text-[var(--muted-foreground)]">{p}</span>
-                    </li>
-                  ))}
-                </ul>
-              </Link>
+                  <span className="text-h2">{t.name}</span>
+                  <span className="text-body-sm text-[var(--muted-foreground)]">{t.description}</span>
+                  <ArrowUpRight className="size-6 text-[var(--subtle-foreground)] transition-colors group-hover:text-[var(--accent)]" />
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
 

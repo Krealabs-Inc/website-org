@@ -11,6 +11,9 @@ import {
   AppWindow,
 } from "lucide-react";
 
+import { TechPage } from "@/components/tech/tech-page";
+import { ReactDemo } from "@/components/tech/demos";
+
 export const metadata: Metadata = {
   title: "React à Rouen - Bibliothèque UI moderne",
   description:
@@ -18,11 +21,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://krealabs.fr/technologies/react" },
 };
 
-import { Container } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceHero } from "@/components/services/service-hero";
-import { ServiceFeatures } from "@/components/services/service-features";
-import { ServiceCta } from "@/components/services/service-cta";
 
 const FEATURES = [
   { icon: Component, title: "Composants réutilisables", description: "Une logique d'UI claire, modulaire, testable." },
@@ -41,59 +39,24 @@ const USE_CASES = [
 
 export default function ReactPage() {
   return (
-    <main className="bg-[var(--background)] text-[var(--foreground)]">
-      <ServiceHero
-        number="02"
-        eyebrow="Technologie · UI"
-        title={
-          <>
+    <TechPage
+      number="02"
+      kind="Technologie · UI"
+      title={<>
             <em>React</em> : la bibliothèque
             <br />
             qui a tout changé.
-          </>
-        }
-        description="L'écosystème UI le plus mature de l'industrie. Composants réutilisables, philosophie déclarative, communauté immense. La base de toutes nos applications web et mobiles."
-      />
-
-      <ServiceFeatures
-        number="01"
-        eyebrow="Pourquoi React"
-        title={
-          <>
+          </>}
+      description="L’écosystème UI le plus mature de l’industrie. Composants réutilisables, philosophie déclarative, communauté immense. La base de toutes nos applications web et mobiles."
+      demo={<ReactDemo />}
+      whyTitle={<>
             Six fondations <em>solides</em>.
-          </>
-        }
-        features={FEATURES}
-      />
-
-      <section className="section-y border-t border-[var(--border)]">
-        <Container>
-          <div className="max-w-3xl mb-16">
-            <Eyebrow number="02" className="mb-6">Cas d'usage</Eyebrow>
-            <h2 className="text-h1">
-              Là où React <em>excelle</em>.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {USE_CASES.map((u) => {
-              return (
-                <div key={u.title} className="editorial-note">
-                  <h3 className="text-h4 mb-2">{u.title}</h3>
-                  <p className="text-body-sm text-[var(--muted-foreground)]">{u.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
-
-      <ServiceCta
-        title={
-          <>
+          </>}
+      reasons={FEATURES.map(({ title, description }) => ({ title, description }))}
+      uses={USE_CASES.map(({ title, description }) => ({ title, description }))}
+      ctaTitle={<>
             Une app <em>React</em> à construire ?
-          </>
-        }
-      />
-    </main>
+          </>}
+    />
   );
 }

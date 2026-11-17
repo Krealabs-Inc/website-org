@@ -11,6 +11,9 @@ import {
   Briefcase,
 } from "lucide-react";
 
+import { TechPage } from "@/components/tech/tech-page";
+import { NextDemo } from "@/components/tech/demos";
+
 export const metadata: Metadata = {
   title: "Next.js à Rouen - Framework React production",
   description:
@@ -18,11 +21,6 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://krealabs.fr/technologies/nextjs" },
 };
 
-import { Container } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceHero } from "@/components/services/service-hero";
-import { ServiceFeatures } from "@/components/services/service-features";
-import { ServiceCta } from "@/components/services/service-cta";
 
 const FEATURES = [
   { icon: Search, title: "SEO natif", description: "Rendu serveur, métadonnées dynamiques, sitemap auto. Des contenus accessibles aux moteurs de recherche." },
@@ -41,60 +39,24 @@ const USE_CASES = [
 
 export default function NextjsPage() {
   return (
-    <main className="bg-[var(--background)] text-[var(--foreground)]">
-      <ServiceHero
-        number="01"
-        eyebrow="Technologie · Web"
-        title={
-          <>
+    <TechPage
+      number="01"
+      kind="Technologie · Web"
+      title={<>
             <em>Next.js</em> : le framework
             <br />
             React de production.
-          </>
-        }
-        description="Un socle technique pour les sites et applications qui ont besoin de fonctionnalités sur mesure. Nous l’utilisons quand le projet demande davantage qu’un site de présentation."
-      />
-
-      <ServiceFeatures
-        number="01"
-        eyebrow="Pourquoi Next.js"
-        title={
-          <>
+          </>}
+      description="Un socle technique pour les sites et applications qui ont besoin de fonctionnalités sur mesure. Nous l’utilisons quand le projet demande davantage qu’un site de présentation."
+      demo={<NextDemo />}
+      whyTitle={<>
             Six raisons de <em>miser</em> dessus.
-          </>
-        }
-        intro="Les fondations techniques qui font de Next.js le standard du web moderne."
-        features={FEATURES}
-      />
-
-      <section className="section-y border-t border-[var(--border)]">
-        <Container>
-          <div className="max-w-3xl mb-16">
-            <Eyebrow number="02" className="mb-6">Cas d'usage</Eyebrow>
-            <h2 className="text-h1">
-              Idéal pour ces <em>projets</em>.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {USE_CASES.map((u) => {
-              return (
-                <div key={u.title} className="editorial-note">
-                  <h3 className="text-h4 mb-2">{u.title}</h3>
-                  <p className="text-body-sm text-[var(--muted-foreground)]">{u.description}</p>
-                </div>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
-
-      <ServiceCta
-        title={
-          <>
+          </>}
+      reasons={FEATURES.map(({ title, description }) => ({ title, description }))}
+      uses={USE_CASES.map(({ title, description }) => ({ title, description }))}
+      ctaTitle={<>
             Un projet <em>Next.js</em> à lancer ?
-          </>
-        }
-      />
-    </main>
+          </>}
+    />
   );
 }
