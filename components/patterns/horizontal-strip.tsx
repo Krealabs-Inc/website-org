@@ -92,8 +92,9 @@ export function HorizontalStrip({
           className="relative flex h-full w-max items-center gap-6 pr-[8vw]"
           style={{ x, perspective: "1200px" }}
         >
-          <div className="flex h-full w-[min(100vw,44rem)] shrink-0 items-center">
-            <Container className="pt-16">{intro}</Container>
+          {/* Starts on the page grid (same left edge as the logo and content). */}
+          <div className="strip-intro flex h-full shrink-0 items-center pt-16">
+            <div className="w-full">{intro}</div>
           </div>
 
           {items.map((item, i) => (

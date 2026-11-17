@@ -5,6 +5,8 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
 import { PROJECTS } from "@/lib/projects";
 import { AmbientVideo } from "@/components/media/ambient-video";
+import { HorizontalStrip } from "@/components/patterns/horizontal-strip";
+import { ProjectCard } from "@/components/projects/project-card";
 
 export const metadata: Metadata = {
   title: "Réalisations d’une agence web à Rouen",
@@ -21,20 +23,29 @@ export const metadata: Metadata = {
 export default function ClientsPage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
-      <section className="project-page-intro">
-        <Container>
-          <Eyebrow className="mb-7">Réalisations & explorations</Eyebrow>
-          <div className="project-page-heading">
+      {/* The page opens on the strip: the title is its first panel, each card
+          leads down to its case study. */}
+      <HorizontalStrip
+        className="!border-t-0"
+        itemClassName="h-[min(64vh,520px)] w-[min(520px,84vw)]"
+        intro={
+          <>
+            <Eyebrow className="mb-7">Réalisations & explorations</Eyebrow>
             <h1 className="text-display">Des besoins différents.<br />Des réponses <em>concrètes.</em></h1>
-            <p className="text-body-lg text-[var(--muted-foreground)]">Une plateforme multilingue, des sites vitrines, un site de marque, une boutique, un concept de refonte et notre propre logiciel. Pour chacun : la situation de départ, ce qui a été fait, et ce que ça change. Peut-être un cas proche du vôtre.</p>
-          </div>
-          <nav aria-label="Les projets" className="project-jump-links">
-            {PROJECTS.map((project, index) => <a key={project.slug} href={`#${project.slug}`}><span aria-hidden>0{index + 1}</span>{project.name}</a>)}
-          </nav>
-        </Container>
-      </section>
+            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-xl">Une plateforme multilingue, des sites vitrines, un site de marque, une boutique, un concept de refonte et notre propre logiciel. Pour chacun : la situation de départ, ce qui a été fait, et ce que ça change. Peut-être un cas proche du vôtre.</p>
+          </>
+        }
+      >
+        {PROJECTS.map((project, index) => (
+          <ProjectCard key={project.slug} project={project} index={index} total={PROJECTS.length} />
+        ))}
+      </HorizontalStrip>
 
       <Container>
+        <div className="pt-20 pb-4" data-scroll data-reveal="up">
+          <Eyebrow className="mb-5">Les fiches en détail</Eyebrow>
+          <h2 className="text-h2">Leur situation, ce qui a été fait, <em>ce que ça change.</em></h2>
+        </div>
         {PROJECTS.map((project, index) => (
           <article id={project.slug} key={project.slug} className="project-case">
             <div className="project-case-heading">
@@ -52,7 +63,8 @@ export default function ClientsPage() {
               </div>
             )}
             <div className="project-case-story" data-scroll data-reveal="up">
-              <div><p className="text-caption mb-5">{project.format}</p><h3 className="text-h2">{project.title}</h3></div>
+              {/* Stays in view while the story beside it is read. */}
+              <div className="project-case-aside"><p className="text-caption mb-5">{project.format}</p><h3 className="text-h2">{project.title}</h3></div>
               <div className="space-y-6">
                 <p className="text-body text-[var(--muted-foreground)]"><strong className="text-[var(--foreground)] font-medium">La situation.</strong> {project.situation}</p>
                 <p className="text-body text-[var(--muted-foreground)]"><strong className="text-[var(--foreground)] font-medium">Ce qui a été fait.</strong> {project.work}</p>
