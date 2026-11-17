@@ -1390,6 +1390,50 @@ fieldset:disabled .calc-option { cursor: default; opacity: 0.5; }
 @keyframes kreia-pulse { 50% { opacity: 0.45; box-shadow: 0 0 2px 0 var(--accent); } }
 .kreia-card { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 16px; padding: 18px; border: 1px solid var(--accent); border-radius: 18px; background: var(--accent-subtle); font-size: 1.25rem; font-weight: 600; color: var(--foreground); }
 
+/* ===== City pages (components/local) ===== */
+.city-map { margin: 0; }
+.city-map svg { display: block; width: 100%; height: auto; overflow: visible; border: 1px solid var(--border-strong); border-radius: 22px; background: radial-gradient(circle at 70% 40%, rgba(143, 153, 237, 0.08), transparent 60%), var(--surface); }
+.cm-grid line { stroke: var(--border); stroke-width: 1; }
+.cm-town circle { fill: var(--surface); stroke: var(--subtle-foreground); stroke-width: 1.5; transition: stroke 150ms ease-out; }
+.cm-town text { fill: var(--subtle-foreground); font-size: 12px; transition: fill 150ms ease-out; }
+.cm-town:hover circle, .cm-town:focus-visible circle { stroke: var(--accent); }
+.cm-town:hover text, .cm-town:focus-visible text { fill: var(--foreground); }
+.cm-town.is-home circle { fill: var(--accent-subtle); stroke: var(--accent); }
+.cm-town.is-home text { fill: var(--muted-foreground); }
+.cm-here circle { fill: var(--accent); }
+.cm-here text { fill: var(--foreground); font-size: 16px; font-weight: 600; }
+.cm-pulse { fill: none !important; stroke: var(--accent); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
+.cm-road { fill: none; stroke: var(--accent); stroke-width: 2; }
+.cm-km { fill: var(--accent); font-family: var(--font-geist-mono), monospace; font-size: 13px; }
+@media (prefers-reduced-motion: no-preference) {
+  .cm-pulse { animation: cm-pulse 2.2s ease-out infinite; }
+  .cm-road { stroke-dasharray: 1; stroke-dashoffset: 1; animation: cm-draw 1.4s cubic-bezier(0.65, 0, 0.35, 1) 300ms forwards; }
+  .cm-km { opacity: 0; animation: bp-fade 300ms ease-out 1.5s forwards; }
+}
+@keyframes cm-pulse { from { opacity: 0.9; transform: scale(0.8); } to { opacity: 0; transform: scale(2.6); } }
+@keyframes cm-draw { to { stroke-dashoffset: 0; } }
+.cm-coords { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; font-family: var(--font-geist-mono), monospace; font-size: 12px; color: var(--muted-foreground); }
+.cm-coords span { color: var(--accent); }
+.city-ticker { overflow: hidden; border-block: 1px solid var(--border); -webkit-mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.city-ticker ul { display: flex; width: max-content; }
+.city-ticker li { padding: 22px 28px; font-family: var(--font-instrument-serif), serif; font-style: italic; font-size: 1.6rem; white-space: nowrap; color: var(--muted-foreground); }
+.city-ticker li::after { content: "·"; margin-left: 56px; color: var(--accent); font-style: normal; }
+@media (prefers-reduced-motion: no-preference) { .city-ticker ul { animation: city-ticker 40s linear infinite; } .city-ticker:hover ul { animation-play-state: paused; } }
+@media (prefers-reduced-motion: reduce) { .city-ticker ul { flex-wrap: wrap; width: auto; } .city-ticker li[aria-hidden="true"] { display: none; } }
+@keyframes city-ticker { to { transform: translateX(-50%); } }
+.city-reasons { display: grid; border-top: 1px solid var(--border-strong); }
+.city-reasons li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; padding: 24px 0; border-bottom: 1px solid var(--border-strong); }
+.city-services { display: grid; border-top: 1px solid var(--border-strong); }
+.city-service { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 28px 0; border-bottom: 1px solid var(--border-strong); }
+@media (min-width: 1024px) { .city-service { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr) 24px; gap: 40px; align-items: center; } }
+.city-service:hover .text-h3 { color: var(--accent); }
+.city-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.city-tags li { padding: 8px 14px; border: 1px solid var(--border-strong); border-radius: 99px; font-size: 14px; }
+.city-card { align-self: start; padding: 28px; border: 1px solid var(--border-strong); border-radius: 22px; background: var(--surface); }
+.city-card dl { display: grid; gap: 16px; margin-top: 18px; }
+.city-card dt { font-size: 12px; color: var(--muted-foreground); }
+.city-card dd { margin-top: 2px; font-weight: 500; }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {

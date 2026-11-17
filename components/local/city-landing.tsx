@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, MapPin, Building2, Code2, Smartphone, Search } from "lucide-react";
+import { ArrowRight, Building2, Code2, Smartphone, Search } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Badge } from "@/components/ui/badge";
+import { CityMap } from "@/components/local/city-map";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { ServiceCta } from "@/components/services/service-cta";
 import type { CityData } from "@/lib/cities";
@@ -70,182 +70,135 @@ export function CityLanding({ city }: { city: CityData }) {
         />
       )}
 
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
-        <div
-          aria-hidden
-          className="absolute -top-32 left-1/3 size-[640px] rounded-full blur-[120px] opacity-20"
-          style={{ background: "radial-gradient(circle, var(--accent), transparent 70%)" }}
-        />
-
-        <Container className="relative">
-          <div className="max-w-4xl">
-            <Badge className="mb-6 inline-flex items-center gap-2">
-              <MapPin className="size-3" />
-              {city.name} {city.postalCode} · {city.region}
-            </Badge>
-            <h1 className="text-display">
-              Agence web <em>{city.cityArticle}</em>,
-              <br />
-              au service de la {city.region}.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              {city.heroIntro}
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Button size="lg" asChild>
-                <Link href="/contact">
-                  Démarrer un projet
-                  <ArrowRight />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/equipe">Voir l&apos;équipe</Link>
-              </Button>
-            </div>
-          </div>
-
-          <div className="mt-20 home-metrics">
-            {[
-              { value: "1", label: "Interlocuteur unique" },
-              { value: `${city.distanceFromRouen} km`, label: city.distanceFromRouen === 0 ? "Centre-ville" : "De notre QG Rouen" },
-              { value: "< 24h", label: "Délai de réponse" },
-              { value: "5 ans", label: "D'expérience locale" },
-            ].map((s) => (
-              <div key={s.label} className="home-metric flex flex-col gap-1">
-                <p className="text-h3 font-medium tracking-[-0.025em]">{s.value}</p>
-                <p className="text-caption">{s.label}</p>
+      {/* HERO: the town on the map of the places we serve */}
+      <section className="pt-32 pb-20 md:pt-40 md:pb-24">
+        <Container>
+          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12">
+            <div className="lg:col-span-6">
+              <Eyebrow dot className="mb-8">
+                {city.name} {city.postalCode} · {city.department}
+              </Eyebrow>
+              <h1 className="text-h1 md:text-display">
+                Agence web <em>{city.cityArticle}</em>, au service de la {city.region}.
+              </h1>
+              <p className="text-body-lg text-[var(--muted-foreground)] mt-8">{city.heroIntro}</p>
+              <div className="mt-10 flex flex-wrap gap-4">
+                <Button size="lg" asChild>
+                  <Link href="/contact">
+                    Parler de mon projet
+                    <ArrowRight />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/equipe">Rencontrer l’équipe</Link>
+                </Button>
               </div>
-            ))}
+            </div>
+            <div className="lg:col-span-6">
+              <CityMap city={city} />
+            </div>
           </div>
         </Container>
       </section>
 
-      {/* POURQUOI UNE AGENCE LOCALE */}
-      <section className="section-y border-t border-[var(--border)]">
+      {/* LANDMARKS: the town's own references, scrolling by */}
+      {city.landmarks.length > 0 && (
+        <div className="city-ticker" aria-label={`Repères ${city.cityPossessive}`}>
+          <ul>
+            {[...city.landmarks, ...city.landmarks].map((l, i) => (
+              <li key={i} aria-hidden={i >= city.landmarks.length}>
+                {l}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* WHY LOCAL */}
+      <section className="section-y">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <Eyebrow number="01" className="mb-6">Proximité</Eyebrow>
               <h2 className="text-h1 mb-6">
-                Pourquoi choisir une <em>agence {city.cityArticle}</em> ?
+                Pourquoi une <em>agence locale</em> ?
               </h2>
-              <p className="text-body-lg text-[var(--muted-foreground)] mb-6">
-                Travailler avec une agence digitale locale, c&apos;est gagner en
-                réactivité, en compréhension de votre marché et en simplicité de
-                collaboration.
-              </p>
-              <p className="text-body text-[var(--muted-foreground)]">
-                {city.cityReason}
-              </p>
+              <p className="text-body text-[var(--muted-foreground)]">{city.cityReason}</p>
             </div>
-
-            <div className="lg:col-span-7 space-y-4">
-              {REASONS.map((r) => (
-                <div key={r.title} className="editorial-note">
+            <ol className="city-reasons lg:col-span-7">
+              {REASONS.map((r, i) => (
+                <li key={r.title}>
+                  <span className="font-[family-name:var(--font-geist-mono)] text-xs text-[var(--accent)]">0{i + 1}</span>
                   <div>
-                    <h3 className="text-h4 mb-2">{r.title}</h3>
-                    <p className="text-body-sm text-[var(--muted-foreground)]">
-                      {r.description}
-                    </p>
+                    <h3 className="text-h4">{r.title}</h3>
+                    <p className="text-body-sm text-[var(--muted-foreground)] mt-2">{r.description}</p>
                   </div>
-                </div>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </Container>
       </section>
 
-      {/* SERVICES POUR LA VILLE */}
+      {/* SERVICES */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="max-w-3xl mb-16">
-            <Eyebrow number="02" className="mb-6">Nos services {city.cityArticle}</Eyebrow>
-            <h2 className="text-h1">
-              Ce que nous <em>construisons</em> pour vous.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {LOCAL_SERVICES.map((s) => {
-              return (
-                <Link
-                  key={s.title}
-                  href={s.href}
-                  className="editorial-note editorial-note-link group"
-                >
-                  <h3 className="text-h3 mb-3">{s.title}</h3>
-                  <p className="text-body text-[var(--muted-foreground)] mb-4">
-                    {s.description}
-                  </p>
-                  <span className="inline-flex items-center gap-2 text-body-sm font-medium text-[var(--accent)]">
-                    En savoir plus
-                    <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
+          <Eyebrow number="02" className="mb-6">Nos services {city.cityArticle}</Eyebrow>
+          <h2 className="text-h1 mb-12">
+            Ce que nous <em>construisons</em> pour vous.
+          </h2>
+          <ul className="city-services">
+            {LOCAL_SERVICES.map((s) => (
+              <li key={s.title}>
+                <Link href={s.href} className="city-service group">
+                  <span className="text-h3">{s.title}</span>
+                  <span className="text-body-sm text-[var(--muted-foreground)]">{s.description}</span>
+                  <ArrowRight className="size-5 text-[var(--accent)] transition-transform group-hover:translate-x-1" />
                 </Link>
-              );
-            })}
-          </div>
-        </Container>
-      </section>
-
-      {/* SECTEURS */}
-      <section className="section-y border-t border-[var(--border)] relative overflow-hidden">
-        <div className="absolute inset-0 bg-dot opacity-40" aria-hidden />
-        <Container className="relative">
-          <div className="max-w-3xl mb-16">
-            <Eyebrow number="03" className="mb-6">Secteurs accompagnés</Eyebrow>
-            <h2 className="text-h1">
-              Des entreprises <em>{city.adjectivePlural}</em> de tous secteurs.
-            </h2>
-            <p className="text-body text-[var(--muted-foreground)] mt-6">
-              {city.name} concentre un tissu économique varié. Voici les secteurs
-              que nous avons accompagnés ou que nous savons cadrer.
-            </p>
-          </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {city.topSectors.map((sector) => (
-              <div
-                key={sector}
-                className="compact-note"
-              >
-                <p className="text-body-sm font-medium">{sector}</p>
-              </div>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
 
-      {/* INFOS PRATIQUES */}
+      {/* SECTORS + PRACTICAL: tags beside a business card */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div className="editorial-note">
-              <p className="text-eyebrow mb-2">Localisation</p>
-              <p className="text-h4 mb-1">
-                {city.name} {city.postalCode}
-              </p>
-              <p className="text-body-sm text-[var(--muted-foreground)]">
-                {city.department} · {city.metropole}
-              </p>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <Eyebrow number="03" className="mb-6">Secteurs</Eyebrow>
+              <h2 className="text-h2">
+                Des entreprises <em>{city.adjectivePlural}</em> de tous secteurs.
+              </h2>
+              <ul className="city-tags mt-8">
+                {city.topSectors.map((sector) => (
+                  <li key={sector}>{sector}</li>
+                ))}
+              </ul>
             </div>
-
-            <div className="editorial-note">
-              <p className="text-eyebrow mb-2">Zone d&apos;intervention</p>
-              <p className="text-h4 mb-1">Toute la {city.region}</p>
-              <p className="text-body-sm text-[var(--muted-foreground)]">
-                Rouen, Le Havre, Caen, Évreux, Dieppe - et France entière à
-                distance.
-              </p>
-            </div>
-
-            <div className="editorial-note">
-              <p className="text-eyebrow mb-2">CCI référente</p>
-              <p className="text-h4 mb-1">{city.cciName}</p>
-              <p className="text-body-sm text-[var(--muted-foreground)]">
-                Krealabs est inscrit auprès de la {city.cciName}.
-              </p>
-            </div>
+            <aside className="city-card lg:col-span-5">
+              <p className="text-caption">En pratique</p>
+              <dl>
+                <div>
+                  <dt>Localisation</dt>
+                  <dd>
+                    {city.name} {city.postalCode} · {city.metropole}
+                  </dd>
+                </div>
+                <div>
+                  <dt>Rendez-vous</dt>
+                  <dd>{city.distanceFromRouen === 0 ? "À Rouen, en visio ou chez vous" : `${city.cityArticle.replace(/^à /, "À ").replace(/^au /, "Au ")}, en visio ou à Rouen`}</dd>
+                </div>
+                <div>
+                  <dt>CCI référente</dt>
+                  <dd>{city.cciName}</dd>
+                </div>
+                <div>
+                  <dt>Réponse</dt>
+                  <dd>Sous 24h ouvrées</dd>
+                </div>
+              </dl>
+            </aside>
           </div>
         </Container>
       </section>
