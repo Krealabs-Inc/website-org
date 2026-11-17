@@ -1,12 +1,12 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowRight, CheckCircle2, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Badge } from "@/components/ui/badge";
+import { SectorSitemap } from "@/components/local/sector-sitemap";
 import { ServiceCta } from "@/components/services/service-cta";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { FAQSchema } from "@/components/seo/faq-schema";
@@ -70,158 +70,112 @@ export default async function AgenceWebRouenSecteurPage({
         }))}
       />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
-        <div
-          aria-hidden
-          className="absolute -top-32 left-1/3 size-[600px] rounded-full blur-[120px] opacity-20"
-          style={{ background: "radial-gradient(circle, var(--accent), transparent 70%)" }}
-        />
-
-        <Container className="relative">
-          <div className="max-w-4xl">
-            <Badge className="mb-6 inline-flex items-center gap-2">
-              <MapPin className="size-3" />
-              Rouen 76000 · {data.namePlural}
-            </Badge>
-            <h1 className="text-display">
-              Agence web pour <em>{data.namePlural}</em>
-              <br />
-              à Rouen et en Normandie.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-3xl">
-              {data.intro}
-            </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Button size="lg" asChild>
-                <Link href="/contact">
-                  Démarrer un projet
-                  <ArrowRight />
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/agence-web-rouen">
-                  Voir tous nos services Rouen
-                </Link>
-              </Button>
+      {/* HERO: the site we would build for this trade */}
+      <section className="pt-32 pb-20 md:pt-40 md:pb-28">
+        <Container>
+          <Link
+            href="/agence-web-rouen"
+            className="inline-flex items-center gap-2 text-body-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors mb-10"
+          >
+            <ArrowLeft className="size-3.5" />
+            Agence web à Rouen
+          </Link>
+          <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <Eyebrow dot className="mb-8">Rouen 76000 · {data.namePlural}</Eyebrow>
+              <h1 className="text-h1 md:text-display">
+                Agence web pour <em>{data.namePlural}</em> à Rouen et en Normandie.
+              </h1>
+              <p className="text-body-lg text-[var(--muted-foreground)] mt-8">{data.intro}</p>
+              <div className="mt-10">
+                <Button size="lg" asChild>
+                  <Link href="/contact">
+                    Parler de mon projet
+                    <ArrowRight />
+                  </Link>
+                </Button>
+              </div>
+            </div>
+            <div className="lg:col-span-5">
+              <SectorSitemap name={data.name} pages={data.features.map((f) => f.title)} />
             </div>
           </div>
         </Container>
       </section>
 
-      {/* CHALLENGES */}
+      {/* CHALLENGES: cards to swipe through */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="max-w-3xl mb-16">
-            <Eyebrow number="01" className="mb-6">
-              Enjeux spécifiques au secteur
-            </Eyebrow>
-            <h2 className="text-h1">
-              Les défis web propres aux <em>{data.namePlural}</em>.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
-            {data.challenges.map((c) => (
-              <div
-                key={c.title}
-                className="bg-[var(--background)] p-8 md:p-10"
-              >
-                <h3 className="text-h3 mb-3">{c.title}</h3>
-                <p className="text-body text-[var(--muted-foreground)]">
-                  {c.description}
-                </p>
-              </div>
-            ))}
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <Eyebrow number="01" className="mb-6">Vos enjeux</Eyebrow>
+              <h2 className="text-h1">
+                Ce qui compte pour les <em>{data.namePlural}</em>.
+              </h2>
+            </div>
+            <p className="text-caption">Faites défiler →</p>
           </div>
         </Container>
+        <ol className="sector-swipe" tabIndex={0} aria-label="Enjeux du secteur">
+          {data.challenges.map((c, i) => (
+            <li key={c.title}>
+              <span className="font-[family-name:var(--font-geist-mono)] text-xs text-[var(--accent)]">Enjeu 0{i + 1}</span>
+              <h3 className="text-h3 mt-4">{c.title}</h3>
+              <p className="text-body text-[var(--muted-foreground)] mt-4">{c.description}</p>
+            </li>
+          ))}
+        </ol>
       </section>
 
-      {/* FEATURES */}
+      {/* FEATURES: the pages of the plan, explained */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="max-w-3xl mb-16">
-            <Eyebrow number="02" className="mb-6">
-              Ce que nous proposons
-            </Eyebrow>
-            <h2 className="text-h1">
-              Une <em>plateforme web</em> adaptée à votre métier.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
-            {data.features.map((f) => (
-              <div
-                key={f.title}
-                className="bg-[var(--background)] p-8 md:p-10 grid grid-cols-[auto_1fr] gap-6 items-start"
-              >
-                <CheckCircle2 className="size-5 text-[var(--accent)] mt-1 shrink-0" />
-                <div>
-                  <h3 className="text-h4 mb-2">{f.title}</h3>
-                  <p className="text-body-sm text-[var(--muted-foreground)]">
-                    {f.description}
-                  </p>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-4">
+              <Eyebrow number="02" className="mb-6">Ce que nous proposons</Eyebrow>
+              <h2 className="text-h1">
+                Un site <em>pensé pour votre métier</em>.
+              </h2>
+            </div>
+            <dl className="sector-features lg:col-span-8">
+              {data.features.map((f) => (
+                <div key={f.title}>
+                  <dt className="text-h4">{f.title}</dt>
+                  <dd className="text-body-sm text-[var(--muted-foreground)]">{f.description}</dd>
                 </div>
-              </div>
-            ))}
+              ))}
+            </dl>
           </div>
         </Container>
       </section>
 
-      {/* STACK RECOMMANDÉE */}
-      <section className="section-y border-t border-[var(--border)] relative overflow-hidden">
-        <div className="absolute inset-0 bg-dot opacity-30" aria-hidden />
-        <Container className="relative">
-          <div className="max-w-3xl">
-            <Eyebrow number="03" className="mb-6">
-              Stack technique recommandée
-            </Eyebrow>
-            <h2 className="text-h2 mb-6">
-              Le bon outil pour les <em>{data.namePlural}</em>.
-            </h2>
-            <p className="text-body-lg text-[var(--muted-foreground)]">
-              {data.recommendedStack}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/services/wordpress"
-                className="text-body-sm text-[var(--accent)] hover:underline"
-              >
-                → Notre offre WordPress
-              </Link>
-              <Link
-                href="/services/developpement-web"
-                className="text-body-sm text-[var(--accent)] hover:underline"
-              >
-                → Développement custom
-              </Link>
-              <Link
-                href="/services/performance-seo"
-                className="text-body-sm text-[var(--accent)] hover:underline"
-              >
-                → Performance &amp; SEO
-              </Link>
-            </div>
+      {/* STACK: a recommendation, written as one */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container size="narrow">
+          <Eyebrow number="03" className="mb-6">Notre recommandation</Eyebrow>
+          <blockquote className="sector-quote">{data.recommendedStack}</blockquote>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link href="/services/wordpress" className="contact-pill hover:text-[var(--foreground)]">Notre offre WordPress</Link>
+            <Link href="/services/developpement-web" className="contact-pill hover:text-[var(--foreground)]">Développement sur mesure</Link>
+            <Link href="/services/performance-seo" className="contact-pill hover:text-[var(--foreground)]">Performance &amp; SEO</Link>
           </div>
         </Container>
       </section>
 
       {/* FAQ */}
       <section className="section-y border-t border-[var(--border)]">
-        <Container>
-          <div className="max-w-3xl mb-12">
-            <Eyebrow number="04" className="mb-6">
-              Questions fréquentes
-            </Eyebrow>
-            <h2 className="text-h1">FAQ {data.name} à Rouen.</h2>
-          </div>
-          <div className="max-w-3xl space-y-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+        <Container size="narrow">
+          <Eyebrow number="04" className="mb-6">Questions fréquentes</Eyebrow>
+          <h2 className="text-h1 mb-10">Vos questions, {data.namePlural}.</h2>
+          <div className="border-y border-[var(--border)]">
             {data.faq.map((q) => (
-              <div key={q.question} className="bg-[var(--background)] p-8">
-                <h3 className="text-h4 mb-3">{q.question}</h3>
-                <p className="text-body text-[var(--muted-foreground)]">
-                  {q.answer}
-                </p>
-              </div>
+              <details key={q.question} className="group border-b border-[var(--border)] last:border-b-0 py-5">
+                <summary className="flex items-center justify-between gap-4 cursor-pointer list-none text-body font-medium [&::-webkit-details-marker]:hidden">
+                  {q.question}
+                  <span aria-hidden className="shrink-0 text-h4 leading-none text-[var(--accent)] transition-transform group-open:rotate-45">+</span>
+                </summary>
+                <p className="text-body-sm text-[var(--muted-foreground)] mt-3 leading-relaxed">{q.answer}</p>
+              </details>
             ))}
           </div>
         </Container>
