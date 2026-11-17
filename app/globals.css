@@ -1619,6 +1619,31 @@ fieldset:disabled .calc-option { cursor: default; opacity: 0.5; }
 .legal-tabs a.is-current { background: var(--surface); color: var(--foreground); }
 .legal-doc h2 { padding-top: 14px; border-top: 1px solid var(--border); }
 
+/* ===== Team profiles: an interview spread (app/equipe/[slug]) ===== */
+.profile-head { display: grid; gap: 10px; padding-bottom: 20px; border-bottom: 1px solid var(--border-strong); }
+.profile-name { font-size: clamp(3rem, 10vw, 8.5rem); font-weight: 600; line-height: 0.88; letter-spacing: -0.055em; }
+.profile-role { display: flex; justify-content: space-between; gap: 16px; font-size: 15px; color: var(--accent); }
+.profile-role span { font-family: var(--font-geist-mono), monospace; font-size: 12px; color: var(--subtle-foreground); }
+.profile-spread { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; margin-top: 40px; }
+@media (min-width: 1024px) { .profile-spread { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr); gap: 64px; align-items: start; } }
+.profile-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--surface); filter: grayscale(1) contrast(0.95); }
+.profile-quote { font-family: var(--font-instrument-serif), serif; font-style: italic; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.08; letter-spacing: -0.01em; }
+.profile-bio { margin-top: 32px; font-size: 1.1rem; line-height: 1.75; color: var(--muted-foreground); }
+@media (min-width: 1280px) { .profile-bio { columns: 2; column-gap: 40px; } }
+.profile-link { font-size: 14px; color: var(--foreground); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--border-strong); }
+.profile-link:hover { color: var(--accent); text-decoration-color: var(--accent); }
+.profile-sheet { display: grid; border-top: 1px solid var(--border-strong); }
+.profile-sheet > div { display: grid; grid-template-columns: minmax(0, 1fr); gap: 6px; padding: 22px 0; border-bottom: 1px solid var(--border-strong); }
+@media (min-width: 768px) { .profile-sheet > div { grid-template-columns: 200px minmax(0, 1fr); gap: 32px; } }
+.profile-sheet dt { font-family: var(--font-geist-mono), monospace; font-size: 12px; color: var(--accent); }
+.profile-sheet dd { line-height: 1.6; }
+.profile-others { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+@media (min-width: 1024px) { .profile-others { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 960px; } }
+.profile-other { display: block; }
+.profile-other-photo { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; background: var(--surface); filter: grayscale(1); transition: filter 300ms ease-out; }
+.profile-other:hover .profile-other-photo { filter: grayscale(0.3); }
+.profile-other:hover .text-h4 { color: var(--accent); }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {
