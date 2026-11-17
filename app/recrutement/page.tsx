@@ -23,56 +23,47 @@ export const metadata: Metadata = {
 export default function RecrutementPage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
-        <Container className="relative">
-          <div className="max-w-4xl">
-            <Eyebrow dot className="mb-8">Recrutement · Rouen</Eyebrow>
-            <h1 className="text-display">
-              Aucun poste ouvert,
-              <br />
-              <em>pour le moment</em>.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              L’équipe est au complet aujourd’hui. Si vous développez, designez
-              ou démarrez dans le web et que notre façon de travailler vous
-              parle, vous pouvez tout de même nous écrire : votre message sera
-              lu.
-            </p>
-            <div className="mt-10 flex flex-wrap items-center gap-3">
-              <Button size="lg" asChild>
-                <a href="mailto:contact@krealabs.fr?subject=Candidature%20spontan%C3%A9e">
-                  Envoyer ma candidature spontanée
-                  <ArrowRight />
-                </a>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/equipe">Voir avec qui vous travailleriez</Link>
-              </Button>
+      {/* HERO: the honest count */}
+      <section className="pt-32 pb-20 md:pt-40">
+        <Container>
+          <div className="hire">
+            <div className="hire-count" aria-hidden>0</div>
+            <div>
+              <Eyebrow dot className="mb-6">Recrutement · Rouen</Eyebrow>
+              <h1 className="text-h1 md:text-display">
+                Aucun poste ouvert, <em>pour le moment</em>.
+              </h1>
+              <p className="text-body-lg text-[var(--muted-foreground)] mt-6 max-w-xl">
+                L’équipe est au complet aujourd’hui. Si vous développez, designez ou démarrez dans le web et que notre façon de travailler vous parle, écrivez-nous quand même : votre message sera lu.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <Button size="lg" asChild>
+                  <a href="mailto:contact@krealabs.fr?subject=Candidature%20spontan%C3%A9e">
+                    Envoyer ma candidature spontanée
+                    <ArrowRight />
+                  </a>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/equipe">Voir avec qui vous travailleriez</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* CE QUI VOUS ATTEND */}
+      {/* WHAT YOU WOULD FIND */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="max-w-3xl mb-16">
-            <Eyebrow className="mb-6">Le jour où un poste s’ouvrira</Eyebrow>
-            <h2 className="text-h1">
-              Ce que vous <em>trouverez</em> ici.
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <p className="text-caption mb-8">Le jour où un poste s’ouvrira, vous trouverez ici :</p>
+          <ul className="hire-points">
             {POINTS.map((point) => (
-              <div key={point.title} className="editorial-note">
-                <p className="text-eyebrow text-[var(--accent)] mb-4">{point.label}</p>
-                <h3 className="text-h4 mb-2">{point.title}</h3>
-                <p className="text-body-sm text-[var(--muted-foreground)]">{point.description}</p>
-              </div>
+              <li key={point.title}>
+                <p className="text-h3">{point.title}</p>
+                <p className="text-body text-[var(--muted-foreground)] mt-2">{point.description}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
 

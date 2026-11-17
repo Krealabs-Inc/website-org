@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 
 export const metadata: Metadata = {
@@ -298,7 +297,7 @@ const CHANGELOG: Entry[] = [
     highlights: ["Lancement de Krealabs"],
     items: [
       "Création de l'agence à Rouen par Maxime Dubois",
-      "Choix éditorial : faire du web qui dure, sans intermédiaires, équipe à taille humaine",
+      "Choix éditorial : faire du web qui dure, sans intermédiaires, avec un interlocuteur direct",
       "Premier site krealabs.fr (WordPress, refondu plus tard)",
     ],
   },
@@ -313,76 +312,48 @@ const typeMeta: Record<EntryType, { label: string; variant: "default" | "seconda
 export default function ChangelogPage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-40" aria-hidden />
-        <Container className="relative">
-          <div className="max-w-3xl">
-            <Eyebrow dot className="mb-8">Journal des versions</Eyebrow>
-            <h1 className="text-display">
-              Ce qui <em>évolue</em>,
-              <br />
-              ce qui s&apos;améliore.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              L&apos;historique des étapes de Krealabs depuis le lancement en
-              2020 : refontes, migrations stack, livraisons majeures, évolutions
-              produit du site. {CHANGELOG.length} entrées et ça continue.
-            </p>
-          </div>
+      {/* HERO: a terminal prompt */}
+      <section className="pt-32 pb-12 md:pt-40">
+        <Container size="narrow">
+          <Eyebrow dot className="mb-8">Journal des versions</Eyebrow>
+          <h1 className="text-h1 md:text-display">
+            Ce qui <em>évolue</em>, version après version.
+          </h1>
+          <p className="text-body-lg text-[var(--muted-foreground)] mt-8">
+            L’historique de Krealabs depuis 2020 : lancements, migrations techniques, livraisons et évolutions du site. {CHANGELOG.length} versions.
+          </p>
         </Container>
       </section>
 
-      {/* ENTRIES */}
-      <section className="section-y border-t border-[var(--border)]">
+      {/* LOG: like a git history, newest first */}
+      <section className="pb-24">
         <Container size="narrow">
-          <ol className="relative space-y-12">
-            <div
-              aria-hidden
-              className="absolute left-[0.625rem] top-3 bottom-3 w-px bg-[var(--border)]"
-            />
-            {CHANGELOG.map((entry) => {
-              const meta = typeMeta[entry.type];
-              return (
-                <li key={entry.version} className="relative pl-10">
-                  <span
-                    className="absolute left-0 top-2 size-5 rounded-full bg-[var(--background)] border border-[var(--border-strong)] flex items-center justify-center"
-                  >
-                    <span className="size-2 rounded-full bg-[var(--accent)]" />
-                  </span>
-
-                  <div className="flex flex-wrap items-center gap-3 mb-4">
-                    <h2 className="text-h3">
-                      v{entry.version}
-                    </h2>
-                    <span className="text-caption">{entry.date}</span>
-                    <Badge variant={meta.variant}>{meta.label}</Badge>
-                  </div>
-
+          <div className="gitlog">
+            <p className="gitlog-cmd">
+              <span>$</span> git log --graph krealabs
+            </p>
+            <ol>
+              {CHANGELOG.map((entry, i) => (
+                <li key={entry.version} className={`gitlog-entry is-${entry.type}`}>
+                  <span className="gitlog-node" aria-hidden />
+                  <p className="gitlog-head">
+                    <span className="gitlog-tag">v{entry.version}</span>
+                    {i === 0 && <span className="gitlog-head-ref">HEAD</span>}
+                    <span className="gitlog-date">{entry.date}</span>
+                    <span className="gitlog-type">{typeMeta[entry.type].label}</span>
+                  </p>
                   {entry.highlights && entry.highlights.length > 0 && (
-                    <div className="mb-4 p-4 rounded-[var(--radius)] border border-[var(--accent-subtle)] bg-[var(--accent-subtle)]/30">
-                      <ul className="space-y-1">
-                        {entry.highlights.map((h, i) => (
-                          <li key={i} className="text-body-sm font-medium text-[var(--accent)]">
-                            {h}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                    <h2 className="gitlog-title">{entry.highlights.join(" · ")}</h2>
                   )}
-
-                  <ul className="space-y-2">
-                    {entry.items.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-body-sm text-[var(--muted-foreground)]">
-                        <span className="mt-2 size-1 rounded-full bg-[var(--subtle-foreground)] shrink-0" />
-                        <span>{item}</span>
-                      </li>
+                  <ul className="gitlog-items">
+                    {entry.items.map((item, k) => (
+                      <li key={k}>{item}</li>
                     ))}
                   </ul>
                 </li>
-              );
-            })}
-          </ol>
+              ))}
+            </ol>
+          </div>
         </Container>
       </section>
 

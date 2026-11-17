@@ -1568,6 +1568,50 @@ fieldset:disabled .calc-option { cursor: default; opacity: 0.5; }
 .vs-row:hover :is(.vs-row-a, .vs-row-b) { color: var(--accent); }
 .vs-row-desc { grid-column: 1 / -1; max-width: 42rem; margin: 8px auto 0; text-align: center; font-size: 14px; color: var(--muted-foreground); }
 
+/* ===== FAQ: search first (components/faq) ===== */
+.faq-search { display: flex; align-items: center; gap: 16px; padding: 20px 24px; border: 1px solid var(--border-strong); border-radius: 20px; background: var(--surface); transition: border-color 150ms ease-out, box-shadow 150ms ease-out; }
+.faq-search:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-subtle); }
+.faq-search input { flex: 1; min-width: 0; background: none; border: 0; outline: none; font-size: clamp(1.1rem, 2.4vw, 1.5rem); color: var(--foreground); }
+.faq-search input::placeholder { color: var(--subtle-foreground); }
+.faq-chip { padding: 7px 14px; border: 1px solid var(--border-strong); border-radius: 99px; font-size: 13px; color: var(--muted-foreground); transition: color 150ms ease-out, border-color 150ms ease-out, background-color 150ms ease-out; }
+.faq-chip:hover { color: var(--foreground); }
+.faq-chip.is-on { border-color: var(--accent); background: var(--accent-subtle); color: var(--foreground); }
+.faq-list { border-top: 1px solid var(--border-strong); }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-item summary { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding: 18px 0; cursor: pointer; list-style: none; font-size: 1.15rem; font-weight: 500; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-plus { color: var(--accent); font-size: 1.4rem; line-height: 1; transition: transform 180ms ease-out; }
+.faq-item[open] .faq-plus { transform: rotate(45deg); }
+.faq-item > p { padding: 0 32px 20px 0; color: var(--muted-foreground); line-height: 1.7; }
+.faq-item mark { background: var(--accent-subtle); color: var(--foreground); border-radius: 3px; padding: 0 2px; }
+.faq-empty { margin-top: 40px; padding: 36px; border: 1px dashed var(--border-strong); border-radius: 20px; }
+
+/* ===== Changelog: a git history (app/changelog) ===== */
+.gitlog { padding: 28px; border: 1px solid var(--border-strong); border-radius: 20px; background: #0d0d10; font-family: var(--font-geist-mono), monospace; }
+.gitlog-cmd { margin-bottom: 24px; font-size: 13px; color: var(--muted-foreground); }
+.gitlog-cmd span { color: #7fb59a; margin-right: 6px; }
+.gitlog ol { position: relative; }
+.gitlog ol::before { content: ""; position: absolute; left: 6px; top: 8px; bottom: 8px; width: 2px; background: var(--border-strong); }
+.gitlog-entry { position: relative; padding: 0 0 30px 32px; }
+.gitlog-node { position: absolute; left: 0; top: 4px; width: 14px; height: 14px; border: 2px solid var(--accent); border-radius: 50%; background: #0d0d10; }
+.gitlog-entry.is-major .gitlog-node { background: var(--accent); box-shadow: 0 0 0 4px var(--accent-subtle); }
+.gitlog-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 13px; }
+.gitlog-tag { color: #e3c07a; }
+.gitlog-head-ref { padding: 1px 8px; border-radius: 99px; background: rgba(127, 181, 154, 0.15); color: #7fb59a; font-size: 11px; }
+.gitlog-date { color: var(--subtle-foreground); }
+.gitlog-type { color: var(--accent); }
+.gitlog-title { margin-top: 8px; font-family: var(--font-switzer, inherit), sans-serif; font-size: 1.15rem; font-weight: 600; color: var(--foreground); }
+.gitlog-items { margin-top: 10px; display: grid; gap: 4px; font-size: 13px; color: var(--muted-foreground); }
+.gitlog-items li::before { content: "+ "; color: #7fb59a; }
+
+/* ===== Recrutement (app/recrutement) ===== */
+.hire { display: grid; grid-template-columns: minmax(0, 1fr); gap: 24px; align-items: center; }
+@media (min-width: 1024px) { .hire { grid-template-columns: auto minmax(0, 1fr); gap: 64px; } }
+.hire-count { font-size: clamp(10rem, 28vw, 22rem); font-weight: 700; line-height: 0.8; letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 2px var(--accent); }
+.hire-points { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 40px; border-top: 1px solid var(--border-strong); }
+@media (min-width: 768px) { .hire-points { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.hire-points li { padding: 28px 0; border-bottom: 1px solid var(--border-strong); }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {

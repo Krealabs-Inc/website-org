@@ -1,14 +1,9 @@
 import { Metadata } from "next";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 import { FAQSchema } from "@/components/seo/faq-schema";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
+import { FaqSearch } from "@/components/faq/faq-search";
 
 export const metadata: Metadata = {
   title: "FAQ - Questions fréquentes",
@@ -115,50 +110,13 @@ export default function FaqPage() {
       <FAQSchema items={allItems} speakable />
 
       {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-40" aria-hidden />
-        <Container className="relative">
-          <div className="max-w-3xl">
-            <Eyebrow dot className="mb-8">Questions fréquentes</Eyebrow>
-            <h1 className="text-display">
-              Tout ce qu'il faut <em>savoir</em>.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Vos questions les plus courantes sur notre méthode, nos délais,
-              notre stack technique et notre façon de travailler.
-            </p>
-          </div>
-        </Container>
-      </section>
-
-      {/* FAQ */}
-      <section className="border-t border-[var(--border)]">
+      <section className="pt-32 pb-24 md:pt-40">
         <Container size="narrow">
-          <div className="py-16 md:py-24 space-y-16">
-            {FAQ_GROUPS.map((group, gi) => (
-              <div key={group.title}>
-                <Eyebrow number={String(gi + 1).padStart(2, "0")} className="mb-6">
-                  {group.title}
-                </Eyebrow>
-                <Accordion type="single" collapsible className="border-t border-[var(--border-strong)]">
-                  {group.items.map((item, i) => (
-                    <AccordionItem
-                      key={`${gi}-${i}`}
-                      value={`item-${gi}-${i}`}
-                      className="editorial-question px-1"
-                    >
-                      <AccordionTrigger className="text-left text-h4 hover:no-underline py-5">
-                        {item.question}
-                      </AccordionTrigger>
-                      <AccordionContent className="text-body text-[var(--muted-foreground)] pb-5 pr-8 leading-relaxed">
-                        {item.answer}
-                      </AccordionContent>
-                    </AccordionItem>
-                  ))}
-                </Accordion>
-              </div>
-            ))}
-          </div>
+          <Eyebrow dot className="mb-8">Questions fréquentes</Eyebrow>
+          <h1 className="text-h1 md:text-display mb-10">
+            Votre question a sûrement <em>sa réponse</em>.
+          </h1>
+          <FaqSearch groups={FAQ_GROUPS} />
         </Container>
       </section>
 
