@@ -1530,6 +1530,44 @@ fieldset:disabled .calc-option { cursor: default; opacity: 0.5; }
 .entry-see a { font-family: var(--font-instrument-serif), serif; font-style: italic; font-size: 1.3rem; color: var(--accent); }
 .entry-see a:hover { text-decoration: underline; text-underline-offset: 4px; }
 
+/* ===== Comparateur: face to face (app/comparateur) ===== */
+.vs-split { position: relative; display: grid; grid-template-columns: 1fr 1fr; border-block: 1px solid var(--border-strong); }
+.vs-side { padding: 48px clamp(16px, 5vw, 72px); }
+.vs-side.is-a { background: var(--surface); }
+.vs-side.is-b { text-align: right; }
+.vs-name { margin-top: 8px; font-size: clamp(2.2rem, 7vw, 5.5rem); font-weight: 600; line-height: 0.95; letter-spacing: -0.04em; overflow-wrap: anywhere; }
+.vs-score { margin-top: 28px; font-family: var(--font-geist-mono), monospace; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; color: var(--accent); }
+.vs-seam { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 64px; height: 64px; margin: -32px 0 0 -32px; border: 1px solid var(--border-strong); border-radius: 50%; background: var(--background); font-family: var(--font-instrument-serif), serif; font-style: italic; font-size: 1.6rem; color: var(--accent); }
+.duels { border-top: 1px solid var(--border-strong); }
+.duel { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 26px 0; border-bottom: 1px solid var(--border-strong); }
+@media (min-width: 1024px) { .duel { grid-template-columns: minmax(0, 1fr) 260px minmax(0, 1fr); gap: 32px; align-items: center; } .duel-b { text-align: right; } }
+.duel-a, .duel-b { font-size: 15px; color: var(--muted-foreground); transition: color 200ms ease-out; }
+.duel.is-a .duel-a, .duel.is-b .duel-b { color: var(--foreground); }
+.duel-mid { text-align: center; }
+.duel-label { font-weight: 600; }
+.duel-track { position: relative; display: block; height: 2px; margin: 14px 0 10px; background: var(--border-strong); }
+.duel-track::before { content: ""; position: absolute; left: 50%; top: -5px; width: 1px; height: 12px; background: var(--subtle-foreground); }
+.duel-dot { position: absolute; top: 50%; left: 50%; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; background: var(--subtle-foreground); }
+.duel.is-a .duel-dot { left: 12%; background: var(--accent); }
+.duel.is-b .duel-dot { left: 88%; background: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .duel .duel-dot { transition: left 700ms cubic-bezier(0.23, 1, 0.32, 1); }
+  html.has-scroll-fx .duel:not(.is-inview) .duel-dot { left: 50%; }
+}
+.duel-verdict { font-family: var(--font-geist-mono), monospace; font-size: 11px; color: var(--accent); }
+.duel.is-tie .duel-verdict { color: var(--subtle-foreground); }
+.vs-cases { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 12px; }
+@media (min-width: 768px) { .vs-cases { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); } }
+.vs-cases li { padding: 26px; border: 1px solid var(--border-strong); border-radius: 20px; }
+.vs-pick { margin-top: 18px; font-family: var(--font-instrument-serif), serif; font-style: italic; font-size: 1.8rem; color: var(--accent); }
+.vs-list { border-top: 1px solid var(--border-strong); }
+.vs-row { display: grid; grid-template-columns: 1fr auto 1fr; align-items: baseline; gap: 4px 20px; padding: 30px 0; border-bottom: 1px solid var(--border-strong); }
+.vs-row-a, .vs-row-b { font-size: clamp(1.6rem, 4vw, 3rem); font-weight: 600; letter-spacing: -0.03em; transition: color 200ms ease-out; }
+.vs-row-a { text-align: right; }
+.vs-row-mid { font-family: var(--font-instrument-serif), serif; font-style: italic; font-size: 1.4rem; color: var(--accent); }
+.vs-row:hover :is(.vs-row-a, .vs-row-b) { color: var(--accent); }
+.vs-row-desc { grid-column: 1 / -1; max-width: 42rem; margin: 8px auto 0; text-align: center; font-size: 14px; color: var(--muted-foreground); }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {

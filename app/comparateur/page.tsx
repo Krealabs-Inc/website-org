@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -47,44 +46,24 @@ export default function ComparatorIndexPage() {
         </Container>
       </section>
 
-      <section className="border-t border-[var(--border)] py-16 md:py-24">
+      {/* MATCHUPS: each comparison as a face-off */}
+      <section className="border-t border-[var(--border)] pb-24">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius-lg)] overflow-hidden">
+          <ul className="vs-list">
             {COMPARATOR_SLUGS.map((slug) => {
               const comp = COMPARATORS[slug];
               return (
-                <Link
-                  key={slug}
-                  href={`/comparateur/${slug}`}
-                  className="group bg-[var(--background)] hover:bg-[var(--surface)] p-8 md:p-10 flex flex-col gap-6 transition-colors"
-                >
-                  <p className="text-eyebrow text-[var(--accent)]">
-                    Comparateur
-                  </p>
-                  <div>
-                    <h2 className="text-h2 mb-2">
-                      {comp.a.name} <em>vs</em> {comp.b.name}
-                    </h2>
-                    <p className="text-body text-[var(--muted-foreground)]">
-                      {comp.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-wrap gap-3 mt-auto">
-                    <span className="text-caption px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--surface)]">
-                      {comp.a.tagline}
-                    </span>
-                    <span className="text-caption px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--surface)]">
-                      {comp.b.tagline}
-                    </span>
-                  </div>
-                  <span className="inline-flex items-center gap-2 text-body-sm font-medium text-[var(--accent)] mt-2">
-                    Lire le comparatif
-                    <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </Link>
+                <li key={slug}>
+                  <Link href={`/comparateur/${slug}`} className="vs-row group">
+                    <span className="vs-row-a">{comp.a.name}</span>
+                    <span className="vs-row-mid">vs</span>
+                    <span className="vs-row-b">{comp.b.name}</span>
+                    <span className="vs-row-desc">{comp.description}</span>
+                  </Link>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </Container>
       </section>
 

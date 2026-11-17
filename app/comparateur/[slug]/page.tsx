@@ -1,12 +1,11 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, ArrowRight, CheckCircle2, Minus } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { FAQSchema } from "@/components/seo/faq-schema";
@@ -50,6 +49,11 @@ export default async function ComparatorPage({ params }: PageProps) {
   const { slug } = await params;
   const data: ComparatorData | undefined = COMPARATORS[slug];
   if (!data) notFound();
+  const score = {
+    a: data.criteria.filter((c) => c.winner === "a").length,
+    b: data.criteria.filter((c) => c.winner === "b").length,
+    tie: data.criteria.filter((c) => !c.winner || c.winner === "tie").length,
+  };
 
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
@@ -62,206 +66,88 @@ export default async function ComparatorPage({ params }: PageProps) {
       />
       <FAQSchema items={data.faq} />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
-        <div
-          aria-hidden
-          className="absolute -top-32 left-1/3 size-[600px] rounded-full blur-[120px] opacity-20"
-          style={{
-            background:
-              "radial-gradient(circle, var(--accent), transparent 70%)",
-          }}
-        />
-
-        <Container className="relative">
+      {/* HERO: split screen, the two tools face to face */}
+      <section className="pt-28 md:pt-32">
+        <Container>
           <Link
-            href="/blog"
+            href="/comparateur"
             className="inline-flex items-center gap-2 text-body-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] mb-8 transition-colors"
           >
             <ArrowLeft className="size-4" />
-            Voir le blog
+            Tous les comparatifs
           </Link>
-
-          <div className="max-w-4xl">
-            <Eyebrow dot className="mb-6">
-              Comparateur · Choix techniques
-            </Eyebrow>
-            <h1 className="text-display">
-              <em>{data.a.name}</em>
-              <br />
-              <span className="text-[var(--muted-foreground)] text-display-sm align-middle">
-                vs
-              </span>
-              <br />
-              <em>{data.b.name}</em>
+        </Container>
+        <div className="vs-split">
+          <div className="vs-side is-a">
+            <p className="text-caption">A</p>
+            <h1 className="vs-name">
+              {data.a.name}
+              <span className="sr-only"> ou {data.b.name} : le comparatif</span>
             </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-3xl">
-              {data.intro}
-            </p>
+            <p className="text-body text-[var(--muted-foreground)] mt-3">{data.a.tagline}</p>
+            <p className="vs-score">{score.a}</p>
           </div>
-
-          {/* Cards des deux concurrents */}
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius-lg)] overflow-hidden">
-            <div className="bg-[var(--surface)] p-8">
-              <Badge className="mb-4">A</Badge>
-              <h2 className="text-h2 mb-2">{data.a.name}</h2>
-              <p className="text-body text-[var(--muted-foreground)]">
-                {data.a.tagline}
-              </p>
-            </div>
-            <div className="bg-[var(--background)] p-8">
-              <Badge variant="outline" className="mb-4">
-                B
-              </Badge>
-              <h2 className="text-h2 mb-2">{data.b.name}</h2>
-              <p className="text-body text-[var(--muted-foreground)]">
-                {data.b.tagline}
-              </p>
-            </div>
+          <span className="vs-seam" aria-hidden>vs</span>
+          <div className="vs-side is-b">
+            <p className="text-caption">B</p>
+            <p className="vs-name" aria-hidden>{data.b.name}</p>
+            <p className="text-body text-[var(--muted-foreground)] mt-3">{data.b.tagline}</p>
+            <p className="vs-score">{score.b}</p>
           </div>
+        </div>
+        <Container size="narrow">
+          <p className="text-caption text-center mt-4">
+            Critères gagnés sur {data.criteria.length}
+            {score.tie > 0 ? ` · ${score.tie} à égalité` : ""}
+          </p>
+          <p className="text-body-lg text-[var(--muted-foreground)] mt-10 text-center">{data.intro}</p>
         </Container>
       </section>
 
-      {/* TABLEAU COMPARATIF */}
-      <section className="section-y border-t border-[var(--border)]">
+      {/* DUELS: one row per criterion, the marker leans toward the winner */}
+      <section className="section-y">
         <Container>
-          <div className="max-w-3xl mb-12">
-            <Eyebrow number="01" className="mb-6">
-              Comparaison critère par critère
-            </Eyebrow>
-            <h2 className="text-h1">
-              {data.criteria.length} <em>critères</em> qui font la différence.
-            </h2>
-          </div>
-
-          <div className="rounded-[var(--radius-lg)] border border-[var(--border)] overflow-hidden">
-            {/* Header - desktop only */}
-            <div className="hidden md:grid grid-cols-[1fr_2fr_2fr_auto] bg-[var(--surface)] text-eyebrow border-b border-[var(--border)]">
-              <div className="px-6 py-4">Critère</div>
-              <div className="px-6 py-4 border-l border-[var(--border)]">
-                {data.a.name}
-              </div>
-              <div className="px-6 py-4 border-l border-[var(--border)]">
-                {data.b.name}
-              </div>
-              <div className="px-6 py-4 border-l border-[var(--border)] w-24 text-center">
-                Verdict
-              </div>
-            </div>
-            {data.criteria.map((c, i) => (
-              <div
-                key={c.label}
-                className={`border-b border-[var(--border)] md:grid md:grid-cols-[1fr_2fr_2fr_auto] ${
-                  i === data.criteria.length - 1 ? "border-b-0" : ""
-                }`}
-              >
-                {/* Label */}
-                <div className="px-5 py-4 md:px-6 md:py-5 text-body-sm font-semibold flex items-center justify-between gap-4 bg-[var(--surface)] md:bg-transparent border-b md:border-b-0 border-[var(--border)]">
-                  <span>{c.label}</span>
-                  {/* Verdict badge inline on mobile */}
-                  <span className="md:hidden shrink-0">
-                    {c.winner === "a" && (
-                      <span className="inline-flex items-center justify-center size-7 rounded-full bg-[var(--accent)] text-[#0a0a0a] text-body-sm font-bold">
-                        A
-                      </span>
-                    )}
-                    {c.winner === "b" && (
-                      <span className="inline-flex items-center justify-center size-7 rounded-full bg-[var(--accent)] text-[#0a0a0a] text-body-sm font-bold">
-                        B
-                      </span>
-                    )}
-                    {!c.winner && (
-                      <Minus className="size-4 text-[var(--muted-foreground)]" />
-                    )}
+          <Eyebrow number="01" className="mb-6">Critère par critère</Eyebrow>
+          <h2 className="text-h1 mb-12">
+            {data.criteria.length} <em>duels</em>.
+          </h2>
+          <ol className="duels">
+            {data.criteria.map((c) => (
+              <li key={c.label} data-scroll className={`duel is-${c.winner ?? "tie"}`}>
+                <p className="duel-a">{c.a}</p>
+                <div className="duel-mid">
+                  <p className="duel-label">{c.label}</p>
+                  <span className="duel-track" aria-hidden>
+                    <span className="duel-dot" />
                   </span>
+                  <p className="duel-verdict">
+                    {c.winner === "a" ? `Avantage ${data.a.name}` : c.winner === "b" ? `Avantage ${data.b.name}` : "Égalité"}
+                  </p>
                 </div>
-                {/* A */}
-                <div
-                  className={`px-5 py-4 md:px-6 md:py-5 text-body-sm text-[var(--muted-foreground)] md:border-l border-[var(--border)] ${
-                    c.winner === "a"
-                      ? "bg-[var(--accent-subtle)]/30"
-                      : ""
-                  }`}
-                >
-                  <span className="md:hidden inline-flex items-center justify-center size-5 rounded-full bg-[var(--border)] text-[var(--foreground)] text-caption font-bold mr-2 align-middle">
-                    A
-                  </span>
-                  {c.a}
-                </div>
-                {/* B */}
-                <div
-                  className={`px-5 py-4 md:px-6 md:py-5 text-body-sm text-[var(--muted-foreground)] md:border-l border-[var(--border)] border-t md:border-t-0 ${
-                    c.winner === "b"
-                      ? "bg-[var(--accent-subtle)]/30"
-                      : ""
-                  }`}
-                >
-                  <span className="md:hidden inline-flex items-center justify-center size-5 rounded-full bg-[var(--border)] text-[var(--foreground)] text-caption font-bold mr-2 align-middle">
-                    B
-                  </span>
-                  {c.b}
-                </div>
-                {/* Verdict - desktop only (mobile badge is inside label row) */}
-                <div className="hidden md:flex px-6 py-5 border-l border-[var(--border)] w-24 items-center justify-center">
-                  {c.winner === "a" && (
-                    <span className="inline-flex items-center justify-center size-7 rounded-full bg-[var(--accent)] text-[#0a0a0a] text-body-sm font-bold">
-                      A
-                    </span>
-                  )}
-                  {c.winner === "b" && (
-                    <span className="inline-flex items-center justify-center size-7 rounded-full bg-[var(--accent)] text-[#0a0a0a] text-body-sm font-bold">
-                      B
-                    </span>
-                  )}
-                  {!c.winner && (
-                    <Minus className="size-4 text-[var(--muted-foreground)]" />
-                  )}
-                </div>
-              </div>
+                <p className="duel-b">{c.b}</p>
+              </li>
             ))}
-          </div>
+          </ol>
         </Container>
       </section>
 
-      {/* USE CASES */}
+      {/* USE CASES: if you..., choose... */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="max-w-3xl mb-12">
-            <Eyebrow number="02" className="mb-6">
-              Use case par use case
-            </Eyebrow>
-            <h2 className="text-h1">
-              Quel choix selon <em>votre projet</em>.
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius-lg)] overflow-hidden">
-            {data.useCases.map((uc) => {
-              const winner =
-                uc.winner === "a" ? data.a.name : data.b.name;
-              return (
-                <div
-                  key={uc.label}
-                  className="bg-[var(--background)] p-8 flex flex-col"
-                >
-                  <div className="mb-4">
-                    <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[var(--accent-subtle)] text-[var(--accent)] text-caption font-medium">
-                      <CheckCircle2 className="size-3" />
-                      Choix : {winner}
-                    </span>
-                  </div>
-                  <h3 className="text-h3 mb-3">{uc.label}</h3>
-                  <p className="text-body-sm text-[var(--muted-foreground)] mb-4">
-                    {uc.description}
-                  </p>
-                  <p className="text-body-sm text-[var(--foreground)] flex-1">
-                    {uc.reasoning}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+          <Eyebrow number="02" className="mb-6">Selon votre projet</Eyebrow>
+          <ul className="vs-cases">
+            {data.useCases.map((uc) => (
+              <li key={uc.label}>
+                <p className="text-caption">Si votre projet est…</p>
+                <h3 className="text-h3 mt-2">{uc.label}</h3>
+                <p className="text-body-sm text-[var(--muted-foreground)] mt-2">{uc.description}</p>
+                <p className="vs-pick">
+                  → {uc.winner === "a" ? data.a.name : data.b.name}
+                </p>
+                <p className="text-body-sm mt-2">{uc.reasoning}</p>
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
 
@@ -282,7 +168,7 @@ export default async function ComparatorPage({ params }: PageProps) {
             <div className="mt-10 flex flex-wrap gap-4">
               <Button asChild size="lg">
                 <Link href="/contact">
-                  Discuter de votre projet
+                  Parler de mon projet
                   <ArrowRight />
                 </Link>
               </Button>
