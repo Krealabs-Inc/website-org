@@ -1656,6 +1656,29 @@ fieldset:disabled .calc-option { cursor: default; opacity: 0.5; }
   color: var(--foreground);
 }
 
+/* ===== Phone footer (components/navigation/footer, MobileFooter) ===== */
+.mfoot-title { font-size: 2.4rem; font-weight: 600; line-height: 1; letter-spacing: -0.04em; }
+.mfoot-title em { font-family: var(--font-instrument-serif), serif; font-weight: 400; color: var(--accent); }
+.mfoot-contact { display: grid; gap: 8px; margin-top: 24px; }
+.mfoot-contact a { display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 0 18px; border: 1px solid var(--border-strong); border-radius: 16px; background: var(--surface); font-weight: 500; transition: transform 120ms ease-out; }
+.mfoot-contact a svg { color: var(--accent); }
+.mfoot-contact a:active { transform: scale(0.98); }
+.mfoot-contact a.is-primary { border-color: var(--accent); background: var(--accent); color: var(--accent-foreground); }
+.mfoot-contact a.is-primary svg { color: var(--accent-foreground); }
+.mfoot-groups { margin-top: 36px; border-top: 1px solid var(--border-strong); }
+.mfoot-groups details { border-bottom: 1px solid var(--border-strong); }
+.mfoot-groups summary { display: flex; align-items: center; justify-content: space-between; min-height: 56px; font-size: 1.15rem; font-weight: 600; list-style: none; cursor: pointer; }
+.mfoot-groups summary::-webkit-details-marker { display: none; }
+.mfoot-groups summary span { font-size: 1.5rem; font-weight: 400; color: var(--accent); transition: transform 180ms ease-out; }
+.mfoot-groups details[open] summary span { transform: rotate(45deg); }
+.mfoot-groups ul { display: grid; padding-bottom: 12px; }
+.mfoot-groups li a { display: block; padding: 10px 0; color: var(--muted-foreground); }
+.mfoot-kreia { display: flex; align-items: center; gap: 14px; margin-top: 28px; padding: 16px 18px; border: 1px solid var(--accent); border-radius: 16px; background: var(--accent-subtle); }
+.mfoot-news { display: grid; gap: 12px; margin-top: 28px; }
+.mfoot-news em { font-family: var(--font-instrument-serif), serif; color: var(--accent); }
+.mfoot-bottom { margin-top: 36px; padding-top: 24px; border-top: 1px solid var(--border); }
+.mfoot-social { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--border-strong); border-radius: 12px; color: var(--muted-foreground); }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {

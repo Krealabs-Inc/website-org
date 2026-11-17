@@ -12,6 +12,7 @@ import { NewsletterSignup } from "@/components/newsletter/newsletter-signup";
 
 const nav = {
   services: [
+    { name: "WordPress", href: "/services/wordpress" },
     { name: "Développement web", href: "/services/developpement-web" },
     { name: "Applications mobile", href: "/services/applications-mobile" },
     { name: "Design UI/UX", href: "/services/design-uiux" },
@@ -139,8 +140,10 @@ export function Footer() {
         {/* Sparkles overlay (desktop + motion-safe) */}
         <FooterSparkles />
 
+        <MobileFooter year={year} />
+
         {/* Newsletter signup ribbon */}
-        <Container className="relative z-10 pt-10 md:pt-16 lg:pt-24">
+        <Container className="relative z-10 hidden md:block pt-10 md:pt-16 lg:pt-24">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 items-center pb-10 md:pb-16 border-b border-[var(--border)]">
             <div className="lg:col-span-5">
               <Eyebrow dot className="mb-4">Newsletter</Eyebrow>
@@ -149,8 +152,8 @@ export function Footer() {
                 <em>zéro spam</em>.
               </h3>
               <p className="text-body-sm md:text-body text-[var(--muted-foreground)] mt-4 max-w-md">
-                Articles, retours d&apos;expérience, études de cas chiffrées
-                sur les projets Krealabs. Désinscription en un clic.
+                Articles, retours d&apos;expérience et études de cas sur les
+                projets Krealabs. Désinscription en un clic.
               </p>
             </div>
             <div className="lg:col-span-7">
@@ -164,7 +167,7 @@ export function Footer() {
         </Container>
 
         {/* Main content - brand + link columns */}
-        <Container className="relative z-10 flex flex-1 flex-col justify-end">
+        <Container className="relative z-10 hidden md:flex flex-1 flex-col justify-end">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-12 lg:gap-8 py-10 md:py-16 lg:py-20">
             {/* Brand block */}
             <div className="lg:col-span-5 space-y-8">
@@ -310,7 +313,7 @@ export function Footer() {
         </Container>
 
         {/* Bottom bar */}
-        <div className="relative z-10 border-t border-[var(--border)]">
+        <div className="relative z-10 hidden md:block border-t border-[var(--border)]">
           <Container>
             <div className="py-5 md:py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-4">
               <p className="text-caption">
@@ -338,6 +341,102 @@ export function Footer() {
           </Container>
         </div>
       </footer>
+    </div>
+  );
+}
+
+/**
+ * Phone footer: contact first with large tap targets, the link groups as
+ * collapsible sections, then KréIA, a one-line newsletter and the legal
+ * line. The desktop footer above is unchanged.
+ */
+function MobileFooter({ year }: { year: number }) {
+  const groups = [
+    { title: "Services", links: nav.services },
+    { title: "Technologies", links: nav.technologies },
+    { title: "Agence", links: nav.agence },
+  ];
+  return (
+    <div className="relative z-10 md:hidden">
+      <Container className="pt-14 pb-8">
+        <p className="mfoot-title">
+          Un projet ? <em>Parlons-en.</em>
+        </p>
+        <div className="mfoot-contact">
+          <a href="mailto:contact@krealabs.fr">
+            <Mail className="size-5" />
+            <span>contact@krealabs.fr</span>
+            <ArrowUpRight className="size-4 ml-auto" />
+          </a>
+          <a href="tel:+33781758188">
+            <Phone className="size-5" />
+            <span>07 81 75 81 88</span>
+            <span className="ml-auto text-caption">lun–ven 9h–18h</span>
+          </a>
+          <Link href="/contact" className="is-primary">
+            <span>Parler de mon projet</span>
+            <ArrowUpRight className="size-4 ml-auto" />
+          </Link>
+        </div>
+
+        <nav className="mfoot-groups" aria-label="Plan du site">
+          {groups.map((g) => (
+            <details key={g.title}>
+              <summary>
+                {g.title}
+                <span aria-hidden>+</span>
+              </summary>
+              <ul>
+                {g.links.map((l) => (
+                  <li key={l.href}>
+                    <Link href={l.href}>{l.name}</Link>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ))}
+        </nav>
+
+        <a href="https://kreia.krealabs.fr" target="_blank" rel="noopener noreferrer" className="mfoot-kreia">
+          <span className="kreia-spark" aria-hidden />
+          <span>
+            <span className="block font-semibold">KréIA</span>
+            <span className="block text-body-sm text-[var(--muted-foreground)]">IA locale pour cabinets comptables et d’avocats</span>
+          </span>
+          <ArrowUpRight className="size-4 ml-auto shrink-0" />
+          <span className="sr-only"> (nouvel onglet)</span>
+        </a>
+
+        <div className="mfoot-news">
+          <p className="font-medium">
+            1 mail par mois, <em>zéro spam</em>.
+          </p>
+          <NewsletterSignup source="footer-mobile" variant="compact" />
+        </div>
+
+        <div className="mfoot-bottom">
+          <div className="flex items-center justify-between">
+            <Link href="/" aria-label="Krealabs - Accueil">
+              <Image src="/logo.png" alt="Krealabs" width={139} height={87} className="h-6 w-auto dark:invert-0 invert" />
+            </Link>
+            <div className="flex gap-2">
+              {social.map((s) => (
+                <a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={`${s.name} (nouvel onglet)`} className="mfoot-social">
+                  <s.icon className="size-5" />
+                </a>
+              ))}
+            </div>
+          </div>
+          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+            {nav.legal.map((l) => (
+              <li key={l.href}>
+                <Link href={l.href} className="text-caption">{l.name}</Link>
+              </li>
+            ))}
+          </ul>
+          <p className="text-caption mt-3">© {year} Krealabs · Rouen, Normandie</p>
+        </div>
+      </Container>
     </div>
   );
 }
