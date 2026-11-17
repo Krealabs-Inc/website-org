@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -22,38 +23,24 @@ export const metadata: Metadata = {
 export default function CalculateurPage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
-      <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
-        <div
-          aria-hidden
-          className="absolute -top-32 left-1/3 size-[600px] rounded-full blur-[120px] opacity-20"
-          style={{
-            background:
-              "radial-gradient(circle, var(--accent), transparent 70%)",
-          }}
-        />
-        <Container className="relative">
+      <section className="pt-32 pb-12 md:pt-40 md:pb-16">
+        <Container>
           <div className="max-w-4xl">
             <Eyebrow dot className="mb-6">
               Calculateur · Estimation projet
             </Eyebrow>
             <h1 className="text-display">
-              Combien <em>coûte</em>
-              <br />
-              votre projet web ?
+              Combien <em>coûte</em> votre projet web ?
             </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-3xl">
-              En 4 étapes (60 secondes), obtenez une fourchette de prix réaliste
-              pour votre projet web - site vitrine, e-commerce, SaaS,
-              application mobile, refonte. Basé sur le vrai marché normand
-              2026, pas sur une boîte noire.
+            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
+              Trois choix, et votre ticket s’imprime ligne par ligne : une fourchette réaliste pour votre site, votre boutique, votre logiciel ou votre application, basée sur les prix du marché normand.
             </p>
           </div>
         </Container>
       </section>
 
-      <section className="border-t border-[var(--border)] py-12 md:py-16">
-        <Container size="narrow">
+      <section className="pb-24">
+        <Container>
           <QuoteCalculator />
         </Container>
       </section>
@@ -87,12 +74,12 @@ export default function CalculateurPage() {
               cadré (besoins exacts, contraintes, intégrations spécifiques) :
               c&apos;est l&apos;objet du premier rendez-vous, gratuit. Pour
               aller plus loin sur les tarifs, lisez l&apos;
-              <a
+              <Link
                 href="/blog/prix-site-internet-rouen-2026"
                 className="underline underline-offset-2 hover:text-[var(--foreground)]"
               >
                 article complet sur les prix des sites internet à Rouen
-              </a>
+              </Link>
               .
             </p>
           </div>
