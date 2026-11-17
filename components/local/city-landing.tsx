@@ -190,10 +190,6 @@ export function CityLanding({ city }: { city: CityData }) {
                   <dd>{city.distanceFromRouen === 0 ? "À Rouen, en visio ou chez vous" : `${city.cityArticle.replace(/^à /, "À ").replace(/^au /, "Au ")}, en visio ou à Rouen`}</dd>
                 </div>
                 <div>
-                  <dt>CCI référente</dt>
-                  <dd>{city.cciName}</dd>
-                </div>
-                <div>
                   <dt>Réponse</dt>
                   <dd>Sous 24h ouvrées</dd>
                 </div>
