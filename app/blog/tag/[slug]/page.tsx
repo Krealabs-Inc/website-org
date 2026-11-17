@@ -1,12 +1,10 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowLeft, ArrowUpRight, Clock } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { blogPosts, getPublishedPosts } from "@/lib/blog-data";
@@ -149,41 +147,21 @@ export default async function BlogTagPage({ params }: PageProps) {
 
       <section className="border-t border-[var(--border)] py-16">
         <Container>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
+          <ol className="journal-index">
             {posts.map((post) => (
-              <Link
-                key={post.slug}
-                href={`/blog/${post.slug}`}
-                className="group bg-[var(--background)] hover:bg-[var(--surface)] transition-colors flex flex-col"
-              >
-                {post.image && (
-                  <div className="relative aspect-[16/10] overflow-hidden">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                )}
-                <div className="p-6 flex-1 flex flex-col">
-                  <div className="flex items-center gap-3 text-caption mb-3">
-                    <Badge variant="secondary">{post.category}</Badge>
-                    <span className="inline-flex items-center gap-1.5">
-                      <Clock className="size-3" />
-                      {post.readTime}
-                    </span>
-                  </div>
-                  <h2 className="text-h4 mb-3 flex-1">{post.title}</h2>
-                  <span className="inline-flex items-center gap-2 text-body-sm font-medium text-[var(--accent)] mt-2">
-                    Lire l&apos;article
-                    <ArrowUpRight className="size-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <li key={post.slug}>
+                <Link href={`/blog/${post.slug}`} className="journal-row group">
+                  <span className="journal-meta">{post.date}</span>
+                  <span className="journal-cat">{post.category}</span>
+                  <span>
+                    <span className="journal-row-title">{post.title}</span>
+                    <span className="journal-excerpt">{post.excerpt}</span>
                   </span>
-                </div>
-              </Link>
+                  <span className="journal-meta text-right">{post.readTime}</span>
+                </Link>
+              </li>
             ))}
-          </div>
+          </ol>
         </Container>
       </section>
 
