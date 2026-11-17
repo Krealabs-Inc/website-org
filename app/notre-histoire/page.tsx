@@ -22,6 +22,7 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { TEAM } from "@/lib/team";
+import { YearReel } from "@/components/history/year-reel";
 
 const TIMELINE = [
   {
@@ -99,26 +100,22 @@ export default function NotreHistoirePage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       <OrganizationSchema />
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
+      {/* HERO: the founding year, outlined, behind the promise */}
+      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+        <span className="history-ghost" aria-hidden>2020</span>
         <Container className="relative">
-          <div className="max-w-4xl">
+          <div className="max-w-3xl">
             <Eyebrow dot className="mb-8">Notre histoire</Eyebrow>
             <h1 className="text-display">
-              Une agence <em>artisanale</em>,
-              <br />
-              ancrée en Normandie.
+              Une agence <em>artisanale</em>, ancrée en Normandie.
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Depuis 2020, nous construisons des sites web, applications mobiles
-              et logiciels sur mesure pour les entreprises de Rouen et de toute
-              la Normandie. Pas de promesses creuses, juste du travail propre.
+              Depuis 2020, nous construisons des sites web, applications mobiles et logiciels sur mesure pour les entreprises de Rouen et de toute la Normandie. Pas de promesses creuses, juste du travail propre.
             </p>
             <div className="mt-10">
               <Button size="lg" asChild>
                 <Link href="/contact">
-                  Démarrer une collaboration
+                  Parler de mon projet
                   <ArrowRight />
                 </Link>
               </Button>
@@ -127,112 +124,52 @@ export default function NotreHistoirePage() {
         </Container>
       </section>
 
-      {/* TIMELINE */}
+      {/* SIGNATURE: the year rolls as the story passes */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-4">
-              <Eyebrow number="01" className="mb-6">Parcours</Eyebrow>
-              <h2 className="text-h1 mb-6">
-                Six années de <em>construction</em>.
-              </h2>
-              <p className="text-body text-[var(--muted-foreground)]">
-                Une trajectoire mesurée, des choix techniques assumés, une
-                clientèle fidèle qui reste avec nous sur la durée.
-              </p>
-            </div>
-
-            <ol className="lg:col-span-8 relative">
-              <div className="absolute left-[1.125rem] top-2 bottom-2 w-px bg-[var(--border)]" aria-hidden />
-              {TIMELINE.map((step) => {
-                return (
-                  <li key={step.year} className="relative pl-14 pb-12 last:pb-0">
-                    <span className="history-marker" aria-hidden />
-                    <p className="text-eyebrow text-[var(--accent)] mb-2">{step.year}</p>
-                    <h3 className="text-h3 mb-2">{step.title}</h3>
-                    <p className="text-body text-[var(--muted-foreground)] max-w-2xl">
-                      {step.description}
-                    </p>
-                  </li>
-                );
-              })}
-            </ol>
+          <div className="mb-10 max-w-2xl">
+            <Eyebrow number="01" className="mb-6">Parcours</Eyebrow>
+            <h2 className="text-h1">
+              Six années de <em>construction</em>.
+            </h2>
           </div>
+          <YearReel chapters={TIMELINE.map(({ year, title, description }) => ({ year, title, description }))} />
         </Container>
       </section>
 
-      {/* EQUIPE - aperçu */}
+      {/* VALUES: a manifesto, one line each */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-            <div className="max-w-2xl">
-              <Eyebrow number="02" className="mb-6">L'équipe</Eyebrow>
-              <h2 className="text-h1">
-                Les <em>développeurs</em> derrière chaque projet.
-              </h2>
-            </div>
-            <p className="text-body text-[var(--muted-foreground)] max-w-md">
-              Pas de chef de projet, pas de sous-traitance. La personne que vous
-              rencontrez est celle qui code votre projet.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {TEAM.map((m) => (
-              <div key={m.name} className="editorial-note md:p-10">
-                <div className="flex items-start gap-5 mb-5">
-                  <div className="size-14 shrink-0 rounded-[var(--radius)] border border-[var(--border)] bg-[var(--accent-subtle)] flex items-center justify-center">
-                    <span className="text-h4 font-semibold text-[var(--accent)]">{m.initials}</span>
-                  </div>
-                  <div>
-                    <h3 className="text-h3 mb-1">{m.name}</h3>
-                    <p className="text-body-sm text-[var(--accent)] font-medium">{m.role}</p>
-                  </div>
-                </div>
-                <p className="text-body text-[var(--muted-foreground)]">{m.bio}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 flex justify-center">
-            <Link
-              href="/equipe"
-              className="inline-flex items-center gap-2 text-body font-medium text-[var(--accent)] hover:opacity-80 transition-opacity"
-            >
-              Découvrir l'équipe en détail
-              <ArrowRight className="size-4" />
-            </Link>
-          </div>
-        </Container>
-      </section>
-
-      {/* VALUES */}
-      <section className="section-y border-t border-[var(--border)]">
-        <Container>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-            <div className="max-w-2xl">
-              <Eyebrow number="03" className="mb-6">Valeurs</Eyebrow>
-              <h2 className="text-h1">
-                Ce qui nous <em>guide</em>.
-              </h2>
-            </div>
-            <p className="text-body text-[var(--muted-foreground)] max-w-md">
-              Quatre engagements concrets qui structurent notre façon de
-              travailler avec chaque client.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <Eyebrow number="02" className="mb-10">Ce qui nous guide</Eyebrow>
+          <ol className="manifesto" data-scroll data-reveal="stagger">
             {VALUES.map((v) => (
-              <div key={v.title} className="editorial-note md:p-10">
-                <p className="text-eyebrow text-[var(--accent)] mb-4">{v.label}</p>
-                <h3 className="text-h3 mb-3">{v.title}</h3>
-                <p className="text-body text-[var(--muted-foreground)] max-w-md">
-                  {v.description}
-                </p>
-              </div>
+              <li key={v.title}>
+                <span className="font-[family-name:var(--font-geist-mono)] text-xs text-[var(--accent)]">{v.label}</span>
+                <p className="manifesto-line">{v.title}.</p>
+                <p className="text-body text-[var(--muted-foreground)] max-w-xl">{v.description}</p>
+              </li>
             ))}
-          </div>
+          </ol>
+        </Container>
+      </section>
+
+      {/* TEAM: a short nod, the full page lives at /equipe */}
+      <section className="border-t border-[var(--border)] py-16">
+        <Container>
+          <Link href="/equipe" className="history-team">
+            <span className="flex -space-x-3">
+              {TEAM.map((m) => (
+                <span key={m.name} className="history-avatar">{m.initials}</span>
+              ))}
+            </span>
+            <span className="text-h3">
+              {TEAM.length} associés, et c’est <em>voulu</em>.
+            </span>
+            <span className="ml-auto inline-flex items-center gap-2 text-body text-[var(--accent)]">
+              Rencontrer l’équipe
+              <ArrowRight className="size-4" />
+            </span>
+          </Link>
         </Container>
       </section>
 

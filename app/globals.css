@@ -1211,6 +1211,24 @@ fieldset:disabled .calc-option { cursor: default; opacity: 0.5; }
 .calc-send { display: grid; gap: 12px; margin-top: 24px; padding: 22px; border: 1px solid var(--border-strong); border-radius: 18px; background: var(--surface); }
 .calc-sent { display: flex; gap: 12px; align-items: center; margin-top: 24px; padding: 18px; border: 1px solid var(--accent); border-radius: 18px; background: var(--accent-subtle); }
 
+/* ===== Notre histoire (components/history) ===== */
+.history-ghost { position: absolute; right: -2vw; bottom: -6vw; font-size: clamp(10rem, 30vw, 28rem); font-weight: 700; line-height: 1; letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 1px var(--border-strong); pointer-events: none; user-select: none; }
+.odo { display: inline-flex; font-size: clamp(8rem, 15vw, 15rem); font-weight: 700; line-height: 1; letter-spacing: -0.06em; color: var(--accent); font-variant-numeric: tabular-nums; }
+.odo-digit { display: inline-block; height: 1em; overflow: hidden; }
+.odo-strip { display: flex; flex-direction: column; }
+.odo-strip > span { height: 1em; }
+@media (prefers-reduced-motion: no-preference) { .odo-strip { transition: transform 600ms cubic-bezier(0.23, 1, 0.32, 1); } }
+.reel-chapter { display: flex; flex-direction: column; justify-content: center; min-height: 70vh; opacity: 0.35; transition: opacity 300ms ease-out; }
+.reel-chapter.is-active { opacity: 1; }
+@media (max-width: 1023px) { .reel-chapter { min-height: 0; padding: 32px 0; opacity: 1; border-bottom: 1px solid var(--border); } }
+.manifesto { display: grid; border-top: 1px solid var(--border-strong); }
+.manifesto li { display: grid; gap: 10px; padding: 36px 0; border-bottom: 1px solid var(--border-strong); }
+@media (min-width: 1024px) { .manifesto li { grid-template-columns: 140px minmax(0, 1fr) minmax(0, 0.8fr); align-items: baseline; gap: 32px; } }
+.manifesto-line { font-family: var(--font-instrument-serif), serif; font-style: italic; font-size: clamp(2rem, 4vw, 3.4rem); line-height: 1.05; }
+.history-team { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; padding: 28px; border: 1px solid var(--border-strong); border-radius: 24px; transition: border-color 200ms ease-out, background-color 200ms ease-out; }
+.history-team:hover { border-color: var(--accent); background: var(--surface); }
+.history-avatar { display: grid; place-items: center; width: 52px; height: 52px; border: 2px solid var(--background); border-radius: 50%; background: var(--accent-subtle); color: var(--accent); font-weight: 600; }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {
