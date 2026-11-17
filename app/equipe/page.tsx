@@ -5,7 +5,7 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { PersonSchema } from "@/components/seo/person-schema";
 import { AmbientVideo } from "@/components/media/ambient-video";
-import { GaletTeam } from "@/components/team/galet-team";
+import { TeamWall } from "@/components/team/team-wall";
 import { TEAM, UPCOMING_TEAM } from "@/lib/team";
 
 export const metadata: Metadata = {
@@ -37,34 +37,23 @@ export default function EquipePage() {
         knowsAbout: member.knowsAbout,
       }))} />
 
-      {/* HERO: the four partners as Galets */}
-      <section id="collectif" className="pt-32 pb-20 md:pt-40 scroll-mt-28" aria-label="Les associés de Krealabs">
+      {/* HERO: the wall of the four partners */}
+      <div id="collectif" className="scroll-mt-28">
+        <TeamWall members={TEAM} />
+      </div>
+      {UPCOMING_TEAM.length > 0 && (
         <Container>
-          <div className="mb-14 text-center">
-            <Eyebrow dot className="mb-6 justify-center">Le collectif · Rouen, depuis 2020</Eyebrow>
-            <h1 className="text-h1 md:text-display mx-auto max-w-4xl">
-              Quatre associés. <em>Personne d’autre</em> entre vous et votre projet.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mx-auto mt-6 max-w-xl">
-              Ce sont eux qui vous écoutent, et eux qui construisent. Touchez un galet pour faire connaissance.
-            </p>
+          <div className="team-pending">
+            {UPCOMING_TEAM.map((member) => (
+              <div key={member.initials} className="editorial-note">
+                <p className="text-h4">{member.name}</p>
+                <p className="text-body-sm mt-2">{member.role}</p>
+                <p className="text-body-sm text-[var(--muted-foreground)] mt-3">{member.teaser}</p>
+              </div>
+            ))}
           </div>
-          <GaletTeam
-            members={TEAM.map(({ slug, name, role, initials, photo, loves }) => ({ slug, name, role, initials, photo, loves }))}
-          />
-          {UPCOMING_TEAM.length > 0 && (
-            <div className="team-pending">
-              {UPCOMING_TEAM.map((member) => (
-                <div key={member.initials} className="editorial-note">
-                  <p className="text-h4">{member.name}</p>
-                  <p className="text-body-sm mt-2">{member.role}</p>
-                  <p className="text-body-sm text-[var(--muted-foreground)] mt-3">{member.teaser}</p>
-                </div>
-              ))}
-            </div>
-          )}
         </Container>
-      </section>
+      )}
 
       <section className="section-y border-t border-[var(--border)]">
         <Container>
