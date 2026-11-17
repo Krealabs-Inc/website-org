@@ -1537,7 +1537,7 @@ fieldset:disabled .calc-option { cursor: default; opacity: 0.5; }
 .vs-side { padding: 48px clamp(16px, 5vw, 72px); }
 .vs-side.is-a { background: var(--surface); }
 .vs-side.is-b { text-align: right; }
-.vs-name { margin-top: 8px; font-size: clamp(2.2rem, 7vw, 5.5rem); font-weight: 600; line-height: 0.95; letter-spacing: -0.04em; overflow-wrap: anywhere; }
+.vs-name { margin-top: 8px; font-size: clamp(1.45rem, 7vw, 5.5rem); font-weight: 600; line-height: 0.95; letter-spacing: -0.04em; overflow-wrap: break-word; hyphens: manual; }
 .vs-score { margin-top: 28px; font-family: var(--font-geist-mono), monospace; font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; color: var(--accent); }
 .vs-seam { position: absolute; left: 50%; top: 50%; display: grid; place-items: center; width: 64px; height: 64px; margin: -32px 0 0 -32px; border: 1px solid var(--border-strong); border-radius: 50%; background: var(--background); font-family: var(--font-instrument-serif), serif; font-style: italic; font-size: 1.6rem; color: var(--accent); }
 .duels { border-top: 1px solid var(--border-strong); }

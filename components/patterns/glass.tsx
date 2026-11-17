@@ -10,6 +10,15 @@ import type { GlassLayout, GlassShape } from "./glass-scene";
 // three.js only loads in the browser, after the text is on screen.
 const GlassScene = dynamic(() => import("./glass-scene"), { ssr: false });
 
+function hasWebGL() {
+  try {
+    const canvas = document.createElement("canvas");
+    return Boolean(canvas.getContext("webgl2") ?? canvas.getContext("webgl"));
+  } catch {
+    return false;
+  }
+}
+
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
 /**
@@ -36,6 +45,9 @@ export function GlassLayer({
   const [active, setActive] = useState(true);
 
   useEffect(() => {
+    // Some devices and power-saving modes have no WebGL: the 3D object is
+    // decoration, so skip it rather than throw.
+    if (!hasWebGL()) return;
     const start = () => setMounted(true);
     if (typeof window.requestIdleCallback === "function") {
       const id = window.requestIdleCallback(start, { timeout: 1500 });
