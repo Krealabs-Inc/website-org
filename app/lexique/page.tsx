@@ -1,10 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 import { GLOSSARY, GLOSSARY_SLUGS } from "@/lib/glossary";
 
@@ -22,77 +20,66 @@ export const metadata: Metadata = {
   },
 };
 
-const CATEGORIES = ["WordPress", "Web", "Mobile", "SEO", "Infrastructure"];
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const initial = (term: string) => term.normalize("NFD").replace(/[\u0300-\u036f]/g, "").charAt(0).toUpperCase();
 
 export default function LexiqueIndexPage() {
-  const entries = GLOSSARY_SLUGS.map((s) => GLOSSARY[s]);
+  const entries = GLOSSARY_SLUGS.map((s) => GLOSSARY[s]).sort((a, b) => a.term.localeCompare(b.term, "fr"));
+  const letters = new Map<string, typeof entries>();
+  for (const e of entries) {
+    const l = /[A-Z]/.test(initial(e.term)) ? initial(e.term) : "#";
+    letters.set(l, [...(letters.get(l) ?? []), e]);
+  }
 
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
-      <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
-        <Container className="relative">
-          <div className="max-w-4xl">
-            <Eyebrow dot className="mb-6">
-              Lexique · Définitions web
-            </Eyebrow>
-            <h1 className="text-display">
-              Le <em>web technique</em>
-              <br />
-              en clair.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-3xl">
-              {entries.length} définitions des termes que nous utilisons en
-              agence : headless WordPress, Core Web Vitals, schema.org, Next.js,
-              SEO local... Pour comprendre les choix techniques qu&apos;on vous
-              propose, et pour outiller votre vocabulaire web.
-            </p>
-          </div>
+      {/* HEAD */}
+      <section className="pt-32 pb-12 md:pt-40">
+        <Container>
+          <Eyebrow dot className="mb-6">Lexique · {entries.length} définitions</Eyebrow>
+          <h1 className="text-display">
+            Le <em>web technique</em> en clair.
+          </h1>
+          <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
+            Les termes que nous employons en agence, expliqués simplement : pour comprendre les choix techniques que nous vous proposons.
+          </p>
         </Container>
       </section>
 
-      {CATEGORIES.map((cat) => {
-        const items = entries.filter((e) => e.category === cat);
-        if (items.length === 0) return null;
-        return (
-          <section
-            key={cat}
-            className="border-t border-[var(--border)] py-16 md:py-20"
-          >
-            <Container>
-              <div className="flex items-baseline justify-between mb-10">
-                <h2 className="text-h1">
-                  <em>{cat}</em>
-                </h2>
-                <span className="text-caption">
-                  {items.length} terme{items.length > 1 ? "s" : ""}
-                </span>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[var(--border)] border border-[var(--border)] rounded-[var(--radius)] overflow-hidden">
-                {items.map((entry) => (
-                  <Link
-                    key={entry.slug}
-                    href={`/lexique/${entry.slug}`}
-                    className="group bg-[var(--background)] hover:bg-[var(--surface)] p-6 flex flex-col gap-3 transition-colors"
-                  >
-                    <Badge variant="outline" className="self-start">
-                      {entry.category}
-                    </Badge>
-                    <h3 className="text-h4">{entry.term}</h3>
-                    <p className="text-body-sm text-[var(--muted-foreground)] flex-1 leading-relaxed">
-                      {entry.shortDef.slice(0, 130)}…
-                    </p>
-                    <span className="inline-flex items-center gap-2 text-body-sm font-medium text-[var(--accent)] mt-2">
-                      Définition
-                      <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </Container>
-          </section>
-        );
-      })}
+      {/* DICTIONARY: letters on a rail, entries beside */}
+      <section className="border-t border-[var(--border)] pb-24">
+        <Container>
+          <div className="dict">
+            <nav className="dict-rail" aria-label="Aller à la lettre">
+              {ALPHABET.map((l) =>
+                letters.has(l) ? (
+                  <a key={l} href={`#lettre-${l}`}>{l}</a>
+                ) : (
+                  <span key={l} aria-hidden>{l}</span>
+                ),
+              )}
+            </nav>
+            <div>
+              {[...letters.entries()].map(([letter, items]) => (
+                <section key={letter} id={`lettre-${letter}`} className="dict-letter scroll-mt-24" aria-label={`Lettre ${letter}`}>
+                  <p className="dict-initial" aria-hidden>{letter}</p>
+                  <ul>
+                    {items.map((entry) => (
+                      <li key={entry.slug}>
+                        <Link href={`/lexique/${entry.slug}`} className="dict-entry group">
+                          <span className="dict-term">{entry.term}</span>
+                          <span className="dict-cat">{entry.category}</span>
+                          <span className="dict-def">{entry.shortDef}</span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ))}
+            </div>
+          </div>
+        </Container>
+      </section>
 
       <ServiceCta
         title={
