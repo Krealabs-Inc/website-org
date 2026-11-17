@@ -72,10 +72,10 @@ export default function ExpertisePage() {
           </div>
           <div data-scroll data-reveal="up">
             <AmbientVideo
-              src="/videos/process.mp4"
-              poster="/videos/process.jpg"
-              label="Animation : les quatre étapes d’un projet"
-              transcript="Vous savez toujours où l’on en est. Cadrage : on comprend votre besoin, vos contraintes et vos objectifs. Conception : vous validez la maquette avant la moindre ligne de code. Développement : des démos régulières, vous voyez votre projet avancer. Mise en ligne et suivi : formation, surveillance, et on reste joignable. Un seul interlocuteur, du devis à la mise en ligne."
+              src="/videos/perso-chantier.mp4"
+              poster="/videos/perso-chantier.jpg"
+              label="Animation : l’équipe construit un site étape par étape"
+              transcript="Votre projet, étape par étape. Un : on cadre ensemble, les blocs du site sont posés. Deux : on dessine votre site. Trois : on le construit, démo après démo. Quatre : le site est en ligne, et on reste là ; une cliente clique sur Demander un devis, la demande est envoyée. Un seul interlocuteur, du devis à la mise en ligne."
             />
           </div>
         </Container>

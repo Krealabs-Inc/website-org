@@ -50,10 +50,10 @@ export default function HomePage() {
             </div>
             <div className="lg:col-span-8" data-scroll data-reveal="up" style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
               <AmbientVideo
-                src="/videos/contexte.mp4"
-                poster="/videos/contexte.jpg"
-                label="Animation : des demandes éparpillées qui se retrouvent au même endroit"
-                transcript="Un lundi matin, dans une entreprise comme la vôtre : une demande de devis dans les mails, une autre au téléphone, un tableur pour suivre, un autre pour facturer. Et une demande qui se perd. Avec un site qui travaille pour vous, chaque demande arrive au même endroit : devis, rappels et questions, chacun avec son statut. Votre activité mérite un site qui travaille pour vous."
+                src="/videos/perso-demandes.mp4"
+                poster="/videos/perso-demandes.jpg"
+                label="Animation : une cliente débordée par ses demandes, qui finissent toutes au même endroit"
+                transcript="Une journée comme les autres. Les demandes arrivent de partout : mails, documents, téléphone, post-it, tableurs. Un membre de l’équipe arrive avec un ordinateur : on vous construit un site qui les rassemble, et toutes les demandes arrivent au même endroit. Et vous retrouvez du temps pour votre métier. Moins de tableurs, plus de temps pour vous."
               />
             </div>
           </div>

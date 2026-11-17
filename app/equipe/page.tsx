@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/container";
 import { ServiceCta } from "@/components/services/service-cta";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { PersonSchema } from "@/components/seo/person-schema";
+import { AmbientVideo } from "@/components/media/ambient-video";
 import { TEAM, UPCOMING_TEAM, type TeamMember } from "@/lib/team";
 
 export const metadata: Metadata = {
@@ -79,6 +80,31 @@ export default function EquipePage() {
               ))}
             </div>
           )}
+        </Container>
+      </section>
+
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div className="lg:col-span-4" data-scroll data-reveal="up">
+              <Eyebrow className="mb-6">Pourquoi ça compte</Eyebrow>
+              <h2 className="text-h1">
+                Vous parlez à <em>ceux qui codent.</em>
+              </h2>
+              <p className="text-body text-[var(--muted-foreground)] mt-6">
+                Pas de chaîne d’intermédiaires entre votre idée et votre site :
+                ce que vous demandez est exactement ce qui est construit.
+              </p>
+            </div>
+            <div className="lg:col-span-8" data-scroll data-reveal="up" style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
+              <AmbientVideo
+                src="/videos/grosse-agence.mp4"
+                poster="/videos/grosse-agence.jpg"
+                label="Animation : une demande qui se déforme d’intermédiaire en intermédiaire, puis livrée telle quelle chez Krealabs"
+                transcript="Dans une grande agence, votre demande passe de main en main. La cliente demande un bouton bleu ; le message passe par le commercial, le chef de projet, le directeur de compte, le comité de validation, la direction artistique et le prestataire, et devient un carrousel rose animé, livré le trimestre prochain. Plus il y a d’intermédiaires, plus le message se perd. Chez Krealabs, 4 associés : vous parlez directement à ceux qui codent. La cliente demande un bouton bleu, c’est noté, et le bouton bleu est livré comme demandé."
+              />
+            </div>
+          </div>
         </Container>
       </section>
 
