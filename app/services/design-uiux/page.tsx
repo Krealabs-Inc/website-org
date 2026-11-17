@@ -20,6 +20,7 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceHero } from "@/components/services/service-hero";
 import { ServiceFeatures } from "@/components/services/service-features";
+import { ServiceMethod } from "@/components/services/service-method";
 import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
@@ -43,6 +44,7 @@ export default function DesignUiUxPage() {
       />
       <ServiceHero
         number="03"
+        shape="sphere"
         eyebrow="Design UI/UX"
         title={
           <>
@@ -71,43 +73,25 @@ export default function DesignUiUxPage() {
         features={FEATURES}
       />
 
-      <section className="section-y border-t border-[var(--border)]">
-        <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            <div className="lg:col-span-5">
-              <Eyebrow number="02" className="mb-6">Méthode</Eyebrow>
-              <h2 className="text-h1 mb-6">
-                Vous validez <em>chaque étape</em>.
-              </h2>
-              <p className="text-body text-[var(--muted-foreground)]">
-                De l’atelier de cadrage au design system, rien ne passe à
-                l’étape suivante sans votre accord.
-              </p>
-            </div>
-            <ol className="lg:col-span-7 space-y-3">
-              {STEPS.map((step, i) => (
-                <li key={step.title} className="editorial-step">
-                  <span className="editorial-ordinal">{String(i + 1).padStart(2, "0")}</span>
-                  <div>
-                    <h3 className="text-h3 mb-2">{step.title}</h3>
-                    <p className="text-body-sm text-[var(--muted-foreground)]">{step.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </Container>
-      </section>
+      <ServiceMethod
+        title={<>Vous validez <em>chaque étape</em>.</>}
+        intro={
+          <>
+            <p>De l’atelier de cadrage au design system, rien ne passe à l’étape suivante sans votre accord.</p>
+          </>
+        }
+        steps={STEPS}
+      />
 
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="max-w-3xl mb-16">
+          <div className="max-w-3xl mb-16" data-scroll data-reveal="up">
             <Eyebrow number="03" className="mb-6">Outils</Eyebrow>
             <h2 className="text-h1">
               Testé <em>avant d’être codé</em>.
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0" data-scroll data-reveal="stagger">
             {TOOLS.map((t) => (
               <div key={t.name} className="compact-note">
                 <p className="text-caption mb-3">{t.kind}</p>

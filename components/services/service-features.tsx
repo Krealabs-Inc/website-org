@@ -1,6 +1,7 @@
-import { Container } from "@/components/ui/container";
-import { Eyebrow } from "@/components/ui/eyebrow";
 import { type LucideIcon } from "lucide-react";
+
+import { Eyebrow } from "@/components/ui/eyebrow";
+import { HorizontalStrip } from "@/components/patterns/horizontal-strip";
 
 export interface FeatureItem {
   icon: LucideIcon;
@@ -15,48 +16,47 @@ interface ServiceFeaturesProps {
   title: React.ReactNode;
   intro?: string;
   features: FeatureItem[];
-  /** 2 ou 3 colonnes sur desktop */
+  /** Conservés pour compatibilité : la bande horizontale remplace la grille. */
   columns?: 2 | 3;
   layout?: "columns" | "list";
 }
 
-export function ServiceFeatures({
-  eyebrow,
-  number,
-  title,
-  intro,
-  features,
-  columns = 3,
-  layout = "columns",
-}: ServiceFeaturesProps) {
-  const colClass = columns === 2 ? "lg:grid-cols-2" : "lg:grid-cols-3";
+function FeatureCard({ feature, index, total }: { feature: FeatureItem; index: number; total: number }) {
+  const Icon = feature.icon;
   return (
-    <section className="section-y border-t border-[var(--border)]">
-      <Container>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16" data-scroll data-reveal="up">
-          <div className="max-w-2xl">
-            <Eyebrow number={number} className="mb-6">{eyebrow}</Eyebrow>
-            <h2 className="text-h1">{title}</h2>
-          </div>
-          {intro && (
-            <p className="text-body text-[var(--muted-foreground)] max-w-md">
-              {intro}
-            </p>
-          )}
-        </div>
+    <article className="promise-card">
+      <div className="flex items-center justify-between">
+        <span className="inline-flex size-11 items-center justify-center rounded-full bg-[var(--accent-subtle)] text-[var(--accent)]">
+          <Icon className="size-5" aria-hidden />
+        </span>
+        <span className="font-[family-name:var(--font-geist-mono)] text-xs text-[var(--muted-foreground)]">
+          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+        </span>
+      </div>
+      <div>
+        <h3 className="text-h2">{feature.title}</h3>
+        <p className="text-body text-[var(--muted-foreground)] mt-5 max-w-md">{feature.description}</p>
+      </div>
+    </article>
+  );
+}
 
-        <div className={layout === "list" ? "service-feature-list" : `grid grid-cols-1 ${colClass} gap-x-10 gap-y-0`} data-scroll data-reveal="stagger">
-          {features.map((feature, index) => (
-            <article key={feature.title} className="editorial-entry">
-              <span className="editorial-ordinal" aria-hidden>{String(index + 1).padStart(2, "0")}</span>
-              <div>
-                <h3 className="text-h4 mb-3">{feature.title}</h3>
-                <p className="text-body-sm text-[var(--muted-foreground)]">{feature.description}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Container>
-    </section>
+/** What the client gets, as a horizontal strip of cards (Défilement). */
+export function ServiceFeatures({ eyebrow, number, title, intro, features }: ServiceFeaturesProps) {
+  return (
+    <HorizontalStrip
+      itemClassName="h-[min(56vh,440px)] w-[min(440px,82vw)]"
+      intro={
+        <>
+          <Eyebrow number={number} className="mb-6">{eyebrow}</Eyebrow>
+          <h2 className="text-h1">{title}</h2>
+          {intro && <p className="text-body text-[var(--muted-foreground)] mt-6 max-w-md">{intro}</p>}
+        </>
+      }
+    >
+      {features.map((feature, i) => (
+        <FeatureCard key={feature.title} feature={feature} index={i} total={features.length} />
+      ))}
+    </HorizontalStrip>
   );
 }

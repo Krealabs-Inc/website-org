@@ -4,6 +4,8 @@ import { ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { GlassAside } from "@/components/patterns/glass";
+import type { GlassShape } from "@/components/patterns/glass-scene";
 
 interface ServiceHeroProps {
   eyebrow: string;
@@ -13,6 +15,8 @@ interface ServiceHeroProps {
   description: string;
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
+  /** Glass object standing on the right, one shape per service. */
+  shape?: GlassShape;
 }
 
 export function ServiceHero({
@@ -22,6 +26,7 @@ export function ServiceHero({
   description,
   primaryCta = { label: "Parler de mon projet", href: "/contact" },
   secondaryCta = { label: "Voir toutes les solutions", href: "/services" },
+  shape,
 }: ServiceHeroProps) {
   return (
     <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
@@ -31,6 +36,8 @@ export function ServiceHero({
         className="absolute -top-32 right-1/4 size-[500px] rounded-full blur-[120px] opacity-20"
         style={{ background: "radial-gradient(circle, var(--accent), transparent 70%)" }}
       />
+      {/* On small screens the object sits behind the text, so it steps back. */}
+      {shape && <GlassAside shape={shape} className="opacity-40 lg:opacity-100" />}
 
       <Container className="relative">
         <Link
@@ -41,7 +48,7 @@ export function ServiceHero({
           Retour aux services
         </Link>
 
-        <div className="max-w-4xl">
+        <div className={shape ? "max-w-3xl" : "max-w-4xl"}>
           <Eyebrow number={number} dot className="mb-8">
             {eyebrow}
           </Eyebrow>

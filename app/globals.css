@@ -819,6 +819,15 @@ html.has-scroll-fx [data-reveal="stagger"] > :nth-child(5) { transition-delay: 2
 html.has-scroll-fx [data-reveal="stagger"] > :nth-child(6) { transition-delay: 300ms; }
 html.has-scroll-fx [data-reveal="stagger"] > :nth-child(n + 7) { transition-delay: 340ms; }
 
+/* Depth steps (DepthStep): compact in the reduced-motion list, display
+   size on a plane of a DepthSequence. */
+.depth-step-number { display: block; font-family: var(--font-geist-mono), monospace; font-size: 12px; color: var(--muted-foreground); }
+.depth-step-title { margin: 16px 0 12px; font-size: 1.125rem; line-height: 1.4; font-weight: 600; letter-spacing: -0.01em; }
+.depth-step-text { font-size: 0.875rem; line-height: 1.5; color: var(--muted-foreground); }
+.depth-plane .depth-step-number { font-size: 14px; color: var(--accent); }
+.depth-plane .depth-step-title { margin: 24px 0 0; font-size: clamp(2.75rem, 7vw, 5.5rem); line-height: 1; letter-spacing: -0.04em; }
+.depth-plane .depth-step-text { max-width: 36rem; margin: 24px auto 0; font-size: 1.125rem; line-height: 1.6; }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {

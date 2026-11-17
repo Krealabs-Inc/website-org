@@ -1,8 +1,7 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 
@@ -10,9 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ScrollHint } from "@/components/animations/scroll-hint";
-
-// three.js only loads in the browser, after the text is on screen.
-const HeroVolumeScene = dynamic(() => import("./hero-volume-scene"), { ssr: false });
+import { GlassLayer } from "@/components/patterns/glass";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
@@ -48,9 +45,6 @@ function HeroActions({ className = "" }: { className?: string }) {
 export function HeroVolume() {
   const reduced = useReducedMotion() ?? false;
   const sectionRef = useRef<HTMLElement>(null);
-  const [active, setActive] = useState(true);
-  const [sceneReady, setSceneReady] = useState(false);
-  const [mountScene, setMountScene] = useState(false);
 
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ["start start", "end end"] });
   const firstOpacity = useTransform(scrollYProgress, [0, 0.28, 0.42], [1, 1, 0]);
@@ -61,27 +55,6 @@ export function HeroVolume() {
   const secondVisibility = useTransform(secondOpacity, (o) => (o > 0 ? "visible" : "hidden"));
   const hintOpacity = useTransform(scrollYProgress, [0, 0.08], [1, 0]);
 
-  // Compiling the glass shader blocks the main thread for a moment: wait
-  // until the browser is idle so the text is readable and clickable first.
-  useEffect(() => {
-    const start = () => setMountScene(true);
-    if (typeof window.requestIdleCallback === "function") {
-      const id = window.requestIdleCallback(start, { timeout: 1500 });
-      return () => window.cancelIdleCallback(id);
-    }
-    const id = window.setTimeout(start, 300);
-    return () => window.clearTimeout(id);
-  }, []);
-
-  // Stop rendering the scene once the hero is off screen.
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([entry]) => setActive(entry.isIntersecting));
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
   const enter = (delay: number) =>
     reduced
       ? {}
@@ -91,18 +64,7 @@ export function HeroVolume() {
           transition: { duration: 0.5, ease: EASE_OUT, delay },
         };
 
-  const scene = (
-    <motion.div
-      className="absolute inset-0"
-      initial={false}
-      animate={{ opacity: sceneReady ? 1 : 0 }}
-      transition={{ duration: reduced ? 0 : 0.6, ease: EASE_OUT }}
-    >
-      {mountScene && (
-        <HeroVolumeScene progress={scrollYProgress} reduced={reduced} active={active} onReady={() => setSceneReady(true)} />
-      )}
-    </motion.div>
-  );
+  const scene = <GlassLayer shape="knot" layout="travel" progress={scrollYProgress} observe={sectionRef} />;
 
   const headline = (
     <h1 className="text-display">

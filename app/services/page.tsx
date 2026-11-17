@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
+import { GlassAside } from "@/components/patterns/glass";
 
 export const metadata: Metadata = {
   title: "Services web à Rouen : sites, apps, SEO",
@@ -35,9 +36,11 @@ export default function ServicesIndexPage() {
       {/* HERO */}
       <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
         <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
+        {/* On small screens the object sits behind the text, so it steps back. */}
+        <GlassAside shape="knot" className="opacity-40 lg:opacity-100" />
 
         <Container className="relative">
-          <div className="max-w-4xl">
+          <div className="max-w-3xl">
             <Eyebrow dot className="mb-8">Services · Agence web Rouen</Eyebrow>
             <h1 className="text-display">
               Un seul <em>interlocuteur</em>,
@@ -64,7 +67,7 @@ export default function ServicesIndexPage() {
       {/* SERVICES GRID */}
       <section className="border-t border-[var(--border)]">
         <Container>
-          <div className="service-directory">
+          <div className="service-directory" data-scroll data-reveal="stagger">
             {SERVICES.map((s, index) => (
               <ServiceCard key={s.title} {...s} index={index} />
             ))}
@@ -75,7 +78,7 @@ export default function ServicesIndexPage() {
       {/* APPROACH BLOCK */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="max-w-3xl mx-auto text-center">
+          <div className="max-w-3xl mx-auto text-center" data-scroll data-reveal="up">
             <Eyebrow className="mb-6 justify-center">Ce que vous pouvez attendre</Eyebrow>
             <h2 className="text-h1 mb-6">
               Un <em>cadre clair</em>, aucune surprise.
@@ -87,7 +90,7 @@ export default function ServicesIndexPage() {
             </p>
           </div>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-5" data-scroll data-reveal="stagger">
             {COMMITMENTS.map((c) => (
               <div key={c.title} className="editorial-note">
                 <p className="text-eyebrow text-[var(--accent)] mb-4">
