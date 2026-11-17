@@ -12,12 +12,8 @@ import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { ShareButton } from "@/components/blog/share-button";
 import { MarkdownText } from "@/components/blog/markdown-text";
 import { ArticleReader } from "@/components/blog/article-reader";
-import {
-  blogPosts,
-  frenchDateToISO,
-  getPublishedPosts,
-  isPostPublished,
-} from "@/lib/blog-data";
+import { frenchDateToISO, isPostPublished } from "@/lib/blog-data";
+import { getPost, getPublishedPosts } from "@/lib/content/posts";
 import { getTeam } from "@/lib/content/team";
 
 const SITE_URL = "https://krealabs.fr";
@@ -37,7 +33,7 @@ export const revalidate = 3600;
 // ============================================================
 
 export async function generateStaticParams() {
-  return getPublishedPosts().map((post) => ({ slug: post.slug }));
+  return (await getPublishedPosts()).map((post) => ({ slug: post.slug }));
 }
 
 // ============================================================
@@ -50,7 +46,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = await getPost(slug);
   if (!post) return {};
 
   const url = `${SITE_URL}/blog/${post.slug}`;
@@ -110,12 +106,12 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = await getPost(slug);
 
   // 404 si l'article n'existe pas OU s'il n'est pas encore publié
   if (!post || !isPostPublished(post)) notFound();
 
-  const publishedPosts = getPublishedPosts();
+  const publishedPosts = (await getPublishedPosts());
   const author = (await getTeam()).find((m) => m.name === post.author.name);
   const url = `${SITE_URL}/blog/${post.slug}`;
   const isoDate = frenchDateToISO(post.date);

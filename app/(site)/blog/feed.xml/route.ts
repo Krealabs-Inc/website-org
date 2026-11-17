@@ -1,4 +1,5 @@
-import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
+import { frenchDateToISO } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/content/posts";
 import { getTeam } from "@/lib/content/team";
 
 const BASE_URL = "https://krealabs.fr";
@@ -16,7 +17,7 @@ const BASE_URL = "https://krealabs.fr";
  */
 export async function GET() {
   const team = await getTeam();
-  const items = getPublishedPosts()
+  const items = (await getPublishedPosts())
     .slice()
     .sort((a, b) => frenchDateToISO(b.date).localeCompare(frenchDateToISO(a.date)))
     .slice(0, 50) // limite à 50 articles dans le flux

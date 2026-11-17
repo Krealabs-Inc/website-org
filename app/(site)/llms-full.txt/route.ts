@@ -1,4 +1,5 @@
-import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
+import { frenchDateToISO } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/content/posts";
 
 const BASE_URL = "https://krealabs.fr";
 
@@ -11,7 +12,7 @@ const BASE_URL = "https://krealabs.fr";
  * Cache long côté CDN (1h) car le contenu ne change pas souvent.
  */
 export async function GET() {
-  const posts = getPublishedPosts()
+  const posts = (await getPublishedPosts())
     .slice()
     .sort((a, b) =>
       frenchDateToISO(b.date).localeCompare(frenchDateToISO(a.date)),

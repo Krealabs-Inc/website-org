@@ -1,5 +1,5 @@
 import { renderPageOg, OG_SIZE, OG_CONTENT_TYPE } from "@/lib/og-renderers";
-import { getPublishedPosts } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/content/posts";
 
 export const runtime = "nodejs";
 export const alt = "Catégorie du blog Krealabs";
@@ -12,7 +12,7 @@ export default async function Image({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const posts = getPublishedPosts().filter(
+  const posts = (await getPublishedPosts()).filter(
     (p) => p.category.toLowerCase() === slug,
   );
   const name = posts[0]?.category ?? "Blog";

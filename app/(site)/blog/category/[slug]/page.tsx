@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
-import { getPublishedPosts } from "@/lib/blog-data";
+import { getPublishedPosts } from "@/lib/content/posts";
 
 // ISR : revalide toutes les heures → les articles à publication différée
 // apparaissent dans la liste catégorie dès leur date prévue.
@@ -101,7 +101,7 @@ export async function generateMetadata({
   if (!cat) return {};
 
   const categoryName = SLUG_TO_NAME[slug];
-  const postCount = getPublishedPosts().filter(
+  const postCount = (await getPublishedPosts()).filter(
     (p) => p.category === categoryName,
   ).length;
   const isThin = postCount < MIN_ARTICLES_PER_CATEGORY;
@@ -126,7 +126,7 @@ export default async function BlogCategoryPage({ params }: PageProps) {
   if (!meta) notFound();
 
   const categoryName = SLUG_TO_NAME[slug];
-  const posts = getPublishedPosts().filter((p) => p.category === categoryName);
+  const posts = (await getPublishedPosts()).filter((p) => p.category === categoryName);
   if (posts.length === 0) notFound();
 
   return (

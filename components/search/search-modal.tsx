@@ -6,7 +6,7 @@ import { Search, ArrowRight, X } from "lucide-react";
 import Fuse from "fuse.js";
 
 import { cn } from "@/lib/utils";
-import { SEARCH_INDEX, type SearchItem } from "@/lib/search-index";
+import type { SearchItem } from "@/lib/search-index";
 
 /**
  * Modal de recherche globale Cmd+K (Ctrl+K sur Windows).
@@ -18,10 +18,23 @@ export function SearchModal() {
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Fuse instance mémorisée (l'index est statique)
+  // The index is fetched from the server the first time the modal opens.
+  const [index, setIndex] = useState<SearchItem[]>([]);
+  useEffect(() => {
+    if (!open || index.length) return;
+    let cancelled = false;
+    fetch("/api/search-index")
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data: SearchItem[]) => !cancelled && setIndex(data))
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [open, index.length]);
+
   const fuse = useMemo(
     () =>
-      new Fuse(SEARCH_INDEX, {
+      new Fuse(index, {
         keys: [
           { name: "title", weight: 3 },
           { name: "keywords", weight: 2 },
@@ -31,7 +44,7 @@ export function SearchModal() {
         minMatchCharLength: 2,
         ignoreLocation: true,
       }),
-    [],
+    [index],
   );
 
   // Raccourci clavier Cmd+K / Ctrl+K
@@ -140,7 +153,7 @@ export function SearchModal() {
           {!query.trim() && (
             <div className="p-8 text-center text-body-sm text-[var(--muted-foreground)]">
               <p className="mb-4">
-                Cherchez parmi {SEARCH_INDEX.length} pages, articles et
+                Cherchez parmi {index.length ? `${index.length} ` : "les "}pages, articles et
                 définitions.
               </p>
               <div className="flex flex-wrap justify-center gap-2 text-caption">

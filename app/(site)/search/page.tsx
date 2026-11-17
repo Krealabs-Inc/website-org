@@ -6,7 +6,7 @@ import Fuse from "fuse.js";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { Badge } from "@/components/ui/badge";
-import { SEARCH_INDEX, type SearchItem } from "@/lib/search-index";
+import { getSearchIndex, type SearchItem } from "@/lib/search-index";
 
 // SSR-only : route SEO pour SearchAction schema (sitelinks search box).
 // Pas d'ISR - chaque visite filtre l'index en mémoire.
@@ -29,7 +29,7 @@ export default async function SearchPage({ searchParams }: PageProps) {
   const { q } = await searchParams;
   const query = (q || "").trim();
 
-  const results = query ? runSearch(query) : [];
+  const results = query ? runSearch(await getSearchIndex(), query) : [];
   const grouped = groupByCategory(results);
 
   return (
@@ -164,8 +164,8 @@ const SUGGESTIONS = [
   { href: "/clients", label: "Travaux clients", badge: "Page" },
 ];
 
-function runSearch(query: string): SearchItem[] {
-  const fuse = new Fuse(SEARCH_INDEX, {
+function runSearch(index: SearchItem[], query: string): SearchItem[] {
+  const fuse = new Fuse(index, {
     keys: [
       { name: "title", weight: 3 },
       { name: "keywords", weight: 2 },

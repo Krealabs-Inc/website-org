@@ -12,12 +12,11 @@
  *  + pages statiques codées en dur
  */
 
-import { getPublishedPosts } from "@/lib/blog-data";
-import { CITIES } from "@/lib/cities";
-import { SECTORS } from "@/lib/sectors";
 import { COMPARATORS } from "@/lib/comparators";
-import { GLOSSARY } from "@/lib/glossary";
-import { TEAM } from "@/lib/team";
+import { getGlossary } from "@/lib/content/glossary";
+import { getCities, getSectors } from "@/lib/content/local";
+import { getPublishedPosts } from "@/lib/content/posts";
+import { getTeam } from "@/lib/content/team";
 
 export interface SearchItem {
   /** URL de la page */
@@ -65,12 +64,25 @@ const SERVICES: SearchItem[] = [
   { url: "/services/performance-seo", title: "Performance & SEO", excerpt: "Audit Core Web Vitals, SEO local.", category: "Service" },
 ];
 
-export const SEARCH_INDEX: SearchItem[] = [
+/**
+ * The whole search index, built on the server from the CMS content (pages
+ * and services above are fixed). Served to the ⌘K modal by
+ * /api/search-index and used directly by /search.
+ */
+export async function getSearchIndex(): Promise<SearchItem[]> {
+  const [cities, sectors, glossary, team, posts] = await Promise.all([
+    getCities(),
+    getSectors(),
+    getGlossary(),
+    getTeam(),
+    getPublishedPosts(),
+  ]);
+  return [
   ...STATIC_PAGES,
   ...SERVICES,
 
   // Pages locales
-  ...Object.values(CITIES).map((c) => ({
+  ...Object.values(cities).map((c) => ({
     url: c.path,
     title: `Agence web ${c.cityArticle}`,
     excerpt: c.heroIntro.slice(0, 180),
@@ -79,7 +91,7 @@ export const SEARCH_INDEX: SearchItem[] = [
   })),
 
   // Programmatic sectors
-  ...Object.values(SECTORS).map((s) => ({
+  ...Object.values(sectors).map((s) => ({
     url: `/agence-web-rouen/${s.slug}`,
     title: `Agence web pour ${s.namePlural} à Rouen`,
     excerpt: s.intro.slice(0, 180),
@@ -97,7 +109,7 @@ export const SEARCH_INDEX: SearchItem[] = [
   })),
 
   // Lexique
-  ...Object.values(GLOSSARY).map((g) => ({
+  ...Object.values(glossary).map((g) => ({
     url: `/lexique/${g.slug}`,
     title: g.term,
     excerpt: g.shortDef,
@@ -106,7 +118,7 @@ export const SEARCH_INDEX: SearchItem[] = [
   })),
 
   // Pages auteur
-  ...TEAM.map((m) => ({
+  ...team.map((m) => ({
     url: `/equipe/${m.slug}`,
     title: m.name,
     excerpt: m.bio,
@@ -114,7 +126,7 @@ export const SEARCH_INDEX: SearchItem[] = [
   })),
 
   // Articles blog
-  ...getPublishedPosts().map((p) => ({
+  ...posts.map((p) => ({
     url: `/blog/${p.slug}`,
     title: p.title,
     excerpt: p.excerpt,
@@ -122,3 +134,4 @@ export const SEARCH_INDEX: SearchItem[] = [
     keywords: p.tags,
   })),
 ];
+}

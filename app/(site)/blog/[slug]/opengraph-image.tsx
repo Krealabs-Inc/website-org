@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { blogPosts } from "@/lib/blog-data";
+import { getPost } from "@/lib/content/posts";
 
 export const runtime = "nodejs";
 export const alt = "Article du blog Krealabs";
@@ -15,7 +15,7 @@ export const contentType = "image/png";
  */
 export default async function Image({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = blogPosts.find((p) => p.slug === slug);
+  const post = await getPost(slug);
   const title = post?.title || "Article Krealabs";
   const category = post?.category || "Blog";
   const author = post?.author.name || "Krealabs";

@@ -14,7 +14,8 @@ import { Projects } from "./payload/collections/projects";
 import { Glossary } from "./payload/collections/glossary";
 import { Cities } from "./payload/collections/cities";
 import { Sectors } from "./payload/collections/sectors";
-import { migrations } from "./payload/migrations";
+import { Faq } from "./payload/collections/faq";
+import { Posts } from "./payload/collections/posts";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -40,16 +41,15 @@ export default buildConfig({
     graphQLPlayground: "/cms-api/graphql-playground",
   },
   i18n: { supportedLanguages: { fr }, fallbackLanguage: "fr" },
-  collections: [Projects, Team, Glossary, Cities, Sectors, Media, Users],
+  collections: [Posts, Projects, Team, Faq, Glossary, Cities, Sectors, Media, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URL || "" },
     schemaName: "payload",
     migrationDir: path.resolve(dirname, "payload/migrations"),
-    // In production, pending migrations run when Payload starts; in
-    // development the schema is pushed directly from the config.
-    prodMigrations: migrations,
+    // Production migrations run from lib/cms.ts under an advisory lock
+    // (parallel build workers); development pushes the schema directly.
   }),
   sharp,
   plugins: [

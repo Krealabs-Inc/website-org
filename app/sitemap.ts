@@ -1,9 +1,9 @@
 import { MetadataRoute } from "next";
-import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
+import { frenchDateToISO } from "@/lib/blog-data";
+import { getPublishedPosts, getIndexableTagSlugs } from "@/lib/content/posts";
 import { getCities, getSectors } from "@/lib/content/local";
 import { getTeam } from "@/lib/content/team";
 import { CATEGORY_SLUGS } from "@/app/(site)/blog/category/[slug]/page";
-import { INDEXABLE_TAG_SLUGS } from "@/app/(site)/blog/tag/[slug]/page";
 import { COMPARATOR_SLUGS } from "@/lib/comparators";
 import { getGlossary } from "@/lib/content/glossary";
 
@@ -188,7 +188,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Articles de blog individuels - chargés depuis blog-data.ts
   // Inclut images pour Google Images (post.image + OG dynamique)
-  const blogArticles: MetadataRoute.Sitemap = getPublishedPosts().map((post) => ({
+  const blogArticles: MetadataRoute.Sitemap = (await getPublishedPosts()).map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     // Date réelle de modif si renseignée, sinon date de publication.
     // Évite que tous les articles se présentent comme "modifiés aujourd'hui"
@@ -239,7 +239,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Pages tag blog (uniquement tags avec ≥3 articles)
-  const blogTagPages: MetadataRoute.Sitemap = INDEXABLE_TAG_SLUGS.map((slug) => ({
+  const blogTagPages: MetadataRoute.Sitemap = (await getIndexableTagSlugs()).map((slug) => ({
     url: `${baseUrl}/blog/tag/${slug}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
