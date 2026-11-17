@@ -834,6 +834,73 @@ html.has-scroll-fx [data-reveal="stagger"] > :nth-child(n + 7) { transition-dela
 .ambient-video { overflow: hidden; border: 1px solid var(--border-strong); border-radius: 24px; background: var(--surface); }
 .ambient-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
 
+/* ===== WordPress page (components/services/wordpress) ===== */
+.wp-editor { position: relative; border: 1px solid var(--border-strong); border-radius: 22px; background: var(--surface); overflow: hidden; }
+.wp-editor-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.wp-editor-publish { padding: 6px 14px; border-radius: 99px; font-size: 13px; font-weight: 600; background: var(--accent); color: var(--accent-foreground); transition: background-color 200ms ease-out, transform 160ms ease-out; }
+.wp-editor-publish.is-done { background: var(--accent-subtle); color: var(--accent); }
+.wp-editor-body { padding: 26px 26px 30px; }
+.wp-editor-title { margin-top: 8px; min-height: 1.3em; font-size: clamp(1.5rem, 2.6vw, 2.1rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; }
+.wp-editor-caret { display: inline-block; width: 2px; height: 1em; margin-left: 3px; vertical-align: -0.12em; background: var(--accent); }
+@media (prefers-reduced-motion: no-preference) {
+  .wp-editor-caret:not(.is-typing) { animation: wp-caret 1s steps(1) infinite; }
+}
+@keyframes wp-caret { 50% { opacity: 0; } }
+.wp-editor-line { display: block; height: 10px; border-radius: 6px; background: var(--border-strong); transition: opacity 200ms ease-out; }
+.wp-editor-media { display: flex; align-items: flex-end; height: 110px; margin-top: 22px; padding: 12px 14px; border: 1px dashed var(--border-strong); border-radius: 14px; }
+.wp-editor-toast { position: absolute; left: 50%; bottom: 18px; padding: 10px 16px; border-radius: 12px; font-size: 13px; font-weight: 600; white-space: nowrap; background: var(--accent); color: var(--accent-foreground); opacity: 0; transform: translate(-50%, 10px); transition: opacity 250ms ease-out, transform 250ms cubic-bezier(0.23, 1, 0.32, 1); }
+.wp-editor-toast.is-shown { opacity: 1; transform: translate(-50%, 0); }
+
+.wp-pane { min-height: 420px; border: 1px solid var(--border-strong); border-radius: 22px; background: var(--surface); overflow: hidden; }
+.wp-admin { display: grid; grid-template-columns: 150px 1fr; height: 100%; min-height: 420px; }
+.wp-admin-menu { display: flex; flex-direction: column; gap: 2px; padding: 16px 10px; background: #101014; font-size: 13px; color: var(--muted-foreground); }
+.wp-admin-menu span { padding: 8px 10px; border-radius: 8px; }
+.wp-admin-menu .is-active { background: var(--accent-subtle); color: var(--accent); }
+.wp-admin-main { display: flex; flex-direction: column; gap: 16px; padding: 22px 24px; }
+.wp-field { display: grid; gap: 6px; font-size: 13px; color: var(--muted-foreground); }
+.wp-input { display: flex; align-items: center; min-height: 42px; padding: 0 14px; border: 1px solid var(--border-strong); border-radius: 10px; background: var(--background); color: var(--foreground); font-size: 15px; }
+.wp-button { align-self: flex-start; padding: 9px 18px; border-radius: 99px; font-size: 13px; font-weight: 600; background: var(--accent); color: var(--accent-foreground); transition: background-color 200ms ease-out; }
+.wp-button.is-pressed { background: var(--accent-subtle); color: var(--accent); }
+.wp-media-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.wp-media-tile { aspect-ratio: 4 / 3; border-radius: 10px; opacity: 0.55; outline: 2px solid transparent; outline-offset: 3px; transition: opacity 200ms ease-out, outline-color 200ms ease-out; }
+.wp-media-tile.is-selected { opacity: 1; outline-color: var(--accent); }
+
+.wp-site { height: 100%; }
+.wp-site-bar { padding: 14px 18px; border-bottom: 1px solid var(--border); }
+.wp-site-body { display: flex; flex-direction: column; gap: 16px; padding: 22px 24px; }
+.wp-site-title { font-size: 1.6rem; font-weight: 600; letter-spacing: -0.02em; border-radius: 8px; }
+.wp-site-photo { display: flex; align-items: center; justify-content: center; height: 110px; border: 1px dashed var(--border-strong); border-radius: 14px; transition: background-color 300ms ease-out; }
+.wp-site-photo.has-photo { border-style: solid; border-color: transparent; background: linear-gradient(135deg, #7fb59a, #3f6f5a); }
+.wp-site-products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.wp-site-product { display: grid; gap: 8px; padding: 10px; border: 1px solid var(--border); border-radius: 12px; font-size: 12px; color: var(--muted-foreground); }
+.wp-site-product-img { display: block; height: 42px; border-radius: 8px; background: var(--border-strong); }
+.wp-site-news { display: grid; gap: 8px; font-size: 13px; color: var(--muted-foreground); }
+.wp-site-badge { margin-right: 6px; padding: 2px 8px; border-radius: 99px; font-size: 11px; font-weight: 600; background: var(--accent); color: var(--accent-foreground); }
+/* What just changed glows briefly, so the eye follows the edit. */
+@media (prefers-reduced-motion: no-preference) {
+  .wp-site .is-fresh { animation: wp-fresh 900ms cubic-bezier(0.23, 1, 0.32, 1); }
+}
+@keyframes wp-fresh { from { box-shadow: 0 0 0 6px var(--accent-subtle), 0 0 0 1px var(--accent); } to { box-shadow: 0 0 0 0 transparent, 0 0 0 1px transparent; } }
+
+.wp-timeline { position: relative; display: grid; gap: 56px; padding-left: 44px; }
+.wp-timeline-track { position: absolute; left: 9px; top: 6px; bottom: 6px; width: 2px; background: var(--border-strong); }
+.wp-timeline-fill { position: absolute; inset: 0; background: var(--accent); transform-origin: top; }
+.wp-timeline-step { position: relative; }
+.wp-timeline-dot { position: absolute; left: -44px; top: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px var(--background); }
+
+.wp-toc { border-top: 1px solid var(--border-strong); }
+.wp-toc li { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--border-strong); }
+.wp-toc-number { font-family: var(--font-geist-mono), monospace; font-size: 2rem; line-height: 1; color: var(--accent); }
+@media (min-width: 1024px) { .wp-toc li { grid-template-columns: 96px minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: baseline; } }
+
+.wp-plugins { border: 1px solid var(--border-strong); border-radius: 22px; background: var(--surface); overflow: hidden; }
+.wp-plugins li { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 16px; padding: 16px 22px; border-bottom: 1px solid var(--border); }
+.wp-plugins li:last-child { border-bottom: 0; }
+.wp-plugin-switch { position: relative; display: inline-block; width: 34px; height: 20px; border-radius: 99px; background: var(--accent); }
+.wp-plugin-switch::after { content: ""; position: absolute; top: 3px; right: 3px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent-foreground); }
+.wp-plugin-switch.is-off { background: var(--border-strong); }
+.wp-plugin-switch.is-off::after { right: auto; left: 3px; background: var(--muted-foreground); }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {

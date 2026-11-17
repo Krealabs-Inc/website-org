@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import Link from "next/link";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import {
   Wrench,
   RefreshCw,
@@ -17,9 +19,10 @@ import { ProjectSelection } from "@/components/projects/project-selection";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 
-import { ServiceHero } from "@/components/services/service-hero";
-import { ServiceFeatures } from "@/components/services/service-features";
-import { ServiceMethod } from "@/components/services/service-method";
+import { Button } from "@/components/ui/button";
+import { EditorDemo } from "@/components/services/wordpress/editor-demo";
+import { LiveEdit } from "@/components/services/wordpress/live-edit";
+import { TimelineTrace } from "@/components/services/wordpress/timeline-trace";
 import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
@@ -58,20 +61,73 @@ export default function WordpressPage() {
           { name: "Headless WordPress", description: "WP back + Next.js front" },
         ]}
       />
-      <ServiceHero
-        number="01"
-        shape="torus"
-        eyebrow="Site WordPress sur mesure"
-        title={
-          <>
-            Votre site <em>WordPress</em>,
-            <br />
-            simple à faire vivre.
-          </>
-        }
-        description="Un site à votre image, des contenus que vous mettez à jour vous-même, et une équipe joignable dès que vous en avez besoin. À Rouen et partout en France."
-        primaryCta={{ label: "Parler de mon projet WordPress", href: "/contact?type=devis" }}
-      />
+      {/* HERO: an editor that writes and publishes on its own */}
+      <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
+        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-40" aria-hidden />
+        <Container className="relative">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 text-body-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors mb-10"
+          >
+            <ArrowLeft className="size-3.5" />
+            Retour aux services
+          </Link>
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-6">
+              <Eyebrow number="01" dot className="mb-8">Site WordPress sur mesure</Eyebrow>
+              <h1 className="text-display">
+                Votre site <em>WordPress</em>,
+                <br />
+                simple à faire vivre.
+              </h1>
+              <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-xl">
+                Un site à votre image, des contenus que vous mettez à jour vous-même, et une équipe joignable dès que vous en avez besoin. À Rouen et partout en France.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <Button size="lg" asChild>
+                  <Link href="/contact?type=devis">
+                    Parler de mon projet WordPress
+                    <ArrowRight />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/services">Voir toutes les solutions</Link>
+                </Button>
+              </div>
+            </div>
+            <div className="lg:col-span-6">
+              <EditorDemo />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* SIGNATURE: you edit, your site follows */}
+      <LiveEdit />
+
+      {/* WHAT YOU GET: a table of contents */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="mb-14 max-w-3xl" data-scroll data-reveal="up">
+            <Eyebrow number="02" className="mb-6">Ce que vous obtenez</Eyebrow>
+            <h2 className="text-h1">
+              Un site pour votre activité.<br />Une gestion <em>à votre portée.</em>
+            </h2>
+            <p className="text-body text-[var(--muted-foreground)] mt-6">
+              De l’idée à la maintenance, vous avez un seul interlocuteur pour toute la vie de votre site.
+            </p>
+          </div>
+          <ol className="wp-toc" data-scroll data-reveal="stagger">
+            {FEATURES.map((f, i) => (
+              <li key={f.title}>
+                <span className="wp-toc-number">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="text-h3">{f.title}</h3>
+                <p className="text-body text-[var(--muted-foreground)]">{f.description}</p>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
 
       <ProjectSelection
         slugs={["iliass", "main-verte"]}
@@ -79,55 +135,52 @@ export default function WordpressPage() {
         title={<>Un même outil.<br />Des besoins <em>très différents.</em></>}
       />
 
-      <ServiceFeatures
-        number="01"
-        eyebrow="Ce que vous obtenez"
-        title={
+      {/* METHOD: a timeline drawn by the scroll */}
+      <TimelineTrace
+        heading={
           <>
-            Un site pour votre activité.<br />Une gestion <em>à votre portée.</em>
-          </>
-        }
-        intro="De l'idée à la maintenance, vous avez un seul interlocuteur pour toute la vie de votre site."
-        features={FEATURES}
-      />
-
-      <ServiceMethod
-        title={<>Un site rapide, que vous <em>maîtrisez</em>.</>}
-        intro={
-          <>
-            <p>Votre site repose sur un thème sur mesure (PHP, HTML, CSS), avec ACF Pro pour vos contenus. Sans Elementor ni Divi, il reste rapide, léger et simple à maintenir.</p>
-            <p>Si votre projet le justifie, il peut passer en <strong className="text-[var(--foreground)] font-medium">headless WordPress</strong> : vous gardez l’administration WordPress, et Next.js affiche vos pages plus vite à vos visiteurs.</p>
+            <Eyebrow number="03" className="mb-6">Méthode</Eyebrow>
+            <h2 className="text-h1">Un site rapide, que vous <em>maîtrisez</em>.</h2>
+            <div className="text-body text-[var(--muted-foreground)] mt-6 space-y-4">
+              <p>Votre site repose sur un thème sur mesure (PHP, HTML, CSS), avec ACF Pro pour vos contenus. Sans Elementor ni Divi, il reste rapide, léger et simple à maintenir.</p>
+              <p>Si votre projet le justifie, il peut passer en <strong className="text-[var(--foreground)] font-medium">headless WordPress</strong> : vous gardez l’administration WordPress, et Next.js affiche vos pages plus vite à vos visiteurs.</p>
+            </div>
           </>
         }
         steps={STEPS}
       />
 
-      {/* STACK WORDPRESS */}
+      {/* STACK: as WordPress shows it, a list of plugins */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="max-w-3xl mb-16" data-scroll data-reveal="up">
-            <Eyebrow number="03" className="mb-6">Stack WordPress</Eyebrow>
-            <h2 className="text-h1">
-              Les outils qui font la <em>différence</em>.
-            </h2>
-            <p className="text-body text-[var(--muted-foreground)] mt-6">
-              Des extensions éprouvées au quotidien, choisies pour que votre
-              site reste rapide, sûr et sauvegardé.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0" data-scroll data-reveal="stagger">
-            {WP_STACK.map((tool) => (
-              <div
-                key={tool.name}
-                className="compact-note"
-              >
-                <p className="text-caption mb-1.5">{tool.kind}</p>
-                <p className="text-body font-semibold">{tool.name}</p>
-                <p className="text-body-sm text-[var(--muted-foreground)] mt-1">
-                  {tool.tagline}
-                </p>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-4 lg:sticky lg:top-28 lg:self-start" data-scroll data-reveal="up">
+              <Eyebrow number="04" className="mb-6">Extensions</Eyebrow>
+              <h2 className="text-h1">
+                Les outils qui font la <em>différence</em>.
+              </h2>
+              <p className="text-body text-[var(--muted-foreground)] mt-6">
+                Des extensions éprouvées au quotidien, choisies pour que votre
+                site reste rapide, sûr et sauvegardé.
+              </p>
+            </div>
+            <ul className="wp-plugins lg:col-span-8" data-scroll data-reveal="stagger">
+              {WP_STACK.map((tool) => {
+                const none = tool.name === "Aucun";
+                return (
+                  <li key={tool.name}>
+                    <div className="min-w-0">
+                      <p className="text-body font-semibold">
+                        {none ? "Page builder" : tool.name}
+                        <span className="text-caption ml-3">{none ? "Jamais installé" : tool.kind}</span>
+                      </p>
+                      <p className="text-body-sm text-[var(--muted-foreground)] mt-1">{tool.tagline}</p>
+                    </div>
+                    <span className={`wp-plugin-switch ${none ? "is-off" : ""}`} role="img" aria-label={none ? "Désactivé" : "Activé"} />
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </Container>
       </section>
@@ -137,7 +190,7 @@ export default function WordpressPage() {
         <div className="absolute inset-0 bg-dot opacity-30" aria-hidden />
         <Container className="relative">
           <div className="max-w-3xl mb-16" data-scroll data-reveal="up">
-            <Eyebrow number="04" className="mb-6">Secteurs accompagnés</Eyebrow>
+            <Eyebrow number="05" className="mb-6">Secteurs accompagnés</Eyebrow>
             <h2 className="text-h1">
               Votre secteur, <em>vos besoins</em>.
             </h2>
