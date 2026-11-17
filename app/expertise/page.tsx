@@ -5,6 +5,7 @@ import { ArrowRight, ShieldCheck, GitBranch, TestTube2, Layers, Rocket, Microsco
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { AmbientVideo } from "@/components/media/ambient-video";
 import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 import { MotionReveal } from "@/components/animations/motion-reveal";
@@ -61,6 +62,25 @@ export default function ExpertisePage() {
       </section>
 
       {/* SAVOIR-FAIRE - 6 COMPÉTENCES PHARES */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="max-w-3xl mb-12" data-scroll data-reveal="up">
+            <Eyebrow className="mb-6">Votre projet, étape par étape</Eyebrow>
+            <h2 className="text-h1">
+              Quatre étapes, <em>aucune surprise</em>.
+            </h2>
+          </div>
+          <div data-scroll data-reveal="up">
+            <AmbientVideo
+              src="/videos/process.mp4"
+              poster="/videos/process.jpg"
+              label="Animation : les quatre étapes d’un projet"
+              transcript="Vous savez toujours où l’on en est. Cadrage : on comprend votre besoin, vos contraintes et vos objectifs. Conception : vous validez la maquette avant la moindre ligne de code. Développement : des démos régulières, vous voyez votre projet avancer. Mise en ligne et suivi : formation, surveillance, et on reste joignable. Un seul interlocuteur, du devis à la mise en ligne."
+            />
+          </div>
+        </Container>
+      </section>
+
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">

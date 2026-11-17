@@ -828,6 +828,10 @@ html.has-scroll-fx [data-reveal="stagger"] > :nth-child(n + 7) { transition-dela
 .depth-plane .depth-step-title { margin: 24px 0 0; font-size: clamp(2.75rem, 7vw, 5.5rem); line-height: 1; letter-spacing: -0.04em; }
 .depth-plane .depth-step-text { max-width: 36rem; margin: 24px auto 0; font-size: 1.125rem; line-height: 1.6; }
 
+/* Brand videos (AmbientVideo): framed like the site's panels. */
+.ambient-video { overflow: hidden; border: 1px solid var(--border-strong); border-radius: 24px; background: var(--surface); }
+.ambient-video video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {

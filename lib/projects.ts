@@ -12,6 +12,8 @@ export interface Project {
   work: string;
   result: string;
   highlights: string[];
+  /** Optional Remotion video (public/videos), shown on /clients. */
+  video?: { src: string; poster: string; transcript: string };
 }
 
 // Descriptions based on the public sites. Results describe what the client
@@ -87,6 +89,11 @@ export const PROJECTS: Project[] = [
     work: "Un site qui explique le principe d’une journée type, présente trois parcours (Suisse normande, Roche d’Oëtre, Boucle des Andelys) avec distance, dénivelé, durée, taille de groupe et tarif, et mène à la réservation en ligne.",
     result: "Les visiteurs comprennent le principe et comparent les parcours sur des critères concrets avant de réserver, sans avoir à poser la question par téléphone.",
     highlights: ["Trois parcours détaillés et comparables", "Carte des parcours", "Réservation en ligne"],
+    video: {
+      src: "/videos/projet-traversia.mp4",
+      poster: "/videos/projet-traversia.jpg",
+      transcript: "Réalisation Traversia, tourisme et plein air. La situation : des journées qui associent randonnée et descente en canoë en Normandie ; l’enjeu, faire comprendre ce format peu courant et donner envie de réserver. Ce qui a été fait : un site qui explique la journée type, présente trois parcours avec distance, dénivelé, durée et tarif, et mène à la réservation en ligne. Ce que ça change : les visiteurs comparent les parcours sur des critères concrets avant de réserver.",
+    },
   },
   {
     slug: "mbe-bihorel",

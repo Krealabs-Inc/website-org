@@ -12,6 +12,7 @@ import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { HeroVolume } from "@/components/home/hero-volume";
 import { PromisesStrip, type ClientPromise } from "@/components/home/promises-strip";
 import { MethodDepth, type MethodStep } from "@/components/home/method-depth";
+import { AmbientVideo } from "@/components/media/ambient-video";
 
 export default function HomePage() {
   return (
@@ -29,6 +30,32 @@ export default function HomePage() {
                 <p className="text-body-sm text-[var(--muted-foreground)]">{benefit.detail}</p>
               </div>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            <div className="lg:col-span-4" data-scroll data-reveal="up">
+              <Eyebrow className="mb-6">Ça vous parle ?</Eyebrow>
+              <h2 className="text-h1">
+                Des demandes <em>éparpillées</em> partout ?
+              </h2>
+              <p className="text-body text-[var(--muted-foreground)] mt-6">
+                Mails, téléphone, tableurs : quand les demandes arrivent de
+                partout, il y en a toujours une qui se perd. Votre site peut
+                les rassembler au même endroit.
+              </p>
+            </div>
+            <div className="lg:col-span-8" data-scroll data-reveal="up" style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
+              <AmbientVideo
+                src="/videos/contexte.mp4"
+                poster="/videos/contexte.jpg"
+                label="Animation : des demandes éparpillées qui se retrouvent au même endroit"
+                transcript="Un lundi matin, dans une entreprise comme la vôtre : une demande de devis dans les mails, une autre au téléphone, un tableur pour suivre, un autre pour facturer. Et une demande qui se perd. Avec un site qui travaille pour vous, chaque demande arrive au même endroit : devis, rappels et questions, chacun avec son statut. Votre activité mérite un site qui travaille pour vous."
+              />
+            </div>
           </div>
         </Container>
       </section>

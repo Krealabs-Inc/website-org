@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
 import { PROJECTS } from "@/lib/projects";
+import { AmbientVideo } from "@/components/media/ambient-video";
 
 export const metadata: Metadata = {
   title: "Réalisations d’une agence web à Rouen",
@@ -40,6 +41,16 @@ export default function ClientsPage() {
               <div><p className="text-caption mb-4">0{index + 1} · {project.sector}</p><h2 className="text-h1">{project.name}</h2></div>
               {project.url && <a href={project.url} target="_blank" rel="noopener noreferrer" className="home-text-link" aria-label={`Visiter ${project.name} (nouvel onglet)`}>{project.domain}<ArrowUpRight className="size-4" aria-hidden /></a>}
             </div>
+            {project.video && (
+              <div data-scroll data-reveal="up">
+                <AmbientVideo
+                  src={project.video.src}
+                  poster={project.video.poster}
+                  label={`Animation : le projet ${project.name}`}
+                  transcript={project.video.transcript}
+                />
+              </div>
+            )}
             <div className="project-case-story" data-scroll data-reveal="up">
               <div><p className="text-caption mb-5">{project.format}</p><h3 className="text-h2">{project.title}</h3></div>
               <div className="space-y-6">
