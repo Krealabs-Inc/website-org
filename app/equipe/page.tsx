@@ -1,15 +1,12 @@
 import { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { ServiceCta } from "@/components/services/service-cta";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { PersonSchema } from "@/components/seo/person-schema";
 import { AmbientVideo } from "@/components/media/ambient-video";
-import { FlipPortrait } from "@/components/team/flip-portrait";
-import { TEAM, UPCOMING_TEAM, type TeamMember } from "@/lib/team";
+import { GaletTeam } from "@/components/team/galet-team";
+import { TEAM, UPCOMING_TEAM } from "@/lib/team";
 
 export const metadata: Metadata = {
   title: "L'équipe : les associés derrière Krealabs (Rouen)",
@@ -27,7 +24,6 @@ export const metadata: Metadata = {
 
 export default function EquipePage() {
   const baseUrl = "https://krealabs.fr";
-  const teamCount = TEAM.length + UPCOMING_TEAM.length;
 
   return (
     <main className="team-page bg-[var(--background)] text-[var(--foreground)]">
@@ -41,35 +37,21 @@ export default function EquipePage() {
         knowsAbout: member.knowsAbout,
       }))} />
 
-      <section className="team-intro">
+      {/* HERO: the four partners as Galets */}
+      <section id="collectif" className="pt-32 pb-20 md:pt-40 scroll-mt-28" aria-label="Les associés de Krealabs">
         <Container>
-          <div className="team-intro-meta">
-            <Eyebrow>Le collectif Krealabs</Eyebrow>
-            <span className="text-caption">Rouen, Normandie · Depuis 2020</span>
+          <div className="mb-14 text-center">
+            <Eyebrow dot className="mb-6 justify-center">Le collectif · Rouen, depuis 2020</Eyebrow>
+            <h1 className="text-h1 md:text-display mx-auto max-w-4xl">
+              Quatre associés. <em>Personne d’autre</em> entre vous et votre projet.
+            </h1>
+            <p className="text-body-lg text-[var(--muted-foreground)] mx-auto mt-6 max-w-xl">
+              Ce sont eux qui vous écoutent, et eux qui construisent. Touchez un galet pour faire connaissance.
+            </p>
           </div>
-          <div className="team-intro-layout">
-            <h1 className="team-headline">Des personnes,<br />derrière chaque <em>projet.</em></h1>
-            <div className="team-intro-aside">
-              <span className="team-count" aria-hidden>{String(teamCount).padStart(2, "0")}</span>
-              <p className="text-caption mb-6">Associés · Un même studio</p>
-              <p className="text-body text-[var(--muted-foreground)]">
-                Nous sommes les personnes qui conçoivent, développent et suivent votre projet.
-                Du premier échange à la mise en ligne, vous nous parlez directement.
-              </p>
-            </div>
-          </div>
-          <div className="team-section-marker">
-            <a href="#collectif" className="text-caption hover:underline underline-offset-4">L’équipe, au complet</a>
-            <span className="text-caption">{String(TEAM.length).padStart(2, "0")} profils à découvrir</span>
-          </div>
-        </Container>
-      </section>
-
-      <section id="collectif" aria-label="Les associés de Krealabs" className="scroll-mt-28">
-        <Container>
-          <div className="team-gallery">
-            {TEAM.map((member, index) => <MemberPortrait key={member.slug} member={member} index={index} />)}
-          </div>
+          <GaletTeam
+            members={TEAM.map(({ slug, name, role, initials, photo, loves }) => ({ slug, name, role, initials, photo, loves }))}
+          />
           {UPCOMING_TEAM.length > 0 && (
             <div className="team-pending">
               {UPCOMING_TEAM.map((member) => (
@@ -139,44 +121,6 @@ export default function EquipePage() {
         secondaryLabel={null}
       />
     </main>
-  );
-}
-
-function MemberPortrait({ member, index }: { member: TeamMember; index: number }) {
-  return (
-    <article className="team-member">
-      <FlipPortrait
-        name={member.name}
-        slug={member.slug}
-        bio={member.bio}
-        stack={member.stack}
-        location={member.location}
-        years={member.yearsExperience}
-        front={
-          <Link href={`/equipe/${member.slug}`} className="team-portrait-link" aria-label={`Découvrir le profil de ${member.name}`}>
-            <div className="team-portrait" data-member={member.slug}>
-              {member.photo ? (
-                <Image src={member.photo} alt={`Portrait de ${member.name}`} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" priority={index < 2} className="team-portrait-image" />
-              ) : <span className="team-portrait-initials">{member.initials}</span>}
-              <span className="team-portrait-index" aria-hidden>0{index + 1}</span>
-            </div>
-          </Link>
-        }
-      />
-      <div className="team-member-heading">
-        <h2 className="text-h3"><Link href={`/equipe/${member.slug}`}>{member.name}</Link></h2>
-        <p className="team-member-role">{member.role}</p>
-      </div>
-      <p className="team-specialties">{member.specialties.join(" / ")}</p>
-      <blockquote className="team-member-quote">« {member.loves} »</blockquote>
-      <div className="team-member-links">
-        <Link href={`/equipe/${member.slug}`} className="team-profile-link">Le profil<ArrowUpRight className="size-3.5" aria-hidden /></Link>
-        <div className="flex flex-wrap gap-4">
-          {member.github && <a href={member.github} target="_blank" rel="noopener noreferrer" aria-label={`GitHub de ${member.name} (nouvel onglet)`}>GitHub</a>}
-          {member.linkedin && <a href={member.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`LinkedIn de ${member.name} (nouvel onglet)`}>LinkedIn</a>}
-        </div>
-      </div>
-    </article>
   );
 }
 
