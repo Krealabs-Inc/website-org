@@ -11,10 +11,10 @@ interface LegalPageProps {
   children: React.ReactNode;
 }
 
-const otherPages = [
+const otherPages: { label: string; href: string; title?: string }[] = [
   { label: "Mentions légales", href: "/legal/mentions-legales" },
   { label: "Politique de confidentialité", href: "/legal/politique-confidentialite" },
-  { label: "CGV", href: "/legal/cgv" },
+  { label: "CGV", href: "/legal/cgv", title: "Conditions générales de vente" },
 ];
 
 export function LegalPage({
@@ -26,11 +26,14 @@ export function LegalPage({
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       <section className="relative pt-32 pb-12 md:pt-40 md:pb-16">
-        <div
-          className="absolute inset-0 bg-grid bg-grid-fade opacity-40"
-          aria-hidden
-        />
         <Container className="relative">
+          <nav className="legal-tabs" aria-label="Pages légales">
+            {otherPages.map((p) => (
+              <Link key={p.href} href={p.href} aria-current={(p.title ?? p.label) === title ? "page" : undefined} className={(p.title ?? p.label) === title ? "is-current" : undefined}>
+                {p.label}
+              </Link>
+            ))}
+          </nav>
           <div className="max-w-3xl">
             <Eyebrow dot className="mb-6">
               {eyebrow}
@@ -48,7 +51,7 @@ export function LegalPage({
       <section className="pb-24 md:pb-32">
         <Container>
           <article
-            className="max-w-3xl
+            className="legal-doc max-w-3xl
               [&_h2]:text-xl [&_h2]:md:text-2xl [&_h2]:font-semibold [&_h2]:tracking-[-0.02em] [&_h2]:mt-14 [&_h2]:mb-5 [&_h2]:text-[var(--foreground)]
               [&_h3]:text-base [&_h3]:md:text-lg [&_h3]:font-semibold [&_h3]:mt-8 [&_h3]:mb-3 [&_h3]:text-[var(--foreground)]
               [&_p]:text-body [&_p]:text-[var(--muted-foreground)] [&_p]:mb-4 [&_p]:leading-relaxed

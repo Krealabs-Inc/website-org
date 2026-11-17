@@ -1612,6 +1612,13 @@ fieldset:disabled .calc-option { cursor: default; opacity: 0.5; }
 @media (min-width: 768px) { .hire-points { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .hire-points li { padding: 28px 0; border-bottom: 1px solid var(--border-strong); }
 
+/* ===== Legal pages: a plain document, no motion (app/legal) ===== */
+.legal-tabs { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 40px; padding: 4px; width: fit-content; border: 1px solid var(--border-strong); border-radius: 12px; }
+.legal-tabs a { padding: 8px 14px; border-radius: 9px; font-size: 13px; color: var(--muted-foreground); }
+.legal-tabs a:hover { color: var(--foreground); }
+.legal-tabs a.is-current { background: var(--surface); color: var(--foreground); }
+.legal-doc h2 { padding-top: 14px; border-top: 1px solid var(--border); }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {
