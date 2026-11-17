@@ -9,7 +9,8 @@ import { AmbientVideo } from "@/components/media/ambient-video";
 import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
 import { MotionReveal } from "@/components/animations/motion-reveal";
-import { MeshGradient } from "@/components/animations/mesh-gradient";
+import { Blueprint } from "@/components/expertise/blueprint";
+import { StackTabs } from "@/components/expertise/stack-tabs";
 
 export const metadata: Metadata = {
   title: "Expertise - Savoir-faire & technologies",
@@ -30,8 +31,7 @@ export default function ExpertisePage() {
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       {/* HERO */}
       <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
-        <MeshGradient intensity={0.25} />
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-30" aria-hidden />
+        <div className="bp-hero-grid" aria-hidden />
 
         <Container className="relative">
           <MotionReveal className="max-w-4xl">
@@ -39,7 +39,7 @@ export default function ExpertisePage() {
             <h1 className="text-display">
               Savoir-faire <em>technique</em>,
               <br />
-              rigueur d'<em>artisan</em>.
+              rigueur d’<em>artisan</em>.
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
               Architecture, performance, sécurité, accessibilité - les
@@ -49,12 +49,12 @@ export default function ExpertisePage() {
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Button size="lg" asChild>
                 <Link href="/contact">
-                  Discuter d'un projet
+                  Parler de mon projet
                   <ArrowRight />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="/equipe">Découvrir l'équipe</Link>
+                <Link href="/equipe">Découvrir l’équipe</Link>
               </Button>
             </div>
           </MotionReveal>
@@ -83,40 +83,18 @@ export default function ExpertisePage() {
 
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
-            <div className="max-w-2xl">
+          <div className="mb-14 grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
+            <div className="lg:col-span-7">
               <Eyebrow number="01" className="mb-6">Savoir-faire</Eyebrow>
               <h2 className="text-h1">
-                Six <em>compétences</em> structurantes.
+                Le <em>plan</em> de votre projet.
               </h2>
             </div>
-            <p className="text-body text-[var(--muted-foreground)] max-w-md">
-              Au-delà du code, ce qui fait la différence sur un projet long
-              terme : la manière d'aborder l'architecture, la sécurité et
-              l'évolutivité.
+            <p className="text-body text-[var(--muted-foreground)] lg:col-span-5">
+              Au-delà du code, ce qui fait tenir un projet dans la durée : six savoir-faire, comme les pièces d’un bâtiment bien conçu.
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {COMPETENCES.map((c) => {
-              return (
-                <article key={c.title} className="editorial-note">
-                  <h3 className="text-h4 mb-2">{c.title}</h3>
-                  <p className="text-body-sm text-[var(--muted-foreground)] mb-5">
-                    {c.description}
-                  </p>
-                  <ul className="space-y-1.5">
-                    {c.points.map((p) => (
-                      <li key={p} className="flex items-start gap-2 text-body-sm">
-                        <span className="mt-2 size-1 rounded-full bg-[var(--accent)] shrink-0" />
-                        <span className="text-[var(--muted-foreground)]">{p}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </article>
-              );
-            })}
-          </div>
+          <Blueprint skills={COMPETENCES.map(({ title, description, points }) => ({ title, description, points }))} />
         </Container>
       </section>
 
@@ -135,30 +113,7 @@ export default function ExpertisePage() {
             </p>
           </div>
 
-          <div className="space-y-12">
-            {STACK_CATEGORIES.map((cat) => (
-              <div key={cat.title}>
-                <div className="flex items-baseline gap-4 mb-6">
-                  <h3 className="text-h3">{cat.title}</h3>
-                  <span className="text-caption">{cat.items.length} outils</span>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
-                  {cat.items.map((item) => (
-                    <div
-                      key={item.name}
-                      className="compact-note"
-                    >
-                      <p className="text-caption mb-1.5">{item.kind}</p>
-                      <p className="text-body font-semibold">{item.name}</p>
-                      <p className="text-body-sm text-[var(--muted-foreground)] mt-1">
-                        {item.tagline}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+          <StackTabs categories={STACK_CATEGORIES} />
         </Container>
       </section>
 
