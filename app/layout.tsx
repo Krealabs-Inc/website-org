@@ -7,7 +7,7 @@ import { Navbar } from "@/components/navigation/navbar";
 import { Footer } from "@/components/navigation/footer";
 import { Toaster } from "sonner";
 import { WebSiteSchema } from "@/components/seo/website-schema";
-import { LenisProvider } from "@/components/animations/lenis-provider";
+import { ScrollProvider } from "@/components/animations/scroll-provider";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CookieConsent } from "@/components/legal/cookie-consent";
@@ -157,7 +157,7 @@ export default function RootLayout({
           defaultTheme="dark"
           enableSystem={false}
         >
-          <LenisProvider>
+          <ScrollProvider>
             <WebSiteSchema />
             <Navbar />
             <div id="main-content">{children}</div>
@@ -165,7 +165,7 @@ export default function RootLayout({
             <Toaster position="top-right" richColors />
             <CookieConsent />
             <SearchModal />
-          </LenisProvider>
+          </ScrollProvider>
           <Analytics />
           <SpeedInsights />
         </ThemeProvider>

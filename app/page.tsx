@@ -22,7 +22,7 @@ export default function HomePage() {
 
       <section className="border-t border-[var(--border-strong)]">
         <Container>
-          <div className="home-benefits !mt-0 !border-t-0 py-12">
+          <div className="home-benefits !mt-0 !border-t-0 py-12" data-scroll data-reveal="stagger">
             {BENEFITS.map((benefit) => (
               <div key={benefit.title}>
                 <p className="text-body font-medium mb-2">{benefit.title}</p>
@@ -84,7 +84,7 @@ export default function HomePage() {
 
       <section className="home-local-strip">
         <Container>
-          <div className="home-local-layout">
+          <div className="home-local-layout" data-scroll data-reveal="up">
             <div><Eyebrow className="mb-5">Rouen, Normandie</Eyebrow><h2 className="text-h2">Proches de vous.<br /><em>Où que vous soyez.</em></h2></div>
             <p className="text-body text-[var(--muted-foreground)]">À Rouen, ailleurs en Normandie ou partout en France : on se voit en visio ou à Rouen, et vous parlez directement aux personnes qui construisent votre projet.</p>
             <Link href="/equipe" className="home-text-link">Voir qui travaille sur votre projet<ArrowRight className="size-4" aria-hidden /></Link>

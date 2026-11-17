@@ -30,11 +30,11 @@ export function ServiceFAQ({ title, eyebrow = "Questions fréquentes", items }: 
       <FAQSchema items={items} />
       <section className="section-y border-t border-[var(--border)]">
         <Container size="narrow">
-          <div className="mb-12 text-center">
+          <div className="mb-12 text-center" data-scroll data-reveal="up">
             <Eyebrow className="mb-6 justify-center">{eyebrow}</Eyebrow>
             <h2 className="text-h1">{title ?? "Questions fréquentes"}</h2>
           </div>
-          <div className="border-t border-[var(--border-strong)]">
+          <div className="border-t border-[var(--border-strong)]" data-scroll data-reveal="stagger">
             {items.map((item) => (
               <details
                 key={item.question}

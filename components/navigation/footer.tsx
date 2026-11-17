@@ -183,13 +183,13 @@ export function Footer() {
               </Link>
 
               <p className="text-body text-[var(--muted-foreground)] max-w-sm">
-                Agence digitale à{" "}
+                Agence web à{" "}
                 <strong className="text-[var(--foreground)] font-medium">
                   Rouen
                 </strong>
-                . Conception et développement de sites web, applications
-                mobiles et logiciels sur mesure pour les entreprises de
-                Normandie.
+                . Votre site, votre application ou votre logiciel, pensés
+                pour vos clients et simples à faire vivre, en Normandie et
+                partout en France.
               </p>
 
               {/* Offre verticale — sous-domaine dédié */}

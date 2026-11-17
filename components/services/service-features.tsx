@@ -33,7 +33,7 @@ export function ServiceFeatures({
   return (
     <section className="section-y border-t border-[var(--border)]">
       <Container>
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16" data-scroll data-reveal="up">
           <div className="max-w-2xl">
             <Eyebrow number={number} className="mb-6">{eyebrow}</Eyebrow>
             <h2 className="text-h1">{title}</h2>
@@ -45,7 +45,7 @@ export function ServiceFeatures({
           )}
         </div>
 
-        <div className={layout === "list" ? "service-feature-list" : `grid grid-cols-1 ${colClass} gap-x-10 gap-y-0`}>
+        <div className={layout === "list" ? "service-feature-list" : `grid grid-cols-1 ${colClass} gap-x-10 gap-y-0`} data-scroll data-reveal="stagger">
           {features.map((feature, index) => (
             <article key={feature.title} className="editorial-entry">
               <span className="editorial-ordinal" aria-hidden>{String(index + 1).padStart(2, "0")}</span>

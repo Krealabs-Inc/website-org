@@ -21,14 +21,14 @@ export function ProjectSelection({
   return (
     <section id="realisations" className="project-selection">
       <Container>
-        <div className="project-selection-heading">
+        <div className="project-selection-heading" data-scroll data-reveal="up">
           <div>
             <Eyebrow className="mb-5">{eyebrow}</Eyebrow>
             <h2 className="text-h1">{title}</h2>
           </div>
           <Link href="/clients" className="home-text-link">Voir toutes les réalisations<ArrowRight className="size-4" aria-hidden /></Link>
         </div>
-        <div className="service-index">
+        <div className="service-index" data-scroll data-reveal="stagger">
           {projects.map((project, index) => (
             <Link key={project.slug} href={`/clients#${project.slug}`} className="service-index-row">
               <span className="service-index-number" aria-hidden>0{index + 1}</span>
