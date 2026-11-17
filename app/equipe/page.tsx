@@ -8,6 +8,7 @@ import { ServiceCta } from "@/components/services/service-cta";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { PersonSchema } from "@/components/seo/person-schema";
 import { AmbientVideo } from "@/components/media/ambient-video";
+import { FlipPortrait } from "@/components/team/flip-portrait";
 import { TEAM, UPCOMING_TEAM, type TeamMember } from "@/lib/team";
 
 export const metadata: Metadata = {
@@ -115,8 +116,8 @@ export default function EquipePage() {
             <h2 className="text-h1">Des parcours différents.<br />Une même <em>exigence.</em></h2>
           </div>
           <p className="text-body-lg text-[var(--muted-foreground)] max-w-2xl mt-8">
-            Une agence à taille humaine, par choix. Nous gardons la maîtrise du code
-            et prenons le temps de comprendre les personnes qui nous le confient.
+            Quatre associés, et c’est voulu : vous gardez les mêmes interlocuteurs du premier échange
+            à la mise en ligne, et ceux qui vous écoutent sont ceux qui construisent.
           </p>
           <div className="team-values">
             {VALUES.map((value, index) => (
@@ -144,31 +145,30 @@ export default function EquipePage() {
 function MemberPortrait({ member, index }: { member: TeamMember; index: number }) {
   return (
     <article className="team-member">
-      <Link href={`/equipe/${member.slug}`} className="team-portrait-link" aria-label={`Découvrir le profil de ${member.name}`}>
-        <div className="team-portrait" data-member={member.slug}>
-          {member.photo ? (
-            <Image src={member.photo} alt={`Portrait de ${member.name}`} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" priority={index < 2} className="team-portrait-image" />
-          ) : <span className="team-portrait-initials">{member.initials}</span>}
-          <span className="team-portrait-index" aria-hidden>0{index + 1}</span>
-          <span className="team-portrait-action" aria-hidden><ArrowUpRight className="size-5" /></span>
-        </div>
-      </Link>
+      <FlipPortrait
+        name={member.name}
+        slug={member.slug}
+        bio={member.bio}
+        stack={member.stack}
+        location={member.location}
+        years={member.yearsExperience}
+        front={
+          <Link href={`/equipe/${member.slug}`} className="team-portrait-link" aria-label={`Découvrir le profil de ${member.name}`}>
+            <div className="team-portrait" data-member={member.slug}>
+              {member.photo ? (
+                <Image src={member.photo} alt={`Portrait de ${member.name}`} fill sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw" priority={index < 2} className="team-portrait-image" />
+              ) : <span className="team-portrait-initials">{member.initials}</span>}
+              <span className="team-portrait-index" aria-hidden>0{index + 1}</span>
+            </div>
+          </Link>
+        }
+      />
       <div className="team-member-heading">
         <h2 className="text-h3"><Link href={`/equipe/${member.slug}`}>{member.name}</Link></h2>
         <p className="team-member-role">{member.role}</p>
       </div>
       <p className="team-specialties">{member.specialties.join(" / ")}</p>
       <blockquote className="team-member-quote">« {member.loves} »</blockquote>
-      <details className="team-member-details">
-        <summary>Parcours & expertises<span className="team-details-plus" aria-hidden>+</span></summary>
-        <div className="team-member-details-body">
-          <p className="text-body-sm text-[var(--muted-foreground)]">{member.bio}</p>
-          <dl className="mt-6 space-y-4 text-body-sm">
-            <div><dt className="text-caption mb-2">Au quotidien</dt><dd>{member.stack.join(" · ")}</dd></div>
-            <div><dt className="text-caption mb-2">Basé à</dt><dd>{member.location} · {member.yearsExperience} ans d’expérience</dd></div>
-          </dl>
-        </div>
-      </details>
       <div className="team-member-links">
         <Link href={`/equipe/${member.slug}`} className="team-profile-link">Le profil<ArrowUpRight className="size-3.5" aria-hidden /></Link>
         <div className="flex flex-wrap gap-4">
