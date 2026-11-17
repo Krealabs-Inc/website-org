@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { ShareButton } from "@/components/blog/share-button";
 import { MarkdownText } from "@/components/blog/markdown-text";
+import { ArticleReader } from "@/components/blog/article-reader";
 import {
   blogPosts,
   frenchDateToISO,
@@ -280,15 +281,20 @@ export default async function BlogPostPage({
 
       {/* ========== ARTICLE CONTENT ========== */}
       <article className="section-y">
-        <Container size="narrow">
+        <Container>
+        <div className="read-layout">
+        <aside className="read-aside">
+          <ArticleReader sections={post.content.sections.map((s) => s.title)} />
+        </aside>
+        <div className="read-body">
           {/* Introduction */}
-          <p className="text-body-lg text-[var(--foreground)]/90 leading-relaxed mb-12">
+          <p className="read-intro text-body-lg text-[var(--foreground)]/90 leading-relaxed mb-12">
             <MarkdownText>{post.content.introduction}</MarkdownText>
           </p>
 
           {/* Sections */}
           {post.content.sections.map((section, index) => (
-            <section key={index} className="mb-12 last:mb-0">
+            <section key={index} id={`s-${index + 1}`} className="mb-12 last:mb-0 scroll-mt-28">
               <h2 className="text-h2 mb-6">
                 <span className="text-[var(--accent)] mr-3 text-eyebrow align-middle">
                   {String(index + 1).padStart(2, "0")}
@@ -347,11 +353,13 @@ export default async function BlogPostPage({
                 {post.author.role}
               </p>
               <span className="inline-flex items-center gap-1.5 text-body-sm font-medium text-[var(--accent)]">
-                Découvrir l'équipe
+                Découvrir l’équipe
                 <ArrowUpRight className="size-3.5 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 transition-transform" />
               </span>
             </div>
           </Link>
+        </div>
+        </div>
         </Container>
       </article>
 
@@ -466,12 +474,12 @@ export default async function BlogPostPage({
                 Un sujet à <em>creuser</em> ensemble ?
               </h2>
               <p className="text-body-lg text-[var(--muted-foreground)] mb-8 max-w-xl mx-auto">
-                Si cet article t'a parlé et que tu as un projet en cours (ou
-                naissant), écris-nous - premier échange offert.
+                Cet article vous parle et vous avez un projet en cours, ou qui
+                se dessine ? Écrivez-nous : le premier échange est offert.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <Button size="lg" asChild>
-                  <Link href="/contact">Discuter d'un projet</Link>
+                  <Link href="/contact">Parler de mon projet</Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
                   <Link href="/services">Voir nos services</Link>
