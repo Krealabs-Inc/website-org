@@ -778,6 +778,18 @@ body {
   .home-local-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto; gap: 48px; }
   .service-feature-list .editorial-entry > div { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 48px; }
 }
+/* Redesign: promise cards in the horizontal strip. */
+.promise-card { display: flex; flex-direction: column; justify-content: space-between; height: 100%; padding: 32px; border-top: 2px solid var(--accent); border-radius: 0 0 16px 16px; background: var(--surface); transition: background-color 200ms ease-out; }
+.promise-card:hover { background: var(--surface-hover); }
+.promise-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+@media (min-width: 768px) { .promise-card { padding: 40px; } }
+
+/* Scroll cue: an accent segment travelling down a hairline. */
+@keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
+@media (prefers-reduced-motion: no-preference) {
+  .scroll-hint-bar { animation: scroll-hint 1.6s cubic-bezier(0.65, 0, 0.35, 1) infinite; }
+}
+
 /* A quiet final invitation; no scroll reveal, parallax or moving decoration. */
 .contact-invitation { scroll-margin-top: 80px; padding: 48px 0 64px; background: var(--background); }
 .contact-invitation-panel {
