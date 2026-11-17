@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import {
   Gauge,
   Search,
@@ -6,6 +7,8 @@ import {
   FileSearch,
   TrendingUp,
   LineChart,
+  ArrowLeft,
+  ArrowRight,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -17,9 +20,11 @@ export const metadata: Metadata = {
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceHero } from "@/components/services/service-hero";
-import { ServiceFeatures } from "@/components/services/service-features";
-import { ServiceMethod } from "@/components/services/service-method";
+import { Button } from "@/components/ui/button";
+import { Gauges } from "@/components/services/seo/gauges";
+import { SerpClimb } from "@/components/services/seo/serp-climb";
+import { LoadRace } from "@/components/services/seo/load-race";
+import { Checklist } from "@/components/services/seo/checklist";
 import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
@@ -42,56 +47,129 @@ export default function PerformanceSeoPage() {
           { name: "Suivi mensuel" },
         ]}
       />
-      <ServiceHero
-        number="04"
-        shape="octahedron"
-        eyebrow="Performance & SEO local"
-        title={
-          <>
-            Vos clients vous trouvent
-            <br />
-            sur Google, à <em>Rouen</em>.
-          </>
-        }
-        description="Vous apparaissez quand vos clients cherchent votre métier, et votre site s'affiche instantanément. Audit technique, Core Web Vitals et SEO local pour les entreprises de Rouen et de Normandie."
-      />
+      {/* HERO: the scores we aim for, filling up */}
+      <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
+        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-40" aria-hidden />
+        <Container className="relative">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 text-body-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors mb-10"
+          >
+            <ArrowLeft className="size-3.5" />
+            Retour aux services
+          </Link>
+          <div className="grid grid-cols-1 items-end gap-14 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <Eyebrow number="04" dot className="mb-8">Performance & SEO local</Eyebrow>
+              <h1 className="text-display">
+                Vos clients vous trouvent sur Google, à <em>Rouen</em>.
+              </h1>
+              <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-xl">
+                Vous apparaissez quand vos clients cherchent votre métier, et votre site s’affiche instantanément. Audit technique, Core Web Vitals et SEO local pour les entreprises de Rouen et de Normandie.
+              </p>
+              <div className="mt-10 flex flex-wrap items-center gap-3">
+                <Button size="lg" asChild>
+                  <Link href="/contact">
+                    Parler de mon projet
+                    <ArrowRight />
+                  </Link>
+                </Button>
+                <Button size="lg" variant="outline" asChild>
+                  <Link href="/services">Voir toutes les solutions</Link>
+                </Button>
+              </div>
+            </div>
+            <div className="lg:col-span-5">
+              <Gauges />
+            </div>
+          </div>
+        </Container>
+      </section>
 
-      <ServiceFeatures
-        number="01"
-        eyebrow="Ce qui change pour vous"
-        title={
-          <>
-            Six leviers, un seul <em>objectif</em>.
-          </>
-        }
-        intro="Chaque levier est mesuré avant/après. Les chiffres parlent - vous savez exactement ce que votre investissement rapporte."
-        features={FEATURES}
-      />
+      {/* SIGNATURE: your site climbing a results page */}
+      <SerpClimb />
 
-      <ServiceMethod
-        title={<>Audit, plan d’action, <em>résultats</em>.</>}
-        intro={
-          <>
-            <p>Aucune boîte noire : chaque recommandation vous est expliquée, vous décidez, on l’applique. Et tout est mesuré.</p>
-          </>
-        }
-        steps={STEPS}
-      />
-
+      {/* SPEED: two pages racing */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="max-w-3xl mb-16" data-scroll data-reveal="up">
-            <Eyebrow number="03" className="mb-6">Outils</Eyebrow>
+          <div className="mb-12 grid grid-cols-1 items-end gap-6 lg:grid-cols-12" data-scroll data-reveal="up">
+            <div className="lg:col-span-7">
+              <Eyebrow number="02" className="mb-6">Vitesse</Eyebrow>
+              <h2 className="text-h1">
+                Vos visiteurs n’attendent pas. <em>Votre site non plus.</em>
+              </h2>
+            </div>
+            <p className="text-body text-[var(--muted-foreground)] lg:col-span-5">
+              Chaque seconde d’attente fait partir des visiteurs, et Google le sait : la vitesse compte dans votre classement.
+            </p>
+          </div>
+          <LoadRace />
+        </Container>
+      </section>
+
+      {/* WHAT YOU GET: written as the report you receive */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="mb-12 max-w-3xl" data-scroll data-reveal="up">
+            <Eyebrow number="03" className="mb-6">Ce que vous obtenez</Eyebrow>
+            <h2 className="text-h1">
+              Six leviers, un seul <em>objectif</em>.
+            </h2>
+            <p className="text-body text-[var(--muted-foreground)] mt-6">
+              Chaque levier est mesuré avant/après : vous savez exactement ce que votre investissement rapporte.
+            </p>
+          </div>
+          <div className="report" data-scroll data-reveal="up">
+            <div className="report-head">
+              <span>Rapport · Leviers travaillés</span>
+              <span>Mesuré par</span>
+            </div>
+            {FEATURES.map((f) => (
+              <div key={f.title} className="report-row">
+                <h3 className="text-h4">{f.title}</h3>
+                <p className="text-body-sm text-[var(--muted-foreground)]">{f.description}</p>
+                <span className="report-metric">{f.metric}</span>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* METHOD: a checklist ticking itself */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-5">
+              <div className="lg:sticky lg:top-32" data-scroll data-reveal="up">
+                <Eyebrow number="04" className="mb-6">Méthode</Eyebrow>
+                <h2 className="text-h1">Audit, plan d’action, <em>résultats</em>.</h2>
+                <p className="text-body text-[var(--muted-foreground)] mt-6">
+                  Aucune boîte noire : chaque recommandation vous est expliquée, vous décidez, on l’applique. Et tout est mesuré.
+                </p>
+              </div>
+            </div>
+            <div className="lg:col-span-7">
+              <Checklist steps={STEPS} />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* TOOLS */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="max-w-3xl mb-12" data-scroll data-reveal="up">
+            <Eyebrow number="05" className="mb-6">Outils</Eyebrow>
             <h2 className="text-h1">
               Des mesures <em>vérifiables</em>, pas des promesses.
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0" data-scroll data-reveal="stagger">
-            {TOOLS.map((t) => (
-              <div key={t.name} className="compact-note">
-                <p className="text-caption mb-3">{t.kind}</p>
-                <p className="text-h4 mb-2">{t.name}</p>
-                <p className="text-body-sm text-[var(--muted-foreground)]">{t.tagline}</p>
+          <div className="tool-tabs" data-scroll data-reveal="stagger">
+            {TOOLS.map((tool) => (
+              <div key={tool.name}>
+                <p className="text-caption mb-3">{tool.kind}</p>
+                <p className="text-h4 mb-2">{tool.name}</p>
+                <p className="text-body-sm text-[var(--muted-foreground)]">{tool.tagline}</p>
               </div>
             ))}
           </div>
@@ -166,31 +244,37 @@ const FEATURES = [
   {
     icon: Gauge,
     title: "Core Web Vitals",
+    metric: "LCP · INP · CLS",
     description: "Objectif : votre site affiché en moins de 2 secondes sur tous les écrans, sous les seuils de Google (LCP, INP, CLS).",
   },
   {
     icon: Search,
     title: "SEO technique",
+    metric: "Pages indexées",
     description: "Google comprend et indexe correctement vos pages : Schema.org, sitemap, robots.txt, canonicals, balises.",
   },
   {
     icon: MapPin,
     title: "SEO local Rouen",
+    metric: "Visibilité locale",
     description: "Vous ressortez dans les recherches locales et sur la carte : fiche Google Business Profile, Schema LocalBusiness, citations locales.",
   },
   {
     icon: FileSearch,
     title: "Recherche de mots-clés",
+    metric: "Requêtes ciblées",
     description: "Vous savez ce que vos clients tapent vraiment dans Google : volume, concurrence et intention des requêtes de votre secteur.",
   },
   {
     icon: TrendingUp,
     title: "Optimisation des contenus",
+    metric: "Positions",
     description: "Vos pages répondent aux questions de vos clients : titres, structure, maillage interne, réécriture si besoin.",
   },
   {
     icon: LineChart,
     title: "Suivi & reporting",
+    metric: "Rapport mensuel",
     description: "Vous voyez chaque mois ce que votre investissement rapporte : positions, trafic organique, conversions.",
   },
 ];
