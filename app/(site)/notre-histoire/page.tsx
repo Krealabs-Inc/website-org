@@ -21,7 +21,7 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
-import { TEAM } from "@/lib/team";
+import { getTeam } from "@/lib/content/team";
 import { YearReel } from "@/components/history/year-reel";
 
 const TIMELINE = [
@@ -96,7 +96,8 @@ const VALUES = [
   },
 ];
 
-export default function NotreHistoirePage() {
+export default async function NotreHistoirePage() {
+  const team = await getTeam();
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       <OrganizationSchema />
@@ -158,12 +159,12 @@ export default function NotreHistoirePage() {
         <Container>
           <Link href="/equipe" className="history-team">
             <span className="flex -space-x-3">
-              {TEAM.map((m) => (
+              {team.map((m) => (
                 <span key={m.name} className="history-avatar">{m.initials}</span>
               ))}
             </span>
             <span className="text-h3">
-              {TEAM.length} associés, et c’est <em>voulu</em>.
+              {team.length} associés, et c’est <em>voulu</em>.
             </span>
             <span className="ml-auto inline-flex items-center gap-2 text-body text-[var(--accent)]">
               Rencontrer l’équipe

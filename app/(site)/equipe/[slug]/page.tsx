@@ -8,7 +8,7 @@ import { Container } from "@/components/ui/container";
 import { ServiceCta } from "@/components/services/service-cta";
 import { PersonSchema } from "@/components/seo/person-schema";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
-import { TEAM, TEAM_SLUGS, getMember } from "@/lib/team";
+import { getTeam } from "@/lib/content/team";
 import { getPublishedPosts } from "@/lib/blog-data";
 
 const BASE_URL = "https://krealabs.fr";
@@ -18,14 +18,15 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return TEAM_SLUGS.map((slug) => ({ slug }));
+  return (await getTeam()).map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const member = getMember(slug);
+  const team = await getTeam();
+  const member = team.find((m) => m.slug === slug);
   if (!member) return {};
 
   const image = member.photo?.startsWith("http")
@@ -50,7 +51,8 @@ export async function generateMetadata({
 
 export default async function AuthorPage({ params }: PageProps) {
   const { slug } = await params;
-  const member = getMember(slug);
+  const team = await getTeam();
+  const member = team.find((m) => m.slug === slug);
   if (!member) notFound();
 
   const image = member.photo?.startsWith("http")
@@ -66,8 +68,8 @@ export default async function AuthorPage({ params }: PageProps) {
   const authoredPosts = getPublishedPosts().filter((p) => p.author.name === member.name);
 
   // Autre(s) membre(s) de l'équipe pour cross-link
-  const otherMembers = TEAM.filter((m) => m.slug !== slug);
-  const index = TEAM.findIndex((m) => m.slug === slug);
+  const otherMembers = team.filter((m) => m.slug !== slug);
+  const index = team.findIndex((m) => m.slug === slug);
 
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
@@ -107,7 +109,7 @@ export default async function AuthorPage({ params }: PageProps) {
             <p className="profile-role">
               {member.role}
               <span>
-                {String(index + 1).padStart(2, "0")} / {String(TEAM.length).padStart(2, "0")}
+                {String(index + 1).padStart(2, "0")} / {String(team.length).padStart(2, "0")}
               </span>
             </p>
           </div>

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { getMember } from "@/lib/team";
+import { getTeamMember } from "@/lib/content/team";
 
 export const runtime = "nodejs";
 export const alt = "Profil membre de l'équipe Krealabs";
@@ -18,7 +18,7 @@ export default async function Image({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const member = getMember(slug);
+  const member = await getTeamMember(slug);
   const name = member?.name || "Équipe Krealabs";
   const role = member?.role || "Fondateur · Développeur";
   const initials = member?.initials || "K";

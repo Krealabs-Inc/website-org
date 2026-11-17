@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
 import { CITIES } from "@/lib/cities";
 import { SECTOR_SLUGS } from "@/lib/sectors";
-import { TEAM_SLUGS } from "@/lib/team";
+import { getTeam } from "@/lib/content/team";
 import { CATEGORY_SLUGS } from "@/app/(site)/blog/category/[slug]/page";
 import { INDEXABLE_TAG_SLUGS } from "@/app/(site)/blog/tag/[slug]/page";
 import { COMPARATOR_SLUGS } from "@/lib/comparators";
@@ -29,7 +29,7 @@ function absolutize(path: string, baseUrl: string): string {
   return `${baseUrl}${path.startsWith("/") ? "" : "/"}${path}`;
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
     {
@@ -224,7 +224,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Pages auteur individuelles (E-E-A-T)
-  const authorPages: MetadataRoute.Sitemap = TEAM_SLUGS.map((slug) => ({
+  const authorPages: MetadataRoute.Sitemap = (await getTeam()).map(({ slug }) => ({
     url: `${baseUrl}/equipe/${slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,

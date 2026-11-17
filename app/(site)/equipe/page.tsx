@@ -6,7 +6,8 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { PersonSchema } from "@/components/seo/person-schema";
 import { AmbientVideo } from "@/components/media/ambient-video";
 import { TeamWall } from "@/components/team/team-wall";
-import { TEAM, UPCOMING_TEAM } from "@/lib/team";
+import { UPCOMING_TEAM } from "@/lib/team";
+import { getTeam } from "@/lib/content/team";
 
 export const metadata: Metadata = {
   title: "L'équipe : les associés derrière Krealabs (Rouen)",
@@ -22,12 +23,13 @@ export const metadata: Metadata = {
   },
 };
 
-export default function EquipePage() {
+export default async function EquipePage() {
+  const team = await getTeam();
   const baseUrl = "https://krealabs.fr";
 
   return (
     <main className="team-page bg-[var(--background)] text-[var(--foreground)]">
-      <PersonSchema persons={TEAM.map((member) => ({
+      <PersonSchema persons={team.map((member) => ({
         name: member.name,
         jobTitle: member.role,
         image: member.photo?.startsWith("http") ? member.photo : member.photo ? `${baseUrl}${member.photo}` : undefined,
@@ -39,7 +41,7 @@ export default function EquipePage() {
 
       {/* HERO: the wall of the four partners */}
       <div id="collectif" className="scroll-mt-28">
-        <TeamWall members={TEAM} />
+        <TeamWall members={team} />
       </div>
       {UPCOMING_TEAM.length > 0 && (
         <Container>

@@ -18,7 +18,7 @@ import {
   getPublishedPosts,
   isPostPublished,
 } from "@/lib/blog-data";
-import { TEAM } from "@/lib/team";
+import { getTeam } from "@/lib/content/team";
 
 const SITE_URL = "https://krealabs.fr";
 
@@ -116,6 +116,7 @@ export default async function BlogPostPage({
   if (!post || !isPostPublished(post)) notFound();
 
   const publishedPosts = getPublishedPosts();
+  const author = (await getTeam()).find((m) => m.name === post.author.name);
   const url = `${SITE_URL}/blog/${post.slug}`;
   const isoDate = frenchDateToISO(post.date);
   const isoModifiedDate = post.updatedAt
@@ -153,10 +154,7 @@ export default async function BlogPostPage({
     author: {
       "@type": "Person",
       name: post.author.name,
-      url: (() => {
-        const member = TEAM.find((m) => m.name === post.author.name);
-        return member ? `${SITE_URL}/equipe/${member.slug}` : `${SITE_URL}/equipe`;
-      })(),
+      url: author ? `${SITE_URL}/equipe/${author.slug}` : `${SITE_URL}/equipe`,
     },
     // Référence à l'org émise sur / et /notre-histoire. Pas de duplication.
     publisher: { "@id": `${SITE_URL}/#organization` },

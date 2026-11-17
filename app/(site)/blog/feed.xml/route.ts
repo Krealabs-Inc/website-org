@@ -1,5 +1,5 @@
 import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
-import { TEAM } from "@/lib/team";
+import { getTeam } from "@/lib/content/team";
 
 const BASE_URL = "https://krealabs.fr";
 
@@ -15,12 +15,13 @@ const BASE_URL = "https://krealabs.fr";
  * Cache : 1 heure côté CDN, 5 minutes côté browser.
  */
 export async function GET() {
+  const team = await getTeam();
   const items = getPublishedPosts()
     .slice()
     .sort((a, b) => frenchDateToISO(b.date).localeCompare(frenchDateToISO(a.date)))
     .slice(0, 50) // limite à 50 articles dans le flux
     .map((post) => {
-      const member = TEAM.find((m) => m.name === post.author.name);
+      const member = team.find((m) => m.name === post.author.name);
       const authorEmail = "contact@krealabs.fr";
       const isoDate = frenchDateToISO(post.date);
       const pubDate = new Date(isoDate).toUTCString();
