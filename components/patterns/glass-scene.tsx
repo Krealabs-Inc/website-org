@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, MeshTransmissionMaterial, RoundedBox } from "@react-three/drei";
@@ -41,6 +41,20 @@ function Geometry({ shape }: { shape: GlassShape }) {
     default:
       return null;
   }
+}
+
+/** True while the site is in its light theme (class on <html>). */
+function useLightTheme() {
+  const [light, setLight] = useState(false);
+  useEffect(() => {
+    const html = document.documentElement;
+    const update = () => setLight(html.classList.contains("light"));
+    update();
+    const mo = new MutationObserver(update);
+    mo.observe(html, { attributes: true, attributeFilter: ["class"] });
+    return () => mo.disconnect();
+  }, []);
+  return light;
 }
 
 function GlassObject({ shape, layout, progress, reduced }: Omit<GlassSceneProps, "active" | "onReady">) {
@@ -91,6 +105,10 @@ function GlassObject({ shape, layout, progress, reduced }: Omit<GlassSceneProps,
     obj.scale.setScalar(THREE.MathUtils.damp(obj.scale.x, scale, 5, delta));
   });
 
+  // The glass refracts what is behind it; the canvas is transparent, so
+  // give it the page colour, or it turns black on the light theme.
+  const light = useLightTheme();
+  const background = useMemo(() => new THREE.Color(light ? "#eef0fb" : "#0a0a0a"), [light]);
   const material = (
     <MeshTransmissionMaterial
       backside
@@ -107,6 +125,7 @@ function GlassObject({ shape, layout, progress, reduced }: Omit<GlassSceneProps,
       distortionScale={0.4}
       temporalDistortion={0}
       color="#cfd4fb"
+      background={background}
     />
   );
 
