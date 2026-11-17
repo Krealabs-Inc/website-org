@@ -1,20 +1,16 @@
 import { Metadata } from "next";
-import Link from "next/link";
 import {
-  ArrowUpRight,
   Code2,
   Smartphone,
   Sparkles,
   Gauge,
-  ArrowRight,
   Wrench,
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
-import { GlassAside } from "@/components/patterns/glass";
+import { ServiceSwitchboard } from "@/components/services/switchboard";
 
 export const metadata: Metadata = {
   title: "Services web à Rouen : sites, apps, SEO",
@@ -33,76 +29,36 @@ export const metadata: Metadata = {
 export default function ServicesIndexPage() {
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
-      {/* HERO */}
-      <section className="relative overflow-hidden pt-32 pb-24 md:pt-40 md:pb-32">
-        <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
-        {/* On small screens the object sits behind the text, so it steps back. */}
-        <GlassAside shape="knot" className="opacity-40 lg:opacity-100" />
-
-        <Container className="relative">
-          <div className="max-w-3xl">
-            <Eyebrow dot className="mb-8">Services · Agence web Rouen</Eyebrow>
-            <h1 className="text-display">
-              Un seul <em>interlocuteur</em>,
-              <br />
-              du devis à la mise en ligne.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Site, application, design ou référencement : vous n’avez pas à
-              coordonner plusieurs prestataires. Les personnes que vous
-              rencontrez sont celles qui construisent votre projet.
-            </p>
-            <div className="mt-10">
-              <Button size="lg" asChild>
-                <Link href="/contact">
-                  Parler de mon projet
-                  <ArrowRight />
-                </Link>
-              </Button>
+      {/* SWITCHBOARD: the page opens straight on the five needs */}
+      <section className="pt-32 pb-20 md:pt-40">
+        <Container>
+          <div className="mb-12 flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <Eyebrow dot className="mb-6">Services · Agence web Rouen</Eyebrow>
+              <h1 className="text-h1 md:text-display max-w-3xl">
+                De quoi avez-vous <em>besoin</em> ?
+              </h1>
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* SERVICES GRID */}
-      <section className="border-t border-[var(--border)]">
-        <Container>
-          <div className="service-directory" data-scroll data-reveal="stagger">
-            {SERVICES.map((s, index) => (
-              <ServiceCard key={s.title} {...s} index={index} />
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* APPROACH BLOCK */}
-      <section className="section-y border-t border-[var(--border)]">
-        <Container>
-          <div className="max-w-3xl mx-auto text-center" data-scroll data-reveal="up">
-            <Eyebrow className="mb-6 justify-center">Ce que vous pouvez attendre</Eyebrow>
-            <h2 className="text-h1 mb-6">
-              Un <em>cadre clair</em>, aucune surprise.
-            </h2>
-            <p className="text-body-lg text-[var(--muted-foreground)]">
-              Cadrage, design, développement, mise en ligne, suivi : votre
-              projet suit des étapes claires. Vous savez à tout moment où il en
-              est, et ce qu’il reste à faire.
+            <p className="text-body text-[var(--muted-foreground)] max-w-sm">
+              Un seul interlocuteur du devis à la mise en ligne : les personnes que vous rencontrez construisent votre projet.
             </p>
           </div>
+          <ServiceSwitchboard services={SERVICES.map(({ eyebrow, title, description, href }) => ({ eyebrow, title, description, href }))} />
+        </Container>
+      </section>
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-5" data-scroll data-reveal="stagger">
+      {/* COMMITMENTS: three short lines */}
+      <section className="border-t border-[var(--border)] py-16">
+        <Container>
+          <ul className="sw-commit">
             {COMMITMENTS.map((c) => (
-              <div key={c.title} className="editorial-note">
-                <p className="text-eyebrow text-[var(--accent)] mb-4">
-                  {c.label}
-                </p>
-                <h3 className="text-h4 mb-2">{c.title}</h3>
-                <p className="text-body-sm text-[var(--muted-foreground)]">
-                  {c.description}
-                </p>
-              </div>
+              <li key={c.title}>
+                <span className="text-caption text-[var(--accent)]">{c.label}</span>
+                <span className="text-h4">{c.title}</span>
+                <span className="text-body-sm text-[var(--muted-foreground)]">{c.description}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </Container>
       </section>
 
@@ -187,25 +143,6 @@ const SERVICES = [
     href: "/services/performance-seo",
   },
 ];
-
-function ServiceCard({ eyebrow, title, description, points, href, index }: (typeof SERVICES)[number] & { index: number }) {
-  return (
-    <Link href={href} className="directory-entry group">
-      <span className="editorial-ordinal" aria-hidden>{String(index + 1).padStart(2, "0")}</span>
-      <div>
-        <p className="text-eyebrow mb-4">{eyebrow}</p>
-        <h2 className="text-h2">{title}</h2>
-      </div>
-      <div>
-        <p className="text-body text-[var(--muted-foreground)] mb-5">{description}</p>
-        <ul className="flex flex-wrap gap-x-5 gap-y-2">
-          {points.map((point) => <li key={point} className="text-caption">{point}</li>)}
-        </ul>
-      </div>
-      <ArrowUpRight className="directory-arrow size-5" aria-hidden />
-    </Link>
-  );
-}
 
 const COMMITMENTS = [
   {

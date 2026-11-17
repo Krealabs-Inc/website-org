@@ -8,8 +8,8 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { AmbientVideo } from "@/components/media/ambient-video";
 import { Badge } from "@/components/ui/badge";
 import { ServiceCta } from "@/components/services/service-cta";
-import { MotionReveal } from "@/components/animations/motion-reveal";
 import { Blueprint } from "@/components/expertise/blueprint";
+import { Elevation } from "@/components/expertise/elevation";
 import { StackTabs } from "@/components/expertise/stack-tabs";
 
 export const metadata: Metadata = {
@@ -34,12 +34,11 @@ export default function ExpertisePage() {
         <div className="bp-hero-grid" aria-hidden />
 
         <Container className="relative">
-          <MotionReveal className="max-w-4xl">
+          <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12">
+          <div className="lg:col-span-6">
             <Eyebrow dot className="mb-8">Notre expertise</Eyebrow>
             <h1 className="text-display">
-              Savoir-faire <em>technique</em>,
-              <br />
-              rigueur d’<em>artisan</em>.
+              Savoir-faire <em>technique</em>, rigueur d’<em>artisan</em>.
             </h1>
             <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
               Architecture, performance, sécurité, accessibilité - les
@@ -57,7 +56,11 @@ export default function ExpertisePage() {
                 <Link href="/equipe">Découvrir l’équipe</Link>
               </Button>
             </div>
-          </MotionReveal>
+          </div>
+          <div className="lg:col-span-6">
+            <Elevation />
+          </div>
+          </div>
         </Container>
       </section>
 
