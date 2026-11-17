@@ -991,6 +991,67 @@ html.has-scroll-fx [data-reveal="stagger"] > :nth-child(n + 7) { transition-dela
 .spec-sheet > div { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; padding: 20px 0; border-bottom: 1px solid var(--border-strong); }
 @media (min-width: 768px) { .spec-sheet > div { grid-template-columns: 160px 220px minmax(0, 1fr); gap: 24px; align-items: baseline; } }
 
+/* ===== Design UI/UX page (components/services/design) ===== */
+.letter-snap { display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .letter-snap { animation: letter-snap 600ms cubic-bezier(0.23, 1, 0.32, 1) var(--delay, 0ms) both; }
+}
+@keyframes letter-snap { from { opacity: 0; transform: translate(var(--dx), var(--dy)); } to { opacity: 1; transform: none; } }
+
+.ba { position: relative; overflow: hidden; border: 1px solid var(--border-strong); border-radius: 24px; background: var(--surface); touch-action: pan-y; user-select: none; cursor: ew-resize; }
+.ba-wire-layer { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos)) 0 0); }
+.ba-handle { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: var(--accent); outline: none; }
+.ba-knob { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: var(--accent); color: var(--accent-foreground); font-weight: 700; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4); }
+.ba-handle:focus-visible .ba-knob { outline: 2px solid var(--foreground); outline-offset: 3px; }
+.ba-label { position: absolute; top: 16px; padding: 6px 12px; border-radius: 99px; font-size: 12px; background: rgba(10, 10, 10, 0.7); color: var(--foreground); pointer-events: none; }
+.ba-label.is-left { left: 16px; }
+.ba-label.is-right { right: 16px; }
+.ba-mock { display: flex; flex-direction: column; gap: 28px; min-height: 520px; padding: 64px clamp(20px, 4vw, 48px) 40px; }
+.ba-nav { display: flex; align-items: center; justify-content: space-between; }
+.ba-links { display: flex; gap: 22px; font-size: 14px; }
+.ba-links i { display: block; width: 56px; height: 10px; border-radius: 4px; background: #3a3a44; }
+.ba-hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; }
+.ba-title { font-size: clamp(1.6rem, 3vw, 2.6rem); font-weight: 600; letter-spacing: -0.03em; line-height: 1.05; }
+.ba-sub { margin-top: 14px; max-width: 26rem; font-size: 15px; }
+.ba-button { display: inline-block; margin-top: 22px; padding: 12px 22px; border-radius: 99px; font-size: 14px; font-weight: 600; }
+.ba-image { display: grid; place-items: center; aspect-ratio: 4 / 3; border-radius: 18px; }
+.ba-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ba-card { display: grid; gap: 10px; padding: 12px; border-radius: 16px; }
+.ba-card-img { height: 80px; border-radius: 10px; }
+.ba-card-title { font-size: 14px; }
+/* Wireframe: grey boxes, dashed, labelled, monospace */
+.ba-mock.is-wire { background: #16161b; color: #8a8a96; font-family: var(--font-geist-mono), monospace; }
+.is-wire .ba-logo, .is-wire .ba-title, .is-wire .ba-sub, .is-wire .ba-card-title { color: #8a8a96; }
+.is-wire .ba-title { font-size: clamp(1.2rem, 2vw, 1.6rem); padding: 10px 12px; border: 1px dashed #4a4a56; border-radius: 8px; }
+.is-wire .ba-button { border: 1px dashed #6a6a76; color: #8a8a96; }
+.is-wire .ba-image, .is-wire .ba-card-img { border: 1px dashed #4a4a56; background: repeating-linear-gradient(45deg, transparent 0 10px, rgba(255, 255, 255, 0.03) 10px 20px); }
+.is-wire .ba-card { border: 1px dashed #3a3a44; }
+/* Final: a fictional florist, warm and colourful */
+.ba-mock.is-final { background: #f6f1ea; color: #2a211c; }
+.is-final .ba-logo { font-family: var(--font-instrument-serif), serif; font-style: italic; font-size: 1.4rem; }
+.is-final .ba-sub { color: #6b5d52; }
+.is-final .ba-button { background: #b4485c; color: #fff; }
+.is-final .ba-image { background: radial-gradient(circle at 35% 40%, #e9a3b2, transparent 45%), radial-gradient(circle at 65% 60%, #f3c77a, transparent 40%), linear-gradient(135deg, #7fa784, #3f6b55); }
+.is-final .ba-card { background: #fff; box-shadow: 0 10px 24px -16px rgba(42, 33, 28, 0.4); }
+.is-final .ba-card:nth-child(1) .ba-card-img { background: linear-gradient(135deg, #e9a3b2, #b4485c); }
+.is-final .ba-card:nth-child(2) .ba-card-img { background: linear-gradient(135deg, #f3c77a, #d98b3a); }
+.is-final .ba-card:nth-child(3) .ba-card-img { background: linear-gradient(135deg, #a7c4a0, #3f6b55); }
+@media (max-width: 767px) { .ba-hero { grid-template-columns: 1fr; } .ba-links { display: none; } }
+
+.ds-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 14px; }
+@media (min-width: 768px) { .ds-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .ds-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ds-tile { display: grid; grid-template-rows: 150px auto; border: 1px solid var(--border-strong); border-radius: 22px; background: var(--surface); overflow: hidden; }
+.ds-specimen { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; border-bottom: 1px solid var(--border); background: var(--background); background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 16px 16px; }
+.ds-body { padding: 22px 24px 26px; }
+
+.layers { border: 1px solid var(--border-strong); border-radius: 18px; background: #18181d; font-size: 14px; overflow: hidden; }
+.layers-head { padding: 12px 16px; border-bottom: 1px solid var(--border); font-size: 12px; color: var(--muted-foreground); }
+.layers-frame { padding: 10px 16px; font-weight: 600; }
+.layers li { display: grid; grid-template-columns: 20px 160px minmax(0, 1fr); align-items: center; gap: 10px; padding: 10px 16px 10px 36px; border-top: 1px solid var(--border); }
+.layers li:hover { background: var(--accent-subtle); }
+.layers-icon { width: 12px; height: 12px; border: 1.5px solid var(--accent); border-radius: 3px; }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {
