@@ -1133,6 +1133,40 @@ html.has-scroll-fx [data-reveal="stagger"] > :nth-child(n + 7) { transition-dela
 .tool-tabs > div { padding: 22px; border-bottom: 1px solid var(--border-strong); }
 @media (min-width: 768px) { .tool-tabs > div { border-bottom: 0; border-right: 1px solid var(--border-strong); } .tool-tabs > div:last-child { border-right: 0; } }
 
+/* ===== Contact (components/contact) ===== */
+.chat { display: grid; gap: 28px; }
+.chat-turn { display: grid; gap: 14px; }
+.chat-q { max-width: 34rem; font-size: 1.35rem; font-weight: 500; letter-spacing: -0.015em; }
+.chat-turn.is-done .chat-q { font-size: 1rem; color: var(--muted-foreground); }
+.chat-a { display: flex; align-items: center; gap: 10px; justify-self: end; max-width: 85%; padding: 10px 10px 10px 18px; border-radius: 20px 20px 6px 20px; background: var(--accent-subtle); color: var(--foreground); font-size: 15px; }
+.chat-edit { display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0; border-radius: 50%; color: var(--muted-foreground); transition: background-color 150ms ease-out, color 150ms ease-out; }
+.chat-edit:hover { background: var(--surface-hover); color: var(--foreground); }
+.chat-turn.is-current { padding: 28px; border: 1px solid var(--border-strong); border-radius: 24px; background: var(--surface); }
+@media (prefers-reduced-motion: no-preference) {
+  .chat-turn.is-current { animation: chat-in 240ms cubic-bezier(0.23, 1, 0.32, 1); }
+}
+@keyframes chat-in { from { opacity: 0; transform: translateY(10px); } }
+.chat-choices { display: flex; flex-wrap: wrap; gap: 10px; }
+.chat-choice { padding: 12px 20px; border: 1px solid var(--border-strong); border-radius: 99px; font-size: 15px; transition: border-color 150ms ease-out, background-color 150ms ease-out, transform 120ms ease-out; }
+.chat-choice:hover { border-color: var(--accent); background: var(--accent-subtle); }
+.chat-choice:active { transform: scale(0.97); }
+.chat-choice.is-selected { border-color: var(--accent); }
+.chat-choice:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.chat-fields { display: grid; gap: 16px; }
+.chat-label { display: grid; gap: 8px; font-size: 13px; color: var(--muted-foreground); }
+.chat-progress { font-family: var(--font-geist-mono), monospace; font-size: 12px; color: var(--subtle-foreground); }
+.chat-done { padding: 40px; border: 1px solid var(--border-strong); border-radius: 24px; background: var(--surface); }
+.chat-done-icon { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--accent); color: var(--accent-foreground); }
+.contact-lines { display: grid; border-top: 1px solid var(--border); }
+.contact-lines li { display: grid; grid-template-columns: 20px auto 1fr; align-items: center; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--border); color: var(--muted-foreground); }
+.contact-lines a { font-size: 1.1rem; font-weight: 500; color: var(--foreground); }
+.contact-lines a:hover { color: var(--accent); }
+.contact-lines span { justify-self: end; font-size: 13px; }
+.contact-next { display: grid; gap: 18px; }
+.contact-next li { display: grid; grid-template-columns: 28px 1fr; gap: 14px; }
+.contact-next li > span { display: grid; place-items: center; width: 28px; height: 28px; border: 1px solid var(--border-strong); border-radius: 50%; font-size: 12px; color: var(--accent); }
+.contact-pill { padding: 6px 12px; border: 1px solid var(--border-strong); border-radius: 99px; font-size: 12px; color: var(--muted-foreground); }
+
 /* Scroll cue: an accent segment travelling down a hairline. */
 @keyframes scroll-hint { from { transform: translateY(-100%); } to { transform: translateY(300%); } }
 @media (prefers-reduced-motion: no-preference) {
