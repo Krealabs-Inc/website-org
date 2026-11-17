@@ -10,21 +10,22 @@ import { SectorSitemap } from "@/components/local/sector-sitemap";
 import { ServiceCta } from "@/components/services/service-cta";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { FAQSchema } from "@/components/seo/faq-schema";
-import { SECTORS, SECTOR_SLUGS, type SectorData } from "@/lib/sectors";
+import type { SectorData } from "@/lib/sectors";
+import { getSectors } from "@/lib/content/local";
 
 interface PageProps {
   params: Promise<{ secteur: string }>;
 }
 
 export async function generateStaticParams() {
-  return SECTOR_SLUGS.map((secteur) => ({ secteur }));
+  return Object.keys(await getSectors()).map((secteur) => ({ secteur }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { secteur } = await params;
-  const data = SECTORS[secteur];
+  const data = (await getSectors())[secteur];
   if (!data) return {};
 
   return {
@@ -46,7 +47,7 @@ export default async function AgenceWebRouenSecteurPage({
   params,
 }: PageProps) {
   const { secteur } = await params;
-  const data: SectorData | undefined = SECTORS[secteur];
+  const data: SectorData | undefined = (await getSectors())[secteur];
   if (!data) notFound();
 
   const baseUrl = "https://krealabs.fr";

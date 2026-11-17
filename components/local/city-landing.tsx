@@ -8,7 +8,7 @@ import { CityMap } from "@/components/local/city-map";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { ServiceCta } from "@/components/services/service-cta";
 import type { CityData } from "@/lib/cities";
-import { CITY_FAQ } from "@/lib/city-faq";
+import type { CityWithFaq } from "@/lib/content/local";
 
 /**
  * Template réutilisable pour les landing pages locales "Agence web à [Ville]".
@@ -16,11 +16,11 @@ import { CITY_FAQ } from "@/lib/city-faq";
  * content perçu par Google si les CityData diffèrent suffisamment (intro,
  * secteurs, landmarks, cityReason).
  */
-export function CityLanding({ city }: { city: CityData }) {
+export function CityLanding({ city }: { city: CityWithFaq }) {
   const baseUrl = "https://krealabs.fr";
   const REASONS = buildReasons(city);
   const LOCAL_SERVICES = buildServices(city);
-  const faq = CITY_FAQ[city.slug] ?? [];
+  const faq = city.faq;
 
   // Service (pas LocalBusiness) : Krealabs est basé à Rouen et DESSERT cette
   // ville. areaServed = la ville, provider = l'org canonique via @id.

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
-import { GLOSSARY, GLOSSARY_SLUGS } from "@/lib/glossary";
+import { getGlossary } from "@/lib/content/glossary";
 
 export const metadata: Metadata = {
   title: "Lexique du web - Définitions techniques",
@@ -23,8 +23,8 @@ export const metadata: Metadata = {
 const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const initial = (term: string) => term.normalize("NFD").replace(/[\u0300-\u036f]/g, "").charAt(0).toUpperCase();
 
-export default function LexiqueIndexPage() {
-  const entries = GLOSSARY_SLUGS.map((s) => GLOSSARY[s]).sort((a, b) => a.term.localeCompare(b.term, "fr"));
+export default async function LexiqueIndexPage() {
+  const entries = Object.values(await getGlossary()).sort((a, b) => a.term.localeCompare(b.term, "fr"));
   const letters = new Map<string, typeof entries>();
   for (const e of entries) {
     const l = /[A-Z]/.test(initial(e.term)) ? initial(e.term) : "#";

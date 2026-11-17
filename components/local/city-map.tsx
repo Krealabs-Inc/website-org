@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { CITIES, type CityData } from "@/lib/cities";
+import type { CityData } from "@/lib/cities";
+import { getCities } from "@/lib/content/local";
 
 // Simple equirectangular projection of the served area onto 600 × 340.
 const LNG = [-1.9, 1.5];
@@ -20,7 +21,8 @@ function project({ lat, lng }: { lat: number; lng: number }) {
  * drawn to it with its distance. Every city page gets its own picture
  * from the same data. Other towns link to their own page.
  */
-export function CityMap({ city }: { city: CityData }) {
+export async function CityMap({ city }: { city: CityData }) {
+  const CITIES = await getCities();
   const rouen = project(CITIES.rouen.geo);
   const here = project(city.geo);
   const isHome = city.slug === "rouen";

@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 
 import { CityLanding } from "@/components/local/city-landing";
-import { CITIES } from "@/lib/cities";
+import { getCity } from "@/lib/content/local";
 
-const city = CITIES.fecamp;
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const city = await getCity("fecamp");
+  return {
   title: city.title,
   description: city.description,
   alternates: { canonical: `https://krealabs.fr${city.path}` },
@@ -15,8 +16,10 @@ export const metadata: Metadata = {
     url: `https://krealabs.fr${city.path}`,
     type: "website",
   },
-};
+  };
+}
 
-export default function AgenceWebFecampPage() {
+export default async function AgenceWebFecampPage() {
+  const city = await getCity("fecamp");
   return <CityLanding city={city} />;
 }

@@ -10,6 +10,10 @@ import sharp from "sharp";
 import { Users } from "./payload/collections/users";
 import { Media } from "./payload/collections/media";
 import { Team } from "./payload/collections/team";
+import { Projects } from "./payload/collections/projects";
+import { Glossary } from "./payload/collections/glossary";
+import { Cities } from "./payload/collections/cities";
+import { Sectors } from "./payload/collections/sectors";
 import { migrations } from "./payload/migrations";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -36,7 +40,7 @@ export default buildConfig({
     graphQLPlayground: "/cms-api/graphql-playground",
   },
   i18n: { supportedLanguages: { fr }, fallbackLanguage: "fr" },
-  collections: [Team, Media, Users],
+  collections: [Projects, Team, Glossary, Cities, Sectors, Media, Users],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   db: postgresAdapter({

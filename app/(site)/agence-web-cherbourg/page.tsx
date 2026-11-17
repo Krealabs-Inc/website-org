@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 
 import { CityLanding } from "@/components/local/city-landing";
-import { CITIES } from "@/lib/cities";
+import { getCity } from "@/lib/content/local";
 
-const city = CITIES.cherbourg;
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const city = await getCity("cherbourg");
+  return {
   title: city.title,
   description: city.description,
   alternates: { canonical: `https://krealabs.fr${city.path}` },
@@ -15,8 +16,10 @@ export const metadata: Metadata = {
     url: `https://krealabs.fr${city.path}`,
     type: "website",
   },
-};
+  };
+}
 
-export default function AgenceWebCherbourgPage() {
+export default async function AgenceWebCherbourgPage() {
+  const city = await getCity("cherbourg");
   return <CityLanding city={city} />;
 }

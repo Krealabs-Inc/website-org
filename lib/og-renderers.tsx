@@ -9,10 +9,9 @@ import { ImageResponse } from "next/og";
 import { readFile } from "fs/promises";
 import { join } from "path";
 
-import { CITIES } from "@/lib/cities";
-import { SECTORS } from "@/lib/sectors";
+import { getCities, getSectors } from "@/lib/content/local";
 import { COMPARATORS } from "@/lib/comparators";
-import { GLOSSARY } from "@/lib/glossary";
+import { getGlossaryEntry } from "@/lib/content/glossary";
 
 export const OG_SIZE = { width: 1200, height: 630 };
 export const OG_CONTENT_TYPE = "image/png";
@@ -164,7 +163,7 @@ function Shell({
 // =============================================================================
 
 export async function renderCityOg(slug: string): Promise<ImageResponse> {
-  const city = CITIES[slug];
+  const city = (await getCities())[slug];
   if (!city) {
     return renderFallbackOg("Agence web Krealabs");
   }
@@ -213,7 +212,7 @@ export async function renderCityOg(slug: string): Promise<ImageResponse> {
 }
 
 export async function renderSectorOg(slug: string): Promise<ImageResponse> {
-  const sector = SECTORS[slug];
+  const sector = (await getSectors())[slug];
   if (!sector) {
     return renderFallbackOg("Agence web Rouen");
   }
@@ -357,7 +356,7 @@ export async function renderComparatorOg(slug: string): Promise<ImageResponse> {
 }
 
 export async function renderLexiqueOg(slug: string): Promise<ImageResponse> {
-  const entry = GLOSSARY[slug];
+  const entry = await getGlossaryEntry(slug);
   if (!entry) return renderFallbackOg("Lexique du web");
 
   return new ImageResponse(

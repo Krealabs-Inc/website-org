@@ -1,12 +1,11 @@
 import { MetadataRoute } from "next";
 import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
-import { CITIES } from "@/lib/cities";
-import { SECTOR_SLUGS } from "@/lib/sectors";
+import { getCities, getSectors } from "@/lib/content/local";
 import { getTeam } from "@/lib/content/team";
 import { CATEGORY_SLUGS } from "@/app/(site)/blog/category/[slug]/page";
 import { INDEXABLE_TAG_SLUGS } from "@/app/(site)/blog/tag/[slug]/page";
 import { COMPARATOR_SLUGS } from "@/lib/comparators";
-import { GLOSSARY_SLUGS } from "@/lib/glossary";
+import { getGlossary } from "@/lib/content/glossary";
 
 const baseUrl = "https://krealabs.fr";
 const now = new Date();
@@ -206,7 +205,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Pages locales par ville (Rouen, Le Havre, Caen, Évreux)
-  const cityPages: MetadataRoute.Sitemap = Object.values(CITIES)
+  const cityPages: MetadataRoute.Sitemap = Object.values(await getCities())
     .filter((c) => c.slug !== "rouen") // Rouen est déjà dans staticPages
     .map((c) => ({
       url: `${baseUrl}${c.path}`,
@@ -216,7 +215,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }));
 
   // Pages programmatic SEO /agence-web-rouen/[secteur]
-  const sectorPages: MetadataRoute.Sitemap = SECTOR_SLUGS.map((secteur) => ({
+  const sectorPages: MetadataRoute.Sitemap = Object.keys(await getSectors()).map((secteur) => ({
     url: `${baseUrl}/agence-web-rouen/${secteur}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
@@ -271,7 +270,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     },
-    ...GLOSSARY_SLUGS.map((slug) => ({
+    ...Object.keys(await getGlossary()).map((slug) => ({
       url: `${baseUrl}/lexique/${slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,

@@ -1,11 +1,12 @@
 import { Metadata } from "next";
 
 import { CityLanding } from "@/components/local/city-landing";
-import { CITIES } from "@/lib/cities";
+import { getCity } from "@/lib/content/local";
 
-const city = CITIES.rouen;
 
-export const metadata: Metadata = {
+export async function generateMetadata(): Promise<Metadata> {
+  const city = await getCity("rouen");
+  return {
   title: city.title,
   description: city.description,
   alternates: { canonical: `https://krealabs.fr${city.path}` },
@@ -15,7 +16,8 @@ export const metadata: Metadata = {
     url: `https://krealabs.fr${city.path}`,
     type: "website",
   },
-};
+  };
+}
 
 // LocalBusiness "branch" schema spécifique à la page HQ Rouen.
 // Référence l'org canonique (#organization) via branchOf - pas de duplication
@@ -42,7 +44,8 @@ const rouenBranchSchema = {
   areaServed: { "@type": "City", name: "Rouen" },
 };
 
-export default function AgenceWebRouenPage() {
+export default async function AgenceWebRouenPage() {
+  const city = await getCity("rouen");
   return (
     <>
       <script

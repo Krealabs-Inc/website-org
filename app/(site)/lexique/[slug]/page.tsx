@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/container";
 import { ServiceCta } from "@/components/services/service-cta";
 import { BreadcrumbSchema } from "@/components/seo/breadcrumb-schema";
 import { DefinedTermSchema } from "@/components/seo/defined-term-schema";
-import { GLOSSARY, GLOSSARY_SLUGS, getEntry } from "@/lib/glossary";
+import { getGlossary } from "@/lib/content/glossary";
 
 const BASE_URL = "https://krealabs.fr";
 
@@ -16,14 +16,15 @@ interface PageProps {
 }
 
 export async function generateStaticParams() {
-  return GLOSSARY_SLUGS.map((slug) => ({ slug }));
+  return Object.keys(await getGlossary()).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const entry = getEntry(slug);
+  const glossary = await getGlossary();
+  const entry = glossary[slug];
   if (!entry) return {};
 
   return {
@@ -41,12 +42,13 @@ export async function generateMetadata({
 
 export default async function LexiquePage({ params }: PageProps) {
   const { slug } = await params;
-  const entry = getEntry(slug);
+  const glossary = await getGlossary();
+  const entry = glossary[slug];
   if (!entry) notFound();
 
   const pageUrl = `${BASE_URL}/lexique/${slug}`;
   const related = entry.relatedTerms
-    .map((s) => GLOSSARY[s])
+    .map((s) => glossary[s])
     .filter((e): e is NonNullable<typeof e> => Boolean(e));
 
   return (

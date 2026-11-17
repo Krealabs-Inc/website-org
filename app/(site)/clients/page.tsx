@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ServiceCta } from "@/components/services/service-cta";
-import { PROJECTS } from "@/lib/projects";
+import { getProjects } from "@/lib/content/projects";
 import { AmbientVideo } from "@/components/media/ambient-video";
 import { HorizontalStrip } from "@/components/patterns/horizontal-strip";
 import { ProjectCard } from "@/components/projects/project-card";
@@ -20,7 +20,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ClientsPage() {
+export default async function ClientsPage() {
+  const projects = await getProjects();
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       {/* The page opens on the strip: the title is its first panel, each card
@@ -36,8 +37,8 @@ export default function ClientsPage() {
           </>
         }
       >
-        {PROJECTS.map((project, index) => (
-          <ProjectCard key={project.slug} project={project} index={index} total={PROJECTS.length} />
+        {projects.map((project, index) => (
+          <ProjectCard key={project.slug} project={project} index={index} total={projects.length} />
         ))}
       </HorizontalStrip>
 
@@ -46,7 +47,7 @@ export default function ClientsPage() {
           <Eyebrow className="mb-5">Les fiches en détail</Eyebrow>
           <h2 className="text-h2">Leur situation, ce qui a été fait, <em>ce que ça change.</em></h2>
         </div>
-        {PROJECTS.map((project, index) => (
+        {projects.map((project, index) => (
           <article id={project.slug} key={project.slug} className="project-case">
             <div className="project-case-heading">
               <div><p className="text-caption mb-4">0{index + 1} · {project.sector}</p><h2 className="text-h1">{project.name}</h2></div>

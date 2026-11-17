@@ -1,5 +1,7 @@
 import * as migration_20261117_231641_init from './20261117_231641_init';
 import * as migration_20261117_232249_team from './20261117_232249_team';
+import * as migration_20261117_232650_projects from './20261117_232650_projects';
+import * as migration_20261117_232917_glossary_cities_sectors from './20261117_232917_glossary_cities_sectors';
 
 export const migrations = [
   {
@@ -10,6 +12,16 @@ export const migrations = [
   {
     up: migration_20261117_232249_team.up,
     down: migration_20261117_232249_team.down,
-    name: '20261117_232249_team'
+    name: '20261117_232249_team',
+  },
+  {
+    up: migration_20261117_232650_projects.up,
+    down: migration_20261117_232650_projects.down,
+    name: '20261117_232650_projects',
+  },
+  {
+    up: migration_20261117_232917_glossary_cities_sectors.up,
+    down: migration_20261117_232917_glossary_cities_sectors.down,
+    name: '20261117_232917_glossary_cities_sectors'
   },
 ];

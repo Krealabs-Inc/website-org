@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { PROJECTS } from "@/lib/projects";
+import { getProjects } from "@/lib/content/projects";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 
@@ -12,12 +12,13 @@ interface ProjectSelectionProps {
 
 // Projects read as an editorial index, like the services list: client
 // photos and banners clashed with the site's own visual language.
-export function ProjectSelection({
+export async function ProjectSelection({
   slugs,
   title = <>Des projets concrets, <em>à explorer.</em></>,
   eyebrow = "Réalisations & concepts",
 }: ProjectSelectionProps) {
-  const projects = slugs ? PROJECTS.filter((project) => slugs.includes(project.slug)) : PROJECTS;
+  const all = await getProjects();
+  const projects = slugs ? all.filter((project) => slugs.includes(project.slug)) : all;
   return (
     <section id="realisations" className="project-selection">
       <Container>
