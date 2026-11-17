@@ -110,7 +110,7 @@ export function Navbar() {
               <ThemeToggle />
               <Button size="md" asChild>
                 <Link href="/contact">
-                  Nous contacter
+                  Parler de mon projet
                   <ArrowUpRight />
                 </Link>
               </Button>
@@ -186,7 +186,7 @@ export function Navbar() {
             <div className="pt-6">
               <Button size="lg" className="w-full" asChild>
                 <Link href="/contact">
-                  Nous contacter
+                  Parler de mon projet
                   <ArrowUpRight />
                 </Link>
               </Button>
