@@ -12,8 +12,10 @@ export type GlassShape = "knot" | "torus" | "icosahedron" | "phone" | "sphere" |
 /**
  * travel: the object crosses the screen as the section scrolls (home hero).
  * aside: the object stays on the right and turns with scroll (inner pages).
+ * center: the object stands centred under a centred headline and turns
+ * toward the viewer as you scroll (mobile apps hero).
  */
-export type GlassLayout = "travel" | "aside";
+export type GlassLayout = "travel" | "aside" | "center";
 
 export interface GlassSceneProps {
   shape: GlassShape;
@@ -48,7 +50,11 @@ function GlassObject({ shape, layout, progress, reduced }: Omit<GlassSceneProps,
   const wide = size.width >= 1024;
 
   const start: [number, number, number] =
-    layout === "travel" ? [wide ? viewport.width * 0.2 : 0, wide ? 0 : 0.9, 0] : [wide ? viewport.width * 0.24 : 0, wide ? 0 : 1, 0];
+    layout === "travel"
+      ? [wide ? viewport.width * 0.2 : 0, wide ? 0 : 0.9, 0]
+      : layout === "center"
+        ? [0, -1.35, 0]
+        : [wide ? viewport.width * 0.24 : 0, wide ? 0 : 1, 0];
 
   // Damped toward its target every frame, so a fast flick never snaps it.
   useFrame((state, delta) => {
@@ -64,6 +70,10 @@ function GlassObject({ shape, layout, progress, reduced }: Omit<GlassSceneProps,
       x = wide ? THREE.MathUtils.lerp(viewport.width * 0.2, -viewport.width * 0.2, p) : 0;
       y = wide ? 0 : THREE.MathUtils.lerp(0.9, 0.2, p);
       scale = (wide ? 0.82 : 0.6) * THREE.MathUtils.lerp(1, 0.85, p);
+    } else if (layout === "center") {
+      x = 0;
+      y = -1.35 + p * 1.1;
+      scale = (wide ? 0.78 : 0.6) * THREE.MathUtils.lerp(1, 1.1, p);
     } else {
       x = wide ? viewport.width * 0.24 : 0;
       y = (wide ? 0 : 1) + p * 0.8;
@@ -72,8 +82,12 @@ function GlassObject({ shape, layout, progress, reduced }: Omit<GlassSceneProps,
 
     obj.position.x = THREE.MathUtils.damp(obj.position.x, x, 5, delta);
     obj.position.y = THREE.MathUtils.damp(obj.position.y, y, 5, delta);
-    obj.rotation.y = THREE.MathUtils.damp(obj.rotation.y, idle + p * Math.PI * 1.25 + px * 0.25, 5, delta);
-    obj.rotation.x = THREE.MathUtils.damp(obj.rotation.x, 0.35 + p * 0.9 - py * 0.2, 5, delta);
+    // A flat face reflects almost nothing head-on: the centred phone is
+    // shown three-quarters, then turns to face you as you scroll.
+    const spinY = layout === "center" ? 0.6 + idle * 0.5 - p * 0.6 + px * 0.2 : idle + p * Math.PI * 1.25 + px * 0.25;
+    const tiltX = layout === "center" ? 0.18 - p * 0.18 - py * 0.1 : 0.35 + p * 0.9 - py * 0.2;
+    obj.rotation.y = THREE.MathUtils.damp(obj.rotation.y, spinY, 5, delta);
+    obj.rotation.x = THREE.MathUtils.damp(obj.rotation.x, tiltX, 5, delta);
     obj.scale.setScalar(THREE.MathUtils.damp(obj.scale.x, scale, 5, delta));
   });
 

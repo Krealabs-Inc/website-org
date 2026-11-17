@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import {
   Smartphone,
   Bell,
@@ -6,6 +7,8 @@ import {
   Lock,
   AppWindow,
   RefreshCw,
+  ArrowLeft,
+  ArrowRight,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -17,9 +20,9 @@ export const metadata: Metadata = {
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceHero } from "@/components/services/service-hero";
-import { ServiceFeatures } from "@/components/services/service-features";
-import { ServiceMethod } from "@/components/services/service-method";
+import { Button } from "@/components/ui/button";
+import { PhoneHero } from "@/components/services/mobile/phone-hero";
+import { PhoneScroll } from "@/components/services/mobile/phone-scroll";
 import { ServiceCta } from "@/components/services/service-cta";
 import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
@@ -42,59 +45,94 @@ export default function ApplicationsMobilePage() {
           { name: "Mises à jour OTA" },
         ]}
       />
-      <ServiceHero
-        number="02"
-        shape="phone"
-        eyebrow="Application mobile · iOS & Android"
-        title={
+      {/* HERO: centred headline, the glass phone standing under it */}
+      <PhoneHero>
+        <Container className="text-center">
+          <Link
+            href="/services"
+            className="inline-flex items-center gap-2 text-body-sm text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors mb-10"
+          >
+            <ArrowLeft className="size-3.5" />
+            Retour aux services
+          </Link>
+          <span className="flex justify-center">
+            <Eyebrow number="02" dot className="mb-8">Application mobile · iOS & Android</Eyebrow>
+          </span>
+          <h1 className="text-display">
+            Vos clients vous ont <em>dans leur poche</em>.
+          </h1>
+          <p className="text-body-lg text-[var(--muted-foreground)] mx-auto mt-8 max-w-2xl">
+            Une application sur iOS et Android pour le budget d’une seule : une base de code React Native, deux App Stores, une expérience native. Vous réduisez vos coûts sans rogner sur la qualité.
+          </p>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <Button size="lg" asChild>
+              <Link href="/contact">
+                Parler de mon projet
+                <ArrowRight />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild>
+              <Link href="/services">Voir toutes les solutions</Link>
+            </Button>
+          </div>
+        </Container>
+      </PhoneHero>
+
+      {/* SIGNATURE: the pinned phone, one screen per feature */}
+      <PhoneScroll
+        heading={
           <>
-            Vos clients vous ont
-            <br />
-            <em>dans leur poche</em>.
+            <Eyebrow number="03" className="mb-5">Ce que vous obtenez</Eyebrow>
+            <h2 className="text-h1">
+              Une app <em>complète</em>, prête à publier.
+            </h2>
           </>
         }
-        description="Une application sur iOS et Android pour le budget d'une seule : une base de code React Native, deux App Stores, une expérience native. Vous réduisez vos coûts sans rogner sur la qualité."
+        features={FEATURES.map((f) => ({ title: f.title, description: f.description }))}
       />
 
-      <ServiceFeatures
-        number="01"
-        eyebrow="Ce que vous obtenez"
-        title={
-          <>
-            Une app <em>complète</em>, prête à publier.
-          </>
-        }
-        intro="Du prototype à la publication sur les stores, vous avez un seul interlocuteur pour toute la vie de votre application."
-        features={FEATURES}
-      />
-
-      <ServiceMethod
-        title={<>Vous testez votre app <em>avant</em> qu’elle existe.</>}
-        intro={
-          <>
-            <p>Tout commence par un prototype navigable : vous testez l’expérience sur votre téléphone avant la moindre ligne de code.</p>
-          </>
-        }
-        steps={STEPS}
-      />
-
+      {/* METHOD: steps as cards stacking on top of each other */}
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <div className="max-w-3xl mb-16" data-scroll data-reveal="up">
-            <Eyebrow number="03" className="mb-6">Stack technique</Eyebrow>
+          <div className="mb-14 max-w-3xl" data-scroll data-reveal="up">
+            <Eyebrow number="04" className="mb-6">Méthode</Eyebrow>
+            <h2 className="text-h1">Vous testez votre app <em>avant</em> qu’elle existe.</h2>
+            <p className="text-body text-[var(--muted-foreground)] mt-6">
+              Tout commence par un prototype navigable : vous testez l’expérience sur votre téléphone avant la moindre ligne de code.
+            </p>
+          </div>
+          <ol className="stack-cards">
+            {STEPS.map((step, i) => (
+              <li key={step.title} className="stack-card" style={{ "--i": i } as React.CSSProperties}>
+                <span className="font-[family-name:var(--font-geist-mono)] text-4xl text-[var(--accent)]">0{i + 1}</span>
+                <div>
+                  <h3 className="text-h2">{step.title}</h3>
+                  <p className="text-body-lg text-[var(--muted-foreground)] mt-4 max-w-2xl">{step.description}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </Container>
+      </section>
+
+      {/* STACK: the app's spec sheet */}
+      <section className="section-y border-t border-[var(--border)]">
+        <Container>
+          <div className="mb-12 max-w-3xl" data-scroll data-reveal="up">
+            <Eyebrow number="05" className="mb-6">Fiche technique</Eyebrow>
             <h2 className="text-h1">
               Ce qui fait tourner <em>votre app</em>.
             </h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0" data-scroll data-reveal="stagger">
-            {TECH.map((t) => (
-              <div key={t.name} className="compact-note">
-                <p className="text-caption mb-3">{t.kind}</p>
-                <p className="text-h4 mb-2">{t.name}</p>
-                <p className="text-body-sm text-[var(--muted-foreground)]">{t.tagline}</p>
+          <dl className="spec-sheet" data-scroll data-reveal="stagger">
+            {TECH.map((tech) => (
+              <div key={tech.name}>
+                <dt className="text-caption">{tech.kind}</dt>
+                <dd className="text-h4">{tech.name}</dd>
+                <dd className="text-body text-[var(--muted-foreground)]">{tech.tagline}</dd>
               </div>
             ))}
-          </div>
+          </dl>
         </Container>
       </section>
 
