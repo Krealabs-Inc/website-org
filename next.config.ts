@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import { withPayload } from "@payloadcms/next/withPayload";
 
 // Bundle analyzer : activé via `ANALYZE=true npm run build`.
 // Génère .next/analyze/client.html + .next/analyze/server.html
@@ -100,7 +101,16 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'avatars.githubusercontent.com',
       },
+      {
+        // Media uploaded through the content admin (Payload → Vercel Blob)
+        protocol: 'https',
+        hostname: '*.public.blob.vercel-storage.com',
+      },
     ],
+  },
+  experimental: {
+    // Two root layouts (site + Payload admin): a 404 for unmatched URLs.
+    globalNotFound: true,
   },
   async redirects() {
     return [
@@ -131,4 +141,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default withPayload(withBundleAnalyzer(nextConfig));

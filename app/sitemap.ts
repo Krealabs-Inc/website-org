@@ -3,8 +3,8 @@ import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
 import { CITIES } from "@/lib/cities";
 import { SECTOR_SLUGS } from "@/lib/sectors";
 import { TEAM_SLUGS } from "@/lib/team";
-import { CATEGORY_SLUGS } from "@/app/blog/category/[slug]/page";
-import { INDEXABLE_TAG_SLUGS } from "@/app/blog/tag/[slug]/page";
+import { CATEGORY_SLUGS } from "@/app/(site)/blog/category/[slug]/page";
+import { INDEXABLE_TAG_SLUGS } from "@/app/(site)/blog/tag/[slug]/page";
 import { COMPARATOR_SLUGS } from "@/lib/comparators";
 import { GLOSSARY_SLUGS } from "@/lib/glossary";
 
