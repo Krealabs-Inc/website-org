@@ -5,10 +5,13 @@ import type { ServerFunctionClient } from "payload";
 import { handleServerFunctions, RootLayout } from "@payloadcms/next/layouts";
 import type { ReactNode } from "react";
 
+import { cms } from "@/lib/cms";
+
 import { importMap } from "./cms/importMap.js";
 
 const serverFunction: ServerFunctionClient = async function (args) {
   "use server";
+  await cms(); // applies pending migrations first (production)
   return handleServerFunctions({ ...args, config, importMap });
 };
 

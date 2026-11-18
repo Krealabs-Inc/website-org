@@ -56,7 +56,14 @@ export default buildConfig({
   sharp,
   plugins: [
     vercelBlobStorage({
+      // Without a token (local dev) files stay on disk, but the storage
+      // fields are always declared, so the database schema is the same in
+      // every environment and the migrations match production.
       enabled: Boolean(process.env.BLOB_READ_WRITE_TOKEN),
+      alwaysInsertFields: true,
+      // The browser sends files straight to Blob: Vercel functions refuse
+      // request bodies over 4.5 MB, which a phone photo easily exceeds.
+      clientUploads: true,
       collections: { media: true },
       token: process.env.BLOB_READ_WRITE_TOKEN,
     }),

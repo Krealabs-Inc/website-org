@@ -8,6 +8,7 @@ import * as migration_20261118_000111_page_home from './20261118_000111_page_hom
 import * as migration_20261118_000805_page_services from './20261118_000805_page_services';
 import * as migration_20261118_001532_page_agency from './20261118_001532_page_agency';
 import * as migration_20261118_001906_page_tools from './20261118_001906_page_tools';
+import * as migration_20261118_011405_media_storage_fields from './20261118_011405_media_storage_fields';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20261118_001906_page_tools.up,
     down: migration_20261118_001906_page_tools.down,
-    name: '20261118_001906_page_tools'
+    name: '20261118_001906_page_tools',
+  },
+  {
+    up: migration_20261118_011405_media_storage_fields.up,
+    down: migration_20261118_011405_media_storage_fields.down,
+    name: '20261118_011405_media_storage_fields'
   },
 ];
