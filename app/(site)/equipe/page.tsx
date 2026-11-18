@@ -1,11 +1,14 @@
 import { Metadata } from "next";
 
 import { Container } from "@/components/ui/container";
-import { ServiceCta } from "@/components/services/service-cta";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { PersonSchema } from "@/components/seo/person-schema";
 import { AmbientVideo } from "@/components/media/ambient-video";
 import { TeamWall } from "@/components/team/team-wall";
+import { PageCta } from "@/components/services/page-cta";
+import { rich } from "@/components/ui/rich";
+import { getPageTexts } from "@/lib/content/pages";
+import { TEAM_PAGE } from "@/lib/page-texts/team-page";
 import { UPCOMING_TEAM } from "@/lib/team";
 import { getTeam } from "@/lib/content/team";
 
@@ -25,6 +28,7 @@ export const metadata: Metadata = {
 
 export default async function EquipePage() {
   const team = await getTeam();
+  const t = await getPageTexts(TEAM_PAGE);
   const baseUrl = "https://krealabs.fr";
 
   return (
@@ -41,7 +45,7 @@ export default async function EquipePage() {
 
       {/* HERO: the wall of the four partners */}
       <div id="collectif" className="scroll-mt-28">
-        <TeamWall members={team} />
+        <TeamWall members={team} title={t.title} band={t.band} />
       </div>
       {UPCOMING_TEAM.length > 0 && (
         <Container>
@@ -61,14 +65,9 @@ export default async function EquipePage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-4" data-scroll data-reveal="up">
-              <Eyebrow className="mb-6">Pourquoi ça compte</Eyebrow>
-              <h2 className="text-h1">
-                Vous parlez à <em>ceux qui codent.</em>
-              </h2>
-              <p className="text-body text-[var(--muted-foreground)] mt-6">
-                Pas de chaîne d’intermédiaires entre votre idée et votre site :
-                ce que vous demandez est exactement ce qui est construit.
-              </p>
+              <Eyebrow className="mb-6">{t.whyEyebrow}</Eyebrow>
+              <h2 className="text-h1">{rich(t.whyTitle)}</h2>
+              <p className="text-body text-[var(--muted-foreground)] mt-6">{t.whyText}</p>
             </div>
             <div className="lg:col-span-8" data-scroll data-reveal="up" style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
               <AmbientVideo
@@ -85,15 +84,12 @@ export default async function EquipePage() {
       <section className="team-manifesto">
         <Container>
           <div className="team-manifesto-heading">
-            <Eyebrow>La même façon de travailler</Eyebrow>
-            <h2 className="text-h1">Des parcours différents.<br />Une même <em>exigence.</em></h2>
+            <Eyebrow>{t.valuesEyebrow}</Eyebrow>
+            <h2 className="text-h1">{rich(t.valuesTitle)}</h2>
           </div>
-          <p className="text-body-lg text-[var(--muted-foreground)] max-w-2xl mt-8">
-            Quatre associés, et c’est voulu : vous gardez les mêmes interlocuteurs du premier échange
-            à la mise en ligne, et ceux qui vous écoutent sont ceux qui construisent.
-          </p>
+          <p className="text-body-lg text-[var(--muted-foreground)] max-w-2xl mt-8">{t.valuesText}</p>
           <div className="team-values">
-            {VALUES.map((value, index) => (
+            {t.values.map((value, index) => (
               <article key={value.title}>
                 <span className="text-caption">0{index + 1} / {value.label}</span>
                 <h3 className="text-h3 mt-6 mb-4">{value.title}</h3>
@@ -104,34 +100,8 @@ export default async function EquipePage() {
         </Container>
       </section>
 
-      <ServiceCta
-        eyebrow="La prochaine rencontre"
-        title={<>On fait <em>équipe ?</em></>}
-        description="Un premier échange offert, en visio ou autour d’un café à Rouen. Parlons de votre idée et de ce que nous pourrions construire ensemble."
-        primaryLabel="Rencontrer le collectif"
-        secondaryLabel={null}
-      />
+      <PageCta t={t} />
     </main>
   );
 }
 
-const VALUES = [
-  {
-    label: "Interlocuteur unique",
-    title: "Un seul contact",
-    description:
-      "Pas de chef de projet, pas de commercial, pas de sous-traitant. Vous appelez, nous répondons. Vous écrivez, nous lisons.",
-  },
-  {
-    label: "Polyvalence",
-    title: "Du design au déploiement",
-    description:
-      "Nous couvrons toute la chaîne. Cela limite les frictions, accélère les itérations, et donne une cohérence forte au produit final.",
-  },
-  {
-    label: "Engagement",
-    title: "Vos projets, nos signatures",
-    description:
-      "Chaque projet que nous livrons est signé Krealabs. Notre nom est sur la ligne - la qualité l'est aussi.",
-  },
-];

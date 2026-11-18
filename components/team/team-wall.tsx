@@ -7,33 +7,25 @@ import { ArrowUpRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import type { TeamMember } from "@/lib/team";
+import { rich } from "@/components/ui/rich";
 
 /**
  * Team page signature: four tall portraits side by side fill the screen; the one you
  * point at, focus or tap widens and tells its story while the others
  * narrow to a strip with their name. A band of facts sits above.
  */
-export function TeamWall({ members }: { members: TeamMember[] }) {
+export function TeamWall({ members, title, band }: { members: TeamMember[]; title: string; band: { value: string; label: string }[] }) {
   const [active, setActive] = useState(0);
   return (
     <section className="mur">
       <div className="mur-head">
-        <h1 className="mur-title">
-          L’équipe qui <em>construit</em> votre projet.
-        </h1>
+        <h1 className="mur-title">{rich(title)}</h1>
         <ul className="mur-band">
-          <li>
-            <strong>4</strong> associés
-          </li>
-          <li>
-            <strong>1</strong> seul interlocuteur
-          </li>
-          <li>
-            <strong>2020</strong> à Rouen
-          </li>
-          <li>
-            <strong>100 %</strong> du code vous appartient
-          </li>
+          {band.map((b) => (
+            <li key={b.label}>
+              <strong>{b.value}</strong> {b.label}
+            </li>
+          ))}
         </ul>
       </div>
 

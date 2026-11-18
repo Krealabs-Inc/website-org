@@ -6,7 +6,7 @@
  * default, so the site never shows a blank.
  *
  * Text conventions (rendered by `rich`): *mots* → italic serif emphasis,
- * a line break → <br />.
+ * **mots** → bold, [texte](/adresse) → link, a line break → <br />.
  */
 export type TextField = { label: string; default: string; long?: boolean; help?: string };
 export type ListField = {

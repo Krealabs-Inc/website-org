@@ -1,0 +1,30 @@
+import { ctaFields, definePage } from "./define";
+
+export const EXPERTISE = definePage({
+  slug: "expertise",
+  label: "Expertise",
+  fields: {
+    eyebrow: { label: "Hero · surtitre", default: "Notre expertise" },
+    title: { label: "Hero · titre", default: "Savoir-faire *technique*, rigueur d’*artisan*." },
+    intro: { label: "Hero · texte", default: "Architecture, performance, sécurité, accessibilité - les compétences que nous mobilisons sur chaque projet pour livrer du code propre, maintenable, et qui dure dans le temps.", long: true },
+    heroCta: { label: "Hero · bouton principal", default: "Parler de mon projet" },
+    heroSecondary: { label: "Hero · bouton secondaire", default: "Découvrir l’équipe" },
+    videoEyebrow: { label: "Vidéo · surtitre", default: "Votre projet, étape par étape" },
+    videoTitle: { label: "Vidéo · titre", default: "Quatre étapes, *aucune surprise*." },
+    skillsEyebrow: { label: "Savoir-faire · surtitre", default: "Savoir-faire" },
+    skillsTitle: { label: "Savoir-faire · titre", default: "Le *plan* de votre projet." },
+    skillsText: { label: "Savoir-faire · texte", default: "Au-delà du code, ce qui fait tenir un projet dans la durée : six savoir-faire, comme les pièces d’un bâtiment bien conçu.", long: true },
+    skills: { label: "Savoir-faire (les six pi\u00e8ces du plan)", list: { title: { label: "Titre" }, description: { label: "Texte", long: true }, points: { label: "Points (s\u00e9par\u00e9s par \u00ab \u00b7 \u00bb)" } }, default: [{"title": "Architecture", "description": "Concevoir des systèmes qui restent simples à mesure qu'ils grossissent.", "points": "Découpage en modules · API typées · Migrations progressives"}, {"title": "Sécurité", "description": "Pratiques OWASP, authentification robuste, gestion des secrets.", "points": "OWASP Top 10 · JWT, OAuth 2 · Audits réguliers"}, {"title": "Performance", "description": "Core Web Vitals optimisés, code splitting, cache intelligent.", "points": "LCP < 2s · Bundle analysis · Edge caching"}, {"title": "Tests & qualité", "description": "Tests unitaires, e2e, CI/CD. Le code livré est du code testé.", "points": "Vitest, Playwright · Couverture mesurée · Tests en CI"}, {"title": "CI/CD & DevOps", "description": "Déploiements automatisés, environnements de preview, rollback simple.", "points": "GitHub Actions · Preview branches · Zero-downtime deploy"}, {"title": "Observabilité", "description": "Monitoring temps réel, alertes, dashboards. On voit les problèmes avant vos utilisateurs.", "points": "Sentry, Vercel Analytics · Logs structurés · Alertes Slack"}] },
+    stackEyebrow: { label: "Stack · surtitre", default: "Stack technique" },
+    stackTitle: { label: "Stack · titre", default: "Les *outils* que nous maîtrisons." },
+    stackText: { label: "Stack · texte", default: "Une stack moderne, typée, testée. Nous nous tenons à jour avec les dernières versions tout en privilégiant la stabilité pour vos projets en production.", long: true },
+    methodEyebrow: { label: "Méthodologie · surtitre", default: "Méthodologie" },
+    methodTitle: { label: "Méthodologie · titre", default: "Comment nous *travaillons*." },
+    methodText: { label: "Méthodologie · texte", default: "Quatre principes structurent notre façon de travailler sur chaque projet, du devis à la maintenance.", long: true },
+    method: { label: "M\u00e9thodologie (principes)", list: { title: { label: "Titre" }, description: { label: "Texte", long: true } }, default: [{"title": "Cadrage écrit", "description": "Chaque projet démarre par un brief écrit validé : objectifs, scope, contraintes, planning. Pas de malentendu."}, {"title": "Itérations courtes", "description": "Sprints d'1 à 2 semaines avec démo à chaque fin de cycle. Vous voyez l'avancement, vous orientez le produit."}, {"title": "Code source partagé", "description": "Accès au dépôt Git dès le jour 1. Vous êtes propriétaire de votre code, pas dépendant de nous."}, {"title": "Documentation continue", "description": "README à jour, schémas d'architecture, conventions documentées. Un futur développeur peut prendre la suite."}] },
+    standardsEyebrow: { label: "Standards · surtitre", default: "Standards & conformité" },
+    standardsTitle: { label: "Standards · titre", default: "Conformes aux *exigences* du métier." },
+    standards: { label: "Standards (pastilles)", list: { label: { label: "Texte" } }, default: [{"label": "WCAG 2.1 AA"}, {"label": "RGPD"}, {"label": "OWASP Top 10"}, {"label": "ISO 27001 friendly"}, {"label": "Core Web Vitals"}, {"label": "Lighthouse 95+"}, {"label": "TypeScript strict"}, {"label": "ESLint + Prettier"}, {"label": "SemVer"}, {"label": "Conventional Commits"}] },
+    ...ctaFields("Discutons de votre *projet*.", {"text": "Quel que soit le projet - site, app mobile, logiciel - la première étape est toujours un échange pour comprendre votre contexte.", "primary": "Démarrer la conversation"}),
+  },
+});

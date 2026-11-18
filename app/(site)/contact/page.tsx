@@ -3,29 +3,21 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ConversationForm } from "@/components/contact/conversation-form";
+import { rich } from "@/components/ui/rich";
+import { getPageTexts } from "@/lib/content/pages";
+import { CONTACT } from "@/lib/page-texts/contact";
 
-const NEXT = [
-  { title: "Premier retour sous 24h ouvrées", text: "Un avis honnête sur la faisabilité, y compris si nous ne sommes pas la bonne équipe pour vous." },
-  { title: "Rendez-vous de cadrage offert", text: "30 à 45 minutes, en visio ou à Rouen. Vous repartez avec un besoin clarifié et une idée du planning." },
-  { title: "Devis détaillé à prix fixe", text: "Sous 5 jours ouvrés : périmètre, livrables, jalons, prix engageant." },
-];
-
-const PROMISES = ["Sans engagement", "NDA sur demande", "Données utilisées uniquement pour vous répondre"];
-
-export default function ContactPage() {
+export default async function ContactPage() {
+  const t = await getPageTexts(CONTACT);
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)] pt-32 pb-32">
       <Container>
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-12">
           {/* The conversation */}
           <div className="lg:col-span-7">
-            <Eyebrow dot className="mb-6">Votre devis gratuit</Eyebrow>
-            <h1 className="text-display">
-              Un premier retour <em>concret</em>, sous 24h.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-6 max-w-xl">
-              Quelques questions, une à la fois. Deux minutes suffisent.
-            </p>
+            <Eyebrow dot className="mb-6">{t.eyebrow}</Eyebrow>
+            <h1 className="text-display">{rich(t.title)}</h1>
+            <p className="text-body-lg text-[var(--muted-foreground)] mt-6 max-w-xl">{t.intro}</p>
             <div className="mt-14">
               <ConversationForm />
             </div>
@@ -35,7 +27,7 @@ export default function ContactPage() {
           <aside className="lg:col-span-5 lg:pt-4">
             <div className="lg:sticky lg:top-28 space-y-10">
               <div>
-                <p className="text-caption mb-4">Ou directement</p>
+                <p className="text-caption mb-4">{t.directLabel}</p>
                 <ul className="contact-lines">
                   <li>
                     <Mail className="size-4" />
@@ -57,9 +49,9 @@ export default function ContactPage() {
               </div>
 
               <div>
-                <p className="text-caption mb-4">Ensuite</p>
+                <p className="text-caption mb-4">{t.nextLabel}</p>
                 <ol className="contact-next">
-                  {NEXT.map((n, i) => (
+                  {t.next.map((n, i) => (
                     <li key={n.title}>
                       <span>{i + 1}</span>
                       <div>
@@ -72,8 +64,8 @@ export default function ContactPage() {
               </div>
 
               <ul className="flex flex-wrap gap-2">
-                {PROMISES.map((p) => (
-                  <li key={p} className="contact-pill">{p}</li>
+                {t.promises.map((p) => (
+                  <li key={p.label} className="contact-pill">{p.label}</li>
                 ))}
               </ul>
             </div>

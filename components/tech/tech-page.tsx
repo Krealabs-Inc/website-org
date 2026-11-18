@@ -5,38 +5,38 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceCta } from "@/components/services/service-cta";
+import { PageCta } from "@/components/services/page-cta";
+import { rich } from "@/components/ui/rich";
 
 interface Item {
   title: string;
   description: string;
 }
 
+interface TechTexts {
+  kind: string;
+  title: string;
+  description: string;
+  heroCta: string;
+  whyEyebrow: string;
+  whyTitle: string;
+  reasons: Item[];
+  usesEyebrow: string;
+  uses: Item[];
+  ctaEyebrow: string;
+  ctaTitle: string;
+  ctaText: string;
+  ctaPrimary: string;
+  ctaSecondary: string;
+}
+
 /**
  * Skeleton shared by the technology pages; each one brings its own demo,
  * so the pages share a family look without being copies of each other.
+ * Texts come from the page's entry in the content admin.
  */
-export function TechPage({
-  number,
-  kind,
-  title,
-  description,
-  demo,
-  whyTitle,
-  reasons,
-  uses,
-  ctaTitle,
-}: {
-  number: string;
-  kind: string;
-  title: ReactNode;
-  description: string;
-  demo: ReactNode;
-  whyTitle: ReactNode;
-  reasons: Item[];
-  uses: Item[];
-  ctaTitle: ReactNode;
-}) {
+export function TechPage({ number, demo, t }: { number: string; demo: ReactNode; t: TechTexts }) {
+  const { kind, description, reasons, uses } = t;
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       <section className="pt-32 pb-20 md:pt-40 md:pb-28">
@@ -53,12 +53,12 @@ export function TechPage({
               <Eyebrow number={number} dot className="mb-8">
                 {kind}
               </Eyebrow>
-              <h1 className="text-h1 md:text-display">{title}</h1>
+              <h1 className="text-h1 md:text-display">{rich(t.title)}</h1>
               <p className="text-body-lg text-[var(--muted-foreground)] mt-8">{description}</p>
               <div className="mt-10">
                 <Button size="lg" asChild>
                   <Link href="/contact">
-                    Parler de mon projet
+                    {t.heroCta}
                     <ArrowRight />
                   </Link>
                 </Button>
@@ -73,8 +73,8 @@ export function TechPage({
         <Container>
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <Eyebrow number="01" className="mb-6">Pourquoi</Eyebrow>
-              <h2 className="text-h1">{whyTitle}</h2>
+              <Eyebrow number="01" className="mb-6">{t.whyEyebrow}</Eyebrow>
+              <h2 className="text-h1">{rich(t.whyTitle)}</h2>
             </div>
             <ol className="tech-reasons lg:col-span-8" data-scroll data-reveal="stagger">
               {reasons.map((r, i) => (
@@ -91,7 +91,7 @@ export function TechPage({
 
       <section className="section-y border-t border-[var(--border)]">
         <Container>
-          <Eyebrow number="02" className="mb-6">Cas d’usage</Eyebrow>
+          <Eyebrow number="02" className="mb-6">{t.usesEyebrow}</Eyebrow>
           <ul className="tech-uses" data-scroll data-reveal="stagger">
             {uses.map((u) => (
               <li key={u.title}>
@@ -103,7 +103,7 @@ export function TechPage({
         </Container>
       </section>
 
-      <ServiceCta title={ctaTitle} />
+      <PageCta t={t} />
     </main>
   );
 }

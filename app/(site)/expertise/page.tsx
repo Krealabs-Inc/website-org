@@ -1,13 +1,16 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, GitBranch, TestTube2, Layers, Rocket, Microscope } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { AmbientVideo } from "@/components/media/ambient-video";
 import { Badge } from "@/components/ui/badge";
-import { ServiceCta } from "@/components/services/service-cta";
+import { PageCta } from "@/components/services/page-cta";
+import { rich } from "@/components/ui/rich";
+import { getPageTexts } from "@/lib/content/pages";
+import { EXPERTISE } from "@/lib/page-texts/expertise";
 import { Blueprint } from "@/components/expertise/blueprint";
 import { Elevation } from "@/components/expertise/elevation";
 import { StackTabs } from "@/components/expertise/stack-tabs";
@@ -26,7 +29,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ExpertisePage() {
+export default async function ExpertisePage() {
+  const t = await getPageTexts(EXPERTISE);
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       {/* HERO */}
@@ -36,24 +40,18 @@ export default function ExpertisePage() {
         <Container className="relative">
           <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12">
           <div className="lg:col-span-6">
-            <Eyebrow dot className="mb-8">Notre expertise</Eyebrow>
-            <h1 className="text-display">
-              Savoir-faire <em>technique</em>, rigueur d’<em>artisan</em>.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Architecture, performance, sécurité, accessibilité - les
-              compétences que nous mobilisons sur chaque projet pour livrer du
-              code propre, maintenable, et qui dure dans le temps.
-            </p>
+            <Eyebrow dot className="mb-8">{t.eyebrow}</Eyebrow>
+            <h1 className="text-display">{rich(t.title)}</h1>
+            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">{t.intro}</p>
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <Button size="lg" asChild>
                 <Link href="/contact">
-                  Parler de mon projet
+                  {t.heroCta}
                   <ArrowRight />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
-                <Link href="/equipe">Découvrir l’équipe</Link>
+                <Link href="/equipe">{t.heroSecondary}</Link>
               </Button>
             </div>
           </div>
@@ -68,10 +66,8 @@ export default function ExpertisePage() {
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <div className="max-w-3xl mb-12" data-scroll data-reveal="up">
-            <Eyebrow className="mb-6">Votre projet, étape par étape</Eyebrow>
-            <h2 className="text-h1">
-              Quatre étapes, <em>aucune surprise</em>.
-            </h2>
+            <Eyebrow className="mb-6">{t.videoEyebrow}</Eyebrow>
+            <h2 className="text-h1">{rich(t.videoTitle)}</h2>
           </div>
           <div data-scroll data-reveal="up">
             <AmbientVideo
@@ -88,16 +84,12 @@ export default function ExpertisePage() {
         <Container>
           <div className="mb-14 grid grid-cols-1 items-end gap-8 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <Eyebrow number="01" className="mb-6">Savoir-faire</Eyebrow>
-              <h2 className="text-h1">
-                Le <em>plan</em> de votre projet.
-              </h2>
+              <Eyebrow number="01" className="mb-6">{t.skillsEyebrow}</Eyebrow>
+              <h2 className="text-h1">{rich(t.skillsTitle)}</h2>
             </div>
-            <p className="text-body text-[var(--muted-foreground)] lg:col-span-5">
-              Au-delà du code, ce qui fait tenir un projet dans la durée : six savoir-faire, comme les pièces d’un bâtiment bien conçu.
-            </p>
+            <p className="text-body text-[var(--muted-foreground)] lg:col-span-5">{t.skillsText}</p>
           </div>
-          <Blueprint skills={COMPETENCES.map(({ title, description, points }) => ({ title, description, points }))} />
+          <Blueprint skills={t.skills.map(({ title, description, points }) => ({ title, description, points: points.split("·").map((p) => p.trim()).filter(Boolean) }))} />
         </Container>
       </section>
 
@@ -105,15 +97,9 @@ export default function ExpertisePage() {
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <div className="max-w-3xl mb-16">
-            <Eyebrow number="02" className="mb-6">Stack technique</Eyebrow>
-            <h2 className="text-h1">
-              Les <em>outils</em> que nous maîtrisons.
-            </h2>
-            <p className="text-body text-[var(--muted-foreground)] mt-6">
-              Une stack moderne, typée, testée. Nous nous tenons à jour avec les
-              dernières versions tout en privilégiant la stabilité pour vos
-              projets en production.
-            </p>
+            <Eyebrow number="02" className="mb-6">{t.stackEyebrow}</Eyebrow>
+            <h2 className="text-h1">{rich(t.stackTitle)}</h2>
+            <p className="text-body text-[var(--muted-foreground)] mt-6">{t.stackText}</p>
           </div>
 
           <StackTabs categories={STACK_CATEGORIES} />
@@ -126,18 +112,13 @@ export default function ExpertisePage() {
         <Container className="relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-5">
-              <Eyebrow number="03" className="mb-6">Méthodologie</Eyebrow>
-              <h2 className="text-h1 mb-6">
-                Comment nous <em>travaillons</em>.
-              </h2>
-              <p className="text-body text-[var(--muted-foreground)]">
-                Quatre principes structurent notre façon de travailler sur
-                chaque projet, du devis à la maintenance.
-              </p>
+              <Eyebrow number="03" className="mb-6">{t.methodEyebrow}</Eyebrow>
+              <h2 className="text-h1 mb-6">{rich(t.methodTitle)}</h2>
+              <p className="text-body text-[var(--muted-foreground)]">{t.methodText}</p>
             </div>
 
             <ol className="lg:col-span-7 space-y-3">
-              {METHODE.map((m, i) => (
+              {t.method.map((m, i) => (
                 <li key={m.title} className="editorial-step">
                   <span className="editorial-ordinal">
                     {String(i + 1).padStart(2, "0")}
@@ -159,72 +140,24 @@ export default function ExpertisePage() {
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <Eyebrow className="mb-6 justify-center">Standards & conformité</Eyebrow>
-            <h2 className="text-h1">
-              Conformes aux <em>exigences</em> du métier.
-            </h2>
+            <Eyebrow className="mb-6 justify-center">{t.standardsEyebrow}</Eyebrow>
+            <h2 className="text-h1">{rich(t.standardsTitle)}</h2>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            {STANDARDS.map((s) => (
-              <Badge key={s} variant="outline" className="px-4 py-2 text-body-sm">
-                {s}
+            {t.standards.map((s) => (
+              <Badge key={s.label} variant="outline" className="px-4 py-2 text-body-sm">
+                {s.label}
               </Badge>
             ))}
           </div>
         </Container>
       </section>
 
-      <ServiceCta
-        title={
-          <>
-            Discutons de votre <em>projet</em>.
-          </>
-        }
-        description="Quelque soit le projet - site, app mobile, logiciel - la première étape est toujours un échange pour comprendre votre contexte."
-        primaryLabel="Démarrer la conversation"
-      />
+      <PageCta t={t} />
     </main>
   );
 }
 
-const COMPETENCES = [
-  {
-    icon: Layers,
-    title: "Architecture",
-    description: "Concevoir des systèmes qui restent simples à mesure qu'ils grossissent.",
-    points: ["Découpage en modules", "API typées", "Migrations progressives"],
-  },
-  {
-    icon: ShieldCheck,
-    title: "Sécurité",
-    description: "Pratiques OWASP, authentification robuste, gestion des secrets.",
-    points: ["OWASP Top 10", "JWT, OAuth 2", "Audits réguliers"],
-  },
-  {
-    icon: Rocket,
-    title: "Performance",
-    description: "Core Web Vitals optimisés, code splitting, cache intelligent.",
-    points: ["LCP < 2s", "Bundle analysis", "Edge caching"],
-  },
-  {
-    icon: TestTube2,
-    title: "Tests & qualité",
-    description: "Tests unitaires, e2e, CI/CD. Le code livré est du code testé.",
-    points: ["Vitest, Playwright", "Couverture mesurée", "Tests en CI"],
-  },
-  {
-    icon: GitBranch,
-    title: "CI/CD & DevOps",
-    description: "Déploiements automatisés, environnements de preview, rollback simple.",
-    points: ["GitHub Actions", "Preview branches", "Zero-downtime deploy"],
-  },
-  {
-    icon: Microscope,
-    title: "Observabilité",
-    description: "Monitoring temps réel, alertes, dashboards. On voit les problèmes avant vos utilisateurs.",
-    points: ["Sentry, Vercel Analytics", "Logs structurés", "Alertes Slack"],
-  },
-];
 
 const STACK_CATEGORIES = [
   {
@@ -290,34 +223,4 @@ const STACK_CATEGORIES = [
   },
 ];
 
-const METHODE = [
-  {
-    title: "Cadrage écrit",
-    description: "Chaque projet démarre par un brief écrit validé : objectifs, scope, contraintes, planning. Pas de malentendu.",
-  },
-  {
-    title: "Itérations courtes",
-    description: "Sprints d'1 à 2 semaines avec démo à chaque fin de cycle. Vous voyez l'avancement, vous orientez le produit.",
-  },
-  {
-    title: "Code source partagé",
-    description: "Accès au dépôt Git dès le jour 1. Vous êtes propriétaire de votre code, pas dépendant de nous.",
-  },
-  {
-    title: "Documentation continue",
-    description: "README à jour, schémas d'architecture, conventions documentées. Un futur développeur peut prendre la suite.",
-  },
-];
 
-const STANDARDS = [
-  "WCAG 2.1 AA",
-  "RGPD",
-  "OWASP Top 10",
-  "ISO 27001 friendly",
-  "Core Web Vitals",
-  "Lighthouse 95+",
-  "TypeScript strict",
-  "ESLint + Prettier",
-  "SemVer",
-  "Conventional Commits",
-];

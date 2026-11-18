@@ -4,7 +4,7 @@ import { revalidateContent } from "../../lib/revalidate";
 import { isList, type PageDef } from "../../lib/page-texts/define";
 import { PAGE_DEFS } from "../../lib/page-texts";
 
-const HELP = "*mots* = italique · un retour à la ligne = saut de ligne · vide = texte d’origine";
+const HELP = "*mots* = italique · **mots** = gras · [texte](/adresse) = lien · retour à la ligne = saut de ligne · vide = texte d’origine";
 
 function toFields(def: PageDef): Field[] {
   return Object.entries(def.fields).map(([name, f]): Field => {
