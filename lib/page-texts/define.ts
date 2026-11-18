@@ -27,3 +27,18 @@ export type PageValues<T extends PageDef> = {
     ? Record<keyof T["fields"][K]["list"] & string, string>[]
     : string;
 };
+
+/** The closing call-to-action block most pages end with (ServiceCta). */
+export function ctaFields(title: string, o: { eyebrow?: string; text?: string; primary?: string; secondary?: string } = {}) {
+  return {
+    ctaEyebrow: { label: "Appel à l’action · surtitre", default: o.eyebrow ?? "Votre projet" },
+    ctaTitle: { label: "Appel à l’action · titre", default: title },
+    ctaText: { label: "Appel à l’action · texte", long: true, default: o.text ?? "Le premier échange est gratuit et sans engagement. Décrivez votre projet, on vous répond sous 24h." },
+    ctaPrimary: { label: "Appel à l’action · bouton principal", default: o.primary ?? "Parler de mon projet" },
+    ctaSecondary: {
+      label: "Appel à l’action · bouton secondaire",
+      default: o.secondary ?? "Voir ce qu’on peut faire pour vous",
+      help: "Vide = pas de bouton secondaire (si le texte d’origine est vide).",
+    },
+  } satisfies Record<string, TextField>;
+}

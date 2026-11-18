@@ -5,6 +5,7 @@ import * as migration_20261117_232917_glossary_cities_sectors from './20261117_2
 import * as migration_20261117_233043_faq from './20261117_233043_faq';
 import * as migration_20261117_233338_posts from './20261117_233338_posts';
 import * as migration_20261118_000111_page_home from './20261118_000111_page_home';
+import * as migration_20261118_000805_page_services from './20261118_000805_page_services';
 
 export const migrations = [
   {
@@ -40,6 +41,11 @@ export const migrations = [
   {
     up: migration_20261118_000111_page_home.up,
     down: migration_20261118_000111_page_home.down,
-    name: '20261118_000111_page_home'
+    name: '20261118_000111_page_home',
+  },
+  {
+    up: migration_20261118_000805_page_services.up,
+    down: migration_20261118_000805_page_services.down,
+    name: '20261118_000805_page_services'
   },
 ];

@@ -1,15 +1,6 @@
 import { Metadata } from "next";
 import Link from "next/link";
-import {
-  Gauge,
-  Search,
-  MapPin,
-  FileSearch,
-  TrendingUp,
-  LineChart,
-  ArrowLeft,
-  ArrowRight,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "SEO local Rouen : vos clients vous trouvent sur Google",
@@ -25,12 +16,16 @@ import { Gauges } from "@/components/services/seo/gauges";
 import { SerpClimb } from "@/components/services/seo/serp-climb";
 import { LoadRace } from "@/components/services/seo/load-race";
 import { Checklist } from "@/components/services/seo/checklist";
-import { ServiceCta } from "@/components/services/service-cta";
+import { PageCta } from "@/components/services/page-cta";
+import { rich } from "@/components/ui/rich";
+import { getPageTexts } from "@/lib/content/pages";
+import { SERVICE_SEO } from "@/lib/page-texts/service-seo";
 import { ServiceResources } from "@/components/services/service-resources";
 import { ServiceFAQ } from "@/components/services/service-faq";
 import { ServiceSchema } from "@/components/seo/service-schema";
 
-export default function PerformanceSeoPage() {
+export default async function PerformanceSeoPage() {
+  const t = await getPageTexts(SERVICE_SEO);
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       <ServiceSchema
@@ -60,22 +55,18 @@ export default function PerformanceSeoPage() {
           </Link>
           <div className="grid grid-cols-1 items-end gap-14 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <Eyebrow number="04" dot className="mb-8">Performance & SEO local</Eyebrow>
-              <h1 className="text-display">
-                Vos clients vous trouvent sur Google, à <em>Rouen</em>.
-              </h1>
-              <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-xl">
-                Vous apparaissez quand vos clients cherchent votre métier, et votre site s’affiche instantanément. Audit technique, Core Web Vitals et SEO local pour les entreprises de Rouen et de Normandie.
-              </p>
+              <Eyebrow number="04" dot className="mb-8">{t.heroEyebrow}</Eyebrow>
+              <h1 className="text-display">{rich(t.heroTitle)}</h1>
+              <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-xl">{t.heroText}</p>
               <div className="mt-10 flex flex-wrap items-center gap-3">
                 <Button size="lg" asChild>
                   <Link href="/contact">
-                    Parler de mon projet
+                    {t.heroCta}
                     <ArrowRight />
                   </Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <Link href="/services">Voir toutes les solutions</Link>
+                  <Link href="/services">{t.heroSecondary}</Link>
                 </Button>
               </div>
             </div>
@@ -94,14 +85,10 @@ export default function PerformanceSeoPage() {
         <Container>
           <div className="mb-12 grid grid-cols-1 items-end gap-6 lg:grid-cols-12" data-scroll data-reveal="up">
             <div className="lg:col-span-7">
-              <Eyebrow number="02" className="mb-6">Vitesse</Eyebrow>
-              <h2 className="text-h1">
-                Vos visiteurs n’attendent pas. <em>Votre site non plus.</em>
-              </h2>
+              <Eyebrow number="02" className="mb-6">{t.speedEyebrow}</Eyebrow>
+              <h2 className="text-h1">{rich(t.speedTitle)}</h2>
             </div>
-            <p className="text-body text-[var(--muted-foreground)] lg:col-span-5">
-              Chaque seconde d’attente fait partir des visiteurs, et Google le sait : la vitesse compte dans votre classement.
-            </p>
+            <p className="text-body text-[var(--muted-foreground)] lg:col-span-5">{t.speedText}</p>
           </div>
           <LoadRace />
         </Container>
@@ -111,20 +98,16 @@ export default function PerformanceSeoPage() {
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <div className="mb-12 max-w-3xl" data-scroll data-reveal="up">
-            <Eyebrow number="03" className="mb-6">Ce que vous obtenez</Eyebrow>
-            <h2 className="text-h1">
-              Six leviers, un seul <em>objectif</em>.
-            </h2>
-            <p className="text-body text-[var(--muted-foreground)] mt-6">
-              Chaque levier est mesuré avant/après : vous savez exactement ce que votre investissement rapporte.
-            </p>
+            <Eyebrow number="03" className="mb-6">{t.featuresEyebrow}</Eyebrow>
+            <h2 className="text-h1">{rich(t.featuresTitle)}</h2>
+            <p className="text-body text-[var(--muted-foreground)] mt-6">{t.featuresText}</p>
           </div>
           <div className="report" data-scroll data-reveal="up">
             <div className="report-head">
               <span>Rapport · Leviers travaillés</span>
               <span>Mesuré par</span>
             </div>
-            {FEATURES.map((f) => (
+            {t.features.map((f) => (
               <div key={f.title} className="report-row">
                 <h3 className="text-h4">{f.title}</h3>
                 <p className="text-body-sm text-[var(--muted-foreground)]">{f.description}</p>
@@ -141,15 +124,13 @@ export default function PerformanceSeoPage() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <div className="lg:sticky lg:top-32" data-scroll data-reveal="up">
-                <Eyebrow number="04" className="mb-6">Méthode</Eyebrow>
-                <h2 className="text-h1">Audit, plan d’action, <em>résultats</em>.</h2>
-                <p className="text-body text-[var(--muted-foreground)] mt-6">
-                  Aucune boîte noire : chaque recommandation vous est expliquée, vous décidez, on l’applique. Et tout est mesuré.
-                </p>
+                <Eyebrow number="04" className="mb-6">{t.methodEyebrow}</Eyebrow>
+                <h2 className="text-h1">{rich(t.methodTitle)}</h2>
+                <p className="text-body text-[var(--muted-foreground)] mt-6">{t.methodText}</p>
               </div>
             </div>
             <div className="lg:col-span-7">
-              <Checklist steps={STEPS} />
+              <Checklist steps={t.steps} />
             </div>
           </div>
         </Container>
@@ -159,13 +140,11 @@ export default function PerformanceSeoPage() {
       <section className="section-y border-t border-[var(--border)]">
         <Container>
           <div className="max-w-3xl mb-12" data-scroll data-reveal="up">
-            <Eyebrow number="05" className="mb-6">Outils</Eyebrow>
-            <h2 className="text-h1">
-              Des mesures <em>vérifiables</em>, pas des promesses.
-            </h2>
+            <Eyebrow number="05" className="mb-6">{t.toolsEyebrow}</Eyebrow>
+            <h2 className="text-h1">{rich(t.toolsTitle)}</h2>
           </div>
           <div className="tool-tabs" data-scroll data-reveal="stagger">
-            {TOOLS.map((tool) => (
+            {t.tools.map((tool) => (
               <div key={tool.name}>
                 <p className="text-caption mb-3">{tool.kind}</p>
                 <p className="text-h4 mb-2">{tool.name}</p>
@@ -177,12 +156,8 @@ export default function PerformanceSeoPage() {
       </section>
 
       <ServiceFAQ
-        title={
-          <>
-            Vos questions sur <em>SEO &amp; performance</em>.
-          </>
-        }
-        items={FAQ}
+        title={rich(t.faqTitle)}
+        items={t.faq}
       />
 
 
@@ -196,111 +171,7 @@ export default function PerformanceSeoPage() {
         ]}
       />
 
-      <ServiceCta
-        title={
-          <>
-            Vos clients vous <em>cherchent</em>. Ils vous trouvent ?
-          </>
-        }
-      />
+      <PageCta t={t} />
     </main>
   );
 }
-
-const FAQ = [
-  {
-    question: "Comment mesurez-vous la performance d'un site ?",
-    answer:
-      "Audit complet en 3 axes : (1) Core Web Vitals via Lighthouse + PageSpeed Insights (LCP, INP, CLS - objectif 90+ sur les 3). (2) Audit SEO technique : crawl du site (Screaming Frog), schema.org, balises, vitesse, mobile-friendliness. (3) Audit sémantique : positions actuelles sur les mots-clés cibles, concurrence locale Rouen / Normandie, opportunités content. Rapport écrit avec recommandations priorisées par impact / effort.",
-  },
-  {
-    question: "Combien coûte un audit SEO + perf complet à Rouen ?",
-    answer:
-      "Audit standard (jusqu'à 50 pages, 3-5 jours de travail) : 1 500-3 000 €. Audit approfondi avec recommandations et plan d'action (jusqu'à 500 pages, 7-12 jours) : 4 000-8 000 €. Inclus : rapport PDF, debrief en visio ou présentiel, priorisation des actions, accompagnement pendant 2 semaines pour les corrections urgentes.",
-  },
-  {
-    question: "Quels sont les délais visibles sur les positions Google après corrections ?",
-    answer:
-      "Cas typiques observés : améliorations Core Web Vitals → +5-15% de trafic en 4-8 semaines. Corrections schema.org + technique → +10-30% en 8-16 semaines. Contenu nouveau ciblé local Rouen → +50-200% sur les longues traînes en 6-12 mois. Le SEO est un investissement long terme - pas de gain instantané sauf bugs techniques majeurs.",
-  },
-  {
-    question: "Garantissez-vous la première position sur \"agence web Rouen\" ?",
-    answer:
-      "Non - et toute agence qui vous garantit la 1ère position ment. Google a 200+ critères de ranking dont seuls une trentaine sont contrôlables côté technique/contenu. Les autres dépendent de l'autorité du domaine (âge, backlinks), de la concurrence locale, du contexte utilisateur. Ce qu'on garantit : application des best practices, mesure transparente, progression continue.",
-  },
-  {
-    question: "Travaillez-vous avec mon agence SEO existante ?",
-    answer:
-      "Oui, régulièrement. Si votre agence SEO gère déjà le contenu et les liens, vous pouvez nous confier la partie technique (performance, structure, schema). Chacun son terrain, et un point commun chaque trimestre pour avancer dans la même direction.",
-  },
-  {
-    question: "Quels outils utilisez-vous ?",
-    answer:
-      "Audit technique : Lighthouse, PageSpeed Insights, Screaming Frog, Sitebulb. Monitoring : Search Console (gratuit), Vercel Analytics, Plausible. Sémantique : Ahrefs ou Semrush selon le projet. AI : Claude / GPT pour la rédaction assistée. Pour le netlinking et la veille concurrentielle intensive, on travaille main dans la main avec votre agence de référencement : vous profitez du meilleur des deux.",
-  },
-];
-
-const FEATURES = [
-  {
-    icon: Gauge,
-    title: "Core Web Vitals",
-    metric: "LCP · INP · CLS",
-    description: "Objectif : votre site affiché en moins de 2 secondes sur tous les écrans, sous les seuils de Google (LCP, INP, CLS).",
-  },
-  {
-    icon: Search,
-    title: "SEO technique",
-    metric: "Pages indexées",
-    description: "Google comprend et indexe correctement vos pages : Schema.org, sitemap, robots.txt, canonicals, balises.",
-  },
-  {
-    icon: MapPin,
-    title: "SEO local Rouen",
-    metric: "Visibilité locale",
-    description: "Vous ressortez dans les recherches locales et sur la carte : fiche Google Business Profile, Schema LocalBusiness, citations locales.",
-  },
-  {
-    icon: FileSearch,
-    title: "Recherche de mots-clés",
-    metric: "Requêtes ciblées",
-    description: "Vous savez ce que vos clients tapent vraiment dans Google : volume, concurrence et intention des requêtes de votre secteur.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Optimisation des contenus",
-    metric: "Positions",
-    description: "Vos pages répondent aux questions de vos clients : titres, structure, maillage interne, réécriture si besoin.",
-  },
-  {
-    icon: LineChart,
-    title: "Suivi & reporting",
-    metric: "Rapport mensuel",
-    description: "Vous voyez chaque mois ce que votre investissement rapporte : positions, trafic organique, conversions.",
-  },
-];
-
-const STEPS = [
-  {
-    title: "Audit complet",
-    description: "Analyse technique, contenu, profil de liens, performance. Rapport écrit avec priorités chiffrées.",
-  },
-  {
-    title: "Plan d'action",
-    description: "Priorisation des chantiers par impact. Vous validez ce qu'on implémente - et dans quel ordre.",
-  },
-  {
-    title: "Implémentation",
-    description: "Corrections techniques, optimisations on-page, schema markup. Mesures avant/après.",
-  },
-  {
-    title: "Suivi mensuel",
-    description: "Reporting Google Search Console + Analytics. Recommandations continues sur 3 à 12 mois.",
-  },
-];
-
-const TOOLS = [
-  { kind: "Performance", name: "Lighthouse", tagline: "Audit Core Web Vitals officiel Google" },
-  { kind: "Recherche", name: "Ahrefs / Semrush", tagline: "Volume, concurrence, suivi positions" },
-  { kind: "Search Console", name: "Google Search Console", tagline: "Indexation, requêtes, problèmes techniques" },
-  { kind: "Analytics", name: "GA4 / Plausible", tagline: "Trafic, comportement, conversions" },
-];
