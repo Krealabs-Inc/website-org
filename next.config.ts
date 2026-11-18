@@ -115,6 +115,9 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // The content admin moved to Directus
+      { source: '/cms', destination: 'https://cms.krealabs.fr/admin', permanent: false },
+      { source: '/cms/:path*', destination: 'https://cms.krealabs.fr/admin', permanent: false },
       // Anciennes URLs e-commerce → /contact (SEO conservation)
       { source: '/pricing', destination: '/contact?type=devis', permanent: true },
       { source: '/cart', destination: '/contact', permanent: true },
