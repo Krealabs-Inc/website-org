@@ -31,8 +31,6 @@ export interface CityData {
   population: string;
   /** Métropole / agglo : "Métropole Rouen Normandie (492 681 hab)" */
   metropole: string;
-  /** CCI référente : "CCI Rouen Métropole" */
-  cciName: string;
   /** Coordonnées GPS pour Schema LocalBusiness */
   geo: { lat: number; lng: number };
   /** Distance routière depuis Krealabs HQ Rouen (en km) */
@@ -70,7 +68,6 @@ export const CITIES: Record<string, CityData> = {
     inseeCode: "76540",
     population: "112 974",
     metropole: "Métropole Rouen Normandie (492 681 hab)",
-    cciName: "CCI Rouen Métropole",
     geo: { lat: 49.4431, lng: 1.0993 },
     distanceFromRouen: 0,
     heroIntro:
@@ -121,7 +118,7 @@ export const CITIES: Record<string, CityData> = {
       "site internet rouen",
     ],
     cityReason:
-      "Basés en plein centre de Rouen, nous pouvons nous déplacer dans la journée chez nos clients du Petit-Quevilly à Bois-Guillaume, et participer aux événements FrenchTech Normandie et CCI Rouen Métropole.",
+      "Basés en plein centre de Rouen, nous pouvons nous déplacer dans la journée chez nos clients du Petit-Quevilly à Bois-Guillaume, et vous rencontrer sur place à chaque étape du projet.",
   },
 
   "le-havre": {
@@ -138,7 +135,6 @@ export const CITIES: Record<string, CityData> = {
     inseeCode: "76351",
     population: "165 830",
     metropole: "Communauté urbaine Le Havre Seine Métropole (267 526 hab)",
-    cciName: "CCI Seine Estuaire",
     geo: { lat: 49.4944, lng: 0.1079 },
     distanceFromRouen: 88,
     heroIntro:
@@ -204,7 +200,6 @@ export const CITIES: Record<string, CityData> = {
     inseeCode: "14118",
     population: "105 354",
     metropole: "Caen la Mer (266 800 hab)",
-    cciName: "CCI Caen Normandie",
     geo: { lat: 49.1829, lng: -0.3707 },
     distanceFromRouen: 120,
     heroIntro:
@@ -271,7 +266,6 @@ export const CITIES: Record<string, CityData> = {
     inseeCode: "76217",
     population: "29 040",
     metropole: "Communauté d'Agglomération Dieppe-Maritime (76 000 hab)",
-    cciName: "CCI Rouen Métropole (antenne Dieppe)",
     geo: { lat: 49.9229, lng: 1.0775 },
     distanceFromRouen: 70,
     heroIntro:
@@ -336,7 +330,6 @@ export const CITIES: Record<string, CityData> = {
     inseeCode: "76259",
     population: "18 540",
     metropole: "Communauté d'agglomération Fécamp Caux Littoral (39 000 hab)",
-    cciName: "CCI Rouen Métropole",
     geo: { lat: 49.7558, lng: 0.3713 },
     distanceFromRouen: 90,
     heroIntro:
@@ -399,7 +392,6 @@ export const CITIES: Record<string, CityData> = {
     inseeCode: "14047",
     population: "13 015",
     metropole: "Bayeux Intercom (29 000 hab)",
-    cciName: "CCI Caen Normandie",
     geo: { lat: 49.2764, lng: -0.7027 },
     distanceFromRouen: 145,
     heroIntro:
@@ -461,7 +453,6 @@ export const CITIES: Record<string, CityData> = {
     inseeCode: "50129",
     population: "78 549",
     metropole: "Communauté d'Agglomération du Cotentin (180 000 hab)",
-    cciName: "CCI Ouest Normandie",
     geo: { lat: 49.6336, lng: -1.622 },
     distanceFromRouen: 250,
     heroIntro:
@@ -526,7 +517,6 @@ export const CITIES: Record<string, CityData> = {
     inseeCode: "50218",
     population: "12 730",
     metropole: "Communauté de Communes Granville Terre et Mer (28 000 hab)",
-    cciName: "CCI Ouest Normandie",
     geo: { lat: 48.8378, lng: -1.5949 },
     distanceFromRouen: 235,
     heroIntro:
@@ -590,7 +580,6 @@ export const CITIES: Record<string, CityData> = {
     inseeCode: "27229",
     population: "47 470",
     metropole: "Évreux Portes de Normandie (113 000 hab)",
-    cciName: "CCI Portes de Normandie",
     geo: { lat: 49.0241, lng: 1.1508 },
     distanceFromRouen: 56,
     heroIntro:

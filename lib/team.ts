@@ -23,6 +23,8 @@ export interface TeamMember {
   yearsExperience: string;
   /** Phrase serif italique : ce que la personne aime faire */
   loves: string;
+  /** Une ligne sur le parcours avant Krealabs (tirée de la bio) */
+  background: string;
   /** URL absolue ou relative au domaine */
   photo?: string;
   /** Liens externes (sameAs schema) */
@@ -54,6 +56,7 @@ export const TEAM: TeamMember[] = [
     location: "Rouen, Normandie",
     yearsExperience: "7+",
     loves: "Concevoir des interfaces où chaque détail compte.",
+    background: "7 ans de développement web avant de fonder Krealabs",
     photo: "/team/maxime.webp",
     github: "https://github.com/makcimerrr",
     linkedin: "https://www.linkedin.com/in/maxime-dubois-0265a4292/",
@@ -95,6 +98,7 @@ export const TEAM: TeamMember[] = [
     location: "Rouen, Normandie",
     yearsExperience: "3+",
     loves: "Optimiser un algorithme jusqu'à ce qu'il devienne simple et rapide.",
+    background: "Éducateur sportif, reconverti au code à Zone01 Rouen",
     photo: "/team/thibaud.jpg",
     github: "https://github.com/ThMasurel",
     linkedin: "https://www.linkedin.com/in/thibaud-masurel-90b960380/",
@@ -129,6 +133,7 @@ export const TEAM: TeamMember[] = [
     location: "Rouen, Normandie",
     yearsExperience: "3+",
     loves: "Voir une application réagir en direct, sans rechargement.",
+    background: "Formé à Zone01 Rouen, du serveur Go à l’interface",
     photo: "/team/paul.jpg",
     linkedin: "https://www.linkedin.com/in/paulbouqueret/",
     github: "https://github.com/pbouqueret",
@@ -160,6 +165,7 @@ export const TEAM: TeamMember[] = [
     location: "Rouen, Normandie",
     yearsExperience: "3+",
     loves: "Rendre une application plus intelligente sans la rendre moins sûre.",
+    background: "Dix ans à manager des équipes dans la distribution",
     photo: "/team/romain.jpg",
     github: "https://github.com/MrFruchard",
     linkedin: "https://www.linkedin.com/in/romain-savary1/",

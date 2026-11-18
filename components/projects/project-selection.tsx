@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { PROJECTS } from "@/lib/projects";
+import { getProjects } from "@/lib/content/projects";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 
@@ -12,23 +12,24 @@ interface ProjectSelectionProps {
 
 // Projects read as an editorial index, like the services list: client
 // photos and banners clashed with the site's own visual language.
-export function ProjectSelection({
+export async function ProjectSelection({
   slugs,
   title = <>Des projets concrets, <em>à explorer.</em></>,
   eyebrow = "Réalisations & concepts",
 }: ProjectSelectionProps) {
-  const projects = slugs ? PROJECTS.filter((project) => slugs.includes(project.slug)) : PROJECTS;
+  const all = await getProjects();
+  const projects = slugs ? all.filter((project) => slugs.includes(project.slug)) : all;
   return (
     <section id="realisations" className="project-selection">
       <Container>
-        <div className="project-selection-heading">
+        <div className="project-selection-heading" data-scroll data-reveal="up">
           <div>
             <Eyebrow className="mb-5">{eyebrow}</Eyebrow>
             <h2 className="text-h1">{title}</h2>
           </div>
           <Link href="/clients" className="home-text-link">Voir toutes les réalisations<ArrowRight className="size-4" aria-hidden /></Link>
         </div>
-        <div className="service-index">
+        <div className="service-index" data-scroll data-reveal="stagger">
           {projects.map((project, index) => (
             <Link key={project.slug} href={`/clients#${project.slug}`} className="service-index-row">
               <span className="service-index-number" aria-hidden>0{index + 1}</span>

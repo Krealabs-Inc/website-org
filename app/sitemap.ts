@@ -1,12 +1,11 @@
 import { MetadataRoute } from "next";
-import { getPublishedPosts, frenchDateToISO } from "@/lib/blog-data";
-import { CITIES } from "@/lib/cities";
-import { SECTOR_SLUGS } from "@/lib/sectors";
-import { TEAM_SLUGS } from "@/lib/team";
-import { CATEGORY_SLUGS } from "@/app/blog/category/[slug]/page";
-import { INDEXABLE_TAG_SLUGS } from "@/app/blog/tag/[slug]/page";
+import { frenchDateToISO } from "@/lib/blog-data";
+import { getPublishedPosts, getIndexableTagSlugs } from "@/lib/content/posts";
+import { getCities, getSectors } from "@/lib/content/local";
+import { getTeam } from "@/lib/content/team";
+import { CATEGORY_SLUGS } from "@/app/(site)/blog/category/[slug]/page";
 import { COMPARATOR_SLUGS } from "@/lib/comparators";
-import { GLOSSARY_SLUGS } from "@/lib/glossary";
+import { getGlossary } from "@/lib/content/glossary";
 
 const baseUrl = "https://krealabs.fr";
 const now = new Date();
@@ -29,7 +28,7 @@ function absolutize(path: string, baseUrl: string): string {
   return `${baseUrl}${path.startsWith("/") ? "" : "/"}${path}`;
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     { url: baseUrl, lastModified: now, changeFrequency: "weekly", priority: 1 },
     {
@@ -189,7 +188,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Articles de blog individuels - chargés depuis blog-data.ts
   // Inclut images pour Google Images (post.image + OG dynamique)
-  const blogArticles: MetadataRoute.Sitemap = getPublishedPosts().map((post) => ({
+  const blogArticles: MetadataRoute.Sitemap = (await getPublishedPosts()).map((post) => ({
     url: `${baseUrl}/blog/${post.slug}`,
     // Date réelle de modif si renseignée, sinon date de publication.
     // Évite que tous les articles se présentent comme "modifiés aujourd'hui"
@@ -206,7 +205,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Pages locales par ville (Rouen, Le Havre, Caen, Évreux)
-  const cityPages: MetadataRoute.Sitemap = Object.values(CITIES)
+  const cityPages: MetadataRoute.Sitemap = Object.values(await getCities())
     .filter((c) => c.slug !== "rouen") // Rouen est déjà dans staticPages
     .map((c) => ({
       url: `${baseUrl}${c.path}`,
@@ -216,7 +215,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }));
 
   // Pages programmatic SEO /agence-web-rouen/[secteur]
-  const sectorPages: MetadataRoute.Sitemap = SECTOR_SLUGS.map((secteur) => ({
+  const sectorPages: MetadataRoute.Sitemap = Object.keys(await getSectors()).map((secteur) => ({
     url: `${baseUrl}/agence-web-rouen/${secteur}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
@@ -224,7 +223,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Pages auteur individuelles (E-E-A-T)
-  const authorPages: MetadataRoute.Sitemap = TEAM_SLUGS.map((slug) => ({
+  const authorPages: MetadataRoute.Sitemap = (await getTeam()).map(({ slug }) => ({
     url: `${baseUrl}/equipe/${slug}`,
     lastModified: now,
     changeFrequency: "monthly" as const,
@@ -240,7 +239,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   // Pages tag blog (uniquement tags avec ≥3 articles)
-  const blogTagPages: MetadataRoute.Sitemap = INDEXABLE_TAG_SLUGS.map((slug) => ({
+  const blogTagPages: MetadataRoute.Sitemap = (await getIndexableTagSlugs()).map((slug) => ({
     url: `${baseUrl}/blog/tag/${slug}`,
     lastModified: now,
     changeFrequency: "weekly" as const,
@@ -271,7 +270,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     },
-    ...GLOSSARY_SLUGS.map((slug) => ({
+    ...Object.keys(await getGlossary()).map((slug) => ({
       url: `${baseUrl}/lexique/${slug}`,
       lastModified: now,
       changeFrequency: "monthly" as const,

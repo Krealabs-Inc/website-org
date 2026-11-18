@@ -24,7 +24,7 @@ export function ServiceCta({
   return (
     <section id="parlons-projet" className="contact-invitation">
       <Container>
-        <div className="contact-invitation-panel">
+        <div className="contact-invitation-panel" data-scroll data-reveal="up">
           <div className="contact-invitation-copy">
             <Eyebrow className="mb-5">{eyebrow}</Eyebrow>
             <h2 className="contact-invitation-title">{title}</h2>

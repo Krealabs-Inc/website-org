@@ -12,6 +12,8 @@ export interface Project {
   work: string;
   result: string;
   highlights: string[];
+  /** Optional Remotion video (public/videos), shown on /clients. */
+  video?: { src: string; poster: string; transcript: string };
 }
 
 // Descriptions based on the public sites. Results describe what the client
@@ -31,6 +33,11 @@ export const PROJECTS: Project[] = [
     work: "Une plateforme organisée par sujets et types de contenus (projets, événements, cours, ressources, partenaires), en français, anglais et espagnol, avec un espace de connexion pour les membres.",
     result: "Le réseau dispose d’un point d’entrée unique : chaque membre retrouve projets, événements et ressources au même endroit, en français, en anglais ou en espagnol.",
     highlights: ["Français, anglais et espagnol", "Projets, événements et ressources", "Espace de connexion pour les membres"],
+    video: {
+      src: "/videos/projet-iliass.mp4",
+      poster: "/videos/projet-iliass.jpg",
+      transcript: "Réalisation ILIASS, enseignement et recherche. La situation : chercheurs, enseignants et partenaires de plusieurs pays ; l’enjeu, rendre l’activité du réseau lasallien accessible à une communauté internationale. Ce qui a été fait : une plateforme organisée par projets, événements, cours, ressources et partenaires, en français, anglais et espagnol, avec un espace membres. Ce que ça change : un point d’entrée unique, où chaque membre retrouve tout au même endroit, dans sa langue.",
+    },
   },
   {
     slug: "main-verte",
@@ -45,6 +52,11 @@ export const PROJECTS: Project[] = [
     work: "Un site vitrine WordPress avec une page par prestation, une galerie de chantiers, des comparaisons avant/après et une demande de devis accessible tout au long du parcours.",
     result: "Les visiteurs voient le travail de Main Verte avant de la contacter, et peuvent demander leur devis depuis n’importe quelle page, sans chercher le formulaire.",
     highlights: ["Galerie de réalisations et avant/après", "Prestations et zones d’intervention", "Demande de devis et contact direct"],
+    video: {
+      src: "/videos/projet-main-verte.mp4",
+      poster: "/videos/projet-main-verte.jpg",
+      transcript: "Réalisation Main Verte, paysage et aménagement. La situation : pour un paysagiste, la confiance se gagne en montrant ses chantiers ; l’enjeu, présenter l’équipe, les métiers et les zones d’intervention. Ce qui a été fait : un site WordPress avec une page par prestation, une galerie de chantiers, des avant/après et une demande de devis tout au long du parcours. Ce que ça change : les visiteurs voient le travail avant de prendre contact, et demandent leur devis depuis n’importe quelle page.",
+    },
   },
   {
     slug: "pas-de-serie",
@@ -59,6 +71,11 @@ export const PROJECTS: Project[] = [
     work: "Un site de marque avec un catalogue visuel, les coulisses de fabrication, un parcours pour apporter son propre vêtement et une composition de stickers à manipuler qui prolonge l’univers de l’atelier.",
     result: "Les visiteurs découvrent l’atelier avant même d’acheter, et peuvent demander une pièce sur mesure ou proposer leur propre vêtement directement depuis le site.",
     highlights: ["Catalogue de pièces et éditions limitées", "Coulisses et demandes sur mesure", "Composition interactive de stickers"],
+    video: {
+      src: "/videos/projet-pas-de-serie.mp4",
+      poster: "/videos/projet-pas-de-serie.jpg",
+      transcript: "Réalisation Pas de Série, mode et création artisanale. La situation : des vêtements transformés à la main, en pièces uniques et petites séries ; l’enjeu, faire sentir le geste de l’atelier autant que montrer les créations. Ce qui a été fait : un site de marque avec catalogue, coulisses de fabrication, demandes sur mesure et une composition de stickers à manipuler. Ce que ça change : les visiteurs découvrent l’atelier avant d’acheter, et demandent une pièce sur mesure directement depuis le site.",
+    },
   },
   {
     slug: "meli-melo",
@@ -73,6 +90,11 @@ export const PROJECTS: Project[] = [
     work: "Une boutique en ligne à sa propre adresse, complétée par un portfolio, une présentation du studio, une foire aux questions et un contact direct avec la créatrice.",
     result: "La créatrice dispose de sa propre boutique pour vendre ses pièces en direct, avec son portfolio et ses réponses aux questions fréquentes au même endroit.",
     highlights: ["Boutique dédiée aux créations", "Portfolio et présentation du studio", "Contact direct avec la créatrice"],
+    video: {
+      src: "/videos/projet-meli-melo.mp4",
+      poster: "/videos/projet-meli-melo.jpg",
+      transcript: "Réalisation Méli-Mélo Studio, artisanat et création. La situation : des articles faits main en reliure, crochet et couture ; l’enjeu, réunir boutique, portfolio et présentation de l’atelier. Ce qui a été fait : une boutique en ligne à sa propre adresse, avec portfolio, présentation du studio, foire aux questions et contact direct. Ce que ça change : la créatrice vend ses pièces en direct, avec tout au même endroit.",
+    },
   },
   {
     slug: "traversia",
@@ -87,6 +109,11 @@ export const PROJECTS: Project[] = [
     work: "Un site qui explique le principe d’une journée type, présente trois parcours (Suisse normande, Roche d’Oëtre, Boucle des Andelys) avec distance, dénivelé, durée, taille de groupe et tarif, et mène à la réservation en ligne.",
     result: "Les visiteurs comprennent le principe et comparent les parcours sur des critères concrets avant de réserver, sans avoir à poser la question par téléphone.",
     highlights: ["Trois parcours détaillés et comparables", "Carte des parcours", "Réservation en ligne"],
+    video: {
+      src: "/videos/projet-traversia.mp4",
+      poster: "/videos/projet-traversia.jpg",
+      transcript: "Réalisation Traversia, tourisme et plein air. La situation : des journées qui associent randonnée et descente en canoë en Normandie ; l’enjeu, faire comprendre ce format peu courant et donner envie de réserver. Ce qui a été fait : un site qui explique la journée type, présente trois parcours avec distance, dénivelé, durée et tarif, et mène à la réservation en ligne. Ce que ça change : les visiteurs comparent les parcours sur des critères concrets avant de réserver.",
+    },
   },
   {
     slug: "mbe-bihorel",
@@ -101,6 +128,11 @@ export const PROJECTS: Project[] = [
     work: "Un parcours qui suit les étapes d’un envoi, de l’emballage au départ, un globe pour explorer les destinations et un simulateur de colis en 3D avec un calcul indicatif du poids volumétrique.",
     result: "Maquette non contractuelle : il n’y a pas de résultat client à mesurer. Elle montre comment un site de services de proximité peut se faire comprendre en un seul parcours.",
     highlights: ["Maquette de démonstration, non contractuelle", "Voyage du colis et destinations interactives", "Simulateur 3D et calcul indicatif"],
+    video: {
+      src: "/videos/projet-mbe-bihorel.mp4",
+      poster: "/videos/projet-mbe-bihorel.jpg",
+      transcript: "Concept de refonte MBE Bihorel, non contractuel, expédition et logistique. La situation : des services difficiles à rendre concrets pour un visiteur. Ce qui a été fait : un parcours qui suit un envoi de l’emballage au départ, un globe des destinations et un simulateur de colis en 3D avec un calcul indicatif du poids volumétrique. Ce que ça change : une maquette, sans résultat client à mesurer, qui montre comment faire comprendre des services de proximité en un seul parcours.",
+    },
   },
   {
     slug: "ardoise",
@@ -113,5 +145,10 @@ export const PROJECTS: Project[] = [
     work: "Une application web installable sur ordinateur et mobile, avec ses règles de calcul testées (montants, totaux, numérotation, statuts), la liste et le détail des factures, la création de facture avec totaux en direct, et son site vitrine. Devis, relances planifiées, dépenses et trésorerie arrivent ensuite.",
     result: "Produit en cours de développement : il n’y a pas encore de résultat utilisateur à mesurer. Il montre comment nous concevons un logiciel métier de bout en bout, des règles de calcul jusqu’à l’interface.",
     highlights: ["Produit conçu et développé par Krealabs", "Une seule app pour ordinateur et mobile", "Factures : création, liste, filtres et détail"],
+    video: {
+      src: "/videos/projet-ardoise.mp4",
+      poster: "/videos/projet-ardoise.jpg",
+      transcript: "Ardoise, produit Krealabs en développement, gestion et facturation. La situation : pour un indépendant, facturer, relancer et suivre sa trésorerie se fait souvent entre plusieurs outils. Ce qui a été fait : une application installable sur ordinateur et mobile, avec des règles de calcul testées et la création de factures avec totaux en direct ; la facture montrée est un exemple fictif. Ce que ça change : sans résultat utilisateur à mesurer pour l’instant, elle montre comment nous concevons un logiciel métier de bout en bout.",
+    },
   },
 ];

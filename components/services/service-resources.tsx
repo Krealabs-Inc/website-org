@@ -39,8 +39,8 @@ export function ServiceResources({
     <section className="section-y border-t border-[var(--border)]">
       <Container>
         <Eyebrow className="mb-6">{eyebrow}</Eyebrow>
-        <h2 className="text-h1 mb-10">{title}</h2>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <h2 className="text-h1 mb-10" data-scroll data-reveal="up">{title}</h2>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-5" data-scroll data-reveal="stagger">
           {articles.map((a) => (
             <li key={a.href}>
               <Link

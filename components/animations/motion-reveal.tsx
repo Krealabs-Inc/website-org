@@ -1,7 +1,4 @@
-"use client";
-
-import { motion, useReducedMotion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -11,98 +8,48 @@ interface MotionRevealProps {
   delay?: number;
   /** Direction du fade-in */
   direction?: "up" | "down" | "left" | "right" | "none";
-  /** Distance en pixels (par défaut 16) */
+  /** Distance en pixels (par défaut 24) */
   distance?: number;
-  /** Stagger pour les enfants directs (utiliser dans un parent puis MotionRevealItem) */
+  /** Fait apparaître les enfants directs l'un après l'autre */
   stagger?: boolean;
   className?: string;
 }
 
-const buildVariants = (direction: NonNullable<MotionRevealProps["direction"]>, distance: number): Variants => {
-  const map: Record<typeof direction, { x?: number; y?: number }> = {
-    up: { y: distance },
-    down: { y: -distance },
-    left: { x: distance },
-    right: { x: -distance },
-    none: {},
-  };
-  return {
-    hidden: { opacity: 0, ...map[direction] },
-    visible: { opacity: 1, x: 0, y: 0 },
-  };
-};
-
 /**
- * Wrapper Motion qui révèle son contenu au scroll (once: true).
- * Respecte prefers-reduced-motion : le contenu apparaît d'un coup, sans
- * fondu ni déplacement.
+ * Révèle son contenu quand il entre à l'écran (une seule fois).
  *
- * On rend toujours le même arbre : useReducedMotion vaut null au rendu
- * serveur et true au client, et React ne corrige pas les attributs qui
- * diffèrent à l'hydratation. Un <div> nu côté client laissait donc le
- * style opacity:0 du rendu serveur, et le contenu restait invisible.
+ * Purement déclaratif : Locomotive Scroll (ScrollProvider) pose la classe
+ * `is-inview` sur les éléments [data-scroll], et le CSS (globals.css,
+ * section "Scroll reveal") fait le reste. Composant serveur, aucun JS
+ * propre : sans JavaScript ou avec prefers-reduced-motion, le contenu est
+ * simplement visible.
  */
 export function MotionReveal({
   children,
   delay = 0,
   direction = "up",
-  distance = 16,
+  distance,
   stagger = false,
   className,
 }: MotionRevealProps) {
-  const reduced = useReducedMotion();
+  const style = {
+    ...(delay ? { "--reveal-delay": `${Math.round(delay * 1000)}ms` } : {}),
+    ...(distance !== undefined ? { "--reveal-distance": `${distance}px` } : {}),
+  } as CSSProperties;
 
   return (
-    <motion.div
+    <div
       className={cn(className)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px 0px" }}
-      variants={buildVariants(direction, distance)}
-      transition={
-        reduced
-          ? { duration: 0 }
-          : {
-              duration: 0.5,
-              delay,
-              ease: [0.22, 1, 0.36, 1],
-              staggerChildren: stagger ? 0.08 : 0,
-            }
-      }
+      data-scroll
+      data-reveal={stagger ? "stagger" : direction}
+      style={style}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-/**
- * Enfant à utiliser dans un MotionReveal avec stagger=true.
- * Hérite des variants du parent.
- */
-export function MotionRevealItem({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  const reduced = useReducedMotion();
-
-  return (
-    <motion.div
-      className={className}
-      variants={{
-        hidden: { opacity: 0, y: 12 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: reduced
-            ? { duration: 0 }
-            : { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
-        },
-      }}
-    >
-      {children}
-    </motion.div>
-  );
+/** Enfant d'un MotionReveal stagger : il hérite de l'apparition en cascade. */
+export function MotionRevealItem({ children, className }: { children: ReactNode; className?: string }) {
+  return <div className={className}>{children}</div>;
 }
