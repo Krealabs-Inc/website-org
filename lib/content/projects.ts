@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 
-import { cms, mediaUrl } from "@/lib/cms";
+import { items, mediaUrl } from "@/lib/directus";
 import type { Project } from "@/lib/projects";
 
 type Doc = Record<string, unknown>;
@@ -26,12 +26,11 @@ function toProject(d: Doc): Project {
   };
 }
 
-/** Projects in display order. Cached; refreshed when edited in /cms. */
+/** Projects in display order. Cached; refreshed when edited in Directus. */
 export const getProjects = unstable_cache(
   async (): Promise<Project[]> => {
-    const payload = await cms();
-    const res = await payload.find({ collection: "projects", sort: "order", limit: 100, depth: 1 });
-    return res.docs.map((d) => toProject(d as unknown as Doc));
+    const docs = await items("projects", { sort: "order" });
+    return docs.map((d) => toProject(d as unknown as Doc));
   },
   ["content-projects"],
   { tags: ["projects"] },

@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 };
 
 /**
- * 404 for URLs that match no route at all. Needed because the app has two
- * root layouts (the site and the Payload admin), so Next.js cannot compose
- * a 404 from a single layout. Same compass as the site's own not-found, without the search shortcut
- * (the search modal lives in the site layout).
+ * 404 for URLs that match no route at all: the root layout lives in the
+ * (site) route group, so Next.js needs this standalone page. Same compass
+ * as the site's own not-found, without the search shortcut (the search
+ * modal lives in the site layout).
  */
 export default function GlobalNotFound() {
   return (

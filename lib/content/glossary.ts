@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 
-import { cms } from "@/lib/cms";
+import { items } from "@/lib/directus";
 import type { GlossaryEntry } from "@/lib/glossary";
 
 type Doc = Record<string, unknown>;
@@ -22,12 +22,11 @@ function toEntry(d: Doc): GlossaryEntry {
   };
 }
 
-/** Glossary entries keyed by slug. Cached; refreshed when edited in /cms. */
+/** Glossary entries keyed by slug. Cached; refreshed when edited in Directus. */
 export const getGlossary = unstable_cache(
   async (): Promise<Record<string, GlossaryEntry>> => {
-    const payload = await cms();
-    const res = await payload.find({ collection: "glossary", sort: "term", limit: 1000, depth: 0 });
-    return Object.fromEntries(res.docs.map((d) => [d.slug as string, toEntry(d as unknown as Doc)]));
+    const docs = await items("glossary", { sort: "term" });
+    return Object.fromEntries(docs.map((d) => [d.slug as string, toEntry(d as unknown as Doc)]));
   },
   ["content-glossary"],
   { tags: ["glossary"] },

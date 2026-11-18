@@ -1,18 +1,17 @@
 import { createHash } from "node:crypto";
 import { unstable_cache } from "next/cache";
 
-import { cms } from "@/lib/cms";
+import { single } from "@/lib/directus";
 import { isList, type PageDef, type PageValues } from "@/lib/page-texts/define";
 
 /**
  * A page's texts: what was saved in the CMS, or the original copy for any
- * empty field. Cached per page; refreshed when the page is saved in /cms.
+ * empty field. Cached per page; refreshed when the page is saved in Directus.
  */
 export async function getPageTexts<T extends PageDef>(def: T): Promise<PageValues<T>> {
   const stored = await unstable_cache(
     async () => {
-      const payload = await cms();
-      return (await payload.findGlobal({ slug: `page-${def.slug}` as never, depth: 0 })) as unknown as Record<string, unknown>;
+      return (await single(`page_${def.slug.replace(/-/g, "_")}`)) as Record<string, unknown> | null;
     },
     // The defaults' fingerprint is part of the key: a copy change in code
     // never stays hidden behind a cached read of the previous version.

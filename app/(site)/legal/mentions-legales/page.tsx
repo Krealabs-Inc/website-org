@@ -98,12 +98,13 @@ export default function MentionsLegalesPage() {
 
       <h2>Hébergement</h2>
       <p>
-        Le site krealabs.fr est hébergé par <strong>Vercel Inc.</strong>,
-        société de droit américain dont le siège social est situé au :
+        Le site krealabs.fr est hébergé sur un serveur privé virtuel loué
+        à <strong>OVH SAS</strong>, société de droit français dont le siège
+        social est situé au :
       </p>
       <ul>
-        <li>440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis</li>
-        <li>Site web : <a href="https://vercel.com">vercel.com</a></li>
+        <li>2 rue Kellermann, 59100 Roubaix, France</li>
+        <li>Site web : <a href="https://www.ovhcloud.com">ovhcloud.com</a></li>
       </ul>
       <p>
         Les données de la base sont hébergées par <strong>Neon Inc.</strong>{" "}

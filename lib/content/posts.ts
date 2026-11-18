@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 
-import { cms, mediaUrl } from "@/lib/cms";
+import { items, mediaUrl } from "@/lib/directus";
 import type { BlogPost } from "@/lib/blog-data";
 
 type Doc = Record<string, unknown>;
@@ -12,7 +12,7 @@ function toFrenchDate(iso: string) {
 }
 
 function toPost(d: Doc): BlogPost {
-  const author = (d.author ?? {}) as Record<string, string>;
+  const author = { name: d.author_name as string, role: d.author_role as string, avatar: d.author_avatar as string };
   const sections = Array.isArray(d.sections) ? (d.sections as Record<string, string>[]) : [];
   return {
     slug: d.slug as string,
@@ -37,9 +37,8 @@ function toPost(d: Doc): BlogPost {
 /** Every article, published or scheduled, in list order. Cached; refreshed on edit. */
 export const getAllPosts = unstable_cache(
   async (): Promise<BlogPost[]> => {
-    const payload = await cms();
-    const res = await payload.find({ collection: "posts", sort: ["order", "-publishedAt"], limit: 1000, depth: 1 });
-    return res.docs.map((d) => toPost(d as unknown as Doc));
+    const docs = await items("posts", { sort: ["order", "-publishedAt"] });
+    return docs.map((d) => toPost(d as unknown as Doc));
   },
   ["content-posts"],
   { tags: ["posts"] },

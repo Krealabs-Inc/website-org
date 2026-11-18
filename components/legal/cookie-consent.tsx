@@ -20,9 +20,8 @@ interface ConsentState {
  * Banner cookie consent minimal RGPD-compliant.
  *
  * État actuel du site :
- *  - Vercel Web Analytics (cookieless, exempté CNIL) → s'affiche toujours
- *  - Vercel Speed Insights (cookieless, exempté) → s'affiche toujours
- *  - Pas d'autre traceur tiers pour le moment
+ *  - Aucune mesure d'audience ni traceur tiers (hébergement OVH via
+ *    Coolify, plus de Vercel Analytics)
  *
  * À quoi sert ce banner :
  *  - Affichage pédagogique de la politique (transparence)
@@ -109,7 +108,7 @@ export function CookieConsent() {
                 className="flex-1 text-body-sm text-[var(--muted-foreground)] leading-snug"
               >
                 <span className="text-[var(--foreground)] font-medium">
-                  Audience mesurée sans cookie,
+                  Cookies indispensables uniquement,
                 </span>{" "}
                 aucun traceur.{" "}
                 <Link
@@ -134,11 +133,11 @@ export function CookieConsent() {
               </div>
 
               <p className="text-body-sm text-[var(--muted-foreground)] mb-5 leading-relaxed">
-                Mesure d&apos;audience anonyme (Vercel Analytics,{" "}
+                Uniquement des cookies indispensables au fonctionnement du site.{" "}
                 <strong className="text-[var(--foreground)] font-medium">
-                  sans cookie
+                  Aucune mesure d&apos;audience, aucun traceur
                 </strong>
-                ). Pas de traceur marketing.{" "}
+                .{" "}
                 <Link
                   href="/legal/politique-confidentialite"
                   className="underline underline-offset-2 hover:text-[var(--foreground)] whitespace-nowrap"
