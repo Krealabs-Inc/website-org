@@ -107,9 +107,8 @@ export default function MentionsLegalesPage() {
         <li>Site web : <a href="https://www.ovhcloud.com">ovhcloud.com</a></li>
       </ul>
       <p>
-        Les données de la base sont hébergées par <strong>Neon Inc.</strong>{" "}
-        (PostgreSQL managé) dans la région{" "}
-        <strong>eu-central-1 (Francfort, UE)</strong>. Les envois d&apos;emails
+        La base de données du site est hébergée sur ce même serveur OVH, en
+        France. Les envois d&apos;emails
         transactionnels passent par <strong>Resend Inc.</strong>{" "}
         (2261 Market Street, San Francisco, CA 94114, États-Unis).
       </p>

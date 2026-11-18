@@ -118,13 +118,9 @@ export default function PolitiqueConfidentialitePage() {
       </p>
       <ul>
         <li>
-          <strong>OVH SAS</strong> (France) - hébergement du site sur un
+          <strong>OVH SAS</strong> (France) - hébergement du site et de sa
+          base de données (formulaires de contact, liste d&apos;attente) sur un
           serveur situé dans l&apos;Union européenne.
-        </li>
-        <li>
-          <strong>Neon Inc.</strong> (États-Unis, base de données hébergée
-          dans l&apos;UE - région eu-central-1, Francfort) - stockage des
-          formulaires de contact et de la liste d&apos;attente.
         </li>
         <li>
           <strong>Resend Inc.</strong> (États-Unis) - envoi des emails
@@ -139,9 +135,9 @@ export default function PolitiqueConfidentialitePage() {
 
       <h2>Transferts hors Union européenne</h2>
       <p>
-        Certains sous-traitants (Neon, Resend) sont établis aux
+        Un sous-traitant (Resend) est établi aux
         États-Unis. Les transferts éventuels de données personnelles vers
-        ces pays sont encadrés par les{" "}
+        ce pays sont encadrés par les{" "}
         <strong>Clauses Contractuelles Types</strong> de la Commission
         européenne (décision 2021/914) ou par la certification au{" "}
         <strong>EU-US Data Privacy Framework</strong>. Aucune donnée
