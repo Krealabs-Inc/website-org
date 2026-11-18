@@ -12,6 +12,7 @@ import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { HeroVolume } from "@/components/home/hero-volume";
 import { PromisesStrip } from "@/components/home/promises-strip";
 import { MethodDepth } from "@/components/home/method-depth";
+import { StudioSection } from "@/components/studio/studio-section";
 import { AmbientVideo } from "@/components/media/ambient-video";
 import { rich } from "@/components/ui/rich";
 import { getPageTexts } from "@/lib/content/pages";
@@ -37,6 +38,8 @@ export default async function HomePage() {
           </div>
         </Container>
       </section>
+
+      <StudioSection t={t} />
 
       <section className="section-y border-t border-[var(--border)]">
         <Container>

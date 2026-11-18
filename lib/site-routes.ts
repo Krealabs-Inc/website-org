@@ -12,6 +12,7 @@ export const ROUTES = [
   { label: "Notre histoire", href: "/notre-histoire", words: "histoire about agence" },
   { label: "Le Journal", href: "/blog", words: "blog articles journal actualites" },
   { label: "Lexique du web", href: "/lexique", words: "lexique glossaire definitions" },
+  { label: "KreaStudio, maquette gratuite", href: "/studio", words: "studio kreastudio maquette gratuite apercu prototype ia" },
   { label: "Calculateur de devis", href: "/calculateur", words: "calculateur devis prix tarif estimation" },
   { label: "Questions fréquentes", href: "/faq", words: "faq questions" },
   { label: "Contact", href: "/contact", words: "contact devis rendez-vous email" },

@@ -280,6 +280,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const conversionPages: MetadataRoute.Sitemap = [
     {
+      url: `${baseUrl}/studio`,
+      lastModified: now,
+      changeFrequency: "monthly" as const,
+      priority: 0.85,
+    },
+    {
       url: `${baseUrl}/calculateur`,
       lastModified: now,
       changeFrequency: "monthly" as const,

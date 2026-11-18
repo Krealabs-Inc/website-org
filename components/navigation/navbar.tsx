@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import { Menu, X, ArrowUpRight, PanelsTopLeft } from "lucide-react";
 
 import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -71,7 +71,7 @@ export function Navbar() {
             {/* Logo */}
             <Link
               href="/"
-              className="group flex items-center -ml-1 px-1 py-1 rounded-[var(--radius)] hover:bg-[var(--surface)] transition-colors"
+              className="group flex shrink-0 items-center -ml-1 px-1 py-1 rounded-[var(--radius)] hover:bg-[var(--surface)] transition-colors"
               aria-label="Krealabs - Accueil"
             >
               <Image
@@ -85,7 +85,7 @@ export function Navbar() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-1">
+            <nav className="hidden lg:flex items-center gap-0 xl:gap-1">
               {navItems.map((item) => {
                 const active =
                   pathname === item.href ||
@@ -95,7 +95,7 @@ export function Navbar() {
                     key={item.name}
                     href={item.href}
                     className={cn(
-                      "px-3 py-2 text-[0.9rem] font-medium rounded-full transition-colors",
+                      "px-2 xl:px-3 py-2 text-[0.9rem] font-medium rounded-full transition-colors",
                       active
                         ? "text-[var(--accent)] bg-[var(--accent-subtle)]"
                         : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]",
@@ -109,6 +109,15 @@ export function Navbar() {
 
             {/* Right cluster */}
             <div className="hidden lg:flex items-center gap-2">
+              <Link
+                href="/studio"
+                className="studio-pill"
+                aria-current={pathname === "/studio" ? "page" : undefined}
+                title="KreaStudio : décrivez votre projet, recevez une maquette de votre site en quelques minutes"
+              >
+                <PanelsTopLeft className="size-4" aria-hidden />
+                Maquette gratuite
+              </Link>
               <a
                 href={KREIA_URL}
                 target="_blank"
@@ -183,6 +192,18 @@ export function Navbar() {
                 <ArrowUpRight className="size-5 text-[var(--subtle-foreground)]" />
               </Link>
             ))}
+            <Link href="/studio" className="kreia-card">
+              <span>
+                <span className="inline-flex items-center gap-2">
+                  <PanelsTopLeft className="size-5 text-[var(--accent)]" aria-hidden />
+                  Maquette gratuite
+                </span>
+                <span className="block text-body-sm text-[var(--muted-foreground)] font-normal">
+                  Décrivez votre projet, voyez votre site en quelques minutes
+                </span>
+              </span>
+              <ArrowUpRight className="size-5 text-[var(--accent)]" />
+            </Link>
             <a
               href={KREIA_URL}
               target="_blank"

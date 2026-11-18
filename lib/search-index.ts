@@ -52,6 +52,7 @@ const STATIC_PAGES: SearchItem[] = [
   { url: "/blog", title: "Blog", excerpt: "Articles techniques et retours d'expérience.", category: "Page" },
   { url: "/comparateur", title: "Comparateurs techniques", excerpt: "Choisir entre 2 stacks.", category: "Page" },
   { url: "/lexique", title: "Lexique du web", excerpt: "Définitions techniques.", category: "Page" },
+  { url: "/studio", title: "KreaStudio, maquette gratuite", excerpt: "Décrivez votre projet, recevez une maquette de votre site en quelques minutes.", category: "Page" },
   { url: "/calculateur", title: "Calculateur de devis", excerpt: "Estimer le prix de votre projet web.", category: "Page" },
 ];
 

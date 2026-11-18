@@ -1,4 +1,5 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
@@ -62,6 +63,15 @@ export default async function ContactPage() {
                   ))}
                 </ol>
               </div>
+
+              <Link href="/studio" className="studio-note">
+                <span className="text-caption text-[var(--accent)]">{t.studioLabel}</span>
+                <span className="mt-2 flex items-center gap-2 text-h4">
+                  {t.studioTitle}
+                  <ArrowRight className="size-4 shrink-0 text-[var(--accent)]" aria-hidden />
+                </span>
+                <span className="mt-1 block text-body-sm text-[var(--muted-foreground)]">{t.studioText}</span>
+              </Link>
 
               <ul className="flex flex-wrap gap-2">
                 {t.promises.map((p) => (

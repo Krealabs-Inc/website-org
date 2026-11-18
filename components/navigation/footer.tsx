@@ -195,6 +195,23 @@ export function Footer() {
                 partout en France.
               </p>
 
+              <Link
+                href="/studio"
+                className="group block compact-note hover:border-[var(--border-strong)] transition-colors"
+              >
+                <span className="text-caption text-[var(--accent)]">
+                  Outil gratuit
+                </span>
+                <span className="mt-2 flex items-center gap-2 text-h4 text-[var(--foreground)]">
+                  KreaStudio
+                  <ArrowUpRight className="size-4 text-[var(--muted-foreground)] group-hover:text-[var(--foreground)] transition-colors" />
+                </span>
+                <span className="mt-1 block text-body-sm text-[var(--muted-foreground)]">
+                  Décrivez votre projet et recevez une maquette de votre site
+                  en quelques minutes.
+                </span>
+              </Link>
+
               {/* Offre verticale — sous-domaine dédié */}
               <a
                 href="https://kreia.krealabs.fr"
@@ -396,6 +413,14 @@ function MobileFooter({ year }: { year: number }) {
             </details>
           ))}
         </nav>
+
+        <Link href="/studio" className="mfoot-kreia">
+          <span>
+            <span className="block font-semibold">KreaStudio</span>
+            <span className="block text-body-sm text-[var(--muted-foreground)]">Une maquette gratuite de votre site en quelques minutes</span>
+          </span>
+          <ArrowUpRight className="size-4 ml-auto shrink-0" />
+        </Link>
 
         <a href="https://kreia.krealabs.fr" target="_blank" rel="noopener noreferrer" className="mfoot-kreia">
           <span className="kreia-spark" aria-hidden />
