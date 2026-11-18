@@ -10,28 +10,36 @@ import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { ScrollHint } from "@/components/animations/scroll-hint";
 import { GlassLayer } from "@/components/patterns/glass";
+import { rich } from "@/components/ui/rich";
 
 const EASE_OUT = [0.23, 1, 0.32, 1] as const;
 
-const SUB =
-  "Un site qui vous amène des demandes, une application que vos clients gardent, un outil qui remplace vos tableurs. Vous gardez la main sur votre projet, de la première idée à la mise en ligne.";
+export type HeroTexts = {
+  heroEyebrow: string;
+  heroTitle: string;
+  heroTakeover: string;
+  heroText: string;
+  heroCta: string;
+  heroSecondary: string;
+  heroReassurance: string;
+};
 
-function HeroActions({ className = "" }: { className?: string }) {
+function HeroActions({ className = "", t }: { className?: string; t: HeroTexts }) {
   return (
     <div className={className}>
       <div className="flex flex-wrap items-center gap-3">
         <Button size="lg" asChild>
           <Link href="/contact">
-            Parler de mon projet
+            {t.heroCta}
             <ArrowRight />
           </Link>
         </Button>
         <Button size="lg" variant="outline" asChild>
-          <Link href="#realisations">Voir les réalisations</Link>
+          <Link href="#realisations">{t.heroSecondary}</Link>
         </Button>
       </div>
       <p className="mt-6 text-caption">
-        On vous répond sous 24h · Votre devis est gratuit · À Rouen et partout en France
+        {t.heroReassurance}
       </p>
     </div>
   );
@@ -42,7 +50,7 @@ function HeroActions({ className = "" }: { className?: string }) {
  * it and carries it across the screen while the promise hands over to the
  * call to action. Reduced motion gets one still composition, no pinning.
  */
-export function HeroVolume() {
+export function HeroVolume({ t }: { t: HeroTexts }) {
   const reduced = useReducedMotion() ?? false;
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -68,15 +76,15 @@ export function HeroVolume() {
 
   const headline = (
     <h1 className="text-display">
-      <motion.span className="block" {...enter(0.05)}>Votre activité mérite</motion.span>
-      <motion.span className="block" {...enter(0.11)}>un site qui</motion.span>
-      <motion.span className="block text-[var(--accent)]" {...enter(0.17)}>
-        <em>travaille pour vous.</em>
-      </motion.span>
+      {t.heroTitle.split("\n").map((line, i) => (
+        <motion.span key={i} className="block" {...enter(0.05 + i * 0.06)}>
+          {rich(line, "text-[var(--accent)]")}
+        </motion.span>
+      ))}
     </h1>
   );
 
-  const eyebrow = <Eyebrow dot className="mb-8">Agence web à Rouen · Sites, apps et logiciels sur mesure</Eyebrow>;
+  const eyebrow = <Eyebrow dot className="mb-8">{t.heroEyebrow}</Eyebrow>;
 
   if (reduced) {
     return (
@@ -86,8 +94,8 @@ export function HeroVolume() {
           <div className="max-w-2xl">
             {eyebrow}
             {headline}
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8">{SUB}</p>
-            <HeroActions className="mt-10" />
+            <p className="text-body-lg text-[var(--muted-foreground)] mt-8">{t.heroText}</p>
+            <HeroActions className="mt-10" t={t} />
           </div>
         </Container>
       </section>
@@ -112,10 +120,10 @@ export function HeroVolume() {
             style={{ opacity: secondOpacity, y: secondY, pointerEvents: secondPointer, visibility: secondVisibility }}
           >
             <p className="text-h2">
-              Vous gardez la main, <em className="display-serif">on s’occupe du reste.</em>
+              {rich(t.heroTakeover, "display-serif")}
             </p>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-6">{SUB}</p>
-            <HeroActions className="mt-10" />
+            <p className="text-body-lg text-[var(--muted-foreground)] mt-6">{t.heroText}</p>
+            <HeroActions className="mt-10" t={t} />
           </motion.div>
         </Container>
 

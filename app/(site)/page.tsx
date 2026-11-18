@@ -10,21 +10,25 @@ import { StackCarousel } from "@/components/ui/stack-carousel";
 import { ServiceCta } from "@/components/services/service-cta";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { HeroVolume } from "@/components/home/hero-volume";
-import { PromisesStrip, type ClientPromise } from "@/components/home/promises-strip";
-import { MethodDepth, type MethodStep } from "@/components/home/method-depth";
+import { PromisesStrip } from "@/components/home/promises-strip";
+import { MethodDepth } from "@/components/home/method-depth";
 import { AmbientVideo } from "@/components/media/ambient-video";
+import { rich } from "@/components/ui/rich";
+import { getPageTexts } from "@/lib/content/pages";
+import { HOME } from "@/lib/page-texts/home";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const t = await getPageTexts(HOME);
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       <OrganizationSchema />
 
-      <HeroVolume />
+      <HeroVolume t={t} />
 
       <section className="border-t border-[var(--border-strong)]">
         <Container>
           <div className="home-benefits !mt-0 !border-t-0 py-12" data-scroll data-reveal="stagger">
-            {BENEFITS.map((benefit) => (
+            {t.benefits.map((benefit) => (
               <div key={benefit.title}>
                 <p className="text-body font-medium mb-2">{benefit.title}</p>
                 <p className="text-body-sm text-[var(--muted-foreground)]">{benefit.detail}</p>
@@ -38,15 +42,9 @@ export default function HomePage() {
         <Container>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             <div className="lg:col-span-4" data-scroll data-reveal="up">
-              <Eyebrow className="mb-6">Ça vous parle ?</Eyebrow>
-              <h2 className="text-h1">
-                Des demandes <em>éparpillées</em> partout ?
-              </h2>
-              <p className="text-body text-[var(--muted-foreground)] mt-6">
-                Mails, téléphone, tableurs : quand les demandes arrivent de
-                partout, il y en a toujours une qui se perd. Votre site peut
-                les rassembler au même endroit.
-              </p>
+              <Eyebrow className="mb-6">{t.demandsEyebrow}</Eyebrow>
+              <h2 className="text-h1">{rich(t.demandsTitle)}</h2>
+              <p className="text-body text-[var(--muted-foreground)] mt-6">{t.demandsText}</p>
             </div>
             <div className="lg:col-span-8" data-scroll data-reveal="up" style={{ "--reveal-delay": "80ms" } as React.CSSProperties}>
               <AmbientVideo
@@ -60,26 +58,20 @@ export default function HomePage() {
         </Container>
       </section>
 
-      <PromisesStrip promises={PROMISES} />
+      <PromisesStrip promises={t.promises} intro={{ eyebrow: t.promisesEyebrow, title: t.promisesTitle, text: t.promisesText, link: t.promisesLink }} />
 
-      <ProjectSelection />
+      <ProjectSelection eyebrow={t.projectsEyebrow} title={rich(t.projectsTitle)} />
 
-      <MethodDepth steps={STEPS} />
+      <MethodDepth steps={t.steps} eyebrow={t.methodEyebrow} title={t.methodTitle} />
 
       {/* ========== STACK ========== */}
       <section className="section-y border-t border-[var(--border)]">
         <MotionReveal>
           <Container>
             <div className="text-center max-w-3xl mx-auto mb-12">
-              <Eyebrow className="mb-6 justify-center">Sous le capot</Eyebrow>
-              <h2 className="text-h1">
-                Des outils solides, <em>choisis pour vous</em>.
-              </h2>
-              <p className="text-body text-[var(--muted-foreground)] mt-6">
-                WordPress pour un site que vous gérez vous-même, Next.js ou
-                React Native quand votre projet demande plus. La technologie
-                s’adapte à votre besoin, pas l’inverse.
-              </p>
+              <Eyebrow className="mb-6 justify-center">{t.stackEyebrow}</Eyebrow>
+              <h2 className="text-h1">{rich(t.stackTitle)}</h2>
+              <p className="text-body text-[var(--muted-foreground)] mt-6">{t.stackText}</p>
             </div>
           </Container>
         </MotionReveal>
@@ -112,19 +104,19 @@ export default function HomePage() {
       <section className="home-local-strip">
         <Container>
           <div className="home-local-layout" data-scroll data-reveal="up">
-            <div><Eyebrow className="mb-5">Rouen, Normandie</Eyebrow><h2 className="text-h2">Proches de vous.<br /><em>Où que vous soyez.</em></h2></div>
-            <p className="text-body text-[var(--muted-foreground)]">À Rouen, ailleurs en Normandie ou partout en France : on se voit en visio ou à Rouen, et vous parlez directement aux personnes qui construisent votre projet.</p>
-            <Link href="/equipe" className="home-text-link">Voir qui travaille sur votre projet<ArrowRight className="size-4" aria-hidden /></Link>
+            <div><Eyebrow className="mb-5">{t.localEyebrow}</Eyebrow><h2 className="text-h2">{rich(t.localTitle)}</h2></div>
+            <p className="text-body text-[var(--muted-foreground)]">{t.localText}</p>
+            <Link href="/equipe" className="home-text-link">{t.localLink}<ArrowRight className="size-4" aria-hidden /></Link>
           </div>
         </Container>
       </section>
 
       <ServiceCta
-        eyebrow="Votre projet"
-        title={<>Et si votre idée <em>prenait vie</em> ?</>}
-        description="Décrivez votre projet en quelques lignes : on vous répond sous 24h ouvrées avec un premier retour concret."
-        primaryLabel="Recevoir mon devis"
-        secondaryLabel="Voir ce qu’on peut faire pour vous"
+        eyebrow={t.ctaEyebrow}
+        title={rich(t.ctaTitle)}
+        description={t.ctaText}
+        primaryLabel={t.ctaPrimary}
+        secondaryLabel={t.ctaSecondary}
       />
     </main>
   );
@@ -134,73 +126,8 @@ export default function HomePage() {
 // DATA
 // ============================================================
 
-const BENEFITS = [
-  { title: "Votre site vous appartient", detail: "Vous disposez des accès et du code de votre projet." },
-  { title: "Vous gardez la main", detail: "Des contenus administrables et une prise en main accompagnée." },
-  { title: "Vous parlez aux développeurs", detail: "Des échanges directs avec les personnes qui réalisent votre site." },
-  { title: "Votre site reste suivi", detail: "Maintenance et évolutions : on reste joignable après la mise en ligne." },
-];
 
-const PROMISES: ClientPromise[] = [
-  {
-    eyebrow: "Site WordPress",
-    title: "Vous modifiez votre site vous-même, sans nous appeler.",
-    description:
-      "Textes, photos, actualités, produits : vous mettez votre site à jour en quelques clics, et il reste rapide, sécurisé et bien référencé.",
-    href: "/services/wordpress",
-  },
-  {
-    eyebrow: "Sites et outils sur mesure",
-    title: "Vos process tournent sans tableurs ni ressaisie.",
-    description:
-      "Un espace client, un outil métier ou une plateforme, construit autour de votre façon de travailler.",
-    href: "/services/developpement-web",
-  },
-  {
-    eyebrow: "Applications mobiles · iOS & Android",
-    title: "Vos clients vous ont dans leur poche.",
-    description:
-      "Vos services accessibles depuis leur téléphone, avec un parcours pensé pour le mobile.",
-    href: "/services/applications-mobile",
-  },
-  {
-    eyebrow: "Design UI/UX",
-    title: "Vos visiteurs comprennent et passent à l’action.",
-    description:
-      "Des écrans clairs et des parcours évidents, de la première impression à la prise de contact.",
-    href: "/services/design-uiux",
-  },
-  {
-    eyebrow: "Performance & SEO",
-    title: "Vous apparaissez quand vos clients cherchent votre métier.",
-    description:
-      "Un site rapide et des contenus structurés pour que Google vous montre à ceux qui ont besoin de vous.",
-    href: "/services/performance-seo",
-  },
-];
 
-const STEPS: MethodStep[] = [
-  {
-    title: "Cadrage",
-    description:
-      "Un premier appel pour comprendre votre besoin, vos contraintes et vos objectifs. Sans engagement.",
-  },
-  {
-    title: "Conception",
-    description:
-      "Vous voyez votre futur site en maquette et vous le validez avant la moindre ligne de code.",
-  },
-  {
-    title: "Développement",
-    description:
-      "Des démos régulières et l’accès au code dès le premier jour : vous voyez votre projet avancer.",
-  },
-  {
-    title: "Mise en ligne & suivi",
-    description:
-      "Mise en ligne, formation pour que vous soyez autonome, surveillance. On reste joignable pour la suite.",
-  },
-];
 
 const STACK_CARDS = [
   {

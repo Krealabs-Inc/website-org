@@ -16,6 +16,7 @@ import { Cities } from "./payload/collections/cities";
 import { Sectors } from "./payload/collections/sectors";
 import { Faq } from "./payload/collections/faq";
 import { Posts } from "./payload/collections/posts";
+import { PageGlobals } from "./payload/globals/pages";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -42,6 +43,7 @@ export default buildConfig({
   },
   i18n: { supportedLanguages: { fr }, fallbackLanguage: "fr" },
   collections: [Posts, Projects, Team, Faq, Glossary, Cities, Sectors, Media, Users],
+  globals: PageGlobals,
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   db: postgresAdapter({

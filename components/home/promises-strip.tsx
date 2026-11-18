@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { Eyebrow } from "@/components/ui/eyebrow";
 import { HorizontalStrip } from "@/components/patterns/horizontal-strip";
+import { rich } from "@/components/ui/rich";
 
 export interface ClientPromise {
   eyebrow: string;
@@ -30,22 +31,16 @@ function PromiseCard({ promise, index, total }: { promise: ClientPromise; index:
 }
 
 /** Home: the five promises as a horizontal strip. */
-export function PromisesStrip({ promises }: { promises: ClientPromise[] }) {
+export function PromisesStrip({ promises, intro }: { promises: ClientPromise[]; intro: { eyebrow: string; title: string; text: string; link: string } }) {
   return (
     <HorizontalStrip
       intro={
         <>
-          <Eyebrow className="mb-6">Ce que vous obtenez</Eyebrow>
-          <h2 className="text-h1">
-            Un besoin précis ?
-            <br />
-            Une réponse <em className="display-serif">sur mesure</em>.
-          </h2>
-          <p className="text-body text-[var(--muted-foreground)] mt-6 max-w-md">
-            Vous nous décrivez le problème, on vous propose le format qui le règle.
-          </p>
+          <Eyebrow className="mb-6">{intro.eyebrow}</Eyebrow>
+          <h2 className="text-h1">{rich(intro.title, "display-serif")}</h2>
+          <p className="text-body text-[var(--muted-foreground)] mt-6 max-w-md">{intro.text}</p>
           <Link href="/services" className="home-text-link mt-8">
-            Voir toutes les solutions <ArrowRight className="size-4" aria-hidden />
+            {intro.link} <ArrowRight className="size-4" aria-hidden />
           </Link>
         </>
       }
