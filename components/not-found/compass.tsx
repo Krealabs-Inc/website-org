@@ -1,5 +1,6 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ArrowRight, Search } from "lucide-react";
@@ -13,7 +14,10 @@ import { closest } from "@/lib/site-routes";
  * where the site's search modal is mounted.
  */
 export function Compass({ search = true }: { search?: boolean }) {
-  const path = usePathname() ?? "/";
+  // On the global 404 the server may not know the requested URL: the
+  // browser's address is the truth, read once hydrated.
+  const routerPath = usePathname() ?? "/";
+  const path = useSyncExternalStore(noop, () => window.location.pathname, () => routerPath);
   const hits = closest(path);
   const openSearch = () =>
     document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", metaKey: true, ctrlKey: true, bubbles: true }));
@@ -60,3 +64,5 @@ export function Compass({ search = true }: { search?: boolean }) {
     </main>
   );
 }
+
+const noop = () => () => {};

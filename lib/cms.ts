@@ -20,6 +20,8 @@ let ready: Promise<Payload> | null = null;
  * advisory lock: `next build` renders pages in several processes at once,
  * and without the lock each would apply the same migrations in parallel.
  * The first process migrates; the others wait, then find nothing to do.
+ * The admin pages, the REST API and the admin's server functions call this
+ * too: a build served from cache may never have run a new migration.
  */
 export function cms(): Promise<Payload> {
   ready ??= (async () => {
