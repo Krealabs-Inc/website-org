@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
+import { STUDIO_URL } from "@/lib/studio";
 
 interface ServiceCtaProps {
   /** Titre avec balises <em> autorisées */
@@ -40,6 +41,14 @@ export function ServiceCta({
               </Button>
             )}
           </div>
+          <p className="studio-aside">
+            Vous préférez voir avant d’en parler ?
+            <a href={STUDIO_URL} target="_blank" rel="noopener noreferrer">
+              Créez une maquette gratuite de votre site
+              <ArrowUpRight className="size-4" aria-hidden />
+              <span className="sr-only"> (nouvel onglet)</span>
+            </a>
+          </p>
         </div>
       </Container>
     </section>
