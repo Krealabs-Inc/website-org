@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 
-import { cms, mediaUrl } from "@/lib/cms";
+import { items, mediaUrl } from "@/lib/directus";
 import type { TeamMember } from "@/lib/team";
 
 type Doc = Record<string, unknown>;
@@ -32,12 +32,11 @@ function toMember(d: Doc): TeamMember {
   };
 }
 
-/** The team, in display order. Cached; refreshed when edited in /cms. */
+/** The team, in display order. Cached; refreshed when edited in Directus. */
 export const getTeam = unstable_cache(
   async (): Promise<TeamMember[]> => {
-    const payload = await cms();
-    const res = await payload.find({ collection: "team", sort: "order", limit: 100, depth: 1 });
-    return res.docs.map((d) => toMember(d as unknown as Doc));
+    const docs = await items("team", { sort: "order" });
+    return docs.map((d) => toMember(d as unknown as Doc));
   },
   ["content-team"],
   { tags: ["team"] },

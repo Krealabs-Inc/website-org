@@ -80,8 +80,8 @@ export default function PolitiqueConfidentialitePage() {
 
       <h3>Journaux techniques</h3>
       <p>
-        Lors de votre navigation, les serveurs de notre hébergeur (Vercel)
-        peuvent conserver des journaux techniques (adresse IP, horodatage,
+        Lors de votre navigation, le serveur qui héberge le site (OVH,
+        France) peut conserver des journaux techniques (adresse IP, horodatage,
         type de navigateur, page consultée) pour des durées courtes à des
         fins de sécurité et de diagnostic.
       </p>
@@ -118,13 +118,9 @@ export default function PolitiqueConfidentialitePage() {
       </p>
       <ul>
         <li>
-          <strong>Vercel Inc.</strong> (États-Unis) - hébergement du site
-          et des fonctions serveur.
-        </li>
-        <li>
-          <strong>Neon Inc.</strong> (États-Unis, base de données hébergée
-          dans l&apos;UE - région eu-central-1, Francfort) - stockage des
-          formulaires de contact et de la liste d&apos;attente.
+          <strong>OVH SAS</strong> (France) - hébergement du site et de sa
+          base de données (formulaires de contact, liste d&apos;attente) sur un
+          serveur situé dans l&apos;Union européenne.
         </li>
         <li>
           <strong>Resend Inc.</strong> (États-Unis) - envoi des emails
@@ -139,9 +135,9 @@ export default function PolitiqueConfidentialitePage() {
 
       <h2>Transferts hors Union européenne</h2>
       <p>
-        Certains sous-traitants (Vercel, Resend) sont établis aux
+        Un sous-traitant (Resend) est établi aux
         États-Unis. Les transferts éventuels de données personnelles vers
-        ces pays sont encadrés par les{" "}
+        ce pays sont encadrés par les{" "}
         <strong>Clauses Contractuelles Types</strong> de la Commission
         européenne (décision 2021/914) ou par la certification au{" "}
         <strong>EU-US Data Privacy Framework</strong>. Aucune donnée
@@ -178,13 +174,8 @@ export default function PolitiqueConfidentialitePage() {
         cookies ne nécessitent pas votre consentement.
       </p>
       <p>
-        Une mesure d&apos;audience anonyme est effectuée via{" "}
-        <strong>Vercel Web Analytics</strong>. Cet outil ne dépose ni
-        cookie ni identifiant personnel : il agrège des indicateurs
-        techniques (pays, navigateur, page) sans permettre votre
-        identification. Conformément à la position de la CNIL sur les
-        outils de mesure d&apos;audience «&nbsp;exemptés&nbsp;», aucun
-        consentement n&apos;est requis.
+        Aucune mesure d&apos;audience n&apos;est effectuée sur le site et
+        aucun traceur tiers n&apos;y est déposé.
       </p>
       <p>
         Si une solution d&apos;analyse plus avancée (cookies tiers,

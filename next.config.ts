@@ -1,6 +1,5 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
-import { withPayload } from "@payloadcms/next/withPayload";
 
 // Bundle analyzer : activé via `ANALYZE=true npm run build`.
 // Génère .next/analyze/client.html + .next/analyze/server.html
@@ -59,6 +58,8 @@ const securityHeaders = [
 ];
 
 const nextConfig: NextConfig = {
+  // Self-contained server bundle for the Docker image (Coolify).
+  output: "standalone",
   poweredByHeader: false,
   compress: true,
   images: {
@@ -102,14 +103,14 @@ const nextConfig: NextConfig = {
         hostname: 'avatars.githubusercontent.com',
       },
       {
-        // Media uploaded through the content admin (Payload → Vercel Blob)
+        // Files uploaded in Directus
         protocol: 'https',
-        hostname: '*.public.blob.vercel-storage.com',
+        hostname: 'cms.krealabs.fr',
       },
     ],
   },
   experimental: {
-    // Two root layouts (site + Payload admin): a 404 for unmatched URLs.
+    // The root layout lives in the (site) route group: a 404 for unmatched URLs.
     globalNotFound: true,
   },
   async redirects() {
@@ -141,4 +142,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default withPayload(withBundleAnalyzer(nextConfig));
+export default withBundleAnalyzer(nextConfig);

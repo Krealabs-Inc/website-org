@@ -1,6 +1,6 @@
 import { unstable_cache } from "next/cache";
 
-import { cms } from "@/lib/cms";
+import { items } from "@/lib/directus";
 import type { CityData } from "@/lib/cities";
 import type { CityFAQItem } from "@/lib/city-faq";
 import type { SectorData } from "@/lib/sectors";
@@ -58,12 +58,11 @@ function toSector(d: Doc): SectorData {
   };
 }
 
-/** Cities keyed by slug. Cached; refreshed when edited in /cms. */
+/** Cities keyed by slug. Cached; refreshed when edited in Directus. */
 export const getCities = unstable_cache(
   async (): Promise<Record<string, CityWithFaq>> => {
-    const payload = await cms();
-    const res = await payload.find({ collection: "cities", limit: 100, depth: 0 });
-    return Object.fromEntries(res.docs.map((d) => [d.slug as string, toCity(d as unknown as Doc)]));
+    const docs = await items("cities");
+    return Object.fromEntries(docs.map((d) => [d.slug as string, toCity(d as unknown as Doc)]));
   },
   ["content-cities"],
   { tags: ["cities"] },
@@ -76,12 +75,11 @@ export async function getCity(slug: string) {
   return city;
 }
 
-/** Rouen sectors keyed by slug. Cached; refreshed when edited in /cms. */
+/** Rouen sectors keyed by slug. Cached; refreshed when edited in Directus. */
 export const getSectors = unstable_cache(
   async (): Promise<Record<string, SectorData>> => {
-    const payload = await cms();
-    const res = await payload.find({ collection: "sectors", limit: 100, depth: 0 });
-    return Object.fromEntries(res.docs.map((d) => [d.slug as string, toSector(d as unknown as Doc)]));
+    const docs = await items("sectors");
+    return Object.fromEntries(docs.map((d) => [d.slug as string, toSector(d as unknown as Doc)]));
   },
   ["content-sectors"],
   { tags: ["sectors"] },

@@ -7,8 +7,6 @@ import { Footer } from "@/components/navigation/footer";
 import { Toaster } from "sonner";
 import { WebSiteSchema } from "@/components/seo/website-schema";
 import { ScrollProvider } from "@/components/animations/scroll-provider";
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 import { CookieConsent } from "@/components/legal/cookie-consent";
 import { SearchModal } from "@/components/search/search-modal";
 
@@ -139,8 +137,6 @@ export default function RootLayout({
             <CookieConsent />
             <SearchModal />
           </ScrollProvider>
-          <Analytics />
-          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

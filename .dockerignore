@@ -1,0 +1,12 @@
+.git
+.next
+node_modules
+media
+.env*
+!.env.example
+*.log
+.vercel
+.agents
+.claude
+Dockerfile
+.dockerignore
