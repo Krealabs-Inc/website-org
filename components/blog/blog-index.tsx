@@ -6,14 +6,16 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/ui/container";
-import { ServiceCta } from "@/components/services/service-cta";
+import { PageCta } from "@/components/services/page-cta";
+import type { PageValues } from "@/lib/page-texts/define";
+import type { BLOG_PAGE } from "@/lib/page-texts/blog-page";
 import type { BlogPost } from "@/lib/blog-data";
 import { cn } from "@/lib/utils";
 
 const CATEGORIES = ["Tous", "WordPress", "Web", "Mobile", "SEO", "Outils"];
 
 /** Blog index (client: section tabs). Articles come from the server page. */
-export function BlogIndex({ published }: { published: BlogPost[] }) {
+export function BlogIndex({ published, t }: { published: BlogPost[]; t: PageValues<typeof BLOG_PAGE> }) {
   const [active, setActive] = useState("Tous");
 
   // Filtre par date de publication (articles futurs invisibles)
@@ -33,13 +35,11 @@ export function BlogIndex({ published }: { published: BlogPost[] }) {
       <section className="pt-32 md:pt-40">
         <Container>
           <div className="journal-mast">
-            <p className="text-caption">Krealabs · Rouen</p>
-            <h1 className="journal-title">Le Journal</h1>
+            <p className="text-caption">{t.mastLeft}</p>
+            <h1 className="journal-title">{t.title}</h1>
             <p className="text-caption">{published.length} articles</p>
           </div>
-          <p className="text-body-lg text-[var(--muted-foreground)] mx-auto mt-8 max-w-2xl text-center">
-            Articles techniques, retours d’expérience et veille sur les outils que nous utilisons chaque jour, pour vous aider à décider en connaissance de cause.
-          </p>
+          <p className="text-body-lg text-[var(--muted-foreground)] mx-auto mt-8 max-w-2xl text-center">{t.intro}</p>
           <nav className="journal-tabs" aria-label="Rubriques">
             {CATEGORIES.map((cat) => (
               <button key={cat} type="button" onClick={() => setActive(cat)} aria-pressed={active === cat} className={cn("journal-tab", active === cat && "is-active")}>
@@ -83,7 +83,7 @@ export function BlogIndex({ published }: { published: BlogPost[] }) {
         <Container>
           <p className="text-caption mb-4">{active === "Tous" ? "Sommaire" : `Rubrique · ${active}`}</p>
           {list.length === 0 ? (
-            <p className="text-body text-[var(--muted-foreground)] py-20 text-center">Aucun article dans cette rubrique pour l’instant.</p>
+            <p className="text-body text-[var(--muted-foreground)] py-20 text-center">{t.empty}</p>
           ) : (
             <ol className="journal-index">
               {list.map((post) => (
@@ -104,15 +104,7 @@ export function BlogIndex({ published }: { published: BlogPost[] }) {
         </Container>
       </section>
 
-      <ServiceCta
-        title={
-          <>
-            Une question <em>technique</em> ?
-          </>
-        }
-        description="Au-delà des articles, nous sommes disponibles pour répondre à vos questions sur vos projets web et mobile."
-        primaryLabel="Nous contacter"
-      />
+      <PageCta t={t} />
     </main>
   );
 }

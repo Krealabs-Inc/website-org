@@ -3,7 +3,10 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceCta } from "@/components/services/service-cta";
+import { rich } from "@/components/ui/rich";
+import { getPageTexts } from "@/lib/content/pages";
+import { GLOSSARY_PAGE } from "@/lib/page-texts/glossary-page";
+import { PageCta } from "@/components/services/page-cta";
 import { getGlossary } from "@/lib/content/glossary";
 
 export const metadata: Metadata = {
@@ -24,6 +27,7 @@ const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const initial = (term: string) => term.normalize("NFD").replace(/[\u0300-\u036f]/g, "").charAt(0).toUpperCase();
 
 export default async function LexiqueIndexPage() {
+  const t = await getPageTexts(GLOSSARY_PAGE);
   const entries = Object.values(await getGlossary()).sort((a, b) => a.term.localeCompare(b.term, "fr"));
   const letters = new Map<string, typeof entries>();
   for (const e of entries) {
@@ -36,13 +40,9 @@ export default async function LexiqueIndexPage() {
       {/* HEAD */}
       <section className="pt-32 pb-12 md:pt-40">
         <Container>
-          <Eyebrow dot className="mb-6">Lexique · {entries.length} définitions</Eyebrow>
-          <h1 className="text-display">
-            Le <em>web technique</em> en clair.
-          </h1>
-          <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-            Les termes que nous employons en agence, expliqués simplement : pour comprendre les choix techniques que nous vous proposons.
-          </p>
+          <Eyebrow dot className="mb-6">{t.eyebrow.replace("{n}", String(entries.length))}</Eyebrow>
+          <h1 className="text-display">{rich(t.title)}</h1>
+          <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">{t.intro}</p>
         </Container>
       </section>
 
@@ -81,15 +81,7 @@ export default async function LexiqueIndexPage() {
         </Container>
       </section>
 
-      <ServiceCta
-        title={
-          <>
-            Un projet à <em>discuter</em> ?
-          </>
-        }
-        description="Premier échange offert pour cadrer votre projet - sites, apps, plateformes. On parle technique sans jargon."
-        primaryLabel="Prendre rendez-vous"
-      />
+      <PageCta t={t} />
     </main>
   );
 }

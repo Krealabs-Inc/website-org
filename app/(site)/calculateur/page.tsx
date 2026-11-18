@@ -1,9 +1,11 @@
 import { Metadata } from "next";
-import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceCta } from "@/components/services/service-cta";
+import { rich } from "@/components/ui/rich";
+import { getPageTexts } from "@/lib/content/pages";
+import { CALCULATOR } from "@/lib/page-texts/calculator";
+import { PageCta } from "@/components/services/page-cta";
 import { QuoteCalculator } from "@/components/calculator/quote-calculator";
 
 export const metadata: Metadata = {
@@ -20,21 +22,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function CalculateurPage() {
+export default async function CalculateurPage() {
+  const t = await getPageTexts(CALCULATOR);
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       <section className="pt-32 pb-12 md:pt-40 md:pb-16">
         <Container>
           <div className="max-w-4xl">
-            <Eyebrow dot className="mb-6">
-              Calculateur · Estimation projet
-            </Eyebrow>
-            <h1 className="text-display">
-              Combien <em>coûte</em> votre projet web ?
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">
-              Trois choix, et votre ticket s’imprime ligne par ligne : une fourchette réaliste pour votre site, votre boutique, votre logiciel ou votre application, basée sur les prix du marché normand.
-            </p>
+            <Eyebrow dot className="mb-6">{t.eyebrow}</Eyebrow>
+            <h1 className="text-display">{rich(t.title)}</h1>
+            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-2xl">{t.intro}</p>
           </div>
         </Container>
       </section>
@@ -48,53 +45,16 @@ export default function CalculateurPage() {
       <section className="section-y border-t border-[var(--border)]">
         <Container size="narrow">
           <div className="max-w-3xl">
-            <Eyebrow className="mb-6">D’où vient votre estimation ?</Eyebrow>
-            <h2 className="text-h1 mb-8">
-              Une estimation <em>que vous pouvez vérifier</em>.
-            </h2>
-            <p className="text-body text-[var(--muted-foreground)] mb-4 leading-relaxed">
-              La fourchette de base par type de projet est dérivée des devis
-              réels qu&apos;on a chiffrés depuis 2020 à Rouen. Les options
-              additionnelles (paiement Stripe, comptes utilisateur,
-              intégrations…) sont valorisées au prix marché normand : environ
-              600-800 €/jour de dev senior, avec une fourchette qui reflète la
-              variance selon la complexité.
-            </p>
-            <p className="text-body text-[var(--muted-foreground)] mb-4 leading-relaxed">
-              Le multiplicateur d&apos;urgence (+20% si &lt; 4 semaines, -5% si
-              flexible) reflète le coût opérationnel réel : un projet urgent
-              demande de déprioriser d&apos;autres clients ou de mobiliser des
-              renforts.
-            </p>
-            <p className="text-body text-[var(--muted-foreground)] leading-relaxed">
-              <strong className="text-[var(--foreground)]">
-                Cette estimation n&apos;est pas un devis.
-              </strong>{" "}
-              Pour un chiffrage précis, votre projet doit d&apos;abord être
-              cadré (besoins exacts, contraintes, intégrations spécifiques) :
-              c&apos;est l&apos;objet du premier rendez-vous, gratuit. Pour
-              aller plus loin sur les tarifs, lisez l&apos;
-              <Link
-                href="/blog/prix-site-internet-rouen-2026"
-                className="underline underline-offset-2 hover:text-[var(--foreground)]"
-              >
-                article complet sur les prix des sites internet à Rouen
-              </Link>
-              .
-            </p>
+            <Eyebrow className="mb-6">{t.methodEyebrow}</Eyebrow>
+            <h2 className="text-h1 mb-8">{rich(t.methodTitle)}</h2>
+            <p className="text-body text-[var(--muted-foreground)] mb-4 leading-relaxed">{rich(t.methodText1)}</p>
+            <p className="text-body text-[var(--muted-foreground)] mb-4 leading-relaxed">{rich(t.methodText2)}</p>
+            <p className="text-body text-[var(--muted-foreground)] leading-relaxed">{rich(t.methodText3)}</p>
           </div>
         </Container>
       </section>
 
-      <ServiceCta
-        title={
-          <>
-            Passez de l&apos;estimation au <em>devis précis</em>.
-          </>
-        }
-        description="Votre premier rendez-vous est offert, à Rouen ou en visio : vous passez de la fourchette à un prix ferme."
-        primaryLabel="Réserver mon rendez-vous offert"
-      />
+      <PageCta t={t} />
     </main>
   );
 }

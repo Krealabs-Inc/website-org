@@ -1,7 +1,10 @@
 import { Metadata } from "next";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceCta } from "@/components/services/service-cta";
+import { rich } from "@/components/ui/rich";
+import { getPageTexts } from "@/lib/content/pages";
+import { CHANGELOG_PAGE } from "@/lib/page-texts/changelog";
+import { PageCta } from "@/components/services/page-cta";
 
 export const metadata: Metadata = {
   title: "Changelog - Journal des versions",
@@ -309,19 +312,16 @@ const typeMeta: Record<EntryType, { label: string; variant: "default" | "seconda
   fix: { label: "Correction", variant: "success" },
 };
 
-export default function ChangelogPage() {
+export default async function ChangelogPage() {
+  const t = await getPageTexts(CHANGELOG_PAGE);
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       {/* HERO: a terminal prompt */}
       <section className="pt-32 pb-12 md:pt-40">
         <Container size="narrow">
-          <Eyebrow dot className="mb-8">Journal des versions</Eyebrow>
-          <h1 className="text-h1 md:text-display">
-            Ce qui <em>évolue</em>, version après version.
-          </h1>
-          <p className="text-body-lg text-[var(--muted-foreground)] mt-8">
-            L’historique de Krealabs depuis 2020 : lancements, migrations techniques, livraisons et évolutions du site. {CHANGELOG.length} versions.
-          </p>
+          <Eyebrow dot className="mb-8">{t.eyebrow}</Eyebrow>
+          <h1 className="text-h1 md:text-display">{rich(t.title)}</h1>
+          <p className="text-body-lg text-[var(--muted-foreground)] mt-8">{t.intro.replace("{n}", String(CHANGELOG.length))}</p>
         </Container>
       </section>
 
@@ -357,15 +357,7 @@ export default function ChangelogPage() {
         </Container>
       </section>
 
-      <ServiceCta
-        title={
-          <>
-            Une <em>suggestion</em> ?
-          </>
-        }
-        description="Vous avez une idée d'amélioration ou une demande spécifique ? Nous sommes à l'écoute."
-        primaryLabel="Nous écrire"
-      />
+      <PageCta t={t} />
     </main>
   );
 }

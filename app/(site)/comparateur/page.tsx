@@ -3,7 +3,10 @@ import Link from "next/link";
 
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/eyebrow";
-import { ServiceCta } from "@/components/services/service-cta";
+import { rich } from "@/components/ui/rich";
+import { getPageTexts } from "@/lib/content/pages";
+import { COMPARATOR } from "@/lib/page-texts/comparator";
+import { PageCta } from "@/components/services/page-cta";
 import { COMPARATORS, COMPARATOR_SLUGS } from "@/lib/comparators";
 
 export const metadata: Metadata = {
@@ -20,28 +23,17 @@ export const metadata: Metadata = {
   },
 };
 
-export default function ComparatorIndexPage() {
+export default async function ComparatorIndexPage() {
+  const t = await getPageTexts(COMPARATOR);
   return (
     <main className="bg-[var(--background)] text-[var(--foreground)]">
       <section className="relative overflow-hidden pt-32 pb-16 md:pt-40 md:pb-20">
         <div className="absolute inset-0 bg-grid bg-grid-fade opacity-50" aria-hidden />
         <Container className="relative">
           <div className="max-w-4xl">
-            <Eyebrow dot className="mb-6">
-              Comparateurs · Choix techniques
-            </Eyebrow>
-            <h1 className="text-display">
-              Comparer <em>deux stacks</em>,
-              <br />
-              choisir la bonne.
-            </h1>
-            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-3xl">
-              Les questions qu&apos;on nous pose en boucle : WordPress ou
-              Webflow ? Next.js ou WordPress ? React Native ou Flutter ? On a
-              écrit des comparatifs détaillés pour cadrer ces choix
-              techniques honnêtement, du point de vue d&apos;une agence web
-              normande.
-            </p>
+            <Eyebrow dot className="mb-6">{t.eyebrow}</Eyebrow>
+            <h1 className="text-display">{rich(t.title)}</h1>
+            <p className="text-body-lg text-[var(--muted-foreground)] mt-8 max-w-3xl">{t.intro}</p>
           </div>
         </Container>
       </section>
@@ -67,15 +59,7 @@ export default function ComparatorIndexPage() {
         </Container>
       </section>
 
-      <ServiceCta
-        title={
-          <>
-            Besoin d&apos;<em>aide</em> pour choisir ?
-          </>
-        }
-        description="Premier échange offert pour cadrer la bonne stack selon votre projet, votre équipe et votre budget."
-        primaryLabel="Prendre rendez-vous"
-      />
+      <PageCta t={t} />
     </main>
   );
 }
