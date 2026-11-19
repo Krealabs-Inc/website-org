@@ -688,7 +688,7 @@ export const COMPARATORS: Record<string, ComparatorData> = {
     description:
       "React Native vs Flutter : comparatif 2026 pour PME et startups. Performance, écosystème, coûts, time-to-market. Bilan d'une agence mobile à Rouen.",
     intro:
-      "React Native et Flutter dominent le développement mobile cross-platform en 2026. Les deux permettent de coder une fois et déployer sur iOS et Android. Mais les philosophies divergent : React Native s'appuie sur l'écosystème React/JS, Flutter sur Dart et son propre rendering engine. Lequel choisir pour votre projet d'app mobile ? Cette page compare honnêtement, du point de vue d'une agence rouennaise qui code des apps React Native depuis 5 ans.",
+      "React Native et Flutter dominent le développement mobile cross-platform en 2026. Les deux permettent de coder une fois et déployer sur iOS et Android. Mais les philosophies divergent : React Native s'appuie sur l'écosystème React/JS, Flutter sur Dart et son propre rendering engine. Lequel choisir pour votre projet d'app mobile ? Cette page compare honnêtement, du point de vue d'une agence rouennaise qui code des apps React Native au quotidien.",
     criteria: [
       {
         label: "Performance UI",

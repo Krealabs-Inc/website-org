@@ -17,7 +17,7 @@ export function OrganizationSchema() {
       "Agence web à Rouen spécialisée en développement de sites internet, applications mobiles et logiciels sur mesure. Experts React, Next.js, React Native et TypeScript pour la Normandie.",
     email: "contact@krealabs.fr",
     telephone: "+33781758188",
-    foundingDate: "2020",
+    foundingDate: "2025-01-01",
     slogan: "Sites web et logiciels sur mesure, conçus à Rouen.",
 
     address: {

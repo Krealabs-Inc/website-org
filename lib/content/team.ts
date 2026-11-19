@@ -32,11 +32,15 @@ function toMember(d: Doc): TeamMember {
   };
 }
 
-/** The team, in display order. Cached; refreshed when edited in Directus. */
+/**
+ * The team shown on the site, in display order. Members ticked "Masquer du
+ * site" in Directus are left out everywhere (pages, sitemap, search, counts).
+ * Cached; refreshed when edited in Directus.
+ */
 export const getTeam = unstable_cache(
   async (): Promise<TeamMember[]> => {
     const docs = await items("team", { sort: "order" });
-    return docs.map((d) => toMember(d as unknown as Doc));
+    return docs.filter((d) => d.hidden !== true).map((d) => toMember(d as unknown as Doc));
   },
   ["content-team"],
   { tags: ["team"] },

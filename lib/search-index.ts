@@ -41,8 +41,8 @@ export interface SearchItem {
 
 const STATIC_PAGES: SearchItem[] = [
   { url: "/", title: "Accueil", excerpt: "Krealabs, agence digitale à Rouen.", category: "Page" },
-  { url: "/notre-histoire", title: "Notre histoire", excerpt: "L'histoire de l'agence Krealabs depuis 2020.", category: "Page" },
-  { url: "/equipe", title: "L'équipe", excerpt: "Les quatre associés de Krealabs, agence digitale à Rouen.", category: "Page" },
+  { url: "/notre-histoire", title: "Notre histoire", excerpt: "L'histoire de l'agence Krealabs, fondée en 2025.", category: "Page" },
+  { url: "/equipe", title: "L'équipe", excerpt: "Les associés de Krealabs, agence digitale à Rouen.", category: "Page" },
   { url: "/expertise", title: "Expertise & savoir-faire", excerpt: "Compétences techniques et secteurs accompagnés.", category: "Page" },
   { url: "/clients", title: "Réalisations", excerpt: "ILIASS, Main Verte, Pas de Série, Méli-Mélo Studio, Traversia, le concept MBE Bihorel et Ardoise.", category: "Page" },
   { url: "/recrutement", title: "Recrutement", excerpt: "Aucun poste ouvert pour le moment, candidatures spontanées possibles.", category: "Page" },

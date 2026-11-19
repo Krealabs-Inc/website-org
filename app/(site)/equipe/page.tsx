@@ -11,24 +11,31 @@ import { getPageTexts } from "@/lib/content/pages";
 import { TEAM_PAGE } from "@/lib/page-texts/team-page";
 import { UPCOMING_TEAM } from "@/lib/team";
 import { getTeam } from "@/lib/content/team";
+import { withTeamCount, withTeamCountAll } from "@/lib/team-count";
 
-export const metadata: Metadata = {
-  title: "L'équipe : les associés derrière Krealabs (Rouen)",
-  description:
-    "Krealabs, c'est un collectif de quatre associés basé à Rouen. Une agence à taille humaine, joignable directement, qui code vos projets de A à Z.",
-  alternates: { canonical: "https://krealabs.fr/equipe" },
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  const n = (await getTeam()).length;
+  const description = withTeamCount(
+    "Krealabs, c'est un collectif de {nombre} associé{s} basé à Rouen. Une agence à taille humaine, joignable directement, qui code vos projets de A à Z.",
+    n,
+  );
+  return {
     title: "L'équipe : les associés derrière Krealabs (Rouen)",
-    description:
-      "Krealabs, c'est un collectif de quatre associés basé à Rouen. Une agence à taille humaine, joignable directement, qui code vos projets de A à Z.",
-    url: "https://krealabs.fr/equipe",
-    type: "website",
-  },
-};
+    description,
+    alternates: { canonical: "https://krealabs.fr/equipe" },
+    openGraph: {
+      title: "L'équipe : les associés derrière Krealabs (Rouen)",
+      description,
+      url: "https://krealabs.fr/equipe",
+      type: "website",
+    },
+  };
+}
 
 export default async function EquipePage() {
   const team = await getTeam();
-  const t = await getPageTexts(TEAM_PAGE);
+  // Texts may mention the team size: {n}, {nombre}, {Nombre}, {s}.
+  const t = withTeamCountAll(await getPageTexts(TEAM_PAGE), team.length);
   const baseUrl = "https://krealabs.fr";
 
   return (
@@ -43,7 +50,7 @@ export default async function EquipePage() {
         knowsAbout: member.knowsAbout,
       }))} />
 
-      {/* HERO: the wall of the four partners */}
+      {/* HERO: the wall of the partners */}
       <div id="collectif" className="scroll-mt-28">
         <TeamWall members={team} title={t.title} band={t.band} />
       </div>
