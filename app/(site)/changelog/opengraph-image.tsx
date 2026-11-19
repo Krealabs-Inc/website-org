@@ -9,7 +9,7 @@ export default async function Image() {
   return renderPageOg({
     badge: "Changelog",
     lines: ["Ce qui évolue,", "ce qui s'améliore."],
-    subtitle: "Le journal des versions de Krealabs depuis 2020",
+    subtitle: "Le journal des versions de Krealabs depuis 2025",
     path: "/changelog",
   });
 }

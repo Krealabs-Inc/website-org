@@ -3,14 +3,14 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Notre histoire - Agence web à Rouen depuis 2020",
+  title: "Notre histoire - Agence web à Rouen depuis 2025",
   description:
-    "Découvrez Krealabs, agence digitale fondée à Rouen en 2020. Notre parcours, nos valeurs, notre méthode artisanale au service des entreprises de Normandie.",
+    "Découvrez Krealabs, agence digitale fondée à Rouen le 1er janvier 2025. Notre parcours, nos valeurs, notre méthode artisanale au service des entreprises de Normandie.",
   alternates: { canonical: "https://krealabs.fr/notre-histoire" },
   openGraph: {
-    title: "Notre histoire - Agence web à Rouen depuis 2020 - Krealabs",
+    title: "Notre histoire - Agence web à Rouen depuis 2025 - Krealabs",
     description:
-      "Découvrez Krealabs, agence digitale fondée à Rouen en 2020. Notre parcours, nos valeurs, notre méthode artisanale au service des entreprises de Normandie.",
+      "Découvrez Krealabs, agence digitale fondée à Rouen le 1er janvier 2025. Notre parcours, nos valeurs, notre méthode artisanale au service des entreprises de Normandie.",
     url: "https://krealabs.fr/notre-histoire",
     type: "website",
   },
@@ -26,6 +26,7 @@ import { HISTORY } from "@/lib/page-texts/history";
 import { OrganizationSchema } from "@/components/seo/organization-schema";
 import { getTeam } from "@/lib/content/team";
 import { YearReel } from "@/components/history/year-reel";
+import { withTeamCount } from "@/lib/team-count";
 
 
 
@@ -37,7 +38,7 @@ export default async function NotreHistoirePage() {
       <OrganizationSchema />
       {/* HERO: the founding year, outlined, behind the promise */}
       <section className="relative overflow-hidden pt-32 pb-20 md:pt-40 md:pb-28">
-        <span className="history-ghost" aria-hidden>2020</span>
+        <span className="history-ghost" aria-hidden>2025</span>
         <Container className="relative">
           <div className="max-w-3xl">
             <Eyebrow dot className="mb-8">{t.eyebrow}</Eyebrow>
@@ -92,7 +93,7 @@ export default async function NotreHistoirePage() {
               ))}
             </span>
             <span className="text-h3">
-              {team.length} {rich(t.teamLine)}
+              {rich(t.teamLine.includes("{n}") || t.teamLine.includes("{nombre}") || t.teamLine.includes("{Nombre}") ? withTeamCount(t.teamLine, team.length) : `${team.length} ${t.teamLine}`)}
             </span>
             <span className="ml-auto inline-flex items-center gap-2 text-body text-[var(--accent)]">
               {t.teamLink}

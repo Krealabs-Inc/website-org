@@ -9,7 +9,7 @@ export default async function Image() {
   return renderPageOg({
     badge: "Notre histoire",
     lines: ["Une agence artisanale,", "ancrée en Normandie."],
-    subtitle: "Fondée à Rouen en 2020",
+    subtitle: "Fondée à Rouen en 2025",
     path: "/notre-histoire",
   });
 }

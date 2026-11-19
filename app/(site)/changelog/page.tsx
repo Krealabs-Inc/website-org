@@ -9,12 +9,12 @@ import { PageCta } from "@/components/services/page-cta";
 export const metadata: Metadata = {
   title: "Changelog - Journal des versions",
   description:
-    "Journal des évolutions du site et de l'agence Krealabs depuis la création en 2020. Versions majeures, nouveautés et étapes au fil du temps.",
+    "Journal des évolutions du site et de l'agence Krealabs depuis sa création le 1er janvier 2025. Versions majeures, nouveautés et étapes au fil du temps.",
   alternates: { canonical: "https://krealabs.fr/changelog" },
   openGraph: {
     title: "Changelog - Journal des versions - Krealabs",
     description:
-      "Journal des évolutions du site et de l'agence Krealabs depuis la création en 2020. Versions majeures, nouveautés et étapes au fil du temps.",
+      "Journal des évolutions du site et de l'agence Krealabs depuis sa création le 1er janvier 2025. Versions majeures, nouveautés et étapes au fil du temps.",
     url: "https://krealabs.fr/changelog",
     type: "website",
   },
@@ -33,7 +33,7 @@ interface Entry {
 const CHANGELOG: Entry[] = [
   // ===== 2026 - La grande refonte =====
   {
-    version: "3.3.0",
+    version: "2.3.0",
     date: "Mai 2026",
     type: "major",
     highlights: [
@@ -53,7 +53,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
   {
-    version: "3.2.0",
+    version: "2.2.0",
     date: "Mai 2026",
     type: "feature",
     highlights: ["SEO local boost massif", "AI search ready"],
@@ -72,7 +72,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
   {
-    version: "3.1.0",
+    version: "2.1.0",
     date: "Mai 2026",
     type: "feature",
     highlights: ["Pages légales conformes", "Footer cinématique"],
@@ -86,7 +86,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
   {
-    version: "3.0.0",
+    version: "2.0.0",
     date: "Mai 2026",
     type: "major",
     highlights: ["Refonte totale du site Krealabs"],
@@ -101,19 +101,19 @@ const CHANGELOG: Entry[] = [
     ],
   },
 
-  // ===== 2025 - Modernisation stack =====
+  // ===== 2025 - Création et modernisation de la stack =====
   {
-    version: "2.8.0",
+    version: "1.4.0",
     date: "Décembre 2025",
     type: "feature",
     items: [
-      "Cadrage de la refonte v3 (audit complet du site existant, definition design system)",
+      "Cadrage de la refonte v2 (audit complet du site existant, definition design system)",
       "Migration des templates emails de HTML vers React",
       "Adoption Vercel Analytics + Search Console DNS verification",
     ],
   },
   {
-    version: "2.7.0",
+    version: "1.3.0",
     date: "Septembre 2025",
     type: "feature",
     highlights: ["SEO technique avancé"],
@@ -125,7 +125,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
   {
-    version: "2.6.0",
+    version: "1.2.0",
     date: "Juin 2025",
     type: "major",
     highlights: ["Next.js 16 + React 19 partout"],
@@ -137,7 +137,7 @@ const CHANGELOG: Entry[] = [
     ],
   },
   {
-    version: "2.5.0",
+    version: "1.1.0",
     date: "Mars 2025",
     type: "feature",
     highlights: ["Performance Lighthouse 95+"],
@@ -149,159 +149,16 @@ const CHANGELOG: Entry[] = [
     ],
   },
   {
-    version: "2.4.0",
-    date: "Janvier 2025",
-    type: "feature",
+    version: "1.0.0",
+    date: "1er janvier 2025",
+    type: "major",
+    highlights: ["Création de Krealabs"],
     items: [
+      "Création de l'agence à Rouen, le 1er janvier 2025",
+      "Choix éditorial : faire du web qui dure, sans intermédiaires, avec un interlocuteur direct",
       "Premier client SaaS migré vers Next.js 15 App Router",
       "Adoption Prisma 6 + Postgres Neon (serverless)",
       "Templates de notifications push (OneSignal + Expo Notifications)",
-    ],
-  },
-
-  // ===== 2024 - Existant historique =====
-  {
-    version: "2.3.0",
-    date: "29 novembre 2024",
-    type: "feature",
-    highlights: ["Expérience utilisateur refondue", "Performance +30% sur mobile"],
-    items: [
-      "Système de blog avec articles détaillés et tags",
-      "Page 404 personnalisée",
-      "Formulaire de contact avec upload de fichiers",
-      "API d'envoi d'emails",
-      "Templates d'emails HTML personnalisés",
-    ],
-  },
-  {
-    version: "2.2.0",
-    date: "20 novembre 2024",
-    type: "feature",
-    highlights: ["Interface plus moderne", "Chargement réduit de 45%"],
-    items: [
-      "Navigation améliorée avec scroll smooth (Lenis)",
-      "Animations Framer Motion fluides",
-      "Composants UI réutilisables Radix",
-      "Theme toggle avec persistance localStorage",
-      "Optimisation des images via Next.js Image",
-    ],
-  },
-  {
-    version: "2.0.0",
-    date: "20 octobre 2024",
-    type: "major",
-    highlights: ["Architecture refondue", "Performance et SEO optimisés"],
-    items: [
-      "Migration complète vers Next.js 15 avec App Router",
-      "Nouveau système de cache pour des performances optimales",
-      "Architecture serverless pour une scalabilité infinie",
-      "API REST complète",
-      "Build via Turbopack",
-      "Support des Server Components",
-    ],
-  },
-  {
-    version: "1.9.0",
-    date: "5 octobre 2024",
-    type: "feature",
-    items: [
-      "Module de gestion des utilisateurs admin avec rôles",
-      "Authentification OAuth (Google, GitHub)",
-      "Notifications push temps réel",
-      "Export des données en CSV/PDF/Excel",
-      "Historique des actions utilisateur",
-    ],
-  },
-  {
-    version: "1.8.0",
-    date: "10 septembre 2024",
-    type: "feature",
-    highlights: ["SEO optimisé"],
-    items: [
-      "Interface d'administration redesignée",
-      "Système de recherche avec filtres avancés",
-      "Intégration Google Analytics 4",
-      "Optimisation SEO avec schema.org",
-      "Sitemap XML automatique",
-    ],
-  },
-
-  // ===== 2023 - Refonte interne =====
-  {
-    version: "1.5.0",
-    date: "Mars 2023",
-    type: "feature",
-    items: [
-      "Refonte interne du site Krealabs v1 (passage de WordPress à Next.js)",
-      "Premier blog technique publié",
-      "Mise en place d'une stratégie SEO long-termiste",
-    ],
-  },
-
-  // ===== 2022 - Premier SaaS =====
-  {
-    version: "1.2.0",
-    date: "Octobre 2022",
-    type: "feature",
-    items: [
-      "Stack Next.js + Postgres adoptée pour les apps custom",
-      "Mise en place CI/CD GitHub Actions sur tous les projets",
-      "Premiers tests E2E (Playwright)",
-    ],
-  },
-  {
-    version: "1.0.0",
-    date: "Avril 2022",
-    type: "major",
-    highlights: ["Premier SaaS B2B livré"],
-    items: [
-      "Premier projet SaaS B2B d'envergure livré à un client normand",
-      "Adoption Stripe Billing pour les abonnements",
-      "Structuration commerciale et juridique de l'agence",
-    ],
-  },
-
-  // ===== 2021 - Mobile =====
-  {
-    version: "0.8.0",
-    date: "Septembre 2021",
-    type: "feature",
-    items: [
-      "Spécialisation WooCommerce (premier projet e-commerce sérieux)",
-      "Premières intégrations Stripe Payments + transporteurs FR (Colissimo, Mondial Relay)",
-    ],
-  },
-  {
-    version: "0.5.0",
-    date: "Mars 2021",
-    type: "feature",
-    highlights: ["Premières apps mobiles"],
-    items: [
-      "Spécialisation React Native",
-      "Première app publiée sur l'App Store et le Play Store",
-      "Setup du compte Apple Developer + Google Play Console",
-    ],
-  },
-
-  // ===== 2020 - Création =====
-  {
-    version: "0.2.0",
-    date: "Juin 2020",
-    type: "feature",
-    items: [
-      "Premier site WordPress client livré (PME normande)",
-      "Mise en place du forfait maintenance WordPress (forfait Light)",
-    ],
-  },
-  {
-    version: "0.1.0",
-    date: "Janvier 2020",
-    type: "major",
-    highlights: ["Lancement de Krealabs"],
-    items: [
-      "Création de l'agence à Rouen par Maxime Dubois",
-      "Choix éditorial : faire du web qui dure, sans intermédiaires, avec un interlocuteur direct",
-      "Premier site krealabs.fr (WordPress, refondu plus tard)",
     ],
   },
 ];

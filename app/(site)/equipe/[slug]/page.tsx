@@ -191,7 +191,7 @@ export default async function AuthorPage({ params }: PageProps) {
       {otherMembers.length > 0 && (
         <section className="section-y border-t border-[var(--border)]">
           <Container>
-            <p className="text-caption mb-6">Les autres associés</p>
+            <p className="text-caption mb-6">{otherMembers.length > 1 ? "Les autres associés" : "L’autre associé"}</p>
             <ul className="profile-others">
               {otherMembers.map((other) => (
                 <li key={other.slug}>
